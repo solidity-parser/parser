@@ -149,7 +149,9 @@ var transformAST = {
     VariableDeclaration: function(ctx) {
         return {
             typeName: this.visit(ctx.typeName()),
-            name: ctx.Identifier().getText()
+            name: ctx.Identifier().getText(),
+            isStateVar: false,
+            isIndexed: false
         }
     },
 
@@ -355,6 +357,7 @@ var transformAST = {
     StateVariableDeclaration: function(ctx) {
         var type = this.visit(ctx.typeName())
         var name = ctx.Identifier().getText()
+
         var expression = null
         if (ctx.expression())
             expression = this.visit(ctx.expression())
@@ -363,7 +366,9 @@ var transformAST = {
             type: 'VariableDeclaration',
             typeName: type,
             name: name,
-            expression: expression
+            expression: expression,
+            isStateVar: true,
+            isIndexed: false
         }
 
         return {
@@ -424,7 +429,9 @@ var transformAST = {
                 .map(iden => iden.getText())
                 .map(iden => ({
                     type: 'VariableDeclaration',
-                    name: iden
+                    name: iden,
+                    isStateVar: false,
+                    isIndexed: false
                 }))
             // @TODO: complete declaration
         
@@ -449,8 +456,31 @@ var transformAST = {
     EventDefinition: function(ctx) {
         return {
             name: ctx.Identifier().getText(),
-            parameters: [], // @TODO: implement this
+            parameters: this.visit(ctx.indexedParameterList()),
             isAnonymous: false // @TODO: implement this
+        }
+    },
+
+    IndexedParameterList: function(ctx) {
+        var len = ctx.typeName().length
+
+        var parameters = []
+        for (var i = 0; i < len; i++) {
+            var type = this.visit(ctx.typeName(i))
+            var name = ctx.Identifier(i).getText()
+            var isIndexed = false
+            parameters.push({
+                type: 'VariableDeclaration',
+                typeName: type,
+                name: name,
+                isStateVar: false,
+                isIndexed: false, // @TODO: fix
+            })
+        }
+
+        return {
+            type: 'ParameterList',
+            parameters: parameters
         }
     },
 
@@ -464,7 +494,9 @@ var transformAST = {
             parameters.push({
                 type: 'VariableDeclaration',
                 typeName: type,
-                name: name
+                name: name,
+                isStateVar: false,
+                isIndexed: false
             })
         }
 
