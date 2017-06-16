@@ -1,5 +1,19 @@
 var antlr4 = require('../antlr4/index')
 
+function location(ctx) {
+    var sourceLocation = {
+        start: {
+            line: ctx.start.line,
+            column: ctx.start.column,
+        },
+        end: {
+            line: ctx.stop.line,
+            column: ctx.stop.column,
+        }
+    }
+    return { loc: sourceLocation }
+}
+
 var transformAST = {
 
     SourceUnit: function(ctx) {
@@ -488,7 +502,9 @@ SolidityVisitor.prototype.visit = function(ctx) {
     var node = { type: name }
 
     if (name in transformAST) {
-        return Object.assign(node, transformAST[name].call(this, ctx));
+        return Object.assign(
+            node, location(ctx),
+            transformAST[name].call(this, ctx));
     }
     return node;
 };
