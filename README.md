@@ -1,19 +1,20 @@
 solidity-parser-antlr
 =====================
 
-A Solidity parser built on top of a robust ANTLR4 gramar.
+A Solidity parser built on top of a robust ANTLR4 grammar.
 
 ### Usage
 
-    import SolidityParser from 'solidity-parser-antlr';
+```javascript
+import SolidityParser from 'solidity-parser-antlr';
 
-    SolidityParser.parse(`
-        contract test {
-            uint256 a;
-            function f() {}
-        }
-    `)
-
+SolidityParser.parse(`
+    contract test {
+        uint256 a;
+        function f() {}
+    }
+`)
+```
 
 ### Author
 
