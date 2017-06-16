@@ -66,19 +66,19 @@ var transformAST = {
             block = this.visit(ctx.block())
 
         var modifiers = ctx.modifierList().children || [];
-        var txtModifiers = modifiers.map(function(v) { return v.getText() });
+        var txtModifiers = modifiers.map(v => v.getText());
             
         // parse function visibility
         var choices = ['external', 'internal', 'public', 'private']
         var visibility = txtModifiers
-            .find(function(v) { return choices.includes(v) }) || 'default'
+            .find(v => choices.includes(v)) || 'default'
 
         var isDeclaredConst = txtModifiers.includes('constant')
         var isPayable = txtModifiers.includes('payable')
 
         var modifiers = modifiers
-            .filter(function(mod) { return mod.constructor.name.startsWith('ModifierInvocation') })
-            .map(function(mod) { return this.visit(mod) });
+            .filter(mod => mod.constructor.name.startsWith('ModifierInvocation'))
+            .map(mod => this.visit(mod));
 
         return {
             name: name ? name.getText() : '',
@@ -407,13 +407,11 @@ var transformAST = {
             variables = [this.visit(ctx.variableDeclaration())]
         else
             variables = ctx.identifierList().Identifier()
-                .map(function(iden) { return iden.getText() })
-                .map(function(iden) {
-                  return {
+                .map(iden => iden.getText())
+                .map(iden => ({
                     type: 'VariableDeclaration',
                     name: iden
-                  }
-                })
+                }))
             // @TODO: complete declaration
         
         var initialValue = null
