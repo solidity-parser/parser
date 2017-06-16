@@ -61,8 +61,16 @@ var transformAST = {
 
         return {
             name: name,
+            baseContracts: this.visit(ctx.inheritanceSpecifier()),
             subNodes: this.visit(ctx.contractPart()),
             kind: ctx.getChild(0).getText()
+        }
+    },
+
+    InheritanceSpecifier: function(ctx) {
+        return {
+            baseName: this.visit(ctx.userDefinedTypeName()),
+            arguments: this.visit(ctx.expression())
         }
     },
 
