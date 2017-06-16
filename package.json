@@ -9,7 +9,12 @@
     "test": "mocha"
   },
   "author": "Federico Bond <federicobond@gmail.com>",
-  "license": "GPL",
+  "homepage": "https://github.com/federicobond/solidity-parser-antlr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/federicobond/solidity-parser-antlr.git"
+  },
+  "license": "GPL-3.0",
   "dependencies": {},
   "devDependencies": {
     "mocha": "^3.4.2",
