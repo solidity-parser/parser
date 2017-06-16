@@ -3,8 +3,8 @@ var antlr4 = require('../antlr4/index')
 var transformAST = {
 
     SourceUnit: function(ctx) {
+        // last element is EOF terminal node
         return {
-            // last element is EOF terminal node
             children: this.visit(ctx.children.slice(0, -1))
         }
     },
@@ -489,8 +489,7 @@ SolidityVisitor.prototype.visit = function(ctx) {
 
     if (name in transformAST) {
         return Object.assign(node, transformAST[name].call(this, ctx));
-    } else
-        console.warn(name)
+    }
     return node;
 };
 

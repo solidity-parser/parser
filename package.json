@@ -5,12 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "antlr4": "antlr4 -Dlanguage=JavaScript Solidity.g4 -o lib",
-    "prettier": "find src -name *.js | xargs prettier --no-semi -w"
+    "prettier": "find src -name *.js | xargs prettier --no-semi --write",
+    "test": "mocha"
   },
   "author": "Federico Bond <federicobond@gmail.com>",
   "license": "GPL",
   "dependencies": {},
   "devDependencies": {
+    "mocha": "^3.4.2",
     "prettier": "^1.4.4"
   }
 }
