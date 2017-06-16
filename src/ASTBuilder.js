@@ -1,5 +1,4 @@
-var antlr4 = require('./antlr4/index')
-var { TerminalNode } = require('./antlr4/tree/Tree')
+var antlr4 = require('../antlr4/index')
 
 var transformAST = {
 

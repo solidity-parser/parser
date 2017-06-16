@@ -2,9 +2,10 @@
   "name": "solidity-parser-antlr",
   "version": "0.0.1",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "antlr4": "antlr4 -Dlanguage=JavaScript Solidity.g4 -o lib"
+    "antlr4": "antlr4 -Dlanguage=JavaScript Solidity.g4 -o lib",
+    "prettier": "find src -name *.js | xargs prettier --no-semi -w"
   },
   "author": "Federico Bond <federicobond@gmail.com>",
   "license": "GPL",
