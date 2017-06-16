@@ -328,9 +328,19 @@ var transformAST = {
             case 4:
                 // function call
                 if (ctx.getChild(1).getText() == '(' && ctx.getChild(3).getText() == ')') {
-                    // @TODO: finish implementation
-                    var arguments = [];
-                    var names = [];
+                    var arguments = []
+                    var names = []
+
+                    var ctxArgs = ctx.functionCallArguments()
+                    if (ctxArgs.expressionList())
+                        arguments = this.visit(ctxArgs.expressionList().children)
+                    else if (ctxArgs.nameValueList()) {
+                        for (var nameValue of ctxArgs.nameValueList().nameValue()) {
+                            arguments.push(this.visit(nameValue.expression()))
+                            names.push(nameValue.Identifier().getText())
+                        }
+                    }
+
                     return {
                         type: 'FunctionCall',
                         expression: this.visit(ctx.getChild(0)),
