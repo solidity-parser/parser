@@ -1,6 +1,8 @@
 solidity-parser-antlr
 =====================
 
+[![Build Status](https://travis-ci.org/federicobond/solidity-parser-antlr.svg?branch=master)](https://travis-ci.org/federicobond/solidity-parser-antlr)
+
 A Solidity parser built on top of a robust ANTLR4 grammar.
 
 ### Usage
