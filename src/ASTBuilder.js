@@ -1,19 +1,5 @@
 var antlr4 = require('../antlr4/index')
 
-function location(ctx) {
-    var sourceLocation = {
-        start: {
-            line: ctx.start.line,
-            column: ctx.start.column,
-        },
-        end: {
-            line: ctx.stop.line,
-            column: ctx.stop.column,
-        }
-    }
-    return { loc: sourceLocation }
-}
-
 var transformAST = {
 
     SourceUnit: function(ctx) {
@@ -525,15 +511,42 @@ var transformAST = {
     }
 }
 
-function SolidityVisitor() {
+function ASTBuilder(options) {
 	antlr4.tree.ParseTreeVisitor.call(this);
-	return this;
+    this.options = options;
 }
 
-SolidityVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
-SolidityVisitor.prototype.constructor = SolidityVisitor;
+ASTBuilder.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
+ASTBuilder.prototype.constructor = ASTBuilder;
 
-SolidityVisitor.prototype.visit = function(ctx) {
+ASTBuilder.prototype._loc = function(ctx) {
+    var sourceLocation = {
+        start: {
+            line: ctx.start.line,
+            column: ctx.start.column,
+        },
+        end: {
+            line: ctx.stop.line,
+            column: ctx.stop.column,
+        }
+    }
+    return { loc: sourceLocation }
+}
+
+ASTBuilder.prototype._range = function(ctx) {
+    return { range: [ctx.start.start, ctx.stop.stop] }
+}
+
+ASTBuilder.prototype.meta = function(ctx) {
+    var ret = {};
+    if (this.options.loc)
+        ret = Object.assign(ret, this._loc(ctx))
+    if (this.options.range)
+        ret = Object.assign(ret, this._range(ctx))
+    return ret;
+}
+
+ASTBuilder.prototype.visit = function(ctx) {
     if (ctx == null) {
         return null
     }
@@ -552,11 +565,12 @@ SolidityVisitor.prototype.visit = function(ctx) {
     var node = { type: name }
 
     if (name in transformAST) {
-        return Object.assign(
-            node, location(ctx),
-            transformAST[name].call(this, ctx));
+        return Object.assign(node,
+            transformAST[name].call(this, ctx),
+            this.meta(ctx)
+        );
     }
     return node;
 };
 
-exports.SolidityVisitor = SolidityVisitor;
+module.exports = ASTBuilder;
