@@ -63,6 +63,11 @@ function visit(node, visitor) {
       visit(node[prop], visitor)
     }
   }
+
+  var selector = node.type + ':exit'
+  if (visitor[selector]) {
+    visitor[selector](node)
+  }
 }
 
 exports.parse = parse
