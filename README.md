@@ -48,6 +48,18 @@ parser.parse('contract test { uint a; }', { loc: true })
 
 ```
 
+#### Example using a visitor to walk over the AST
+
+```javascript
+var ast = parser.parse('contract test { uint a; }')
+
+// Output the name of each contract found
+parser.visit(ast, {
+  ContractDefinition: function(node) {
+    console.log(node.name)
+  }
+})
+```
 
 ### Author
 
