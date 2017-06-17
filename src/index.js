@@ -38,7 +38,7 @@ function parse (input, options) {
 }
 
 function _isASTNode (node) {
-  return typeof node === 'object' && node.hasOwnProperty('type')
+  return !!node && typeof node === 'object' && node.hasOwnProperty('type')
 }
 
 function visit (node, visitor) {
