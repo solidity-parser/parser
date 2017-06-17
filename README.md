@@ -1,6 +1,7 @@
 solidity-parser-antlr
 =====================
 
+[![npm](https://img.shields.io/npm/v/solidity-parser-antlr.svg)](https://www.npmjs.com/package/solidity-parser-antlr)
 [![Build Status](https://travis-ci.org/federicobond/solidity-parser-antlr.svg?branch=master)](https://travis-ci.org/federicobond/solidity-parser-antlr)
 
 A Solidity parser built on top of a robust [ANTLR4 grammar](https://github.com/solidityj/solidity-antlr4).
