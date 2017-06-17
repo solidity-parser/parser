@@ -9,7 +9,7 @@ function ParserError(errors) {
   this.errors = errors
 }
 
-ParserError.prototype = Object.create(Error)
+ParserError.prototype = Object.create(Error.prototype)
 ParserError.prototype.constructor = ParserError
 
 function parse(input, options) {
