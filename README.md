@@ -8,14 +8,16 @@ A Solidity parser built on top of a robust ANTLR4 grammar.
 ### Usage
 
 ```javascript
-import SolidityParser from 'solidity-parser-antlr';
+import parser from 'solidity-parser-antlr';
 
-SolidityParser.parse(`
+var input = `
     contract test {
         uint256 a;
         function f() {}
     }
-`)
+`
+
+parser.parse(input)
 ```
 
 ### Author
