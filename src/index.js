@@ -44,6 +44,10 @@ function _isASTNode(node) {
 }
 
 function visit(node, visitor) {
+  if (Array.isArray(node)) {
+    node.forEach(child => visit(child, visitor))
+  }
+
   if (!_isASTNode(node)) return
 
   var cont = true
@@ -52,7 +56,7 @@ function visit(node, visitor) {
     cont = visitor[node.type](node)
   }
 
-  if (!cont) return
+  if (cont === false) return
 
   for (var prop in node) {
     if (node.hasOwnProperty(prop)) {
