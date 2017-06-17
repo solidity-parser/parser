@@ -1,6 +1,6 @@
-var antlr4 = require("../antlr4/index")
+var antlr4 = require('../antlr4/index')
 
-function ErrorListener() {
+function ErrorListener () {
   antlr4.error.ErrorListener.call(this)
   this._errors = []
 }
@@ -8,7 +8,7 @@ function ErrorListener() {
 ErrorListener.prototype = Object.create(antlr4.error.ErrorListener.prototype)
 ErrorListener.prototype.constructor = ErrorListener
 
-ErrorListener.prototype.syntaxError = function(
+ErrorListener.prototype.syntaxError = function (
   recognizer,
   offendingSymbol,
   line,
@@ -18,11 +18,11 @@ ErrorListener.prototype.syntaxError = function(
   this._errors.push({ message: message, line: line, column: column })
 }
 
-ErrorListener.prototype.getErrors = function() {
+ErrorListener.prototype.getErrors = function () {
   return this._errors
 }
 
-ErrorListener.prototype.hasErrors = function() {
+ErrorListener.prototype.hasErrors = function () {
   return this._errors.length > 0
 }
 

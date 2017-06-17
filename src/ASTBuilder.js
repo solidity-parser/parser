@@ -2,575 +2,575 @@ var antlr4 = require('../antlr4/index')
 
 var transformAST = {
 
-    SourceUnit: function(ctx) {
-        // last element is EOF terminal node
-        return {
-            children: this.visit(ctx.children.slice(0, -1))
-        }
-    },
+  SourceUnit: function (ctx) {
+    // last element is EOF terminal node
+    return {
+      children: this.visit(ctx.children.slice(0, -1))
+    }
+  },
 
-    EnumDefinition: function(ctx) {
-        return {
-            name: ctx.Identifier().getText(),
-            members: this.visit(ctx.enumValue())
-        }
-    },
+  EnumDefinition: function (ctx) {
+    return {
+      name: ctx.Identifier().getText(),
+      members: this.visit(ctx.enumValue())
+    }
+  },
 
-    EnumValue: function(ctx) {
-        return {
-            name: ctx.Identifier().getText()
-        }
-    },
+  EnumValue: function (ctx) {
+    return {
+      name: ctx.Identifier().getText()
+    }
+  },
 
-    UsingForDeclaration: function(ctx) {
-        if (ctx.getChild(3).getText() == '*')
-            typeName = null
-        else
-            typeName = this.visit(ctx.getChild(3))
+  UsingForDeclaration: function (ctx) {
+    var typeName = null
+    if (ctx.getChild(3).getText() !== '*') {
+      typeName = this.visit(ctx.getChild(3))
+    }
 
-        return {
-            typeName: typeName,
-            libraryName: ctx.Identifier().getText()
-        }
-    },
+    return {
+      typeName: typeName,
+      libraryName: ctx.Identifier().getText()
+    }
+  },
 
-    PragmaDirective: function(ctx) {
-        return {
-            name: ctx.pragmaName().getText(),
-            value: ctx.pragmaValue().getText()
-        }
-    },
+  PragmaDirective: function (ctx) {
+    return {
+      name: ctx.pragmaName().getText(),
+      value: ctx.pragmaValue().getText()
+    }
+  },
 
-    ContractDefinition: function(ctx) {
-        var name = ctx.Identifier().getText()
-        this._currentContract = name;
+  ContractDefinition: function (ctx) {
+    var name = ctx.Identifier().getText()
+    this._currentContract = name
 
-        return {
-            name: name,
-            baseContracts: this.visit(ctx.inheritanceSpecifier()),
-            subNodes: this.visit(ctx.contractPart()),
-            kind: ctx.getChild(0).getText()
-        }
-    },
+    return {
+      name: name,
+      baseContracts: this.visit(ctx.inheritanceSpecifier()),
+      subNodes: this.visit(ctx.contractPart()),
+      kind: ctx.getChild(0).getText()
+    }
+  },
 
-    InheritanceSpecifier: function(ctx) {
-        return {
-            baseName: this.visit(ctx.userDefinedTypeName()),
-            arguments: this.visit(ctx.expression())
-        }
-    },
+  InheritanceSpecifier: function (ctx) {
+    return {
+      baseName: this.visit(ctx.userDefinedTypeName()),
+      arguments: this.visit(ctx.expression())
+    }
+  },
 
-    ContractPart: function(ctx) {
-        return this.visit(ctx.children[0])
-    },
+  ContractPart: function (ctx) {
+    return this.visit(ctx.children[0])
+  },
 
-    FunctionDefinition: function(ctx) {
-        var name = ctx.Identifier(0)
+  FunctionDefinition: function (ctx) {
+    var name = ctx.Identifier(0)
 
-        var parameters = this.visit(ctx.parameterList())
+    var parameters = this.visit(ctx.parameterList())
 
-        var block = null
-        if (ctx.block())
-            block = this.visit(ctx.block())
+    var block = null
+    if (ctx.block()) { block = this.visit(ctx.block()) }
 
-        var modifiers = ctx.modifierList().children || [];
-        var txtModifiers = modifiers.map(v => v.getText());
-            
-        // parse function visibility
-        var choices = ['external', 'internal', 'public', 'private']
-        var visibility = txtModifiers
-            .find(v => choices.includes(v)) || 'default'
+    var modifiers = ctx.modifierList().children || []
+    var txtModifiers = modifiers.map(v => v.getText())
 
-        var isDeclaredConst = txtModifiers.includes('constant')
-        var isPayable = txtModifiers.includes('payable')
+    // parse function visibility
+    var choices = ['external', 'internal', 'public', 'private']
+    var visibility = txtModifiers
+      .find(v => choices.includes(v)) || 'default'
 
-        var modifiers = modifiers
-            .filter(mod => mod.constructor.name.startsWith('ModifierInvocation'))
-            .map(mod => this.visit(mod));
+    var isDeclaredConst = txtModifiers.includes('constant')
+    var isPayable = txtModifiers.includes('payable')
 
-        return {
-            name: name ? name.getText() : '',
-            parameters: parameters,
-            body: block,
-            visibility: visibility,
-            modifiers: modifiers,
-            isConstructor: name == this._currentContract,
-            isDeclaredConst: isDeclaredConst,
-            isPayable: isPayable,
-        }
-    },
+    modifiers = modifiers
+      .filter(mod => mod.constructor.name.startsWith('ModifierInvocation'))
+      .map(mod => this.visit(mod))
 
-    ModifierInvocation: function(ctx) {
-        var exprList = ctx.expressionList()
+    return {
+      name: name ? name.getText() : '',
+      parameters: parameters,
+      body: block,
+      visibility: visibility,
+      modifiers: modifiers,
+      isConstructor: name === this._currentContract,
+      isDeclaredConst: isDeclaredConst,
+      isPayable: isPayable
+    }
+  },
 
-        var arguments
-        if (exprList != null)
-            arguments = this.visit(exprList.children)
-        else
-            arguments = []
+  ModifierInvocation: function (ctx) {
+    var exprList = ctx.expressionList()
 
-        return {
-            name: ctx.Identifier().getText(),
-            arguments: arguments
-        }
-    },
+    var args
+    if (exprList != null) { args = this.visit(exprList.children) } else { args = [] }
 
-    ElementaryTypeNameExpression: function(ctx) {
-        return {
-            type: this.visit(ctx.typeName())
-        }
-    },
+    return {
+      name: ctx.Identifier().getText(),
+      arguments: args
+    }
+  },
 
-    TypeName: function(ctx) {
-        return this.visit(ctx.children[0])
-    },
+  ElementaryTypeNameExpression: function (ctx) {
+    return {
+      type: this.visit(ctx.typeName())
+    }
+  },
 
-    ReturnStatement: function(ctx) {
-        var expression = null
-        if (ctx.expression())
-            expression = this.visit(ctx.expression())
+  TypeName: function (ctx) {
+    return this.visit(ctx.children[0])
+  },
 
-        return { expression: expression }
-    },
+  ReturnStatement: function (ctx) {
+    var expression = null
+    if (ctx.expression()) { expression = this.visit(ctx.expression()) }
 
-    StructDefinition: function(ctx) {
-        return {
-            name: ctx.Identifier().getText(),
-            members: this.visit(ctx.variableDeclaration())
-        }
-    },
+    return { expression: expression }
+  },
 
-    VariableDeclaration: function(ctx) {
-        return {
-            typeName: this.visit(ctx.typeName()),
-            name: ctx.Identifier().getText(),
-            isStateVar: false,
-            isIndexed: false
-        }
-    },
+  StructDefinition: function (ctx) {
+    return {
+      name: ctx.Identifier().getText(),
+      members: this.visit(ctx.variableDeclaration())
+    }
+  },
 
-    WhileStatement: function(ctx) {
-        return {
-            condition: this.visit(ctx.expression()),
-            body: this.visit(ctx.statement()),
-            isDoWhile: ctx.getChild(0).getText() == "do"
-        }
-    },
+  VariableDeclaration: function (ctx) {
+    return {
+      typeName: this.visit(ctx.typeName()),
+      name: ctx.Identifier().getText(),
+      isStateVar: false,
+      isIndexed: false
+    }
+  },
 
-    IfStatement: function(ctx) {
-        var trueBody = this.visit(ctx.statement(0))
-        var falseBody = null
-        if (ctx.statement().length > 1)
-            falseBody = this.visit(ctx.statement(1))
+  WhileStatement: function (ctx) {
+    return {
+      condition: this.visit(ctx.expression()),
+      body: this.visit(ctx.statement()),
+      isDoWhile: ctx.getChild(0).getText() === 'do'
+    }
+  },
 
-        return {
-            condition: this.visit(ctx.expression()),
-            trueBody: trueBody,
-            falseBody: falseBody
-        }
-    },
+  IfStatement: function (ctx) {
+    var trueBody = this.visit(ctx.statement(0))
+    var falseBody = null
+    if (ctx.statement().length > 1) { falseBody = this.visit(ctx.statement(1)) }
 
-    UserDefinedTypeName: function(ctx) {
-        return {
-            namePath: ctx.getText()
-        }
-    },
+    return {
+      condition: this.visit(ctx.expression()),
+      trueBody: trueBody,
+      falseBody: falseBody
+    }
+  },
 
-    ElementaryTypeName: function(ctx) {
-        return {
-            name: ctx.getText()
-        }
-    },
+  UserDefinedTypeName: function (ctx) {
+    return {
+      namePath: ctx.getText()
+    }
+  },
 
-    Block: function(ctx) {
-        return {
-            statements: this.visit(ctx.statement())
-        }
-    },
+  ElementaryTypeName: function (ctx) {
+    return {
+      name: ctx.getText()
+    }
+  },
 
-    ExpressionStatement: function(ctx) {
-        return {
-            expression: this.visit(ctx.expression())
-        }
-    },
+  Block: function (ctx) {
+    return {
+      statements: this.visit(ctx.statement())
+    }
+  },
 
-    NumberLiteral: function(ctx) {
-        var number = ctx.getChild(0).getText()
-        var subdenomination = null
-        if (ctx.children.length == 2)
-            subdenomination = ctx.getChild(1).getText()
+  ExpressionStatement: function (ctx) {
+    return {
+      expression: this.visit(ctx.expression())
+    }
+  },
 
-        return {
-            number: number,
-            subdenomination: subdenomination
-        }
-    },
+  NumberLiteral: function (ctx) {
+    var number = ctx.getChild(0).getText()
+    var subdenomination = null
 
-    Mapping: function(ctx) {
-        return {
-            keyType: this.visit(ctx.elementaryTypeName()),
-            valueType: this.visit(ctx.typeName())
-        }
-    },
+    if (ctx.children.length === 2) {
+      subdenomination = ctx.getChild(1).getText()
+    }
 
-    ModifierDefinition: function(ctx) {
-        var parameters = []
-        if (ctx.parameterList())
-            parameters = this.visit(ctx.parameterList())
+    return {
+      number: number,
+      subdenomination: subdenomination
+    }
+  },
 
-        return {
-            name: ctx.Identifier().getText(),
-            parameters: parameters,
-            body: this.visit(ctx.block())
-        }
-    },
+  Mapping: function (ctx) {
+    return {
+      keyType: this.visit(ctx.elementaryTypeName()),
+      valueType: this.visit(ctx.typeName())
+    }
+  },
 
-    Statement: function(ctx) {
+  ModifierDefinition: function (ctx) {
+    var parameters = []
+    if (ctx.parameterList()) { parameters = this.visit(ctx.parameterList()) }
+
+    return {
+      name: ctx.Identifier().getText(),
+      parameters: parameters,
+      body: this.visit(ctx.block())
+    }
+  },
+
+  Statement: function (ctx) {
+    return this.visit(ctx.getChild(0))
+  },
+
+  SimpleStatement: function (ctx) {
+    return this.visit(ctx.getChild(0))
+  },
+
+  Expression: function (ctx) {
+    switch (ctx.children.length) {
+      case 1:
+        // primary expression
         return this.visit(ctx.getChild(0))
-    },
 
-    SimpleStatement: function(ctx) {
-        return this.visit(ctx.getChild(0))
-    },
-
-    Expression: function(ctx) {
-        switch (ctx.children.length) {
-            case 1:
-                // primary expression
-                return this.visit(ctx.getChild(0))
-
-            case 2:
-                // new expression
-                if (ctx.getChild(0).getText() == 'new')
-                    return {
-                        type: 'NewExpression',
-                        typeName: this.visit(ctx.typeName())
-                    }
-
-                // prefix operators
-                if (['+', '-', '++', '--', '!', '~', 'after', 'delete'].includes(ctx.getChild(0).getText()))
-                    return {
-                        type: 'UnaryOperation',
-                        subExpression: this.visit(ctx.getChild(1)),
-                        isPrefix: true
-                    }
-                // postfix operators
-                if (['++', '--'].includes(ctx.getChild(1).getText()))
-                    return {
-                        type: 'UnaryOperation',
-                        subExpression: this.visit(ctx.getChild(0)),
-                        isPrefix: false
-                    }
-            
-            case 3:
-                // treat parenthesis as no-op
-                if (ctx.getChild(0).getText() == '('
-                        && ctx.getChild(2).getText() == ')')
-                    return {
-                        type: 'TupleExpression',
-                        components: [this.visit(ctx.getChild(1))],
-                        isArray: false
-                    }
-
-                var op = ctx.getChild(1).getText()
-
-                // tuple separator
-                if (op == ',') {
-                    return {
-                        type: 'TupleExpression',
-                        components: [this.visit(ctx.getChild(0)), this.visit(ctx.getChild(2))],
-                        isArray: false
-                    }
-                }
-
-                // member access
-                if (op == '.') {
-                    var expression = this.visit(ctx.getChild(0))
-                    var memberName = ctx.getChild(2).getText()
-                    return {
-                        type: 'MemberAccess',
-                        expression: expression,
-                        memberName: memberName
-                    }
-                }
-
-                // binary operation
-                var binOps = [
-                    '+', '-', '*', '/', '**', '%',
-                    '&&', '||', '&', '|', '^',
-                    '<', '>', '<=', '>=', '==', '!=',
-                    '=', '|=', '^=', '&=', '<<=', '>>=',
-                    '+=', '-=', '*=', '/=', '%='
-                ]
-
-                if (binOps.includes(op))
-                    return {
-                        type: 'BinaryOperation',
-                        operator: op,
-                        left: this.visit(ctx.getChild(0)),
-                        right: this.visit(ctx.getChild(2))
-                    }
-
-            case 4:
-                // function call
-                if (ctx.getChild(1).getText() == '(' && ctx.getChild(3).getText() == ')') {
-                    var arguments = []
-                    var names = []
-
-                    var ctxArgs = ctx.functionCallArguments()
-                    if (ctxArgs.expressionList())
-                        arguments = this.visit(ctxArgs.expressionList().children)
-                    else if (ctxArgs.nameValueList()) {
-                        for (var nameValue of ctxArgs.nameValueList().nameValue()) {
-                            arguments.push(this.visit(nameValue.expression()))
-                            names.push(nameValue.Identifier().getText())
-                        }
-                    }
-
-                    return {
-                        type: 'FunctionCall',
-                        expression: this.visit(ctx.getChild(0)),
-                        arguments: arguments,
-                        names: names
-                    }
-                }
-
-                // index access
-                if (ctx.getChild(1).getText() == '[' && ctx.getChild(3).getText() == ']') {
-                    return {
-                        type: 'IndexAccess',
-                        base: this.visit(ctx.getChild(0)),
-                        index: this.visit(ctx.getChild(2))
-                    }
-                }
-
-            case 5:
-                // ternary operator
-                if (ctx.getChild(1).getText() == '?' && ctx.getChild(3).getText() == ':')
-                    return {
-                        type: 'Conditional',
-                        condition: this.visit(ctx.getChild(0)),
-                        trueExpression: this.visit(ctx.getChild(2)),
-                        falseExpression: this.visit(ctx.getChild(4))
-                    }
+      case 2:
+        // new expression
+        if (ctx.getChild(0).getText() === 'new') {
+          return {
+            type: 'NewExpression',
+            typeName: this.visit(ctx.typeName())
+          }
         }
-        
-        throw new Error('unrecognized expression');
-    },
 
-    StateVariableDeclaration: function(ctx) {
-        var type = this.visit(ctx.typeName())
-        var name = ctx.Identifier().getText()
+        // prefix operators
+        if (['+', '-', '++', '--', '!', '~', 'after', 'delete'].includes(ctx.getChild(0).getText())) {
+          return {
+            type: 'UnaryOperation',
+            subExpression: this.visit(ctx.getChild(1)),
+            isPrefix: true
+          }
+        }
+        // postfix operators
+        if (['++', '--'].includes(ctx.getChild(1).getText())) {
+          return {
+            type: 'UnaryOperation',
+            subExpression: this.visit(ctx.getChild(0)),
+            isPrefix: false
+          }
+        }
+        break
 
-        var expression = null
-        if (ctx.expression())
-            expression = this.visit(ctx.expression())
+      case 3:
+        // treat parenthesis as no-op
+        if (ctx.getChild(0).getText() === '(' &&
+            ctx.getChild(2).getText() === ')') {
+          return {
+            type: 'TupleExpression',
+            components: [this.visit(ctx.getChild(1))],
+            isArray: false
+          }
+        }
 
-        var decl = {
-            type: 'VariableDeclaration',
-            typeName: type,
-            name: name,
+        var op = ctx.getChild(1).getText()
+
+        // tuple separator
+        if (op === ',') {
+          return {
+            type: 'TupleExpression',
+            components: [this.visit(ctx.getChild(0)), this.visit(ctx.getChild(2))],
+            isArray: false
+          }
+        }
+
+        // member access
+        if (op === '.') {
+          var expression = this.visit(ctx.getChild(0))
+          var memberName = ctx.getChild(2).getText()
+          return {
+            type: 'MemberAccess',
             expression: expression,
-            isStateVar: true,
-            isIndexed: false
+            memberName: memberName
+          }
         }
 
-        return {
-            variables: [decl],
-            initialValue: expression
-        }
-    },
+        // binary operation
+        var binOps = [
+          '+', '-', '*', '/', '**', '%',
+          '&&', '||', '&', '|', '^',
+          '<', '>', '<=', '>=', '==', '!=',
+          '=', '|=', '^=', '&=', '<<=', '>>=',
+          '+=', '-=', '*=', '/=', '%='
+        ]
 
-    ForStatement: function(ctx) {
-        return {
-            initExpression: this.visit(ctx.simpleStatement()),
-            conditionExpression: this.visit(ctx.expression(0)),
-            loopExpression: {
-                type: 'ExpressionStatement',
-                expression: this.visit(ctx.expression(1))
-            },
-            body: this.visit(ctx.statement())
+        if (binOps.includes(op)) {
+          return {
+            type: 'BinaryOperation',
+            operator: op,
+            left: this.visit(ctx.getChild(0)),
+            right: this.visit(ctx.getChild(2))
+          }
         }
-    },
+        break
 
-    PrimaryExpression: function(ctx) {
-        if (ctx.BooleanLiteral())
-            return {
-                type: 'BooleanLiteral',
-                value: ctx.BooleanLiteral().getText() === 'true'
+      case 4:
+        // function call
+        if (ctx.getChild(1).getText() === '(' && ctx.getChild(3).getText() === ')') {
+          var args = []
+          var names = []
+
+          var ctxArgs = ctx.functionCallArguments()
+          if (ctxArgs.expressionList()) { args = this.visit(ctxArgs.expressionList().children) } else if (ctxArgs.nameValueList()) {
+            for (var nameValue of ctxArgs.nameValueList().nameValue()) {
+              args.push(this.visit(nameValue.expression()))
+              names.push(nameValue.Identifier().getText())
             }
+          }
 
-        if (ctx.HexLiteral())
-            return {
-                type: 'NumberLiteral',
-                value: ctx.HexLiteral().getText()
-            }
-        
-        if (ctx.Identifier())
-            return {
-                type: 'Identifier',
-                value: ctx.Identifier().getText()
-            }
-
-        if (ctx.StringLiteral()) {
-            var text = ctx.getText()
-            return {
-                type: 'StringLiteral',
-                value: text.substring(1, text.length - 1)
-            }
+          return {
+            type: 'FunctionCall',
+            expression: this.visit(ctx.getChild(0)),
+            arguments: args,
+            names: names
+          }
         }
 
-        if (ctx.numberLiteral())
-            return this.visit(ctx.numberLiteral())
-    },
-
-    VariableDeclarationStatement: function(ctx) {
-        var variables 
-        if (ctx.variableDeclaration())
-            variables = [this.visit(ctx.variableDeclaration())]
-        else
-            variables = ctx.identifierList().Identifier()
-                .map(iden => iden.getText())
-                .map(iden => ({
-                    type: 'VariableDeclaration',
-                    name: iden,
-                    isStateVar: false,
-                    isIndexed: false
-                }))
-            // @TODO: complete declaration
-        
-        var initialValue = null
-        if (ctx.expression())
-            initialValue = this.visit(ctx.expression())
-
-        return {
-            variables: variables,
-            initialValue: initialValue
+        // index access
+        if (ctx.getChild(1).getText() === '[' && ctx.getChild(3).getText() === ']') {
+          return {
+            type: 'IndexAccess',
+            base: this.visit(ctx.getChild(0)),
+            index: this.visit(ctx.getChild(2))
+          }
         }
-    },
+        break
 
-    ImportDirective: function(ctx) {
-        var pathString = ctx.StringLiteral().getText()
-        return {
-            unitAlias: null,
-            path: pathString.substring(1, pathString.length - 1)
+      case 5:
+                // ternary operator
+        if (ctx.getChild(1).getText() === '?' && ctx.getChild(3).getText() === ':') {
+          return {
+            type: 'Conditional',
+            condition: this.visit(ctx.getChild(0)),
+            trueExpression: this.visit(ctx.getChild(2)),
+            falseExpression: this.visit(ctx.getChild(4))
+          }
         }
-    },
-
-    EventDefinition: function(ctx) {
-        return {
-            name: ctx.Identifier().getText(),
-            parameters: this.visit(ctx.indexedParameterList()),
-            isAnonymous: false // @TODO: implement this
-        }
-    },
-
-    IndexedParameterList: function(ctx) {
-        var len = ctx.typeName().length
-
-        var parameters = []
-        for (var i = 0; i < len; i++) {
-            var type = this.visit(ctx.typeName(i))
-            var name = ctx.Identifier(i).getText()
-            var isIndexed = false
-            parameters.push({
-                type: 'VariableDeclaration',
-                typeName: type,
-                name: name,
-                isStateVar: false,
-                isIndexed: false, // @TODO: fix
-            })
-        }
-
-        return {
-            type: 'ParameterList',
-            parameters: parameters
-        }
-    },
-
-    ParameterList: function(ctx) {
-        var len = ctx.typeName().length
-
-        var parameters = []
-        for (var i = 0; i < len; i++) {
-            var type = this.visit(ctx.typeName(i))
-            var name = ctx.Identifier(i).getText()
-            parameters.push({
-                type: 'VariableDeclaration',
-                typeName: type,
-                name: name,
-                isStateVar: false,
-                isIndexed: false
-            })
-        }
-
-        return {
-            type: 'ParameterList',
-            parameters: parameters
-        }
+        break
     }
+
+    throw new Error('unrecognized expression')
+  },
+
+  StateVariableDeclaration: function (ctx) {
+    var type = this.visit(ctx.typeName())
+    var name = ctx.Identifier().getText()
+
+    var expression = null
+    if (ctx.expression()) { expression = this.visit(ctx.expression()) }
+
+    var decl = {
+      type: 'VariableDeclaration',
+      typeName: type,
+      name: name,
+      expression: expression,
+      isStateVar: true,
+      isIndexed: false
+    }
+
+    return {
+      variables: [decl],
+      initialValue: expression
+    }
+  },
+
+  ForStatement: function (ctx) {
+    return {
+      initExpression: this.visit(ctx.simpleStatement()),
+      conditionExpression: this.visit(ctx.expression(0)),
+      loopExpression: {
+        type: 'ExpressionStatement',
+        expression: this.visit(ctx.expression(1))
+      },
+      body: this.visit(ctx.statement())
+    }
+  },
+
+  PrimaryExpression: function (ctx) {
+    if (ctx.BooleanLiteral()) {
+      return {
+        type: 'BooleanLiteral',
+        value: ctx.BooleanLiteral().getText() === 'true'
+      }
+    }
+
+    if (ctx.HexLiteral()) {
+      return {
+        type: 'NumberLiteral',
+        value: ctx.HexLiteral().getText()
+      }
+    }
+
+    if (ctx.Identifier()) {
+      return {
+        type: 'Identifier',
+        value: ctx.Identifier().getText()
+      }
+    }
+
+    if (ctx.StringLiteral()) {
+      var text = ctx.getText()
+      return {
+        type: 'StringLiteral',
+        value: text.substring(1, text.length - 1)
+      }
+    }
+
+    if (ctx.numberLiteral()) { return this.visit(ctx.numberLiteral()) }
+  },
+
+  VariableDeclarationStatement: function (ctx) {
+    var variables
+    if (ctx.variableDeclaration()) { variables = [this.visit(ctx.variableDeclaration())] } else {
+      variables = ctx.identifierList().Identifier()
+        .map(iden => iden.getText())
+        .map(iden => ({
+          type: 'VariableDeclaration',
+          name: iden,
+          isStateVar: false,
+          isIndexed: false
+        }))
+    }
+    // @TODO: complete declaration
+
+    var initialValue = null
+    if (ctx.expression()) { initialValue = this.visit(ctx.expression()) }
+
+    return {
+      variables: variables,
+      initialValue: initialValue
+    }
+  },
+
+  ImportDirective: function (ctx) {
+    var pathString = ctx.StringLiteral().getText()
+    return {
+      unitAlias: null,
+      path: pathString.substring(1, pathString.length - 1)
+    }
+  },
+
+  EventDefinition: function (ctx) {
+    return {
+      name: ctx.Identifier().getText(),
+      parameters: this.visit(ctx.indexedParameterList()),
+      isAnonymous: false // @TODO: implement this
+    }
+  },
+
+  IndexedParameterList: function (ctx) {
+    var len = ctx.typeName().length
+
+    var parameters = []
+    for (var i = 0; i < len; i++) {
+      var type = this.visit(ctx.typeName(i))
+      var name = ctx.Identifier(i).getText()
+
+      parameters.push({
+        type: 'VariableDeclaration',
+        typeName: type,
+        name: name,
+        isStateVar: false,
+        isIndexed: false // @TODO: fix
+      })
+    }
+
+    return {
+      type: 'ParameterList',
+      parameters: parameters
+    }
+  },
+
+  ParameterList: function (ctx) {
+    var len = ctx.typeName().length
+
+    var parameters = []
+    for (var i = 0; i < len; i++) {
+      var type = this.visit(ctx.typeName(i))
+      var name = ctx.Identifier(i).getText()
+      parameters.push({
+        type: 'VariableDeclaration',
+        typeName: type,
+        name: name,
+        isStateVar: false,
+        isIndexed: false
+      })
+    }
+
+    return {
+      type: 'ParameterList',
+      parameters: parameters
+    }
+  }
 }
 
-function ASTBuilder(options) {
-	antlr4.tree.ParseTreeVisitor.call(this);
-    this.options = options;
+function ASTBuilder (options) {
+  antlr4.tree.ParseTreeVisitor.call(this)
+  this.options = options
 }
 
-ASTBuilder.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
-ASTBuilder.prototype.constructor = ASTBuilder;
+ASTBuilder.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype)
+ASTBuilder.prototype.constructor = ASTBuilder
 
-ASTBuilder.prototype._loc = function(ctx) {
-    var sourceLocation = {
-        start: {
-            line: ctx.start.line,
-            column: ctx.start.column,
-        },
-        end: {
-            line: ctx.stop.line,
-            column: ctx.stop.column,
-        }
+ASTBuilder.prototype._loc = function (ctx) {
+  var sourceLocation = {
+    start: {
+      line: ctx.start.line,
+      column: ctx.start.column
+    },
+    end: {
+      line: ctx.stop.line,
+      column: ctx.stop.column
     }
-    return { loc: sourceLocation }
+  }
+  return { loc: sourceLocation }
 }
 
-ASTBuilder.prototype._range = function(ctx) {
-    return { range: [ctx.start.start, ctx.stop.stop] }
+ASTBuilder.prototype._range = function (ctx) {
+  return { range: [ctx.start.start, ctx.stop.stop] }
 }
 
-ASTBuilder.prototype.meta = function(ctx) {
-    var ret = {};
-    if (this.options.loc)
-        ret = Object.assign(ret, this._loc(ctx))
-    if (this.options.range)
-        ret = Object.assign(ret, this._range(ctx))
-    return ret;
+ASTBuilder.prototype.meta = function (ctx) {
+  var ret = {}
+  if (this.options.loc) { ret = Object.assign(ret, this._loc(ctx)) }
+  if (this.options.range) { ret = Object.assign(ret, this._range(ctx)) }
+  return ret
 }
 
-ASTBuilder.prototype.visit = function(ctx) {
-    if (ctx == null) {
-        return null
-    }
+ASTBuilder.prototype.visit = function (ctx) {
+  if (ctx == null) {
+    return null
+  }
 
-    if (Array.isArray(ctx)) {
-		return ctx.map(function(child) {
-            return this.visit(child)
-        }, this);
-    }
+  if (Array.isArray(ctx)) {
+    return ctx.map(function (child) {
+      return this.visit(child)
+    }, this)
+  }
 
-    var name = ctx.constructor.name;
-    if (name.endsWith("Context")) {
-        name = name.substring(0, name.length - "Context".length);
-    }
+  var name = ctx.constructor.name
+  if (name.endsWith('Context')) {
+    name = name.substring(0, name.length - 'Context'.length)
+  }
 
-    var node = { type: name }
+  var node = { type: name }
 
-    if (name in transformAST) {
-        return Object.assign(node,
-            transformAST[name].call(this, ctx),
-            this.meta(ctx)
-        );
-    }
-    return node;
-};
+  if (name in transformAST) {
+    return Object.assign(node,
+      transformAST[name].call(this, ctx),
+      this.meta(ctx)
+    )
+  }
+  return node
+}
 
-module.exports = ASTBuilder;
+module.exports = ASTBuilder
