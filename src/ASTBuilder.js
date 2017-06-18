@@ -118,7 +118,19 @@ var transformAST = {
   },
 
   TypeName: function (ctx) {
-    return this.visit(ctx.children[0])
+    if (ctx.children.length === 4 &&
+        ctx.getChild(1).getText() === '[' &&
+        ctx.getChild(3).getText() === ']'
+    ) {
+      this.visit(ctx.children[0])
+
+      return {
+        type: 'ArrayTypeName',
+        baseTypeName: this.visit(ctx.getChild(0)),
+        length: this.visit(ctx.getChild(2))
+      }
+    }
+    return this.visit(ctx.getChild(0))
   },
 
   ReturnStatement: function (ctx) {
