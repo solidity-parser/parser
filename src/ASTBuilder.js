@@ -453,9 +453,31 @@ var transformAST = {
 
   ImportDirective: function (ctx) {
     var pathString = ctx.StringLiteral().getText()
+    var unitAlias = null
+    var symbolAliases = null
+
+    if (ctx.importDeclaration().length > 0) {
+      symbolAliases = ctx.importDeclaration().map(decl => {
+        var symbol = decl.Identifier(0).getText()
+        var alias = decl.Identifier(1).getText()
+        return [symbol, alias]
+      })
+    } else if (ctx.children.length === 7) {
+      unitAlias = [
+        ctx.getChild(1).getText(),
+        ctx.getChild(3).getText()
+      ]
+    } else if (ctx.children.length === 5) {
+      unitAlias = [
+        null,
+        ctx.getChild(3).getText()
+      ]
+    }
+
     return {
-      unitAlias: null,
-      path: pathString.substring(1, pathString.length - 1)
+      path: pathString.substring(1, pathString.length - 1),
+      unitAlias: unitAlias,
+      symbolAliases: symbolAliases
     }
   },
 
