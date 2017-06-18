@@ -510,6 +510,78 @@ var transformAST = {
       type: 'ParameterList',
       parameters: parameters
     }
+  },
+
+  InlineAssemblyStatement: function (ctx) {
+    var language = null
+    if (ctx.StringLiteral()) {
+      language = ctx.StringLiteral()
+      language = language.substring(1, language.length - 1)
+    }
+
+    return {
+      language: language,
+      body: this.visit(ctx.inlineAssemblyBlock())
+    }
+  },
+
+  InlineAssemblyBlock: function (ctx) {
+    var operations = ctx.assemblyItem()
+      .map(it => this.visit(it))
+
+    return { operations: operations }
+  },
+
+  AssemblyItem: function (ctx) {
+    if (ctx.HexLiteral()) {
+      return {
+        type: 'NumberLiteral',
+        value: ctx.HexLiteral().getText()
+      }
+    }
+
+    if (ctx.Identifier()) {
+      return {
+        type: 'Identifier',
+        value: ctx.Identifier().getText()
+      }
+    }
+
+    if (ctx.StringLiteral()) {
+      var text = ctx.getText()
+      return {
+        type: 'StringLiteral',
+        value: text.substring(1, text.length - 1)
+      }
+    }
+    return this.visit(ctx.getChild(0))
+  },
+
+  AssemblyLocalBinding: function (ctx) {
+    return {
+      name: ctx.Identifier().getText(),
+      expression: this.visit(ctx.functionalAssemblyExpression())
+    }
+  },
+
+  FunctionalAssemblyExpression: function (ctx) {
+    return {
+      name: ctx.Identifier().getText(),
+      arguments: this.visit(ctx.assemblyItem())
+    }
+  },
+
+  AssemblyAssignment: function (ctx) {
+    return {
+      name: ctx.Identifier().getText(),
+      expression: this.visit(ctx.functionalAssemblyExpression())
+    }
+  },
+
+  AssemblyLabel: function (ctx) {
+    return {
+      name: ctx.Identifier().getText()
+    }
   }
 }
 
