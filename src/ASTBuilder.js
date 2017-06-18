@@ -148,9 +148,15 @@ var transformAST = {
   },
 
   VariableDeclaration: function (ctx) {
+    var storageLocation = null
+    if (ctx.storageLocation()) {
+      storageLocation = ctx.storageLocation().getText()
+    }
+
     return {
       typeName: this.visit(ctx.typeName()),
       name: ctx.Identifier().getText(),
+      storageLocation: storageLocation,
       isStateVar: false,
       isIndexed: false
     }
