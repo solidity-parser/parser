@@ -680,11 +680,13 @@ ASTBuilder.prototype.visit = function (ctx) {
   var node = { type: name }
 
   if (name in transformAST) {
-    return Object.assign(node,
-      transformAST[name].call(this, ctx),
-      this.meta(ctx)
+    Object.assign(node,
+      transformAST[name].call(this, ctx)
     )
   }
+
+  Object.assign(node, this.meta(ctx))
+
   return node
 }
 
