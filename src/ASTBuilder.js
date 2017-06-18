@@ -459,7 +459,10 @@ var transformAST = {
     if (ctx.importDeclaration().length > 0) {
       symbolAliases = ctx.importDeclaration().map(decl => {
         var symbol = decl.Identifier(0).getText()
-        var alias = decl.Identifier(1).getText()
+        var alias = null
+        if (decl.Identifier(1)) {
+          alias = decl.Identifier(1).getText()
+        }
         return [symbol, alias]
       })
     } else if (ctx.children.length === 7) {
