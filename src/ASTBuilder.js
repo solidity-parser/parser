@@ -113,7 +113,7 @@ var transformAST = {
 
   ElementaryTypeNameExpression: function (ctx) {
     return {
-      type: this.visit(ctx.typeName())
+      typeName: this.visit(ctx.elementaryTypeName())
     }
   },
 
@@ -443,7 +443,14 @@ var transformAST = {
       }
     }
 
-    if (ctx.numberLiteral()) { return this.visit(ctx.numberLiteral()) }
+    return this.visit(ctx.getChild(0))
+  },
+
+  TupleExpression: function (ctx) {
+    return {
+      elements: this.visit(ctx.expression()),
+      isArray: ctx.getChild(0).getText() === '[',
+    }
   },
 
   VariableDeclarationStatement: function (ctx) {
