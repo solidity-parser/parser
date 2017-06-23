@@ -167,7 +167,6 @@ expression
     | expression '||' expression
     | expression '?' expression ':' expression
     | expression ('=' | '|=' | '^=' | '&=' | '<<=' | '>>=' | '+=' | '-=' | '*=' | '/=' | '%=') expression
-    | expression ',' expression
     | primaryExpression
     ;
 
@@ -177,7 +176,7 @@ primaryExpression
     | HexLiteral
     | StringLiteral
     | Identifier
-    | arrayLiteral
+    | tupleExpression
     | elementaryTypeNameExpression
     ;
 
@@ -209,7 +208,10 @@ assemblyAssignment : Identifier ':=' functionalAssemblyExpression | '=:' Identif
 assemblyLabel : Identifier ':' ;
 functionalAssemblyExpression : Identifier '(' assemblyItem? ( ',' assemblyItem )* ')' ;
 
-arrayLiteral : '[' ( expression ( ',' expression )* )? ']' ;
+tupleExpression
+    : '(' ( expression ( ',' expression )* )? ')'
+    | '[' ( expression ( ',' expression )* )? ']' ;
+
 elementaryTypeNameExpression : elementaryTypeName ;
 numberLiteral : (DecimalNumber | HexNumber) NumberUnit? ;
 
