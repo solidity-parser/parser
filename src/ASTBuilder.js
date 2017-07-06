@@ -144,6 +144,44 @@ var transformAST = {
     return this.visit(ctx.getChild(0))
   },
 
+  FunctionTypeName: function (ctx) {
+    var parameterTypes = ctx.typeNameList(0)
+      .typeName()
+      .map(typeCtx => this.visit(typeCtx))
+
+    var returnTypes = []
+    if (ctx.typeNameList(1)) {
+      returnTypes = ctx.typeNameList(1)
+        .typeName()
+        .map(typeCtx => this.visit(typeCtx))
+    }
+
+    let visibility = 'default'
+    if (ctx.InternalKeyword(0)) {
+      visibility = 'internal'
+    } else if (ctx.ExternalKeyword(0)) {
+      visibility = 'external'
+    }
+
+    var isDeclaredConst = false
+    if (ctx.ConstantKeyword(0)) {
+      isDeclaredConst = true
+    }
+
+    var isPayable = false
+    if (ctx.PayableKeyword(0)) {
+      isPayable = true
+    }
+
+    return {
+      parameterTypes: parameterTypes,
+      returnTypes: returnTypes,
+      visibility: visibility,
+      isDeclaredConst: isDeclaredConst,
+      isPayable: isPayable
+    }
+  },
+
   ReturnStatement: function (ctx) {
     var expression = null
     if (ctx.expression()) { expression = this.visit(ctx.expression()) }
