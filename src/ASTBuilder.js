@@ -72,20 +72,31 @@ var transformAST = {
     var block = null
     if (ctx.block()) { block = this.visit(ctx.block()) }
 
-    var modifiers = ctx.modifierList().children || []
-    var txtModifiers = modifiers.map(v => v.getText())
+    var modifiers = ctx.modifierList()
+      .modifierInvocation()
+      .map(mod => this.visit(mod))
 
     // parse function visibility
-    var choices = ['external', 'internal', 'public', 'private']
-    var visibility = txtModifiers
-      .find(v => choices.includes(v)) || 'default'
+    let visibility = 'default'
+    if (ctx.modifierList().ExternalKeyword(0)) {
+      visibility = 'external'
+    } else if (ctx.modifierList().InternalKeyword(0)) {
+      visibility = 'internal'
+    } else if (ctx.modifierList().PublicKeyword(0)) {
+      visibility = 'public'
+    } else if (ctx.modifierList().PrivateKeyword(0)) {
+      visibility = 'private'
+    }
 
-    var isDeclaredConst = txtModifiers.includes('constant')
-    var isPayable = txtModifiers.includes('payable')
+    var isPayable = false
+    if (ctx.modifierList().PayableKeyword(0)) {
+      isPayable = true
+    }
 
-    modifiers = modifiers
-      .filter(mod => mod.constructor.name.startsWith('ModifierInvocation'))
-      .map(mod => this.visit(mod))
+    var isDeclaredConst = false
+    if (ctx.modifierList().ConstantKeyword(0)) {
+      isDeclaredConst = true
+    }
 
     return {
       name: name ? name.getText() : '',
@@ -386,12 +397,28 @@ var transformAST = {
     var expression = null
     if (ctx.expression()) { expression = this.visit(ctx.expression()) }
 
+    let visibility = 'default'
+    if (ctx.InternalKeyword(0)) {
+      visibility = 'internal'
+    } else if (ctx.PublicKeyword(0)) {
+      visibility = 'public'
+    } else if (ctx.PrivateKeyword(0)) {
+      visibility = 'private'
+    }
+
+    var isDeclaredConst = false
+    if (ctx.ConstantKeyword(0)) {
+      isDeclaredConst = true
+    }
+
     var decl = {
       type: 'VariableDeclaration',
       typeName: type,
       name: name,
       expression: expression,
+      visibility: visibility,
       isStateVar: true,
+      isDeclaredConst: isDeclaredConst,
       isIndexed: false
     }
 
@@ -449,7 +476,7 @@ var transformAST = {
   TupleExpression: function (ctx) {
     return {
       elements: this.visit(ctx.expression()),
-      isArray: ctx.getChild(0).getText() === '[',
+      isArray: ctx.getChild(0).getText() === '['
     }
   },
 
@@ -518,21 +545,17 @@ var transformAST = {
   },
 
   IndexedParameterList: function (ctx) {
-    var len = ctx.typeName().length
-
-    var parameters = []
-    for (var i = 0; i < len; i++) {
-      var type = this.visit(ctx.typeName(i))
-      var name = ctx.Identifier(i).getText()
-
-      parameters.push({
+    var parameters = ctx.indexedParameter().map(function (paramCtx) {
+      var type = this.visit(paramCtx.typeName())
+      var name = paramCtx.Identifier().getText()
+      return {
         type: 'VariableDeclaration',
         typeName: type,
         name: name,
         isStateVar: false,
-        isIndexed: false // @TODO: fix
-      })
-    }
+        isIndexed: !!paramCtx.IndexedKeyword()
+      }
+    }, this)
 
     return {
       type: 'ParameterList',
@@ -541,20 +564,17 @@ var transformAST = {
   },
 
   ParameterList: function (ctx) {
-    var len = ctx.typeName().length
-
-    var parameters = []
-    for (var i = 0; i < len; i++) {
-      var type = this.visit(ctx.typeName(i))
-      var name = ctx.Identifier(i).getText()
-      parameters.push({
+    var parameters = ctx.parameter().map(function (paramCtx) {
+      var type = this.visit(paramCtx.typeName())
+      var name = paramCtx.Identifier().getText()
+      return {
         type: 'VariableDeclaration',
         typeName: type,
         name: name,
         isStateVar: false,
         isIndexed: false
-      })
-    }
+      }
+    }, this)
 
     return {
       type: 'ParameterList',

@@ -4,7 +4,7 @@
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "src/index.js",
   "scripts": {
-    "antlr4": "antlr4 -Dlanguage=JavaScript Solidity.g4 -o lib",
+    "antlr4": "antlr4 -Dlanguage=JavaScript Solidity.g4 -o lib && sed -i '' -e 's/antlr4\\/index/\\.\\.\\/antlr4\\/index/g' lib/*.js",
     "prettier": "find src -name *.js | xargs prettier --no-semi --write",
     "eslint": "eslint src",
     "test": "nyc mocha"

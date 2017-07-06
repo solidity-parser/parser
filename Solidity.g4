@@ -56,7 +56,7 @@ contractPart
     | enumDefinition
     ;
 
-stateVariableDeclaration : typeName ( 'public' | 'internal' | 'private' | 'constant' )* Identifier ('=' expression)? ';' ;
+stateVariableDeclaration : typeName ( PublicKeyword | InternalKeyword | PrivateKeyword | ConstantKeyword )* Identifier ('=' expression)? ';' ;
 usingForDeclaration : 'using' Identifier 'for' ('*' | typeName) ';' ;
 structDefinition : 'struct' Identifier '{'
                      ( variableDeclaration ';' (variableDeclaration ';')* )? '}' ;
@@ -68,7 +68,7 @@ functionDefinition
 returnParameters
     : 'returns' parameterList ;
 modifierList
-    : ( modifierInvocation | 'constant' | 'payable' | 'external' | 'public' | 'internal' | 'private' )* ;
+    : ( modifierInvocation | ConstantKeyword | PayableKeyword | ExternalKeyword | PublicKeyword | InternalKeyword | PrivateKeyword )* ;
 
 eventDefinition
     : 'event' Identifier indexedParameterList 'anonymous'? ';' ;
@@ -77,9 +77,11 @@ enumValue : Identifier ;
 enumDefinition
     : 'enum' Identifier '{' enumValue? (',' enumValue)* '}' ;
 
-indexedParameterList : '(' ( typeName 'indexed'? Identifier? (',' typeName 'indexed'? Identifier?)* )? ')' ;
-parameterList :        '(' ( typeName            Identifier? (',' typeName            Identifier?)* )? ')' ;
-typeNameList :         '(' ( typeName (',' typeName )* )? ')' ;
+indexedParameterList : '(' ( indexedParameter (',' indexedParameter)* )? ')' ;
+indexedParameter : typeName IndexedKeyword? Identifier? ;
+parameterList : '(' ( parameter (',' parameter)* )? ')' ;
+parameter : typeName Identifier? ;
+typeNameList : '(' ( typeName (',' typeName )* )? ')' ;
 
 variableDeclaration : ( typeName storageLocation? Identifier ) ;
 
@@ -94,7 +96,7 @@ typeName
 userDefinedTypeName : Identifier ( '.' Identifier )* ;
 
 mapping : 'mapping' '(' elementaryTypeName '=>' typeName ')' ;
-functionTypeName : 'function' typeNameList ( 'internal' | 'external' | 'constant' | 'payable' )*
+functionTypeName : 'function' typeNameList ( InternalKeyword | ExternalKeyword | ConstantKeyword | PayableKeyword )*
                    ( 'returns' typeNameList )? ;
 storageLocation : 'memory' | 'storage' ;
 
@@ -253,7 +255,15 @@ ReservedKeyword
   | 'view'
   ;
 
-Identifier : IdentifierStart IdentifierPart* ;
+ConstantKeyword : 'constant' ;
+ExternalKeyword : 'external' ;
+IndexedKeyword : 'indexed' ;
+InternalKeyword : 'internal' ;
+PayableKeyword : 'payable' ;
+PrivateKeyword : 'private' ;
+PublicKeyword : 'public' ;
+
+Identifier : (IdentifierStart IdentifierPart* | 'from') ;
 
 fragment
 IdentifierStart : [a-zA-Z$_] ;
