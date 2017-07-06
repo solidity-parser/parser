@@ -18,7 +18,8 @@ describe("#parse", () => {
 
   it("supports tolerant mode", () => {
     var source = "not good"
-    parser.parse(source, { tolerant: true })
+    var root = parser.parse(source, { tolerant: true })
+    assert.equal(root.errors.length, 1)
   })
 
   it("supports loc", () => {
