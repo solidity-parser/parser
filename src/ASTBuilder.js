@@ -387,7 +387,11 @@ var transformAST = {
           var names = []
 
           var ctxArgs = ctx.functionCallArguments()
-          if (ctxArgs.expressionList()) { args = this.visit(ctxArgs.expressionList().children) } else if (ctxArgs.nameValueList()) {
+          if (ctxArgs.expressionList()) {
+            args = ctxArgs.expressionList()
+              .expression()
+              .map(exprCtx => this.visit(exprCtx))
+          } else if (ctxArgs.nameValueList()) {
             for (var nameValue of ctxArgs.nameValueList().nameValue()) {
               args.push(this.visit(nameValue.expression()))
               names.push(nameValue.Identifier().getText())
