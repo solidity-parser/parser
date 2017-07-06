@@ -53,10 +53,10 @@ parser.parse('contract test { uint a; }', { loc: true })
 ```javascript
 var ast = parser.parse('contract test { uint a; }')
 
-// Output the name of each contract found
+// output the path of each import found
 parser.visit(ast, {
-  ContractDefinition: function(node) {
-    console.log(node.name)
+  ImportDirective: function(node) {
+    console.log(node.path)
   }
 })
 ```
