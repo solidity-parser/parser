@@ -683,8 +683,8 @@ ASTBuilder.prototype._range = function (ctx) {
 
 ASTBuilder.prototype.meta = function (ctx) {
   var ret = {}
-  if (this.options.loc) { ret = Object.assign(ret, this._loc(ctx)) }
-  if (this.options.range) { ret = Object.assign(ret, this._range(ctx)) }
+  if (this.options.loc) { Object.assign(ret, this._loc(ctx)) }
+  if (this.options.range) { Object.assign(ret, this._range(ctx)) }
   return ret
 }
 
