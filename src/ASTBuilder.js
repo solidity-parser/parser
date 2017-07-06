@@ -589,7 +589,11 @@ var transformAST = {
   IndexedParameterList: function (ctx) {
     var parameters = ctx.indexedParameter().map(function (paramCtx) {
       var type = this.visit(paramCtx.typeName())
-      var name = paramCtx.Identifier().getText()
+      var name = null
+      if (paramCtx.Identifier()) {
+        name = paramCtx.Identifier().getText()
+      }
+
       return {
         type: 'VariableDeclaration',
         typeName: type,
@@ -608,7 +612,11 @@ var transformAST = {
   ParameterList: function (ctx) {
     var parameters = ctx.parameter().map(function (paramCtx) {
       var type = this.visit(paramCtx.typeName())
-      var name = paramCtx.Identifier().getText()
+      var name = null
+      if (paramCtx.Identifier()) {
+        name = paramCtx.Identifier().getText()
+      }
+
       return {
         type: 'VariableDeclaration',
         typeName: type,
