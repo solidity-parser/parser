@@ -449,6 +449,7 @@ contract c {
     function f_internal() internal {}
 }
 contract test {
+    uint256 constant FIXED_ONE = uint256(1) << PRECISION;
     function fun(uint256 a) {
         while (true) { uint256 x = 1; break; continue; } x = 9;
     }
