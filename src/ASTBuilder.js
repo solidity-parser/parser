@@ -11,14 +11,14 @@ var transformAST = {
 
   EnumDefinition: function (ctx) {
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       members: this.visit(ctx.enumValue())
     }
   },
 
   EnumValue: function (ctx) {
     return {
-      name: ctx.Identifier().getText()
+      name: ctx.identifier().getText()
     }
   },
 
@@ -30,7 +30,7 @@ var transformAST = {
 
     return {
       typeName: typeName,
-      libraryName: ctx.Identifier().getText()
+      libraryName: ctx.identifier().getText()
     }
   },
 
@@ -42,7 +42,7 @@ var transformAST = {
   },
 
   ContractDefinition: function (ctx) {
-    var name = ctx.Identifier().getText()
+    var name = ctx.identifier().getText()
     this._currentContract = name
 
     return {
@@ -65,7 +65,7 @@ var transformAST = {
   },
 
   FunctionDefinition: function (ctx) {
-    var name = ctx.Identifier(0)
+    var name = ctx.identifier(0)
 
     var parameters = this.visit(ctx.parameterList())
 
@@ -117,7 +117,7 @@ var transformAST = {
     if (exprList != null) { args = this.visit(exprList.children) } else { args = [] }
 
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       arguments: args
     }
   },
@@ -191,7 +191,7 @@ var transformAST = {
 
   StructDefinition: function (ctx) {
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       members: this.visit(ctx.variableDeclaration())
     }
   },
@@ -204,7 +204,7 @@ var transformAST = {
 
     return {
       typeName: this.visit(ctx.typeName()),
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       storageLocation: storageLocation,
       isStateVar: false,
       isIndexed: false
@@ -281,7 +281,7 @@ var transformAST = {
     if (ctx.parameterList()) { parameters = this.visit(ctx.parameterList()) }
 
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       parameters: parameters,
       body: this.visit(ctx.block())
     }
@@ -394,7 +394,7 @@ var transformAST = {
           } else if (ctxArgs.nameValueList()) {
             for (var nameValue of ctxArgs.nameValueList().nameValue()) {
               args.push(this.visit(nameValue.expression()))
-              names.push(nameValue.Identifier().getText())
+              names.push(nameValue.identifier().getText())
             }
           }
 
@@ -434,7 +434,7 @@ var transformAST = {
 
   StateVariableDeclaration: function (ctx) {
     var type = this.visit(ctx.typeName())
-    var name = ctx.Identifier().getText()
+    var name = ctx.identifier().getText()
 
     var expression = null
     if (ctx.expression()) { expression = this.visit(ctx.expression()) }
@@ -497,10 +497,10 @@ var transformAST = {
       }
     }
 
-    if (ctx.Identifier()) {
+    if (ctx.identifier()) {
       return {
         type: 'Identifier',
-        value: ctx.Identifier().getText()
+        value: ctx.identifier().getText()
       }
     }
 
@@ -525,7 +525,7 @@ var transformAST = {
   VariableDeclarationStatement: function (ctx) {
     var variables
     if (ctx.variableDeclaration()) { variables = [this.visit(ctx.variableDeclaration())] } else {
-      variables = ctx.identifierList().Identifier()
+      variables = ctx.identifierList().identifier()
         .map(iden => iden.getText())
         .map(iden => ({
           type: 'VariableDeclaration',
@@ -552,10 +552,10 @@ var transformAST = {
 
     if (ctx.importDeclaration().length > 0) {
       symbolAliases = ctx.importDeclaration().map(decl => {
-        var symbol = decl.Identifier(0).getText()
+        var symbol = decl.identifier(0).getText()
         var alias = null
-        if (decl.Identifier(1)) {
-          alias = decl.Identifier(1).getText()
+        if (decl.identifier(1)) {
+          alias = decl.identifier(1).getText()
         }
         return [symbol, alias]
       })
@@ -580,7 +580,7 @@ var transformAST = {
 
   EventDefinition: function (ctx) {
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       parameters: this.visit(ctx.indexedParameterList()),
       isAnonymous: false // @TODO: implement this
     }
@@ -590,8 +590,8 @@ var transformAST = {
     var parameters = ctx.indexedParameter().map(function (paramCtx) {
       var type = this.visit(paramCtx.typeName())
       var name = null
-      if (paramCtx.Identifier()) {
-        name = paramCtx.Identifier().getText()
+      if (paramCtx.identifier()) {
+        name = paramCtx.identifier().getText()
       }
 
       return {
@@ -613,8 +613,8 @@ var transformAST = {
     var parameters = ctx.parameter().map(function (paramCtx) {
       var type = this.visit(paramCtx.typeName())
       var name = null
-      if (paramCtx.Identifier()) {
-        name = paramCtx.Identifier().getText()
+      if (paramCtx.identifier()) {
+        name = paramCtx.identifier().getText()
       }
 
       return {
@@ -660,10 +660,10 @@ var transformAST = {
       }
     }
 
-    if (ctx.Identifier()) {
+    if (ctx.identifier()) {
       return {
         type: 'Identifier',
-        value: ctx.Identifier().getText()
+        value: ctx.identifier().getText()
       }
     }
 
@@ -679,28 +679,28 @@ var transformAST = {
 
   AssemblyLocalBinding: function (ctx) {
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       expression: this.visit(ctx.functionalAssemblyExpression())
     }
   },
 
   FunctionalAssemblyExpression: function (ctx) {
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       arguments: this.visit(ctx.assemblyItem())
     }
   },
 
   AssemblyAssignment: function (ctx) {
     return {
-      name: ctx.Identifier().getText(),
+      name: ctx.identifier().getText(),
       expression: this.visit(ctx.functionalAssemblyExpression())
     }
   },
 
   AssemblyLabel: function (ctx) {
     return {
-      name: ctx.Identifier().getText()
+      name: ctx.identifier().getText()
     }
   }
 }
