@@ -172,7 +172,7 @@ forStatement
   : 'for' '(' ( simpleStatement | ';' ) expression? ';' expression? ')' statement ;
 
 inlineAssemblyStatement
-  : 'assembly' StringLiteral? inlineAssemblyBlock ;
+  : 'assembly' StringLiteral? assemblyBlock ;
 
 doWhileStatement
   : 'do' statement 'while' '(' expression ')' ';' ;
@@ -262,31 +262,77 @@ functionCallArguments
   : '{' nameValueList? '}'
   | expressionList? ;
 
-inlineAssemblyBlock
+assemblyBlock
   : '{' assemblyItem* '}' ;
 
 assemblyItem
   : identifier
-  | functionalAssemblyExpression
-  | inlineAssemblyBlock
-  | assemblyLocalBinding
+  | assemblyBlock
+  | assemblyExpression
+  | assemblyLocalDefinition
   | assemblyAssignment
-  | assemblyLabel
+  | assemblyRightAssignment
+  | labelDefinition
+  | assemblySwitch
+  | assemblyFunctionDefinition
+  | assemblyFor
+  | 'break' | 'continue'
+  | subAssembly
+  | dataSize
+  | linkerSymbol
+  | 'errorLabel' | 'bytecodeSize'
   | numberLiteral
   | StringLiteral
   | HexLiteral ;
 
-assemblyLocalBinding
-  : 'let' identifier ':=' functionalAssemblyExpression ;
+assemblyExpression
+  : assemblyCall | assemblyLiteral ;
+
+assemblyCall
+  : ( 'return' | 'byte' | 'address' | Identifier ) ( '(' assemblyExpression? ( ',' assemblyExpression )* ')' )? ;
+
+assemblyLocalDefinition
+  : 'let' assemblyIdentifierOrList ':=' assemblyExpression ;
 
 assemblyAssignment
-  : identifier ':=' functionalAssemblyExpression | '=:' identifier ;
+  : assemblyIdentifierOrList ':=' assemblyExpression ;
 
-assemblyLabel
-  : identifier ':' ;
+assemblyIdentifierOrList
+  : identifier | '(' assemblyIdentifierList ')' ;
 
-functionalAssemblyExpression
-  : identifier '(' assemblyItem? ( ',' assemblyItem )* ')' ;
+assemblyIdentifierList
+  : Identifier ( ',' Identifier )* ;
+
+assemblyRightAssignment
+  : '=:' Identifier ;
+
+labelDefinition
+  : Identifier ':' ;
+
+assemblySwitch
+  : 'switch' assemblyExpression assemblyCase* ( 'default' ':' assemblyBlock )? ;
+
+assemblyCase
+  : 'case' assemblyLiteral ':' assemblyBlock ;
+
+assemblyFunctionDefinition
+  : 'function' Identifier '(' assemblyIdentifierList? ')' ( '->'  assemblyIdentifierList )? assemblyBlock ;
+
+assemblyFor
+  : 'for' ( assemblyBlock | assemblyExpression )
+    assemblyExpression ( assemblyBlock | assemblyExpression ) assemblyBlock ;
+
+assemblyLiteral
+  : StringLiteral | DecimalNumber | HexNumber | HexLiteral ;
+
+subAssembly
+  : 'assembly' Identifier assemblyBlock ;
+
+dataSize
+  : 'dataSize' '(' StringLiteral ')' ;
+
+linkerSymbol
+  : 'linkerSymbol' '(' StringLiteral ')' ;
 
 tupleExpression
   : '(' ( expression ( ',' expression )* )? ')'
