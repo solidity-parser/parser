@@ -90,7 +90,7 @@ modifierList
     | PublicKeyword | InternalKeyword | PrivateKeyword )* ;
 
 eventDefinition
-  : 'event' identifier indexedParameterList 'anonymous'? ';' ;
+  : 'event' identifier indexedParameterList AnonymousKeyword? ';' ;
 
 enumValue
   : identifier ;
@@ -102,19 +102,22 @@ indexedParameterList
   : '(' ( indexedParameter (',' indexedParameter)* )? ')' ;
 
 indexedParameter
-  : typeName IndexedKeyword? identifier? ;
+  : typeName ( storageLocation | IndexedKeyword )* identifier? ;
 
 parameterList
   : '(' ( parameter (',' parameter)* )? ')' ;
 
 parameter
-  : typeName identifier? ;
+  : typeName storageLocation? identifier? ;
 
 typeNameList
-  : '(' ( typeName (',' typeName )* )? ')' ;
+  : '(' ( unnamedParameter (',' unnamedParameter)* )? ')' ;
+
+unnamedParameter
+  : typeName storageLocation? ;
 
 variableDeclaration
-  : ( typeName storageLocation? identifier ) ;
+  : typeName storageLocation? identifier ;
 
 typeName
   : elementaryTypeName
@@ -346,6 +349,7 @@ ReservedKeyword
   | 'typeof'
   | 'view' ;
 
+AnonymousKeyword : 'anonymous' ;
 ConstantKeyword : 'constant' ;
 ExternalKeyword : 'external' ;
 IndexedKeyword : 'indexed' ;

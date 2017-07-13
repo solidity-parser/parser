@@ -146,7 +146,7 @@ var transformAST = {
 
   FunctionTypeName: function (ctx) {
     var parameterTypes = ctx.typeNameList(0)
-      .typeName()
+      .unnamedParameter()
       .map(typeCtx => this.visit(typeCtx))
 
     var returnTypes = []
@@ -205,6 +205,38 @@ var transformAST = {
     return {
       typeName: this.visit(ctx.typeName()),
       name: ctx.identifier().getText(),
+      storageLocation: storageLocation,
+      isStateVar: false,
+      isIndexed: false
+    }
+  },
+
+  IndexedParameter: function (ctx) {
+    var storageLocation = null
+    if (ctx.storageLocation(0)) {
+      storageLocation = ctx.storageLocation(0).getText()
+    }
+
+    return {
+      type: 'VariableDeclaration',
+      typeName: this.visit(ctx.typeName()),
+      name: ctx.identifier().getText(),
+      storageLocation: storageLocation,
+      isStateVar: false,
+      isIndexed: !!ctx.IndexedKeyword(0)
+    }
+  },
+
+  UnnamedParameter: function (ctx) {
+    var storageLocation = null
+    if (ctx.storageLocation()) {
+      storageLocation = ctx.storageLocation().getText()
+    }
+
+    return {
+      type: 'VariableDeclaration',
+      typeName: this.visit(ctx.typeName()),
+      name: null,
       storageLocation: storageLocation,
       isStateVar: false,
       isIndexed: false
@@ -437,7 +469,9 @@ var transformAST = {
     var name = ctx.identifier().getText()
 
     var expression = null
-    if (ctx.expression()) { expression = this.visit(ctx.expression()) }
+    if (ctx.expression()) {
+      expression = this.visit(ctx.expression())
+    }
 
     let visibility = 'default'
     if (ctx.InternalKeyword(0)) {
@@ -524,7 +558,9 @@ var transformAST = {
 
   VariableDeclarationStatement: function (ctx) {
     var variables
-    if (ctx.variableDeclaration()) { variables = [this.visit(ctx.variableDeclaration())] } else {
+    if (ctx.variableDeclaration()) {
+      variables = [this.visit(ctx.variableDeclaration())]
+    } else {
       variables = ctx.identifierList().identifier()
         .map(iden => iden.getText())
         .map(iden => ({
@@ -582,7 +618,7 @@ var transformAST = {
     return {
       name: ctx.identifier().getText(),
       parameters: this.visit(ctx.indexedParameterList()),
-      isAnonymous: false // @TODO: implement this
+      isAnonymous: !!ctx.AnonymousKeyword()
     }
   },
 
@@ -599,7 +635,7 @@ var transformAST = {
         typeName: type,
         name: name,
         isStateVar: false,
-        isIndexed: !!paramCtx.IndexedKeyword()
+        isIndexed: !!paramCtx.IndexedKeyword(0)
       }
     }, this)
 
@@ -610,21 +646,8 @@ var transformAST = {
   },
 
   ParameterList: function (ctx) {
-    var parameters = ctx.parameter().map(function (paramCtx) {
-      var type = this.visit(paramCtx.typeName())
-      var name = null
-      if (paramCtx.identifier()) {
-        name = paramCtx.identifier().getText()
-      }
-
-      return {
-        type: 'VariableDeclaration',
-        typeName: type,
-        name: name,
-        isStateVar: false,
-        isIndexed: false
-      }
-    }, this)
+    var parameters = ctx.parameter()
+      .map(paramCtx => this.visit(paramCtx))
 
     return {
       type: 'ParameterList',
