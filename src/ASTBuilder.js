@@ -658,17 +658,17 @@ var transformAST = {
   InlineAssemblyStatement: function (ctx) {
     var language = null
     if (ctx.StringLiteral()) {
-      language = ctx.StringLiteral()
+      language = ctx.StringLiteral().getText()
       language = language.substring(1, language.length - 1)
     }
 
     return {
       language: language,
-      body: this.visit(ctx.inlineAssemblyBlock())
+      body: this.visit(ctx.assemblyBlock())
     }
   },
 
-  InlineAssemblyBlock: function (ctx) {
+  AssemblyBlock: function (ctx) {
     var operations = ctx.assemblyItem()
       .map(it => this.visit(it))
 
