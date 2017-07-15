@@ -1,78 +1,78 @@
-var antlr4 = require('../antlr4/index')
+const antlr4 = require('../antlr4/index')
 
-var transformAST = {
+const transformAST = {
 
-  SourceUnit: function (ctx) {
+  SourceUnit (ctx) {
     // last element is EOF terminal node
     return {
       children: this.visit(ctx.children.slice(0, -1))
     }
   },
 
-  EnumDefinition: function (ctx) {
+  EnumDefinition (ctx) {
     return {
       name: ctx.identifier().getText(),
       members: this.visit(ctx.enumValue())
     }
   },
 
-  EnumValue: function (ctx) {
+  EnumValue (ctx) {
     return {
       name: ctx.identifier().getText()
     }
   },
 
-  UsingForDeclaration: function (ctx) {
-    var typeName = null
+  UsingForDeclaration (ctx) {
+    let typeName = null
     if (ctx.getChild(3).getText() !== '*') {
       typeName = this.visit(ctx.getChild(3))
     }
 
     return {
-      typeName: typeName,
+      typeName,
       libraryName: ctx.identifier().getText()
     }
   },
 
-  PragmaDirective: function (ctx) {
+  PragmaDirective (ctx) {
     return {
       name: ctx.pragmaName().getText(),
       value: ctx.pragmaValue().getText()
     }
   },
 
-  ContractDefinition: function (ctx) {
-    var name = ctx.identifier().getText()
+  ContractDefinition (ctx) {
+    const name = ctx.identifier().getText()
     this._currentContract = name
 
     return {
-      name: name,
+      name,
       baseContracts: this.visit(ctx.inheritanceSpecifier()),
       subNodes: this.visit(ctx.contractPart()),
       kind: ctx.getChild(0).getText()
     }
   },
 
-  InheritanceSpecifier: function (ctx) {
+  InheritanceSpecifier (ctx) {
     return {
       baseName: this.visit(ctx.userDefinedTypeName()),
       arguments: this.visit(ctx.expression())
     }
   },
 
-  ContractPart: function (ctx) {
+  ContractPart (ctx) {
     return this.visit(ctx.children[0])
   },
 
-  FunctionDefinition: function (ctx) {
-    var name = ctx.identifier(0)
+  FunctionDefinition (ctx) {
+    const name = ctx.identifier(0)
 
-    var parameters = this.visit(ctx.parameterList())
+    const parameters = this.visit(ctx.parameterList())
 
-    var block = null
+    let block = null
     if (ctx.block()) { block = this.visit(ctx.block()) }
 
-    var modifiers = ctx.modifierList()
+    const modifiers = ctx.modifierList()
       .modifierInvocation()
       .map(mod => this.visit(mod))
 
@@ -88,33 +88,37 @@ var transformAST = {
       visibility = 'private'
     }
 
-    var isPayable = false
+    let isPayable = false
     if (ctx.modifierList().PayableKeyword(0)) {
       isPayable = true
     }
 
-    var isDeclaredConst = false
+    let isDeclaredConst = false
     if (ctx.modifierList().ConstantKeyword(0)) {
       isDeclaredConst = true
     }
 
     return {
       name: name ? name.getText() : '',
-      parameters: parameters,
+      parameters,
       body: block,
-      visibility: visibility,
-      modifiers: modifiers,
+      visibility,
+      modifiers,
       isConstructor: name === this._currentContract,
-      isDeclaredConst: isDeclaredConst,
-      isPayable: isPayable
+      isDeclaredConst,
+      isPayable
     }
   },
 
-  ModifierInvocation: function (ctx) {
-    var exprList = ctx.expressionList()
+  ModifierInvocation (ctx) {
+    const exprList = ctx.expressionList()
 
-    var args
-    if (exprList != null) { args = this.visit(exprList.children) } else { args = [] }
+    let args
+    if (exprList != null) {
+      args = this.visit(exprList.children)
+    } else {
+      args = []
+    }
 
     return {
       name: ctx.identifier().getText(),
@@ -122,13 +126,13 @@ var transformAST = {
     }
   },
 
-  ElementaryTypeNameExpression: function (ctx) {
+  ElementaryTypeNameExpression (ctx) {
     return {
       typeName: this.visit(ctx.elementaryTypeName())
     }
   },
 
-  TypeName: function (ctx) {
+  TypeName (ctx) {
     if (ctx.children.length === 4 &&
         ctx.getChild(1).getText() === '[' &&
         ctx.getChild(3).getText() === ']'
@@ -144,12 +148,12 @@ var transformAST = {
     return this.visit(ctx.getChild(0))
   },
 
-  FunctionTypeName: function (ctx) {
-    var parameterTypes = ctx.typeNameList(0)
+  FunctionTypeName (ctx) {
+    const parameterTypes = ctx.typeNameList(0)
       .unnamedParameter()
       .map(typeCtx => this.visit(typeCtx))
 
-    var returnTypes = []
+    let returnTypes = []
     if (ctx.typeNameList(1)) {
       returnTypes = ctx.typeNameList(1)
         .typeName()
@@ -163,41 +167,41 @@ var transformAST = {
       visibility = 'external'
     }
 
-    var isDeclaredConst = false
+    let isDeclaredConst = false
     if (ctx.ConstantKeyword(0)) {
       isDeclaredConst = true
     }
 
-    var isPayable = false
+    let isPayable = false
     if (ctx.PayableKeyword(0)) {
       isPayable = true
     }
 
     return {
-      parameterTypes: parameterTypes,
-      returnTypes: returnTypes,
-      visibility: visibility,
-      isDeclaredConst: isDeclaredConst,
-      isPayable: isPayable
+      parameterTypes,
+      returnTypes,
+      visibility,
+      isDeclaredConst,
+      isPayable
     }
   },
 
-  ReturnStatement: function (ctx) {
-    var expression = null
+  ReturnStatement (ctx) {
+    let expression = null
     if (ctx.expression()) { expression = this.visit(ctx.expression()) }
 
-    return { expression: expression }
+    return { expression }
   },
 
-  StructDefinition: function (ctx) {
+  StructDefinition (ctx) {
     return {
       name: ctx.identifier().getText(),
       members: this.visit(ctx.variableDeclaration())
     }
   },
 
-  VariableDeclaration: function (ctx) {
-    var storageLocation = null
+  VariableDeclaration (ctx) {
+    let storageLocation = null
     if (ctx.storageLocation()) {
       storageLocation = ctx.storageLocation().getText()
     }
@@ -205,14 +209,14 @@ var transformAST = {
     return {
       typeName: this.visit(ctx.typeName()),
       name: ctx.identifier().getText(),
-      storageLocation: storageLocation,
+      storageLocation,
       isStateVar: false,
       isIndexed: false
     }
   },
 
-  IndexedParameter: function (ctx) {
-    var storageLocation = null
+  IndexedParameter (ctx) {
+    let storageLocation = null
     if (ctx.storageLocation(0)) {
       storageLocation = ctx.storageLocation(0).getText()
     }
@@ -221,14 +225,14 @@ var transformAST = {
       type: 'VariableDeclaration',
       typeName: this.visit(ctx.typeName()),
       name: ctx.identifier().getText(),
-      storageLocation: storageLocation,
+      storageLocation,
       isStateVar: false,
       isIndexed: !!ctx.IndexedKeyword(0)
     }
   },
 
-  UnnamedParameter: function (ctx) {
-    var storageLocation = null
+  UnnamedParameter (ctx) {
+    let storageLocation = null
     if (ctx.storageLocation()) {
       storageLocation = ctx.storageLocation().getText()
     }
@@ -237,13 +241,13 @@ var transformAST = {
       type: 'VariableDeclaration',
       typeName: this.visit(ctx.typeName()),
       name: null,
-      storageLocation: storageLocation,
+      storageLocation,
       isStateVar: false,
       isIndexed: false
     }
   },
 
-  WhileStatement: function (ctx) {
+  WhileStatement (ctx) {
     return {
       condition: this.visit(ctx.expression()),
       body: this.visit(ctx.statement()),
@@ -251,91 +255,98 @@ var transformAST = {
     }
   },
 
-  IfStatement: function (ctx) {
-    var trueBody = this.visit(ctx.statement(0))
-    var falseBody = null
-    if (ctx.statement().length > 1) { falseBody = this.visit(ctx.statement(1)) }
+  IfStatement (ctx) {
+    const trueBody = this.visit(ctx.statement(0))
+
+    let falseBody = null
+    if (ctx.statement().length > 1) {
+      falseBody = this.visit(ctx.statement(1))
+    }
 
     return {
       condition: this.visit(ctx.expression()),
-      trueBody: trueBody,
-      falseBody: falseBody
+      trueBody,
+      falseBody
     }
   },
 
-  UserDefinedTypeName: function (ctx) {
+  UserDefinedTypeName (ctx) {
     return {
       namePath: ctx.getText()
     }
   },
 
-  ElementaryTypeName: function (ctx) {
+  ElementaryTypeName (ctx) {
     return {
       name: ctx.getText()
     }
   },
 
-  Block: function (ctx) {
+  Block (ctx) {
     return {
       statements: this.visit(ctx.statement())
     }
   },
 
-  ExpressionStatement: function (ctx) {
+  ExpressionStatement (ctx) {
     return {
       expression: this.visit(ctx.expression())
     }
   },
 
-  NumberLiteral: function (ctx) {
-    var number = ctx.getChild(0).getText()
-    var subdenomination = null
+  NumberLiteral (ctx) {
+    const number = ctx.getChild(0).getText()
+    let subdenomination = null
 
     if (ctx.children.length === 2) {
       subdenomination = ctx.getChild(1).getText()
     }
 
     return {
-      number: number,
-      subdenomination: subdenomination
+      number,
+      subdenomination
     }
   },
 
-  Mapping: function (ctx) {
+  Mapping (ctx) {
     return {
       keyType: this.visit(ctx.elementaryTypeName()),
       valueType: this.visit(ctx.typeName())
     }
   },
 
-  ModifierDefinition: function (ctx) {
-    var parameters = []
+  ModifierDefinition (ctx) {
+    let parameters = []
     if (ctx.parameterList()) { parameters = this.visit(ctx.parameterList()) }
 
     return {
       name: ctx.identifier().getText(),
-      parameters: parameters,
+      parameters,
       body: this.visit(ctx.block())
     }
   },
 
-  Statement: function (ctx) {
+  Statement (ctx) {
     return this.visit(ctx.getChild(0))
   },
 
-  SimpleStatement: function (ctx) {
+  SimpleStatement (ctx) {
     return this.visit(ctx.getChild(0))
   },
 
-  Expression: function (ctx) {
+  Expression (ctx) {
+    let op
+
     switch (ctx.children.length) {
       case 1:
         // primary expression
         return this.visit(ctx.getChild(0))
 
       case 2:
+        op = ctx.getChild(0).getText()
+
         // new expression
-        if (ctx.getChild(0).getText() === 'new') {
+        if (op === 'new') {
           return {
             type: 'NewExpression',
             typeName: this.visit(ctx.typeName())
@@ -343,13 +354,14 @@ var transformAST = {
         }
 
         // prefix operators
-        if (['+', '-', '++', '--', '!', '~', 'after', 'delete'].includes(ctx.getChild(0).getText())) {
+        if (['+', '-', '++', '--', '!', '~', 'after', 'delete'].includes(op)) {
           return {
             type: 'UnaryOperation',
             subExpression: this.visit(ctx.getChild(1)),
             isPrefix: true
           }
         }
+
         // postfix operators
         if (['++', '--'].includes(ctx.getChild(1).getText())) {
           return {
@@ -371,30 +383,33 @@ var transformAST = {
           }
         }
 
-        var op = ctx.getChild(1).getText()
+        op = ctx.getChild(1).getText()
 
         // tuple separator
         if (op === ',') {
           return {
             type: 'TupleExpression',
-            components: [this.visit(ctx.getChild(0)), this.visit(ctx.getChild(2))],
+            components: [
+              this.visit(ctx.getChild(0)),
+              this.visit(ctx.getChild(2))
+            ],
             isArray: false
           }
         }
 
         // member access
         if (op === '.') {
-          var expression = this.visit(ctx.getChild(0))
-          var memberName = ctx.getChild(2).getText()
+          const expression = this.visit(ctx.getChild(0))
+          const memberName = ctx.getChild(2).getText()
           return {
             type: 'MemberAccess',
-            expression: expression,
-            memberName: memberName
+            expression,
+            memberName
           }
         }
 
         // binary operation
-        var binOps = [
+        const binOps = [
           '+', '-', '*', '/', '**', '%',
           '<<', '>>', '&&', '||', '&', '|', '^',
           '<', '>', '<=', '>=', '==', '!=',
@@ -414,17 +429,18 @@ var transformAST = {
 
       case 4:
         // function call
-        if (ctx.getChild(1).getText() === '(' && ctx.getChild(3).getText() === ')') {
-          var args = []
-          var names = []
+        if (ctx.getChild(1).getText() === '(' &&
+            ctx.getChild(3).getText() === ')') {
+          let args = []
+          const names = []
 
-          var ctxArgs = ctx.functionCallArguments()
+          const ctxArgs = ctx.functionCallArguments()
           if (ctxArgs.expressionList()) {
             args = ctxArgs.expressionList()
               .expression()
               .map(exprCtx => this.visit(exprCtx))
           } else if (ctxArgs.nameValueList()) {
-            for (var nameValue of ctxArgs.nameValueList().nameValue()) {
+            for (const nameValue of ctxArgs.nameValueList().nameValue()) {
               args.push(this.visit(nameValue.expression()))
               names.push(nameValue.identifier().getText())
             }
@@ -434,12 +450,13 @@ var transformAST = {
             type: 'FunctionCall',
             expression: this.visit(ctx.getChild(0)),
             arguments: args,
-            names: names
+            names
           }
         }
 
         // index access
-        if (ctx.getChild(1).getText() === '[' && ctx.getChild(3).getText() === ']') {
+        if (ctx.getChild(1).getText() === '[' &&
+            ctx.getChild(3).getText() === ']') {
           return {
             type: 'IndexAccess',
             base: this.visit(ctx.getChild(0)),
@@ -449,8 +466,9 @@ var transformAST = {
         break
 
       case 5:
-                // ternary operator
-        if (ctx.getChild(1).getText() === '?' && ctx.getChild(3).getText() === ':') {
+        // ternary operator
+        if (ctx.getChild(1).getText() === '?' &&
+            ctx.getChild(3).getText() === ':') {
           return {
             type: 'Conditional',
             condition: this.visit(ctx.getChild(0)),
@@ -464,11 +482,11 @@ var transformAST = {
     throw new Error('unrecognized expression')
   },
 
-  StateVariableDeclaration: function (ctx) {
-    var type = this.visit(ctx.typeName())
-    var name = ctx.identifier().getText()
+  StateVariableDeclaration (ctx) {
+    const type = this.visit(ctx.typeName())
+    const name = ctx.identifier().getText()
 
-    var expression = null
+    let expression = null
     if (ctx.expression()) {
       expression = this.visit(ctx.expression())
     }
@@ -482,19 +500,19 @@ var transformAST = {
       visibility = 'private'
     }
 
-    var isDeclaredConst = false
+    let isDeclaredConst = false
     if (ctx.ConstantKeyword(0)) {
       isDeclaredConst = true
     }
 
-    var decl = {
+    const decl = {
       type: 'VariableDeclaration',
       typeName: type,
-      name: name,
-      expression: expression,
-      visibility: visibility,
+      name,
+      expression,
+      visibility,
       isStateVar: true,
-      isDeclaredConst: isDeclaredConst,
+      isDeclaredConst,
       isIndexed: false
     }
 
@@ -504,7 +522,7 @@ var transformAST = {
     }
   },
 
-  ForStatement: function (ctx) {
+  ForStatement (ctx) {
     return {
       initExpression: this.visit(ctx.simpleStatement()),
       conditionExpression: this.visit(ctx.expression(0)),
@@ -516,7 +534,7 @@ var transformAST = {
     }
   },
 
-  PrimaryExpression: function (ctx) {
+  PrimaryExpression (ctx) {
     if (ctx.BooleanLiteral()) {
       return {
         type: 'BooleanLiteral',
@@ -532,7 +550,7 @@ var transformAST = {
     }
 
     if (ctx.StringLiteral()) {
-      var text = ctx.getText()
+      const text = ctx.getText()
       return {
         type: 'StringLiteral',
         value: text.substring(1, text.length - 1)
@@ -542,21 +560,21 @@ var transformAST = {
     return this.visit(ctx.getChild(0))
   },
 
-  Identifier: function (ctx) {
+  Identifier (ctx) {
     return {
       name: ctx.getText()
     }
   },
 
-  TupleExpression: function (ctx) {
+  TupleExpression (ctx) {
     return {
       elements: this.visit(ctx.expression()),
       isArray: ctx.getChild(0).getText() === '['
     }
   },
 
-  VariableDeclarationStatement: function (ctx) {
-    var variables
+  VariableDeclarationStatement (ctx) {
+    let variables
     if (ctx.variableDeclaration()) {
       variables = [this.visit(ctx.variableDeclaration())]
     } else {
@@ -569,24 +587,24 @@ var transformAST = {
         }, iden))
     }
 
-    var initialValue = null
+    let initialValue = null
     if (ctx.expression()) { initialValue = this.visit(ctx.expression()) }
 
     return {
-      variables: variables,
-      initialValue: initialValue
+      variables,
+      initialValue
     }
   },
 
-  ImportDirective: function (ctx) {
-    var pathString = ctx.StringLiteral().getText()
-    var unitAlias = null
-    var symbolAliases = null
+  ImportDirective (ctx) {
+    const pathString = ctx.StringLiteral().getText()
+    let unitAlias = null
+    let symbolAliases = null
 
     if (ctx.importDeclaration().length > 0) {
       symbolAliases = ctx.importDeclaration().map(decl => {
-        var symbol = decl.identifier(0).getText()
-        var alias = null
+        const symbol = decl.identifier(0).getText()
+        let alias = null
         if (decl.identifier(1)) {
           alias = decl.identifier(1).getText()
         }
@@ -606,12 +624,12 @@ var transformAST = {
 
     return {
       path: pathString.substring(1, pathString.length - 1),
-      unitAlias: unitAlias,
-      symbolAliases: symbolAliases
+      unitAlias,
+      symbolAliases
     }
   },
 
-  EventDefinition: function (ctx) {
+  EventDefinition (ctx) {
     return {
       name: ctx.identifier().getText(),
       parameters: this.visit(ctx.indexedParameterList()),
@@ -619,10 +637,10 @@ var transformAST = {
     }
   },
 
-  IndexedParameterList: function (ctx) {
-    var parameters = ctx.indexedParameter().map(function (paramCtx) {
-      var type = this.visit(paramCtx.typeName())
-      var name = null
+  IndexedParameterList (ctx) {
+    const parameters = ctx.indexedParameter().map(function (paramCtx) {
+      const type = this.visit(paramCtx.typeName())
+      let name = null
       if (paramCtx.identifier()) {
         name = paramCtx.identifier().getText()
       }
@@ -630,7 +648,7 @@ var transformAST = {
       return {
         type: 'VariableDeclaration',
         typeName: type,
-        name: name,
+        name,
         isStateVar: false,
         isIndexed: !!paramCtx.IndexedKeyword(0)
       }
@@ -638,48 +656,47 @@ var transformAST = {
 
     return {
       type: 'ParameterList',
-      parameters: parameters
+      parameters
     }
   },
 
-  ParameterList: function (ctx) {
-    var parameters = ctx.parameter()
+  ParameterList (ctx) {
+    const parameters = ctx.parameter()
       .map(paramCtx => this.visit(paramCtx))
 
     return {
       type: 'ParameterList',
-      parameters: parameters
+      parameters
     }
   },
 
-  InlineAssemblyStatement: function (ctx) {
-    var language = null
+  InlineAssemblyStatement (ctx) {
+    let language = null
     if (ctx.StringLiteral()) {
       language = ctx.StringLiteral().getText()
       language = language.substring(1, language.length - 1)
     }
 
     return {
-      language: language,
+      language,
       body: this.visit(ctx.assemblyBlock())
     }
   },
 
-  AssemblyBlock: function (ctx) {
-    var operations = ctx.assemblyItem()
+  AssemblyBlock (ctx) {
+    const operations = ctx.assemblyItem()
       .map(it => this.visit(it))
 
-    return { operations: operations }
+    return { operations }
   },
 
-  AssemblyItem: function (ctx) {
-    var text
+  AssemblyItem (ctx) {
+    let text
 
     if (ctx.HexLiteral()) {
       return {
         type: 'NumberLiteral',
         value: ctx.HexLiteral().getText()
-        // TODO: add positions to these fake nodes
       }
     }
 
@@ -706,23 +723,23 @@ var transformAST = {
     return this.visit(ctx.getChild(0))
   },
 
-  AssemblyExpression: function (ctx) {
+  AssemblyExpression (ctx) {
     return this.visit(ctx.getChild(0))
   },
 
-  AssemblyCall: function (ctx) {
-    var functionName = ctx.getChild(0).getText()
-    var args = ctx.assemblyExpression()
+  AssemblyCall (ctx) {
+    const functionName = ctx.getChild(0).getText()
+    const args = ctx.assemblyExpression()
       .map(arg => this.visit(arg))
 
     return {
-      functionName: functionName,
+      functionName,
       arguments: args
     }
   },
 
-  AssemblyLiteral: function (ctx) {
-    var text
+  AssemblyLiteral (ctx) {
+    let text
 
     if (ctx.StringLiteral()) {
       text = ctx.getText()
@@ -754,20 +771,20 @@ var transformAST = {
     }
   },
 
-  AssemblySwitch: function (ctx) {
+  AssemblySwitch (ctx) {
     return {
       expression: this.visit(ctx.assemblyExpression()),
       cases: ctx.assemblyCase().map(c => this.visit(c))
     }
   },
 
-  AssemblyCase: function (ctx) {
-    var value = null
+  AssemblyCase (ctx) {
+    let value = null
     if (ctx.getChild(0).getText() === 'case') {
       value = this.visit(ctx.assemblyLiteral())
     }
 
-    var node = { block: this.visit(ctx.assemblyBlock()) }
+    const node = { block: this.visit(ctx.assemblyBlock()) }
     if (value !== null) {
       node.value = value
     } else {
@@ -777,8 +794,8 @@ var transformAST = {
     return node
   },
 
-  AssemblyLocalDefinition: function (ctx) {
-    var names = ctx.assemblyIdentifierOrList()
+  AssemblyLocalDefinition (ctx) {
+    let names = ctx.assemblyIdentifierOrList()
     if (names.identifier()) {
       names = [this.visit(names.identifier())]
     } else {
@@ -786,21 +803,26 @@ var transformAST = {
     }
 
     return {
-      names: names,
+      names,
       expression: this.visit(ctx.assemblyExpression())
     }
   },
 
-  AssemblyFunctionDefinition: function (ctx) {
+  AssemblyFunctionDefinition (ctx) {
+    const args = ctx.assemblyIdentifierList().identifier()
+    const returnArgs = ctx.assemblyFunctionReturns()
+      .assemblyIdentifierList()
+      .identifier()
+
     return {
       name: ctx.identifier().getText(),
-      arguments: this.visit(ctx.assemblyIdentifierList().identifier()),
-      returnArguments: this.visit(ctx.assemblyFunctionReturns().assemblyIdentifierList().identifier())
+      arguments: this.visit(args),
+      returnArguments: this.visit(returnArgs)
     }
   },
 
-  AssemblyAssignment: function (ctx) {
-    var names = ctx.assemblyIdentifierOrList()
+  AssemblyAssignment (ctx) {
+    let names = ctx.assemblyIdentifierOrList()
     if (names.identifier()) {
       names = [this.visit(names.identifier())]
     } else {
@@ -808,24 +830,24 @@ var transformAST = {
     }
 
     return {
-      names: names,
+      names,
       expression: this.visit(ctx.assemblyExpression())
     }
   },
 
-  AssemblyLabel: function (ctx) {
+  AssemblyLabel (ctx) {
     return {
       name: ctx.identifier().getText()
     }
   },
 
-  AssemblyStackAssignment: function (ctx) {
+  AssemblyStackAssignment (ctx) {
     return {
       name: ctx.identifier().getText()
     }
   },
 
-  AssemblyFor: function (ctx) {
+  AssemblyFor (ctx) {
     return {
       pre: this.visit(ctx.getChild(1)),
       condition: this.visit(ctx.getChild(2)),
@@ -844,7 +866,7 @@ ASTBuilder.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype)
 ASTBuilder.prototype.constructor = ASTBuilder
 
 ASTBuilder.prototype._loc = function (ctx) {
-  var sourceLocation = {
+  const sourceLocation = {
     start: {
       line: ctx.start.line,
       column: ctx.start.column
@@ -862,7 +884,7 @@ ASTBuilder.prototype._range = function (ctx) {
 }
 
 ASTBuilder.prototype.meta = function (ctx) {
-  var ret = {}
+  const ret = {}
   if (this.options.loc) { Object.assign(ret, this._loc(ctx)) }
   if (this.options.range) { Object.assign(ret, this._range(ctx)) }
   return ret
@@ -883,12 +905,12 @@ ASTBuilder.prototype.visit = function (ctx) {
     }, this)
   }
 
-  var name = ctx.constructor.name
+  let name = ctx.constructor.name
   if (name.endsWith('Context')) {
     name = name.substring(0, name.length - 'Context'.length)
   }
 
-  var node = { type: name }
+  const node = { type: name }
 
   if (name in transformAST) {
     Object.assign(node,

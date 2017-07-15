@@ -1,8 +1,8 @@
-var antlr4 = require('../antlr4/index')
-var { SolidityLexer } = require('../lib/SolidityLexer')
-var { SolidityParser } = require('../lib/SolidityParser')
-var ASTBuilder = require('./ASTBuilder')
-var ErrorListener = require('./ErrorListener')
+const antlr4 = require('../antlr4/index')
+const { SolidityLexer } = require('../lib/SolidityLexer')
+const { SolidityParser } = require('../lib/SolidityParser')
+const ASTBuilder = require('./ASTBuilder')
+const ErrorListener = require('./ErrorListener')
 
 function ParserError (errors) {
   Error.call(this)
@@ -15,26 +15,28 @@ ParserError.prototype.constructor = ParserError
 function parse (input, options) {
   options = options || {}
 
-  var chars = antlr4.CharStreams.fromString(input)
-  var lexer = new SolidityLexer(chars)
-  var tokens = new antlr4.CommonTokenStream(lexer)
+  const chars = antlr4.CharStreams.fromString(input)
+  const lexer = new SolidityLexer(chars)
+  const tokens = new antlr4.CommonTokenStream(lexer)
 
-  var parser = new SolidityParser(tokens)
-  var listener = new ErrorListener()
+  const parser = new SolidityParser(tokens)
+  const listener = new ErrorListener()
   parser.removeErrorListeners()
   parser.addErrorListener(listener)
   parser.buildParseTrees = true
 
-  var tree = parser.sourceUnit()
+  const tree = parser.sourceUnit()
 
   if (!options.tolerant && listener.hasErrors()) {
     throw new ParserError({ errors: listener.getErrors() })
   }
 
-  var visitor = new ASTBuilder(options)
-  var ast = visitor.visit(tree)
+  const visitor = new ASTBuilder(options)
+  const ast = visitor.visit(tree)
 
-  if (options.tolerant && listener.hasErrors()) { ast.errors = listener.getErrors() }
+  if (options.tolerant && listener.hasErrors()) {
+    ast.errors = listener.getErrors()
+  }
 
   return ast
 }
@@ -50,7 +52,7 @@ function visit (node, visitor) {
 
   if (!_isASTNode(node)) return
 
-  var cont = true
+  let cont = true
 
   if (visitor[node.type]) {
     cont = visitor[node.type](node)
@@ -58,13 +60,13 @@ function visit (node, visitor) {
 
   if (cont === false) return
 
-  for (var prop in node) {
+  for (const prop in node) {
     if (node.hasOwnProperty(prop)) {
       visit(node[prop], visitor)
     }
   }
 
-  var selector = node.type + ':exit'
+  const selector = node.type + ':exit'
   if (visitor[selector]) {
     visitor[selector](node)
   }
