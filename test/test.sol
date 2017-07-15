@@ -454,6 +454,36 @@ contract test {
         while (true) { uint256 x = 1; break; continue; } x = 9;
     }
 }
+contract test {
+  function() {
+	assembly {
+    start:
+        mstore(0x40, 0x60) // store the "free memory pointer"
+        // function dispatcher
+        switch div(calldataload(0), exp(2, 226))
+        case 0xb3de648b {
+            let (r) := f(calldataload(4))
+            let ret := $allocate(0x20)
+            mstore(ret, r)
+            return(ret, 0x20)
+        }
+        default { revert(0, 0) }
+        // memory allocator
+        function $allocate(size) -> pos {
+            pos := mload(0x40)
+            mstore(0x40, add(pos, size))
+            =: pos
+        }
+        // the contract function
+        function f(x) -> y {
+            y := 1
+            for { let i := 0 } lt(i, x) { i := add(i, 1) } {
+                y := mul(2, y)
+            }
+        }
+    }
+  }
+}
 /**
  * @title ERC20 interface
  * @dev see https://github.com/ethereum/EIPs/issues/20

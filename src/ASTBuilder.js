@@ -531,13 +531,6 @@ var transformAST = {
       }
     }
 
-    if (ctx.identifier()) {
-      return {
-        type: 'Identifier',
-        value: ctx.identifier().getText()
-      }
-    }
-
     if (ctx.StringLiteral()) {
       var text = ctx.getText()
       return {
@@ -547,6 +540,12 @@ var transformAST = {
     }
 
     return this.visit(ctx.getChild(0))
+  },
+
+  Identifier: function (ctx) {
+    return {
+      name: ctx.getText()
+    }
   },
 
   TupleExpression: function (ctx) {
@@ -562,15 +561,13 @@ var transformAST = {
       variables = [this.visit(ctx.variableDeclaration())]
     } else {
       variables = ctx.identifierList().identifier()
-        .map(iden => iden.getText())
-        .map(iden => ({
+        .map(iden => this.createNode({
           type: 'VariableDeclaration',
-          name: iden,
+          name: iden.getText(),
           isStateVar: false,
           isIndexed: false
-        }))
+        }, iden))
     }
-    // @TODO: complete declaration
 
     var initialValue = null
     if (ctx.expression()) { initialValue = this.visit(ctx.expression()) }
@@ -676,54 +673,164 @@ var transformAST = {
   },
 
   AssemblyItem: function (ctx) {
+    var text
+
     if (ctx.HexLiteral()) {
       return {
         type: 'NumberLiteral',
         value: ctx.HexLiteral().getText()
-      }
-    }
-
-    if (ctx.identifier()) {
-      return {
-        type: 'Identifier',
-        value: ctx.identifier().getText()
+        // TODO: add positions to these fake nodes
       }
     }
 
     if (ctx.StringLiteral()) {
-      var text = ctx.getText()
+      text = ctx.StringLiteral().getText()
       return {
         type: 'StringLiteral',
         value: text.substring(1, text.length - 1)
       }
     }
+
+    if (ctx.BreakKeyword()) {
+      return {
+        type: 'Break'
+      }
+    }
+
+    if (ctx.ContinueKeyword()) {
+      return {
+        type: 'Continue'
+      }
+    }
+
     return this.visit(ctx.getChild(0))
   },
 
-  AssemblyLocalBinding: function (ctx) {
+  AssemblyExpression: function (ctx) {
+    return this.visit(ctx.getChild(0))
+  },
+
+  AssemblyCall: function (ctx) {
+    var functionName = ctx.getChild(0).getText()
+    var args = ctx.assemblyExpression()
+      .map(arg => this.visit(arg))
+
     return {
-      name: ctx.identifier().getText(),
-      expression: this.visit(ctx.functionalAssemblyExpression())
+      functionName: functionName,
+      arguments: args
     }
   },
 
-  FunctionalAssemblyExpression: function (ctx) {
+  AssemblyLiteral: function (ctx) {
+    var text
+
+    if (ctx.StringLiteral()) {
+      text = ctx.getText()
+      return {
+        type: 'StringLiteral',
+        value: text.substring(1, text.length - 1)
+      }
+    }
+
+    if (ctx.DecimalNumber()) {
+      return {
+        type: 'DecimalNumber',
+        value: ctx.getText()
+      }
+    }
+
+    if (ctx.HexNumber()) {
+      return {
+        type: 'HexNumber',
+        value: ctx.getText()
+      }
+    }
+
+    if (ctx.HexLiteral()) {
+      return {
+        type: 'HexNumber',
+        value: ctx.getText()
+      }
+    }
+  },
+
+  AssemblySwitch: function (ctx) {
+    return {
+      expression: this.visit(ctx.assemblyExpression()),
+      cases: ctx.assemblyCase().map(c => this.visit(c))
+    }
+  },
+
+  AssemblyCase: function (ctx) {
+    var value = null
+    if (ctx.getChild(0).getText() === 'case') {
+      value = this.visit(ctx.assemblyLiteral())
+    }
+
+    var node = { block: this.visit(ctx.assemblyBlock()) }
+    if (value !== null) {
+      node.value = value
+    } else {
+      node.default = true
+    }
+
+    return node
+  },
+
+  AssemblyLocalDefinition: function (ctx) {
+    var names = ctx.assemblyIdentifierOrList()
+    if (names.identifier()) {
+      names = [this.visit(names.identifier())]
+    } else {
+      names = this.visit(names.assemblyIdentifierList().identifier())
+    }
+
+    return {
+      names: names,
+      expression: this.visit(ctx.assemblyExpression())
+    }
+  },
+
+  AssemblyFunctionDefinition: function (ctx) {
     return {
       name: ctx.identifier().getText(),
-      arguments: this.visit(ctx.assemblyItem())
+      arguments: this.visit(ctx.assemblyIdentifierList().identifier()),
+      returnArguments: this.visit(ctx.assemblyFunctionReturns().assemblyIdentifierList().identifier())
     }
   },
 
   AssemblyAssignment: function (ctx) {
+    var names = ctx.assemblyIdentifierOrList()
+    if (names.identifier()) {
+      names = [this.visit(names.identifier())]
+    } else {
+      names = this.visit(names.assemblyIdentifierList().identifier())
+    }
+
     return {
-      name: ctx.identifier().getText(),
-      expression: this.visit(ctx.functionalAssemblyExpression())
+      names: names,
+      expression: this.visit(ctx.assemblyExpression())
     }
   },
 
   AssemblyLabel: function (ctx) {
     return {
       name: ctx.identifier().getText()
+    }
+  },
+
+  AssemblyStackAssignment: function (ctx) {
+    return {
+      name: ctx.identifier().getText()
+    }
+  },
+
+  AssemblyFor: function (ctx) {
+    return {
+      pre: this.visit(ctx.getChild(1)),
+      condition: this.visit(ctx.getChild(2)),
+      post: this.visit(ctx.getChild(3)),
+      body: this.visit(ctx.getChild(4))
     }
   }
 }
@@ -761,6 +868,10 @@ ASTBuilder.prototype.meta = function (ctx) {
   return ret
 }
 
+ASTBuilder.prototype.createNode = function (obj, ctx) {
+  return Object.assign(obj, this.meta(ctx))
+}
+
 ASTBuilder.prototype.visit = function (ctx) {
   if (ctx == null) {
     return null
@@ -785,9 +896,7 @@ ASTBuilder.prototype.visit = function (ctx) {
     )
   }
 
-  Object.assign(node, this.meta(ctx))
-
-  return node
+  return this.createNode(node, ctx)
 }
 
 module.exports = ASTBuilder

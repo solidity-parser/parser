@@ -271,16 +271,14 @@ assemblyItem
   | assemblyExpression
   | assemblyLocalDefinition
   | assemblyAssignment
-  | assemblyRightAssignment
+  | assemblyStackAssignment
   | labelDefinition
   | assemblySwitch
   | assemblyFunctionDefinition
   | assemblyFor
-  | 'break' | 'continue'
+  | BreakKeyword
+  | ContinueKeyword
   | subAssembly
-  | dataSize
-  | linkerSymbol
-  | 'errorLabel' | 'bytecodeSize'
   | numberLiteral
   | StringLiteral
   | HexLiteral ;
@@ -289,10 +287,10 @@ assemblyExpression
   : assemblyCall | assemblyLiteral ;
 
 assemblyCall
-  : ( 'return' | 'byte' | 'address' | Identifier ) ( '(' assemblyExpression? ( ',' assemblyExpression )* ')' )? ;
+  : ( 'return' | 'byte' | 'address' | identifier ) ( '(' assemblyExpression? ( ',' assemblyExpression )* ')' )? ;
 
 assemblyLocalDefinition
-  : 'let' assemblyIdentifierOrList ':=' assemblyExpression ;
+  : 'let' assemblyIdentifierOrList ( ':=' assemblyExpression )? ;
 
 assemblyAssignment
   : assemblyIdentifierOrList ':=' assemblyExpression ;
@@ -301,22 +299,27 @@ assemblyIdentifierOrList
   : identifier | '(' assemblyIdentifierList ')' ;
 
 assemblyIdentifierList
-  : Identifier ( ',' Identifier )* ;
+  : identifier ( ',' identifier )* ;
 
-assemblyRightAssignment
-  : '=:' Identifier ;
+assemblyStackAssignment
+  : '=:' identifier ;
 
 labelDefinition
-  : Identifier ':' ;
+  : identifier ':' ;
 
 assemblySwitch
-  : 'switch' assemblyExpression assemblyCase* ( 'default' ':' assemblyBlock )? ;
+  : 'switch' assemblyExpression assemblyCase* ;
 
 assemblyCase
-  : 'case' assemblyLiteral ':' assemblyBlock ;
+  : 'case' assemblyLiteral assemblyBlock
+  | 'default' assemblyBlock ;
 
 assemblyFunctionDefinition
-  : 'function' Identifier '(' assemblyIdentifierList? ')' ( '->'  assemblyIdentifierList )? assemblyBlock ;
+  : 'function' identifier '(' assemblyIdentifierList? ')'
+    assemblyFunctionReturns? assemblyBlock ;
+
+assemblyFunctionReturns
+  : ( '->' assemblyIdentifierList ) ;
 
 assemblyFor
   : 'for' ( assemblyBlock | assemblyExpression )
@@ -326,13 +329,7 @@ assemblyLiteral
   : StringLiteral | DecimalNumber | HexNumber | HexLiteral ;
 
 subAssembly
-  : 'assembly' Identifier assemblyBlock ;
-
-dataSize
-  : 'dataSize' '(' StringLiteral ')' ;
-
-linkerSymbol
-  : 'linkerSymbol' '(' StringLiteral ')' ;
+  : 'assembly' identifier assemblyBlock ;
 
 tupleExpression
   : '(' ( expression ( ',' expression )* )? ')'
@@ -396,7 +393,9 @@ ReservedKeyword
   | 'view' ;
 
 AnonymousKeyword : 'anonymous' ;
+BreakKeyword : 'break' ;
 ConstantKeyword : 'constant' ;
+ContinueKeyword : 'continue' ;
 ExternalKeyword : 'external' ;
 IndexedKeyword : 'indexed' ;
 InternalKeyword : 'internal' ;

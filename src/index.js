@@ -27,7 +27,9 @@ function parse (input, options) {
 
   var tree = parser.sourceUnit()
 
-  if (!options.tolerant && listener.hasErrors()) { throw new ParserError({ errors: listener.getErrors() }) }
+  if (!options.tolerant && listener.hasErrors()) {
+    throw new ParserError({ errors: listener.getErrors() })
+  }
 
   var visitor = new ASTBuilder(options)
   var ast = visitor.visit(tree)
