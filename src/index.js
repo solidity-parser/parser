@@ -4,9 +4,11 @@ const { SolidityParser } = require('../lib/SolidityParser')
 const ASTBuilder = require('./ASTBuilder')
 const ErrorListener = require('./ErrorListener')
 
-function ParserError (errors) {
-  Error.call(this)
-  this.errors = errors
+function ParserError (args) {
+  this.name = 'ParserError'
+  this.message = args.errors.map(e => e.message).join('. ')
+  this.errors = args.errors
+  this.stack = (new Error).stack
 }
 
 ParserError.prototype = Object.create(Error.prototype)
