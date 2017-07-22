@@ -251,7 +251,13 @@ const transformAST = {
     return {
       condition: this.visit(ctx.expression()),
       body: this.visit(ctx.statement()),
-      isDoWhile: ctx.getChild(0).getText() === 'do'
+    }
+  },
+
+  DoWhileStatement (ctx) {
+    return {
+      condition: this.visit(ctx.expression()),
+      body: this.visit(ctx.statement()),
     }
   },
 
