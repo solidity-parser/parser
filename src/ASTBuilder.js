@@ -663,10 +663,21 @@ const transformAST = {
   ParameterList (ctx) {
     const parameters = ctx.parameter()
       .map(paramCtx => this.visit(paramCtx))
+    return { parameters }
+  },
+
+  Parameter (ctx) {
+    let storageLocation = null
+    if (ctx.storageLocation()) {
+      storageLocation = ctx.storageLocation().getText()
+    }
 
     return {
-      type: 'ParameterList',
-      parameters
+      typeName: this.visit(ctx.typeName()),
+      name: ctx.identifier().getText(),
+      storageLocation,
+      isStateVar: false,
+      isIndexed: false
     }
   },
 
