@@ -97,6 +97,32 @@ describe("#parse", () => {
     })
 
     it("UsingForDeclaration", () => {
+      var ast = parseNode("using Lib for uint;")
+      assert.deepEqual(ast, {
+        "type": "UsingForDeclaration",
+        "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+        "libraryName": "Lib"
+      })
+
+      ast = parseNode("using Lib for *;")
+      assert.deepEqual(ast, {
+        "type": "UsingForDeclaration",
+        "typeName": null,
+        "libraryName": "Lib"
+      })
+
+      ast = parseNode("using Lib for S;")
+      assert.deepEqual(ast, {
+        "type": "UsingForDeclaration",
+        "typeName": {
+            "type": "UserDefinedTypeName",
+            "namePath": "S"
+          },
+        "libraryName": "Lib"
+      })
 
     })
 
@@ -221,13 +247,56 @@ describe("#parse", () => {
       })
     })
 
-    it("TypeName", () => {
+    xit("TypeName", () => {
 
 
     })
 
     it("FunctionTypeName", () => {
-
+      var ast = parseNode("function (uint, uint) returns(bool) a;")
+      assert.deepEqual(ast.variables[0].typeName, {
+        "type": "FunctionTypeName",
+        "parameterTypes": [
+          {
+            "type": "VariableDeclaration",
+            "typeName": {
+              "type": "ElementaryTypeName",
+              "name": "uint"
+            },
+            "name": null,
+            "storageLocation": null,
+            "isStateVar": false,
+            "isIndexed": false
+          },
+          {
+            "type": "VariableDeclaration",
+            "typeName": {
+              "type": "ElementaryTypeName",
+              "name": "uint"
+            },
+            "name": null,
+            "storageLocation": null,
+            "isStateVar": false,
+            "isIndexed": false
+          }
+        ],
+        "returnTypes": [
+          {
+            "type": "VariableDeclaration",
+            "typeName": {
+              "type": "ElementaryTypeName",
+              "name": "bool"
+            },
+            "name": null,
+            "storageLocation": null,
+            "isStateVar": false,
+            "isIndexed": false
+          }
+        ],
+        "visibility": "default",
+        "isDeclaredConst": false,
+        "isPayable": false
+      })
     })
 
     it("ReturnStatement", () => {
@@ -349,12 +418,23 @@ describe("#parse", () => {
       })
     })
 
-    xit("UserDefinedTypeName", () => {
-
+    it("UserDefinedTypeName", () => {
+      var ast = parseStatement("Foo.Bar a;")
+      assert.deepEqual(ast.variables[0].typeName, {
+        "type": "UserDefinedTypeName",
+        "namePath": "Foo.Bar"
+      })
     })
 
-    xit("ExpressionStatement", () => {
-
+    it("ExpressionStatement", () => {
+      var stmt = parseStatement("true;")
+      assert.deepEqual(stmt, {
+        "type": "ExpressionStatement",
+        "expression": {
+          "type": "BooleanLiteral",
+          "value": true
+        }
+      })
     })
 
     it("NumberLiteral", () => {
@@ -634,14 +714,6 @@ describe("#parse", () => {
           "operations": []
         }
       })
-    })
-
-    xit("AssemblyBlock", () => {
-
-    })
-
-    xit("AssemblyItem", () => {
-
     })
 
     xit("AssemblyExpression", () => {
