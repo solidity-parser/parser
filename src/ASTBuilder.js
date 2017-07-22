@@ -593,7 +593,7 @@ const transformAST = {
 
     if (ctx.HexLiteral()) {
       return {
-        type: 'NumberLiteral',
+        type: 'HexLiteral',
         value: ctx.HexLiteral().getText()
       }
     }
@@ -754,7 +754,7 @@ const transformAST = {
 
     if (ctx.HexLiteral()) {
       return {
-        type: 'NumberLiteral',
+        type: 'HexLiteral',
         value: ctx.HexLiteral().getText()
       }
     }
@@ -823,7 +823,7 @@ const transformAST = {
 
     if (ctx.HexLiteral()) {
       return {
-        type: 'HexNumber',
+        type: 'HexLiteral',
         value: ctx.getText()
       }
     }

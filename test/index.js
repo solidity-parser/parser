@@ -446,6 +446,30 @@ describe("#parse", () => {
       })
     })
 
+    it("StringLiteral", () => {
+      var expr = parseExpression("\"Hello\"")
+      assert.deepEqual(expr, {
+        "type": "StringLiteral",
+        "value": "Hello",
+      })
+    })
+
+    it("HexLiteral", () => {
+      var expr = parseExpression("hex\"fafafa\"")
+      assert.deepEqual(expr, {
+        type: "HexLiteral",
+        value: "hex\"fafafa\""
+      })
+    })
+
+    it("BooleanLiteral", () => {
+      var expr = parseExpression("false")
+      assert.deepEqual(expr, {
+        "type": "BooleanLiteral",
+        "value": false,
+      })
+    })
+
     it("Mapping", () => {
       var ast = parseNode("mapping(uint => address) a;")
       assert.deepEqual(ast.variables[0].typeName, {
@@ -550,10 +574,6 @@ describe("#parse", () => {
           "statements": []
         }
       })
-
-    })
-
-    xit("PrimaryExpression", () => {
 
     })
 
@@ -714,10 +734,6 @@ describe("#parse", () => {
           "operations": []
         }
       })
-    })
-
-    xit("AssemblyExpression", () => {
-
     })
 
     xit("AssemblyCall", () => {
