@@ -161,7 +161,7 @@ const transformAST = {
     if (ctx.typeNameList(1)) {
       returnTypes = ctx
         .typeNameList(1)
-        .typeName()
+        .unnamedParameter()
         .map(typeCtx => this.visit(typeCtx))
     }
 
