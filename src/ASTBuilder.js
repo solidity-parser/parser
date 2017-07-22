@@ -1,7 +1,6 @@
 const antlr4 = require('../antlr4/index')
 
 const transformAST = {
-
   SourceUnit (ctx) {
     // last element is EOF terminal node
     return {
@@ -70,9 +69,12 @@ const transformAST = {
     const parameters = this.visit(ctx.parameterList())
 
     let block = null
-    if (ctx.block()) { block = this.visit(ctx.block()) }
+    if (ctx.block()) {
+      block = this.visit(ctx.block())
+    }
 
-    const modifiers = ctx.modifierList()
+    const modifiers = ctx
+      .modifierList()
       .modifierInvocation()
       .map(mod => this.visit(mod))
 
@@ -133,9 +135,10 @@ const transformAST = {
   },
 
   TypeName (ctx) {
-    if (ctx.children.length === 4 &&
-        ctx.getChild(1).getText() === '[' &&
-        ctx.getChild(3).getText() === ']'
+    if (
+      ctx.children.length === 4 &&
+      ctx.getChild(1).getText() === '[' &&
+      ctx.getChild(3).getText() === ']'
     ) {
       this.visit(ctx.children[0])
 
@@ -149,13 +152,15 @@ const transformAST = {
   },
 
   FunctionTypeName (ctx) {
-    const parameterTypes = ctx.typeNameList(0)
+    const parameterTypes = ctx
+      .typeNameList(0)
       .unnamedParameter()
       .map(typeCtx => this.visit(typeCtx))
 
     let returnTypes = []
     if (ctx.typeNameList(1)) {
-      returnTypes = ctx.typeNameList(1)
+      returnTypes = ctx
+        .typeNameList(1)
         .typeName()
         .map(typeCtx => this.visit(typeCtx))
     }
@@ -188,7 +193,9 @@ const transformAST = {
 
   ReturnStatement (ctx) {
     let expression = null
-    if (ctx.expression()) { expression = this.visit(ctx.expression()) }
+    if (ctx.expression()) {
+      expression = this.visit(ctx.expression())
+    }
 
     return { expression }
   },
@@ -323,7 +330,9 @@ const transformAST = {
 
   ModifierDefinition (ctx) {
     let parameters = []
-    if (ctx.parameterList()) { parameters = this.visit(ctx.parameterList()) }
+    if (ctx.parameterList()) {
+      parameters = this.visit(ctx.parameterList())
+    }
 
     return {
       name: ctx.identifier().getText(),
@@ -380,8 +389,10 @@ const transformAST = {
 
       case 3:
         // treat parenthesis as no-op
-        if (ctx.getChild(0).getText() === '(' &&
-            ctx.getChild(2).getText() === ')') {
+        if (
+          ctx.getChild(0).getText() === '(' &&
+          ctx.getChild(2).getText() === ')'
+        ) {
           return {
             type: 'TupleExpression',
             components: [this.visit(ctx.getChild(1))],
@@ -416,11 +427,36 @@ const transformAST = {
 
         // binary operation
         const binOps = [
-          '+', '-', '*', '/', '**', '%',
-          '<<', '>>', '&&', '||', '&', '|', '^',
-          '<', '>', '<=', '>=', '==', '!=',
-          '=', '|=', '^=', '&=', '<<=', '>>=',
-          '+=', '-=', '*=', '/=', '%='
+          '+',
+          '-',
+          '*',
+          '/',
+          '**',
+          '%',
+          '<<',
+          '>>',
+          '&&',
+          '||',
+          '&',
+          '|',
+          '^',
+          '<',
+          '>',
+          '<=',
+          '>=',
+          '==',
+          '!=',
+          '=',
+          '|=',
+          '^=',
+          '&=',
+          '<<=',
+          '>>=',
+          '+=',
+          '-=',
+          '*=',
+          '/=',
+          '%='
         ]
 
         if (binOps.includes(op)) {
@@ -435,14 +471,17 @@ const transformAST = {
 
       case 4:
         // function call
-        if (ctx.getChild(1).getText() === '(' &&
-            ctx.getChild(3).getText() === ')') {
+        if (
+          ctx.getChild(1).getText() === '(' &&
+          ctx.getChild(3).getText() === ')'
+        ) {
           let args = []
           const names = []
 
           const ctxArgs = ctx.functionCallArguments()
           if (ctxArgs.expressionList()) {
-            args = ctxArgs.expressionList()
+            args = ctxArgs
+              .expressionList()
               .expression()
               .map(exprCtx => this.visit(exprCtx))
           } else if (ctxArgs.nameValueList()) {
@@ -461,8 +500,10 @@ const transformAST = {
         }
 
         // index access
-        if (ctx.getChild(1).getText() === '[' &&
-            ctx.getChild(3).getText() === ']') {
+        if (
+          ctx.getChild(1).getText() === '[' &&
+          ctx.getChild(3).getText() === ']'
+        ) {
           return {
             type: 'IndexAccess',
             base: this.visit(ctx.getChild(0)),
@@ -473,8 +514,10 @@ const transformAST = {
 
       case 5:
         // ternary operator
-        if (ctx.getChild(1).getText() === '?' &&
-            ctx.getChild(3).getText() === ':') {
+        if (
+          ctx.getChild(1).getText() === '?' &&
+          ctx.getChild(3).getText() === ':'
+        ) {
           return {
             type: 'Conditional',
             condition: this.visit(ctx.getChild(0)),
@@ -584,17 +627,23 @@ const transformAST = {
     if (ctx.variableDeclaration()) {
       variables = [this.visit(ctx.variableDeclaration())]
     } else {
-      variables = ctx.identifierList().identifier()
-        .map(iden => this.createNode({
-          type: 'VariableDeclaration',
-          name: iden.getText(),
-          isStateVar: false,
-          isIndexed: false
-        }, iden))
+      variables = ctx.identifierList().identifier().map(iden =>
+        this.createNode(
+          {
+            type: 'VariableDeclaration',
+            name: iden.getText(),
+            isStateVar: false,
+            isIndexed: false
+          },
+          iden
+        )
+      )
     }
 
     let initialValue = null
-    if (ctx.expression()) { initialValue = this.visit(ctx.expression()) }
+    if (ctx.expression()) {
+      initialValue = this.visit(ctx.expression())
+    }
 
     return {
       variables,
@@ -617,15 +666,9 @@ const transformAST = {
         return [symbol, alias]
       })
     } else if (ctx.children.length === 7) {
-      unitAlias = [
-        ctx.getChild(1).getText(),
-        ctx.getChild(3).getText()
-      ]
+      unitAlias = ctx.getChild(3).getText()
     } else if (ctx.children.length === 5) {
-      unitAlias = [
-        null,
-        ctx.getChild(3).getText()
-      ]
+      unitAlias = ctx.getChild(3).getText()
     }
 
     return {
@@ -701,8 +744,7 @@ const transformAST = {
   },
 
   AssemblyBlock (ctx) {
-    const operations = ctx.assemblyItem()
-      .map(it => this.visit(it))
+    const operations = ctx.assemblyItem().map(it => this.visit(it))
 
     return { operations }
   },
@@ -746,8 +788,7 @@ const transformAST = {
 
   AssemblyCall (ctx) {
     const functionName = ctx.getChild(0).getText()
-    const args = ctx.assemblyExpression()
-      .map(arg => this.visit(arg))
+    const args = ctx.assemblyExpression().map(arg => this.visit(arg))
 
     return {
       functionName,
@@ -827,7 +868,8 @@ const transformAST = {
 
   AssemblyFunctionDefinition (ctx) {
     const args = ctx.assemblyIdentifierList().identifier()
-    const returnArgs = ctx.assemblyFunctionReturns()
+    const returnArgs = ctx
+      .assemblyFunctionReturns()
       .assemblyIdentifierList()
       .identifier()
 
@@ -902,8 +944,12 @@ ASTBuilder.prototype._range = function (ctx) {
 
 ASTBuilder.prototype.meta = function (ctx) {
   const ret = {}
-  if (this.options.loc) { Object.assign(ret, this._loc(ctx)) }
-  if (this.options.range) { Object.assign(ret, this._range(ctx)) }
+  if (this.options.loc) {
+    Object.assign(ret, this._loc(ctx))
+  }
+  if (this.options.range) {
+    Object.assign(ret, this._range(ctx))
+  }
   return ret
 }
 
@@ -930,9 +976,7 @@ ASTBuilder.prototype.visit = function (ctx) {
   const node = { type: name }
 
   if (name in transformAST) {
-    Object.assign(node,
-      transformAST[name].call(this, ctx)
-    )
+    Object.assign(node, transformAST[name].call(this, ctx))
   }
 
   return this.createNode(node, ctx)

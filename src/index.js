@@ -8,7 +8,7 @@ function ParserError (args) {
   this.name = 'ParserError'
   this.message = args.errors.map(e => e.message).join('. ')
   this.errors = args.errors
-  this.stack = (new Error).stack
+  this.stack = new Error().stack
 }
 
 ParserError.prototype = Object.create(Error.prototype)
