@@ -65,7 +65,6 @@ const transformAST = {
 
   FunctionDefinition (ctx) {
     const name = ctx.identifier(0)
-
     const parameters = this.visit(ctx.parameterList())
 
     let block = null
@@ -372,15 +371,19 @@ const transformAST = {
         if (['+', '-', '++', '--', '!', '~', 'after', 'delete'].includes(op)) {
           return {
             type: 'UnaryOperation',
+            operator: op,
             subExpression: this.visit(ctx.getChild(1)),
             isPrefix: true
           }
         }
 
+        op = ctx.getChild(1).getText()
+
         // postfix operators
-        if (['++', '--'].includes(ctx.getChild(1).getText())) {
+        if (['++', '--'].includes(op)) {
           return {
             type: 'UnaryOperation',
+            operator: op,
             subExpression: this.visit(ctx.getChild(0)),
             isPrefix: false
           }
@@ -721,9 +724,14 @@ const transformAST = {
       storageLocation = ctx.storageLocation().getText()
     }
 
+    let name = null
+    if (ctx.identifier()) {
+      name = ctx.identifier().getText()
+    }
+
     return {
       typeName: this.visit(ctx.typeName()),
-      name: ctx.identifier().getText(),
+      name,
       storageLocation,
       isStateVar: false,
       isIndexed: false
@@ -876,7 +884,8 @@ const transformAST = {
     return {
       name: ctx.identifier().getText(),
       arguments: this.visit(args),
-      returnArguments: this.visit(returnArgs)
+      returnArguments: this.visit(returnArgs),
+      body: this.visit(ctx.assemblyBlock())
     }
   },
 
@@ -894,7 +903,7 @@ const transformAST = {
     }
   },
 
-  AssemblyLabel (ctx) {
+  LabelDefinition (ctx) {
     return {
       name: ctx.identifier().getText()
     }

@@ -66,6 +66,12 @@ describe("#parse", () => {
       return ast.body.statements[0].expression
     }
 
+    function parseAssembly(source) {
+      var ast = parseNode("function () { assembly { " + source + " } }")
+      assert.isOk(ast.body.statements[0].body.operations[0])
+      return ast.body.statements[0].body.operations[0]
+    }
+
     it("SourceUnit", () => {
       var ast = parser.parse("");
       assert.deepEqual(ast, {
@@ -247,9 +253,20 @@ describe("#parse", () => {
       })
     })
 
-    xit("TypeName", () => {
-
-
+    it("TypeName", () => {
+      var ast = parseNode("uint256[2] a;")
+      assert.deepEqual(ast.variables[0].typeName, {
+        "type": "ArrayTypeName",
+        "baseTypeName": {
+          "type": "ElementaryTypeName",
+          "name": "uint256"
+        },
+        "length": {
+          "type": "NumberLiteral",
+          "number": "2",
+          "subdenomination": null
+        }
+      })
     })
 
     it("FunctionTypeName", () => {
@@ -438,11 +455,11 @@ describe("#parse", () => {
     })
 
     it("NumberLiteral", () => {
-      var expr = parseExpression("2")
+      var expr = parseExpression("2 ether")
       assert.deepEqual(expr, {
         "type": "NumberLiteral",
         "number": "2",
-        "subdenomination": null
+        "subdenomination": "ether"
       })
     })
 
@@ -498,8 +515,40 @@ describe("#parse", () => {
       })
     })
 
-    xit("Expression", () => {
+    it("Expression", () => {
+      // new expression
+      var expr = parseExpression("new MyContract")
+      assert.deepEqual(expr, {
+        "type": "NewExpression",
+        "typeName": {
+          "type": "UserDefinedTypeName",
+          "namePath": "MyContract"
+        }
+      })
 
+      // prefix operation
+      var expr = parseExpression("!true")
+      assert.deepEqual(expr, {
+        "type": "UnaryOperation",
+        "operator": "!",
+        "subExpression": {
+          "type": "BooleanLiteral",
+          "value": true
+        },
+        "isPrefix": true
+      })
+
+      // prefix operation
+      var expr = parseExpression("i++")
+      assert.deepEqual(expr, {
+        "type": "UnaryOperation",
+        "operator": "++",
+        "subExpression": {
+          "type": "Identifier",
+          "name": "i"
+        },
+        "isPrefix": false
+      })
     })
 
     it("StateVariableDeclaration", () => {
@@ -562,6 +611,7 @@ describe("#parse", () => {
           "type": "ExpressionStatement",
           "expression": {
             "type": "UnaryOperation",
+            "operator": "++",
             "subExpression": {
               "type": "Identifier",
               "name": "i"
@@ -736,46 +786,285 @@ describe("#parse", () => {
       })
     })
 
-    xit("AssemblyCall", () => {
+    it("AssemblyCall", () => {
+      var ast = parseAssembly("mload(0x04)")
+      assert.deepEqual(ast, {
+        "type": "AssemblyCall",
+        "functionName": "mload",
+        "arguments": [
+          {
+            "type": "HexNumber",
+            "value": "0x04"
+          }
+        ]
+      })
+    })
+
+    it("AssemblyLiteral", () => {
+      var ast = parseAssembly("0x04")
+      assert.deepEqual(ast, {
+        "type": "HexNumber",
+        "value": "0x04"
+      })
+
+      ast = parseAssembly("\"hello\"")
+      assert.deepEqual(ast, {
+        "type": "StringLiteral",
+        "value": "hello"
+      })
+    })
+
+    it("AssemblySwitch / AssemblyCase", () => {
+      var ast = parseAssembly("switch x case 0 { y := mul(x, 2) } default { y := 0 }")
+      assert.deepEqual(ast, {
+        "type": "AssemblySwitch",
+        "expression": {
+          "type": "AssemblyCall",
+          "functionName": "x",
+          "arguments": []
+        },
+        "cases": [
+          {
+            "type": "AssemblyCase",
+            "block": {
+              "type": "AssemblyBlock",
+              "operations": [
+                {
+                  "type": "AssemblyAssignment",
+                  "names": [
+                    {
+                      "type": "Identifier",
+                      "name": "y"
+                    }
+                  ],
+                  "expression": {
+                    "type": "AssemblyCall",
+                    "functionName": "mul",
+                    "arguments": [
+                      {
+                        "type": "AssemblyCall",
+                        "functionName": "x",
+                        "arguments": []
+                      },
+                      {
+                        "type": "DecimalNumber",
+                        "value": "2"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "value": {
+              "type": "DecimalNumber",
+              "value": "0"
+            }
+          },
+          {
+            "type": "AssemblyCase",
+            "block": {
+              "type": "AssemblyBlock",
+              "operations": [
+                {
+                  "type": "AssemblyAssignment",
+                  "names": [
+                    {
+                      "type": "Identifier",
+                      "name": "y"
+                    }
+                  ],
+                  "expression": {
+                    "type": "DecimalNumber",
+                    "value": "0"
+                  }
+                }
+              ]
+            },
+            "default": true
+          }
+        ]
+      })
+    })
+
+    it("AssemblyLocalDefinition", () => {
+      var ast = parseAssembly("let x := 0x04")
+      assert.deepEqual(ast, {
+        "type": "AssemblyLocalDefinition",
+        "names": [
+          {
+            "type": "Identifier",
+            "name": "x"
+          }
+        ],
+        "expression": {
+          "type": "HexNumber",
+          "value": "0x04"
+        }
+      })
 
     })
 
-    xit("AssemblyLiteral", () => {
+    it("AssemblyFunctionDefinition", () => {
+      var ast = parseAssembly("function power(base, exponent) -> result {}")
+      assert.deepEqual(ast, {
+        "type": "AssemblyFunctionDefinition",
+        "name": "power",
+        "arguments": [
+          {
+            "type": "Identifier",
+            "name": "base"
+          },
+          {
+            "type": "Identifier",
+            "name": "exponent"
+          }
+        ],
+        "returnArguments": [
+          {
+            "type": "Identifier",
+            "name": "result"
+          }
+        ],
+        "body": {
+          "type": "AssemblyBlock",
+          "operations": []
+        }
+      })
+
 
     })
 
-    xit("AssemblySwitch", () => {
-
+    it("AssemblyAssignment", () => {
+      var ast = parseAssembly("a := 10")
+      assert.deepEqual(ast, {
+        "type": "AssemblyAssignment",
+        "names": [
+          {
+            "type": "Identifier",
+            "name": "a"
+          }
+        ],
+        "expression": {
+          "type": "DecimalNumber",
+          "value": "10"
+        }
+      })
     })
 
-    xit("AssemblyCase", () => {
-
+    it("LabelDefinition", () => {
+      var ast = parseAssembly("loop:")
+      assert.deepEqual(ast, {
+        "type": "LabelDefinition",
+        "name": "loop"
+      })
     })
 
-    xit("AssemblyLocalDefinition", () => {
-
+    it("AssemblyStackAssignment", () => {
+      var ast = parseAssembly("=: a")
+      assert.deepEqual(ast, {
+        "type": "AssemblyStackAssignment",
+        "name": "a"
+      })
     })
 
-    xit("AssemblyFunctionDefinition", () => {
-
+    it("AssemblyFor", () => {
+      var ast = parseAssembly("for { let i := 0  } lt(i, x) { i := add(i, 1)  } { y := mul(2, y) }")
+      assert.deepEqual(ast, {
+        "type": "AssemblyFor",
+        "pre": {
+          "type": "AssemblyBlock",
+          "operations": [
+            {
+              "type": "AssemblyLocalDefinition",
+              "names": [
+                {
+                  "type": "Identifier",
+                  "name": "i"
+                }
+              ],
+              "expression": {
+                "type": "DecimalNumber",
+                "value": "0"
+              }
+            }
+          ]
+        },
+        "condition": {
+          "type": "AssemblyCall",
+          "functionName": "lt",
+          "arguments": [
+            {
+              "type": "AssemblyCall",
+              "functionName": "i",
+              "arguments": []
+            },
+            {
+              "type": "AssemblyCall",
+              "functionName": "x",
+              "arguments": []
+            }
+          ]
+        },
+        "post": {
+          "type": "AssemblyBlock",
+          "operations": [
+            {
+              "type": "AssemblyAssignment",
+              "names": [
+                {
+                  "type": "Identifier",
+                  "name": "i"
+                }
+              ],
+              "expression": {
+                "type": "AssemblyCall",
+                "functionName": "add",
+                "arguments": [
+                  {
+                    "type": "AssemblyCall",
+                    "functionName": "i",
+                    "arguments": []
+                  },
+                  {
+                    "type": "DecimalNumber",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "body": {
+          "type": "AssemblyBlock",
+          "operations": [
+            {
+              "type": "AssemblyAssignment",
+              "names": [
+                {
+                  "type": "Identifier",
+                  "name": "y"
+                }
+              ],
+              "expression": {
+                "type": "AssemblyCall",
+                "functionName": "mul",
+                "arguments": [
+                  {
+                    "type": "DecimalNumber",
+                    "value": "2"
+                  },
+                  {
+                    "type": "AssemblyCall",
+                    "functionName": "y",
+                    "arguments": []
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      })
     })
-
-    xit("AssemblyAssignment", () => {
-
-    })
-
-    xit("AssemblyLabel", () => {
-
-    })
-
-    xit("AssemblyStackAssignment", () => {
-
-    })
-
-    xit("AssemblyFor", () => {
-
-    })
-
   })
 })
 
