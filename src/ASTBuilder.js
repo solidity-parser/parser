@@ -536,7 +536,8 @@ const transformAST = {
 
   StateVariableDeclaration (ctx) {
     const type = this.visit(ctx.typeName())
-    const name = ctx.identifier().getText()
+    const iden = ctx.identifier()
+    const name = iden.getText()
 
     let expression = null
     if (ctx.expression()) {
@@ -557,7 +558,7 @@ const transformAST = {
       isDeclaredConst = true
     }
 
-    const decl = {
+    const decl = this.createNode({
       type: 'VariableDeclaration',
       typeName: type,
       name,
@@ -566,7 +567,7 @@ const transformAST = {
       isStateVar: true,
       isDeclaredConst,
       isIndexed: false
-    }
+    }, iden)
 
     return {
       variables: [decl],
