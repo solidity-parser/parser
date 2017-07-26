@@ -3,6 +3,7 @@ const { SolidityLexer } = require('../lib/SolidityLexer')
 const { SolidityParser } = require('../lib/SolidityParser')
 const ASTBuilder = require('./ASTBuilder')
 const ErrorListener = require('./ErrorListener')
+const { buildTokenList } = require('./tokens')
 
 function ParserError (args) {
   this.name = 'ParserError'
@@ -14,6 +15,16 @@ function ParserError (args) {
 ParserError.prototype = Object.create(Error.prototype)
 ParserError.prototype.constructor = ParserError
 
+function tokenize (input, options) {
+  options = options || {}
+
+  const chars = antlr4.CharStreams.fromString(input)
+  const lexer = new SolidityLexer(chars)
+  const tokens = new antlr4.CommonTokenStream(lexer)
+
+  return buildTokenList(tokens.tokenSource.getAllTokens(), options)
+}
+
 function parse (input, options) {
   options = options || {}
 
@@ -23,11 +34,20 @@ function parse (input, options) {
 
   const parser = new SolidityParser(tokens)
   const listener = new ErrorListener()
+
   parser.removeErrorListeners()
   parser.addErrorListener(listener)
   parser.buildParseTrees = true
 
   const tree = parser.sourceUnit()
+
+  let tokenList
+  if (options.tokens) {
+    const tokenSource = tokens.tokenSource
+    tokenSource.reset()
+
+    tokenList = buildTokenList(tokenSource.getAllTokens(), options)
+  }
 
   if (!options.tolerant && listener.hasErrors()) {
     throw new ParserError({ errors: listener.getErrors() })
@@ -38,6 +58,9 @@ function parse (input, options) {
 
   if (options.tolerant && listener.hasErrors()) {
     ast.errors = listener.getErrors()
+  }
+  if (options.tokens) {
+    ast.tokens = tokenList
   }
 
   return ast
@@ -74,6 +97,7 @@ function visit (node, visitor) {
   }
 }
 
+exports.tokenize = tokenize
 exports.parse = parse
 exports.visit = visit
 exports.ParserError = ParserError
