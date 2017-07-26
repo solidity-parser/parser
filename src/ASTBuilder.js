@@ -64,7 +64,10 @@ const transformAST = {
   },
 
   FunctionDefinition (ctx) {
-    const name = ctx.identifier(0)
+    let name = ''
+    if (ctx.identifier(0)) {
+      name = ctx.identifier(0).getText()
+    }
     const parameters = this.visit(ctx.parameterList())
 
     let block = null
@@ -100,7 +103,7 @@ const transformAST = {
     }
 
     return {
-      name: name ? name.getText() : '',
+      name,
       parameters,
       body: block,
       visibility,
