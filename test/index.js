@@ -232,12 +232,29 @@ describe("#parse", () => {
       })
     })
 
-    it("FunctionDefinition", () => {
+    it("ModifierInvocation", () => {
       var ast = parseNode("function foo(uint a) onlyOwner {}")
       assert.deepEqual(ast.modifiers[0], {
         "type": "ModifierInvocation",
         "name": "onlyOwner",
         "arguments": []
+      })
+
+      ast = parseNode("function foo(uint a) bar(true, 1) {}")
+      assert.deepEqual(ast.modifiers[0], {
+        "type": "ModifierInvocation",
+        "name": "bar",
+        "arguments": [
+          {
+            "type": "BooleanLiteral",
+            "value": true
+          },
+          {
+            "type": "NumberLiteral",
+            "number": "1",
+            "subdenomination": null
+          },
+        ]
       })
     })
 

@@ -119,7 +119,7 @@ const transformAST = {
 
     let args
     if (exprList != null) {
-      args = this.visit(exprList.children)
+      args = this.visit(exprList.expression())
     } else {
       args = []
     }
