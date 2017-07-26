@@ -256,14 +256,14 @@ const transformAST = {
   WhileStatement (ctx) {
     return {
       condition: this.visit(ctx.expression()),
-      body: this.visit(ctx.statement()),
+      body: this.visit(ctx.statement())
     }
   },
 
   DoWhileStatement (ctx) {
     return {
       condition: this.visit(ctx.expression()),
-      body: this.visit(ctx.statement()),
+      body: this.visit(ctx.statement())
     }
   },
 

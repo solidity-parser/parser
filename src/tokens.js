@@ -1,7 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 
-function rsplit(str, value) {
+const TYPE_TOKENS = [
+  'var', 'bool', 'address', 'string', 'Int', 'Uint', 'Byte', 'Fixed', 'UFixed'
+]
+
+function rsplit (str, value) {
   const index = str.lastIndexOf(value)
   return [
     str.substring(0, index),
@@ -28,7 +32,7 @@ function getTokenType (value) {
     return 'Version'
   } else if (value === 'StringLiteral') {
     return 'String'
-  } else if (['var', 'bool', 'address', 'string', 'Int', 'Uint', 'Byte', 'Fixed', 'UFixed'].includes(value)) {
+  } else if (TYPE_TOKENS.includes(value)) {
     return 'Type'
   } else if (value === 'NumberUnit') {
     return 'Subdenomination'
