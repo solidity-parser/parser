@@ -701,13 +701,14 @@ const transformAST = {
         name = paramCtx.identifier().getText()
       }
 
-      return {
+      return this.createNode({
         type: 'VariableDeclaration',
         typeName: type,
         name,
         isStateVar: false,
         isIndexed: !!paramCtx.IndexedKeyword(0)
-      }
+      }, paramCtx)
+
     }, this)
 
     return {

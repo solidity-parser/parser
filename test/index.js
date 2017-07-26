@@ -1095,6 +1095,11 @@ describe("#parse", () => {
       assert.isOk(ast.variables[0].loc)
     })
 
+    it("adds meta to VariableDeclaration inside EventDefinition", () => {
+      var ast = parseNode("event Foo(address bar);", { loc: true })
+      assert.isOk(ast.parameters.parameters[0].loc)
+    })
+
   })
 })
 
