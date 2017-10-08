@@ -92,14 +92,9 @@ const transformAST = {
       visibility = 'private'
     }
 
-    let isPayable = false
-    if (ctx.modifierList().PayableKeyword(0)) {
-      isPayable = true
-    }
-
-    let isDeclaredConst = false
-    if (ctx.modifierList().ConstantKeyword(0)) {
-      isDeclaredConst = true
+    let stateMutability = null
+    if (ctx.modifierList().stateMutability(0)) {
+      stateMutability = ctx.modifierList().stateMutability(0).getText()
     }
 
     return {
@@ -109,8 +104,7 @@ const transformAST = {
       visibility,
       modifiers,
       isConstructor: name === this._currentContract,
-      isDeclaredConst,
-      isPayable
+      stateMutability,
     }
   },
 
@@ -174,22 +168,16 @@ const transformAST = {
       visibility = 'external'
     }
 
-    let isDeclaredConst = false
-    if (ctx.ConstantKeyword(0)) {
-      isDeclaredConst = true
-    }
-
-    let isPayable = false
-    if (ctx.PayableKeyword(0)) {
-      isPayable = true
+    let stateMutability = null
+    if (ctx.stateMutability(0)) {
+      stateMutability = ctx.stateMutability(0).getText()
     }
 
     return {
       parameterTypes,
       returnTypes,
       visibility,
-      isDeclaredConst,
-      isPayable
+      stateMutability,
     }
   },
 

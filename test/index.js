@@ -200,7 +200,7 @@ describe("#parse", () => {
     })
 
     it("FunctionDefinition", () => {
-      var ast = parseNode("function foo(uint a) {}")
+      var ast = parseNode("function foo(uint a) pure {}")
       assert.deepEqual(ast, {
         "type": "FunctionDefinition",
         "name": "foo",
@@ -227,8 +227,7 @@ describe("#parse", () => {
         "visibility": "default",
         "modifiers": [],
         "isConstructor": false,
-        "isDeclaredConst": false,
-        "isPayable": false
+        "stateMutability": "pure",
       })
     })
 
@@ -327,8 +326,7 @@ describe("#parse", () => {
           }
         ],
         "visibility": "default",
-        "isDeclaredConst": false,
-        "isPayable": false
+        "stateMutability": null
       })
     })
 
