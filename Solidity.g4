@@ -86,7 +86,7 @@ returnParameters
   : 'returns' parameterList ;
 
 modifierList
-  : ( modifierInvocation | ConstantKeyword | PayableKeyword | ExternalKeyword
+  : ( modifierInvocation | stateMutability | ExternalKeyword
     | PublicKeyword | InternalKeyword | PrivateKeyword )* ;
 
 eventDefinition
@@ -134,11 +134,14 @@ mapping
 
 functionTypeName
   : 'function' typeNameList
-    ( InternalKeyword | ExternalKeyword | ConstantKeyword | PayableKeyword )*
+    ( InternalKeyword | ExternalKeyword | stateMutability )*
     ( 'returns' typeNameList )? ;
 
 storageLocation
   : 'memory' | 'storage' ;
+
+stateMutability
+  : PureKeyword | ConstantKeyword | ViewKeyword | PayableKeyword ;
 
 block
   : '{' statement* '}' ;
@@ -383,14 +386,12 @@ ReservedKeyword
   | 'match'
   | 'null'
   | 'of'
-  | 'pure'
   | 'relocatable'
   | 'static'
   | 'switch'
   | 'try'
   | 'type'
-  | 'typeof'
-  | 'view' ;
+  | 'typeof' ;
 
 AnonymousKeyword : 'anonymous' ;
 BreakKeyword : 'break' ;
@@ -402,6 +403,8 @@ InternalKeyword : 'internal' ;
 PayableKeyword : 'payable' ;
 PrivateKeyword : 'private' ;
 PublicKeyword : 'public' ;
+PureKeyword : 'pure' ;
+ViewKeyword : 'view' ;
 
 Identifier
   : (IdentifierStart IdentifierPart* | 'from') ;
