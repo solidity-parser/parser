@@ -475,6 +475,13 @@ describe("#parse", () => {
         "number": "2",
         "subdenomination": "ether"
       })
+
+      expr = parseExpression("2.3e5")
+      assert.deepEqual(expr, {
+        "type": "NumberLiteral",
+        "number": "2.3e5",
+        "subdenomination": null
+      })
     })
 
     it("StringLiteral", () => {
