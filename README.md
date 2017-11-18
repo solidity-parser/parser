@@ -17,8 +17,13 @@ var input = `
         function f() {}
     }
 `
-
-parser.parse(input)
+try {
+    parser.parse(input)
+} catch (e) {
+    if (e instanceof parser.ParserError) {
+        console.log(e.errors)
+    }
+}
 ```
 
 The `parse` method also accepts a second argument which lets you specify the
