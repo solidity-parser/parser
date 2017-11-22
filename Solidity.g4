@@ -335,7 +335,7 @@ subAssembly
   : 'assembly' identifier assemblyBlock ;
 
 tupleExpression
-  : '(' ( expression ( ',' expression )* )? ')'
+  : '(' ( expression? ( ',' expression? )* ) ')'
   | '[' ( expression ( ',' expression )* )? ']' ;
 
 elementaryTypeNameExpression
