@@ -2,10 +2,18 @@ const antlr4 = require('../antlr4/index')
 
 function mapCommasToNulls(children) {
   let comma = true
+
+  let lastNotEmpty = children.reduce(function (acc, el, idx) {
+    if (el.children) {
+      return idx
+    }
+    return acc
+  })
+
   return children.reduce(function (acc, el, idx) {
     // we assume el is a terminal node if it has no children
     if (!el.children) {
-      if (comma || idx === children.length - 1) {
+      if (comma || idx > lastNotEmpty) {
         acc.push(null)
       } else {
         comma = true
