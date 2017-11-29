@@ -617,22 +617,33 @@ const transformAST = {
     }
   },
 
+  IdentifierList (ctx) {
+    // remove parentheses
+    const children = ctx.children.slice(1, -1)
+    return children.map(iden => {
+      // add a null for each empty value
+      if (!iden.children) {
+        return null
+      }
+
+      return this.createNode(
+        {
+          type: 'VariableDeclaration',
+          name: iden.getText(),
+          isStateVar: false,
+          isIndexed: false
+        },
+        iden
+      )
+    })
+  },
+
   VariableDeclarationStatement (ctx) {
     let variables
     if (ctx.variableDeclaration()) {
       variables = [this.visit(ctx.variableDeclaration())]
     } else {
-      variables = ctx.identifierList().identifier().map(iden =>
-        this.createNode(
-          {
-            type: 'VariableDeclaration',
-            name: iden.getText(),
-            isStateVar: false,
-            isIndexed: false
-          },
-          iden
-        )
-      )
+      variables = this.visit(ctx.identifierList())
     }
 
     let initialValue = null
@@ -978,7 +989,11 @@ ASTBuilder.prototype.visit = function (ctx) {
   const node = { type: name }
 
   if (name in transformAST) {
-    Object.assign(node, transformAST[name].call(this, ctx))
+    const visited = transformAST[name].call(this, ctx)
+    if (Array.isArray(visited)) {
+      return visited
+    }
+    Object.assign(node, visited)
   }
 
   return this.createNode(node, ctx)

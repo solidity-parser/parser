@@ -711,6 +711,32 @@ describe("#parse", () => {
         ],
         "initialValue": null
       })
+
+      stmt = parseStatement("var (a,,b) = 0;")
+      assert.deepEqual(stmt, {
+        "type": "VariableDeclarationStatement",
+        "initialValue": {
+          "number": "0",
+          "subdenomination": null,
+          "type": "NumberLiteral"
+        },
+        "variables": [
+          {
+            "isIndexed": false,
+            "isStateVar": false,
+            "name": "a",
+            "type": "VariableDeclaration"
+          },
+          null,
+          null,
+          {
+            "isIndexed": false,
+            "isStateVar": false,
+            "name": "b",
+            "type": "VariableDeclaration"
+          }
+        ]
+      })
     })
 
     it("ImportDirective", () => {
