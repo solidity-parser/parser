@@ -1,5 +1,23 @@
 const antlr4 = require('../antlr4/index')
 
+function mapCommasToNulls(children) {
+  let comma = false
+  return children.reduce(function (acc, el) {
+    // we assume el is a terminal node if it has no children
+    if (!el.children) {
+      if (comma) {
+        acc.push(null)
+      } else {
+        comma = true
+      }
+    } else {
+      acc.push(el)
+      comma = false
+    }
+    return acc
+  }, [])
+}
+
 const transformAST = {
   SourceUnit (ctx) {
     // last element is EOF terminal node
@@ -611,8 +629,18 @@ const transformAST = {
   },
 
   TupleExpression (ctx) {
+    // remove parentheses
+    const children = ctx.children.slice(1, -1)
+    const elements = mapCommasToNulls(children).map(expr => {
+      // add a null for each empty value
+      if (expr === null) {
+        return null
+      }
+      return this.visit(expr)
+    })
+
     return {
-      elements: this.visit(ctx.expression()),
+      elements,
       isArray: ctx.getChild(0).getText() === '['
     }
   },
@@ -620,9 +648,9 @@ const transformAST = {
   IdentifierList (ctx) {
     // remove parentheses
     const children = ctx.children.slice(1, -1)
-    return children.map(iden => {
+    return mapCommasToNulls(children).map(iden => {
       // add a null for each empty value
-      if (!iden.children) {
+      if (iden === null) {
         return null
       }
 
