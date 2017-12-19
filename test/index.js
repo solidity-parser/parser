@@ -1115,6 +1115,48 @@ describe("#parse", () => {
         }
       })
     })
+
+    it("AssemblyIf", () => {
+      var ast = parseAssembly("if lt(i, x) { revert(0, 0) }")
+      assert.deepEqual(ast, {
+        "body": {
+          "operations": [
+            {
+              "arguments": [
+                {
+                  "type": "DecimalNumber",
+                  "value": "0"
+                },
+                {
+                  "type": "DecimalNumber",
+                  "value": "0"
+                }
+              ],
+              "functionName": "revert",
+              "type": "AssemblyCall"
+            }
+          ],
+          "type": "AssemblyBlock"
+        },
+        "condition": {
+          "arguments": [
+            {
+              "arguments": [],
+              "functionName": "i",
+              "type": "AssemblyCall"
+            },
+            {
+              "arguments": [],
+              "functionName": "x",
+              "type": "AssemblyCall"
+            }
+          ],
+          "functionName": "lt",
+          "type": "AssemblyCall"
+        },
+        "type": "AssemblyIf"
+      })
+    })
   })
 
   describe("node meta", () => {

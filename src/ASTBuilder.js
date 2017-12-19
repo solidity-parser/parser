@@ -962,6 +962,13 @@ const transformAST = {
       post: this.visit(ctx.getChild(3)),
       body: this.visit(ctx.getChild(4))
     }
+  },
+
+  AssemblyIf (ctx) {
+    return {
+      condition: this.visit(ctx.assemblyExpression()),
+      body: this.visit(ctx.assemblyBlock())
+    }
   }
 }
 
