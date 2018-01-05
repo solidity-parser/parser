@@ -175,15 +175,15 @@ const transformAST = {
 
   FunctionTypeName (ctx) {
     const parameterTypes = ctx
-      .typeNameList(0)
-      .unnamedParameter()
+      .functionTypeParameterList(0)
+      .functionTypeParameter()
       .map(typeCtx => this.visit(typeCtx))
 
     let returnTypes = []
-    if (ctx.typeNameList(1)) {
+    if (ctx.functionTypeParameterList(1)) {
       returnTypes = ctx
-        .typeNameList(1)
-        .unnamedParameter()
+        .functionTypeParameterList(1)
+        .functionTypeParameter()
         .map(typeCtx => this.visit(typeCtx))
     }
 
@@ -238,7 +238,7 @@ const transformAST = {
     }
   },
 
-  IndexedParameter (ctx) {
+  EventParameter (ctx) {
     let storageLocation = null
     if (ctx.storageLocation(0)) {
       storageLocation = ctx.storageLocation(0).getText()
@@ -254,7 +254,7 @@ const transformAST = {
     }
   },
 
-  UnnamedParameter (ctx) {
+  FunctionTypeParameter (ctx) {
     let storageLocation = null
     if (ctx.storageLocation()) {
       storageLocation = ctx.storageLocation().getText()
@@ -723,13 +723,13 @@ const transformAST = {
   EventDefinition (ctx) {
     return {
       name: ctx.identifier().getText(),
-      parameters: this.visit(ctx.indexedParameterList()),
+      parameters: this.visit(ctx.eventParameterList()),
       isAnonymous: !!ctx.AnonymousKeyword()
     }
   },
 
-  IndexedParameterList (ctx) {
-    const parameters = ctx.indexedParameter().map(function (paramCtx) {
+  EventParameterList (ctx) {
+    const parameters = ctx.eventParameter().map(function (paramCtx) {
       const type = this.visit(paramCtx.typeName())
       let name = null
       if (paramCtx.identifier()) {
