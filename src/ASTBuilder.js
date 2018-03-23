@@ -216,6 +216,36 @@ const transformAST = {
     return { expression }
   },
 
+  EmitStatement (ctx) {
+    return {
+      eventCall: this.visit(ctx.functionCall())
+    }
+  },
+
+  FunctionCall (ctx) {
+    let args = []
+    const names = []
+
+    const ctxArgs = ctx.functionCallArguments()
+    if (ctxArgs.expressionList()) {
+      args = ctxArgs
+        .expressionList()
+        .expression()
+        .map(exprCtx => this.visit(exprCtx))
+    } else if (ctxArgs.nameValueList()) {
+      for (const nameValue of ctxArgs.nameValueList().nameValue()) {
+        args.push(this.visit(nameValue.expression()))
+        names.push(nameValue.identifier().getText())
+      }
+    }
+
+    return {
+      expression: this.visit(ctx.expression()),
+      arguments: args,
+      names
+    }
+  },
+
   StructDefinition (ctx) {
     return {
       name: ctx.identifier().getText(),

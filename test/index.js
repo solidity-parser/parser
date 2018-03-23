@@ -348,6 +348,35 @@ describe("#parse", () => {
       })
     })
 
+    it("ThrowStatement", () => {
+      var ast = parseStatement("throw;")
+      assert.deepEqual(ast, {
+        "type": "ThrowStatement",
+      })
+    })
+
+    it("EmitStatement", () => {
+      var ast = parseStatement("emit EventCalled(1);")
+      assert.deepEqual(ast, {
+        "type": "EmitStatement",
+        "eventCall": {
+          "type": "FunctionCall",
+          "expression": {
+            "type": "Identifier",
+            "name": "EventCalled"
+          },
+          "arguments": [
+            {
+              "type": "NumberLiteral",
+              "number": "1",
+              "subdenomination": null
+            }
+          ],
+          "names": []
+        }
+      })
+    })
+
     it("StructDefinition", () => {
       var ast = parseNode("struct hello { uint a; }")
       assert.deepEqual(ast, {
