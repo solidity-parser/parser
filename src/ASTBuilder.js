@@ -134,6 +134,8 @@ const transformAST = {
     }
     const parameters = this.visit(ctx.parameterList())
 
+    const returnParameters = this.visit(ctx.returnParameters())
+
     let block = null
     if (ctx.block()) {
       block = this.visit(ctx.block())
@@ -164,6 +166,7 @@ const transformAST = {
     return {
       name,
       parameters,
+      returnParameters,
       body: block,
       visibility,
       modifiers,
@@ -818,6 +821,10 @@ const transformAST = {
       type: 'ParameterList',
       parameters
     }
+  },
+
+  ReturnParameters (ctx) {
+    return this.visit(ctx.parameterList())
   },
 
   ParameterList (ctx) {
