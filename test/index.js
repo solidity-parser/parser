@@ -199,6 +199,38 @@ describe("#parse", () => {
       })
     })
 
+    it('ConstructorDefinition', () => {
+      var ast = parseNode("constructor(uint a) {}")
+      assert.deepEqual(ast, {
+        "type": "FunctionDefinition",
+        "name": null,
+        "parameters": {
+          "type": "ParameterList",
+          "parameters": [
+            {
+              "type": "Parameter",
+              "typeName": {
+                "type": "ElementaryTypeName",
+                "name": "uint"
+              },
+              "name": "a",
+              "storageLocation": null,
+              "isStateVar": false,
+              "isIndexed": false
+            }
+          ]
+        },
+        "body": {
+          "type": "Block",
+          "statements": []
+        },
+        "visibility": "default",
+        "modifiers": [],
+        "isConstructor": true,
+        "stateMutability": null,
+      })
+    })
+
     it("FunctionDefinition", () => {
       var ast = parseNode("function foo(uint a) pure {}")
       assert.deepEqual(ast, {

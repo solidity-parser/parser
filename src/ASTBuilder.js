@@ -89,6 +89,44 @@ const transformAST = {
     return this.visit(ctx.children[0])
   },
 
+  ConstructorDefinition (ctx) {
+    const parameters = this.visit(ctx.parameterList())
+    const block = this.visit(ctx.block())
+
+    const modifiers = ctx
+      .modifierList()
+      .modifierInvocation()
+      .map(mod => this.visit(mod))
+
+    // parse function visibility
+    let visibility = 'default'
+    if (ctx.modifierList().ExternalKeyword(0)) {
+      visibility = 'external'
+    } else if (ctx.modifierList().InternalKeyword(0)) {
+      visibility = 'internal'
+    } else if (ctx.modifierList().PublicKeyword(0)) {
+      visibility = 'public'
+    } else if (ctx.modifierList().PrivateKeyword(0)) {
+      visibility = 'private'
+    }
+
+    let stateMutability = null
+    if (ctx.modifierList().stateMutability(0)) {
+      stateMutability = ctx.modifierList().stateMutability(0).getText()
+    }
+
+    return {
+      type: 'FunctionDefinition',
+      name: null,
+      parameters,
+      body: block,
+      visibility,
+      modifiers,
+      isConstructor: true,
+      stateMutability
+    }
+  },
+
   FunctionDefinition (ctx) {
     let name = ''
     if (ctx.identifier(0)) {
