@@ -72,4 +72,4 @@ Federico Bond ([@federicobond](https://github.com/federicobond))
 
 ### License
 
-GPL 3.0
+MIT
