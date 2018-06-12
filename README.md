@@ -42,7 +42,7 @@ following options, in a style similar to the _esprima_ API:
 parser.parse('contract test { uint a; }', { loc: true })
 
 // { type: 'SourceUnit',
-//   children: 
+//   children:
 //    [ { type: 'ContractDefinition',
 //        name: 'test',
 //        baseContracts: [],

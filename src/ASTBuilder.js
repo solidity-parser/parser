@@ -745,12 +745,35 @@ const transformAST = {
     })
   },
 
+  VariableDeclarationList (ctx) {
+    // remove parentheses
+    return mapCommasToNulls(ctx.children).map(decl => {
+      // add a null for each empty value
+      if (decl === null) {
+        return null
+      }
+
+      return this.createNode(
+        {
+          type: 'VariableDeclaration',
+          name: decl.identifier().getText(),
+          typeName: this.visit(decl.typeName()),
+          isStateVar: false,
+          isIndexed: false
+        },
+        decl
+      )
+    })
+  },
+
   VariableDeclarationStatement (ctx) {
     let variables
     if (ctx.variableDeclaration()) {
       variables = [this.visit(ctx.variableDeclaration())]
-    } else {
+    } else if (ctx.identifierList()) {
       variables = this.visit(ctx.identifierList())
+    } else if (ctx.variableDeclarationList()) {
+      variables = this.visit(ctx.variableDeclarationList())
     }
 
     let initialValue = null

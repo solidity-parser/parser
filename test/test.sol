@@ -73,7 +73,7 @@ contract derived is base {
     uint64(2);
   }
 }
-	
+
 contract foo {
   function fun() {
   }
@@ -493,4 +493,10 @@ contract ERC20 is ERC20Basic {
   function transferFrom(address from, address to, uint256 value);
   function approve(address spender, uint256 value);
   event Approval(address indexed owner, address indexed spender, uint256 value);
+}
+
+contract test {
+  function () payable {
+    (bytes32 a, uint b) = foo();
+  }
 }
