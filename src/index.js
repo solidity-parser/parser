@@ -29,11 +29,16 @@ function parse (input, options) {
   options = options || {}
 
   const chars = antlr4.CharStreams.fromString(input)
+
+  const listener = new ErrorListener()
+
   const lexer = new SolidityLexer(chars)
+  lexer.removeErrorListeners()
+  lexer.addErrorListener(listener)
+
   const tokens = new antlr4.CommonTokenStream(lexer)
 
   const parser = new SolidityParser(tokens)
-  const listener = new ErrorListener()
 
   parser.removeErrorListeners()
   parser.addErrorListener(listener)

@@ -1365,4 +1365,16 @@ describe("#visit", () => {
     })
   })
 
+  it("shouldn't print anything if the lexer fails", () => {
+    const originalConsoleError = console.error
+    let called = false
+    console.error = () => called = true
+
+    var ast = parser.parse('"', {tolerant: true})
+
+    console.error = originalConsoleError
+
+    assert.isFalse(called, "Should not call console.error on lexer errors")
+  });
+
 })
