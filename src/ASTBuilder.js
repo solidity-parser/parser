@@ -1,4 +1,4 @@
-const antlr4 = require('../antlr4/index')
+const antlr4 = require('./antlr4/index')
 
 function mapCommasToNulls(children) {
   let comma = true
