@@ -5,7 +5,7 @@ const ASTBuilder = require('./ASTBuilder')
 const ErrorListener = require('./ErrorListener')
 const { buildTokenList } = require('./tokens')
 
-function ParserError (args) {
+function ParserError(args) {
   this.name = 'ParserError'
   this.message = args.errors.map(e => e.message).join('. ')
   this.errors = args.errors
@@ -15,7 +15,7 @@ function ParserError (args) {
 ParserError.prototype = Object.create(Error.prototype)
 ParserError.prototype.constructor = ParserError
 
-function tokenize (input, options) {
+function tokenize(input, options) {
   options = options || {}
 
   const chars = antlr4.CharStreams.fromString(input)
@@ -25,7 +25,7 @@ function tokenize (input, options) {
   return buildTokenList(tokens.tokenSource.getAllTokens(), options)
 }
 
-function parse (input, options) {
+function parse(input, options) {
   options = options || {}
 
   const chars = antlr4.CharStreams.fromString(input)
@@ -71,11 +71,11 @@ function parse (input, options) {
   return ast
 }
 
-function _isASTNode (node) {
+function _isASTNode(node) {
   return !!node && typeof node === 'object' && node.hasOwnProperty('type')
 }
 
-function visit (node, visitor) {
+function visit(node, visitor) {
   if (Array.isArray(node)) {
     node.forEach(child => visit(child, visitor))
   }

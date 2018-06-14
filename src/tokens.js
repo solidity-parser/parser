@@ -2,18 +2,23 @@ const fs = require('fs')
 const path = require('path')
 
 const TYPE_TOKENS = [
-  'var', 'bool', 'address', 'string', 'Int', 'Uint', 'Byte', 'Fixed', 'UFixed'
+  'var',
+  'bool',
+  'address',
+  'string',
+  'Int',
+  'Uint',
+  'Byte',
+  'Fixed',
+  'UFixed'
 ]
 
-function rsplit (str, value) {
+function rsplit(str, value) {
   const index = str.lastIndexOf(value)
-  return [
-    str.substring(0, index),
-    str.substring(index + 1, str.length)
-  ]
+  return [str.substring(0, index), str.substring(index + 1, str.length)]
 }
 
-function normalizeTokenType (value) {
+function normalizeTokenType(value) {
   if (value.endsWith("'")) {
     value = value.substring(0, value.length - 1)
   }
@@ -23,7 +28,7 @@ function normalizeTokenType (value) {
   return value
 }
 
-function getTokenType (value) {
+function getTokenType(value) {
   if (value === 'Identifier' || value === 'from') {
     return 'Identifier'
   } else if (value === 'TrueLiteral' || value === 'FalseLiteral') {
@@ -49,10 +54,13 @@ function getTokenType (value) {
   }
 }
 
-function getTokenTypeMap () {
+function getTokenTypeMap() {
   const filePath = path.join(__dirname, '../lib/Solidity.tokens')
 
-  return fs.readFileSync(filePath).toString('utf-8').split('\n')
+  return fs
+    .readFileSync(filePath)
+    .toString('utf-8')
+    .split('\n')
     .map(line => rsplit(line, '='))
     .reduce((acum, [value, key]) => {
       acum[parseInt(key, 10)] = normalizeTokenType(value)
@@ -60,7 +68,7 @@ function getTokenTypeMap () {
     }, {})
 }
 
-function buildTokenList (tokens, options) {
+function buildTokenList(tokens, options) {
   const tokenTypes = getTokenTypeMap()
 
   return tokens.map(token => {
