@@ -1,5 +1,12 @@
 const antlr4 = require('./antlr4/index')
 
+function toText(ctx) {
+  if (ctx !== null) {
+    return ctx.getText()
+  }
+  return null
+}
+
 function mapCommasToNulls(children) {
   let comma = true
 
@@ -36,45 +43,45 @@ const transformAST = {
 
   EnumDefinition (ctx) {
     return {
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       members: this.visit(ctx.enumValue())
     }
   },
 
   EnumValue (ctx) {
     return {
-      name: ctx.identifier().getText()
+      name: toText(ctx.identifier())
     }
   },
 
   UsingForDeclaration (ctx) {
     let typeName = null
-    if (ctx.getChild(3).getText() !== '*') {
+    if (toText(ctx.getChild(3)) !== '*') {
       typeName = this.visit(ctx.getChild(3))
     }
 
     return {
       typeName,
-      libraryName: ctx.identifier().getText()
+      libraryName: toText(ctx.identifier())
     }
   },
 
   PragmaDirective (ctx) {
     return {
-      name: ctx.pragmaName().getText(),
-      value: ctx.pragmaValue().getText()
+      name: toText(ctx.pragmaName()),
+      value: toText(ctx.pragmaValue())
     }
   },
 
   ContractDefinition (ctx) {
-    const name = ctx.identifier().getText()
+    const name = toText(ctx.identifier())
     this._currentContract = name
 
     return {
       name,
       baseContracts: this.visit(ctx.inheritanceSpecifier()),
       subNodes: this.visit(ctx.contractPart()),
-      kind: ctx.getChild(0).getText()
+      kind: toText(ctx.getChild(0))
     }
   },
 
@@ -112,7 +119,7 @@ const transformAST = {
 
     let stateMutability = null
     if (ctx.modifierList().stateMutability(0)) {
-      stateMutability = ctx.modifierList().stateMutability(0).getText()
+      stateMutability = toText(ctx.modifierList().stateMutability(0))
     }
 
     return {
@@ -130,7 +137,7 @@ const transformAST = {
   FunctionDefinition (ctx) {
     let name = ''
     if (ctx.identifier(0)) {
-      name = ctx.identifier(0).getText()
+      name = toText(ctx.identifier(0))
     }
     const parameters = this.visit(ctx.parameterList())
 
@@ -160,7 +167,7 @@ const transformAST = {
 
     let stateMutability = null
     if (ctx.modifierList().stateMutability(0)) {
-      stateMutability = ctx.modifierList().stateMutability(0).getText()
+      stateMutability = toText(ctx.modifierList().stateMutability(0))
     }
 
     return {
@@ -186,7 +193,7 @@ const transformAST = {
     }
 
     return {
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       arguments: args
     }
   },
@@ -200,8 +207,8 @@ const transformAST = {
   TypeName (ctx) {
     if (
       ctx.children.length === 4 &&
-      ctx.getChild(1).getText() === '[' &&
-      ctx.getChild(3).getText() === ']'
+      toText(ctx.getChild(1)) === '[' &&
+      toText(ctx.getChild(3)) === ']'
     ) {
       this.visit(ctx.children[0])
 
@@ -237,7 +244,7 @@ const transformAST = {
 
     let stateMutability = null
     if (ctx.stateMutability(0)) {
-      stateMutability = ctx.stateMutability(0).getText()
+      stateMutability = toText(ctx.stateMutability(0))
     }
 
     return {
@@ -276,7 +283,7 @@ const transformAST = {
     } else if (ctxArgs.nameValueList()) {
       for (const nameValue of ctxArgs.nameValueList().nameValue()) {
         args.push(this.visit(nameValue.expression()))
-        names.push(nameValue.identifier().getText())
+        names.push(toText(nameValue.identifier()))
       }
     }
 
@@ -289,7 +296,7 @@ const transformAST = {
 
   StructDefinition (ctx) {
     return {
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       members: this.visit(ctx.variableDeclaration())
     }
   },
@@ -297,12 +304,12 @@ const transformAST = {
   VariableDeclaration (ctx) {
     let storageLocation = null
     if (ctx.storageLocation()) {
-      storageLocation = ctx.storageLocation().getText()
+      storageLocation = toText(ctx.storageLocation())
     }
 
     return {
       typeName: this.visit(ctx.typeName()),
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       storageLocation,
       isStateVar: false,
       isIndexed: false
@@ -312,13 +319,13 @@ const transformAST = {
   EventParameter (ctx) {
     let storageLocation = null
     if (ctx.storageLocation(0)) {
-      storageLocation = ctx.storageLocation(0).getText()
+      storageLocation = toText(ctx.storageLocation(0))
     }
 
     return {
       type: 'VariableDeclaration',
       typeName: this.visit(ctx.typeName()),
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       storageLocation,
       isStateVar: false,
       isIndexed: !!ctx.IndexedKeyword(0)
@@ -328,7 +335,7 @@ const transformAST = {
   FunctionTypeParameter (ctx) {
     let storageLocation = null
     if (ctx.storageLocation()) {
-      storageLocation = ctx.storageLocation().getText()
+      storageLocation = toText(ctx.storageLocation())
     }
 
     return {
@@ -372,13 +379,13 @@ const transformAST = {
 
   UserDefinedTypeName (ctx) {
     return {
-      namePath: ctx.getText()
+      namePath: toText(ctx)
     }
   },
 
   ElementaryTypeName (ctx) {
     return {
-      name: ctx.getText()
+      name: toText(ctx)
     }
   },
 
@@ -395,11 +402,11 @@ const transformAST = {
   },
 
   NumberLiteral (ctx) {
-    const number = ctx.getChild(0).getText()
+    const number = toText(ctx.getChild(0))
     let subdenomination = null
 
     if (ctx.children.length === 2) {
-      subdenomination = ctx.getChild(1).getText()
+      subdenomination = toText(ctx.getChild(1))
     }
 
     return {
@@ -422,7 +429,7 @@ const transformAST = {
     }
 
     return {
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       parameters,
       body: this.visit(ctx.block())
     }
@@ -445,7 +452,7 @@ const transformAST = {
         return this.visit(ctx.getChild(0))
 
       case 2:
-        op = ctx.getChild(0).getText()
+        op = toText(ctx.getChild(0))
 
         // new expression
         if (op === 'new') {
@@ -465,7 +472,7 @@ const transformAST = {
           }
         }
 
-        op = ctx.getChild(1).getText()
+        op = toText(ctx.getChild(1))
 
         // postfix operators
         if (['++', '--'].includes(op)) {
@@ -481,8 +488,8 @@ const transformAST = {
       case 3:
         // treat parenthesis as no-op
         if (
-          ctx.getChild(0).getText() === '(' &&
-          ctx.getChild(2).getText() === ')'
+          toText(ctx.getChild(0)) === '(' &&
+          toText(ctx.getChild(2)) === ')'
         ) {
           return {
             type: 'TupleExpression',
@@ -491,7 +498,7 @@ const transformAST = {
           }
         }
 
-        op = ctx.getChild(1).getText()
+        op = toText(ctx.getChild(1))
 
         // tuple separator
         if (op === ',') {
@@ -508,7 +515,7 @@ const transformAST = {
         // member access
         if (op === '.') {
           const expression = this.visit(ctx.getChild(0))
-          const memberName = ctx.getChild(2).getText()
+          const memberName = toText(ctx.getChild(2))
           return {
             type: 'MemberAccess',
             expression,
@@ -563,8 +570,8 @@ const transformAST = {
       case 4:
         // function call
         if (
-          ctx.getChild(1).getText() === '(' &&
-          ctx.getChild(3).getText() === ')'
+          toText(ctx.getChild(1)) === '(' &&
+          toText(ctx.getChild(3)) === ')'
         ) {
           let args = []
           const names = []
@@ -578,7 +585,7 @@ const transformAST = {
           } else if (ctxArgs.nameValueList()) {
             for (const nameValue of ctxArgs.nameValueList().nameValue()) {
               args.push(this.visit(nameValue.expression()))
-              names.push(nameValue.identifier().getText())
+              names.push(toText(nameValue.identifier()))
             }
           }
 
@@ -592,8 +599,8 @@ const transformAST = {
 
         // index access
         if (
-          ctx.getChild(1).getText() === '[' &&
-          ctx.getChild(3).getText() === ']'
+          toText(ctx.getChild(1)) === '[' &&
+          toText(ctx.getChild(3)) === ']'
         ) {
           return {
             type: 'IndexAccess',
@@ -606,8 +613,8 @@ const transformAST = {
       case 5:
         // ternary operator
         if (
-          ctx.getChild(1).getText() === '?' &&
-          ctx.getChild(3).getText() === ':'
+          toText(ctx.getChild(1)) === '?' &&
+          toText(ctx.getChild(3)) === ':'
         ) {
           return {
             type: 'Conditional',
@@ -625,7 +632,7 @@ const transformAST = {
   StateVariableDeclaration (ctx) {
     const type = this.visit(ctx.typeName())
     const iden = ctx.identifier()
-    const name = iden.getText()
+    const name = toText(iden)
 
     let expression = null
     if (ctx.expression()) {
@@ -679,19 +686,19 @@ const transformAST = {
     if (ctx.BooleanLiteral()) {
       return {
         type: 'BooleanLiteral',
-        value: ctx.BooleanLiteral().getText() === 'true'
+        value: toText(ctx.BooleanLiteral()) === 'true'
       }
     }
 
     if (ctx.HexLiteral()) {
       return {
         type: 'HexLiteral',
-        value: ctx.HexLiteral().getText()
+        value: toText(ctx.HexLiteral())
       }
     }
 
     if (ctx.StringLiteral()) {
-      const text = ctx.getText()
+      const text = toText(ctx)
       return {
         type: 'StringLiteral',
         value: text.substring(1, text.length - 1)
@@ -703,7 +710,7 @@ const transformAST = {
 
   Identifier (ctx) {
     return {
-      name: ctx.getText()
+      name: toText(ctx)
     }
   },
 
@@ -720,7 +727,7 @@ const transformAST = {
 
     return {
       elements,
-      isArray: ctx.getChild(0).getText() === '['
+      isArray: toText(ctx.getChild(0)) === '['
     }
   },
 
@@ -736,7 +743,7 @@ const transformAST = {
       return this.createNode(
         {
           type: 'VariableDeclaration',
-          name: iden.getText(),
+          name: toText(iden),
           isStateVar: false,
           isIndexed: false
         },
@@ -756,7 +763,7 @@ const transformAST = {
       return this.createNode(
         {
           type: 'VariableDeclaration',
-          name: decl.identifier().getText(),
+          name: toText(decl.identifier()),
           typeName: this.visit(decl.typeName()),
           isStateVar: false,
           isIndexed: false
@@ -788,23 +795,23 @@ const transformAST = {
   },
 
   ImportDirective (ctx) {
-    const pathString = ctx.StringLiteral().getText()
+    const pathString = toText(ctx.StringLiteral())
     let unitAlias = null
     let symbolAliases = null
 
     if (ctx.importDeclaration().length > 0) {
       symbolAliases = ctx.importDeclaration().map(decl => {
-        const symbol = decl.identifier(0).getText()
+        const symbol = toText(decl.identifier(0))
         let alias = null
         if (decl.identifier(1)) {
-          alias = decl.identifier(1).getText()
+          alias = toText(decl.identifier(1))
         }
         return [symbol, alias]
       })
     } else if (ctx.children.length === 7) {
-      unitAlias = ctx.getChild(3).getText()
+      unitAlias = toText(ctx.getChild(3))
     } else if (ctx.children.length === 5) {
-      unitAlias = ctx.getChild(3).getText()
+      unitAlias = toText(ctx.getChild(3))
     }
 
     return {
@@ -816,7 +823,7 @@ const transformAST = {
 
   EventDefinition (ctx) {
     return {
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       parameters: this.visit(ctx.eventParameterList()),
       isAnonymous: !!ctx.AnonymousKeyword()
     }
@@ -827,7 +834,7 @@ const transformAST = {
       const type = this.visit(paramCtx.typeName())
       let name = null
       if (paramCtx.identifier()) {
-        name = paramCtx.identifier().getText()
+        name = toText(paramCtx.identifier())
       }
 
       return this.createNode({
@@ -859,12 +866,12 @@ const transformAST = {
   Parameter (ctx) {
     let storageLocation = null
     if (ctx.storageLocation()) {
-      storageLocation = ctx.storageLocation().getText()
+      storageLocation = toText(ctx.storageLocation())
     }
 
     let name = null
     if (ctx.identifier()) {
-      name = ctx.identifier().getText()
+      name = toText(ctx.identifier())
     }
 
     return {
@@ -879,7 +886,7 @@ const transformAST = {
   InlineAssemblyStatement (ctx) {
     let language = null
     if (ctx.StringLiteral()) {
-      language = ctx.StringLiteral().getText()
+      language = toText(ctx.StringLiteral())
       language = language.substring(1, language.length - 1)
     }
 
@@ -901,12 +908,12 @@ const transformAST = {
     if (ctx.HexLiteral()) {
       return {
         type: 'HexLiteral',
-        value: ctx.HexLiteral().getText()
+        value: toText(ctx.HexLiteral())
       }
     }
 
     if (ctx.StringLiteral()) {
-      text = ctx.StringLiteral().getText()
+      text = toText(ctx.StringLiteral())
       return {
         type: 'StringLiteral',
         value: text.substring(1, text.length - 1)
@@ -933,7 +940,7 @@ const transformAST = {
   },
 
   AssemblyCall (ctx) {
-    const functionName = ctx.getChild(0).getText()
+    const functionName = toText(ctx.getChild(0))
     const args = ctx.assemblyExpression().map(arg => this.visit(arg))
 
     return {
@@ -946,7 +953,7 @@ const transformAST = {
     let text
 
     if (ctx.StringLiteral()) {
-      text = ctx.getText()
+      text = toText(ctx)
       return {
         type: 'StringLiteral',
         value: text.substring(1, text.length - 1)
@@ -956,21 +963,21 @@ const transformAST = {
     if (ctx.DecimalNumber()) {
       return {
         type: 'DecimalNumber',
-        value: ctx.getText()
+        value: toText(ctx)
       }
     }
 
     if (ctx.HexNumber()) {
       return {
         type: 'HexNumber',
-        value: ctx.getText()
+        value: toText(ctx)
       }
     }
 
     if (ctx.HexLiteral()) {
       return {
         type: 'HexLiteral',
-        value: ctx.getText()
+        value: toText(ctx)
       }
     }
   },
@@ -984,7 +991,7 @@ const transformAST = {
 
   AssemblyCase (ctx) {
     let value = null
-    if (ctx.getChild(0).getText() === 'case') {
+    if (toText(ctx.getChild(0)) === 'case') {
       value = this.visit(ctx.assemblyLiteral())
     }
 
@@ -1020,7 +1027,7 @@ const transformAST = {
       .identifier()
 
     return {
-      name: ctx.identifier().getText(),
+      name: toText(ctx.identifier()),
       arguments: this.visit(args),
       returnArguments: this.visit(returnArgs),
       body: this.visit(ctx.assemblyBlock())
@@ -1043,13 +1050,13 @@ const transformAST = {
 
   LabelDefinition (ctx) {
     return {
-      name: ctx.identifier().getText()
+      name: toText(ctx.identifier())
     }
   },
 
   AssemblyStackAssignment (ctx) {
     return {
-      name: ctx.identifier().getText()
+      name: toText(ctx.identifier())
     }
   },
 

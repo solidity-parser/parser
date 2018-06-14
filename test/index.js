@@ -69,6 +69,20 @@ describe("#parse", () => {
     assert.isOk(root.hasOwnProperty('range'))
   })
 
+  it('can build ast with tolerant mode errors', () => {
+    // TODO: just a few examples here, more should be added
+    var cases = [
+      'contract { function a() return bool {} }',
+      'contract test { function () { 2 + + 2; } }',
+      'contract test { uint ; }',
+      'contract test { modifier {  } }'
+    ]
+
+    for (var c of cases) {
+      parser.parse(c, { tolerant: true })
+    }
+  })
+
   describe('AST', () => {
 
     it("SourceUnit", () => {
