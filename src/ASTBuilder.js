@@ -205,17 +205,16 @@ const transformAST = {
   },
 
   TypeName(ctx) {
-    if (
-      ctx.children.length === 4 &&
-      toText(ctx.getChild(1)) === '[' &&
-      toText(ctx.getChild(3)) === ']'
-    ) {
-      this.visit(ctx.children[0])
+    if (ctx.children.length > 1) {
+      let length = null
+      if (ctx.children.length === 4) {
+        length = this.visit(ctx.getChild(2))
+      }
 
       return {
         type: 'ArrayTypeName',
         baseTypeName: this.visit(ctx.getChild(0)),
-        length: this.visit(ctx.getChild(2))
+        length
       }
     }
     return this.visit(ctx.getChild(0))

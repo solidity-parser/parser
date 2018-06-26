@@ -301,6 +301,16 @@ describe('AST', () => {
         "subdenomination": null
       }
     })
+
+    ast = parseNode("uint256[] a;")
+    assert.deepEqual(ast.variables[0].typeName, {
+      "type": "ArrayTypeName",
+      "baseTypeName": {
+        "type": "ElementaryTypeName",
+        "name": "uint256"
+      },
+      "length": null
+    })
   })
 
   it("FunctionTypeName", () => {
