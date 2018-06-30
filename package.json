@@ -18,9 +18,6 @@
     "url": "https://github.com/federicobond/solidity-parser-antlr.git"
   },
   "license": "MIT",
-  "dependencies": {
-    "yarn": "^1.7.0"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -33,7 +30,8 @@
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "^3.4.2",
     "nyc": "^11.0.2",
-    "prettier": "^1.4.4"
+    "prettier": "^1.4.4",
+    "yarn": "^1.7.0"
   },
   "nyc": {
     "include": [
