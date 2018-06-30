@@ -18,7 +18,9 @@
     "url": "https://github.com/federicobond/solidity-parser-antlr.git"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "yarn": "^1.7.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
