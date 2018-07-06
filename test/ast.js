@@ -719,7 +719,7 @@ describe('AST', () => {
     var ast = parseExpression("(,a,, b,,)")
     assert.deepEqual(ast, {
       "type": "TupleExpression",
-      "elements": [
+      "components": [
         null,
         {
           "type": "Identifier",
@@ -740,7 +740,7 @@ describe('AST', () => {
     ast = parseExpression("[a, b]")
     assert.deepEqual(ast, {
       "type": "TupleExpression",
-      "elements": [
+      "components": [
         {
           "type": "Identifier",
           "name": "a"

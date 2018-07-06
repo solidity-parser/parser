@@ -719,7 +719,7 @@ const transformAST = {
   TupleExpression(ctx) {
     // remove parentheses
     const children = ctx.children.slice(1, -1)
-    const elements = mapCommasToNulls(children).map(expr => {
+    const components = mapCommasToNulls(children).map(expr => {
       // add a null for each empty value
       if (expr === null) {
         return null
@@ -728,7 +728,7 @@ const transformAST = {
     })
 
     return {
-      elements,
+      components,
       isArray: toText(ctx.getChild(0)) === '['
     }
   },
