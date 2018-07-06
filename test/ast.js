@@ -630,6 +630,30 @@ describe('AST', () => {
     })
   })
 
+  it("FunctionCall", () => {
+    var expr = parseExpression("f(1, 2)")
+		assert.deepEqual(expr, {
+			"type": "FunctionCall",
+			"expression": {
+				"type": "Identifier",
+				"name": "f"
+			},
+			"arguments": [
+				{
+					"type": "NumberLiteral",
+					"number": "1",
+					"subdenomination": null
+				},
+				{
+					"type": "NumberLiteral",
+					"number": "2",
+					"subdenomination": null
+				}
+			],
+			"names": []
+		})
+  })
+
   it("StateVariableDeclaration", () => {
     var ast = parseNode("uint a;")
     assert.deepEqual(ast, {
