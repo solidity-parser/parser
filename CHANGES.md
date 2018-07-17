@@ -1,3 +1,7 @@
+### Unreleased
+
+ * Fix parsing of zero-component tuples.
+
 ### 0.3.0
 
  * Use `components` for all `TupleExpression` nodes. Earlier versions

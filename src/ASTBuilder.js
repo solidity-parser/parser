@@ -10,6 +10,10 @@ function toText(ctx) {
 function mapCommasToNulls(children) {
   let comma = true
 
+  if (children.length === 0) {
+    return []
+  }
+
   let lastNotEmpty = children.reduce(function(acc, el, idx) {
     if (el.children) {
       return idx

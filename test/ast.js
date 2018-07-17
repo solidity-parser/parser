@@ -375,6 +375,16 @@ describe('AST', () => {
         "subdenomination": null
       }
     })
+
+    ast = parseStatement("return ();")
+    assert.deepEqual(ast, {
+      "type": "ReturnStatement",
+      "expression": {
+        "type": "TupleExpression",
+        "isArray": false,
+        "components": []
+      }
+    })
   })
 
   it("ThrowStatement", () => {
