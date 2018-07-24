@@ -1,4 +1,4 @@
-### Unreleased
+### 0.3.1
 
  * Fix parsing of zero-component tuples.
 
