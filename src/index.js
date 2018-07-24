@@ -6,14 +6,19 @@ const ErrorListener = require('./ErrorListener')
 const { buildTokenList } = require('./tokens')
 
 function ParserError(args) {
-  this.name = 'ParserError'
-  this.message = args.errors.map(e => e.message).join('. ')
+  this.message = args.errors[0].message
   this.errors = args.errors
-  this.stack = new Error().stack
+
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, this.constructor)
+  } else {
+    this.stack = (new Error()).stack
+  }
 }
 
 ParserError.prototype = Object.create(Error.prototype)
 ParserError.prototype.constructor = ParserError
+ParserError.prototype.name = 'ParserError'
 
 function tokenize(input, options) {
   options = options || {}
