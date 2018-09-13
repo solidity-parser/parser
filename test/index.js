@@ -3,33 +3,33 @@ var { assert } = require('chai')
 var parser = require("../src/index")
 var { parseNode, parseStatement } = require('./utils')
 
-describe("#parse", () => {
+describe("#parse", function() {
 
-  it("parses test file correctly", () => {
+  it("parses test file correctly", function() {
     var content = fs.readFileSync(__dirname + "/test.sol")
     parser.parse(content.toString())
   })
 
-  it("throws ParserError on syntax error", () => {
+  it("throws ParserError on syntax error", function() {
     var source = "not good"
     assert.throws(() => {
       parser.parse(source)
     }, parser.ParseError)
   })
 
-  it("supports tolerant mode", () => {
+  it("supports tolerant mode", function() {
     var source = "not good"
     var root = parser.parse(source, { tolerant: true })
     assert.equal(root.errors.length, 1)
   })
 
-  it("supports loc", () => {
+  it("supports loc", function() {
     var source = "contract test { uint a; }"
     var root = parser.parse(source, { loc: true })
     assert.isOk(root.hasOwnProperty('loc'))
   })
 
-  it("supports range", () => {
+  it("supports range", function() {
     var source = "contract test { uint a; }"
     var root = parser.parse(source, { range: true })
     assert.isOk(root.hasOwnProperty('range'))
@@ -50,19 +50,19 @@ describe("#parse", () => {
   })
 
 
-  describe("node meta", () => {
+  describe("node meta", function() {
 
-    it("adds meta to VariableDeclaration inside StateVariableDeclaration", () => {
+    it("adds meta to VariableDeclaration inside StateVariableDeclaration", function() {
       var ast = parseNode("uint public a;", { loc: true })
       assert.isOk(ast.variables[0].loc)
     })
 
-    it("adds meta to VariableDeclaration inside VariableDeclarationStatement", () => {
+    it("adds meta to VariableDeclaration inside VariableDeclarationStatement", function() {
       var ast = parseStatement("uint a;", { loc: true })
       assert.isOk(ast.variables[0].loc)
     })
 
-    it("adds meta to VariableDeclaration inside EventDefinition", () => {
+    it("adds meta to VariableDeclaration inside EventDefinition", function() {
       var ast = parseNode("event Foo(address bar);", { loc: true })
       assert.isOk(ast.parameters.parameters[0].loc)
     })
@@ -70,9 +70,9 @@ describe("#parse", () => {
   })
 })
 
-describe("#visit", () => {
+describe("#visit", function() {
 
-  it("walks visitor through AST", () => {
+  it("walks visitor through AST", function() {
     var source = "contract test { uint a; }"
     var ast = parser.parse(source)
     parser.visit(ast, {
@@ -86,7 +86,7 @@ describe("#visit", () => {
     })
   })
 
-  it("can stop visiting inner nodes by returning false", () => {
+  it("can stop visiting inner nodes by returning false", function() {
     var source = "contract test { uint a; }"
     var ast = parser.parse(source)
     parser.visit(ast, {
@@ -100,7 +100,7 @@ describe("#visit", () => {
     })
   })
 
-  it("shouldn't print anything if the lexer fails", () => {
+  it("shouldn't print anything if the lexer fails", function() {
     const originalConsoleError = console.error
     let called = false
     console.error = () => called = true

@@ -10,7 +10,7 @@ const {
 
 describe('AST', () => {
 
-  it("SourceUnit", () => {
+  it("SourceUnit", function() {
     var ast = parser.parse("");
     assert.deepEqual(ast, {
       "type": "SourceUnit",
@@ -18,7 +18,7 @@ describe('AST', () => {
     });
   })
 
-  it("EnumDefinition / EnumValue", () => {
+  it("EnumDefinition / EnumValue", function() {
     var ast = parseNode("enum Hello { A, B, C }")
     assert.deepEqual(ast, {
       "type": "EnumDefinition",
@@ -40,7 +40,7 @@ describe('AST', () => {
     })
   })
 
-  it("UsingForDeclaration", () => {
+  it("UsingForDeclaration", function() {
     var ast = parseNode("using Lib for uint;")
     assert.deepEqual(ast, {
       "type": "UsingForDeclaration",
@@ -70,7 +70,7 @@ describe('AST', () => {
 
   })
 
-  it("PragmaDirective", () => {
+  it("PragmaDirective", function() {
     var ast = parser.parse("pragma solidity ^0.4.0;")
     var pragma = ast.children[0]
     assert.deepEqual(pragma, {
@@ -80,7 +80,7 @@ describe('AST', () => {
     })
   })
 
-  it("ContractDefinition", () => {
+  it("ContractDefinition", function() {
     var ast = parseContract("contract test {}")
     assert.deepEqual(ast, {
       "type": "ContractDefinition",
@@ -170,7 +170,7 @@ describe('AST', () => {
     })
   })
 
-  it("FunctionDefinition", () => {
+  it("FunctionDefinition", function() {
     var ast = parseNode("function foo(uint a) pure {}")
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
@@ -250,7 +250,7 @@ describe('AST', () => {
     })
   })
 
-  it("ModifierInvocation", () => {
+  it("ModifierInvocation", function() {
     var ast = parseNode("function foo(uint a) onlyOwner {}")
     assert.deepEqual(ast.modifiers[0], {
       "type": "ModifierInvocation",
@@ -276,7 +276,7 @@ describe('AST', () => {
     })
   })
 
-  it("ElementaryTypeNameExpression", () => {
+  it("ElementaryTypeNameExpression", function() {
     var stmt = parseStatement("uint(a);")
     assert.deepEqual(stmt.expression.expression, {
       "type": "ElementaryTypeNameExpression",
@@ -287,7 +287,7 @@ describe('AST', () => {
     })
   })
 
-  it("TypeName", () => {
+  it("TypeName", function() {
     var ast = parseNode("uint256[2] a;")
     assert.deepEqual(ast.variables[0].typeName, {
       "type": "ArrayTypeName",
@@ -313,7 +313,7 @@ describe('AST', () => {
     })
   })
 
-  it("ElementaryTypeName", () => {
+  it("ElementaryTypeName", function() {
     var ast = parseNode("address payable a;")
     assert.deepEqual(ast.variables[0].typeName, {
       "type": "ElementaryTypeName",
@@ -322,7 +322,7 @@ describe('AST', () => {
     })
   })
 
-  it("FunctionTypeName", () => {
+  it("FunctionTypeName", function() {
     var ast = parseNode("function (uint, uint) returns(bool) a;")
     assert.deepEqual(ast.variables[0].typeName, {
       "type": "FunctionTypeName",
@@ -368,7 +368,7 @@ describe('AST', () => {
     })
   })
 
-  it("ReturnStatement", () => {
+  it("ReturnStatement", function() {
     var ast = parseStatement("return;")
     assert.deepEqual(ast, {
       "type": "ReturnStatement",
@@ -396,14 +396,14 @@ describe('AST', () => {
     })
   })
 
-  it("ThrowStatement", () => {
+  it("ThrowStatement", function() {
     var ast = parseStatement("throw;")
     assert.deepEqual(ast, {
       "type": "ThrowStatement",
     })
   })
 
-  it("EmitStatement", () => {
+  it("EmitStatement", function() {
     var ast = parseStatement("emit EventCalled(1);")
     assert.deepEqual(ast, {
       "type": "EmitStatement",
@@ -425,7 +425,7 @@ describe('AST', () => {
     })
   })
 
-  it("StructDefinition", () => {
+  it("StructDefinition", function() {
     var ast = parseNode("struct hello { uint a; }")
     assert.deepEqual(ast, {
       "type": "StructDefinition",
@@ -446,7 +446,7 @@ describe('AST', () => {
     })
   })
 
-  it("VariableDeclaration", () => {
+  it("VariableDeclaration", function() {
     // state variable
     var ast = parseNode("uint a;")
     assert.deepEqual(ast.variables[0], {
@@ -464,7 +464,7 @@ describe('AST', () => {
     })
   })
 
-  it("WhileStatement", () => {
+  it("WhileStatement", function() {
     var stmt = parseStatement("while (true) {}")
     assert.deepEqual(stmt, {
       "type": "WhileStatement",
@@ -492,7 +492,7 @@ describe('AST', () => {
     })
   })
 
-  it("IfStatement", () => {
+  it("IfStatement", function() {
     var stmt = parseStatement("if (true) {}")
     assert.deepEqual(stmt, {
       "type": "IfStatement",
@@ -526,7 +526,7 @@ describe('AST', () => {
     })
   })
 
-  it("UserDefinedTypeName", () => {
+  it("UserDefinedTypeName", function() {
     var ast = parseStatement("Foo.Bar a;")
     assert.deepEqual(ast.variables[0].typeName, {
       "type": "UserDefinedTypeName",
@@ -534,7 +534,7 @@ describe('AST', () => {
     })
   })
 
-  it("ExpressionStatement", () => {
+  it("ExpressionStatement", function() {
     var stmt = parseStatement("true;")
     assert.deepEqual(stmt, {
       "type": "ExpressionStatement",
@@ -545,7 +545,7 @@ describe('AST', () => {
     })
   })
 
-  it("NumberLiteral", () => {
+  it("NumberLiteral", function() {
     var expr = parseExpression("2 ether")
     assert.deepEqual(expr, {
       "type": "NumberLiteral",
@@ -568,7 +568,7 @@ describe('AST', () => {
     })
   })
 
-  it("StringLiteral", () => {
+  it("StringLiteral", function() {
     var expr = parseExpression("\"Hello\"")
     assert.deepEqual(expr, {
       "type": "StringLiteral",
@@ -576,7 +576,7 @@ describe('AST', () => {
     })
   })
 
-  it("HexLiteral", () => {
+  it("HexLiteral", function() {
     var expr = parseExpression("hex\"fafafa\"")
     assert.deepEqual(expr, {
       type: "HexLiteral",
@@ -584,7 +584,7 @@ describe('AST', () => {
     })
   })
 
-  it("BooleanLiteral", () => {
+  it("BooleanLiteral", function() {
     var expr = parseExpression("false")
     assert.deepEqual(expr, {
       "type": "BooleanLiteral",
@@ -592,7 +592,7 @@ describe('AST', () => {
     })
   })
 
-  it("Mapping", () => {
+  it("Mapping", function() {
     var ast = parseNode("mapping(uint => address) a;")
     assert.deepEqual(ast.variables[0].typeName, {
       "type": "Mapping",
@@ -607,7 +607,7 @@ describe('AST', () => {
     })
   })
 
-  it("ModifierDefinition", () => {
+  it("ModifierDefinition", function() {
     var ast = parseNode("modifier onlyOwner {}")
     assert.deepEqual(ast, {
       "type": "ModifierDefinition",
@@ -620,7 +620,7 @@ describe('AST', () => {
     })
   })
 
-  it("Expression", () => {
+  it("Expression", function() {
     // new expression
     var expr = parseExpression("new MyContract")
     assert.deepEqual(expr, {
@@ -656,7 +656,7 @@ describe('AST', () => {
     })
   })
 
-  it("FunctionCall", () => {
+  it("FunctionCall", function() {
     var expr = parseExpression("f(1, 2)")
 		assert.deepEqual(expr, {
 			"type": "FunctionCall",
@@ -680,7 +680,7 @@ describe('AST', () => {
 		})
   })
 
-  it("StateVariableDeclaration", () => {
+  it("StateVariableDeclaration", function() {
     var ast = parseNode("uint a;")
     assert.deepEqual(ast, {
       "type": "StateVariableDeclaration",
@@ -703,7 +703,7 @@ describe('AST', () => {
     })
   })
 
-  it("ForStatement", () => {
+  it("ForStatement", function() {
     var stmt = parseStatement("for (i = 0; i < 10; i++) {}")
     assert.deepEqual(stmt, {
       "type": "ForStatement",
@@ -756,7 +756,7 @@ describe('AST', () => {
 
   })
 
-  it("Identifier", () => {
+  it("Identifier", function() {
     var expr = parseExpression("a")
     assert.deepEqual(expr, {
       "type": "Identifier",
@@ -764,7 +764,7 @@ describe('AST', () => {
     })
   })
 
-  it("TupleExpression", () => {
+  it("TupleExpression", function() {
     // tuple
     var ast = parseExpression("(,a,, b,,)")
     assert.deepEqual(ast, {
@@ -804,7 +804,7 @@ describe('AST', () => {
     })
   })
 
-  it("VariableDeclarationStatement", () => {
+  it("VariableDeclarationStatement", function() {
     var stmt = parseStatement("uint a;")
     assert.deepEqual(stmt, {
       "type": "VariableDeclarationStatement",
@@ -883,7 +883,7 @@ describe('AST', () => {
     })
   })
 
-  it("ImportDirective", () => {
+  it("ImportDirective", function() {
     var ast = parser.parse("import \"./abc.sol\";")
     assert.deepEqual(ast.children[0], {
       "type": "ImportDirective",
@@ -921,7 +921,7 @@ describe('AST', () => {
     })
   })
 
-  it("EventDefinition", () => {
+  it("EventDefinition", function() {
     var ast = parseNode("event Foo(address indexed a, uint b);")
     assert.deepEqual(ast, {
       "type": "EventDefinition",
@@ -955,7 +955,7 @@ describe('AST', () => {
     })
   })
 
-  it("InlineAssemblyStatement", () => {
+  it("InlineAssemblyStatement", function() {
     var ast = parseStatement("assembly {}")
     assert.deepEqual(ast, {
       "type": "InlineAssemblyStatement",
@@ -977,7 +977,7 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblyCall", () => {
+  it("AssemblyCall", function() {
     var ast = parseAssembly("mload(0x04)")
     assert.deepEqual(ast, {
       "type": "AssemblyCall",
@@ -991,7 +991,7 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblyLiteral", () => {
+  it("AssemblyLiteral", function() {
     var ast = parseAssembly("0x04")
     assert.deepEqual(ast, {
       "type": "HexNumber",
@@ -1005,7 +1005,7 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblySwitch / AssemblyCase", () => {
+  it("AssemblySwitch / AssemblyCase", function() {
     var ast = parseAssembly("switch x case 0 { y := mul(x, 2) } default { y := 0 }")
     assert.deepEqual(ast, {
       "type": "AssemblySwitch",
@@ -1077,7 +1077,7 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblyLocalDefinition", () => {
+  it("AssemblyLocalDefinition", function() {
     var ast = parseAssembly("let x := 0x04")
     assert.deepEqual(ast, {
       "type": "AssemblyLocalDefinition",
@@ -1095,7 +1095,7 @@ describe('AST', () => {
 
   })
 
-  it("AssemblyFunctionDefinition", () => {
+  it("AssemblyFunctionDefinition", function() {
     var ast = parseAssembly("function power(base, exponent) -> result {}")
     assert.deepEqual(ast, {
       "type": "AssemblyFunctionDefinition",
@@ -1125,7 +1125,7 @@ describe('AST', () => {
 
   })
 
-  it("AssemblyAssignment", () => {
+  it("AssemblyAssignment", function() {
     var ast = parseAssembly("a := 10")
     assert.deepEqual(ast, {
       "type": "AssemblyAssignment",
@@ -1142,7 +1142,7 @@ describe('AST', () => {
     })
   })
 
-  it("LabelDefinition", () => {
+  it("LabelDefinition", function() {
     var ast = parseAssembly("loop:")
     assert.deepEqual(ast, {
       "type": "LabelDefinition",
@@ -1150,7 +1150,7 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblyStackAssignment", () => {
+  it("AssemblyStackAssignment", function() {
     var ast = parseAssembly("=: a")
     assert.deepEqual(ast, {
       "type": "AssemblyStackAssignment",
@@ -1158,7 +1158,7 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblyFor", () => {
+  it("AssemblyFor", function() {
     var ast = parseAssembly("for { let i := 0  } lt(i, x) { i := add(i, 1)  } { y := mul(2, y) }")
     assert.deepEqual(ast, {
       "type": "AssemblyFor",
@@ -1257,7 +1257,7 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblyIf", () => {
+  it("AssemblyIf", function() {
     var ast = parseAssembly("if lt(i, x) { revert(0, 0) }")
     assert.deepEqual(ast, {
       "body": {
