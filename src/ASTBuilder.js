@@ -209,7 +209,7 @@ const transformAST = {
   },
 
   TypeName(ctx) {
-    if (ctx.children.length > 1) {
+    if (ctx.children.length > 2) {
       let length = null
       if (ctx.children.length === 4) {
         length = this.visit(ctx.getChild(2))
@@ -219,6 +219,13 @@ const transformAST = {
         type: 'ArrayTypeName',
         baseTypeName: this.visit(ctx.getChild(0)),
         length
+      }
+    }
+    if (ctx.children.length === 2) {
+      return {
+        type: 'ElementaryTypeName',
+        name: toText(ctx.getChild(0)),
+        stateMutability: toText(ctx.getChild(1))
       }
     }
     return this.visit(ctx.getChild(0))

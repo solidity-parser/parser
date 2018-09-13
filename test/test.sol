@@ -500,3 +500,13 @@ contract test {
     (bytes32 a, uint b) = foo();
   }
 }
+
+contract C {
+  address payable constant a = address(0);
+}
+
+contract C {
+	function f() public pure returns(address payable[] memory m) {
+		m = new address payable[](10);
+	}
+}

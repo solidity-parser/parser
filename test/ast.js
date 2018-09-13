@@ -313,6 +313,15 @@ describe('AST', () => {
     })
   })
 
+  it("ElementaryTypeName", () => {
+    var ast = parseNode("address payable a;")
+    assert.deepEqual(ast.variables[0].typeName, {
+      "type": "ElementaryTypeName",
+      "name": "address",
+      "stateMutability": "payable"
+    })
+  })
+
   it("FunctionTypeName", () => {
     var ast = parseNode("function (uint, uint) returns(bool) a;")
     assert.deepEqual(ast.variables[0].typeName, {
