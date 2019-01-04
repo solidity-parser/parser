@@ -6,7 +6,8 @@ const ErrorListener = require('./ErrorListener')
 const { buildTokenList } = require('./tokens')
 
 function ParserError(args) {
-  this.message = args.errors[0].message
+  const { message, line, column } = args.errors[0]
+  this.message = `${message} (${line}:${column})`
   this.errors = args.errors
 
   if (Error.captureStackTrace) {
