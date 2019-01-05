@@ -510,3 +510,7 @@ contract C {
 		m = new address payable[](10);
 	}
 }
+
+contract C {
+  event e(bytes calldata);
+}

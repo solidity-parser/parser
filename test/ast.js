@@ -762,6 +762,11 @@ describe('AST', () => {
       "type": "Identifier",
       "name": "a",
     })
+    expr = parseExpression("calldata")
+    assert.deepEqual(expr, {
+      "type": "Identifier",
+      "name": "calldata",
+    })
   })
 
   it("TupleExpression", function() {

@@ -1,8 +1,9 @@
-// Generated from solidity-antlr4/Solidity.g4 by ANTLR 4.7.1
+// Generated from solidity-antlr4/Solidity.g4 by ANTLR 4.7.2
 // jshint ignore: start
 var antlr4 = require('../antlr4/index');
 var SolidityListener = require('./SolidityListener').SolidityListener;
 var grammarFileName = "Solidity.g4";
+
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0003y\u03bd\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
@@ -129,7 +130,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "kooqr\u0003\u0002(*\u0005\u0002kkppst\u0005\u0002$$36]a\u0003\u0002",
     "78\u0003\u0002:;\u0003\u0002<=\u0004\u0002\u000e\u000e@A\u0003\u0002",
     "BC\u0003\u0002\u0007\n\u0003\u0002FG\u0004\u0002\u000b\u000bLU\u0005",
-    "\u0002deggvv\u0003\u0002de\u0004\u0002\u000f\u000fuu\u0002\u0414\u0002",
+    "\u0002deggvv\u0003\u0002de\u0005\u0002\u000f\u000f**uu\u0002\u0414\u0002",
     "\u00af\u0003\u0002\u0002\u0002\u0004\u00b4\u0003\u0002\u0002\u0002\u0006",
     "\u00b9\u0003\u0002\u0002\u0002\b\u00bd\u0003\u0002\u0002\u0002\n\u00bf",
     "\u0003\u0002\u0002\u0002\f\u00c3\u0003\u0002\u0002\u0002\u000e\u00c6",
@@ -937,6 +938,7 @@ SolidityParser.RULE_elementaryTypeNameExpression = 81;
 SolidityParser.RULE_numberLiteral = 82;
 SolidityParser.RULE_identifier = 83;
 
+
 function SourceUnitContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -1058,6 +1060,7 @@ SolidityParser.prototype.sourceUnit = function() {
     return localctx;
 };
 
+
 function PragmaDirectiveContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -1127,6 +1130,7 @@ SolidityParser.prototype.pragmaDirective = function() {
     return localctx;
 };
 
+
 function PragmaNameContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -1185,6 +1189,7 @@ SolidityParser.prototype.pragmaName = function() {
     }
     return localctx;
 };
+
 
 function PragmaValueContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -1263,6 +1268,7 @@ SolidityParser.prototype.pragmaValue = function() {
     return localctx;
 };
 
+
 function VersionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -1338,6 +1344,7 @@ SolidityParser.prototype.version = function() {
     return localctx;
 };
 
+
 function VersionOperatorContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -1401,6 +1408,7 @@ SolidityParser.prototype.versionOperator = function() {
     }
     return localctx;
 };
+
 
 function VersionConstraintContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -1473,6 +1481,7 @@ SolidityParser.prototype.versionConstraint = function() {
     }
     return localctx;
 };
+
 
 function ImportDeclarationContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -1550,6 +1559,7 @@ SolidityParser.prototype.importDeclaration = function() {
     }
     return localctx;
 };
+
 
 function ImportDirectiveContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -1652,6 +1662,7 @@ SolidityParser.prototype.importDirective = function() {
                 this.match(SolidityParser.T__11);
                 break;
             case SolidityParser.T__12:
+            case SolidityParser.T__39:
             case SolidityParser.Identifier:
                 this.state = 214;
                 this.identifier();
@@ -1721,6 +1732,7 @@ SolidityParser.prototype.importDirective = function() {
     }
     return localctx;
 };
+
 
 function ContractDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -1826,7 +1838,7 @@ SolidityParser.prototype.contractDefinition = function() {
         this.state = 258;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__12) | (1 << SolidityParser.T__22) | (1 << SolidityParser.T__24) | (1 << SolidityParser.T__25) | (1 << SolidityParser.T__26) | (1 << SolidityParser.T__27) | (1 << SolidityParser.T__29) | (1 << SolidityParser.T__30))) !== 0) || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__12) | (1 << SolidityParser.T__22) | (1 << SolidityParser.T__24) | (1 << SolidityParser.T__25) | (1 << SolidityParser.T__26) | (1 << SolidityParser.T__27) | (1 << SolidityParser.T__29) | (1 << SolidityParser.T__30))) !== 0) || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
             this.state = 255;
             this.contractPart();
             this.state = 260;
@@ -1848,6 +1860,7 @@ SolidityParser.prototype.contractDefinition = function() {
     }
     return localctx;
 };
+
 
 function InheritanceSpecifierContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -1943,6 +1956,7 @@ SolidityParser.prototype.inheritanceSpecifier = function() {
     }
     return localctx;
 };
+
 
 function ContractPartContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2080,6 +2094,7 @@ SolidityParser.prototype.contractPart = function() {
     }
     return localctx;
 };
+
 
 function StateVariableDeclarationContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2228,6 +2243,7 @@ SolidityParser.prototype.stateVariableDeclaration = function() {
     return localctx;
 };
 
+
 function UsingForDeclarationContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -2292,6 +2308,7 @@ SolidityParser.prototype.usingForDeclaration = function() {
         case SolidityParser.T__27:
         case SolidityParser.T__33:
         case SolidityParser.T__35:
+        case SolidityParser.T__39:
         case SolidityParser.T__48:
         case SolidityParser.T__49:
         case SolidityParser.T__50:
@@ -2323,6 +2340,7 @@ SolidityParser.prototype.usingForDeclaration = function() {
     }
     return localctx;
 };
+
 
 function StructDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2388,7 +2406,7 @@ SolidityParser.prototype.structDefinition = function() {
         this.state = 323;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
             this.state = 313;
             this.variableDeclaration();
             this.state = 314;
@@ -2396,7 +2414,7 @@ SolidityParser.prototype.structDefinition = function() {
             this.state = 320;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            while(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+            while(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
                 this.state = 315;
                 this.variableDeclaration();
                 this.state = 316;
@@ -2422,6 +2440,7 @@ SolidityParser.prototype.structDefinition = function() {
     }
     return localctx;
 };
+
 
 function ConstructorDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2495,6 +2514,7 @@ SolidityParser.prototype.constructorDefinition = function() {
     }
     return localctx;
 };
+
 
 function ModifierDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2576,6 +2596,7 @@ SolidityParser.prototype.modifierDefinition = function() {
     return localctx;
 };
 
+
 function ModifierInvocationContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -2635,7 +2656,7 @@ SolidityParser.prototype.modifierInvocation = function() {
             this.state = 342;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
                 this.state = 341;
                 this.expressionList();
             }
@@ -2657,6 +2678,7 @@ SolidityParser.prototype.modifierInvocation = function() {
     }
     return localctx;
 };
+
 
 function FunctionDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2723,7 +2745,7 @@ SolidityParser.prototype.functionDefinition = function() {
         this.state = 349;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
             this.state = 348;
             this.identifier();
         }
@@ -2767,6 +2789,7 @@ SolidityParser.prototype.functionDefinition = function() {
     }
     return localctx;
 };
+
 
 function ReturnParametersContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2828,6 +2851,7 @@ SolidityParser.prototype.returnParameters = function() {
     }
     return localctx;
 };
+
 
 function ModifierListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -2942,11 +2966,12 @@ SolidityParser.prototype.modifierList = function() {
         this.state = 371;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while(_la===SolidityParser.T__12 || ((((_la - 105)) & ~0x1f) == 0 && ((1 << (_la - 105)) & ((1 << (SolidityParser.ConstantKeyword - 105)) | (1 << (SolidityParser.ExternalKeyword - 105)) | (1 << (SolidityParser.InternalKeyword - 105)) | (1 << (SolidityParser.PayableKeyword - 105)) | (1 << (SolidityParser.PrivateKeyword - 105)) | (1 << (SolidityParser.PublicKeyword - 105)) | (1 << (SolidityParser.PureKeyword - 105)) | (1 << (SolidityParser.ViewKeyword - 105)) | (1 << (SolidityParser.Identifier - 105)))) !== 0)) {
+        while(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 105)) & ~0x1f) == 0 && ((1 << (_la - 105)) & ((1 << (SolidityParser.ConstantKeyword - 105)) | (1 << (SolidityParser.ExternalKeyword - 105)) | (1 << (SolidityParser.InternalKeyword - 105)) | (1 << (SolidityParser.PayableKeyword - 105)) | (1 << (SolidityParser.PrivateKeyword - 105)) | (1 << (SolidityParser.PublicKeyword - 105)) | (1 << (SolidityParser.PureKeyword - 105)) | (1 << (SolidityParser.ViewKeyword - 105)) | (1 << (SolidityParser.Identifier - 105)))) !== 0)) {
             this.state = 369;
             this._errHandler.sync(this);
             switch(this._input.LA(1)) {
             case SolidityParser.T__12:
+            case SolidityParser.T__39:
             case SolidityParser.Identifier:
                 this.state = 363;
                 this.modifierInvocation();
@@ -2994,6 +3019,7 @@ SolidityParser.prototype.modifierList = function() {
     }
     return localctx;
 };
+
 
 function EventDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3077,6 +3103,7 @@ SolidityParser.prototype.eventDefinition = function() {
     return localctx;
 };
 
+
 function EnumValueContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -3135,6 +3162,7 @@ SolidityParser.prototype.enumValue = function() {
     }
     return localctx;
 };
+
 
 function EnumDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3200,7 +3228,7 @@ SolidityParser.prototype.enumDefinition = function() {
         this.state = 388;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
             this.state = 387;
             this.enumValue();
         }
@@ -3232,6 +3260,7 @@ SolidityParser.prototype.enumDefinition = function() {
     }
     return localctx;
 };
+
 
 function ParameterListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3289,7 +3318,7 @@ SolidityParser.prototype.parameterList = function() {
         this.state = 408;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
             this.state = 400;
             this.parameter();
             this.state = 405;
@@ -3321,6 +3350,7 @@ SolidityParser.prototype.parameterList = function() {
     }
     return localctx;
 };
+
 
 function ParameterContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3378,16 +3408,16 @@ SolidityParser.prototype.parameter = function() {
         this.typeName(0);
         this.state = 414;
         this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        if(((((_la - 38)) & ~0x1f) == 0 && ((1 << (_la - 38)) & ((1 << (SolidityParser.T__37 - 38)) | (1 << (SolidityParser.T__38 - 38)) | (1 << (SolidityParser.T__39 - 38)))) !== 0)) {
+        var la_ = this._interp.adaptivePredict(this._input,35,this._ctx);
+        if(la_===1) {
             this.state = 413;
             this.storageLocation();
-        }
 
+        }
         this.state = 417;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
             this.state = 416;
             this.identifier();
         }
@@ -3405,6 +3435,7 @@ SolidityParser.prototype.parameter = function() {
     }
     return localctx;
 };
+
 
 function EventParameterListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3462,7 +3493,7 @@ SolidityParser.prototype.eventParameterList = function() {
         this.state = 428;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
             this.state = 420;
             this.eventParameter();
             this.state = 425;
@@ -3494,6 +3525,7 @@ SolidityParser.prototype.eventParameterList = function() {
     }
     return localctx;
 };
+
 
 function EventParameterContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3560,7 +3592,7 @@ SolidityParser.prototype.eventParameter = function() {
         this.state = 437;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
             this.state = 436;
             this.identifier();
         }
@@ -3578,6 +3610,7 @@ SolidityParser.prototype.eventParameter = function() {
     }
     return localctx;
 };
+
 
 function FunctionTypeParameterListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3635,7 +3668,7 @@ SolidityParser.prototype.functionTypeParameterList = function() {
         this.state = 448;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
             this.state = 440;
             this.functionTypeParameter();
             this.state = 445;
@@ -3667,6 +3700,7 @@ SolidityParser.prototype.functionTypeParameterList = function() {
     }
     return localctx;
 };
+
 
 function FunctionTypeParameterContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3740,6 +3774,7 @@ SolidityParser.prototype.functionTypeParameter = function() {
     return localctx;
 };
 
+
 function VariableDeclarationContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -3789,19 +3824,18 @@ SolidityParser.prototype.variableDeclaration = function() {
 
     var localctx = new VariableDeclarationContext(this, this._ctx, this.state);
     this.enterRule(localctx, 60, SolidityParser.RULE_variableDeclaration);
-    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 456;
         this.typeName(0);
         this.state = 458;
         this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        if(((((_la - 38)) & ~0x1f) == 0 && ((1 << (_la - 38)) & ((1 << (SolidityParser.T__37 - 38)) | (1 << (SolidityParser.T__38 - 38)) | (1 << (SolidityParser.T__39 - 38)))) !== 0)) {
+        var la_ = this._interp.adaptivePredict(this._input,44,this._ctx);
+        if(la_===1) {
             this.state = 457;
             this.storageLocation();
-        }
 
+        }
         this.state = 460;
         this.identifier();
     } catch (re) {
@@ -3817,6 +3851,7 @@ SolidityParser.prototype.variableDeclaration = function() {
     }
     return localctx;
 };
+
 
 function TypeNameContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -3848,6 +3883,10 @@ TypeNameContext.prototype.mapping = function() {
 
 TypeNameContext.prototype.functionTypeName = function() {
     return this.getTypedRuleContext(FunctionTypeNameContext,0);
+};
+
+TypeNameContext.prototype.PayableKeyword = function() {
+    return this.getToken(SolidityParser.PayableKeyword, 0);
 };
 
 TypeNameContext.prototype.typeName = function() {
@@ -3938,7 +3977,7 @@ SolidityParser.prototype.typeName = function(_p) {
                 this.state = 474;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
                     this.state = 473;
                     this.expression(0);
                 }
@@ -3964,6 +4003,7 @@ SolidityParser.prototype.typeName = function(_p) {
     }
     return localctx;
 };
+
 
 function UserDefinedTypeNameContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -4046,6 +4086,7 @@ SolidityParser.prototype.userDefinedTypeName = function() {
     return localctx;
 };
 
+
 function MappingContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -4118,6 +4159,7 @@ SolidityParser.prototype.mapping = function() {
     }
     return localctx;
 };
+
 
 function FunctionTypeNameContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -4264,6 +4306,7 @@ SolidityParser.prototype.functionTypeName = function() {
     return localctx;
 };
 
+
 function StorageLocationContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -4327,6 +4370,7 @@ SolidityParser.prototype.storageLocation = function() {
     }
     return localctx;
 };
+
 
 function StateMutabilityContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -4407,6 +4451,7 @@ SolidityParser.prototype.stateMutability = function() {
     return localctx;
 };
 
+
 function BlockContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -4463,7 +4508,7 @@ SolidityParser.prototype.block = function() {
         this.state = 519;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__13) | (1 << SolidityParser.T__20) | (1 << SolidityParser.T__23) | (1 << SolidityParser.T__27))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__35 - 32)) | (1 << (SolidityParser.T__40 - 32)) | (1 << (SolidityParser.T__42 - 32)) | (1 << (SolidityParser.T__43 - 32)) | (1 << (SolidityParser.T__44 - 32)) | (1 << (SolidityParser.T__45 - 32)) | (1 << (SolidityParser.T__46 - 32)) | (1 << (SolidityParser.T__47 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.BreakKeyword - 91)) | (1 << (SolidityParser.ContinueKeyword - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__13) | (1 << SolidityParser.T__20) | (1 << SolidityParser.T__23) | (1 << SolidityParser.T__27))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__35 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__40 - 32)) | (1 << (SolidityParser.T__42 - 32)) | (1 << (SolidityParser.T__43 - 32)) | (1 << (SolidityParser.T__44 - 32)) | (1 << (SolidityParser.T__45 - 32)) | (1 << (SolidityParser.T__46 - 32)) | (1 << (SolidityParser.T__47 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.BreakKeyword - 91)) | (1 << (SolidityParser.ContinueKeyword - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
             this.state = 516;
             this.statement();
             this.state = 521;
@@ -4485,6 +4530,7 @@ SolidityParser.prototype.block = function() {
     }
     return localctx;
 };
+
 
 function StatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -4637,6 +4683,7 @@ SolidityParser.prototype.statement = function() {
         case SolidityParser.T__31:
         case SolidityParser.T__33:
         case SolidityParser.T__35:
+        case SolidityParser.T__39:
         case SolidityParser.T__48:
         case SolidityParser.T__49:
         case SolidityParser.T__50:
@@ -4680,6 +4727,7 @@ SolidityParser.prototype.statement = function() {
     }
     return localctx;
 };
+
 
 function ExpressionStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -4741,6 +4789,7 @@ SolidityParser.prototype.expressionStatement = function() {
     }
     return localctx;
 };
+
 
 function IfStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -4830,6 +4879,7 @@ SolidityParser.prototype.ifStatement = function() {
     return localctx;
 };
 
+
 function WhileStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -4900,6 +4950,7 @@ SolidityParser.prototype.whileStatement = function() {
     }
     return localctx;
 };
+
 
 function SimpleStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -4977,6 +5028,7 @@ SolidityParser.prototype.simpleStatement = function() {
     return localctx;
 };
 
+
 function ForStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -5050,6 +5102,7 @@ SolidityParser.prototype.forStatement = function() {
         case SolidityParser.T__31:
         case SolidityParser.T__33:
         case SolidityParser.T__35:
+        case SolidityParser.T__39:
         case SolidityParser.T__48:
         case SolidityParser.T__49:
         case SolidityParser.T__50:
@@ -5086,7 +5139,7 @@ SolidityParser.prototype.forStatement = function() {
         this.state = 567;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
             this.state = 566;
             this.expression(0);
         }
@@ -5096,7 +5149,7 @@ SolidityParser.prototype.forStatement = function() {
         this.state = 571;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
             this.state = 570;
             this.expression(0);
         }
@@ -5118,6 +5171,7 @@ SolidityParser.prototype.forStatement = function() {
     }
     return localctx;
 };
+
 
 function InlineAssemblyStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5192,6 +5246,7 @@ SolidityParser.prototype.inlineAssemblyStatement = function() {
     }
     return localctx;
 };
+
 
 function DoWhileStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5268,6 +5323,7 @@ SolidityParser.prototype.doWhileStatement = function() {
     return localctx;
 };
 
+
 function ContinueStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -5284,6 +5340,9 @@ function ContinueStatementContext(parser, parent, invokingState) {
 ContinueStatementContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ContinueStatementContext.prototype.constructor = ContinueStatementContext;
 
+ContinueStatementContext.prototype.ContinueKeyword = function() {
+    return this.getToken(SolidityParser.ContinueKeyword, 0);
+};
 
 ContinueStatementContext.prototype.enterRule = function(listener) {
     if(listener instanceof SolidityListener ) {
@@ -5326,6 +5385,7 @@ SolidityParser.prototype.continueStatement = function() {
     return localctx;
 };
 
+
 function BreakStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -5342,6 +5402,9 @@ function BreakStatementContext(parser, parent, invokingState) {
 BreakStatementContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 BreakStatementContext.prototype.constructor = BreakStatementContext;
 
+BreakStatementContext.prototype.BreakKeyword = function() {
+    return this.getToken(SolidityParser.BreakKeyword, 0);
+};
 
 BreakStatementContext.prototype.enterRule = function(listener) {
     if(listener instanceof SolidityListener ) {
@@ -5383,6 +5446,7 @@ SolidityParser.prototype.breakStatement = function() {
     }
     return localctx;
 };
+
 
 function ReturnStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5433,7 +5497,7 @@ SolidityParser.prototype.returnStatement = function() {
         this.state = 598;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
             this.state = 597;
             this.expression(0);
         }
@@ -5453,6 +5517,7 @@ SolidityParser.prototype.returnStatement = function() {
     }
     return localctx;
 };
+
 
 function ThrowStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5511,6 +5576,7 @@ SolidityParser.prototype.throwStatement = function() {
     }
     return localctx;
 };
+
 
 function EmitStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5574,6 +5640,7 @@ SolidityParser.prototype.emitStatement = function() {
     }
     return localctx;
 };
+
 
 function VariableDeclarationStatementContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5683,6 +5750,7 @@ SolidityParser.prototype.variableDeclarationStatement = function() {
     return localctx;
 };
 
+
 function VariableDeclarationListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -5737,7 +5805,7 @@ SolidityParser.prototype.variableDeclarationList = function() {
         this.state = 625;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
             this.state = 624;
             this.variableDeclaration();
         }
@@ -5751,7 +5819,7 @@ SolidityParser.prototype.variableDeclarationList = function() {
             this.state = 629;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
+            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__48 - 34)) | (1 << (SolidityParser.T__49 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.Identifier - 91)))) !== 0)) {
                 this.state = 628;
                 this.variableDeclaration();
             }
@@ -5773,6 +5841,7 @@ SolidityParser.prototype.variableDeclarationList = function() {
     }
     return localctx;
 };
+
 
 function IdentifierListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5835,7 +5904,7 @@ SolidityParser.prototype.identifierList = function() {
                 this.state = 638;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-                if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+                if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
                     this.state = 637;
                     this.identifier();
                 }
@@ -5851,7 +5920,7 @@ SolidityParser.prototype.identifierList = function() {
         this.state = 647;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
             this.state = 646;
             this.identifier();
         }
@@ -5871,6 +5940,7 @@ SolidityParser.prototype.identifierList = function() {
     }
     return localctx;
 };
+
 
 function ElementaryTypeNameContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -5954,6 +6024,7 @@ SolidityParser.prototype.elementaryTypeName = function() {
     }
     return localctx;
 };
+
 
 function ExpressionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -6418,6 +6489,7 @@ SolidityParser.prototype.expression = function(_p) {
     return localctx;
 };
 
+
 function PrimaryExpressionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -6509,6 +6581,7 @@ SolidityParser.prototype.primaryExpression = function() {
             this.match(SolidityParser.StringLiteral);
             break;
         case SolidityParser.T__12:
+        case SolidityParser.T__39:
         case SolidityParser.Identifier:
             this.enterOuterAlt(localctx, 5);
             this.state = 739;
@@ -6550,6 +6623,7 @@ SolidityParser.prototype.primaryExpression = function() {
     }
     return localctx;
 };
+
 
 function ExpressionListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -6629,6 +6703,7 @@ SolidityParser.prototype.expressionList = function() {
     }
     return localctx;
 };
+
 
 function NameValueListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -6720,6 +6795,7 @@ SolidityParser.prototype.nameValueList = function() {
     return localctx;
 };
 
+
 function NameValueContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -6787,6 +6863,7 @@ SolidityParser.prototype.nameValue = function() {
     return localctx;
 };
 
+
 function FunctionCallArgumentsContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -6844,7 +6921,7 @@ SolidityParser.prototype.functionCallArguments = function() {
             this.state = 769;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
                 this.state = 768;
                 this.nameValueList();
             }
@@ -6858,6 +6935,7 @@ SolidityParser.prototype.functionCallArguments = function() {
         case SolidityParser.T__21:
         case SolidityParser.T__31:
         case SolidityParser.T__33:
+        case SolidityParser.T__39:
         case SolidityParser.T__48:
         case SolidityParser.T__49:
         case SolidityParser.T__50:
@@ -6885,7 +6963,7 @@ SolidityParser.prototype.functionCallArguments = function() {
             this.state = 773;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
                 this.state = 772;
                 this.expressionList();
             }
@@ -6907,6 +6985,7 @@ SolidityParser.prototype.functionCallArguments = function() {
     }
     return localctx;
 };
+
 
 function FunctionCallContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -6977,6 +7056,7 @@ SolidityParser.prototype.functionCall = function() {
     return localctx;
 };
 
+
 function AssemblyBlockContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -7033,7 +7113,7 @@ SolidityParser.prototype.assemblyBlock = function() {
         this.state = 786;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__12) | (1 << SolidityParser.T__13) | (1 << SolidityParser.T__20) | (1 << SolidityParser.T__23) | (1 << SolidityParser.T__27))) !== 0) || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__40 - 34)) | (1 << (SolidityParser.T__43 - 34)) | (1 << (SolidityParser.T__45 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 84)) & ~0x1f) == 0 && ((1 << (_la - 84)) & ((1 << (SolidityParser.T__83 - 84)) | (1 << (SolidityParser.T__85 - 84)) | (1 << (SolidityParser.T__86 - 84)) | (1 << (SolidityParser.DecimalNumber - 84)) | (1 << (SolidityParser.HexNumber - 84)) | (1 << (SolidityParser.HexLiteral - 84)) | (1 << (SolidityParser.BreakKeyword - 84)) | (1 << (SolidityParser.ContinueKeyword - 84)) | (1 << (SolidityParser.Identifier - 84)))) !== 0) || _la===SolidityParser.StringLiteral) {
+        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__12) | (1 << SolidityParser.T__13) | (1 << SolidityParser.T__20) | (1 << SolidityParser.T__23) | (1 << SolidityParser.T__27))) !== 0) || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__40 - 34)) | (1 << (SolidityParser.T__43 - 34)) | (1 << (SolidityParser.T__45 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 84)) & ~0x1f) == 0 && ((1 << (_la - 84)) & ((1 << (SolidityParser.T__83 - 84)) | (1 << (SolidityParser.T__85 - 84)) | (1 << (SolidityParser.T__86 - 84)) | (1 << (SolidityParser.DecimalNumber - 84)) | (1 << (SolidityParser.HexNumber - 84)) | (1 << (SolidityParser.HexLiteral - 84)) | (1 << (SolidityParser.BreakKeyword - 84)) | (1 << (SolidityParser.ContinueKeyword - 84)) | (1 << (SolidityParser.Identifier - 84)))) !== 0) || _la===SolidityParser.StringLiteral) {
             this.state = 783;
             this.assemblyItem();
             this.state = 788;
@@ -7055,6 +7135,7 @@ SolidityParser.prototype.assemblyBlock = function() {
     }
     return localctx;
 };
+
 
 function AssemblyItemContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -7283,6 +7364,7 @@ SolidityParser.prototype.assemblyItem = function() {
     return localctx;
 };
 
+
 function AssemblyExpressionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -7334,6 +7416,7 @@ SolidityParser.prototype.assemblyExpression = function() {
         switch(this._input.LA(1)) {
         case SolidityParser.T__12:
         case SolidityParser.T__33:
+        case SolidityParser.T__39:
         case SolidityParser.T__45:
         case SolidityParser.T__51:
         case SolidityParser.Identifier:
@@ -7365,6 +7448,7 @@ SolidityParser.prototype.assemblyExpression = function() {
     }
     return localctx;
 };
+
 
 function AssemblyCallContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -7437,6 +7521,7 @@ SolidityParser.prototype.assemblyCall = function() {
             this.match(SolidityParser.T__51);
             break;
         case SolidityParser.T__12:
+        case SolidityParser.T__39:
         case SolidityParser.Identifier:
             this.state = 817;
             this.identifier();
@@ -7453,7 +7538,7 @@ SolidityParser.prototype.assemblyCall = function() {
             this.state = 822;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__45 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 98)) & ~0x1f) == 0 && ((1 << (_la - 98)) & ((1 << (SolidityParser.DecimalNumber - 98)) | (1 << (SolidityParser.HexNumber - 98)) | (1 << (SolidityParser.HexLiteral - 98)) | (1 << (SolidityParser.Identifier - 98)) | (1 << (SolidityParser.StringLiteral - 98)))) !== 0)) {
+            if(_la===SolidityParser.T__12 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__45 - 34)) | (1 << (SolidityParser.T__51 - 34)))) !== 0) || ((((_la - 98)) & ~0x1f) == 0 && ((1 << (_la - 98)) & ((1 << (SolidityParser.DecimalNumber - 98)) | (1 << (SolidityParser.HexNumber - 98)) | (1 << (SolidityParser.HexLiteral - 98)) | (1 << (SolidityParser.Identifier - 98)) | (1 << (SolidityParser.StringLiteral - 98)))) !== 0)) {
                 this.state = 821;
                 this.assemblyExpression();
             }
@@ -7487,6 +7572,7 @@ SolidityParser.prototype.assemblyCall = function() {
     }
     return localctx;
 };
+
 
 function AssemblyLocalDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -7564,6 +7650,7 @@ SolidityParser.prototype.assemblyLocalDefinition = function() {
     return localctx;
 };
 
+
 function AssemblyAssignmentContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -7631,6 +7718,7 @@ SolidityParser.prototype.assemblyAssignment = function() {
     return localctx;
 };
 
+
 function AssemblyIdentifierOrListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -7681,6 +7769,7 @@ SolidityParser.prototype.assemblyIdentifierOrList = function() {
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case SolidityParser.T__12:
+        case SolidityParser.T__39:
         case SolidityParser.Identifier:
             this.enterOuterAlt(localctx, 1);
             this.state = 844;
@@ -7711,6 +7800,7 @@ SolidityParser.prototype.assemblyIdentifierOrList = function() {
     }
     return localctx;
 };
+
 
 function AssemblyIdentifierListContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -7791,6 +7881,7 @@ SolidityParser.prototype.assemblyIdentifierList = function() {
     return localctx;
 };
 
+
 function AssemblyStackAssignmentContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -7852,6 +7943,7 @@ SolidityParser.prototype.assemblyStackAssignment = function() {
     return localctx;
 };
 
+
 function LabelDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -7912,6 +8004,7 @@ SolidityParser.prototype.labelDefinition = function() {
     }
     return localctx;
 };
+
 
 function AssemblySwitchContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -7996,6 +8089,7 @@ SolidityParser.prototype.assemblySwitch = function() {
     return localctx;
 };
 
+
 function AssemblyCaseContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -8078,6 +8172,7 @@ SolidityParser.prototype.assemblyCase = function() {
     return localctx;
 };
 
+
 function AssemblyFunctionDefinitionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -8143,7 +8238,7 @@ SolidityParser.prototype.assemblyFunctionDefinition = function() {
         this.state = 885;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier) {
             this.state = 884;
             this.assemblyIdentifierList();
         }
@@ -8173,6 +8268,7 @@ SolidityParser.prototype.assemblyFunctionDefinition = function() {
     }
     return localctx;
 };
+
 
 function AssemblyFunctionReturnsContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -8234,6 +8330,7 @@ SolidityParser.prototype.assemblyFunctionReturns = function() {
     }
     return localctx;
 };
+
 
 function AssemblyForContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -8307,6 +8404,7 @@ SolidityParser.prototype.assemblyFor = function() {
             break;
         case SolidityParser.T__12:
         case SolidityParser.T__33:
+        case SolidityParser.T__39:
         case SolidityParser.T__45:
         case SolidityParser.T__51:
         case SolidityParser.DecimalNumber:
@@ -8331,6 +8429,7 @@ SolidityParser.prototype.assemblyFor = function() {
             break;
         case SolidityParser.T__12:
         case SolidityParser.T__33:
+        case SolidityParser.T__39:
         case SolidityParser.T__45:
         case SolidityParser.T__51:
         case SolidityParser.DecimalNumber:
@@ -8359,6 +8458,7 @@ SolidityParser.prototype.assemblyFor = function() {
     }
     return localctx;
 };
+
 
 function AssemblyIfContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -8426,6 +8526,7 @@ SolidityParser.prototype.assemblyIf = function() {
     }
     return localctx;
 };
+
 
 function AssemblyLiteralContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -8506,6 +8607,7 @@ SolidityParser.prototype.assemblyLiteral = function() {
     return localctx;
 };
 
+
 function SubAssemblyContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -8573,6 +8675,7 @@ SolidityParser.prototype.subAssembly = function() {
     return localctx;
 };
 
+
 function TupleExpressionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -8634,7 +8737,7 @@ SolidityParser.prototype.tupleExpression = function() {
             this.state = 920;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
                 this.state = 919;
                 this.expression(0);
             }
@@ -8648,7 +8751,7 @@ SolidityParser.prototype.tupleExpression = function() {
                 this.state = 924;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
                     this.state = 923;
                     this.expression(0);
                 }
@@ -8667,7 +8770,7 @@ SolidityParser.prototype.tupleExpression = function() {
             this.state = 941;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
                 this.state = 933;
                 this.expression(0);
                 this.state = 938;
@@ -8703,6 +8806,7 @@ SolidityParser.prototype.tupleExpression = function() {
     }
     return localctx;
 };
+
 
 function ElementaryTypeNameExpressionContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -8762,6 +8866,7 @@ SolidityParser.prototype.elementaryTypeNameExpression = function() {
     }
     return localctx;
 };
+
 
 function NumberLiteralContext(parser, parent, invokingState) {
 	if(parent===undefined) {
@@ -8846,6 +8951,7 @@ SolidityParser.prototype.numberLiteral = function() {
     return localctx;
 };
 
+
 function IdentifierContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
@@ -8892,7 +8998,7 @@ SolidityParser.prototype.identifier = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 952;
         _la = this._input.LA(1);
-        if(!(_la===SolidityParser.T__12 || _la===SolidityParser.Identifier)) {
+        if(!(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || _la===SolidityParser.Identifier)) {
         this._errHandler.recoverInline(this);
         }
         else {
