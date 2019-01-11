@@ -1,6 +1,7 @@
 ### 0.4.0
 
  * Correctly handle non-existent tuple components. Thanks @maxsam4
+ * Accept calldata as identifier
 
 ### 0.3.3
 
