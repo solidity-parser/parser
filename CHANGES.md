@@ -1,3 +1,7 @@
+### 0.4.0
+
+ * Correctly handle non-existent tuple components. Thanks @maxsam4
+
 ### 0.3.3
 
  * Add support for `address payable` typename.

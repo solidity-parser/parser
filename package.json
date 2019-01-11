@@ -1,6 +1,6 @@
 {
   "name": "solidity-parser-antlr",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.js",
   "scripts": {
