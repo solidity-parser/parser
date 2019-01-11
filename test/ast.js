@@ -756,6 +756,49 @@ describe('AST', () => {
 
   })
 
+  it("IdentifierList", function() {
+    var expr = parseExpression("(a,) = (1,2)")
+    assert.deepEqual(expr.left, {
+      "components": [
+        {
+          "name": "a",
+          "type": "Identifier",
+        },
+        null,
+      ],
+      "isArray": false,
+      "type": "TupleExpression",
+    })
+    expr = parseExpression("(a) = (1,)")
+    assert.deepEqual(expr.left, {
+      "components": [
+        {
+          "name": "a",
+          "type": "Identifier",
+        },
+      ],
+      "isArray": false,
+      "type": "TupleExpression",
+    })
+    expr = parseExpression("(a,,b,) = (1,2,1)")
+    assert.deepEqual(expr.left, {
+      "components": [
+        {
+          "name": "a",
+          "type": "Identifier",
+        },
+        null,
+        {
+          "name": "b",
+          "type": "Identifier",
+        },
+        null,
+      ],
+      "isArray": false,
+      "type": "TupleExpression",
+    })
+  })
+
   it("Identifier", function() {
     var expr = parseExpression("a")
     assert.deepEqual(expr, {

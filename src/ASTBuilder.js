@@ -8,33 +8,35 @@ function toText(ctx) {
 }
 
 function mapCommasToNulls(children) {
-  let comma = true
 
   if (children.length === 0) {
     return []
   }
 
-  let lastNotEmpty = children.reduce(function(acc, el, idx) {
-    if (el.children) {
-      return idx
-    }
-    return acc
-  })
+  const values = []
+  let comma = true
 
-  return children.reduce(function(acc, el, idx) {
-    // we assume el is a terminal node if it has no children
-    if (!el.children) {
-      if (comma || idx > lastNotEmpty) {
-        acc.push(null)
+  for (const el of children) {
+    if (comma) {
+      if (toText(el) === ',') {
+        values.push(null)
       } else {
-        comma = true
+        values.push(el)
+        comma = false
       }
     } else {
-      acc.push(el)
-      comma = false
+      if (toText(el) !== ',') {
+        throw new Error('expected comma')
+      }
+      comma = true
     }
-    return acc
-  }, [])
+  }
+
+  if (comma) {
+    values.push(null)
+  }
+
+  return values
 }
 
 const transformAST = {
