@@ -81,7 +81,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\n(\u0003)\u0003)\u0003)\u0003*\u0003*\u0003*\u0003*\u0003*\u0003*\u0003",
     "*\u0005*\u0227\n*\u0003+\u0003+\u0003+\u0003+\u0003+\u0003+\u0003,\u0003",
     ",\u0005,\u0231\n,\u0003-\u0003-\u0003-\u0003-\u0005-\u0237\n-\u0003",
-    "-\u0005-\u023a\n-\u0003-\u0003-\u0005-\u023e\n-\u0003-\u0003-\u0003",
+    "-\u0003-\u0005-\u023b\n-\u0003-\u0005-\u023e\n-\u0003-\u0003-\u0003",
     "-\u0003.\u0003.\u0005.\u0245\n.\u0003.\u0003.\u0003/\u0003/\u0003/\u0003",
     "/\u0003/\u0003/\u0003/\u0003/\u00030\u00030\u00030\u00031\u00031\u0003",
     "1\u00032\u00032\u00052\u0259\n2\u00032\u00032\u00033\u00033\u00033\u0003",
@@ -402,10 +402,10 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0002\u0231W\u0003\u0002\u0002\u0002\u0232\u0233\u0007",
     "\u001a\u0002\u0002\u0233\u0236\u0007\u0017\u0002\u0002\u0234\u0237\u0005",
     "V,\u0002\u0235\u0237\u0007\u0004\u0002\u0002\u0236\u0234\u0003\u0002",
-    "\u0002\u0002\u0236\u0235\u0003\u0002\u0002\u0002\u0237\u0239\u0003\u0002",
-    "\u0002\u0002\u0238\u023a\u0005p9\u0002\u0239\u0238\u0003\u0002\u0002",
-    "\u0002\u0239\u023a\u0003\u0002\u0002\u0002\u023a\u023b\u0003\u0002\u0002",
-    "\u0002\u023b\u023d\u0007\u0004\u0002\u0002\u023c\u023e\u0005p9\u0002",
+    "\u0002\u0002\u0236\u0235\u0003\u0002\u0002\u0002\u0237\u023a\u0003\u0002",
+    "\u0002\u0002\u0238\u023b\u0005P)\u0002\u0239\u023b\u0007\u0004\u0002",
+    "\u0002\u023a\u0238\u0003\u0002\u0002\u0002\u023a\u0239\u0003\u0002\u0002",
+    "\u0002\u023b\u023d\u0003\u0002\u0002\u0002\u023c\u023e\u0005p9\u0002",
     "\u023d\u023c\u0003\u0002\u0002\u0002\u023d\u023e\u0003\u0002\u0002\u0002",
     "\u023e\u023f\u0003\u0002\u0002\u0002\u023f\u0240\u0007\u0018\u0002\u0002",
     "\u0240\u0241\u0005N(\u0002\u0241Y\u0003\u0002\u0002\u0002\u0242\u0244",
@@ -634,7 +634,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u011f\u0125\u012b\u0134\u0142\u0145\u0151\u0158\u015b\u015f\u0164\u0168",
     "\u0173\u0175\u017c\u0186\u018c\u0197\u019a\u01a0\u01a3\u01ab\u01ae\u01b4",
     "\u01b7\u01bf\u01c2\u01c8\u01cc\u01d7\u01dc\u01e1\u01e9\u01f8\u01fa\u01ff",
-    "\u0209\u021a\u0226\u0230\u0236\u0239\u023d\u0244\u0258\u026a\u026e\u0273",
+    "\u0209\u021a\u0226\u0230\u0236\u023a\u023d\u0244\u0258\u026a\u026e\u0273",
     "\u0277\u027b\u0280\u0285\u0289\u02a1\u02dc\u02de\u02e8\u02ef\u02f7\u02fb",
     "\u0303\u0307\u0309\u0314\u032a\u032e\u0334\u0338\u033e\u0342\u0348\u0353",
     "\u035a\u0368\u0371\u0377\u037b\u0385\u038a\u039a\u039e\u03a2\u03ac\u03af",
@@ -5053,15 +5053,12 @@ ForStatementContext.prototype.simpleStatement = function() {
     return this.getTypedRuleContext(SimpleStatementContext,0);
 };
 
-ForStatementContext.prototype.expression = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(ExpressionContext);
-    } else {
-        return this.getTypedRuleContext(ExpressionContext,i);
-    }
+ForStatementContext.prototype.expressionStatement = function() {
+    return this.getTypedRuleContext(ExpressionStatementContext,0);
+};
+
+ForStatementContext.prototype.expression = function() {
+    return this.getTypedRuleContext(ExpressionContext,0);
 };
 
 ForStatementContext.prototype.enterRule = function(listener) {
@@ -5136,16 +5133,48 @@ SolidityParser.prototype.forStatement = function() {
         default:
             throw new antlr4.error.NoViableAltException(this);
         }
-        this.state = 567;
+        this.state = 568;
         this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__20))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__57 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)))) !== 0) || ((((_la - 91)) & ~0x1f) == 0 && ((1 << (_la - 91)) & ((1 << (SolidityParser.Int - 91)) | (1 << (SolidityParser.Uint - 91)) | (1 << (SolidityParser.Byte - 91)) | (1 << (SolidityParser.Fixed - 91)) | (1 << (SolidityParser.Ufixed - 91)) | (1 << (SolidityParser.BooleanLiteral - 91)) | (1 << (SolidityParser.DecimalNumber - 91)) | (1 << (SolidityParser.HexNumber - 91)) | (1 << (SolidityParser.HexLiteral - 91)) | (1 << (SolidityParser.Identifier - 91)) | (1 << (SolidityParser.StringLiteral - 91)))) !== 0)) {
+        switch(this._input.LA(1)) {
+        case SolidityParser.T__3:
+        case SolidityParser.T__12:
+        case SolidityParser.T__20:
+        case SolidityParser.T__31:
+        case SolidityParser.T__33:
+        case SolidityParser.T__39:
+        case SolidityParser.T__48:
+        case SolidityParser.T__49:
+        case SolidityParser.T__50:
+        case SolidityParser.T__51:
+        case SolidityParser.T__52:
+        case SolidityParser.T__53:
+        case SolidityParser.T__54:
+        case SolidityParser.T__55:
+        case SolidityParser.T__56:
+        case SolidityParser.T__57:
+        case SolidityParser.T__58:
+        case SolidityParser.T__59:
+        case SolidityParser.Int:
+        case SolidityParser.Uint:
+        case SolidityParser.Byte:
+        case SolidityParser.Fixed:
+        case SolidityParser.Ufixed:
+        case SolidityParser.BooleanLiteral:
+        case SolidityParser.DecimalNumber:
+        case SolidityParser.HexNumber:
+        case SolidityParser.HexLiteral:
+        case SolidityParser.Identifier:
+        case SolidityParser.StringLiteral:
             this.state = 566;
-            this.expression(0);
+            this.expressionStatement();
+            break;
+        case SolidityParser.T__1:
+            this.state = 567;
+            this.match(SolidityParser.T__1);
+            break;
+        default:
+            throw new antlr4.error.NoViableAltException(this);
         }
-
-        this.state = 569;
-        this.match(SolidityParser.T__1);
         this.state = 571;
         this._errHandler.sync(this);
         _la = this._input.LA(1);

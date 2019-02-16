@@ -686,12 +686,16 @@ const transformAST = {
   },
 
   ForStatement(ctx) {
+    let conditionExpression = this.visit(ctx.expressionStatement())
+    if (conditionExpression) {
+      conditionExpression = conditionExpression.expression
+    }
     return {
       initExpression: this.visit(ctx.simpleStatement()),
-      conditionExpression: this.visit(ctx.expression(0)),
+      conditionExpression,
       loopExpression: {
         type: 'ExpressionStatement',
-        expression: this.visit(ctx.expression(1))
+        expression: this.visit(ctx.expression())
       },
       body: this.visit(ctx.statement())
     }

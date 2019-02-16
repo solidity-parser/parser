@@ -753,7 +753,28 @@ describe('AST', () => {
         "statements": []
       }
     })
-
+    stmt = parseStatement("for (;; i++) {}")
+    assert.deepEqual(stmt, {
+      "type": "ForStatement",
+      "initExpression": null,
+      "conditionExpression": null,
+      "loopExpression": {
+        "type": "ExpressionStatement",
+        "expression": {
+          "type": "UnaryOperation",
+          "operator": "++",
+          "subExpression": {
+            "type": "Identifier",
+            "name": "i"
+          },
+          "isPrefix": false
+        }
+      },
+      "body": {
+        "type": "Block",
+        "statements": []
+      }
+    })
   })
 
   it("IdentifierList", function() {
