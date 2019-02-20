@@ -1,3 +1,7 @@
+### 0.4.1
+
+ * Fix parsing of for loops with missing initial and condition statements.
+
 ### 0.4.0
 
  * Correctly handle non-existent tuple components. Thanks @maxsam4
