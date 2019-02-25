@@ -3,6 +3,7 @@
   "version": "0.4.1",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "antlr4": "sh scripts/antlr4.sh",
     "build": "rm -rf dist && babel --out-dir=dist src",
