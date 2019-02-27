@@ -311,6 +311,27 @@ describe('AST', () => {
       },
       "length": null
     })
+
+    // typename as expression
+    ast = parseExpression("A[]")
+    assert.deepEqual(ast, {
+      "type": "ArrayTypeName",
+      "baseTypeName": {
+        "type": "UserDefinedTypeName",
+        "namePath": "A"
+      },
+      "length": null
+    })
+
+    ast = parseExpression("uint256[]")
+    assert.deepEqual(ast, {
+      "type": "ArrayTypeName",
+      "baseTypeName": {
+        "type": "ElementaryTypeName",
+        "name": "uint256"
+      },
+      "length": null
+    })
   })
 
   it("ElementaryTypeName", function() {

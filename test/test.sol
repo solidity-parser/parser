@@ -514,3 +514,10 @@ contract C {
 contract C {
   event e(bytes calldata);
 }
+
+contract test {
+    function world(bytes memory b) public {
+        uint256[] memory a;
+        a = abi.decode(b, (uint256[]));
+    }
+}

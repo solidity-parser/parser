@@ -724,6 +724,30 @@ const transformAST = {
       }
     }
 
+    if (ctx.children.length == 3 &&
+        toText(ctx.getChild(1)) === '[' &&
+        toText(ctx.getChild(2)) === ']') {
+
+      let node = this.visit(ctx.getChild(0))
+      if (node.type === 'Identifier') {
+        node = {
+          type: 'UserDefinedTypeName',
+          namePath: node.name,
+        }
+      } else {
+        node = {
+          type: 'ElementaryTypeName',
+          name: toText(ctx.getChild(0)),
+        }
+      }
+      return {
+        type: 'ArrayTypeName',
+        baseTypeName: node,
+        length: null
+      }
+    }
+
+
     return this.visit(ctx.getChild(0))
   },
 
