@@ -1,3 +1,7 @@
+### Unreleased
+
+ * Fix parsing of assembly function definitions with no args or return args.
+
 ### 0.4.1
 
  * Fix parsing of for loops with missing initial and condition statements.

@@ -1211,8 +1211,38 @@ describe('AST', () => {
         "operations": []
       }
     })
-
-
+    var ast = parseAssembly("function foo() -> result {}")
+    assert.deepEqual(ast, {
+      "type": "AssemblyFunctionDefinition",
+      "name": "foo",
+      "arguments": [],
+      "returnArguments": [
+        {
+          "type": "Identifier",
+          "name": "result"
+        }
+      ],
+      "body": {
+        "type": "AssemblyBlock",
+        "operations": []
+      }
+    })
+    var ast = parseAssembly("function foo(x) {}")
+    assert.deepEqual(ast, {
+      "type": "AssemblyFunctionDefinition",
+      "name": "foo",
+      "arguments": [
+        {
+          "type": "Identifier",
+          "name": "x"
+        },
+      ],
+      "returnArguments": [],
+      "body": {
+        "type": "AssemblyBlock",
+        "operations": []
+      }
+    })
   })
 
   it("AssemblyAssignment", function() {

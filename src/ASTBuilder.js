@@ -1064,16 +1064,16 @@ const transformAST = {
   },
 
   AssemblyFunctionDefinition(ctx) {
-    const args = ctx.assemblyIdentifierList().identifier()
-    const returnArgs = ctx
-      .assemblyFunctionReturns()
-      .assemblyIdentifierList()
-      .identifier()
+    let args = ctx.assemblyIdentifierList()
+    args = args ? this.visit(args.identifier()) : []
+
+    let returnArgs = ctx.assemblyFunctionReturns()
+    returnArgs = returnArgs ? this.visit(returnArgs.assemblyIdentifierList().identifier()) : []
 
     return {
       name: toText(ctx.identifier()),
-      arguments: this.visit(args),
-      returnArguments: this.visit(returnArgs),
+      arguments: args,
+      returnArguments: returnArgs,
       body: this.visit(ctx.assemblyBlock())
     }
   },
