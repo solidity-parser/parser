@@ -10,6 +10,7 @@
     "prepublish": "yarn build",
     "prettier": "find src -name *.js | egrep -v '^src/(lib|antlr4)/' | xargs prettier --no-semi --single-quote --write",
     "eslint": "eslint src",
+    "pretest": "eslint src",
     "test": "nyc mocha"
   },
   "author": "Federico Bond <federicobond@gmail.com>",
