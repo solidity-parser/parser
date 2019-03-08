@@ -1,4 +1,4 @@
-### Unreleased
+### 0.4.2
 
  * Fix parsing of assembly function definitions with no args or return args.
 
