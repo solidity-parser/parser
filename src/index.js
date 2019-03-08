@@ -13,7 +13,7 @@ function ParserError(args) {
   if (Error.captureStackTrace) {
     Error.captureStackTrace(this, this.constructor)
   } else {
-    this.stack = (new Error()).stack
+    this.stack = new Error().stack
   }
 }
 

@@ -8,7 +8,6 @@ function toText(ctx) {
 }
 
 function mapCommasToNulls(children) {
-
   if (children.length === 0) {
     return []
   }
@@ -37,6 +36,42 @@ function mapCommasToNulls(children) {
   }
 
   return values
+}
+
+function isBinOp(op) {
+  const binOps = [
+    '+',
+    '-',
+    '*',
+    '/',
+    '**',
+    '%',
+    '<<',
+    '>>',
+    '&&',
+    '||',
+    '&',
+    '|',
+    '^',
+    '<',
+    '>',
+    '<=',
+    '>=',
+    '==',
+    '!=',
+    '=',
+    '|=',
+    '^=',
+    '&=',
+    '<<=',
+    '>>=',
+    '+=',
+    '-=',
+    '*=',
+    '/=',
+    '%='
+  ]
+  return binOps.includes(op)
 }
 
 const transformAST = {
@@ -526,50 +561,14 @@ const transformAST = {
 
         // member access
         if (op === '.') {
-          const expression = this.visit(ctx.getChild(0))
-          const memberName = toText(ctx.getChild(2))
           return {
             type: 'MemberAccess',
-            expression,
-            memberName
+            expression: this.visit(ctx.getChild(0)),
+            memberName: toText(ctx.getChild(2))
           }
         }
 
-        // binary operation
-        const binOps = [
-          '+',
-          '-',
-          '*',
-          '/',
-          '**',
-          '%',
-          '<<',
-          '>>',
-          '&&',
-          '||',
-          '&',
-          '|',
-          '^',
-          '<',
-          '>',
-          '<=',
-          '>=',
-          '==',
-          '!=',
-          '=',
-          '|=',
-          '^=',
-          '&=',
-          '<<=',
-          '>>=',
-          '+=',
-          '-=',
-          '*=',
-          '/=',
-          '%='
-        ]
-
-        if (binOps.includes(op)) {
+        if (isBinOp(op)) {
           return {
             type: 'BinaryOperation',
             operator: op,
@@ -724,20 +723,21 @@ const transformAST = {
       }
     }
 
-    if (ctx.children.length == 3 &&
-        toText(ctx.getChild(1)) === '[' &&
-        toText(ctx.getChild(2)) === ']') {
-
+    if (
+      ctx.children.length == 3 &&
+      toText(ctx.getChild(1)) === '[' &&
+      toText(ctx.getChild(2)) === ']'
+    ) {
       let node = this.visit(ctx.getChild(0))
       if (node.type === 'Identifier') {
         node = {
           type: 'UserDefinedTypeName',
-          namePath: node.name,
+          namePath: node.name
         }
       } else {
         node = {
           type: 'ElementaryTypeName',
-          name: toText(ctx.getChild(0)),
+          name: toText(ctx.getChild(0))
         }
       }
       return {
@@ -746,7 +746,6 @@ const transformAST = {
         length: null
       }
     }
-
 
     return this.visit(ctx.getChild(0))
   },
@@ -1068,7 +1067,9 @@ const transformAST = {
     args = args ? this.visit(args.identifier()) : []
 
     let returnArgs = ctx.assemblyFunctionReturns()
-    returnArgs = returnArgs ? this.visit(returnArgs.assemblyIdentifierList().identifier()) : []
+    returnArgs = returnArgs
+      ? this.visit(returnArgs.assemblyIdentifierList().identifier())
+      : []
 
     return {
       name: toText(ctx.identifier()),

@@ -1,7 +1,6 @@
 {
-    "extends": ["standard"],
+    "extends": ["eslint:recommended"],
     "plugins": [
-        "standard",
         "promise"
     ],
     "rules": {
@@ -10,5 +9,12 @@
         "object-shorthand": 2,
         "prefer-const": 2,
         "max-len": 2
+    },
+    "parserOptions": {
+       "ecmaVersion": 2017
+    },
+    "env": {
+       "es6": true,
+       "node": true
     }
 }
