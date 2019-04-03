@@ -91,7 +91,8 @@ export type ASTNodeTypeString =
   | 'NumberLiteral'
   | 'Identifier'
   | 'BinaryOperation'
-  | 'Conditional';
+  | 'Conditional'
+  | 'IndexAccess';
 export interface BaseASTNode {
   type: ASTNodeTypeString;
   range?: [number, number];
@@ -392,6 +393,11 @@ export interface Conditional extends BaseASTNode {
   trueExpression: ASTNode;
   falseExpression: ASTNode;
 }
+export interface IndexAccess extends BaseASTNode {
+  type: 'IndexAccess';
+  base: ASTNode;
+  index: ASTNode
+}
 export type ASTNode =
   | SourceUnit
   | PragmaDirective
@@ -468,7 +474,8 @@ export type ASTNode =
   | NumberLiteral
   | Identifier
   | BinaryOperation
-  | Conditional;
+  | Conditional
+  | IndexAccess;
 export interface Visitor {
   SourceUnit?: (node: SourceUnit) => any;
   PragmaDirective?: (node: PragmaDirective) => any;
@@ -546,6 +553,7 @@ export interface Visitor {
   Identifier?: (node: Identifier) => any;
   BinaryOperation?: (node: BinaryOperation) => any;
   Conditional?: (node: Conditional) => any;
+  IndexAccess?: (node: IndexAccess) => any;
   // Start of :exit handler for each type. Must be consistent with above
   'SourceUnit:exit'?: (node: SourceUnit) => any;
   'PragmaDirective:exit'?: (node: PragmaDirective) => any;
@@ -629,6 +637,7 @@ export interface Visitor {
   'Identifier:exit'?: (node: Identifier) => any;
   'BinaryOperation:exit'?: (node: BinaryOperation) => any;
   'Conditional:exit'?: (node: Conditional) => any;
+  'IndexAccess:exit'?: (node: IndexAccess) => any;
 }
 export interface ParserOpts {
   tolerant?: boolean;
