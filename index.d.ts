@@ -63,7 +63,6 @@ export type ASTNodeTypeString =
   | 'VariableDeclarationStatement'
   | 'IdentifierList'
   | 'ElementaryTypeName'
-  | 'Expression'
   | 'ExpressionList'
   | 'NameValueList'
   | 'NameValue'
@@ -92,6 +91,8 @@ export type ASTNodeTypeString =
   | 'Identifier'
   | 'BinaryOperation'
   | 'Conditional'
+  | 'StringLiteral'
+  | 'HexLiteral'
   | 'IndexAccess';
 export interface BaseASTNode {
   type: ASTNodeTypeString;
@@ -190,17 +191,22 @@ export interface FunctionTypeParameter extends BaseASTNode {
 }
 export interface VariableDeclaration extends BaseASTNode {
   type: 'VariableDeclaration';
-  visibility: 'public' | 'private';
+  isIndexed: boolean;
   isStateVar: boolean;
-}
-export interface TypeName extends BaseASTNode {
-  type: 'TypeName';
+  typeName: TypeName;
+  name: string;
+  isDeclaredConst?: boolean;
+  storageLocation?: string;
+  expression?: Expression;
+  visibility?: 'public' | 'private';
 }
 export interface UserDefinedTypeName extends BaseASTNode {
   type: 'UserDefinedTypeName';
 }
 export interface Mapping extends BaseASTNode {
   type: 'Mapping';
+  keyType:TypeName;
+  valueType: TypeName;
 }
 export interface FunctionTypeName extends BaseASTNode {
   type: 'FunctionTypeName';
@@ -213,15 +219,17 @@ export interface StateMutability extends BaseASTNode {
 }
 export interface Block extends BaseASTNode {
   type: 'Block';
+  statements: Statement[]
 }
 export interface ExpressionStatement extends BaseASTNode {
   type: 'ExpressionStatement';
-  expression: ASTNode;
+  expression: Expression;
 }
 export interface IfStatement extends BaseASTNode {
   type: 'IfStatement';
-  trueBody: ASTNode;
-  falseBody: ASTNode;
+  condition: Expression;
+  trueBody: Block;
+  falseBody: Block;
 }
 export interface WhileStatement extends BaseASTNode {
   type: 'WhileStatement';
@@ -249,15 +257,15 @@ export interface ThrowStatement extends BaseASTNode {
 }
 export interface VariableDeclarationStatement extends BaseASTNode {
   type: 'VariableDeclarationStatement';
+  variables: ASTNode[];
+  initialValue: Expression;
 }
 export interface IdentifierList extends BaseASTNode {
   type: 'IdentifierList';
 }
 export interface ElementaryTypeName extends BaseASTNode {
   type: 'ElementaryTypeName';
-}
-export interface Expression extends BaseASTNode {
-  type: 'Expression';
+  name: string
 }
 export interface ExpressionList extends BaseASTNode {
   type: 'ExpressionList';
@@ -348,8 +356,17 @@ export interface BooleanLiteral extends BaseASTNode {
   type: 'BooleanLiteral';
   value: boolean;
 }
+export interface HexLiteral extends BaseASTNode {
+  type: 'HexLiteral';
+  value: string;
+}
+export interface StringLiteral extends BaseASTNode {
+  type: 'StringLiteral';
+  value: string;
+}
 export interface Identifier extends BaseASTNode {
   type: 'Identifier';
+  name: string;
 }
 export type BinOp =
   | '+'
@@ -447,7 +464,6 @@ export type ASTNode =
   | VariableDeclarationStatement
   | IdentifierList
   | ElementaryTypeName
-  | Expression
   | ExpressionList
   | NameValueList
   | NameValue
@@ -476,6 +492,37 @@ export type ASTNode =
   | BinaryOperation
   | Conditional
   | IndexAccess;
+export type Expression = 
+  | IndexAccess
+  | TupleExpression
+  | BinaryOperation
+  | Conditional
+export type PrimaryExpression = 
+  | BooleanLiteral
+  | NumberLiteral
+  | Identifier
+  | TupleExpression
+  | ElementaryTypeNameExpression
+export type SimpleStatement=
+  | VariableDeclaration
+  | ExpressionStatement
+export type TypeName =
+  | ElementaryTypeName
+  | UserDefinedTypeName
+  | Mapping
+  | FunctionTypeName
+export type Statement =
+  | IfStatement
+  | WhileStatement
+  | ForStatement
+  | Block
+  | InlineAssemblyStatement
+  | DoWhileStatement
+  | ContinueStatement
+  | BreakStatement
+  | ReturnStatement
+  | ThrowStatement
+  | SimpleStatement
 export interface Visitor {
   SourceUnit?: (node: SourceUnit) => any;
   PragmaDirective?: (node: PragmaDirective) => any;
@@ -505,7 +552,6 @@ export interface Visitor {
   FunctionTypeParameterList?: (node: FunctionTypeParameterList) => any;
   FunctionTypeParameter?: (node: FunctionTypeParameter) => any;
   VariableDeclaration?: (node: VariableDeclaration) => any;
-  TypeName?: (node: TypeName) => any;
   UserDefinedTypeName?: (node: UserDefinedTypeName) => any;
   Mapping?: (node: Mapping) => any;
   FunctionTypeName?: (node: FunctionTypeName) => any;
@@ -525,7 +571,6 @@ export interface Visitor {
   VariableDeclarationStatement?: (node: VariableDeclarationStatement) => any;
   IdentifierList?: (node: IdentifierList) => any;
   ElementaryTypeName?: (node: ElementaryTypeName) => any;
-  Expression?: (node: Expression) => any;
   ExpressionList?: (node: ExpressionList) => any;
   NameValueList?: (node: NameValueList) => any;
   NameValue?: (node: NameValue) => any;
@@ -583,7 +628,6 @@ export interface Visitor {
   'FunctionTypeParameterList:exit'?: (node: FunctionTypeParameterList) => any;
   'FunctionTypeParameter:exit'?: (node: FunctionTypeParameter) => any;
   'VariableDeclaration:exit'?: (node: VariableDeclaration) => any;
-  'TypeName:exit'?: (node: TypeName) => any;
   'UserDefinedTypeName:exit'?: (node: UserDefinedTypeName) => any;
   'Mapping:exit'?: (node: Mapping) => any;
   'FunctionTypeName:exit'?: (node: FunctionTypeName) => any;
@@ -605,7 +649,6 @@ export interface Visitor {
   ) => any;
   'IdentifierList:exit'?: (node: IdentifierList) => any;
   'ElementaryTypeName:exit'?: (node: ElementaryTypeName) => any;
-  'Expression:exit'?: (node: Expression) => any;
   'ExpressionList:exit'?: (node: ExpressionList) => any;
   'NameValueList:exit'?: (node: NameValueList) => any;
   'NameValue:exit'?: (node: NameValue) => any;
