@@ -205,7 +205,7 @@ export interface UserDefinedTypeName extends BaseASTNode {
 }
 export interface Mapping extends BaseASTNode {
   type: 'Mapping';
-  keyType:TypeName;
+  keyType: TypeName;
   valueType: TypeName;
 }
 export interface FunctionTypeName extends BaseASTNode {
@@ -228,8 +228,8 @@ export interface ExpressionStatement extends BaseASTNode {
 export interface IfStatement extends BaseASTNode {
   type: 'IfStatement';
   condition: Expression;
-  trueBody: Block;
-  falseBody: Block;
+  trueBody: Statement;
+  falseBody: Statement;
 }
 export interface WhileStatement extends BaseASTNode {
   type: 'WhileStatement';
@@ -487,30 +487,30 @@ export type ASTNode =
   | SubAssembly
   | TupleExpression
   | ElementaryTypeNameExpression
-  | NumberLiteral
-  | Identifier
   | BinaryOperation
   | Conditional
-  | IndexAccess;
+  | IndexAccess
+  | Expression;
 export type Expression = 
   | IndexAccess
   | TupleExpression
   | BinaryOperation
   | Conditional
+  | PrimaryExpression;
 export type PrimaryExpression = 
   | BooleanLiteral
   | NumberLiteral
   | Identifier
   | TupleExpression
-  | ElementaryTypeNameExpression
+  | ElementaryTypeNameExpression;
 export type SimpleStatement=
   | VariableDeclaration
-  | ExpressionStatement
+  | ExpressionStatement;
 export type TypeName =
   | ElementaryTypeName
   | UserDefinedTypeName
   | Mapping
-  | FunctionTypeName
+  | FunctionTypeName;
 export type Statement =
   | IfStatement
   | WhileStatement
@@ -523,6 +523,7 @@ export type Statement =
   | ReturnStatement
   | ThrowStatement
   | SimpleStatement
+  | VariableDeclarationStatement;
 export interface Visitor {
   SourceUnit?: (node: SourceUnit) => any;
   PragmaDirective?: (node: PragmaDirective) => any;
