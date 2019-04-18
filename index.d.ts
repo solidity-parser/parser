@@ -66,6 +66,7 @@ export type ASTNodeTypeString =
   | 'ExpressionList'
   | 'NameValueList'
   | 'NameValue'
+  | 'FunctionCall'
   | 'FunctionCallArguments'
   | 'AssemblyBlock'
   | 'AssemblyItem'
@@ -93,6 +94,7 @@ export type ASTNodeTypeString =
   | 'Conditional'
   | 'StringLiteral'
   | 'HexLiteral'
+  | 'MemberAccess'
   | 'IndexAccess';
 export interface BaseASTNode {
   type: ASTNodeTypeString;
@@ -229,7 +231,7 @@ export interface IfStatement extends BaseASTNode {
   type: 'IfStatement';
   condition: Expression;
   trueBody: Statement;
-  falseBody: Statement;
+  falseBody?: Statement;
 }
 export interface WhileStatement extends BaseASTNode {
   type: 'WhileStatement';
@@ -258,7 +260,7 @@ export interface ThrowStatement extends BaseASTNode {
 export interface VariableDeclarationStatement extends BaseASTNode {
   type: 'VariableDeclarationStatement';
   variables: ASTNode[];
-  initialValue: Expression;
+  initialValue?: Expression;
 }
 export interface IdentifierList extends BaseASTNode {
   type: 'IdentifierList';
@@ -275,6 +277,11 @@ export interface NameValueList extends BaseASTNode {
 }
 export interface NameValue extends BaseASTNode {
   type: 'NameValue';
+}
+export interface FunctionCall extends BaseASTNode {
+  type: 'FunctionCall';
+  expression: Expression;
+  arguments: FunctionCallArguments[];
 }
 export interface FunctionCallArguments extends BaseASTNode {
   type: 'FunctionCallArguments';
@@ -338,7 +345,7 @@ export interface ElementaryTypeNameExpression extends BaseASTNode {
 }
 export interface NumberLiteral extends BaseASTNode {
   type: 'NumberLiteral';
-  number: number;
+  number: string;
   subdenomination:
     | null
     | 'wei'
@@ -401,8 +408,8 @@ export type BinOp =
   | '%=';
 export interface BinaryOperation extends BaseASTNode {
   type: 'BinaryOperation';
-  left: ASTNode;
-  right: ASTNode;
+  left: Expression;
+  right: Expression;
   operator: BinOp;
 }
 export interface Conditional extends BaseASTNode {
@@ -412,8 +419,13 @@ export interface Conditional extends BaseASTNode {
 }
 export interface IndexAccess extends BaseASTNode {
   type: 'IndexAccess';
-  base: ASTNode;
-  index: ASTNode
+  base: Expression;
+  index: Expression;
+}
+export interface MemberAccess extends BaseASTNode {
+  type: 'MemberAccess';
+  expression: Expression;
+  memberName: string;
 }
 export type ASTNode =
   | SourceUnit
@@ -496,6 +508,7 @@ export type Expression =
   | TupleExpression
   | BinaryOperation
   | Conditional
+  | MemberAccess
   | PrimaryExpression;
 export type PrimaryExpression = 
   | BooleanLiteral
@@ -596,10 +609,12 @@ export interface Visitor {
   TupleExpression?: (node: TupleExpression) => any;
   ElementaryTypeNameExpression?: (node: ElementaryTypeNameExpression) => any;
   NumberLiteral?: (node: NumberLiteral) => any;
+  BooleanLiteral?: (node: BooleanLiteral) => any;
   Identifier?: (node: Identifier) => any;
   BinaryOperation?: (node: BinaryOperation) => any;
   Conditional?: (node: Conditional) => any;
   IndexAccess?: (node: IndexAccess) => any;
+  MemberAccess?: (node: MemberAccess) => any;
   // Start of :exit handler for each type. Must be consistent with above
   'SourceUnit:exit'?: (node: SourceUnit) => any;
   'PragmaDirective:exit'?: (node: PragmaDirective) => any;
@@ -678,10 +693,12 @@ export interface Visitor {
     node: ElementaryTypeNameExpression
   ) => any;
   'NumberLiteral:exit'?: (node: NumberLiteral) => any;
+  'BooleanLiteral:exit'?: (node: BooleanLiteral) => any;
   'Identifier:exit'?: (node: Identifier) => any;
   'BinaryOperation:exit'?: (node: BinaryOperation) => any;
   'Conditional:exit'?: (node: Conditional) => any;
   'IndexAccess:exit'?: (node: IndexAccess) => any;
+  'MemberAccess:exit'?: (node: MemberAccess) => any;
 }
 export interface ParserOpts {
   tolerant?: boolean;
