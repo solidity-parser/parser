@@ -43,9 +43,9 @@ export type ASTNodeTypeString =
   | 'FunctionTypeParameterList'
   | 'FunctionTypeParameter'
   | 'VariableDeclaration'
-  | 'TypeName'
   | 'UserDefinedTypeName'
   | 'Mapping'
+  | 'ArrayTypeName'
   | 'FunctionTypeName'
   | 'StorageLocation'
   | 'StateMutability'
@@ -67,7 +67,6 @@ export type ASTNodeTypeString =
   | 'NameValueList'
   | 'NameValue'
   | 'FunctionCall'
-  | 'FunctionCallArguments'
   | 'AssemblyBlock'
   | 'AssemblyItem'
   | 'AssemblyCall'
@@ -132,6 +131,8 @@ export interface ImportDirective extends BaseASTNode {
 export interface ContractDefinition extends BaseASTNode {
   type: 'ContractDefinition';
   name: string;
+  baseContracts: InheritanceSpecifier[];
+  kind: string;
   subNodes: ASTNode[]; // TODO: Can be more precise
 }
 export interface InheritanceSpecifier extends BaseASTNode {
@@ -140,6 +141,7 @@ export interface InheritanceSpecifier extends BaseASTNode {
 export interface StateVariableDeclaration extends BaseASTNode {
   type: 'StateVariableDeclaration';
   variables: VariableDeclaration[];
+  initialValue?: Expression;
 }
 export interface UsingForDeclaration extends BaseASTNode {
   type: 'UsingForDeclaration';
@@ -157,9 +159,14 @@ export interface ModifierInvocation extends BaseASTNode {
 }
 export interface FunctionDefinition extends BaseASTNode {
   type: 'FunctionDefinition';
-  name: string;
+  name?: string;
   parameters: ParameterList;
-  body: Block | null;
+  modifiers: ModifierInvocation[];
+  stateMutability?: 'pure' | 'constant' | 'payable' | 'view'
+  visibility: 'default' | 'external' | 'internal' | 'public' | 'private';
+  isConstructor: boolean;
+  returnParameters?: ParameterList;
+  body?: Block;
 }
 export interface ModifierList extends BaseASTNode {
   type: 'ModifierList';
@@ -175,6 +182,7 @@ export interface EnumDefinition extends BaseASTNode {
 }
 export interface ParameterList extends BaseASTNode {
   type: 'ParameterList';
+  parameters: Parameter[];
 }
 export interface Parameter extends BaseASTNode {
   type: 'Parameter';
@@ -200,14 +208,19 @@ export interface VariableDeclaration extends BaseASTNode {
   isDeclaredConst?: boolean;
   storageLocation?: string;
   expression?: Expression;
-  visibility?: 'public' | 'private';
+  visibility?: 'public' | 'private' | 'internal' | 'default';
 }
 export interface UserDefinedTypeName extends BaseASTNode {
   type: 'UserDefinedTypeName';
 }
+export interface ArrayTypeName extends BaseASTNode {
+  type: 'ArrayTypeName';
+  baseTypeName: TypeName;
+  length?: Expression;
+}
 export interface Mapping extends BaseASTNode {
   type: 'Mapping';
-  keyType: TypeName;
+  keyType: ElementaryTypeName;
   valueType: TypeName;
 }
 export interface FunctionTypeName extends BaseASTNode {
@@ -238,6 +251,10 @@ export interface WhileStatement extends BaseASTNode {
 }
 export interface ForStatement extends BaseASTNode {
   type: 'ForStatement';
+  initExpression?: SimpleStatement;
+  conditionExpression?: Expression;
+  loopExpression?: ExpressionStatement;
+  body: Statement;
 }
 export interface InlineAssemblyStatement extends BaseASTNode {
   type: 'InlineAssemblyStatement';
@@ -267,7 +284,7 @@ export interface IdentifierList extends BaseASTNode {
 }
 export interface ElementaryTypeName extends BaseASTNode {
   type: 'ElementaryTypeName';
-  name: string
+  name: string;
 }
 export interface ExpressionList extends BaseASTNode {
   type: 'ExpressionList';
@@ -281,10 +298,8 @@ export interface NameValue extends BaseASTNode {
 export interface FunctionCall extends BaseASTNode {
   type: 'FunctionCall';
   expression: Expression;
-  arguments: FunctionCallArguments[];
-}
-export interface FunctionCallArguments extends BaseASTNode {
-  type: 'FunctionCallArguments';
+  arguments: Expression[];
+  names: string[];
 }
 export interface AssemblyBlock extends BaseASTNode {
   type: 'AssemblyBlock';
@@ -342,6 +357,7 @@ export interface TupleExpression extends BaseASTNode {
 }
 export interface ElementaryTypeNameExpression extends BaseASTNode {
   type: 'ElementaryTypeNameExpression';
+  typeName: ElementaryTypeName;
 }
 export interface NumberLiteral extends BaseASTNode {
   type: 'NumberLiteral';
@@ -479,7 +495,6 @@ export type ASTNode =
   | ExpressionList
   | NameValueList
   | NameValue
-  | FunctionCallArguments
   | AssemblyBlock
   | AssemblyItem
   | AssemblyCall
@@ -509,6 +524,7 @@ export type Expression =
   | BinaryOperation
   | Conditional
   | MemberAccess
+  | FunctionCall
   | PrimaryExpression;
 export type PrimaryExpression = 
   | BooleanLiteral
@@ -517,12 +533,13 @@ export type PrimaryExpression =
   | TupleExpression
   | ElementaryTypeNameExpression;
 export type SimpleStatement=
-  | VariableDeclaration
+  | VariableDeclarationStatement
   | ExpressionStatement;
 export type TypeName =
   | ElementaryTypeName
   | UserDefinedTypeName
   | Mapping
+  | ArrayTypeName
   | FunctionTypeName;
 export type Statement =
   | IfStatement
@@ -568,6 +585,7 @@ export interface Visitor {
   VariableDeclaration?: (node: VariableDeclaration) => any;
   UserDefinedTypeName?: (node: UserDefinedTypeName) => any;
   Mapping?: (node: Mapping) => any;
+  ArrayTypeName?: (node: ArrayTypeName) => any;
   FunctionTypeName?: (node: FunctionTypeName) => any;
   StorageLocation?: (node: StorageLocation) => any;
   StateMutability?: (node: StateMutability) => any;
@@ -588,7 +606,6 @@ export interface Visitor {
   ExpressionList?: (node: ExpressionList) => any;
   NameValueList?: (node: NameValueList) => any;
   NameValue?: (node: NameValue) => any;
-  FunctionCallArguments?: (node: FunctionCallArguments) => any;
   AssemblyBlock?: (node: AssemblyBlock) => any;
   AssemblyItem?: (node: AssemblyItem) => any;
   AssemblyCall?: (node: AssemblyCall) => any;
@@ -646,6 +663,7 @@ export interface Visitor {
   'VariableDeclaration:exit'?: (node: VariableDeclaration) => any;
   'UserDefinedTypeName:exit'?: (node: UserDefinedTypeName) => any;
   'Mapping:exit'?: (node: Mapping) => any;
+  'ArrayTypeName:exit'?: (node: ArrayTypeName) => any;
   'FunctionTypeName:exit'?: (node: FunctionTypeName) => any;
   'StorageLocation:exit'?: (node: StorageLocation) => any;
   'StateMutability:exit'?: (node: StateMutability) => any;
@@ -660,15 +678,12 @@ export interface Visitor {
   'BreakStatement:exit'?: (node: BreakStatement) => any;
   'ReturnStatement:exit'?: (node: ReturnStatement) => any;
   'ThrowStatement:exit'?: (node: ThrowStatement) => any;
-  'VariableDeclarationStatement:exit'?: (
-    node: VariableDeclarationStatement
-  ) => any;
+  'VariableDeclarationStatement:exit'?: (node: VariableDeclarationStatement) => any;
   'IdentifierList:exit'?: (node: IdentifierList) => any;
   'ElementaryTypeName:exit'?: (node: ElementaryTypeName) => any;
   'ExpressionList:exit'?: (node: ExpressionList) => any;
   'NameValueList:exit'?: (node: NameValueList) => any;
   'NameValue:exit'?: (node: NameValue) => any;
-  'FunctionCallArguments:exit'?: (node: FunctionCallArguments) => any;
   'AssemblyBlock:exit'?: (node: AssemblyBlock) => any;
   'AssemblyItem:exit'?: (node: AssemblyItem) => any;
   'AssemblyCall:exit'?: (node: AssemblyCall) => any;
