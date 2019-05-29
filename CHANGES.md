@@ -1,3 +1,7 @@
+### 0.4.3
+
+ * Improve TypeScript type definitions, thanks @Leeleo3x and @yxliang01.
+
 ### 0.4.2
 
  * Fix parsing of assembly function definitions with no args or return args.
