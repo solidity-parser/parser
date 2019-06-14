@@ -1,3 +1,7 @@
+### Unreleased
+
+ * Add misisng `storageLocation` to variables in VariableDeclarationStatement.
+
 ### 0.4.3
 
  * Improve TypeScript type definitions, thanks @Leeleo3x and @yxliang01.

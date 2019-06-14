@@ -786,6 +786,8 @@ const transformAST = {
         {
           type: 'VariableDeclaration',
           name: toText(iden),
+          storageLocation: null,
+          typeName: null,
           isStateVar: false,
           isIndexed: false
         },
@@ -802,11 +804,17 @@ const transformAST = {
         return null
       }
 
+      let storageLocation = null
+      if (decl.storageLocation()) {
+        storageLocation = toText(decl.storageLocation())
+      }
+
       return this.createNode(
         {
           type: 'VariableDeclaration',
           name: toText(decl.identifier()),
           typeName: this.visit(decl.typeName()),
+          storageLocation,
           isStateVar: false,
           isIndexed: false
         },

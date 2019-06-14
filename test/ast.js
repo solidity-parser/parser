@@ -927,14 +927,18 @@ describe('AST', () => {
           "isIndexed": false,
           "isStateVar": false,
           "name": "a",
-          "type": "VariableDeclaration"
+          "storageLocation": null,
+          "type": "VariableDeclaration",
+          "typeName": null
         },
         null,
         {
           "isIndexed": false,
           "isStateVar": false,
           "name": "b",
-          "type": "VariableDeclaration"
+          "storageLocation": null,
+          "type": "VariableDeclaration",
+          "typeName": null
         }
       ]
     })
@@ -952,6 +956,7 @@ describe('AST', () => {
           "isIndexed": false,
           "isStateVar": false,
           "name": "a",
+          "storageLocation": null,
           "type": "VariableDeclaration",
           "typeName": {
             "name": "uint",
@@ -963,6 +968,7 @@ describe('AST', () => {
           "isIndexed": false,
           "isStateVar": false,
           "name": "b",
+          "storageLocation": null,
           "type": "VariableDeclaration",
           "typeName": {
             "name": "uint",
