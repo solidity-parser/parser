@@ -19,9 +19,6 @@ export type ASTNodeTypeString =
   | 'PragmaDirective'
   | 'PragmaName'
   | 'PragmaValue'
-  | 'Version'
-  | 'VersionOperator'
-  | 'VersionConstraint'
   | 'ImportDeclaration'
   | 'ImportDirective'
   | 'ContractDefinition'
@@ -32,7 +29,6 @@ export type ASTNodeTypeString =
   | 'ModifierDefinition'
   | 'ModifierInvocation'
   | 'FunctionDefinition'
-  | 'ModifierList'
   | 'EventDefinition'
   | 'EnumValue'
   | 'EnumDefinition'
@@ -40,8 +36,6 @@ export type ASTNodeTypeString =
   | 'Parameter'
   | 'EventParameterList'
   | 'EventParameter'
-  | 'FunctionTypeParameterList'
-  | 'FunctionTypeParameter'
   | 'VariableDeclaration'
   | 'UserDefinedTypeName'
   | 'Mapping'
@@ -59,21 +53,17 @@ export type ASTNodeTypeString =
   | 'ContinueStatement'
   | 'BreakStatement'
   | 'ReturnStatement'
+  | 'EmitStatement'
   | 'ThrowStatement'
   | 'VariableDeclarationStatement'
   | 'IdentifierList'
   | 'ElementaryTypeName'
-  | 'ExpressionList'
-  | 'NameValueList'
-  | 'NameValue'
   | 'FunctionCall'
   | 'AssemblyBlock'
   | 'AssemblyItem'
   | 'AssemblyCall'
   | 'AssemblyLocalDefinition'
   | 'AssemblyAssignment'
-  | 'AssemblyIdentifierOrList'
-  | 'AssemblyIdentifierList'
   | 'AssemblyStackAssignment'
   | 'LabelDefinition'
   | 'AssemblySwitch'
@@ -106,21 +96,8 @@ export interface SourceUnit extends BaseASTNode {
 } // tslint:disable-line:no-empty-interface
 export interface PragmaDirective extends BaseASTNode {
   type: 'PragmaDirective';
-}
-export interface PragmaName extends BaseASTNode {
-  type: 'PragmaName';
-}
-export interface PragmaValue extends BaseASTNode {
-  type: 'PragmaValue';
-}
-export interface Version extends BaseASTNode {
-  type: 'Version';
-}
-export interface VersionOperator extends BaseASTNode {
-  type: 'VersionOperator';
-}
-export interface VersionConstraint extends BaseASTNode {
-  type: 'VersionConstraint';
+  name: string;
+  value: string;
 }
 export interface ImportDeclaration extends BaseASTNode {
   type: 'ImportDeclaration';
@@ -145,9 +122,13 @@ export interface StateVariableDeclaration extends BaseASTNode {
 }
 export interface UsingForDeclaration extends BaseASTNode {
   type: 'UsingForDeclaration';
+  typeName: TypeName;
+  libraryName: string;
 }
 export interface StructDefinition extends BaseASTNode {
   type: 'StructDefinition';
+  name: string;
+  members: VariableDeclaration[];
 }
 export interface ModifierDefinition extends BaseASTNode {
   type: 'ModifierDefinition';
@@ -156,6 +137,7 @@ export interface ModifierDefinition extends BaseASTNode {
 export interface ModifierInvocation extends BaseASTNode {
   type: 'ModifierInvocation';
   name: string;
+  arguments: Expression[] | null;
 }
 export interface FunctionDefinition extends BaseASTNode {
   type: 'FunctionDefinition';
@@ -168,17 +150,19 @@ export interface FunctionDefinition extends BaseASTNode {
   returnParameters?: ParameterList;
   body?: Block;
 }
-export interface ModifierList extends BaseASTNode {
-  type: 'ModifierList';
-}
 export interface EventDefinition extends BaseASTNode {
   type: 'EventDefinition';
+  name: string;
+  parameters: ParameterList[];
 }
 export interface EnumValue extends BaseASTNode {
   type: 'EnumValue';
+  name: string;
 }
 export interface EnumDefinition extends BaseASTNode {
   type: 'EnumDefinition';
+  name: string;
+  members: EnumValue[];
 }
 export interface ParameterList extends BaseASTNode {
   type: 'ParameterList';
@@ -186,18 +170,6 @@ export interface ParameterList extends BaseASTNode {
 }
 export interface Parameter extends BaseASTNode {
   type: 'Parameter';
-}
-export interface EventParameterList extends BaseASTNode {
-  type: 'EventParameterList';
-}
-export interface EventParameter extends BaseASTNode {
-  type: 'EventParameter';
-}
-export interface FunctionTypeParameterList extends BaseASTNode {
-  type: 'FunctionTypeParameterList';
-}
-export interface FunctionTypeParameter extends BaseASTNode {
-  type: 'FunctionTypeParameter';
 }
 export interface VariableDeclaration extends BaseASTNode {
   type: 'VariableDeclaration';
@@ -225,12 +197,10 @@ export interface Mapping extends BaseASTNode {
 }
 export interface FunctionTypeName extends BaseASTNode {
   type: 'FunctionTypeName';
-}
-export interface StorageLocation extends BaseASTNode {
-  type: 'StorageLocation';
-}
-export interface StateMutability extends BaseASTNode {
-  type: 'StateMutability';
+  parameterTypes: TypeName[];
+  returnTypes: TypeName[];
+  visibility: string;
+  stateMutability: string;
 }
 export interface Block extends BaseASTNode {
   type: 'Block';
@@ -270,6 +240,11 @@ export interface BreakStatement extends BaseASTNode {
 }
 export interface ReturnStatement extends BaseASTNode {
   type: 'ReturnStatement';
+  expression: Expression | null;
+}
+export interface EmitStatement extends BaseASTNode {
+  type: 'EmitStatement';
+  eventCall: FunctionCall;
 }
 export interface ThrowStatement extends BaseASTNode {
   type: 'ThrowStatement';
@@ -279,21 +254,9 @@ export interface VariableDeclarationStatement extends BaseASTNode {
   variables: ASTNode[];
   initialValue?: Expression;
 }
-export interface IdentifierList extends BaseASTNode {
-  type: 'IdentifierList';
-}
 export interface ElementaryTypeName extends BaseASTNode {
   type: 'ElementaryTypeName';
   name: string;
-}
-export interface ExpressionList extends BaseASTNode {
-  type: 'ExpressionList';
-}
-export interface NameValueList extends BaseASTNode {
-  type: 'NameValueList';
-}
-export interface NameValue extends BaseASTNode {
-  type: 'NameValue';
 }
 export interface FunctionCall extends BaseASTNode {
   type: 'FunctionCall';
@@ -315,12 +278,6 @@ export interface AssemblyLocalDefinition extends BaseASTNode {
 }
 export interface AssemblyAssignment extends BaseASTNode {
   type: 'AssemblyAssignment';
-}
-export interface AssemblyIdentifierOrList extends BaseASTNode {
-  type: 'AssemblyIdentifierOrList';
-}
-export interface AssemblyIdentifierList extends BaseASTNode {
-  type: 'AssemblyIdentifierList';
 }
 export interface AssemblyStackAssignment extends BaseASTNode {
   type: 'AssemblyStackAssignment';
@@ -446,11 +403,6 @@ export interface MemberAccess extends BaseASTNode {
 export type ASTNode =
   | SourceUnit
   | PragmaDirective
-  | PragmaName
-  | PragmaValue
-  | Version
-  | VersionOperator
-  | VersionConstraint
   | ImportDeclaration
   | ImportDirective
   | ContractDefinition
@@ -461,23 +413,16 @@ export type ASTNode =
   | ModifierDefinition
   | ModifierInvocation
   | FunctionDefinition
-  | ModifierList
   | EventDefinition
   | EnumValue
   | EnumDefinition
   | ParameterList
   | Parameter
-  | EventParameterList
-  | EventParameter
-  | FunctionTypeParameterList
-  | FunctionTypeParameter
   | VariableDeclaration
   | TypeName
   | UserDefinedTypeName
   | Mapping
   | FunctionTypeName
-  | StorageLocation
-  | StateMutability
   | Block
   | ExpressionStatement
   | IfStatement
@@ -488,20 +433,15 @@ export type ASTNode =
   | ContinueStatement
   | BreakStatement
   | ReturnStatement
+  | EmitStatement
   | ThrowStatement
   | VariableDeclarationStatement
-  | IdentifierList
   | ElementaryTypeName
-  | ExpressionList
-  | NameValueList
-  | NameValue
   | AssemblyBlock
   | AssemblyItem
   | AssemblyCall
   | AssemblyLocalDefinition
   | AssemblyAssignment
-  | AssemblyIdentifierOrList
-  | AssemblyIdentifierList
   | AssemblyStackAssignment
   | LabelDefinition
   | AssemblySwitch
@@ -518,7 +458,7 @@ export type ASTNode =
   | Conditional
   | IndexAccess
   | Expression;
-export type Expression = 
+export type Expression =
   | IndexAccess
   | TupleExpression
   | BinaryOperation
@@ -526,7 +466,7 @@ export type Expression =
   | MemberAccess
   | FunctionCall
   | PrimaryExpression;
-export type PrimaryExpression = 
+export type PrimaryExpression =
   | BooleanLiteral
   | NumberLiteral
   | Identifier
@@ -551,17 +491,13 @@ export type Statement =
   | ContinueStatement
   | BreakStatement
   | ReturnStatement
+  | EmitStatement
   | ThrowStatement
   | SimpleStatement
   | VariableDeclarationStatement;
 export interface Visitor {
   SourceUnit?: (node: SourceUnit) => any;
   PragmaDirective?: (node: PragmaDirective) => any;
-  PragmaName?: (node: PragmaName) => any;
-  PragmaValue?: (node: PragmaValue) => any;
-  Version?: (node: Version) => any;
-  VersionOperator?: (node: VersionOperator) => any;
-  VersionConstraint?: (node: VersionConstraint) => any;
   ImportDeclaration?: (node: ImportDeclaration) => any;
   ImportDirective?: (node: ImportDirective) => any;
   ContractDefinition?: (node: ContractDefinition) => any;
@@ -572,23 +508,16 @@ export interface Visitor {
   ModifierDefinition?: (node: ModifierDefinition) => any;
   ModifierInvocation?: (node: ModifierInvocation) => any;
   FunctionDefinition?: (node: FunctionDefinition) => any;
-  ModifierList?: (node: ModifierList) => any;
   EventDefinition?: (node: EventDefinition) => any;
   EnumValue?: (node: EnumValue) => any;
   EnumDefinition?: (node: EnumDefinition) => any;
   ParameterList?: (node: ParameterList) => any;
   Parameter?: (node: Parameter) => any;
-  EventParameterList?: (node: EventParameterList) => any;
-  EventParameter?: (node: EventParameter) => any;
-  FunctionTypeParameterList?: (node: FunctionTypeParameterList) => any;
-  FunctionTypeParameter?: (node: FunctionTypeParameter) => any;
   VariableDeclaration?: (node: VariableDeclaration) => any;
   UserDefinedTypeName?: (node: UserDefinedTypeName) => any;
   Mapping?: (node: Mapping) => any;
   ArrayTypeName?: (node: ArrayTypeName) => any;
   FunctionTypeName?: (node: FunctionTypeName) => any;
-  StorageLocation?: (node: StorageLocation) => any;
-  StateMutability?: (node: StateMutability) => any;
   Block?: (node: Block) => any;
   ExpressionStatement?: (node: ExpressionStatement) => any;
   IfStatement?: (node: IfStatement) => any;
@@ -599,20 +528,15 @@ export interface Visitor {
   ContinueStatement?: (node: ContinueStatement) => any;
   BreakStatement?: (node: BreakStatement) => any;
   ReturnStatement?: (node: ReturnStatement) => any;
+  EmitStatement?: (node: EmitStatement) => any;
   ThrowStatement?: (node: ThrowStatement) => any;
   VariableDeclarationStatement?: (node: VariableDeclarationStatement) => any;
-  IdentifierList?: (node: IdentifierList) => any;
   ElementaryTypeName?: (node: ElementaryTypeName) => any;
-  ExpressionList?: (node: ExpressionList) => any;
-  NameValueList?: (node: NameValueList) => any;
-  NameValue?: (node: NameValue) => any;
   AssemblyBlock?: (node: AssemblyBlock) => any;
   AssemblyItem?: (node: AssemblyItem) => any;
   AssemblyCall?: (node: AssemblyCall) => any;
   AssemblyLocalDefinition?: (node: AssemblyLocalDefinition) => any;
   AssemblyAssignment?: (node: AssemblyAssignment) => any;
-  AssemblyIdentifierOrList?: (node: AssemblyIdentifierOrList) => any;
-  AssemblyIdentifierList?: (node: AssemblyIdentifierList) => any;
   AssemblyStackAssignment?: (node: AssemblyStackAssignment) => any;
   LabelDefinition?: (node: LabelDefinition) => any;
   AssemblySwitch?: (node: AssemblySwitch) => any;
@@ -635,11 +559,6 @@ export interface Visitor {
   // Start of :exit handler for each type. Must be consistent with above
   'SourceUnit:exit'?: (node: SourceUnit) => any;
   'PragmaDirective:exit'?: (node: PragmaDirective) => any;
-  'PragmaName:exit'?: (node: PragmaName) => any;
-  'PragmaValue:exit'?: (node: PragmaValue) => any;
-  'Version:exit'?: (node: Version) => any;
-  'VersionOperator:exit'?: (node: VersionOperator) => any;
-  'VersionConstraint:exit'?: (node: VersionConstraint) => any;
   'ImportDeclaration:exit'?: (node: ImportDeclaration) => any;
   'ImportDirective:exit'?: (node: ImportDirective) => any;
   'ContractDefinition:exit'?: (node: ContractDefinition) => any;
@@ -650,23 +569,16 @@ export interface Visitor {
   'ModifierDefinition:exit'?: (node: ModifierDefinition) => any;
   'ModifierInvocation:exit'?: (node: ModifierInvocation) => any;
   'FunctionDefinition:exit'?: (node: FunctionDefinition) => any;
-  'ModifierList:exit'?: (node: ModifierList) => any;
   'EventDefinition:exit'?: (node: EventDefinition) => any;
   'EnumValue:exit'?: (node: EnumValue) => any;
   'EnumDefinition:exit'?: (node: EnumDefinition) => any;
   'ParameterList:exit'?: (node: ParameterList) => any;
   'Parameter:exit'?: (node: Parameter) => any;
-  'EventParameterList:exit'?: (node: EventParameterList) => any;
-  'EventParameter:exit'?: (node: EventParameter) => any;
-  'FunctionTypeParameterList:exit'?: (node: FunctionTypeParameterList) => any;
-  'FunctionTypeParameter:exit'?: (node: FunctionTypeParameter) => any;
   'VariableDeclaration:exit'?: (node: VariableDeclaration) => any;
   'UserDefinedTypeName:exit'?: (node: UserDefinedTypeName) => any;
   'Mapping:exit'?: (node: Mapping) => any;
   'ArrayTypeName:exit'?: (node: ArrayTypeName) => any;
   'FunctionTypeName:exit'?: (node: FunctionTypeName) => any;
-  'StorageLocation:exit'?: (node: StorageLocation) => any;
-  'StateMutability:exit'?: (node: StateMutability) => any;
   'Block:exit'?: (node: Block) => any;
   'ExpressionStatement:exit'?: (node: ExpressionStatement) => any;
   'IfStatement:exit'?: (node: IfStatement) => any;
@@ -677,20 +589,15 @@ export interface Visitor {
   'ContinueStatement:exit'?: (node: ContinueStatement) => any;
   'BreakStatement:exit'?: (node: BreakStatement) => any;
   'ReturnStatement:exit'?: (node: ReturnStatement) => any;
+  'EmitStatement:exit'?: (node: EmitStatement) => any;
   'ThrowStatement:exit'?: (node: ThrowStatement) => any;
   'VariableDeclarationStatement:exit'?: (node: VariableDeclarationStatement) => any;
-  'IdentifierList:exit'?: (node: IdentifierList) => any;
   'ElementaryTypeName:exit'?: (node: ElementaryTypeName) => any;
-  'ExpressionList:exit'?: (node: ExpressionList) => any;
-  'NameValueList:exit'?: (node: NameValueList) => any;
-  'NameValue:exit'?: (node: NameValue) => any;
   'AssemblyBlock:exit'?: (node: AssemblyBlock) => any;
   'AssemblyItem:exit'?: (node: AssemblyItem) => any;
   'AssemblyCall:exit'?: (node: AssemblyCall) => any;
   'AssemblyLocalDefinition:exit'?: (node: AssemblyLocalDefinition) => any;
   'AssemblyAssignment:exit'?: (node: AssemblyAssignment) => any;
-  'AssemblyIdentifierOrList:exit'?: (node: AssemblyIdentifierOrList) => any;
-  'AssemblyIdentifierList:exit'?: (node: AssemblyIdentifierList) => any;
   'AssemblyStackAssignment:exit'?: (node: AssemblyStackAssignment) => any;
   'LabelDefinition:exit'?: (node: LabelDefinition) => any;
   'AssemblySwitch:exit'?: (node: AssemblySwitch) => any;
