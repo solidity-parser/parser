@@ -255,6 +255,13 @@ describe('AST', () => {
     assert.deepEqual(ast.modifiers[0], {
       "type": "ModifierInvocation",
       "name": "onlyOwner",
+      "arguments": null
+    })
+
+    var ast = parseNode("function foo(uint a) onlyOwner() {}")
+    assert.deepEqual(ast.modifiers[0], {
+      "type": "ModifierInvocation",
+      "name": "onlyOwner",
       "arguments": []
     })
 

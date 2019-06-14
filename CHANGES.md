@@ -1,6 +1,8 @@
 ### Unreleased
 
  * Add misisng `storageLocation` to variables in VariableDeclarationStatement.
+ * Return `null` for `arguments` instead of `[]` when `ModifierInvocation`
+   contains no arguments and no parentheses to distinguish the two cases.
 
 ### 0.4.3
 

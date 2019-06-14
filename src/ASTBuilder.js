@@ -229,8 +229,10 @@ const transformAST = {
     let args
     if (exprList != null) {
       args = this.visit(exprList.expression())
-    } else {
+    } else if (ctx.children.length > 1) {
       args = []
+    } else {
+      args = null
     }
 
     return {
