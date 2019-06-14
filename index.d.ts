@@ -99,11 +99,11 @@ export interface PragmaDirective extends BaseASTNode {
   name: string;
   value: string;
 }
-export interface ImportDeclaration extends BaseASTNode {
-  type: 'ImportDeclaration';
-}
 export interface ImportDirective extends BaseASTNode {
   type: 'ImportDirective';
+  path: string;
+  unitAlias: string,
+  symbolAliases: [string, string][];
 }
 export interface ContractDefinition extends BaseASTNode {
   type: 'ContractDefinition';
@@ -231,6 +231,8 @@ export interface InlineAssemblyStatement extends BaseASTNode {
 }
 export interface DoWhileStatement extends BaseASTNode {
   type: 'DoWhileStatement';
+  condition: Expression;
+  body: Statement;
 }
 export interface ContinueStatement extends BaseASTNode {
   type: 'ContinueStatement';
@@ -311,6 +313,8 @@ export interface SubAssembly extends BaseASTNode {
 }
 export interface TupleExpression extends BaseASTNode {
   type: 'TupleExpression';
+  components: Expression[];
+  isArray: boolean;
 }
 export interface ElementaryTypeNameExpression extends BaseASTNode {
   type: 'ElementaryTypeNameExpression';
