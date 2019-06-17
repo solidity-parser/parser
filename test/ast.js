@@ -84,6 +84,7 @@ describe('AST', () => {
     var ast = parseContract("contract test {}")
     assert.deepEqual(ast, {
       "type": "ContractDefinition",
+      "natspec": null,
       "name": "test",
       "baseContracts": [],
       "subNodes": [],
@@ -94,6 +95,7 @@ describe('AST', () => {
     ast = parseContract("contract test is foo, bar {}")
     assert.deepEqual(ast, {
       "type": "ContractDefinition",
+      "natspec": null,
       "name": "test",
       "baseContracts": [
         {
@@ -121,6 +123,7 @@ describe('AST', () => {
     ast = parseContract("library test {}")
     assert.deepEqual(ast, {
       "type": "ContractDefinition",
+      "natspec": null,
       "name": "test",
       "baseContracts": [],
       "subNodes": [],
@@ -131,6 +134,7 @@ describe('AST', () => {
     ast = parseContract("interface test {}")
     assert.deepEqual(ast, {
       "type": "ContractDefinition",
+      "natspec": null,
       "name": "test",
       "baseContracts": [],
       "subNodes": [],
@@ -171,6 +175,7 @@ describe('AST', () => {
     var ast = parseNode("function foo(uint a) pure {}")
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
+      "natspec": null,
       "name": "foo",
       "parameters": [
         {
@@ -200,6 +205,7 @@ describe('AST', () => {
     ast = parseNode("function foo(uint a) pure returns (uint256) {}")
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
+      "natspec": null,
       "name": "foo",
       "parameters": [
         {
@@ -1091,6 +1097,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "EventDefinition",
       "name": "Foo",
+      "natspec": null,
       "parameters": [
         {
           "type": "VariableDeclaration",
@@ -1489,5 +1496,122 @@ describe('AST', () => {
       },
       "type": "AssemblyIf"
     })
+  })
+
+  it("NatSpec multi line", function () {
+    const ast = parser.parse(
+`/**
+  * @dev This is the Sum contract.
+  * @title Sum Contract
+  * @author username
+  */
+contract Sum { }`
+    );
+    assert.deepEqual(ast.children[0], {
+      type: "ContractDefinition",
+      natspec: {
+        dev: "This is the Sum contract.",
+        title: "Sum Contract",
+        author: "username",
+      },
+      name: "Sum",
+      baseContracts: [],
+      subNodes: [],
+      kind: "contract",
+    })
+  })
+
+  it("NatSpec single line", function () {
+    const ast = parser.parse(
+`/// @dev This is the Sum contract.
+/// @title Sum Contract
+/// @author username
+contract Sum { }`
+    );
+    assert.deepEqual(ast.children[0], {
+      type: "ContractDefinition",
+      natspec: {
+        dev: "This is the Sum contract.",
+        title: "Sum Contract",
+        author: "username",
+      },
+      name: "Sum",
+      baseContracts: [],
+      subNodes: [],
+      kind: "contract",
+    })
+  })
+
+  it("NatSpec multi line event", function () {
+    const ast = parseNode(
+`/**
+  * @dev This method says hello
+  * @param user the user address
+  */
+  event sayHello(address user);`
+    );
+    assert.deepEqual(ast.natspec, {
+      dev: "This method says hello",
+      params: {
+        user: "the user address"
+      },
+    })
+  })
+
+  it("NatSpec multi line function", function () {
+    const ast = parseNode(
+`/**
+  * @dev This method transfer fund to other user
+  * @param from the address extract funds
+  * @param to the user address to give funds
+  * @param amount the amount to transfer
+  */
+ function transfer(address from, address to, uint256 amount) public {}`);
+
+    assert.deepEqual(ast.natspec, {
+      dev: "This method transfer fund to other user",
+      params: {
+        from: "the address extract funds",
+        to: "the user address to give funds",
+        amount: "the amount to transfer",
+      },
+    })
+  })
+  it("NatSpec multi line multiple functions in contract", function () {
+    const ast = parser.parse(
+`/**
+  * @dev The ERC20 contract
+  */
+ contract ERC20 {
+    /**
+     * @dev This method transfer fund to other user
+     * @param from the address extract funds
+     * @param to the user address to give funds
+     * @param amount the amount to transfer
+     */
+    function transfer(address from, address to, uint256 amount) public {}
+    /**
+     * @dev This method gets the approved amount
+     * @param user the user address to verify
+     * @return the approved amount
+     */
+    function approved(address user) public view returns(uint256) {}
+ }`);
+    const methods = ast.children[0].subNodes;
+    assert.deepEqual(methods[0].natspec, {
+      dev: 'This method transfer fund to other user',
+      params: {
+        from: 'the address extract funds',
+        to: 'the user address to give funds',
+        amount: 'the amount to transfer',
+      },
+    });
+    assert.deepEqual(methods[1].natspec, {
+      dev: 'This method gets the approved amount',
+      params: {
+        user: 'the user address to verify',
+      },
+      return: 'the approved amount',
+    });
   })
 })
