@@ -19,7 +19,6 @@ export type ASTNodeTypeString =
   | 'PragmaDirective'
   | 'PragmaName'
   | 'PragmaValue'
-  | 'ImportDeclaration'
   | 'ImportDirective'
   | 'ContractDefinition'
   | 'InheritanceSpecifier'
@@ -103,7 +102,7 @@ export interface ImportDirective extends BaseASTNode {
   type: 'ImportDirective';
   path: string;
   unitAlias: string,
-  symbolAliases: [string, string][];
+  symbolAliases: Array<[string, string]>;
 }
 export interface ContractDefinition extends BaseASTNode {
   type: 'ContractDefinition';
@@ -407,7 +406,6 @@ export interface MemberAccess extends BaseASTNode {
 export type ASTNode =
   | SourceUnit
   | PragmaDirective
-  | ImportDeclaration
   | ImportDirective
   | ContractDefinition
   | InheritanceSpecifier
@@ -502,7 +500,6 @@ export type Statement =
 export interface Visitor {
   SourceUnit?: (node: SourceUnit) => any;
   PragmaDirective?: (node: PragmaDirective) => any;
-  ImportDeclaration?: (node: ImportDeclaration) => any;
   ImportDirective?: (node: ImportDirective) => any;
   ContractDefinition?: (node: ContractDefinition) => any;
   InheritanceSpecifier?: (node: InheritanceSpecifier) => any;
@@ -563,7 +560,6 @@ export interface Visitor {
   // Start of :exit handler for each type. Must be consistent with above
   'SourceUnit:exit'?: (node: SourceUnit) => any;
   'PragmaDirective:exit'?: (node: PragmaDirective) => any;
-  'ImportDeclaration:exit'?: (node: ImportDeclaration) => any;
   'ImportDirective:exit'?: (node: ImportDirective) => any;
   'ContractDefinition:exit'?: (node: ContractDefinition) => any;
   'InheritanceSpecifier:exit'?: (node: InheritanceSpecifier) => any;

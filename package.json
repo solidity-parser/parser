@@ -10,8 +10,9 @@
     "prepublish": "yarn build",
     "prettier": "find src -name *.js | egrep -v '^src/(lib|antlr4)/' | xargs prettier --no-semi --single-quote --write",
     "eslint": "eslint src",
-    "pretest": "eslint src",
-    "test": "nyc mocha"
+    "pretest": "eslint src && tslint-config-prettier-check ./tslint.json",
+    "test": "nyc mocha",
+    "tslint": "tslint-config-prettier-check ./tslint.json"
   },
   "author": "Federico Bond <federicobond@gmail.com>",
   "homepage": "https://github.com/federicobond/solidity-parser-antlr",
@@ -32,6 +33,9 @@
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
     "prettier": "^1.16.4",
+    "tslint": "5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "3.5.2",
     "yarn": "^1.13.0"
   },
   "nyc": {
