@@ -50,6 +50,8 @@ export type ASTNodeTypeString =
   | 'InlineAssemblyStatement'
   | 'DoWhileStatement'
   | 'ContinueStatement'
+  | 'Break'
+  | 'Continue'
   | 'BreakStatement'
   | 'ReturnStatement'
   | 'EmitStatement'
@@ -82,6 +84,8 @@ export type ASTNodeTypeString =
   | 'Conditional'
   | 'StringLiteral'
   | 'HexLiteral'
+  | 'HexNumber'
+  | 'DecimalNumber'
   | 'MemberAccess'
   | 'IndexAccess';
 export interface BaseASTNode {
@@ -113,6 +117,8 @@ export interface ContractDefinition extends BaseASTNode {
 }
 export interface InheritanceSpecifier extends BaseASTNode {
   type: 'InheritanceSpecifier';
+  baseName: UserDefinedTypeName;
+  arguments: Expression[];
 }
 export interface StateVariableDeclaration extends BaseASTNode {
   type: 'StateVariableDeclaration';
@@ -183,6 +189,7 @@ export interface VariableDeclaration extends BaseASTNode {
 }
 export interface UserDefinedTypeName extends BaseASTNode {
   type: 'UserDefinedTypeName';
+  namePath: string;
 }
 export interface ArrayTypeName extends BaseASTNode {
   type: 'ArrayTypeName';
@@ -227,6 +234,8 @@ export interface ForStatement extends BaseASTNode {
 }
 export interface InlineAssemblyStatement extends BaseASTNode {
   type: 'InlineAssemblyStatement';
+  language: string;
+  body: AssemblyBlock;
 }
 export interface DoWhileStatement extends BaseASTNode {
   type: 'DoWhileStatement';
@@ -235,6 +244,12 @@ export interface DoWhileStatement extends BaseASTNode {
 }
 export interface ContinueStatement extends BaseASTNode {
   type: 'ContinueStatement';
+}
+export interface Break extends BaseASTNode {
+  type: 'Break';
+}
+export interface Continue extends BaseASTNode {
+  type: 'Continue';
 }
 export interface BreakStatement extends BaseASTNode {
   type: 'BreakStatement';
@@ -267,18 +282,20 @@ export interface FunctionCall extends BaseASTNode {
 }
 export interface AssemblyBlock extends BaseASTNode {
   type: 'AssemblyBlock';
-}
-export interface AssemblyItem extends BaseASTNode {
-  type: 'AssemblyItem';
+  operations: AssemblyItem[]
 }
 export interface AssemblyCall extends BaseASTNode {
   type: 'AssemblyCall';
+  functionName: string,
+  arguments: AssemblyExpression[];
 }
 export interface AssemblyLocalDefinition extends BaseASTNode {
   type: 'AssemblyLocalDefinition';
 }
 export interface AssemblyAssignment extends BaseASTNode {
   type: 'AssemblyAssignment';
+  expression: AssemblyExpression;
+  names: Identifier[]
 }
 export interface AssemblyStackAssignment extends BaseASTNode {
   type: 'AssemblyStackAssignment';
@@ -403,6 +420,14 @@ export interface MemberAccess extends BaseASTNode {
   expression: Expression;
   memberName: string;
 }
+export interface HexNumber extends BaseASTNode {
+  type: 'HexNumber';
+  value: string;
+}
+export interface DecimalNumber extends BaseASTNode {
+  type: 'DecimalNumber';
+  value: string;
+}
 export type ASTNode =
   | SourceUnit
   | PragmaDirective
@@ -440,7 +465,6 @@ export type ASTNode =
   | VariableDeclarationStatement
   | ElementaryTypeName
   | AssemblyBlock
-  | AssemblyItem
   | AssemblyCall
   | AssemblyLocalDefinition
   | AssemblyAssignment
@@ -459,7 +483,31 @@ export type ASTNode =
   | BinaryOperation
   | Conditional
   | IndexAccess
+  | AssemblyItem
   | Expression;
+export type AssemblyItem =
+  | Identifier
+  | AssemblyBlock
+  | AssemblyExpression
+  | AssemblyLocalDefinition
+  | AssemblyAssignment
+  | AssemblyStackAssignment
+  | LabelDefinition
+  | AssemblySwitch
+  | AssemblyFunctionDefinition
+  | AssemblyFor
+  | AssemblyIf
+  | Break
+  | Continue
+  | SubAssembly
+  | NumberLiteral
+  | StringLiteral
+  | HexNumber
+  | HexLiteral
+  | DecimalNumber;
+export type AssemblyExpression =
+  | AssemblyCall
+  | AssemblyLiteral
 export type Expression =
   | IndexAccess
   | TupleExpression
@@ -534,7 +582,6 @@ export interface Visitor {
   VariableDeclarationStatement?: (node: VariableDeclarationStatement) => any;
   ElementaryTypeName?: (node: ElementaryTypeName) => any;
   AssemblyBlock?: (node: AssemblyBlock) => any;
-  AssemblyItem?: (node: AssemblyItem) => any;
   AssemblyCall?: (node: AssemblyCall) => any;
   AssemblyLocalDefinition?: (node: AssemblyLocalDefinition) => any;
   AssemblyAssignment?: (node: AssemblyAssignment) => any;
@@ -557,6 +604,10 @@ export interface Visitor {
   Conditional?: (node: Conditional) => any;
   IndexAccess?: (node: IndexAccess) => any;
   MemberAccess?: (node: MemberAccess) => any;
+  Break?: (node: Break) => any;
+  HexNumber?: (node: HexNumber) => any;
+  DecimalNumber?: (node: DecimalNumber) => any;
+  Continue?: (node: Continue) => any;
   // Start of :exit handler for each type. Must be consistent with above
   'SourceUnit:exit'?: (node: SourceUnit) => any;
   'PragmaDirective:exit'?: (node: PragmaDirective) => any;
@@ -594,7 +645,6 @@ export interface Visitor {
   'VariableDeclarationStatement:exit'?: (node: VariableDeclarationStatement) => any;
   'ElementaryTypeName:exit'?: (node: ElementaryTypeName) => any;
   'AssemblyBlock:exit'?: (node: AssemblyBlock) => any;
-  'AssemblyItem:exit'?: (node: AssemblyItem) => any;
   'AssemblyCall:exit'?: (node: AssemblyCall) => any;
   'AssemblyLocalDefinition:exit'?: (node: AssemblyLocalDefinition) => any;
   'AssemblyAssignment:exit'?: (node: AssemblyAssignment) => any;
@@ -621,6 +671,10 @@ export interface Visitor {
   'Conditional:exit'?: (node: Conditional) => any;
   'IndexAccess:exit'?: (node: IndexAccess) => any;
   'MemberAccess:exit'?: (node: MemberAccess) => any;
+  'HexNumber:exit'?: (node: HexNumber) => any;
+  'DecimalNumber:exit'?: (node: DecimalNumber) => any;
+  'Break:exit'?: (node: Break) => any;
+  'Continue:exit'?: (node: Continue) => any;
 }
 export interface ParserOpts {
   tolerant?: boolean;
@@ -628,4 +682,4 @@ export interface ParserOpts {
   loc?: boolean;
 }
 export function parse(sourceCode: string, parserOpts: ParserOpts): ASTNode;
-export function visit(ast: ASTNode, visitor: Visitor): void;
+export function visit(ast: ASTNode | ASTNode[] | null | undefined, visitor: Visitor): void;
