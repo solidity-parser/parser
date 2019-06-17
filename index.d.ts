@@ -153,7 +153,7 @@ export interface FunctionDefinition extends BaseASTNode {
 export interface EventDefinition extends BaseASTNode {
   type: 'EventDefinition';
   name: string;
-  parameters: ParameterList[];
+  parameters: ParameterList;
 }
 export interface EnumValue extends BaseASTNode {
   type: 'EnumValue';
