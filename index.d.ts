@@ -682,4 +682,4 @@ export interface ParserOpts {
   loc?: boolean;
 }
 export function parse(sourceCode: string, parserOpts: ParserOpts): ASTNode;
-export function visit(ast: ASTNode | ASTNode[] | null | undefined, visitor: Visitor): void;
+export function visit(ast: ASTNode, visitor: Visitor): void;
