@@ -171,10 +171,15 @@ export interface EnumDefinition extends BaseASTNode {
 }
 export interface ParameterList extends BaseASTNode {
   type: 'ParameterList';
-  parameters: Parameter[];
+  parameters: ParameterListMember[];
 }
 export interface Parameter extends BaseASTNode {
   type: 'Parameter';
+  isIndexed: boolean;
+  isStateVar: boolean;
+  typeName: TypeName;
+  name: string;
+  storageLocation?: string;
 }
 export interface VariableDeclaration extends BaseASTNode {
   type: 'VariableDeclaration';
@@ -522,7 +527,7 @@ export type PrimaryExpression =
   | Identifier
   | TupleExpression
   | ElementaryTypeNameExpression;
-export type SimpleStatement=
+export type SimpleStatement =
   | VariableDeclarationStatement
   | ExpressionStatement;
 export type TypeName =
@@ -545,6 +550,9 @@ export type Statement =
   | ThrowStatement
   | SimpleStatement
   | VariableDeclarationStatement;
+export type ParameterListMember =
+  | Parameter
+  | VariableDeclaration;
 export interface Visitor {
   SourceUnit?: (node: SourceUnit) => any;
   PragmaDirective?: (node: PragmaDirective) => any;
