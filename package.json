@@ -7,7 +7,7 @@
   "scripts": {
     "antlr4": "sh scripts/antlr4.sh",
     "build": "rm -rf dist && babel --out-dir=dist src",
-    "prepublish": "yarn build",
+    "prepare": "yarn build",
     "prettier": "find src -name *.js | egrep -v '^src/(lib|antlr4)/' | xargs prettier --no-semi --single-quote --write",
     "eslint": "eslint src",
     "pretest": "eslint src && tslint-config-prettier-check ./tslint.json",
