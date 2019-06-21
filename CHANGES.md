@@ -1,3 +1,9 @@
+### 0.5.0 (Unreleased)
+
+ * Remove `ParameterList` and `Parameter` node types. Parameters are now always
+   of type `VariableDeclaration` and lists of parameters are represented as
+   lists of nodes of type `VariableDeclaration`. This is a breaking change.
+
 ### 0.4.8
 
  * Fix parsing of string literals with escaped characters.

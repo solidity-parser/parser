@@ -894,7 +894,7 @@ const transformAST = {
   },
 
   EventParameterList(ctx) {
-    const parameters = ctx.eventParameter().map(function(paramCtx) {
+    return ctx.eventParameter().map(function(paramCtx) {
       const type = this.visit(paramCtx.typeName())
       let name = null
       if (paramCtx.identifier()) {
@@ -912,11 +912,6 @@ const transformAST = {
         paramCtx
       )
     }, this)
-
-    return {
-      type: 'ParameterList',
-      parameters
-    }
   },
 
   ReturnParameters(ctx) {
@@ -924,8 +919,7 @@ const transformAST = {
   },
 
   ParameterList(ctx) {
-    const parameters = ctx.parameter().map(paramCtx => this.visit(paramCtx))
-    return { parameters }
+    return ctx.parameter().map(paramCtx => this.visit(paramCtx))
   },
 
   Parameter(ctx) {
@@ -940,6 +934,7 @@ const transformAST = {
     }
 
     return {
+      type: 'VariableDeclaration',
       typeName: this.visit(ctx.typeName()),
       name,
       storageLocation,

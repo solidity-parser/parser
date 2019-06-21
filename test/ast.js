@@ -143,22 +143,19 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
       "name": null,
-      "parameters": {
-        "type": "ParameterList",
-        "parameters": [
-          {
-            "type": "Parameter",
-            "typeName": {
-              "type": "ElementaryTypeName",
-              "name": "uint"
-            },
-            "name": "a",
-            "storageLocation": null,
-            "isStateVar": false,
-            "isIndexed": false
-          }
-        ]
-      },
+      "parameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
       "body": {
         "type": "Block",
         "statements": []
@@ -175,22 +172,19 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
       "name": "foo",
-      "parameters": {
-        "type": "ParameterList",
-        "parameters": [
-          {
-            "type": "Parameter",
-            "typeName": {
-              "type": "ElementaryTypeName",
-              "name": "uint"
-            },
-            "name": "a",
-            "storageLocation": null,
-            "isStateVar": false,
-            "isIndexed": false
-          }
-        ]
-      },
+      "parameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
       "returnParameters": null,
       "body": {
         "type": "Block",
@@ -207,38 +201,32 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
       "name": "foo",
-      "parameters": {
-        "type": "ParameterList",
-        "parameters": [
-          {
-            "type": "Parameter",
-            "typeName": {
-              "type": "ElementaryTypeName",
-              "name": "uint"
-            },
-            "name": "a",
-            "storageLocation": null,
-            "isStateVar": false,
-            "isIndexed": false
+      "parameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
+      "returnParameters": [
+        {
+          "isIndexed": false,
+          "isStateVar": false,
+          "name": null,
+          "storageLocation": null,
+          "type": "VariableDeclaration",
+          "typeName": {
+            "name": "uint256",
+            "type": "ElementaryTypeName"
           }
-        ]
-      },
-      "returnParameters": {
-        "type": "ParameterList",
-        "parameters": [
-          {
-            "isIndexed": false,
-            "isStateVar": false,
-            "name": null,
-            "storageLocation": null,
-            "type": "Parameter",
-            "typeName": {
-              "name": "uint256",
-              "type": "ElementaryTypeName"
-            }
-          }
-        ],
-      },
+        }
+      ],
       "body": {
         "type": "Block",
         "statements": []
@@ -1075,31 +1063,28 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "EventDefinition",
       "name": "Foo",
-      "parameters": {
-        "type": "ParameterList",
-        "parameters": [
-          {
-            "type": "VariableDeclaration",
-            "typeName": {
-              "type": "ElementaryTypeName",
-              "name": "address"
-            },
-            "name": "a",
-            "isStateVar": false,
-            "isIndexed": true
+      "parameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "address"
           },
-          {
-            "type": "VariableDeclaration",
-            "typeName": {
-              "type": "ElementaryTypeName",
-              "name": "uint"
-            },
-            "name": "b",
-            "isStateVar": false,
-            "isIndexed": false
-          }
-        ]
-      },
+          "name": "a",
+          "isStateVar": false,
+          "isIndexed": true
+        },
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "b",
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
       "isAnonymous": false
     })
   })

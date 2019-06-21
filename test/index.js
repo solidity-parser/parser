@@ -64,7 +64,7 @@ describe("#parse", function() {
 
     it("adds meta to VariableDeclaration inside EventDefinition", function() {
       var ast = parseNode("event Foo(address bar);", { loc: true })
-      assert.isOk(ast.parameters.parameters[0].loc)
+      assert.isOk(ast.parameters[0].loc)
     })
 
   })
