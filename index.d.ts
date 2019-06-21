@@ -31,10 +31,6 @@ export type ASTNodeTypeString =
   | 'EventDefinition'
   | 'EnumValue'
   | 'EnumDefinition'
-  | 'ParameterList'
-  | 'Parameter'
-  | 'EventParameterList'
-  | 'EventParameter'
   | 'VariableDeclaration'
   | 'UserDefinedTypeName'
   | 'Mapping'
@@ -147,18 +143,18 @@ export interface ModifierInvocation extends BaseASTNode {
 export interface FunctionDefinition extends BaseASTNode {
   type: 'FunctionDefinition';
   name?: string;
-  parameters: ParameterList;
+  parameters: VariableDeclaration[];
   modifiers: ModifierInvocation[];
   stateMutability?: 'pure' | 'constant' | 'payable' | 'view'
   visibility: 'default' | 'external' | 'internal' | 'public' | 'private';
   isConstructor: boolean;
-  returnParameters?: ParameterList;
+  returnParameters?: VariableDeclaration[];
   body?: Block;
 }
 export interface EventDefinition extends BaseASTNode {
   type: 'EventDefinition';
   name: string;
-  parameters: ParameterList;
+  parameters: VariableDeclaration[];
 }
 export interface EnumValue extends BaseASTNode {
   type: 'EnumValue';
@@ -168,18 +164,6 @@ export interface EnumDefinition extends BaseASTNode {
   type: 'EnumDefinition';
   name: string;
   members: EnumValue[];
-}
-export interface ParameterList extends BaseASTNode {
-  type: 'ParameterList';
-  parameters: ParameterListMember[];
-}
-export interface Parameter extends BaseASTNode {
-  type: 'Parameter';
-  isIndexed: boolean;
-  isStateVar: boolean;
-  typeName: TypeName;
-  name: string;
-  storageLocation?: string;
 }
 export interface VariableDeclaration extends BaseASTNode {
   type: 'VariableDeclaration';
@@ -448,8 +432,6 @@ export type ASTNode =
   | EventDefinition
   | EnumValue
   | EnumDefinition
-  | ParameterList
-  | Parameter
   | VariableDeclaration
   | TypeName
   | UserDefinedTypeName
@@ -550,9 +532,6 @@ export type Statement =
   | ThrowStatement
   | SimpleStatement
   | VariableDeclarationStatement;
-export type ParameterListMember =
-  | Parameter
-  | VariableDeclaration;
 export interface Visitor {
   SourceUnit?: (node: SourceUnit) => any;
   PragmaDirective?: (node: PragmaDirective) => any;
@@ -568,8 +547,6 @@ export interface Visitor {
   EventDefinition?: (node: EventDefinition) => any;
   EnumValue?: (node: EnumValue) => any;
   EnumDefinition?: (node: EnumDefinition) => any;
-  ParameterList?: (node: ParameterList) => any;
-  Parameter?: (node: Parameter) => any;
   VariableDeclaration?: (node: VariableDeclaration) => any;
   UserDefinedTypeName?: (node: UserDefinedTypeName) => any;
   Mapping?: (node: Mapping) => any;
@@ -631,8 +608,6 @@ export interface Visitor {
   'EventDefinition:exit'?: (node: EventDefinition) => any;
   'EnumValue:exit'?: (node: EnumValue) => any;
   'EnumDefinition:exit'?: (node: EnumDefinition) => any;
-  'ParameterList:exit'?: (node: ParameterList) => any;
-  'Parameter:exit'?: (node: Parameter) => any;
   'VariableDeclaration:exit'?: (node: VariableDeclaration) => any;
   'UserDefinedTypeName:exit'?: (node: UserDefinedTypeName) => any;
   'Mapping:exit'?: (node: Mapping) => any;
