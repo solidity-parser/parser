@@ -472,7 +472,7 @@ const transformAST = {
   },
 
   ModifierDefinition(ctx) {
-    let parameters = []
+    let parameters = null
     if (ctx.parameterList()) {
       parameters = this.visit(ctx.parameterList())
     }

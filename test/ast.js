@@ -659,6 +659,16 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       "type": "ModifierDefinition",
       "name": "onlyOwner",
+      "parameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      }
+    })
+    var ast = parseNode("modifier onlyOwner() {}")
+    assert.deepEqual(ast, {
+      "type": "ModifierDefinition",
+      "name": "onlyOwner",
       "parameters": [],
       "body": {
         "type": "Block",
