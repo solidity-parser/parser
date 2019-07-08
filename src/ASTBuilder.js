@@ -725,6 +725,13 @@ const transformAST = {
       }
     }
 
+    if (ctx.TypeKeyword()) {
+      return {
+        type: 'Identifier',
+        name: 'type'
+      }
+    }
+
     if (
       ctx.children.length == 3 &&
       toText(ctx.getChild(1)) === '[' &&

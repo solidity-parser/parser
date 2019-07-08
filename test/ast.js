@@ -686,26 +686,41 @@ describe('AST', () => {
 
   it("FunctionCall", function() {
     var expr = parseExpression("f(1, 2)")
-		assert.deepEqual(expr, {
-			"type": "FunctionCall",
-			"expression": {
-				"type": "Identifier",
-				"name": "f"
-			},
-			"arguments": [
-				{
-					"type": "NumberLiteral",
-					"number": "1",
-					"subdenomination": null
-				},
-				{
-					"type": "NumberLiteral",
-					"number": "2",
-					"subdenomination": null
-				}
-			],
-			"names": []
-		})
+    assert.deepEqual(expr, {
+      "type": "FunctionCall",
+      "expression": {
+        "type": "Identifier",
+        "name": "f"
+      },
+      "arguments": [
+        {
+          "type": "NumberLiteral",
+          "number": "1",
+          "subdenomination": null
+        },
+        {
+          "type": "NumberLiteral",
+          "number": "2",
+          "subdenomination": null
+        }
+      ],
+      "names": []
+    })
+    var expr = parseExpression("type(MyContract)")
+    assert.deepEqual(expr, {
+      "type": "FunctionCall",
+      "expression": {
+        "type": "Identifier",
+        "name": "type"
+      },
+      "arguments": [
+        {
+          "type": "Identifier",
+          "name": "MyContract",
+        }
+      ],
+      "names": []
+    })
   })
 
   it("StateVariableDeclaration", function() {
