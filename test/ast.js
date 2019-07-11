@@ -594,6 +594,13 @@ describe('AST', () => {
       "number": ".1",
       "subdenomination": null
     })
+
+    expr = parseExpression("1_000_000")
+    assert.deepEqual(expr, {
+      "type": "NumberLiteral",
+      "number": "1_000_000",
+      "subdenomination": null
+    })
   })
 
   it("StringLiteral", function() {
