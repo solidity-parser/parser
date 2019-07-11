@@ -1,6 +1,7 @@
-### Unreleased
+### 0.4.6
 
  * Add support for the `type` keyword.
+ * Add support for underscores in number literals.
 
 ### 0.4.5
 
