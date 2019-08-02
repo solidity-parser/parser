@@ -603,11 +603,35 @@ describe('AST', () => {
     })
   })
 
-  it("StringLiteral", function() {
+  it("StringLiteral with double quotes", function() {
     var expr = parseExpression("\"Hello\"")
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello",
+    })
+  })
+
+  it("StringLiteral with single quotes", function() {
+    var expr = parseExpression("'Hello'")
+    assert.deepEqual(expr, {
+      "type": "StringLiteral",
+      "value": "Hello",
+    })
+  })
+
+  it("StringLiteral with escaped double quotes", function() {
+    var expr = parseExpression("\"Hello \\\"goodbye\\\"\"")
+    assert.deepEqual(expr, {
+      "type": "StringLiteral",
+      "value": "Hello \"goodbye\"",
+    })
+  })
+
+  it("StringLiteral with escaped single quotes", function() {
+    var expr = parseExpression("'Hello \\\'goodbye\\\''")
+    assert.deepEqual(expr, {
+      "type": "StringLiteral",
+      "value": "Hello 'goodbye'",
     })
   })
 

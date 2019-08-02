@@ -719,9 +719,14 @@ const transformAST = {
 
     if (ctx.StringLiteral()) {
       const text = toText(ctx)
+      const singleQuotes = text[0] === "'"
+      const textWithoutQuotes = text.substring(1, text.length - 1)
+      const value = singleQuotes
+        ? textWithoutQuotes.replace(new RegExp("\\\\'", 'g'), "'")
+        : textWithoutQuotes.replace(new RegExp('\\\\"', 'g'), '"')
       return {
         type: 'StringLiteral',
-        value: text.substring(1, text.length - 1)
+        value
       }
     }
 
