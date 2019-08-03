@@ -1,3 +1,11 @@
+### 0.4.8
+
+ * Fix parsing of string literals with escaped characters.
+
+### 0.4.7
+
+ * Fix parsing of underscores in number literals.
+
 ### 0.4.6
 
  * Add support for the `type` keyword.
