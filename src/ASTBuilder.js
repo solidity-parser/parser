@@ -127,9 +127,13 @@ const transformAST = {
   },
 
   InheritanceSpecifier(ctx) {
+    const exprList = ctx.expressionList()
+    const args = (exprList != null)
+      ? this.visit(exprList.expression()) : []
+
     return {
       baseName: this.visit(ctx.userDefinedTypeName()),
-      arguments: this.visit(ctx.expression())
+      arguments: args
     }
   },
 

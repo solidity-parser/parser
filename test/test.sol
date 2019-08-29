@@ -68,7 +68,7 @@ contract base {
   }
 }
 
-contract derived is base {
+contract derived is base() {
   function fun() {
     uint64(2);
   }
