@@ -4,6 +4,10 @@
    of type `VariableDeclaration` and lists of parameters are represented as
    lists of nodes of type `VariableDeclaration`. This is a breaking change.
 
+### 0.4.9
+
+ * Fix parsing of inheritance specifier with no arguments.
+
 ### 0.4.8
 
  * Fix parsing of string literals with escaped characters.
