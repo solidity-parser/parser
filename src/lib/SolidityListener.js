@@ -740,12 +740,12 @@ SolidityListener.prototype.exitTupleExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SolidityParser#elementaryTypeNameExpression.
-SolidityListener.prototype.enterElementaryTypeNameExpression = function(ctx) {
+// Enter a parse tree produced by SolidityParser#typeNameExpression.
+SolidityListener.prototype.enterTypeNameExpression = function(ctx) {
 };
 
-// Exit a parse tree produced by SolidityParser#elementaryTypeNameExpression.
-SolidityListener.prototype.exitElementaryTypeNameExpression = function(ctx) {
+// Exit a parse tree produced by SolidityParser#typeNameExpression.
+SolidityListener.prototype.exitTypeNameExpression = function(ctx) {
 };
 
 

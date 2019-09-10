@@ -72,7 +72,7 @@ export type ASTNodeTypeString =
   | 'AssemblyLiteral'
   | 'SubAssembly'
   | 'TupleExpression'
-  | 'ElementaryTypeNameExpression'
+  | 'TypeNameExpression'
   | 'BooleanLiteral'
   | 'NumberLiteral'
   | 'Identifier'
@@ -321,9 +321,9 @@ export interface TupleExpression extends BaseASTNode {
   components: Expression[];
   isArray: boolean;
 }
-export interface ElementaryTypeNameExpression extends BaseASTNode {
-  type: 'ElementaryTypeNameExpression';
-  typeName: ElementaryTypeName;
+export interface TypeNameExpression extends BaseASTNode {
+  type: 'TypeNameExpression';
+  typeName: ElementaryTypeName | UserDefinedTypeName;
 }
 export interface NumberLiteral extends BaseASTNode {
   type: 'NumberLiteral';
@@ -466,7 +466,7 @@ export type ASTNode =
   | AssemblyLiteral
   | SubAssembly
   | TupleExpression
-  | ElementaryTypeNameExpression
+  | TypeNameExpression
   | BinaryOperation
   | Conditional
   | IndexAccess
@@ -508,7 +508,7 @@ export type PrimaryExpression =
   | NumberLiteral
   | Identifier
   | TupleExpression
-  | ElementaryTypeNameExpression;
+  | TypeNameExpression;
 export type SimpleStatement =
   | VariableDeclarationStatement
   | ExpressionStatement;
@@ -581,7 +581,7 @@ export interface Visitor {
   AssemblyLiteral?: (node: AssemblyLiteral) => any;
   SubAssembly?: (node: SubAssembly) => any;
   TupleExpression?: (node: TupleExpression) => any;
-  ElementaryTypeNameExpression?: (node: ElementaryTypeNameExpression) => any;
+  TypeNameExpression?: (node: TypeNameExpression) => any;
   NumberLiteral?: (node: NumberLiteral) => any;
   BooleanLiteral?: (node: BooleanLiteral) => any;
   Identifier?: (node: Identifier) => any;
@@ -644,8 +644,8 @@ export interface Visitor {
   'AssemblyLiteral:exit'?: (node: AssemblyLiteral) => any;
   'SubAssembly:exit'?: (node: SubAssembly) => any;
   'TupleExpression:exit'?: (node: TupleExpression) => any;
-  'ElementaryTypeNameExpression:exit'?: (
-    node: ElementaryTypeNameExpression
+  'TypeNameExpression:exit'?: (
+    node: TypeNameExpression
   ) => any;
   'NumberLiteral:exit'?: (node: NumberLiteral) => any;
   'BooleanLiteral:exit'?: (node: BooleanLiteral) => any;

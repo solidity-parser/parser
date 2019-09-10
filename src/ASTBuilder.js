@@ -245,9 +245,13 @@ const transformAST = {
     }
   },
 
-  ElementaryTypeNameExpression(ctx) {
+  TypeNameExpression(ctx) {
+    let typeName = ctx.elementaryTypeName()
+    if (typeName === null) {
+      typeName = ctx.userDefinedTypeName()
+    }
     return {
-      typeName: this.visit(ctx.elementaryTypeName())
+      typeName: this.visit(typeName)
     }
   },
 
@@ -260,7 +264,7 @@ const transformAST = {
 
       return {
         type: 'ArrayTypeName',
-        baseTypeName: this.visit(ctx.getChild(0)),
+        baseTypeName: this.visit(ctx.typeName()),
         length
       }
     }
@@ -752,16 +756,24 @@ const transformAST = {
           type: 'UserDefinedTypeName',
           namePath: node.name
         }
+      } else if (node.type == 'TypeNameExpression') {
+        node = node.typeName
       } else {
         node = {
           type: 'ElementaryTypeName',
           name: toText(ctx.getChild(0))
         }
       }
-      return {
+
+      const typeName = {
         type: 'ArrayTypeName',
         baseTypeName: node,
         length: null
+      }
+
+      return {
+        type: 'TypeNameExpression',
+        typeName
       }
     }
 

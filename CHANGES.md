@@ -4,6 +4,14 @@
    of type `VariableDeclaration` and lists of parameters are represented as
    lists of nodes of type `VariableDeclaration`. This is a breaking change.
 
+### 0.4.12 (Unreleased)
+
+ * Fix type name expressions to also support user-defined type names.
+
+### 0.4.11
+
+ * Bugfix release
+
 ### 0.4.9
 
  * Fix parsing of inheritance specifier with no arguments.

@@ -271,13 +271,25 @@ describe('AST', () => {
     })
   })
 
-  it("ElementaryTypeNameExpression", function() {
+  it("TypeNameExpression", function() {
     var stmt = parseStatement("uint(a);")
     assert.deepEqual(stmt.expression.expression, {
-      "type": "ElementaryTypeNameExpression",
+      "type": "TypeNameExpression",
       "typeName": {
         "type": "ElementaryTypeName",
         "name": "uint"
+      }
+    })
+    stmt = parseStatement("A.B[];")
+    assert.deepEqual(stmt.expression, {
+      "type": "TypeNameExpression",
+      "typeName": {
+        "type": "ArrayTypeName",
+        "baseTypeName": {
+          "type": "UserDefinedTypeName",
+          "namePath": "A.B"
+        },
+        "length": null
       }
     })
   })
@@ -310,22 +322,28 @@ describe('AST', () => {
     // typename as expression
     ast = parseExpression("A[]")
     assert.deepEqual(ast, {
-      "type": "ArrayTypeName",
-      "baseTypeName": {
-        "type": "UserDefinedTypeName",
-        "namePath": "A"
-      },
-      "length": null
+      "type": "TypeNameExpression",
+      "typeName": {
+        "type": "ArrayTypeName",
+        "baseTypeName": {
+          "type": "UserDefinedTypeName",
+          "namePath": "A"
+        },
+        "length": null
+      }
     })
 
     ast = parseExpression("uint256[]")
     assert.deepEqual(ast, {
-      "type": "ArrayTypeName",
-      "baseTypeName": {
-        "type": "ElementaryTypeName",
-        "name": "uint256"
-      },
-      "length": null
+      "type": "TypeNameExpression",
+      "typeName": {
+        "type": "ArrayTypeName",
+        "baseTypeName": {
+          "type": "ElementaryTypeName",
+          "name": "uint256"
+        },
+        "length": null
+      }
     })
   })
 
