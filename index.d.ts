@@ -77,6 +77,7 @@ export type ASTNodeTypeString =
   | 'NumberLiteral'
   | 'Identifier'
   | 'BinaryOperation'
+  | 'UnaryOperation'
   | 'Conditional'
   | 'StringLiteral'
   | 'HexLiteral'
@@ -388,11 +389,25 @@ export type BinOp =
   | '*='
   | '/='
   | '%=';
+export type UnaryOp =
+  | '-'
+  | '+'
+  | '++'
+  | '~'
+  | 'after'
+  | 'delete'
+  | '!';
 export interface BinaryOperation extends BaseASTNode {
   type: 'BinaryOperation';
   left: Expression;
   right: Expression;
   operator: BinOp;
+}
+export interface UnaryOperation extends BaseASTNode {
+  type: 'UnaryOperation';
+  operator: UnaryOp;
+  subExpression: Expression;
+  isPrefix: boolean;
 }
 export interface Conditional extends BaseASTNode {
   type: 'Conditional';
@@ -502,6 +517,7 @@ export type Expression =
   | Conditional
   | MemberAccess
   | FunctionCall
+  | UnaryOperation
   | PrimaryExpression;
 export type PrimaryExpression =
   | BooleanLiteral
