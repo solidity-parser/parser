@@ -24,7 +24,7 @@ ParserError.prototype.name = 'ParserError'
 function tokenize(input, options) {
   options = options || {}
 
-  const chars = antlr4.InputStream(input)
+  const chars = new antlr4.InputStream(input)
   const lexer = new SolidityLexer(chars)
   const tokens = new antlr4.CommonTokenStream(lexer)
 
@@ -34,7 +34,7 @@ function tokenize(input, options) {
 function parse(input, options) {
   options = options || {}
 
-  const chars = antlr4.InputStream(input)
+  const chars = new antlr4.InputStream(input)
 
   const listener = new ErrorListener()
 
