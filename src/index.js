@@ -78,7 +78,10 @@ function parse(input, options) {
 }
 
 function _isASTNode(node) {
-  return !!node && typeof node === 'object' && node.hasOwnProperty('type')
+  return (
+    !!node && typeof node === 'object'
+    && Object.prototype.hasOwnProperty.call(node, 'type')
+  )
 }
 
 function visit(node, visitor) {
