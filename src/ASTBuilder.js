@@ -560,7 +560,7 @@ const transformAST = {
       returnParameters = this.visit(ctx.returnParameters())
     }
 
-    let catchClauses = []
+    const catchClauses = []
     for (let i = 0; i < ctx.catchClause().length; i++) { 
       catchClauses[i] = this.visit(ctx.statement(i))
     }
@@ -584,7 +584,10 @@ const transformAST = {
     }
 
     return {
-      isReasonStringType: (ctx.identifier() && toText(ctx.identifier()) === 'Error'),
+      isReasonStringType: (
+        ctx.identifier() &&
+        toText(ctx.identifier()) === 'Error'
+      ),
       parameters,
       body: this.visit(ctx.block())
     }
@@ -813,7 +816,7 @@ const transformAST = {
             type: 'IndexRangeAccess',
             base: this.visit(ctx.getChild(0)),
             indexStart: this.visit(ctx.getChild(2)),
-            indexStart: this.visit(ctx.getChild(4))
+            indexEnd: this.visit(ctx.getChild(4))
           }
         }
         break

@@ -2,7 +2,13 @@
 
 set -o errexit
 
-antlr -Dlanguage=JavaScript solidity-antlr4/Solidity.g4 -o lib
+ANTLR_JAR="solidity-antlr4/antlr4.jar"
+
+if [ ! -e "$ANTLR_JAR" ]; then
+  curl https://www.antlr.org/download/antlr-4.7.2-complete.jar -o "$ANTLR_JAR"
+fi
+
+java -jar $ANTLR_JAR -Dlanguage=JavaScript solidity-antlr4/Solidity.g4 -o lib
 
 mv lib/solidity-antlr4/* src/lib/
 
