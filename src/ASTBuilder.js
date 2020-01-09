@@ -185,6 +185,8 @@ const transformAST = {
       visibility,
       modifiers,
       isConstructor: true,
+      isReceiveEther: false,
+      isFallback: false,
       stateMutability
     }
   },
@@ -239,6 +241,108 @@ const transformAST = {
       visibility,
       modifiers,
       isConstructor: name === this._currentContract,
+      isReceiveEther: false,
+      isFallback: name === '',
+      stateMutability
+    }
+  },
+
+  FallbackDefinition(ctx) {    
+    if (ctx.parameterList().parameter().length > 0) {
+      throw new Error('Fallback functions cannot have parameters')
+    }
+
+    if (ctx.returnParameters().parameterList().parameter().length > 0) {
+      throw new Error('Fallback functions cannot have return parameters')
+    }
+
+    let block = null
+    if (ctx.block()) {
+      block = this.visit(ctx.block())
+    }
+
+    const modifiers = ctx
+      .modifierList()
+      .modifierInvocation()
+      .map(mod => this.visit(mod))
+
+    // error out on incorrect function visibility
+    if (!ctx.modifierList().ExternalKeyword(0)) {
+      throw new Error('Fallback functions have to be declared "external"')
+    }
+
+    let stateMutability = null
+    if (ctx.modifierList().stateMutability(0)) {
+      stateMutability = toText(ctx.modifierList().stateMutability(0))
+    }
+
+    let natspec = null
+    if (ctx.natSpec()) {
+      natspec = parseComments(toText(ctx.getChild(0)))
+    }
+
+    return {
+      type: 'FunctionDefinition',
+      natspec,
+      name: null,
+      parameters: null,
+      returnParameters: null,
+      body: block,
+      visibility: 'external',
+      modifiers,
+      isConstructor: false,
+      isReceiveEther: true,
+      isFallback: false,
+      stateMutability
+    }
+  },
+
+  ReceiveDefinition(ctx) {    
+    if (ctx.parameterList().parameter().length > 0) {
+      throw new Error('Receive Ether functions cannot have parameters')
+    }
+
+    if (ctx.returnParameters().parameterList().parameter().length > 0) {
+      throw new Error('Receive Ether functions cannot have return parameters')
+    }
+
+    let block = null
+    if (ctx.block()) {
+      block = this.visit(ctx.block())
+    }
+
+    const modifiers = ctx
+      .modifierList()
+      .modifierInvocation()
+      .map(mod => this.visit(mod))
+
+    // error out on incorrect function visibility
+    if (!ctx.modifierList().ExternalKeyword(0)) {
+      throw new Error('Receive Ether functions have to be declared "external"')
+    }
+
+    let stateMutability = null
+    if (ctx.modifierList().stateMutability(0)) {
+      stateMutability = toText(ctx.modifierList().stateMutability(0))
+    }
+
+    let natspec = null
+    if (ctx.natSpec()) {
+      natspec = parseComments(toText(ctx.getChild(0)))
+    }
+
+    return {
+      type: 'FunctionDefinition',
+      natspec,
+      name: null,
+      parameters: null,
+      returnParameters: null,
+      body: block,
+      visibility: 'external',
+      modifiers,
+      isConstructor: false,
+      isReceiveEther: true,
+      isFallback: false,
       stateMutability
     }
   },
@@ -450,6 +554,42 @@ const transformAST = {
     }
   },
 
+  TryStatement(ctx) {
+    let returnParameters = null
+    if (ctx.returnParameters()) {
+      returnParameters = this.visit(ctx.returnParameters())
+    }
+
+    let catchClauses = []
+    for (let i = 0; i < ctx.catchClause().length; i++) { 
+      catchClauses[i] = this.visit(ctx.statement(i))
+    }
+
+    return {
+      expression: this.visit(ctx.expression()),
+      returnParameters,
+      body: this.visit(ctx.block()),
+      catchClauses
+    }
+  },
+
+  catchClause(ctx) {
+    let parameters = null
+    if (ctx.parameterList()) {
+      parameters = this.visit(ctx.parameterList())
+    }
+
+    if (ctx.identifier() && toText(ctx.identifier()) === 'Error') {
+      throw new Error('Expected "Error" identifier in catch clause')
+    }
+
+    return {
+      isReasonStringType: (ctx.identifier() && toText(ctx.identifier()) === 'Error'),
+      parameters,
+      body: this.visit(ctx.block())
+    }
+  },
+
   UserDefinedTypeName(ctx) {
     return {
       namePath: toText(ctx)
@@ -658,6 +798,22 @@ const transformAST = {
             condition: this.visit(ctx.getChild(0)),
             trueExpression: this.visit(ctx.getChild(2)),
             falseExpression: this.visit(ctx.getChild(4))
+          }
+        }
+        break
+
+      case 6:
+        // index range access
+        if (
+          toText(ctx.getChild(1)) === '[' &&
+          toText(ctx.getChild(3)) === ':' &&
+          toText(ctx.getChild(5)) === ']'
+        ) {
+          return {
+            type: 'IndexRangeAccess',
+            base: this.visit(ctx.getChild(0)),
+            indexStart: this.visit(ctx.getChild(2)),
+            indexStart: this.visit(ctx.getChild(4))
           }
         }
         break
