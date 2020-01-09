@@ -92,6 +92,15 @@ SolidityListener.prototype.exitImportDirective = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SolidityParser#natSpec.
+SolidityListener.prototype.enterNatSpec = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#natSpec.
+SolidityListener.prototype.exitNatSpec = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SolidityParser#contractDefinition.
 SolidityListener.prototype.enterContractDefinition = function(ctx) {
 };
@@ -179,6 +188,24 @@ SolidityListener.prototype.enterFunctionDefinition = function(ctx) {
 
 // Exit a parse tree produced by SolidityParser#functionDefinition.
 SolidityListener.prototype.exitFunctionDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SolidityParser#fallbackDefinition.
+SolidityListener.prototype.enterFallbackDefinition = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#fallbackDefinition.
+SolidityListener.prototype.exitFallbackDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SolidityParser#receiveDefinition.
+SolidityListener.prototype.enterReceiveDefinition = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#receiveDefinition.
+SolidityListener.prototype.exitReceiveDefinition = function(ctx) {
 };
 
 
@@ -377,6 +404,24 @@ SolidityListener.prototype.enterIfStatement = function(ctx) {
 
 // Exit a parse tree produced by SolidityParser#ifStatement.
 SolidityListener.prototype.exitIfStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SolidityParser#tryStatement.
+SolidityListener.prototype.enterTryStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#tryStatement.
+SolidityListener.prototype.exitTryStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SolidityParser#catchClause.
+SolidityListener.prototype.enterCatchClause = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#catchClause.
+SolidityListener.prototype.exitCatchClause = function(ctx) {
 };
 
 
@@ -764,6 +809,15 @@ SolidityListener.prototype.enterIdentifier = function(ctx) {
 
 // Exit a parse tree produced by SolidityParser#identifier.
 SolidityListener.prototype.exitIdentifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SolidityParser#overrideSpecifier.
+SolidityListener.prototype.enterOverrideSpecifier = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#overrideSpecifier.
+SolidityListener.prototype.exitOverrideSpecifier = function(ctx) {
 };
 
 
