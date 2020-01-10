@@ -358,8 +358,12 @@ describe('AST', () => {
       "typeName": {
         "type": "ArrayTypeName",
         "baseTypeName": {
-          "type": "UserDefinedTypeName",
-          "namePath": "A.B"
+          "expression": {
+            "name": "A",
+            "type": "Identifier"
+          },
+          "memberName": "B",
+          "type": "MemberAccess"
         },
         "length": null
       }

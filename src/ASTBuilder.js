@@ -709,6 +709,22 @@ const transformAST = {
           }
         }
 
+        // if square parenthesis are present it can only be
+        // a typename expression
+        if (
+          toText(ctx.getChild(1)) === '[' &&
+          toText(ctx.getChild(2)) === ']'
+        ) {
+          return {
+            "type": "TypeNameExpression",
+            "typeName": {
+              "type": "ArrayTypeName",
+              "baseTypeName": this.visit(ctx.getChild(0)),
+              "length": null
+            }
+          }
+        }
+
         op = toText(ctx.getChild(1))
 
         // tuple separator
