@@ -100,7 +100,7 @@ function visit(node, visitor) {
   if (cont === false) return
 
   for (const prop in node) {
-    if (Object.prototype.hasOwnProperty.call(node, "prop")) {
+    if (Object.prototype.hasOwnProperty.call(node, prop)) {
       visit(node[prop], visitor)
     }
   }
