@@ -167,8 +167,70 @@ describe('AST', () => {
       "visibility": "default",
       "modifiers": [],
       "isConstructor": true,
+      "isFallback": false,
+      "isReceiveEther": false,
       "stateMutability": null,
     })
+  })
+
+  it('FallbackDefinition', () => {
+    var ast = parseNode("fallback () external {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "natspec": null,
+      "name": null,
+      "parameters": [],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "external",
+      "modifiers": [],
+      "isConstructor": false,
+      "isFallback": true,
+      "isReceiveEther": false,
+      "stateMutability": null,
+    })
+  })
+
+  it('FallbackDefinition missing "external" decorator throws', () => {
+    assert.throws(() => parseNode("fallback () {}"), Error, 'Fallback functions have to be declared "external"');
+  })
+
+  it('FallbackDefinition with parameters throws', () => {
+    assert.throws(() => parseNode("fallback (uint256 myUint) external {}"), Error, 'Fallback functions cannot have parameters');
+  })
+
+  it('ReceiveDefinition', () => {
+    var ast = parseNode("receive () external payable {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "natspec": null,
+      "name": null,
+      "parameters": [],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "external",
+      "modifiers": [],
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": true,
+      "stateMutability": "payable",
+    })
+  })
+
+  it('ReceiveDefinition missing "external" decorator throws', () => {
+    assert.throws(() => parseNode("receive () payable {}"), Error, 'Receive Ether functions have to be declared "external"');
+  })
+
+  it('ReceiveDefinition missing "payable" decorator throws', () => {
+    assert.throws(() => parseNode("receive () external {}"), Error, 'Receive Ether functions have to be declared "payable"');
+  })
+
+  it('ReceiveDefinition with parameters throws', () => {
+    assert.throws(() => parseNode("receive (uint256 myUint) external payable {}"), Error, 'Receive Ether functions cannot have parameters');
   })
 
   it("FunctionDefinition", function() {
@@ -198,6 +260,8 @@ describe('AST', () => {
       "visibility": "default",
       "modifiers": [],
       "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
       "stateMutability": "pure",
     })
 
@@ -240,6 +304,8 @@ describe('AST', () => {
       "visibility": "default",
       "modifiers": [],
       "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
       "stateMutability": "pure"
     })
   })
@@ -563,6 +629,165 @@ describe('AST', () => {
         "type": "Block",
         "statements": []
       },
+    })
+  })
+
+  it("TryStatement", function() {
+    // try with one catch clause
+    var stmt = parseStatement(
+      "try f(1, 2) returns (uint a) {} catch (bytes memory a) {}"
+    )
+    assert.deepEqual(stmt, {
+      "type": "TryStatement",
+      "expression": {
+        "type": "FunctionCall",
+        "expression": {
+          "type": "Identifier",
+          "name": "f"
+        },
+        "arguments": [
+          {
+            "type": "NumberLiteral",
+            "number": "1",
+            "subdenomination": null
+          },
+          {
+            "type": "NumberLiteral",
+            "number": "2",
+            "subdenomination": null
+          }
+        ],
+        "names": []
+      },
+      "returnParameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "catchClauses": [
+        {
+          "body": {
+            "statements": [],
+            "type": "Block"
+          },
+          "isReasonStringType": false,
+          "parameters": [
+            {
+              "isIndexed": false,
+              "isStateVar": false,
+              "name": "a",
+              "storageLocation": "memory",
+              "type": "VariableDeclaration",
+              "typeName": {
+                "name": "bytes",
+                "type": "ElementaryTypeName"
+              }
+            }
+          ],
+          "type": "CatchClause"
+        }
+      ]
+    })
+
+    // try with two catch clauses
+    var stmt = parseStatement(
+      "try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch (bytes memory c) {}"
+    )
+    assert.deepEqual(stmt, {
+      "type": "TryStatement",
+      "expression": {
+        "type": "FunctionCall",
+        "expression": {
+          "type": "Identifier",
+          "name": "f"
+        },
+        "arguments": [
+          {
+            "type": "NumberLiteral",
+            "number": "1",
+            "subdenomination": null
+          },
+          {
+            "type": "NumberLiteral",
+            "number": "2",
+            "subdenomination": null
+          }
+        ],
+        "names": []
+      },
+      "returnParameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "catchClauses": [
+        {
+          "body": {
+            "statements": [],
+            "type": "Block"
+          },
+          "isReasonStringType": true,
+          "parameters": [
+            {
+              "isIndexed": false,
+              "isStateVar": false,
+              "name": "b",
+              "storageLocation": "memory",
+              "type": "VariableDeclaration",
+              "typeName": {
+                "name": "string",
+                "type": "ElementaryTypeName"
+              }
+            }
+          ],
+          "type": "CatchClause"
+        },
+        {
+          "body": {
+            "statements": [],
+            "type": "Block"
+          },
+          "isReasonStringType": false,
+          "parameters": [
+            {
+              "isIndexed": false,
+              "isStateVar": false,
+              "name": "c",
+              "storageLocation": "memory",
+              "type": "VariableDeclaration",
+              "typeName": {
+                "name": "bytes",
+                "type": "ElementaryTypeName"
+              }
+            }
+          ],
+          "type": "CatchClause"
+        }
+      ]
     })
   })
 

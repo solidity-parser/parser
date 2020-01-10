@@ -252,10 +252,6 @@ const transformAST = {
       throw new Error('Fallback functions cannot have parameters')
     }
 
-    if (ctx.returnParameters().parameterList().parameter().length > 0) {
-      throw new Error('Fallback functions cannot have return parameters')
-    }
-
     let block = null
     if (ctx.block()) {
       block = this.visit(ctx.block())
@@ -285,14 +281,13 @@ const transformAST = {
       type: 'FunctionDefinition',
       natspec,
       name: null,
-      parameters: null,
-      returnParameters: null,
+      parameters: [],
       body: block,
       visibility: 'external',
       modifiers,
       isConstructor: false,
-      isReceiveEther: true,
-      isFallback: false,
+      isReceiveEther: false,
+      isFallback: true,
       stateMutability
     }
   },
@@ -300,10 +295,6 @@ const transformAST = {
   ReceiveDefinition(ctx) {    
     if (ctx.parameterList().parameter().length > 0) {
       throw new Error('Receive Ether functions cannot have parameters')
-    }
-
-    if (ctx.returnParameters().parameterList().parameter().length > 0) {
-      throw new Error('Receive Ether functions cannot have return parameters')
     }
 
     let block = null
@@ -321,6 +312,14 @@ const transformAST = {
       throw new Error('Receive Ether functions have to be declared "external"')
     }
 
+    // error out on incorrect function payability
+    if (
+      !ctx.modifierList().stateMutability(0) ||
+      !ctx.modifierList().stateMutability(0).PayableKeyword(0)
+    ) {
+      throw new Error('Receive Ether functions have to be declared "payable"')
+    }
+
     let stateMutability = null
     if (ctx.modifierList().stateMutability(0)) {
       stateMutability = toText(ctx.modifierList().stateMutability(0))
@@ -335,8 +334,7 @@ const transformAST = {
       type: 'FunctionDefinition',
       natspec,
       name: null,
-      parameters: null,
-      returnParameters: null,
+      parameters: [],
       body: block,
       visibility: 'external',
       modifiers,
@@ -560,10 +558,7 @@ const transformAST = {
       returnParameters = this.visit(ctx.returnParameters())
     }
 
-    const catchClauses = []
-    for (let i = 0; i < ctx.catchClause().length; i++) { 
-      catchClauses[i] = this.visit(ctx.statement(i))
-    }
+    const catchClauses = ctx.catchClause().map(exprCtx => this.visit(exprCtx))
 
     return {
       expression: this.visit(ctx.expression()),
@@ -573,18 +568,18 @@ const transformAST = {
     }
   },
 
-  catchClause(ctx) {
+  CatchClause(ctx) {
     let parameters = null
     if (ctx.parameterList()) {
       parameters = this.visit(ctx.parameterList())
     }
 
-    if (ctx.identifier() && toText(ctx.identifier()) === 'Error') {
+    if (ctx.identifier() && toText(ctx.identifier()) !== 'Error') {
       throw new Error('Expected "Error" identifier in catch clause')
     }
 
     return {
-      isReasonStringType: (
+      isReasonStringType: !!(
         ctx.identifier() &&
         toText(ctx.identifier()) === 'Error'
       ),
@@ -803,6 +798,31 @@ const transformAST = {
             falseExpression: this.visit(ctx.getChild(4))
           }
         }
+
+        // index range access
+        if (
+          toText(ctx.getChild(1)) === '[' &&
+          toText(ctx.getChild(2)) === ':' &&
+          toText(ctx.getChild(4)) === ']'
+        ) {
+          return {
+            type: 'IndexRangeAccess',
+            base: this.visit(ctx.getChild(0)),
+            indexStart: null,
+            indexEnd: this.visit(ctx.getChild(3))
+          }
+        } else if (
+          toText(ctx.getChild(1)) === '[' &&
+          toText(ctx.getChild(3)) === ':' &&
+          toText(ctx.getChild(4)) === ']'
+        ) {
+          return {
+            type: 'IndexRangeAccess',
+            base: this.visit(ctx.getChild(0)),
+            indexStart: this.visit(ctx.getChild(2)),
+            indexEnd: null
+          }
+        }
         break
 
       case 6:
@@ -822,7 +842,7 @@ const transformAST = {
         break
     }
 
-    throw new Error('unrecognized expression')
+    throw new Error('Unrecognized expression')
   },
 
   StateVariableDeclaration(ctx) {
