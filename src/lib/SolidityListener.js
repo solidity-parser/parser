@@ -155,15 +155,6 @@ SolidityListener.prototype.exitStructDefinition = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SolidityParser#constructorDefinition.
-SolidityListener.prototype.enterConstructorDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#constructorDefinition.
-SolidityListener.prototype.exitConstructorDefinition = function(ctx) {
-};
-
-
 // Enter a parse tree produced by SolidityParser#modifierDefinition.
 SolidityListener.prototype.enterModifierDefinition = function(ctx) {
 };
@@ -191,21 +182,12 @@ SolidityListener.prototype.exitFunctionDefinition = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SolidityParser#fallbackDefinition.
-SolidityListener.prototype.enterFallbackDefinition = function(ctx) {
+// Enter a parse tree produced by SolidityParser#functionDescriptor.
+SolidityListener.prototype.enterFunctionDescriptor = function(ctx) {
 };
 
-// Exit a parse tree produced by SolidityParser#fallbackDefinition.
-SolidityListener.prototype.exitFallbackDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#receiveDefinition.
-SolidityListener.prototype.enterReceiveDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#receiveDefinition.
-SolidityListener.prototype.exitReceiveDefinition = function(ctx) {
+// Exit a parse tree produced by SolidityParser#functionDescriptor.
+SolidityListener.prototype.exitFunctionDescriptor = function(ctx) {
 };
 
 

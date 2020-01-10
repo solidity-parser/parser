@@ -151,54 +151,14 @@ const transformAST = {
     return this.visit(ctx.children[0])
   },
 
-  ConstructorDefinition(ctx) {
-    const parameters = this.visit(ctx.parameterList())
-    const block = this.visit(ctx.block())
-
-    const modifiers = ctx
-      .modifierList()
-      .modifierInvocation()
-      .map(mod => this.visit(mod))
-
-    // parse function visibility
-    let visibility = 'default'
-    if (ctx.modifierList().ExternalKeyword(0)) {
-      visibility = 'external'
-    } else if (ctx.modifierList().InternalKeyword(0)) {
-      visibility = 'internal'
-    } else if (ctx.modifierList().PublicKeyword(0)) {
-      visibility = 'public'
-    } else if (ctx.modifierList().PrivateKeyword(0)) {
-      visibility = 'private'
-    }
-
-    let stateMutability = null
-    if (ctx.modifierList().stateMutability(0)) {
-      stateMutability = toText(ctx.modifierList().stateMutability(0))
-    }
-
-    return {
-      type: 'FunctionDefinition',
-      name: null,
-      parameters,
-      body: block,
-      visibility,
-      modifiers,
-      isConstructor: true,
-      isReceiveEther: false,
-      isFallback: false,
-      stateMutability
-    }
-  },
-
   FunctionDefinition(ctx) {
-    let name = ''
-    if (ctx.identifier(0)) {
-      name = toText(ctx.identifier(0))
-    }
-    const parameters = this.visit(ctx.parameterList())
-
-    const returnParameters = this.visit(ctx.returnParameters())
+    let isConstructor = false
+    let isFallback = false
+    let isReceiveEther = false
+    let name = null
+    let parameters = []
+    let returnParameters = null
+    let visibility = 'default'
 
     let block = null
     if (ctx.block()) {
@@ -210,18 +170,6 @@ const transformAST = {
       .modifierInvocation()
       .map(mod => this.visit(mod))
 
-    // parse function visibility
-    let visibility = 'default'
-    if (ctx.modifierList().ExternalKeyword(0)) {
-      visibility = 'external'
-    } else if (ctx.modifierList().InternalKeyword(0)) {
-      visibility = 'internal'
-    } else if (ctx.modifierList().PublicKeyword(0)) {
-      visibility = 'public'
-    } else if (ctx.modifierList().PrivateKeyword(0)) {
-      visibility = 'private'
-    }
-
     let stateMutability = null
     if (ctx.modifierList().stateMutability(0)) {
       stateMutability = toText(ctx.modifierList().stateMutability(0))
@@ -230,6 +178,111 @@ const transformAST = {
     let natspec = null
     if (ctx.natSpec()) {
       natspec = parseComments(toText(ctx.getChild(0)))
+    }
+
+    // see what type of function we're dealing with
+    switch (toText(ctx.functionDescriptor().getChild(0))) {
+      case 'constructor':
+        parameters = this.visit(ctx.parameterList())
+
+        if (
+          ctx.returnParameters() &&
+          ctx.returnParameters().parameterList().parameter().length > 0
+        ) {
+          throw new Error('Constructors cannot have return parameters')
+        }
+
+        // error out on incorrect function visibility
+        if (ctx.modifierList().InternalKeyword(0)) {
+          visibility = 'internal'
+        } else if (ctx.modifierList().PublicKeyword(0)) {
+          visibility = 'public'
+        } else {
+          throw new Error(
+            'Constructors have to be declared either "public" or "internal"'
+          )
+        }
+
+        isConstructor = true
+        break
+      case 'fallback':
+        if (ctx.parameterList().parameter().length > 0) {
+          throw new Error('Fallback functions cannot have parameters')
+        }
+
+        if (
+          ctx.returnParameters() &&
+          ctx.returnParameters().parameterList().parameter().length > 0
+        ) {
+          throw new Error(
+            'Fallback functions cannot have return parameters'
+          )
+        }
+
+        // error out on incorrect function visibility
+        if (!ctx.modifierList().ExternalKeyword(0)) {
+          throw new Error('Fallback functions have to be declared "external"')
+        }
+        visibility = 'external'
+
+        isFallback = true
+        break
+      case 'receive':
+        if (ctx.parameterList().parameter().length > 0) {
+          throw new Error('Receive Ether functions cannot have parameters')
+        }
+
+        if (
+          ctx.returnParameters() &&
+          ctx.returnParameters().parameterList().parameter().length > 0
+        ) {
+          throw new Error(
+            'Receive Ether functions cannot have return parameters'
+          )
+        }
+
+        // error out on incorrect function visibility
+        if (!ctx.modifierList().ExternalKeyword(0)) {
+          throw new Error(
+            'Receive Ether functions have to be declared "external"'
+          )
+        }
+        visibility = 'external'
+
+        // error out on incorrect function payability
+        if (
+          !ctx.modifierList().stateMutability(0) ||
+          !ctx.modifierList().stateMutability(0).PayableKeyword(0)
+        ) {
+          throw new Error(
+            'Receive Ether functions have to be declared "payable"'
+          )
+        }
+
+        isReceiveEther = true
+        break
+      case 'function':
+        name = ctx.functionDescriptor().identifier(0) ?
+          toText(ctx.functionDescriptor().identifier(0)) :
+          ''
+
+        parameters = this.visit(ctx.parameterList())
+        returnParameters = this.visit(ctx.returnParameters())
+
+        // parse function visibility
+        if (ctx.modifierList().ExternalKeyword(0)) {
+          visibility = 'external'
+        } else if (ctx.modifierList().InternalKeyword(0)) {
+          visibility = 'internal'
+        } else if (ctx.modifierList().PublicKeyword(0)) {
+          visibility = 'public'
+        } else if (ctx.modifierList().PrivateKeyword(0)) {
+          visibility = 'private'
+        }
+
+        isConstructor = (name === this._currentContract)
+        isFallback = (name === '')
+        break
     }
 
     return {
@@ -240,107 +293,9 @@ const transformAST = {
       body: block,
       visibility,
       modifiers,
-      isConstructor: name === this._currentContract,
-      isReceiveEther: false,
-      isFallback: name === '',
-      stateMutability
-    }
-  },
-
-  FallbackDefinition(ctx) {    
-    if (ctx.parameterList().parameter().length > 0) {
-      throw new Error('Fallback functions cannot have parameters')
-    }
-
-    let block = null
-    if (ctx.block()) {
-      block = this.visit(ctx.block())
-    }
-
-    const modifiers = ctx
-      .modifierList()
-      .modifierInvocation()
-      .map(mod => this.visit(mod))
-
-    // error out on incorrect function visibility
-    if (!ctx.modifierList().ExternalKeyword(0)) {
-      throw new Error('Fallback functions have to be declared "external"')
-    }
-
-    let stateMutability = null
-    if (ctx.modifierList().stateMutability(0)) {
-      stateMutability = toText(ctx.modifierList().stateMutability(0))
-    }
-
-    let natspec = null
-    if (ctx.natSpec()) {
-      natspec = parseComments(toText(ctx.getChild(0)))
-    }
-
-    return {
-      type: 'FunctionDefinition',
-      natspec,
-      name: null,
-      parameters: [],
-      body: block,
-      visibility: 'external',
-      modifiers,
-      isConstructor: false,
-      isReceiveEther: false,
-      isFallback: true,
-      stateMutability
-    }
-  },
-
-  ReceiveDefinition(ctx) {    
-    if (ctx.parameterList().parameter().length > 0) {
-      throw new Error('Receive Ether functions cannot have parameters')
-    }
-
-    let block = null
-    if (ctx.block()) {
-      block = this.visit(ctx.block())
-    }
-
-    const modifiers = ctx
-      .modifierList()
-      .modifierInvocation()
-      .map(mod => this.visit(mod))
-
-    // error out on incorrect function visibility
-    if (!ctx.modifierList().ExternalKeyword(0)) {
-      throw new Error('Receive Ether functions have to be declared "external"')
-    }
-
-    // error out on incorrect function payability
-    if (
-      !ctx.modifierList().stateMutability(0) ||
-      !ctx.modifierList().stateMutability(0).PayableKeyword(0)
-    ) {
-      throw new Error('Receive Ether functions have to be declared "payable"')
-    }
-
-    let stateMutability = null
-    if (ctx.modifierList().stateMutability(0)) {
-      stateMutability = toText(ctx.modifierList().stateMutability(0))
-    }
-
-    let natspec = null
-    if (ctx.natSpec()) {
-      natspec = parseComments(toText(ctx.getChild(0)))
-    }
-
-    return {
-      type: 'FunctionDefinition',
-      natspec,
-      name: null,
-      parameters: [],
-      body: block,
-      visibility: 'external',
-      modifiers,
-      isConstructor: false,
-      isReceiveEther: true,
-      isFallback: false,
+      isConstructor,
+      isReceiveEther,
+      isFallback,
       stateMutability
     }
   },

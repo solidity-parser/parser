@@ -142,10 +142,11 @@ describe('AST', () => {
     })
   })
 
-  it('ConstructorDefinition', () => {
-    var ast = parseNode("constructor(uint a) {}")
+  it('FunctionDefinition constructor case', () => {
+    var ast = parseNode("constructor(uint a) public {}")
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
+      "natspec": null,
       "name": null,
       "parameters": [
         {
@@ -160,11 +161,12 @@ describe('AST', () => {
           "isIndexed": false
         }
       ],
+      "returnParameters": null,
       "body": {
         "type": "Block",
         "statements": []
       },
-      "visibility": "default",
+      "visibility": "public",
       "modifiers": [],
       "isConstructor": true,
       "isFallback": false,
@@ -173,13 +175,35 @@ describe('AST', () => {
     })
   })
 
-  it('FallbackDefinition', () => {
+  it('FunctionDefinition fallback case', () => {
     var ast = parseNode("fallback () external {}")
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
       "natspec": null,
       "name": null,
       "parameters": [],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "external",
+      "modifiers": [],
+      "isConstructor": false,
+      "isFallback": true,
+      "isReceiveEther": false,
+      "stateMutability": null,
+    })
+  })
+  
+  it('FunctionDefinition fallback old definition', () => {
+    var ast = parseNode("function () external {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "natspec": null,
+      "name": '',
+      "parameters": [],
+      "returnParameters": null,
       "body": {
         "type": "Block",
         "statements": []
@@ -193,21 +217,38 @@ describe('AST', () => {
     })
   })
 
-  it('FallbackDefinition missing "external" decorator throws', () => {
-    assert.throws(() => parseNode("fallback () {}"), Error, 'Fallback functions have to be declared "external"');
+  it('FunctionDefinition fallback case missing "external" decorator throws', () => {
+    assert.throws(
+      () => parseNode("fallback () {}"),
+      Error,
+      'Fallback functions have to be declared "external"'
+    );
   })
 
-  it('FallbackDefinition with parameters throws', () => {
-    assert.throws(() => parseNode("fallback (uint256 myUint) external {}"), Error, 'Fallback functions cannot have parameters');
+  it('FunctionDefinition fallback case with parameters throws', () => {
+    assert.throws(
+      () => parseNode("fallback (uint256 myUint) external {}"),
+      Error,
+      'Fallback functions cannot have parameters'
+    );
   })
 
-  it('ReceiveDefinition', () => {
+  it('FunctionDefinition fallback case with return parameters throws', () => {
+    assert.throws(
+      () => parseNode("fallback () external returns (uint256 myUint) {}"),
+      Error,
+      'Fallback functions cannot have return parameters'
+    );
+  })
+
+  it('FunctionDefinition receive ether case', () => {
     var ast = parseNode("receive () external payable {}")
     assert.deepEqual(ast, {
       "type": "FunctionDefinition",
       "natspec": null,
       "name": null,
       "parameters": [],
+      "returnParameters": null,
       "body": {
         "type": "Block",
         "statements": []
@@ -221,16 +262,32 @@ describe('AST', () => {
     })
   })
 
-  it('ReceiveDefinition missing "external" decorator throws', () => {
-    assert.throws(() => parseNode("receive () payable {}"), Error, 'Receive Ether functions have to be declared "external"');
+  it('FunctionDefinition receive ether case missing "external" decorator throws', () => {
+    assert.throws(
+      () => parseNode("receive () payable {}"),
+      Error,
+      'Receive Ether functions have to be declared "external"');
   })
 
-  it('ReceiveDefinition missing "payable" decorator throws', () => {
-    assert.throws(() => parseNode("receive () external {}"), Error, 'Receive Ether functions have to be declared "payable"');
+  it('FunctionDefinition receive ether case missing "payable" decorator throws', () => {
+    assert.throws(
+      () => parseNode("receive () external {}"),
+      Error,
+      'Receive Ether functions have to be declared "payable"');
   })
 
-  it('ReceiveDefinition with parameters throws', () => {
-    assert.throws(() => parseNode("receive (uint256 myUint) external payable {}"), Error, 'Receive Ether functions cannot have parameters');
+  it('FunctionDefinition receive ether case with parameters throws', () => {
+    assert.throws(
+      () => parseNode("receive (uint256 myUint) external payable {}"),
+      Error,
+      'Receive Ether functions cannot have parameters');
+  })
+
+  it('FunctionDefinition receive ether case with return parameters throws', () => {
+    assert.throws(
+      () => parseNode("receive () external payable returns (uint256 myUint) {}"),
+      Error,
+      'Receive Ether functions cannot have return parameters');
   })
 
   it("FunctionDefinition", function() {
