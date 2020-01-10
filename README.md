@@ -4,17 +4,19 @@
 </sup><br/><br/>
 
 
-solidity-parser-antlr
+solidity-parser-diligence
 =====================
 
-A Solidity parser built on top of a robust [ANTLR4 grammar](https://github.com/solidityj/solidity-antlr4).
+A Solidity parser built on top of a robust [ANTLR4 grammar](https://github.com/consensys/solidity-antlr4).
 
 Now maintained by the ConsenSys Diligence team! :tada:
+
+You can find this new package in NPM at `solidity-parser-diligence` (https://www.npmjs.com/package/solidity-parser-diligence).
 
 ### Usage
 
 ```javascript
-import parser from 'solidity-parser-antlr';
+import parser from 'solidity-parser-diligence';
 
 var input = `
     contract test {
