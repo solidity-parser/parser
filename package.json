@@ -1,6 +1,6 @@
 {
   "name": "solidity-parser-diligence",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.js",
   "types": "./index.d.ts",
