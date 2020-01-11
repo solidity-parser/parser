@@ -1,5 +1,4 @@
 const antlr4 = require('./antlr4/index')
-const parseComments = require('./natspec')
 
 function toText(ctx) {
   if (ctx !== null) {
@@ -117,18 +116,11 @@ const transformAST = {
 
   ContractDefinition(ctx) {
     const name = toText(ctx.identifier())
-    let natspec = null
-    let kind
-    if (ctx.natSpec()) {
-      natspec = parseComments(toText(ctx.getChild(0)))
-      kind = toText(ctx.getChild(1))
-    } else {
-      kind = toText(ctx.getChild(0))
-    }
+    const kind = toText(ctx.getChild(0))
+    
     this._currentContract = name
 
     return {
-      natspec,
       name,
       baseContracts: this.visit(ctx.inheritanceSpecifier()),
       subNodes: this.visit(ctx.contractPart()),
@@ -173,11 +165,6 @@ const transformAST = {
     let stateMutability = null
     if (ctx.modifierList().stateMutability(0)) {
       stateMutability = toText(ctx.modifierList().stateMutability(0))
-    }
-
-    let natspec = null
-    if (ctx.natSpec()) {
-      natspec = parseComments(toText(ctx.getChild(0)))
     }
 
     // see what type of function we're dealing with
@@ -286,7 +273,6 @@ const transformAST = {
     }
 
     return {
-      natspec,
       name,
       parameters,
       returnParameters,
@@ -1068,12 +1054,7 @@ const transformAST = {
   },
 
   EventDefinition(ctx) {
-    let natspec = null
-    if (ctx.natSpec()) {
-      natspec = parseComments(toText(ctx.getChild(0)))
-    }
     return {
-      natspec,
       name: toText(ctx.identifier()),
       parameters: this.visit(ctx.eventParameterList()),
       isAnonymous: !!ctx.AnonymousKeyword()
