@@ -1,3 +1,14 @@
+pragma solidity 0.4.4;
+pragma solidity ^0.4.4;
+pragma solidity ~0.4.4;
+pragma solidity >0.4.4;
+pragma solidity >=0.4.4;
+pragma solidity <0.4.4;
+pragma solidity <=0.4.4;
+pragma solidity =0.4.4;
+pragma solidity 0.4;
+pragma solidity >=0.5.0 <0.7.0;
+
 library a {}
 library b {}
 library c {}
@@ -17,11 +28,6 @@ contract c {
 contract c {
     uint[10] a;
     uint[] a2;
-
-    /***************
-    GLOBAL CONSTANTS
-    ***************/
-
     struct x { uint[2**20] b; y[0] c; }
     struct y { uint d; mapping(uint=>x)[] e; }
 }
@@ -194,6 +200,7 @@ contract test {
 contract test {
     string a = hex"00FF0000";
     string b = hex'00AA0000';
+    string b = hex'00AA_0000';
 }
 contract test {
     function fun(uint256 a) {
@@ -439,6 +446,7 @@ contract test {
     function fun(uint256 a) {
         var b = 2;
         uint256 c = 0x87;
+        uint256 d = 0X78;
         mapping(address=>bytes32) d;
         bytes32 name = "Solidity";
     }
@@ -454,50 +462,80 @@ contract c {
     function f_internal() internal {}
 }
 contract test {
-    uint256 constant FIXED_ONE = uint256(1) << PRECISION;
     function fun(uint256 a) {
         while (true) { uint256 x = 1; break; continue; } x = 9;
     }
 }
+
 contract test {
   function() {
-	assembly {
-    start:
-        mstore(0x40, 0x60) // store the "free memory pointer"
-        // function dispatcher
-        switch div(calldataload(0), exp(2, 226))
-        case 0xb3de648b {
-            let (r) := f(calldataload(4))
-            let ret := $allocate(0x20)
-            mstore(ret, r)
-            return(ret, 0x20)
-        }
-        default { revert(0, 0) }
-        // memory allocator
-        function $allocate(size) -> pos {
-            pos := mload(0x40)
-            mstore(0x40, add(pos, size))
-            =: pos
-        }
-        // the contract function
-        function f(x) -> y {
-            y := 1
-            for { let i := 0 } lt(i, x) { i := add(i, 1) } {
-                y := mul(2, y)
-            }
-        }
+		assembly {
+			mstore(0x40, 0x60) // store the "free memory pointer"
+			// function dispatcher
+			switch div(calldataload(0), exp(2, 226))
+			case 0xb3de648b {
+				let (r) := f(calldataload(4))
+				let ret := $allocate(0x20)
+				mstore(ret, r)
+				return(ret, 0x20)
+			}
+			default { revert(0, 0) }
+			// memory allocator
+			function $allocate(size) -> pos {
+				pos := mload(0x40)
+				mstore(0x40, add(pos, size))
+			}
+			// the contract function
+			function f(x) -> y {
+				y := 1
+				for { let i := 0 } lt(i, x) { i := add(i, 1) } {
+					y := mul(2, y)
+				}
+				if gt(y, 2) { revert(0, 0) }
+			}
+		}
+  }
+}
+
+contract test {
+  function f() view {
+    return 2;
+  }
+  function g() pure {
+    return 2;
+  }
+}
+
+contract test {
+  function f() {
+    uint256 a = 2.3e5;
+  }
+}
+
+contract test {
+  function f() {
+    uint256 a;
+    (a,) = g();
+    (,) = g();
+  }
+}
+
+contract test {
+  function foo() public returns (byte b) {
+    assembly {
+      n := byte(0x0)
     }
   }
 }
-/**
- * @title ERC20 interface
- * @dev see https://github.com/ethereum/EIPs/issues/20
- */
-contract ERC20 is ERC20Basic {
-  function allowance(address owner, address spender) constant returns (uint256);
-  function transferFrom(address from, address to, uint256 value);
-  function approve(address spender, uint256 value);
-  event Approval(address indexed owner, address indexed spender, uint256 value);
+
+contract test {
+    function() {
+        emit EventCalled(1, 2, 3);
+    }
+}
+
+contract test {
+    constructor(uint a, uint b) withModifier public {}
 }
 
 contract test {
@@ -506,27 +544,72 @@ contract test {
   }
 }
 
-contract C {
-  address payable constant a = address(0);
-}
-
-contract C {
-	function f() public pure returns(address payable[] memory m) {
-		m = new address payable[](10);
-	}
-}
-
-contract C {
-  event e(bytes calldata);
+contract test {
+  uint x = .1 ether;
 }
 
 contract test {
-    function world(bytes memory b) public {
-        uint256[] memory a;
-        a = abi.decode(b, (uint256[]));
+  function () {
+    type(Proxy).creationCode;
+  }
+}
 
-        bytes memory itemBytes;
-        Imported.Item[] memory items = abi.decode(itemBytes, (Imported.Item[]));
+contract test {
+  uint x = 1000000;
+  int x2 = -1000000;
+  int x3 = -1000000 * 200;
+  uint y = .25;
+  uint y2 = 0.25;
+  uint y3 = 10.25;
+  uint y4 = 100.25;
+  uint y5 = 0.0025 * 1e18;
+  uint z = 0x11_22;
+  uint z2 = 0x1122;
+}
+
+contract test {
+  function _finalization() internal {
+    if (goalReached()) {
+      _escrow.close();
+      _escrow.beneficiaryWithdraw();
+    } else {
+      _escrow.enableRefunds();
+    }
+
+    super._finalization();
+  }
+}
+
+contract test {
+  function testFunction() {
+		assembly {
+			function power(base, exponent) -> result {
+        switch exponent
+        case 0 { result := 1 }
+        case 1 { result := base }
+        default {
+            result := power(mul(base, base), div(exponent, 2))
+            switch mod(exponent, 2)
+            case 1 {
+              result := mul(base, result)
+              leave
+            }
+        }
+    }
+		}
+  }
+}
+
+contract Sharer {
+    function sendHalf(address payable addr) public payable returns (uint balance) {
+        require(msg.value % 2 == 0, "Even value required.");
+        uint balanceBeforeTransfer = address(this).balance;
+        addr.transfer(msg.value / 2);
+        // Since transfer throws an exception on failure and
+        // cannot call back here, there should be no way for us to
+        // still have half of the money.
+        assert(address(this).balance == balanceBeforeTransfer - msg.value / 2);
+        return address(this).balance;
     }
 }
 
