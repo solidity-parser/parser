@@ -55,7 +55,7 @@ function getTokenType(value) {
 }
 
 function getTokenTypeMap() {
-  const filePath = path.join(__dirname, '../lib/Solidity.tokens')
+  const filePath = path.join(__dirname, './lib/Solidity.tokens')
 
   return fs
     .readFileSync(filePath)
