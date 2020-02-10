@@ -1,5 +1,4 @@
-const fs = require('fs')
-const path = require('path')
+import tokens from './lib/Solidity.tokens'
 
 const TYPE_TOKENS = [
   'var',
@@ -55,11 +54,7 @@ function getTokenType(value) {
 }
 
 function getTokenTypeMap() {
-  const filePath = path.join(__dirname, '../lib/Solidity.tokens')
-
-  return fs
-    .readFileSync(filePath)
-    .toString('utf-8')
+  return tokens
     .split('\n')
     .map(line => rsplit(line, '='))
     .reduce((acum, [value, key]) => {
