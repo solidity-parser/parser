@@ -644,8 +644,14 @@ contract FeedConsumer {
     }
 }
 
-
 contract test {
   receive () external payable {}
   fallback () external payable {}
+}
+
+contract c {
+    string a = "aaa"
+    "bbb";
+    string b = "aaa""bbb";
+    string c = "aaa"  "bbb";
 }

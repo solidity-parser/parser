@@ -794,5 +794,14 @@ SolidityListener.prototype.exitOverrideSpecifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SolidityParser#stringLiteral.
+SolidityListener.prototype.enterStringLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#stringLiteral.
+SolidityListener.prototype.exitStringLiteral = function(ctx) {
+};
+
+
 
 exports.SolidityListener = SolidityListener;

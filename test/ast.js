@@ -923,6 +923,30 @@ describe('AST', () => {
     })
   })
 
+  it("Multiline StringLiteral with newline", function() {
+    var expr = parseExpression("\"Hello \"\n\"World\"")
+    assert.deepEqual(expr, {
+      "type": "StringLiteral",
+      "value": "Hello World",
+    })
+  })
+
+  it("Multiline StringLiteral with space", function() {
+    var expr = parseExpression("\"Hello \" \"World\"")
+    assert.deepEqual(expr, {
+      "type": "StringLiteral",
+      "value": "Hello World",
+    })
+  })
+
+  it("Multiline StringLiteral with no space", function() {
+    var expr = parseExpression("\"Hello \"\"World\"")
+    assert.deepEqual(expr, {
+      "type": "StringLiteral",
+      "value": "Hello World",
+    })
+  })
+
   it("HexLiteral", function() {
     var expr = parseExpression("hex\"fafafa\"")
     assert.deepEqual(expr, {

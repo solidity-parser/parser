@@ -877,13 +877,21 @@ const transformAST = {
       }
     }
 
-    if (ctx.StringLiteral()) {
-      const text = toText(ctx)
-      const singleQuotes = text[0] === "'"
-      const textWithoutQuotes = text.substring(1, text.length - 1)
-      const value = singleQuotes
-        ? textWithoutQuotes.replace(new RegExp("\\\\'", 'g'), "'")
-        : textWithoutQuotes.replace(new RegExp('\\\\"', 'g'), '"')
+    if (ctx.stringLiteral()) {
+      const value = ctx.stringLiteral().StringLiteralFragment().map(
+        stringLiteralFragmentCtx => {
+          const text = toText(stringLiteralFragmentCtx)
+          const singleQuotes = text[0] === "'"
+          const textWithoutQuotes = text.substring(1, text.length - 1)
+          const value = singleQuotes
+            ? textWithoutQuotes.replace(new RegExp("\\\\'", 'g'), "'")
+            : textWithoutQuotes.replace(new RegExp('\\\\"', 'g'), '"')
+
+          return value
+        }
+      ).join("")
+      
+
       return {
         type: 'StringLiteral',
         value
@@ -1027,7 +1035,7 @@ const transformAST = {
   },
 
   ImportDirective(ctx) {
-    const pathString = toText(ctx.StringLiteral())
+    const pathString = toText(ctx.StringLiteralFragment())
     let unitAlias = null
     let symbolAliases = null
 
@@ -1113,8 +1121,8 @@ const transformAST = {
 
   InlineAssemblyStatement(ctx) {
     let language = null
-    if (ctx.StringLiteral()) {
-      language = toText(ctx.StringLiteral())
+    if (ctx.StringLiteralFragment()) {
+      language = toText(ctx.StringLiteralFragment())
       language = language.substring(1, language.length - 1)
     }
 
@@ -1140,8 +1148,8 @@ const transformAST = {
       }
     }
 
-    if (ctx.StringLiteral()) {
-      text = toText(ctx.StringLiteral())
+    if (ctx.stringLiteral()) {
+      text = toText(ctx.stringLiteral())
       return {
         type: 'StringLiteral',
         value: text.substring(1, text.length - 1)
@@ -1180,7 +1188,7 @@ const transformAST = {
   AssemblyLiteral(ctx) {
     let text
 
-    if (ctx.StringLiteral()) {
+    if (ctx.stringLiteral()) {
       text = toText(ctx)
       return {
         type: 'StringLiteral',
