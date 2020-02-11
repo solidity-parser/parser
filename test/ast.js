@@ -166,6 +166,7 @@ describe('AST', () => {
       "isConstructor": true,
       "isFallback": false,
       "isReceiveEther": false,
+      "isVirtual": false,
       "stateMutability": null,
     })
   })
@@ -186,6 +187,7 @@ describe('AST', () => {
       "isConstructor": false,
       "isFallback": true,
       "isReceiveEther": false,
+      "isVirtual": false,
       "stateMutability": null,
     })
   })
@@ -206,6 +208,7 @@ describe('AST', () => {
       "isConstructor": false,
       "isFallback": true,
       "isReceiveEther": false,
+      "isVirtual": false,
       "stateMutability": null,
     })
   })
@@ -250,6 +253,7 @@ describe('AST', () => {
       "isConstructor": false,
       "isFallback": false,
       "isReceiveEther": true,
+      "isVirtual": false,
       "stateMutability": "payable",
     })
   })
@@ -310,7 +314,27 @@ describe('AST', () => {
       "isConstructor": false,
       "isFallback": false,
       "isReceiveEther": false,
+      "isVirtual": false,
       "stateMutability": "pure",
+    })
+
+     ast = parseNode("function foo() virtual public {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "name": "foo",
+      "parameters": [],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "public",
+      "modifiers": [],
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": true,
+      "stateMutability": null,
     })
 
     // Function Definition with return parameters
@@ -353,6 +377,7 @@ describe('AST', () => {
       "isConstructor": false,
       "isFallback": false,
       "isReceiveEther": false,
+      "isVirtual": false,
       "stateMutability": "pure"
     })
   })

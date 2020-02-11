@@ -147,6 +147,7 @@ const transformAST = {
     let isConstructor = false
     let isFallback = false
     let isReceiveEther = false
+    let isVirtual = false
     let name = null
     let parameters = []
     let returnParameters = null
@@ -266,6 +267,11 @@ const transformAST = {
         } else if (ctx.modifierList().PrivateKeyword(0)) {
           visibility = 'private'
         }
+        
+        // check if function is virtual
+        if (ctx.modifierList().VirtualKeyword(0)) {
+          isVirtual = true
+        }
 
         isConstructor = (name === this._currentContract)
         isFallback = (name === '')
@@ -282,6 +288,7 @@ const transformAST = {
       isConstructor,
       isReceiveEther,
       isFallback,
+      isVirtual,
       stateMutability
     }
   },
