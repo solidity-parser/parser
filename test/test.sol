@@ -201,6 +201,8 @@ contract test {
     string a = hex"00FF0000";
     string b = hex'00AA0000';
     string b = hex'00AA_0000';
+    string b = hex'';
+    string b = hex"";
 }
 contract test {
     function fun(uint256 a) {

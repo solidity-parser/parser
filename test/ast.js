@@ -980,6 +980,14 @@ describe('AST', () => {
     })
   })
 
+  it("Empty HexLiteral", function() {
+    var expr = parseExpression("hex\"\"")
+    assert.deepEqual(expr, {
+      type: "HexLiteral",
+      value: "hex\"\""
+    })
+  })
+
   it("BooleanLiteral", function() {
     var expr = parseExpression("false")
     assert.deepEqual(expr, {
