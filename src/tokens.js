@@ -63,7 +63,7 @@ function getTokenTypeMap() {
     }, {})
 }
 
-function buildTokenList(tokens, options) {
+export function buildTokenList(tokens, options) {
   const tokenTypes = getTokenTypeMap()
 
   return tokens.map(token => {
@@ -81,5 +81,3 @@ function buildTokenList(tokens, options) {
     return node
   })
 }
-
-exports.buildTokenList = buildTokenList
