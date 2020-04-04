@@ -73,6 +73,7 @@ export type ASTNodeTypeString =
   | 'SubAssembly'
   | 'TupleExpression'
   | 'TypeNameExpression'
+  | 'NameValueExpression'
   | 'BooleanLiteral'
   | 'NumberLiteral'
   | 'Identifier'
@@ -325,6 +326,11 @@ export interface TupleExpression extends BaseASTNode {
 export interface TypeNameExpression extends BaseASTNode {
   type: 'TypeNameExpression';
   typeName: ElementaryTypeName | UserDefinedTypeName;
+}
+export interface NameValueExpression extends BaseASTNode {
+  type: 'NameValueExpression';
+  expression: Expression;
+  arguments: {[name: string]: Expression};
 }
 export interface NumberLiteral extends BaseASTNode {
   type: 'NumberLiteral';

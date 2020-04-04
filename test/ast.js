@@ -1829,4 +1829,67 @@ describe('AST', () => {
       "type": "AssemblyIf"
     })
   })
+
+  it("Function call with name/value list", function() {
+    let expr = parseExpression("recipient.call{value: 1}()")
+    assert.deepEqual(expr, {
+      "type": "FunctionCall",
+      "expression": {
+        "arguments": {
+          "type": "NameValueList",
+          "values": {
+            "value": {
+              "number": "1",
+              "subdenomination": null,
+              "type": "NumberLiteral"
+            }
+          }
+        },
+        "expression": {
+          "expression": {
+            "name": "recipient",
+            "type": "Identifier"
+          },
+          "memberName": "call",
+          "type": "MemberAccess"
+        },
+        "type": "NameValueExpression"
+      },
+      "arguments": [],
+      "names": []
+    })
+
+    expr = parseExpression("recipient.call{value: 1, gas: 21000}()")
+    assert.deepEqual(expr, {
+      "type": "FunctionCall",
+      "expression": {
+        "arguments": {
+          "type": "NameValueList",
+          "values": {
+            "value": {
+              "number": "1",
+              "subdenomination": null,
+              "type": "NumberLiteral"
+            },
+            "gas": {
+              "number": "21000",
+              "subdenomination": null,
+              "type": "NumberLiteral"
+            }
+          }
+        },
+        "expression": {
+          "expression": {
+            "name": "recipient",
+            "type": "Identifier"
+          },
+          "memberName": "call",
+          "type": "MemberAccess"
+        },
+        "type": "NameValueExpression"
+      },
+      "arguments": [],
+      "names": []
+    })
+  })
 })
