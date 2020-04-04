@@ -278,6 +278,14 @@ const transformAST = {
         break
     }
 
+    let override
+    const overrideSpecifier = ctx.modifierList().overrideSpecifier()
+    if (overrideSpecifier.length === 0) {
+      override = null
+    } else {
+      override = this.visit(overrideSpecifier[0].userDefinedTypeName())
+    }
+
     return {
       name,
       parameters,
@@ -285,6 +293,7 @@ const transformAST = {
       body: block,
       visibility,
       modifiers,
+      override,
       isConstructor,
       isReceiveEther,
       isFallback,

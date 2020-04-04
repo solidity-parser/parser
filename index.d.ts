@@ -151,6 +151,7 @@ export interface FunctionDefinition extends BaseASTNode {
   isConstructor: boolean;
   returnParameters?: VariableDeclaration[];
   body?: Block;
+  override: null | UserDefinedTypeName[];
 }
 export interface EventDefinition extends BaseASTNode {
   type: 'EventDefinition';
