@@ -4,6 +4,12 @@ solidity-parser
 This is a fork of ([@federicobond](https://github.com/federicobond))'s original [repo](https://github.com/federicobond/solidity-parser-antlr),
 with some extra features taken from [Consensys Diligence's alternative fork](https://github.com/consensys/solidity-parser-antlr).
 
+### Installation
+
+```
+npm install @solidity-parser/parser
+```
+
 ### Usage
 
 ```javascript
