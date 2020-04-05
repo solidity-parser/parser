@@ -70,13 +70,25 @@ describe('AST', () => {
 
   })
 
-  it("PragmaDirective", function() {
-    var ast = parser.parse("pragma solidity ^0.4.0;")
-    var pragma = ast.children[0]
-    assert.deepEqual(pragma, {
-      "type": "PragmaDirective",
-      "name": "solidity",
-      "value": "^0.4.0"
+  const versions = [
+    "0.4.12",
+    "0.0.0", "0.0", "0",
+    ">0.5.1", ">0.5", ">1",
+    ">=100.500.100", ">=100.500",
+    "^0.4.0", "^0.4", "^1",
+    "~0.3.11",, "~1.3", "~10",
+    "=0.0.1", "=0.6", "=1",
+    "<=1.1.1", "<=11.11", "<=111",
+    "<0.5.11"]
+  versions.forEach(function (version) {
+    it("PragmaDirective " + version, function() {
+      var ast = parser.parse("pragma solidity " + version + ";")
+      var pragma = ast.children[0]
+      assert.deepEqual(pragma, {
+        "type": "PragmaDirective",
+        "name": "solidity",
+        "value": version
+      })
     })
   })
 
