@@ -68,6 +68,29 @@ describe("#parse", function() {
     })
 
   })
+
+  it("parses empty files", function() {
+    const ast = parser.parse('')
+    assert.deepEqual(ast, { type: 'SourceUnit', children: [] })
+  })
+
+  it("parses empty files with loc enabled", function() {
+    const ast = parser.parse('', { loc: true })
+    assert.deepEqual(ast, {
+      type: 'SourceUnit',
+      children: [],
+      loc: {
+        start: {
+          line: 1,
+          column: 0,
+        },
+        end: {
+          line: 1,
+          column: 0,
+        }
+      }
+    })
+  })
 })
 
 describe("#visit", function() {
