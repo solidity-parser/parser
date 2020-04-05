@@ -104,7 +104,13 @@ This project can be linked to a forked `@solidity-parser/antlr` project by editi
 git submodule sync
 ```
 
-The Solidity ANTLR file [Solidity.g4](./solidity-antlr4/Solidity.g4) can be built with the following. This will download the ANTLR jar file to [solidity-antlr4/antlr4.jar](./solidity-antlr4/antlr4.jar) if it doesn't already exist.
+The Solidity ANTLR file [Solidity.g4](./antlr/Solidity.g4) can be built with the following. This will also download the ANTLR Java Archive (jar) file to `antlr/antlr4.jar` if it doesn't already exist. The generated ANTLR tokens and JavaScript files are copied the [src](./src) folder.
+
+```
+yarn run antlr
+```
+
+The files to be distributed with the npm package are in the `dist` folder and built by running
 
 ```
 yarn run build
