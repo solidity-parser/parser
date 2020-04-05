@@ -13,19 +13,20 @@ npm install @solidity-parser/parser
 ### Usage
 
 ```javascript
-import parser from '@solidity-parser/parser';
+const parser = require('@solidity-parser/parser');
 
-var input = `
+const input = `
     contract test {
         uint256 a;
         function f() {}
     }
 `
 try {
-    parser.parse(input)
+    const ast = parser.parse(input)
+    console.log(ast)
 } catch (e) {
     if (e instanceof parser.ParserError) {
-        console.log(e.errors)
+        console.error(e.errors)
     }
 }
 ```
