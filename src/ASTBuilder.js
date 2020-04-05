@@ -1337,8 +1337,8 @@ ASTBuilder.prototype._loc = function(ctx) {
       column: ctx.start.column
     },
     end: {
-      line: ctx.stop.line,
-      column: ctx.stop.column
+      line: ctx.stop ? ctx.stop.line : ctx.start.line,
+      column: ctx.stop ? ctx.stop.column : ctx.start.column
     }
   }
   return { loc: sourceLocation }
