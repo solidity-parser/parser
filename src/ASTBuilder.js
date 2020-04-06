@@ -756,6 +756,19 @@ const transformAST = {
             index: this.visit(ctx.getChild(2))
           }
         }
+
+        // expression with nameValueList
+        if (
+          toText(ctx.getChild(1)) === '{' &&
+          toText(ctx.getChild(3)) === '}'
+        ) {
+          return {
+            type: 'NameValueExpression',
+            expression: this.visit(ctx.getChild(0)),
+            arguments: this.visit(ctx.getChild(2))
+          }
+        }
+
         break
 
       case 5:
@@ -816,6 +829,20 @@ const transformAST = {
     }
 
     throw new Error('Unrecognized expression')
+  },
+
+  NameValueList(ctx) {
+    const values = {}
+
+    for (const nameValue of ctx.nameValue()) {
+      const name = toText(nameValue.identifier())
+      values[name]  =this.visit(nameValue.expression())
+    }
+
+    return {
+      type: 'NameValueList',
+      values,
+    }
   },
 
   StateVariableDeclaration(ctx) {

@@ -677,3 +677,11 @@ contract Inherited is Base1, Base2
     // override it
     function foo() public override(Base1, Base2) {}
 }
+
+contract CallWithNameValue {
+  function foo() {
+    recipient.call("");
+    recipient.call{value: 1}("");
+    recipient.call{value: 1, gas: 1000}("");
+  }
+}
