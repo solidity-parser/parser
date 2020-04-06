@@ -7,7 +7,8 @@
   "scripts": {
     "antlr": "sh scripts/antlr.sh",
     "build": "rm -rf dist && babel --out-dir=dist src --copy-files",
-    "prepare": "yarn build",
+    "build:browser": "webpack",
+    "prepare": "yarn build && yarn build:browser",
     "prettier": "find src -name *.js | egrep -v '^src/(lib|antlr4)/' | xargs prettier --no-semi --single-quote --write",
     "eslint": "eslint src",
     "pretest": "eslint src && tslint-config-prettier-check ./tslint.json",
@@ -27,7 +28,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "babel-cli": "^6.26.0",
+    "babel-loader": "^8.1.0",
     "babel-plugin-inline-import": "^3.0.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
@@ -39,9 +43,12 @@
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
+    "raw-loader": "^4.0.0",
     "tslint": "5.19.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "3.6.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
     "yarn": "^1.17.3"
   },
   "nyc": {
