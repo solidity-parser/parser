@@ -175,6 +175,7 @@ describe('AST', () => {
       },
       "visibility": "public",
       "modifiers": [],
+      "override": null,
       "isConstructor": true,
       "isFallback": false,
       "isReceiveEther": false,
@@ -196,6 +197,7 @@ describe('AST', () => {
       },
       "visibility": "external",
       "modifiers": [],
+      "override": null,
       "isConstructor": false,
       "isFallback": true,
       "isReceiveEther": false,
@@ -217,6 +219,7 @@ describe('AST', () => {
       },
       "visibility": "external",
       "modifiers": [],
+      "override": null,
       "isConstructor": false,
       "isFallback": true,
       "isReceiveEther": false,
@@ -262,6 +265,7 @@ describe('AST', () => {
       },
       "visibility": "external",
       "modifiers": [],
+      "override": null,
       "isConstructor": false,
       "isFallback": false,
       "isReceiveEther": true,
@@ -298,6 +302,81 @@ describe('AST', () => {
       'Receive Ether functions cannot have return parameters');
   })
 
+  it('FunctionDefinition with override', () => {
+    var ast = parseNode("function foo() public override {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "name": "foo",
+      "parameters": [],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "public",
+      "modifiers": [],
+      "override": [],
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": false,
+      "stateMutability": null,
+    })
+  })
+
+  it('FunctionDefinition with one explicit override', () => {
+    var ast = parseNode("function foo() public override(Base) {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "name": "foo",
+      "parameters": [],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "public",
+      "modifiers": [],
+      "override": [{
+        "type": "UserDefinedTypeName",
+        "namePath": "Base"
+      }],
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": false,
+      "stateMutability": null,
+    })
+  })
+
+  it('FunctionDefinition with two overrides', () => {
+    var ast = parseNode("function foo() public override(Base1, Base2) {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "name": "foo",
+      "parameters": [],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "public",
+      "modifiers": [],
+      "override": [{
+        "type": "UserDefinedTypeName",
+        "namePath": "Base1"
+      }, {
+        "type": "UserDefinedTypeName",
+        "namePath": "Base2"
+      }],
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": false,
+      "stateMutability": null,
+    })
+  })
+
   it("FunctionDefinition", function() {
     var ast = parseNode("function foo(uint a) pure {}")
     assert.deepEqual(ast, {
@@ -323,6 +402,7 @@ describe('AST', () => {
       },
       "visibility": "default",
       "modifiers": [],
+      "override": null,
       "isConstructor": false,
       "isFallback": false,
       "isReceiveEther": false,
@@ -342,6 +422,7 @@ describe('AST', () => {
       },
       "visibility": "public",
       "modifiers": [],
+      "override": null,
       "isConstructor": false,
       "isFallback": false,
       "isReceiveEther": false,
@@ -386,6 +467,7 @@ describe('AST', () => {
       },
       "visibility": "default",
       "modifiers": [],
+      "override": null,
       "isConstructor": false,
       "isFallback": false,
       "isReceiveEther": false,
