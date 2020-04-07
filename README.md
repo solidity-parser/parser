@@ -122,7 +122,7 @@ The [mocha](https://mochajs.org/) tests under the [test](./test) folder can be r
 yarn run test
 ```
 
-## User By
+## Used By
 
 * [sol2uml](https://github.com/naddison36/sol2uml)
 
