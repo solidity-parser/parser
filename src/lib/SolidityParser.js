@@ -311,10 +311,10 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u017f\u017c\u0003\u0002\u0002\u0002\u017f\u017d\u0003\u0002\u0002",
     "\u0002\u017f\u017e\u0003\u0002\u0002\u0002\u0180\'\u0003\u0002\u0002",
     "\u0002\u0181\u0182\u0007\u001f\u0002\u0002\u0182\u0183\u00052\u001a",
-    "\u0002\u0183)\u0003\u0002\u0002\u0002\u0184\u018d\u0005\"\u0012\u0002",
-    "\u0185\u018d\u0005J&\u0002\u0186\u018d\u0007q\u0002\u0002\u0187\u018d",
-    "\u0007v\u0002\u0002\u0188\u018d\u0007s\u0002\u0002\u0189\u018d\u0007",
-    "u\u0002\u0002\u018a\u018d\u0007w\u0002\u0002\u018b\u018d\u0005\u00ae",
+    "\u0002\u0183)\u0003\u0002\u0002\u0002\u0184\u018d\u0007q\u0002\u0002",
+    "\u0185\u018d\u0007v\u0002\u0002\u0186\u018d\u0007s\u0002\u0002\u0187",
+    "\u018d\u0007u\u0002\u0002\u0188\u018d\u0007w\u0002\u0002\u0189\u018d",
+    "\u0005J&\u0002\u018a\u018d\u0005\"\u0012\u0002\u018b\u018d\u0005\u00ae",
     "X\u0002\u018c\u0184\u0003\u0002\u0002\u0002\u018c\u0185\u0003\u0002",
     "\u0002\u0002\u018c\u0186\u0003\u0002\u0002\u0002\u018c\u0187\u0003\u0002",
     "\u0002\u0002\u018c\u0188\u0003\u0002\u0002\u0002\u018c\u0189\u0003\u0002",
@@ -3109,28 +3109,6 @@ function ModifierListContext(parser, parent, invokingState) {
 ModifierListContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ModifierListContext.prototype.constructor = ModifierListContext;
 
-ModifierListContext.prototype.modifierInvocation = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(ModifierInvocationContext);
-    } else {
-        return this.getTypedRuleContext(ModifierInvocationContext,i);
-    }
-};
-
-ModifierListContext.prototype.stateMutability = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(StateMutabilityContext);
-    } else {
-        return this.getTypedRuleContext(StateMutabilityContext,i);
-    }
-};
-
 ModifierListContext.prototype.ExternalKeyword = function(i) {
 	if(i===undefined) {
 		i = null;
@@ -3191,6 +3169,28 @@ ModifierListContext.prototype.VirtualKeyword = function(i) {
 };
 
 
+ModifierListContext.prototype.stateMutability = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(StateMutabilityContext);
+    } else {
+        return this.getTypedRuleContext(StateMutabilityContext,i);
+    }
+};
+
+ModifierListContext.prototype.modifierInvocation = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(ModifierInvocationContext);
+    } else {
+        return this.getTypedRuleContext(ModifierInvocationContext,i);
+    }
+};
+
 ModifierListContext.prototype.overrideSpecifier = function(i) {
     if(i===undefined) {
         i = null;
@@ -3236,37 +3236,37 @@ SolidityParser.prototype.modifierList = function() {
             switch(la_) {
             case 1:
                 this.state = 386;
-                this.modifierInvocation();
+                this.match(SolidityParser.ExternalKeyword);
                 break;
 
             case 2:
                 this.state = 387;
-                this.stateMutability();
+                this.match(SolidityParser.PublicKeyword);
                 break;
 
             case 3:
                 this.state = 388;
-                this.match(SolidityParser.ExternalKeyword);
+                this.match(SolidityParser.InternalKeyword);
                 break;
 
             case 4:
                 this.state = 389;
-                this.match(SolidityParser.PublicKeyword);
+                this.match(SolidityParser.PrivateKeyword);
                 break;
 
             case 5:
                 this.state = 390;
-                this.match(SolidityParser.InternalKeyword);
+                this.match(SolidityParser.VirtualKeyword);
                 break;
 
             case 6:
                 this.state = 391;
-                this.match(SolidityParser.PrivateKeyword);
+                this.stateMutability();
                 break;
 
             case 7:
                 this.state = 392;
-                this.match(SolidityParser.VirtualKeyword);
+                this.modifierInvocation();
                 break;
 
             case 8:
