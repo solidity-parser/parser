@@ -685,3 +685,8 @@ contract CallWithNameValue {
     recipient.call{value: 1, gas: 1000}("");
   }
 }
+
+contract FunctionsNamedAsKeywords {
+  function receive() {}
+  function leave() {}
+}

@@ -141,8 +141,8 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0003\u0002\u0005\u000b\u0003\u0002\u0014\u0016\u0003\u0002(*\u0006",
     "\u0002nnttxxzz\u0005\u0002$$58ae\u0003\u00029:\u0003\u0002=>\u0003\u0002",
     "?@\u0004\u0002\u000e\u000eCD\u0003\u0002EF\u0003\u0002\u0007\n\u0003",
-    "\u0002IJ\u0004\u0002\u000b\u000bNW\u0003\u0002gh\u0007\u0002\u000f\u000f",
-    "**__tt}~\u0002\u0497\u0002\u00b9\u0003\u0002\u0002\u0002\u0004\u00be",
+    "\u0002IJ\u0004\u0002\u000b\u000bNW\u0003\u0002gh\b\u0002\u000f\u000f",
+    "**__pptt}~\u0002\u0497\u0002\u00b9\u0003\u0002\u0002\u0002\u0004\u00be",
     "\u0003\u0002\u0002\u0002\u0006\u00c3\u0003\u0002\u0002\u0002\b\u00c7",
     "\u0003\u0002\u0002\u0002\n\u00c9\u0003\u0002\u0002\u0002\f\u00cd\u0003",
     "\u0002\u0002\u0002\u000e\u00d7\u0003\u0002\u0002\u0002\u0010\u00d9\u0003",
@@ -1818,6 +1818,7 @@ SolidityParser.prototype.importDirective = function() {
             case SolidityParser.T__12:
             case SolidityParser.T__39:
             case SolidityParser.T__92:
+            case SolidityParser.LeaveKeyword:
             case SolidityParser.PayableKeyword:
             case SolidityParser.ReceiveKeyword:
             case SolidityParser.Identifier:
@@ -2003,7 +2004,7 @@ SolidityParser.prototype.contractDefinition = function() {
         this.state = 276;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__12) | (1 << SolidityParser.T__23) | (1 << SolidityParser.T__25) | (1 << SolidityParser.T__26) | (1 << SolidityParser.T__27) | (1 << SolidityParser.T__29) | (1 << SolidityParser.T__30))) !== 0) || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ConstructorKeyword - 93)) | (1 << (SolidityParser.FallbackKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__12) | (1 << SolidityParser.T__23) | (1 << SolidityParser.T__25) | (1 << SolidityParser.T__26) | (1 << SolidityParser.T__27) | (1 << SolidityParser.T__29) | (1 << SolidityParser.T__30))) !== 0) || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ConstructorKeyword - 93)) | (1 << (SolidityParser.FallbackKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 273;
             this.contractPart();
             this.state = 278;
@@ -2086,7 +2087,7 @@ SolidityParser.prototype.inheritanceSpecifier = function() {
             this.state = 284;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                 this.state = 283;
                 this.expressionList();
             }
@@ -2489,6 +2490,7 @@ SolidityParser.prototype.usingForDeclaration = function() {
         case SolidityParser.Byte:
         case SolidityParser.Fixed:
         case SolidityParser.Ufixed:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.ReceiveKeyword:
         case SolidityParser.Identifier:
@@ -2579,7 +2581,7 @@ SolidityParser.prototype.structDefinition = function() {
         this.state = 338;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 328;
             this.variableDeclaration();
             this.state = 329;
@@ -2587,7 +2589,7 @@ SolidityParser.prototype.structDefinition = function() {
             this.state = 335;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            while(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+            while(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
                 this.state = 330;
                 this.variableDeclaration();
                 this.state = 331;
@@ -2800,7 +2802,7 @@ SolidityParser.prototype.modifierInvocation = function() {
             this.state = 359;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                 this.state = 358;
                 this.expressionList();
             }
@@ -2992,7 +2994,7 @@ SolidityParser.prototype.functionDescriptor = function() {
             this.state = 376;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
                 this.state = 375;
                 this.identifier();
             }
@@ -3229,7 +3231,7 @@ SolidityParser.prototype.modifierList = function() {
         this.state = 396;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.T__93 - 93)) | (1 << (SolidityParser.ConstantKeyword - 93)) | (1 << (SolidityParser.ExternalKeyword - 93)) | (1 << (SolidityParser.InternalKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.PrivateKeyword - 93)) | (1 << (SolidityParser.PublicKeyword - 93)) | (1 << (SolidityParser.VirtualKeyword - 93)) | (1 << (SolidityParser.PureKeyword - 93)) | (1 << (SolidityParser.ViewKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        while(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.T__93 - 93)) | (1 << (SolidityParser.ConstantKeyword - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.ExternalKeyword - 93)) | (1 << (SolidityParser.InternalKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.PrivateKeyword - 93)) | (1 << (SolidityParser.PublicKeyword - 93)) | (1 << (SolidityParser.VirtualKeyword - 93)) | (1 << (SolidityParser.PureKeyword - 93)) | (1 << (SolidityParser.ViewKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 394;
             this._errHandler.sync(this);
             var la_ = this._interp.adaptivePredict(this._input,35,this._ctx);
@@ -3501,7 +3503,7 @@ SolidityParser.prototype.enumDefinition = function() {
         this.state = 413;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 412;
             this.enumValue();
         }
@@ -3591,7 +3593,7 @@ SolidityParser.prototype.parameterList = function() {
         this.state = 433;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 425;
             this.parameter();
             this.state = 430;
@@ -3690,7 +3692,7 @@ SolidityParser.prototype.parameter = function() {
         this.state = 442;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 441;
             this.identifier();
         }
@@ -3766,7 +3768,7 @@ SolidityParser.prototype.eventParameterList = function() {
         this.state = 453;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 445;
             this.eventParameter();
             this.state = 450;
@@ -3865,7 +3867,7 @@ SolidityParser.prototype.eventParameter = function() {
         this.state = 462;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 461;
             this.identifier();
         }
@@ -3941,7 +3943,7 @@ SolidityParser.prototype.functionTypeParameterList = function() {
         this.state = 473;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 465;
             this.functionTypeParameter();
             this.state = 470;
@@ -4250,7 +4252,7 @@ SolidityParser.prototype.typeName = function(_p) {
                 this.state = 499;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                     this.state = 498;
                     this.expression(0);
                 }
@@ -4781,7 +4783,7 @@ SolidityParser.prototype.block = function() {
         this.state = 544;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__13) | (1 << SolidityParser.T__21) | (1 << SolidityParser.T__24) | (1 << SolidityParser.T__27))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__35 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__40 - 32)) | (1 << (SolidityParser.T__42 - 32)) | (1 << (SolidityParser.T__44 - 32)) | (1 << (SolidityParser.T__45 - 32)) | (1 << (SolidityParser.T__46 - 32)) | (1 << (SolidityParser.T__47 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.BreakKeyword - 93)) | (1 << (SolidityParser.ContinueKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+        while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__13) | (1 << SolidityParser.T__21) | (1 << SolidityParser.T__24) | (1 << SolidityParser.T__27))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__35 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__40 - 32)) | (1 << (SolidityParser.T__42 - 32)) | (1 << (SolidityParser.T__44 - 32)) | (1 << (SolidityParser.T__45 - 32)) | (1 << (SolidityParser.T__46 - 32)) | (1 << (SolidityParser.T__47 - 32)) | (1 << (SolidityParser.T__48 - 32)) | (1 << (SolidityParser.T__49 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.BreakKeyword - 93)) | (1 << (SolidityParser.ContinueKeyword - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
             this.state = 541;
             this.statement();
             this.state = 546;
@@ -4988,6 +4990,7 @@ SolidityParser.prototype.statement = function() {
         case SolidityParser.DecimalNumber:
         case SolidityParser.HexNumber:
         case SolidityParser.HexLiteral:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.TypeKeyword:
         case SolidityParser.ReceiveKeyword:
@@ -5325,11 +5328,11 @@ SolidityParser.prototype.catchClause = function() {
         this.state = 592;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(((((_la - 13)) & ~0x1f) == 0 && ((1 << (_la - 13)) & ((1 << (SolidityParser.T__12 - 13)) | (1 << (SolidityParser.T__21 - 13)) | (1 << (SolidityParser.T__39 - 13)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(((((_la - 13)) & ~0x1f) == 0 && ((1 << (_la - 13)) & ((1 << (SolidityParser.T__12 - 13)) | (1 << (SolidityParser.T__21 - 13)) | (1 << (SolidityParser.T__39 - 13)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 589;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
                 this.state = 588;
                 this.identifier();
             }
@@ -5597,6 +5600,7 @@ SolidityParser.prototype.forStatement = function() {
         case SolidityParser.DecimalNumber:
         case SolidityParser.HexNumber:
         case SolidityParser.HexLiteral:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.TypeKeyword:
         case SolidityParser.ReceiveKeyword:
@@ -5643,6 +5647,7 @@ SolidityParser.prototype.forStatement = function() {
         case SolidityParser.DecimalNumber:
         case SolidityParser.HexNumber:
         case SolidityParser.HexLiteral:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.TypeKeyword:
         case SolidityParser.ReceiveKeyword:
@@ -5661,7 +5666,7 @@ SolidityParser.prototype.forStatement = function() {
         this.state = 617;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
             this.state = 616;
             this.expression(0);
         }
@@ -6009,7 +6014,7 @@ SolidityParser.prototype.returnStatement = function() {
         this.state = 644;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
             this.state = 643;
             this.expression(0);
         }
@@ -6317,7 +6322,7 @@ SolidityParser.prototype.variableDeclarationList = function() {
         this.state = 671;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 670;
             this.variableDeclaration();
         }
@@ -6331,7 +6336,7 @@ SolidityParser.prototype.variableDeclarationList = function() {
             this.state = 675;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__27 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__35 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__50 - 34)) | (1 << (SolidityParser.T__51 - 34)) | (1 << (SolidityParser.T__52 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
                 this.state = 674;
                 this.variableDeclaration();
             }
@@ -6416,7 +6421,7 @@ SolidityParser.prototype.identifierList = function() {
                 this.state = 684;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-                if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+                if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
                     this.state = 683;
                     this.identifier();
                 }
@@ -6432,7 +6437,7 @@ SolidityParser.prototype.identifierList = function() {
         this.state = 693;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 692;
             this.identifier();
         }
@@ -6953,7 +6958,7 @@ SolidityParser.prototype.expression = function(_p) {
                     this.state = 766;
                     this._errHandler.sync(this);
                     _la = this._input.LA(1);
-                    if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+                    if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                         this.state = 765;
                         this.expression(0);
                     }
@@ -6974,7 +6979,7 @@ SolidityParser.prototype.expression = function(_p) {
                     this.state = 772;
                     this._errHandler.sync(this);
                     _la = this._input.LA(1);
-                    if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+                    if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                         this.state = 771;
                         this.expression(0);
                     }
@@ -6984,7 +6989,7 @@ SolidityParser.prototype.expression = function(_p) {
                     this.state = 776;
                     this._errHandler.sync(this);
                     _la = this._input.LA(1);
-                    if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+                    if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                         this.state = 775;
                         this.expression(0);
                     }
@@ -7522,7 +7527,7 @@ SolidityParser.prototype.functionCallArguments = function() {
             this.state = 841;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+            if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
                 this.state = 840;
                 this.nameValueList();
             }
@@ -7559,6 +7564,7 @@ SolidityParser.prototype.functionCallArguments = function() {
         case SolidityParser.DecimalNumber:
         case SolidityParser.HexNumber:
         case SolidityParser.HexLiteral:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.TypeKeyword:
         case SolidityParser.ReceiveKeyword:
@@ -7568,7 +7574,7 @@ SolidityParser.prototype.functionCallArguments = function() {
             this.state = 845;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                 this.state = 844;
                 this.expressionList();
             }
@@ -8035,6 +8041,7 @@ SolidityParser.prototype.assemblyExpression = function() {
         case SolidityParser.T__47:
         case SolidityParser.T__53:
         case SolidityParser.T__92:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.ReceiveKeyword:
         case SolidityParser.Identifier:
@@ -8141,6 +8148,7 @@ SolidityParser.prototype.assemblyCall = function() {
         case SolidityParser.T__12:
         case SolidityParser.T__39:
         case SolidityParser.T__92:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.ReceiveKeyword:
         case SolidityParser.Identifier:
@@ -8159,7 +8167,7 @@ SolidityParser.prototype.assemblyCall = function() {
             this.state = 895;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if(_la===SolidityParser.T__12 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__47 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+            if(_la===SolidityParser.T__12 || ((((_la - 34)) & ~0x1f) == 0 && ((1 << (_la - 34)) & ((1 << (SolidityParser.T__33 - 34)) | (1 << (SolidityParser.T__39 - 34)) | (1 << (SolidityParser.T__47 - 34)) | (1 << (SolidityParser.T__53 - 34)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                 this.state = 894;
                 this.assemblyExpression();
             }
@@ -8392,6 +8400,7 @@ SolidityParser.prototype.assemblyIdentifierOrList = function() {
         case SolidityParser.T__12:
         case SolidityParser.T__39:
         case SolidityParser.T__92:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.ReceiveKeyword:
         case SolidityParser.Identifier:
@@ -8862,7 +8871,7 @@ SolidityParser.prototype.assemblyFunctionDefinition = function() {
         this.state = 958;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
+        if(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0)) {
             this.state = 957;
             this.assemblyIdentifierList();
         }
@@ -9035,6 +9044,7 @@ SolidityParser.prototype.assemblyFor = function() {
         case SolidityParser.DecimalNumber:
         case SolidityParser.HexNumber:
         case SolidityParser.HexLiteral:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.ReceiveKeyword:
         case SolidityParser.Identifier:
@@ -9063,6 +9073,7 @@ SolidityParser.prototype.assemblyFor = function() {
         case SolidityParser.DecimalNumber:
         case SolidityParser.HexNumber:
         case SolidityParser.HexLiteral:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.ReceiveKeyword:
         case SolidityParser.Identifier:
@@ -9382,7 +9393,7 @@ SolidityParser.prototype.tupleExpression = function() {
             this.state = 997;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                 this.state = 996;
                 this.expression(0);
             }
@@ -9396,7 +9407,7 @@ SolidityParser.prototype.tupleExpression = function() {
                 this.state = 1001;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+                if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                     this.state = 1000;
                     this.expression(0);
                 }
@@ -9415,7 +9426,7 @@ SolidityParser.prototype.tupleExpression = function() {
             this.state = 1018;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
+            if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SolidityParser.T__3) | (1 << SolidityParser.T__12) | (1 << SolidityParser.T__21))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SolidityParser.T__31 - 32)) | (1 << (SolidityParser.T__33 - 32)) | (1 << (SolidityParser.T__39 - 32)) | (1 << (SolidityParser.T__50 - 32)) | (1 << (SolidityParser.T__51 - 32)) | (1 << (SolidityParser.T__52 - 32)) | (1 << (SolidityParser.T__53 - 32)) | (1 << (SolidityParser.T__54 - 32)) | (1 << (SolidityParser.T__55 - 32)) | (1 << (SolidityParser.T__56 - 32)) | (1 << (SolidityParser.T__58 - 32)) | (1 << (SolidityParser.T__59 - 32)) | (1 << (SolidityParser.T__60 - 32)) | (1 << (SolidityParser.T__61 - 32)) | (1 << (SolidityParser.T__62 - 32)))) !== 0) || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.Int - 93)) | (1 << (SolidityParser.Uint - 93)) | (1 << (SolidityParser.Byte - 93)) | (1 << (SolidityParser.Fixed - 93)) | (1 << (SolidityParser.Ufixed - 93)) | (1 << (SolidityParser.BooleanLiteral - 93)) | (1 << (SolidityParser.DecimalNumber - 93)) | (1 << (SolidityParser.HexNumber - 93)) | (1 << (SolidityParser.HexLiteral - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.TypeKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0) || _la===SolidityParser.StringLiteralFragment) {
                 this.state = 1010;
                 this.expression(0);
                 this.state = 1015;
@@ -9519,6 +9530,7 @@ SolidityParser.prototype.typeNameExpression = function() {
         case SolidityParser.T__12:
         case SolidityParser.T__39:
         case SolidityParser.T__92:
+        case SolidityParser.LeaveKeyword:
         case SolidityParser.PayableKeyword:
         case SolidityParser.ReceiveKeyword:
         case SolidityParser.Identifier:
@@ -9652,6 +9664,10 @@ IdentifierContext.prototype.PayableKeyword = function() {
     return this.getToken(SolidityParser.PayableKeyword, 0);
 };
 
+IdentifierContext.prototype.LeaveKeyword = function() {
+    return this.getToken(SolidityParser.LeaveKeyword, 0);
+};
+
 IdentifierContext.prototype.Identifier = function() {
     return this.getToken(SolidityParser.Identifier, 0);
 };
@@ -9682,7 +9698,7 @@ SolidityParser.prototype.identifier = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 1031;
         _la = this._input.LA(1);
-        if(!(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0))) {
+        if(!(_la===SolidityParser.T__12 || _la===SolidityParser.T__39 || ((((_la - 93)) & ~0x1f) == 0 && ((1 << (_la - 93)) & ((1 << (SolidityParser.T__92 - 93)) | (1 << (SolidityParser.LeaveKeyword - 93)) | (1 << (SolidityParser.PayableKeyword - 93)) | (1 << (SolidityParser.ReceiveKeyword - 93)) | (1 << (SolidityParser.Identifier - 93)))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         else {
