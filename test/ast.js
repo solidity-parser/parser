@@ -1986,4 +1986,22 @@ describe('AST', () => {
       "names": []
     })
   })
+
+  it("should allow using payable as a function", function () {
+    let expr = parseExpression("payable(recipient)")
+    assert.deepEqual(expr, {
+      "type": "FunctionCall",
+      "expression": {
+        "name": "payable",
+        "type": "Identifier"
+      },
+      "arguments": [
+        {
+          "name": "recipient",
+          "type": "Identifier"
+        }
+      ],
+      "names": [],
+    })
+  })
 })
