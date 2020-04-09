@@ -125,6 +125,7 @@ yarn run test
 ## Used By
 
 * [sol2uml](https://github.com/naddison36/sol2uml)
+* [Solhint](https://github.com/protofire/solhint/)
 
 ## License
 
