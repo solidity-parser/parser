@@ -12,7 +12,7 @@ The grammar description used as input for ANTLR lives in [this repo](https://git
 
 For example, an issue like "the list of state variables in the generated AST code should be in the same order than in the solidity file" probably can be done by just updating the code in the parser. On the other hand, an issue like "support this new keyword" will need an update to the grammar.
 
-The entry point of the project is [`src/index.js`](src/index.js), but most of the important logic is in [`src/ASTBuilder.js`](src/ASTBuilder.js). `ASTBuilder` is a [visitor](https://en.wikipedia.org/wiki/Visitor_pattern) object that traverses the AST returned by teh generated parser, and produces the AST that will be returned by the parser.
+The entry point of the project is [`src/index.js`](src/index.js), but most of the important logic is in [`src/ASTBuilder.js`](src/ASTBuilder.js). `ASTBuilder` is a [visitor](https://en.wikipedia.org/wiki/Visitor_pattern) object that traverses the AST returned by the generated parser, and produces the AST that will be returned by the parser.
 
 ## Setup
 
