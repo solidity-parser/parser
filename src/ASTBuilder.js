@@ -869,6 +869,14 @@ const transformAST = {
       isDeclaredConst = true
     }
 
+    let override
+    const overrideSpecifier = ctx.overrideSpecifier()
+    if (overrideSpecifier.length === 0) {
+      override = null
+    } else {
+      override = this.visit(overrideSpecifier[0].userDefinedTypeName())
+    }
+
     const decl = this.createNode(
       {
         type: 'VariableDeclaration',
@@ -878,14 +886,15 @@ const transformAST = {
         visibility,
         isStateVar: true,
         isDeclaredConst,
-        isIndexed: false
+        isIndexed: false,
+        override,
       },
       iden
     )
 
     return {
       variables: [decl],
-      initialValue: expression
+      initialValue: expression,
     }
   },
 

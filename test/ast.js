@@ -324,6 +324,30 @@ describe('AST', () => {
     })
   })
 
+  it('StateVariableDeclaration with override', () => {
+    var ast = parseNode("uint public override foo;")
+    assert.deepEqual(ast, {
+      "type": "StateVariableDeclaration",
+      "variables": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "foo",
+          "expression": null,
+          "visibility": "public",
+          "override": [],
+          "isStateVar": true,
+          "isDeclaredConst": false,
+          "isIndexed": false
+        }
+      ],
+      "initialValue": null
+    })
+  })
+
   it('FunctionDefinition with one explicit override', () => {
     var ast = parseNode("function foo() public override(Base) {}")
     assert.deepEqual(ast, {
@@ -346,6 +370,33 @@ describe('AST', () => {
       "isReceiveEther": false,
       "isVirtual": false,
       "stateMutability": null,
+    })
+  })
+
+  it('StateVariableDeclaration with one explicit override', () => {
+    var ast = parseNode("uint public override(Base) foo;")
+    assert.deepEqual(ast, {
+      "type": "StateVariableDeclaration",
+      "variables": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "foo",
+          "expression": null,
+          "visibility": "public",
+          "override": [{
+            "type": "UserDefinedTypeName",
+            "namePath": "Base"
+          }],
+          "isStateVar": true,
+          "isDeclaredConst": false,
+          "isIndexed": false
+        }
+      ],
+      "initialValue": null
     })
   })
 
@@ -374,6 +425,36 @@ describe('AST', () => {
       "isReceiveEther": false,
       "isVirtual": false,
       "stateMutability": null,
+    })
+  })
+
+  it('StateVariableDeclaration with two overrides', () => {
+    var ast = parseNode("uint public override(Base1, Base2) foo;")
+    assert.deepEqual(ast, {
+      "type": "StateVariableDeclaration",
+      "variables": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "foo",
+          "expression": null,
+          "visibility": "public",
+          "override": [{
+            "type": "UserDefinedTypeName",
+            "namePath": "Base1"
+          }, {
+            "type": "UserDefinedTypeName",
+            "namePath": "Base2"
+          }],
+          "isStateVar": true,
+          "isDeclaredConst": false,
+          "isIndexed": false
+        }
+      ],
+      "initialValue": null
     })
   })
 
@@ -736,7 +817,8 @@ describe('AST', () => {
       "visibility": "default",
       "isStateVar": true,
       "isDeclaredConst": false,
-      "isIndexed": false
+      "isIndexed": false,
+      "override": null,
     })
   })
 
@@ -1217,6 +1299,7 @@ describe('AST', () => {
           "name": "a",
           "expression": null,
           "visibility": "default",
+          "override": null,
           "isStateVar": true,
           "isDeclaredConst": false,
           "isIndexed": false
