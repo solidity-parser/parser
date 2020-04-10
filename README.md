@@ -126,6 +126,7 @@ yarn run test
 
 * [sol2uml](https://github.com/naddison36/sol2uml)
 * [Solhint](https://github.com/protofire/solhint/)
+* [solidity-coverage](https://github.com/sc-forks/solidity-coverage)
 
 ## License
 
