@@ -128,6 +128,8 @@ yarn run test
 * [Solhint](https://github.com/protofire/solhint/)
 * [solidity-coverage](https://github.com/sc-forks/solidity-coverage)
 * [prettier-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity/)
+* [Buidler](https://github.com/nomiclabs/buidler/)
+* [eth-gas-reporter](https://github.com/cgewecke/eth-gas-reporter)
 
 ## License
 
