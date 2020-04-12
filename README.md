@@ -122,11 +122,12 @@ The [mocha](https://mochajs.org/) tests under the [test](./test) folder can be r
 yarn run test
 ```
 
-## Used By
+## Used by
 
 * [sol2uml](https://github.com/naddison36/sol2uml)
 * [Solhint](https://github.com/protofire/solhint/)
 * [solidity-coverage](https://github.com/sc-forks/solidity-coverage)
+* [prettier-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity/)
 
 ## License
 
