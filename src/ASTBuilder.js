@@ -832,16 +832,18 @@ const transformAST = {
   },
 
   NameValueList(ctx) {
-    const values = {}
+    const names = []
+    const args = []
 
     for (const nameValue of ctx.nameValue()) {
-      const name = toText(nameValue.identifier())
-      values[name]  =this.visit(nameValue.expression())
+      names.push(toText(nameValue.identifier()))
+      args.push(this.visit(nameValue.expression()))
     }
 
     return {
       type: 'NameValueList',
-      values,
+      names,
+      arguments: args,
     }
   },
 
