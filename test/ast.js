@@ -1172,13 +1172,28 @@ describe('AST', () => {
     })
   })
 
-  it("Mapping", function() {
+  it("Mapping with elementary type key", function() {
     var ast = parseNode("mapping(uint => address) a;")
     assert.deepEqual(ast.variables[0].typeName, {
       "type": "Mapping",
       "keyType": {
         "type": "ElementaryTypeName",
         "name": "uint"
+      },
+      "valueType": {
+        "type": "ElementaryTypeName",
+        "name": "address"
+      }
+    })
+  })
+
+  it("Mapping with user defined type key", function() {
+    var ast = parseNode("mapping(Foo => address) a;")
+    assert.deepEqual(ast.variables[0].typeName, {
+      "type": "Mapping",
+      "keyType": {
+        "type": "UserDefinedTypeName",
+        "namePath": "Foo"
       },
       "valueType": {
         "type": "ElementaryTypeName",

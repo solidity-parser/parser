@@ -583,9 +583,22 @@ const transformAST = {
     }
   },
 
+  MappingKey(ctx) {
+    if (ctx.elementaryTypeName()) {
+      return this.visit(ctx.elementaryTypeName())
+    } else if (ctx.userDefinedTypeName()) {
+      return this.visit(ctx.userDefinedTypeName())
+    } else {
+      throw new Error(
+        'Expected MappingKey to have either ' +
+        'elementaryTypeName or userDefinedTypeName'
+      )
+    }
+  },
+
   Mapping(ctx) {
     return {
-      keyType: this.visit(ctx.elementaryTypeName()),
+      keyType: this.visit(ctx.mappingKey()),
       valueType: this.visit(ctx.typeName())
     }
   },
