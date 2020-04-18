@@ -85,7 +85,8 @@ export type ASTNodeTypeString =
   | 'HexNumber'
   | 'DecimalNumber'
   | 'MemberAccess'
-  | 'IndexAccess';
+  | 'IndexAccess'
+  | 'NameValueList';
 export interface BaseASTNode {
   type: ASTNodeTypeString;
   range?: [number, number];
@@ -441,6 +442,11 @@ export interface HexNumber extends BaseASTNode {
 export interface DecimalNumber extends BaseASTNode {
   type: 'DecimalNumber';
   value: string;
+}
+export interface NameValueList extends BaseASTNode {
+  type: 'NameValueList';
+  names: string[];
+  args: Expression[];
 }
 export type ASTNode =
   | SourceUnit

@@ -2014,13 +2014,12 @@ describe('AST', () => {
       "expression": {
         "arguments": {
           "type": "NameValueList",
-          "values": {
-            "value": {
-              "number": "1",
-              "subdenomination": null,
-              "type": "NumberLiteral"
-            }
-          }
+          "names": ["value"],
+          "arguments": [{
+            "number": "1",
+            "subdenomination": null,
+            "type": "NumberLiteral"
+          }],
         },
         "expression": {
           "expression": {
@@ -2042,18 +2041,18 @@ describe('AST', () => {
       "expression": {
         "arguments": {
           "type": "NameValueList",
-          "values": {
-            "value": {
+          "names": ["value", "gas"],
+          "arguments": [
+             {
               "number": "1",
               "subdenomination": null,
               "type": "NumberLiteral"
             },
-            "gas": {
+            {
               "number": "21000",
               "subdenomination": null,
               "type": "NumberLiteral"
-            }
-          }
+            }]
         },
         "expression": {
           "expression": {
