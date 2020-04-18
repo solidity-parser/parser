@@ -308,6 +308,15 @@ SolidityListener.prototype.exitUserDefinedTypeName = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SolidityParser#mappingKey.
+SolidityListener.prototype.enterMappingKey = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#mappingKey.
+SolidityListener.prototype.exitMappingKey = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SolidityParser#mapping.
 SolidityListener.prototype.enterMapping = function(ctx) {
 };
