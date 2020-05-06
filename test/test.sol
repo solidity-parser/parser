@@ -690,3 +690,7 @@ contract FunctionsNamedAsKeywords {
   function receive() {}
   function leave() {}
 }
+
+contract ImmutableKeyword {
+  uint immutable foo;
+}
