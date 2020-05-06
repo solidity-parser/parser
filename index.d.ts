@@ -173,6 +173,7 @@ export interface VariableDeclaration extends BaseASTNode {
   type: 'VariableDeclaration';
   isIndexed: boolean;
   isStateVar: boolean;
+  isImmutable: boolean;
   typeName: TypeName;
   name: string;
   isDeclaredConst?: boolean;

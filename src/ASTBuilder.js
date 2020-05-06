@@ -892,6 +892,11 @@ const transformAST = {
       override = this.visit(overrideSpecifier[0].userDefinedTypeName())
     }
 
+    let isImmutable = false
+    if (ctx.ImmutableKeyword(0)) {
+      isImmutable = true
+    }
+
     const decl = this.createNode(
       {
         type: 'VariableDeclaration',
@@ -902,6 +907,7 @@ const transformAST = {
         isStateVar: true,
         isDeclaredConst,
         isIndexed: false,
+        isImmutable,
         override,
       },
       iden

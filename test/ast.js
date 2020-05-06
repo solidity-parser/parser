@@ -341,7 +341,33 @@ describe('AST', () => {
           "override": [],
           "isStateVar": true,
           "isDeclaredConst": false,
-          "isIndexed": false
+          "isIndexed": false,
+          "isImmutable": false,
+        }
+      ],
+      "initialValue": null
+    })
+  })
+
+  it('StateVariableDeclaration with immutable', () => {
+    var ast = parseNode("uint immutable foo;")
+    assert.deepEqual(ast, {
+      "type": "StateVariableDeclaration",
+      "variables": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "foo",
+          "expression": null,
+          "visibility": "default",
+          "override": null,
+          "isStateVar": true,
+          "isDeclaredConst": false,
+          "isIndexed": false,
+          "isImmutable": true,
         }
       ],
       "initialValue": null
@@ -393,7 +419,8 @@ describe('AST', () => {
           }],
           "isStateVar": true,
           "isDeclaredConst": false,
-          "isIndexed": false
+          "isIndexed": false,
+          "isImmutable": false
         }
       ],
       "initialValue": null
@@ -451,7 +478,8 @@ describe('AST', () => {
           }],
           "isStateVar": true,
           "isDeclaredConst": false,
-          "isIndexed": false
+          "isIndexed": false,
+          "isImmutable": false
         }
       ],
       "initialValue": null
@@ -819,6 +847,7 @@ describe('AST', () => {
       "isDeclaredConst": false,
       "isIndexed": false,
       "override": null,
+      "isImmutable": false,
     })
   })
 
@@ -1317,7 +1346,8 @@ describe('AST', () => {
           "override": null,
           "isStateVar": true,
           "isDeclaredConst": false,
-          "isIndexed": false
+          "isIndexed": false,
+          "isImmutable": false
         }
       ],
       "initialValue": null
