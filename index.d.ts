@@ -121,7 +121,7 @@ export interface InheritanceSpecifier extends BaseASTNode {
 }
 export interface StateVariableDeclaration extends BaseASTNode {
   type: 'StateVariableDeclaration';
-  variables: VariableDeclarationWithOverride[];
+  variables: StateVariableDeclarationVariable[];
   initialValue?: Expression;
 }
 export interface UsingForDeclaration extends BaseASTNode {
@@ -173,7 +173,6 @@ export interface VariableDeclaration extends BaseASTNode {
   type: 'VariableDeclaration';
   isIndexed: boolean;
   isStateVar: boolean;
-  isImmutable: boolean;
   typeName: TypeName;
   name: string;
   isDeclaredConst?: boolean;
@@ -181,8 +180,9 @@ export interface VariableDeclaration extends BaseASTNode {
   expression?: Expression;
   visibility?: 'public' | 'private' | 'internal' | 'default';
 }
-export interface VariableDeclarationWithOverride extends VariableDeclaration {
+export interface StateVariableDeclarationVariable extends VariableDeclaration {
   override: null | UserDefinedTypeName[];
+  isImmutable: boolean;
 }
 export interface UserDefinedTypeName extends BaseASTNode {
   type: 'UserDefinedTypeName';
