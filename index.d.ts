@@ -137,6 +137,10 @@ export interface StructDefinition extends BaseASTNode {
 export interface ModifierDefinition extends BaseASTNode {
   type: 'ModifierDefinition';
   name: string;
+  parameters: null | VariableDeclaration[];
+  isVirtual: boolean;
+  override: null | UserDefinedTypeName[];
+  body: Block;
 }
 export interface ModifierInvocation extends BaseASTNode {
   type: 'ModifierInvocation';

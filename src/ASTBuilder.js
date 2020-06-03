@@ -117,7 +117,7 @@ const transformAST = {
   ContractDefinition(ctx) {
     const name = toText(ctx.identifier())
     const kind = toText(ctx.getChild(0))
-    
+
     this._currentContract = name
 
     return {
@@ -267,7 +267,7 @@ const transformAST = {
         } else if (ctx.modifierList().PrivateKeyword(0)) {
           visibility = 'private'
         }
-        
+
         // check if function is virtual
         if (ctx.modifierList().VirtualKeyword(0)) {
           isVirtual = true
@@ -609,10 +609,25 @@ const transformAST = {
       parameters = this.visit(ctx.parameterList())
     }
 
+    let isVirtual = false
+    if (ctx.VirtualKeyword(0)) {
+      isVirtual = true
+    }
+
+    let override
+    const overrideSpecifier = ctx.overrideSpecifier()
+    if (overrideSpecifier.length === 0) {
+      override = null
+    } else {
+      override = this.visit(overrideSpecifier[0].userDefinedTypeName())
+    }
+
     return {
       name: toText(ctx.identifier()),
       parameters,
-      body: this.visit(ctx.block())
+      body: this.visit(ctx.block()),
+      isVirtual,
+      override,
     }
   },
 
@@ -963,7 +978,7 @@ const transformAST = {
           return value
         }
       ).join("")
-      
+
 
       return {
         type: 'StringLiteral',

@@ -205,7 +205,7 @@ describe('AST', () => {
       "stateMutability": null,
     })
   })
-  
+
   it('FunctionDefinition fallback old definition', () => {
     var ast = parseNode("function () external {}")
     assert.deepEqual(ast, {
@@ -1237,6 +1237,8 @@ describe('AST', () => {
       "type": "ModifierDefinition",
       "name": "onlyOwner",
       "parameters": null,
+      "isVirtual": false,
+      "override": null,
       "body": {
         "type": "Block",
         "statements": []
@@ -1247,6 +1249,8 @@ describe('AST', () => {
       "type": "ModifierDefinition",
       "name": "onlyOwner",
       "parameters": [],
+      "isVirtual": false,
+      "override": null,
       "body": {
         "type": "Block",
         "statements": []
@@ -2129,6 +2133,75 @@ describe('AST', () => {
         }
       ],
       "names": [],
+    })
+  })
+
+  it("should allow using virtual in a modifier", function () {
+    let ast = parseNode("modifier foo() virtual {}")
+    assert.deepEqual(ast, {
+      "type": "ModifierDefinition",
+      "name": "foo",
+      "parameters": [],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "isVirtual": true,
+      "override": null,
+    })
+  })
+
+  it("should allow using override in a modifier", function () {
+    let ast = parseNode("modifier foo() override {}")
+    assert.deepEqual(ast, {
+      "type": "ModifierDefinition",
+      "name": "foo",
+      "parameters": [],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "isVirtual": false,
+      "override": [],
+    })
+  })
+
+  it("should allow using one explit override in a modifier", function () {
+    let ast = parseNode("modifier foo() override(Base) {}")
+    assert.deepEqual(ast, {
+      "type": "ModifierDefinition",
+      "name": "foo",
+      "parameters": [],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "isVirtual": false,
+      "override": [{
+        "type": "UserDefinedTypeName",
+        "namePath": "Base"
+      }],
+    })
+  })
+
+  it("should allow using two explit overrides in a modifier", function () {
+    let ast = parseNode("modifier foo() override(Base1, Base2) {}")
+    assert.deepEqual(ast, {
+      "type": "ModifierDefinition",
+      "name": "foo",
+      "parameters": [],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "isVirtual": false,
+      "override": [{
+        "type": "UserDefinedTypeName",
+        "namePath": "Base1"
+      }, {
+        "type": "UserDefinedTypeName",
+        "namePath": "Base2"
+      }],
     })
   })
 })
