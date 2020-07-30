@@ -186,9 +186,7 @@ const transformAST = {
         } else if (ctx.modifierList().PublicKeyword(0)) {
           visibility = 'public'
         } else {
-          throw new Error(
-            'Constructors have to be declared either "public" or "internal"'
-          )
+          visibility = 'default'
         }
 
         isConstructor = true
