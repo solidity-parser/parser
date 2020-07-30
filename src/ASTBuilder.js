@@ -186,7 +186,7 @@ const transformAST = {
         } else if (ctx.modifierList().PublicKeyword(0)) {
           visibility = 'public'
         } else {
-          visibility = 'public' // TODO: only do this if strictly >= 0.7.0
+          visibility = 'public'
         }
 
         isConstructor = true

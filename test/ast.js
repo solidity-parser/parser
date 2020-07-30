@@ -184,6 +184,40 @@ describe('AST', () => {
     })
   })
 
+  it('FunctionDefinition constructor case without public', () => {
+    var ast = parseNode("constructor(uint a) {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "name": null,
+      "parameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "public",
+      "modifiers": [],
+      "override": null,
+      "isConstructor": true,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": false,
+      "stateMutability": null,
+    })
+  })
+
   it('FunctionDefinition fallback case', () => {
     var ast = parseNode("fallback () external {}")
     assert.deepEqual(ast, {
