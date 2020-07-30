@@ -207,7 +207,7 @@ describe('AST', () => {
         "type": "Block",
         "statements": []
       },
-      "visibility": "public",
+      "visibility": "default",
       "modifiers": [],
       "override": null,
       "isConstructor": true,

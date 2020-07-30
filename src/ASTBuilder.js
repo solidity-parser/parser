@@ -186,7 +186,7 @@ const transformAST = {
         } else if (ctx.modifierList().PublicKeyword(0)) {
           visibility = 'public'
         } else {
-          visibility = 'public'
+          visibility = 'default'
         }
 
         isConstructor = true
