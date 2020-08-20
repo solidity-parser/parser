@@ -88,7 +88,7 @@ parser.visit(ast, {
 
 A browser-friendly version is available in `dist/solidity-parser.js` in the published version.
 
-If you are using webpack, keep in mind that minimizing your bundle will mangle function names, breaking the parser. To fix this you can just set `optimization.minimize` to `false`. For a more granular fix, check [this comment](https://github.com/solidity-parser/parser/issues/21#issuecomment-658397190).
+If you are using webpack, keep in mind that minimizing your bundle will mangle function names, breaking the parser. To fix this you can just set `optimization.minimize` to `false`.
 
 ## Contribution
 
