@@ -84,6 +84,12 @@ parser.visit(ast, {
 })
 ```
 
+## Usage in the browser
+
+A browser-friendly version is available in `dist/solidity-parser.js` in the published version.
+
+If you are using webpack, keep in mind that minimizing your bundle will mangle function names, breaking the parser. To fix this you can just set `optimization.minimize` to `false`.
+
 ## Contribution
 
 This project is dependant on the [@solidity-parser/antlr](https://github.com/solidity-parser/antlr) repository via a git submodule. To clone this repository and the submodule, run
