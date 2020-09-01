@@ -108,9 +108,16 @@ const transformAST = {
   },
 
   PragmaDirective(ctx) {
+    // this converts something like >= 0.5.0  <0.7.0
+    // in >=0.5.0 <0.7.0
+    const value = ctx
+      .pragmaValue()
+      .children[0].children.map(x => toText(x))
+      .join(" ")
+
     return {
       name: toText(ctx.pragmaName()),
-      value: toText(ctx.pragmaValue())
+      value
     }
   },
 

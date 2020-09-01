@@ -79,7 +79,7 @@ describe('AST', () => {
     "~0.3.11",, "~1.3", "~10",
     "=0.0.1", "=0.6", "=1",
     "<=1.1.1", "<=11.11", "<=111",
-    "<0.5.11"]
+    "<0.5.11", ">=0.6.7 <0.7.0"]
   versions.forEach(function (version) {
     it("PragmaDirective " + version, function() {
       var ast = parser.parse("pragma solidity " + version + ";")
