@@ -1,6 +1,6 @@
 {
   "name": "@solidity-parser/parser",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.js",
   "types": "./index.d.ts",
