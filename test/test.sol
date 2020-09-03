@@ -694,3 +694,12 @@ contract FunctionsNamedAsKeywords {
 contract ImmutableKeyword {
   uint immutable foo;
 }
+
+contract AssemblySlotNotation {
+  function foo() {
+    assembly {
+      ds.slot := position
+      offset := x.offset
+    }
+  }
+}

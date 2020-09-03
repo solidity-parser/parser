@@ -1338,6 +1338,8 @@ const transformAST = {
     let names = ctx.assemblyIdentifierOrList()
     if (names.identifier()) {
       names = [this.visit(names.identifier())]
+    } else if (names.assemblyMember()) {
+      names = [this.visit(names.assemblyMember())]
     } else {
       names = this.visit(names.assemblyIdentifierList().identifier())
     }
@@ -1369,6 +1371,8 @@ const transformAST = {
     let names = ctx.assemblyIdentifierOrList()
     if (names.identifier()) {
       names = [this.visit(names.identifier())]
+    } else if (names.assemblyMember()) {
+      names = [this.visit(names.assemblyMember())]
     } else {
       names = this.visit(names.assemblyIdentifierList().identifier())
     }
@@ -1376,6 +1380,15 @@ const transformAST = {
     return {
       names,
       expression: this.visit(ctx.assemblyExpression())
+    }
+  },
+
+  AssemblyMember(ctx) {
+    const [accessed, member] = ctx.identifier()
+    return {
+      type: 'AssemblyMemberAccess',
+      expression: this.visit(accessed),
+      memberName: this.visit(member),
     }
   },
 

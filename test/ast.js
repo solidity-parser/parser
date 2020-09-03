@@ -1933,6 +1933,54 @@ describe('AST', () => {
     })
   })
 
+  it("AssemblyAssignment, left member access", function() {
+    var ast = parseAssembly("a.slot := 10")
+    assert.deepEqual(ast, {
+      "type": "AssemblyAssignment",
+      "names": [
+        {
+          "type": "AssemblyMemberAccess",
+          "expression": {
+            "name": "a",
+            "type": "Identifier"
+          },
+          "memberName": {
+            "name": "slot",
+            "type": "Identifier"
+          }
+        }
+      ],
+      "expression": {
+        "type": "DecimalNumber",
+        "value": "10"
+      }
+    })
+  })
+
+  it("AssemblyAssignment, right member access", function() {
+    var ast = parseAssembly("o := x.offset")
+    assert.deepEqual(ast, {
+      "type": "AssemblyAssignment",
+      "names": [
+        {
+          "type": "Identifier",
+          "name": "o"
+        }
+      ],
+      "expression": {
+          "type": "AssemblyMemberAccess",
+          "expression": {
+            "name": "x",
+            "type": "Identifier"
+          },
+          "memberName": {
+            "name": "offset",
+            "type": "Identifier"
+          }
+      }
+    })
+  })
+
   it("LabelDefinition", function() {
     var ast = parseAssembly("loop:")
     assert.deepEqual(ast, {

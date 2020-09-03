@@ -1,4 +1,4 @@
-// Generated from antlr/Solidity.g4 by ANTLR 4.7.2
+// Generated from antlr/Solidity.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('../antlr4/index');
 
@@ -620,6 +620,15 @@ SolidityListener.prototype.enterAssemblyExpression = function(ctx) {
 
 // Exit a parse tree produced by SolidityParser#assemblyExpression.
 SolidityListener.prototype.exitAssemblyExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SolidityParser#assemblyMember.
+SolidityListener.prototype.enterAssemblyMember = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#assemblyMember.
+SolidityListener.prototype.exitAssemblyMember = function(ctx) {
 };
 
 
