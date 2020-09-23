@@ -619,6 +619,106 @@ describe('AST', () => {
     })
   })
 
+  it("top-level FunctionDefinition", function() {
+    var ast = parser.parse("function foo(uint a) pure {}")
+    var functionNode = ast.children[0];
+    assert.deepEqual(functionNode, {
+      "type": "FunctionDefinition",
+      "name": "foo",
+      "parameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "default",
+      "modifiers": [],
+      "override": null,
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": false,
+      "stateMutability": "pure",
+    })
+
+     ast = parseNode("function foo() virtual public {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "name": "foo",
+      "parameters": [],
+      "returnParameters": null,
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "public",
+      "modifiers": [],
+      "override": null,
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": true,
+      "stateMutability": null,
+    })
+
+    // Function Definition with return parameters
+    ast = parseNode("function foo(uint a) pure returns (uint256) {}")
+    assert.deepEqual(ast, {
+      "type": "FunctionDefinition",
+      "name": "foo",
+      "parameters": [
+        {
+          "type": "VariableDeclaration",
+          "typeName": {
+            "type": "ElementaryTypeName",
+            "name": "uint"
+          },
+          "name": "a",
+          "storageLocation": null,
+          "isStateVar": false,
+          "isIndexed": false
+        }
+      ],
+      "returnParameters": [
+        {
+          "isIndexed": false,
+          "isStateVar": false,
+          "name": null,
+          "storageLocation": null,
+          "type": "VariableDeclaration",
+          "typeName": {
+            "name": "uint256",
+            "type": "ElementaryTypeName"
+          }
+        }
+      ],
+      "body": {
+        "type": "Block",
+        "statements": []
+      },
+      "visibility": "default",
+      "modifiers": [],
+      "override": null,
+      "isConstructor": false,
+      "isFallback": false,
+      "isReceiveEther": false,
+      "isVirtual": false,
+      "stateMutability": "pure"
+    })
+  })
+
   it("ModifierInvocation", function() {
     var ast = parseNode("function foo(uint a) onlyOwner {}")
     assert.deepEqual(ast.modifiers[0], {
