@@ -225,6 +225,7 @@ export interface IfStatement extends BaseASTNode {
 }
 export interface WhileStatement extends BaseASTNode {
   type: 'WhileStatement';
+  body: Statement;
 }
 export interface ForStatement extends BaseASTNode {
   type: 'ForStatement';
