@@ -154,10 +154,13 @@ export interface FunctionDefinition extends BaseASTNode {
   modifiers: ModifierInvocation[];
   stateMutability?: 'pure' | 'constant' | 'payable' | 'view'
   visibility: 'default' | 'external' | 'internal' | 'public' | 'private';
-  isConstructor: boolean;
   returnParameters?: VariableDeclaration[];
   body?: Block;
   override: null | UserDefinedTypeName[];
+  isConstructor: boolean;
+  isReceiveEther: boolean;
+  isFallback: boolean;
+  isVirtual: boolean;
 }
 export interface EventDefinition extends BaseASTNode {
   type: 'EventDefinition';
