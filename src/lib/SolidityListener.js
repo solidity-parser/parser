@@ -128,6 +128,15 @@ SolidityListener.prototype.exitStateVariableDeclaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SolidityParser#fileLevelConstant.
+SolidityListener.prototype.enterFileLevelConstant = function(ctx) {
+};
+
+// Exit a parse tree produced by SolidityParser#fileLevelConstant.
+SolidityListener.prototype.exitFileLevelConstant = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SolidityParser#usingForDeclaration.
 SolidityListener.prototype.enterUsingForDeclaration = function(ctx) {
 };
