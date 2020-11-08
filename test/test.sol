@@ -708,3 +708,6 @@ contract AssemblySlotNotation {
 function helper(uint x) pure returns (uint) {
     return x * 2;
 }
+
+// file-level constant
+uint constant topLevelConstantVariable = 3;

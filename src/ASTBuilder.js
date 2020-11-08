@@ -939,6 +939,23 @@ const transformAST = {
     }
   },
 
+  FileLevelConstant(ctx) {
+    const type = this.visit(ctx.typeName())
+    const iden = ctx.identifier()
+    const name = toText(iden)
+
+    let expression = null
+    if (ctx.expression()) {
+      expression = this.visit(ctx.expression())
+    }
+
+    return {
+      typeName: type,
+      name,
+      initialValue: expression,
+    }
+  },
+
   ForStatement(ctx) {
     let conditionExpression = this.visit(ctx.expressionStatement())
     if (conditionExpression) {

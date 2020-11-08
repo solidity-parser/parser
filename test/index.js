@@ -20,7 +20,7 @@ describe("#parse", function() {
   it("supports tolerant mode", function() {
     var source = "not good"
     var root = parser.parse(source, { tolerant: true })
-    assert.equal(root.errors.length, 1)
+    assert.isAbove(root.errors.length, 0)
   })
 
   it("supports loc", function() {

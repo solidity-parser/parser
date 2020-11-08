@@ -719,6 +719,25 @@ describe('AST', () => {
     })
   })
 
+  it("file-level constants", function() {
+    var ast = parser.parse("uint constant EXPONENT = 10;")
+    var fileLevelConstantNode = ast.children[0];
+
+    assert.deepEqual(fileLevelConstantNode, {
+      type: "FileLevelConstant",
+      initialValue: {
+        number: "10",
+        subdenomination: null,
+        type: "NumberLiteral"
+      },
+      name: "EXPONENT",
+      typeName: {
+        name: "uint",
+        type: "ElementaryTypeName"
+      }
+    })
+  })
+
   it("ModifierInvocation", function() {
     var ast = parseNode("function foo(uint a) onlyOwner {}")
     assert.deepEqual(ast.modifiers[0], {
