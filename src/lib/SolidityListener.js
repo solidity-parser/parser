@@ -1,834 +1,828 @@
 // Generated from antlr/Solidity.g4 by ANTLR 4.8
 // jshint ignore: start
-var antlr4 = require('../antlr4/index');
+import antlr4 from 'antlr4';
 
 // This class defines a complete listener for a parse tree produced by SolidityParser.
-function SolidityListener() {
-	antlr4.tree.ParseTreeListener.call(this);
-	return this;
+export default class SolidityListener extends antlr4.tree.ParseTreeListener {
+
+	// Enter a parse tree produced by SolidityParser#sourceUnit.
+	enterSourceUnit(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#sourceUnit.
+	exitSourceUnit(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#pragmaDirective.
+	enterPragmaDirective(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#pragmaDirective.
+	exitPragmaDirective(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#pragmaName.
+	enterPragmaName(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#pragmaName.
+	exitPragmaName(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#pragmaValue.
+	enterPragmaValue(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#pragmaValue.
+	exitPragmaValue(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#version.
+	enterVersion(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#version.
+	exitVersion(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#versionOperator.
+	enterVersionOperator(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#versionOperator.
+	exitVersionOperator(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#versionConstraint.
+	enterVersionConstraint(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#versionConstraint.
+	exitVersionConstraint(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#importDeclaration.
+	enterImportDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#importDeclaration.
+	exitImportDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#importDirective.
+	enterImportDirective(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#importDirective.
+	exitImportDirective(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#contractDefinition.
+	enterContractDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#contractDefinition.
+	exitContractDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#inheritanceSpecifier.
+	enterInheritanceSpecifier(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#inheritanceSpecifier.
+	exitInheritanceSpecifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#contractPart.
+	enterContractPart(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#contractPart.
+	exitContractPart(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#stateVariableDeclaration.
+	enterStateVariableDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#stateVariableDeclaration.
+	exitStateVariableDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#fileLevelConstant.
+	enterFileLevelConstant(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#fileLevelConstant.
+	exitFileLevelConstant(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#usingForDeclaration.
+	enterUsingForDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#usingForDeclaration.
+	exitUsingForDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#structDefinition.
+	enterStructDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#structDefinition.
+	exitStructDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#modifierDefinition.
+	enterModifierDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#modifierDefinition.
+	exitModifierDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#modifierInvocation.
+	enterModifierInvocation(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#modifierInvocation.
+	exitModifierInvocation(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#functionDefinition.
+	enterFunctionDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#functionDefinition.
+	exitFunctionDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#functionDescriptor.
+	enterFunctionDescriptor(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#functionDescriptor.
+	exitFunctionDescriptor(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#returnParameters.
+	enterReturnParameters(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#returnParameters.
+	exitReturnParameters(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#modifierList.
+	enterModifierList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#modifierList.
+	exitModifierList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#eventDefinition.
+	enterEventDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#eventDefinition.
+	exitEventDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#enumValue.
+	enterEnumValue(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#enumValue.
+	exitEnumValue(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#enumDefinition.
+	enterEnumDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#enumDefinition.
+	exitEnumDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#parameterList.
+	enterParameterList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#parameterList.
+	exitParameterList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#parameter.
+	enterParameter(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#parameter.
+	exitParameter(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#eventParameterList.
+	enterEventParameterList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#eventParameterList.
+	exitEventParameterList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#eventParameter.
+	enterEventParameter(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#eventParameter.
+	exitEventParameter(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#functionTypeParameterList.
+	enterFunctionTypeParameterList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#functionTypeParameterList.
+	exitFunctionTypeParameterList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#functionTypeParameter.
+	enterFunctionTypeParameter(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#functionTypeParameter.
+	exitFunctionTypeParameter(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#variableDeclaration.
+	enterVariableDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#variableDeclaration.
+	exitVariableDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#typeName.
+	enterTypeName(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#typeName.
+	exitTypeName(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#userDefinedTypeName.
+	enterUserDefinedTypeName(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#userDefinedTypeName.
+	exitUserDefinedTypeName(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#mappingKey.
+	enterMappingKey(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#mappingKey.
+	exitMappingKey(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#mapping.
+	enterMapping(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#mapping.
+	exitMapping(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#functionTypeName.
+	enterFunctionTypeName(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#functionTypeName.
+	exitFunctionTypeName(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#storageLocation.
+	enterStorageLocation(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#storageLocation.
+	exitStorageLocation(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#stateMutability.
+	enterStateMutability(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#stateMutability.
+	exitStateMutability(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#block.
+	enterBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#block.
+	exitBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#statement.
+	enterStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#statement.
+	exitStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#expressionStatement.
+	enterExpressionStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#expressionStatement.
+	exitExpressionStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#ifStatement.
+	enterIfStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#ifStatement.
+	exitIfStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#tryStatement.
+	enterTryStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#tryStatement.
+	exitTryStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#catchClause.
+	enterCatchClause(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#catchClause.
+	exitCatchClause(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#whileStatement.
+	enterWhileStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#whileStatement.
+	exitWhileStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#simpleStatement.
+	enterSimpleStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#simpleStatement.
+	exitSimpleStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#forStatement.
+	enterForStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#forStatement.
+	exitForStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#inlineAssemblyStatement.
+	enterInlineAssemblyStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#inlineAssemblyStatement.
+	exitInlineAssemblyStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#doWhileStatement.
+	enterDoWhileStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#doWhileStatement.
+	exitDoWhileStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#continueStatement.
+	enterContinueStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#continueStatement.
+	exitContinueStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#breakStatement.
+	enterBreakStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#breakStatement.
+	exitBreakStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#returnStatement.
+	enterReturnStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#returnStatement.
+	exitReturnStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#throwStatement.
+	enterThrowStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#throwStatement.
+	exitThrowStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#emitStatement.
+	enterEmitStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#emitStatement.
+	exitEmitStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#variableDeclarationStatement.
+	enterVariableDeclarationStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#variableDeclarationStatement.
+	exitVariableDeclarationStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#variableDeclarationList.
+	enterVariableDeclarationList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#variableDeclarationList.
+	exitVariableDeclarationList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#identifierList.
+	enterIdentifierList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#identifierList.
+	exitIdentifierList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#elementaryTypeName.
+	enterElementaryTypeName(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#elementaryTypeName.
+	exitElementaryTypeName(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#expression.
+	enterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#expression.
+	exitExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#primaryExpression.
+	enterPrimaryExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#primaryExpression.
+	exitPrimaryExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#expressionList.
+	enterExpressionList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#expressionList.
+	exitExpressionList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#nameValueList.
+	enterNameValueList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#nameValueList.
+	exitNameValueList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#nameValue.
+	enterNameValue(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#nameValue.
+	exitNameValue(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#functionCallArguments.
+	enterFunctionCallArguments(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#functionCallArguments.
+	exitFunctionCallArguments(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#functionCall.
+	enterFunctionCall(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#functionCall.
+	exitFunctionCall(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyBlock.
+	enterAssemblyBlock(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyBlock.
+	exitAssemblyBlock(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyItem.
+	enterAssemblyItem(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyItem.
+	exitAssemblyItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyExpression.
+	enterAssemblyExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyExpression.
+	exitAssemblyExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyMember.
+	enterAssemblyMember(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyMember.
+	exitAssemblyMember(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyCall.
+	enterAssemblyCall(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyCall.
+	exitAssemblyCall(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyLocalDefinition.
+	enterAssemblyLocalDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyLocalDefinition.
+	exitAssemblyLocalDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyAssignment.
+	enterAssemblyAssignment(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyAssignment.
+	exitAssemblyAssignment(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyIdentifierOrList.
+	enterAssemblyIdentifierOrList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyIdentifierOrList.
+	exitAssemblyIdentifierOrList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyIdentifierList.
+	enterAssemblyIdentifierList(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyIdentifierList.
+	exitAssemblyIdentifierList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyStackAssignment.
+	enterAssemblyStackAssignment(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyStackAssignment.
+	exitAssemblyStackAssignment(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#labelDefinition.
+	enterLabelDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#labelDefinition.
+	exitLabelDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblySwitch.
+	enterAssemblySwitch(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblySwitch.
+	exitAssemblySwitch(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyCase.
+	enterAssemblyCase(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyCase.
+	exitAssemblyCase(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyFunctionDefinition.
+	enterAssemblyFunctionDefinition(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyFunctionDefinition.
+	exitAssemblyFunctionDefinition(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyFunctionReturns.
+	enterAssemblyFunctionReturns(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyFunctionReturns.
+	exitAssemblyFunctionReturns(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyFor.
+	enterAssemblyFor(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyFor.
+	exitAssemblyFor(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyIf.
+	enterAssemblyIf(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyIf.
+	exitAssemblyIf(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#assemblyLiteral.
+	enterAssemblyLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#assemblyLiteral.
+	exitAssemblyLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#subAssembly.
+	enterSubAssembly(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#subAssembly.
+	exitSubAssembly(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#tupleExpression.
+	enterTupleExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#tupleExpression.
+	exitTupleExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#typeNameExpression.
+	enterTypeNameExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#typeNameExpression.
+	exitTypeNameExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#numberLiteral.
+	enterNumberLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#numberLiteral.
+	exitNumberLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#identifier.
+	enterIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#identifier.
+	exitIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#overrideSpecifier.
+	enterOverrideSpecifier(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#overrideSpecifier.
+	exitOverrideSpecifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SolidityParser#stringLiteral.
+	enterStringLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#stringLiteral.
+	exitStringLiteral(ctx) {
+	}
+
+
+
 }
-
-SolidityListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototype);
-SolidityListener.prototype.constructor = SolidityListener;
-
-// Enter a parse tree produced by SolidityParser#sourceUnit.
-SolidityListener.prototype.enterSourceUnit = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#sourceUnit.
-SolidityListener.prototype.exitSourceUnit = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#pragmaDirective.
-SolidityListener.prototype.enterPragmaDirective = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#pragmaDirective.
-SolidityListener.prototype.exitPragmaDirective = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#pragmaName.
-SolidityListener.prototype.enterPragmaName = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#pragmaName.
-SolidityListener.prototype.exitPragmaName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#pragmaValue.
-SolidityListener.prototype.enterPragmaValue = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#pragmaValue.
-SolidityListener.prototype.exitPragmaValue = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#version.
-SolidityListener.prototype.enterVersion = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#version.
-SolidityListener.prototype.exitVersion = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#versionOperator.
-SolidityListener.prototype.enterVersionOperator = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#versionOperator.
-SolidityListener.prototype.exitVersionOperator = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#versionConstraint.
-SolidityListener.prototype.enterVersionConstraint = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#versionConstraint.
-SolidityListener.prototype.exitVersionConstraint = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#importDeclaration.
-SolidityListener.prototype.enterImportDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#importDeclaration.
-SolidityListener.prototype.exitImportDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#importDirective.
-SolidityListener.prototype.enterImportDirective = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#importDirective.
-SolidityListener.prototype.exitImportDirective = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#contractDefinition.
-SolidityListener.prototype.enterContractDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#contractDefinition.
-SolidityListener.prototype.exitContractDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#inheritanceSpecifier.
-SolidityListener.prototype.enterInheritanceSpecifier = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#inheritanceSpecifier.
-SolidityListener.prototype.exitInheritanceSpecifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#contractPart.
-SolidityListener.prototype.enterContractPart = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#contractPart.
-SolidityListener.prototype.exitContractPart = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#stateVariableDeclaration.
-SolidityListener.prototype.enterStateVariableDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#stateVariableDeclaration.
-SolidityListener.prototype.exitStateVariableDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#fileLevelConstant.
-SolidityListener.prototype.enterFileLevelConstant = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#fileLevelConstant.
-SolidityListener.prototype.exitFileLevelConstant = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#usingForDeclaration.
-SolidityListener.prototype.enterUsingForDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#usingForDeclaration.
-SolidityListener.prototype.exitUsingForDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#structDefinition.
-SolidityListener.prototype.enterStructDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#structDefinition.
-SolidityListener.prototype.exitStructDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#modifierDefinition.
-SolidityListener.prototype.enterModifierDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#modifierDefinition.
-SolidityListener.prototype.exitModifierDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#modifierInvocation.
-SolidityListener.prototype.enterModifierInvocation = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#modifierInvocation.
-SolidityListener.prototype.exitModifierInvocation = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#functionDefinition.
-SolidityListener.prototype.enterFunctionDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#functionDefinition.
-SolidityListener.prototype.exitFunctionDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#functionDescriptor.
-SolidityListener.prototype.enterFunctionDescriptor = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#functionDescriptor.
-SolidityListener.prototype.exitFunctionDescriptor = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#returnParameters.
-SolidityListener.prototype.enterReturnParameters = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#returnParameters.
-SolidityListener.prototype.exitReturnParameters = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#modifierList.
-SolidityListener.prototype.enterModifierList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#modifierList.
-SolidityListener.prototype.exitModifierList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#eventDefinition.
-SolidityListener.prototype.enterEventDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#eventDefinition.
-SolidityListener.prototype.exitEventDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#enumValue.
-SolidityListener.prototype.enterEnumValue = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#enumValue.
-SolidityListener.prototype.exitEnumValue = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#enumDefinition.
-SolidityListener.prototype.enterEnumDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#enumDefinition.
-SolidityListener.prototype.exitEnumDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#parameterList.
-SolidityListener.prototype.enterParameterList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#parameterList.
-SolidityListener.prototype.exitParameterList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#parameter.
-SolidityListener.prototype.enterParameter = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#parameter.
-SolidityListener.prototype.exitParameter = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#eventParameterList.
-SolidityListener.prototype.enterEventParameterList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#eventParameterList.
-SolidityListener.prototype.exitEventParameterList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#eventParameter.
-SolidityListener.prototype.enterEventParameter = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#eventParameter.
-SolidityListener.prototype.exitEventParameter = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#functionTypeParameterList.
-SolidityListener.prototype.enterFunctionTypeParameterList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#functionTypeParameterList.
-SolidityListener.prototype.exitFunctionTypeParameterList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#functionTypeParameter.
-SolidityListener.prototype.enterFunctionTypeParameter = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#functionTypeParameter.
-SolidityListener.prototype.exitFunctionTypeParameter = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#variableDeclaration.
-SolidityListener.prototype.enterVariableDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#variableDeclaration.
-SolidityListener.prototype.exitVariableDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#typeName.
-SolidityListener.prototype.enterTypeName = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#typeName.
-SolidityListener.prototype.exitTypeName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#userDefinedTypeName.
-SolidityListener.prototype.enterUserDefinedTypeName = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#userDefinedTypeName.
-SolidityListener.prototype.exitUserDefinedTypeName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#mappingKey.
-SolidityListener.prototype.enterMappingKey = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#mappingKey.
-SolidityListener.prototype.exitMappingKey = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#mapping.
-SolidityListener.prototype.enterMapping = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#mapping.
-SolidityListener.prototype.exitMapping = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#functionTypeName.
-SolidityListener.prototype.enterFunctionTypeName = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#functionTypeName.
-SolidityListener.prototype.exitFunctionTypeName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#storageLocation.
-SolidityListener.prototype.enterStorageLocation = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#storageLocation.
-SolidityListener.prototype.exitStorageLocation = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#stateMutability.
-SolidityListener.prototype.enterStateMutability = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#stateMutability.
-SolidityListener.prototype.exitStateMutability = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#block.
-SolidityListener.prototype.enterBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#block.
-SolidityListener.prototype.exitBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#statement.
-SolidityListener.prototype.enterStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#statement.
-SolidityListener.prototype.exitStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#expressionStatement.
-SolidityListener.prototype.enterExpressionStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#expressionStatement.
-SolidityListener.prototype.exitExpressionStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#ifStatement.
-SolidityListener.prototype.enterIfStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#ifStatement.
-SolidityListener.prototype.exitIfStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#tryStatement.
-SolidityListener.prototype.enterTryStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#tryStatement.
-SolidityListener.prototype.exitTryStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#catchClause.
-SolidityListener.prototype.enterCatchClause = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#catchClause.
-SolidityListener.prototype.exitCatchClause = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#whileStatement.
-SolidityListener.prototype.enterWhileStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#whileStatement.
-SolidityListener.prototype.exitWhileStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#simpleStatement.
-SolidityListener.prototype.enterSimpleStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#simpleStatement.
-SolidityListener.prototype.exitSimpleStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#forStatement.
-SolidityListener.prototype.enterForStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#forStatement.
-SolidityListener.prototype.exitForStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#inlineAssemblyStatement.
-SolidityListener.prototype.enterInlineAssemblyStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#inlineAssemblyStatement.
-SolidityListener.prototype.exitInlineAssemblyStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#doWhileStatement.
-SolidityListener.prototype.enterDoWhileStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#doWhileStatement.
-SolidityListener.prototype.exitDoWhileStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#continueStatement.
-SolidityListener.prototype.enterContinueStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#continueStatement.
-SolidityListener.prototype.exitContinueStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#breakStatement.
-SolidityListener.prototype.enterBreakStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#breakStatement.
-SolidityListener.prototype.exitBreakStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#returnStatement.
-SolidityListener.prototype.enterReturnStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#returnStatement.
-SolidityListener.prototype.exitReturnStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#throwStatement.
-SolidityListener.prototype.enterThrowStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#throwStatement.
-SolidityListener.prototype.exitThrowStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#emitStatement.
-SolidityListener.prototype.enterEmitStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#emitStatement.
-SolidityListener.prototype.exitEmitStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#variableDeclarationStatement.
-SolidityListener.prototype.enterVariableDeclarationStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#variableDeclarationStatement.
-SolidityListener.prototype.exitVariableDeclarationStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#variableDeclarationList.
-SolidityListener.prototype.enterVariableDeclarationList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#variableDeclarationList.
-SolidityListener.prototype.exitVariableDeclarationList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#identifierList.
-SolidityListener.prototype.enterIdentifierList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#identifierList.
-SolidityListener.prototype.exitIdentifierList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#elementaryTypeName.
-SolidityListener.prototype.enterElementaryTypeName = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#elementaryTypeName.
-SolidityListener.prototype.exitElementaryTypeName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#expression.
-SolidityListener.prototype.enterExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#expression.
-SolidityListener.prototype.exitExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#primaryExpression.
-SolidityListener.prototype.enterPrimaryExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#primaryExpression.
-SolidityListener.prototype.exitPrimaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#expressionList.
-SolidityListener.prototype.enterExpressionList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#expressionList.
-SolidityListener.prototype.exitExpressionList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#nameValueList.
-SolidityListener.prototype.enterNameValueList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#nameValueList.
-SolidityListener.prototype.exitNameValueList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#nameValue.
-SolidityListener.prototype.enterNameValue = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#nameValue.
-SolidityListener.prototype.exitNameValue = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#functionCallArguments.
-SolidityListener.prototype.enterFunctionCallArguments = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#functionCallArguments.
-SolidityListener.prototype.exitFunctionCallArguments = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#functionCall.
-SolidityListener.prototype.enterFunctionCall = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#functionCall.
-SolidityListener.prototype.exitFunctionCall = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyBlock.
-SolidityListener.prototype.enterAssemblyBlock = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyBlock.
-SolidityListener.prototype.exitAssemblyBlock = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyItem.
-SolidityListener.prototype.enterAssemblyItem = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyItem.
-SolidityListener.prototype.exitAssemblyItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyExpression.
-SolidityListener.prototype.enterAssemblyExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyExpression.
-SolidityListener.prototype.exitAssemblyExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyMember.
-SolidityListener.prototype.enterAssemblyMember = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyMember.
-SolidityListener.prototype.exitAssemblyMember = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyCall.
-SolidityListener.prototype.enterAssemblyCall = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyCall.
-SolidityListener.prototype.exitAssemblyCall = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyLocalDefinition.
-SolidityListener.prototype.enterAssemblyLocalDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyLocalDefinition.
-SolidityListener.prototype.exitAssemblyLocalDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyAssignment.
-SolidityListener.prototype.enterAssemblyAssignment = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyAssignment.
-SolidityListener.prototype.exitAssemblyAssignment = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyIdentifierOrList.
-SolidityListener.prototype.enterAssemblyIdentifierOrList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyIdentifierOrList.
-SolidityListener.prototype.exitAssemblyIdentifierOrList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyIdentifierList.
-SolidityListener.prototype.enterAssemblyIdentifierList = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyIdentifierList.
-SolidityListener.prototype.exitAssemblyIdentifierList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyStackAssignment.
-SolidityListener.prototype.enterAssemblyStackAssignment = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyStackAssignment.
-SolidityListener.prototype.exitAssemblyStackAssignment = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#labelDefinition.
-SolidityListener.prototype.enterLabelDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#labelDefinition.
-SolidityListener.prototype.exitLabelDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblySwitch.
-SolidityListener.prototype.enterAssemblySwitch = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblySwitch.
-SolidityListener.prototype.exitAssemblySwitch = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyCase.
-SolidityListener.prototype.enterAssemblyCase = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyCase.
-SolidityListener.prototype.exitAssemblyCase = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyFunctionDefinition.
-SolidityListener.prototype.enterAssemblyFunctionDefinition = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyFunctionDefinition.
-SolidityListener.prototype.exitAssemblyFunctionDefinition = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyFunctionReturns.
-SolidityListener.prototype.enterAssemblyFunctionReturns = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyFunctionReturns.
-SolidityListener.prototype.exitAssemblyFunctionReturns = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyFor.
-SolidityListener.prototype.enterAssemblyFor = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyFor.
-SolidityListener.prototype.exitAssemblyFor = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyIf.
-SolidityListener.prototype.enterAssemblyIf = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyIf.
-SolidityListener.prototype.exitAssemblyIf = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#assemblyLiteral.
-SolidityListener.prototype.enterAssemblyLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#assemblyLiteral.
-SolidityListener.prototype.exitAssemblyLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#subAssembly.
-SolidityListener.prototype.enterSubAssembly = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#subAssembly.
-SolidityListener.prototype.exitSubAssembly = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#tupleExpression.
-SolidityListener.prototype.enterTupleExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#tupleExpression.
-SolidityListener.prototype.exitTupleExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#typeNameExpression.
-SolidityListener.prototype.enterTypeNameExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#typeNameExpression.
-SolidityListener.prototype.exitTypeNameExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#numberLiteral.
-SolidityListener.prototype.enterNumberLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#numberLiteral.
-SolidityListener.prototype.exitNumberLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#identifier.
-SolidityListener.prototype.enterIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#identifier.
-SolidityListener.prototype.exitIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#overrideSpecifier.
-SolidityListener.prototype.enterOverrideSpecifier = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#overrideSpecifier.
-SolidityListener.prototype.exitOverrideSpecifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SolidityParser#stringLiteral.
-SolidityListener.prototype.enterStringLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by SolidityParser#stringLiteral.
-SolidityListener.prototype.exitStringLiteral = function(ctx) {
-};
-
-
-
-exports.SolidityListener = SolidityListener;

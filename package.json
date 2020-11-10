@@ -12,7 +12,7 @@
     "prettier": "find src -name *.js | egrep -v '^src/(lib|antlr4)/' | xargs prettier --no-semi --single-quote --write",
     "eslint": "eslint src",
     "pretest": "eslint src && tslint-config-prettier-check ./tslint.json",
-    "test": "nyc mocha --require babel-register",
+    "test": "nyc mocha --require @babel/register",
     "tslint": "tslint-config-prettier-check ./tslint.json"
   },
   "authors": [
@@ -28,12 +28,13 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
     "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "babel-cli": "^6.26.0",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.12.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-inline-import": "^3.0.0",
-    "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "eslint": "^6.2.2",
     "eslint-plugin-import": "^2.18.2",
@@ -55,5 +56,8 @@
     "include": [
       "src/*.js"
     ]
+  },
+  "dependencies": {
+    "antlr4": "^4.8.0"
   }
 }

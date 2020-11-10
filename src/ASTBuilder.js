@@ -1,4 +1,4 @@
-const antlr4 = require('./antlr4/index')
+const antlr4 = require('antlr4')
 
 function toText(ctx) {
   if (ctx !== null) {
@@ -113,7 +113,7 @@ const transformAST = {
     const value = ctx
       .pragmaValue()
       .children[0].children.map(x => toText(x))
-      .join(" ")
+      .join(' ')
 
     return {
       name: toText(ctx.pragmaName()),
@@ -137,8 +137,7 @@ const transformAST = {
 
   InheritanceSpecifier(ctx) {
     const exprList = ctx.expressionList()
-    const args = (exprList != null)
-      ? this.visit(exprList.expression()) : []
+    const args = exprList != null ? this.visit(exprList.expression()) : []
 
     return {
       baseName: this.visit(ctx.userDefinedTypeName()),
@@ -182,7 +181,10 @@ const transformAST = {
 
         if (
           ctx.returnParameters() &&
-          ctx.returnParameters().parameterList().parameter().length > 0
+          ctx
+            .returnParameters()
+            .parameterList()
+            .parameter().length > 0
         ) {
           throw new Error('Constructors cannot have return parameters')
         }
@@ -205,11 +207,12 @@ const transformAST = {
 
         if (
           ctx.returnParameters() &&
-          ctx.returnParameters().parameterList().parameter().length > 0
+          ctx
+            .returnParameters()
+            .parameterList()
+            .parameter().length > 0
         ) {
-          throw new Error(
-            'Fallback functions cannot have return parameters'
-          )
+          throw new Error('Fallback functions cannot have return parameters')
         }
 
         // error out on incorrect function visibility
@@ -227,7 +230,10 @@ const transformAST = {
 
         if (
           ctx.returnParameters() &&
-          ctx.returnParameters().parameterList().parameter().length > 0
+          ctx
+            .returnParameters()
+            .parameterList()
+            .parameter().length > 0
         ) {
           throw new Error(
             'Receive Ether functions cannot have return parameters'
@@ -245,7 +251,10 @@ const transformAST = {
         // error out on incorrect function payability
         if (
           !ctx.modifierList().stateMutability(0) ||
-          !ctx.modifierList().stateMutability(0).PayableKeyword(0)
+          !ctx
+            .modifierList()
+            .stateMutability(0)
+            .PayableKeyword(0)
         ) {
           throw new Error(
             'Receive Ether functions have to be declared "payable"'
@@ -255,9 +264,9 @@ const transformAST = {
         isReceiveEther = true
         break
       case 'function':
-        name = ctx.functionDescriptor().identifier(0) ?
-          toText(ctx.functionDescriptor().identifier(0)) :
-          ''
+        name = ctx.functionDescriptor().identifier(0)
+          ? toText(ctx.functionDescriptor().identifier(0))
+          : ''
 
         parameters = this.visit(ctx.parameterList())
         returnParameters = this.visit(ctx.returnParameters())
@@ -278,8 +287,8 @@ const transformAST = {
           isVirtual = true
         }
 
-        isConstructor = (name === this._currentContract)
-        isFallback = (name === '')
+        isConstructor = name === this._currentContract
+        isFallback = name === ''
         break
     }
 
@@ -542,8 +551,7 @@ const transformAST = {
 
     return {
       isReasonStringType: !!(
-        ctx.identifier() &&
-        toText(ctx.identifier()) === 'Error'
+        ctx.identifier() && toText(ctx.identifier()) === 'Error'
       ),
       parameters,
       body: this.visit(ctx.block())
@@ -596,7 +604,7 @@ const transformAST = {
     } else {
       throw new Error(
         'Expected MappingKey to have either ' +
-        'elementaryTypeName or userDefinedTypeName'
+          'elementaryTypeName or userDefinedTypeName'
       )
     }
   },
@@ -632,7 +640,7 @@ const transformAST = {
       parameters,
       body: this.visit(ctx.block()),
       isVirtual,
-      override,
+      override
     }
   },
 
@@ -706,11 +714,11 @@ const transformAST = {
           toText(ctx.getChild(2)) === ']'
         ) {
           return {
-            "type": "TypeNameExpression",
-            "typeName": {
-              "type": "ArrayTypeName",
-              "baseTypeName": this.visit(ctx.getChild(0)),
-              "length": null
+            type: 'TypeNameExpression',
+            typeName: {
+              type: 'ArrayTypeName',
+              baseTypeName: this.visit(ctx.getChild(0)),
+              length: null
             }
           }
         }
@@ -876,7 +884,7 @@ const transformAST = {
     return {
       type: 'NameValueList',
       names,
-      arguments: args,
+      arguments: args
     }
   },
 
@@ -928,14 +936,14 @@ const transformAST = {
         isDeclaredConst,
         isIndexed: false,
         isImmutable,
-        override,
+        override
       },
       iden
     )
 
     return {
       variables: [decl],
-      initialValue: expression,
+      initialValue: expression
     }
   },
 
@@ -952,7 +960,7 @@ const transformAST = {
     return {
       typeName: type,
       name,
-      initialValue: expression,
+      initialValue: expression
     }
   },
 
@@ -988,8 +996,10 @@ const transformAST = {
     }
 
     if (ctx.stringLiteral()) {
-      const value = ctx.stringLiteral().StringLiteralFragment().map(
-        stringLiteralFragmentCtx => {
+      const value = ctx
+        .stringLiteral()
+        .StringLiteralFragment()
+        .map(stringLiteralFragmentCtx => {
           const text = toText(stringLiteralFragmentCtx)
           const singleQuotes = text[0] === "'"
           const textWithoutQuotes = text.substring(1, text.length - 1)
@@ -998,9 +1008,8 @@ const transformAST = {
             : textWithoutQuotes.replace(new RegExp('\\\\"', 'g'), '"')
 
           return value
-        }
-      ).join("")
-
+        })
+        .join('')
 
       return {
         type: 'StringLiteral',
@@ -1405,7 +1414,7 @@ const transformAST = {
     return {
       type: 'AssemblyMemberAccess',
       expression: this.visit(accessed),
-      memberName: this.visit(member),
+      memberName: this.visit(member)
     }
   },
 
@@ -1438,74 +1447,74 @@ const transformAST = {
   }
 }
 
-function ASTBuilder(options) {
-  antlr4.tree.ParseTreeVisitor.call(this)
-  this.options = options
-}
+class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
+  constructor(options) {
+    super(options)
 
-ASTBuilder.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype)
-ASTBuilder.prototype.constructor = ASTBuilder
+    this.options = options
+  }
 
-ASTBuilder.prototype._loc = function(ctx) {
-  const sourceLocation = {
-    start: {
-      line: ctx.start.line,
-      column: ctx.start.column
-    },
-    end: {
-      line: ctx.stop ? ctx.stop.line : ctx.start.line,
-      column: ctx.stop ? ctx.stop.column : ctx.start.column
+  _loc(ctx) {
+    const sourceLocation = {
+      start: {
+        line: ctx.start.line,
+        column: ctx.start.column
+      },
+      end: {
+        line: ctx.stop ? ctx.stop.line : ctx.start.line,
+        column: ctx.stop ? ctx.stop.column : ctx.start.column
+      }
     }
-  }
-  return { loc: sourceLocation }
-}
-
-ASTBuilder.prototype._range = function(ctx) {
-  return { range: [ctx.start.start, ctx.stop.stop] }
-}
-
-ASTBuilder.prototype.meta = function(ctx) {
-  const ret = {}
-  if (this.options.loc) {
-    Object.assign(ret, this._loc(ctx))
-  }
-  if (this.options.range) {
-    Object.assign(ret, this._range(ctx))
-  }
-  return ret
-}
-
-ASTBuilder.prototype.createNode = function(obj, ctx) {
-  return Object.assign(obj, this.meta(ctx))
-}
-
-ASTBuilder.prototype.visit = function(ctx) {
-  if (ctx == null) {
-    return null
+    return { loc: sourceLocation }
   }
 
-  if (Array.isArray(ctx)) {
-    return ctx.map(function(child) {
-      return this.visit(child)
-    }, this)
+  _range(ctx) {
+    return { range: [ctx.start.start, ctx.stop.stop] }
   }
 
-  let name = ctx.constructor.name
-  if (name.endsWith('Context')) {
-    name = name.substring(0, name.length - 'Context'.length)
-  }
-
-  const node = { type: name }
-
-  if (name in transformAST) {
-    const visited = transformAST[name].call(this, ctx)
-    if (Array.isArray(visited)) {
-      return visited
+  meta(ctx) {
+    const ret = {}
+    if (this.options.loc) {
+      Object.assign(ret, this._loc(ctx))
     }
-    Object.assign(node, visited)
+    if (this.options.range) {
+      Object.assign(ret, this._range(ctx))
+    }
+    return ret
   }
 
-  return this.createNode(node, ctx)
+  createNode(obj, ctx) {
+    return Object.assign(obj, this.meta(ctx))
+  }
+
+  visit(ctx) {
+    if (ctx == null) {
+      return null
+    }
+
+    if (Array.isArray(ctx)) {
+      return ctx.map(function(child) {
+        return this.visit(child)
+      }, this)
+    }
+
+    let name = ctx.constructor.name
+    if (name.endsWith('Context')) {
+      name = name.substring(0, name.length - 'Context'.length)
+    }
+
+    const node = { type: name }
+
+    if (name in transformAST) {
+      const visited = transformAST[name].call(this, ctx)
+      if (Array.isArray(visited)) {
+        return visited
+      }
+      Object.assign(node, visited)
+    }
+
+    return this.createNode(node, ctx)
+  }
 }
 
 module.exports = ASTBuilder

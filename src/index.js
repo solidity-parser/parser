@@ -1,6 +1,7 @@
-const antlr4 = require('./antlr4/index')
-const { SolidityLexer } = require('./lib/SolidityLexer')
-const { SolidityParser } = require('./lib/SolidityParser')
+import SolidityLexer from './lib/SolidityLexer'
+import SolidityParser from './lib/SolidityParser'
+
+const antlr4 = require('antlr4')
 const ASTBuilder = require('./ASTBuilder')
 const ErrorListener = require('./ErrorListener')
 const { buildTokenList } = require('./tokens')
@@ -79,8 +80,9 @@ function parse(input, options) {
 
 function _isASTNode(node) {
   return (
-    !!node && typeof node === 'object'
-    && Object.prototype.hasOwnProperty.call(node, 'type')
+    !!node &&
+    typeof node === 'object' &&
+    Object.prototype.hasOwnProperty.call(node, 'type')
   )
 }
 
