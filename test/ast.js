@@ -1279,6 +1279,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello",
+      "parts": ["Hello"],
     })
   })
 
@@ -1287,6 +1288,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello",
+      "parts": ["Hello"],
     })
   })
 
@@ -1295,6 +1297,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello \"goodbye\"",
+      "parts": ["Hello \"goodbye\""],
     })
   })
 
@@ -1303,6 +1306,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello 'goodbye'",
+      "parts": ["Hello 'goodbye'"],
     })
   })
 
@@ -1311,6 +1315,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello World",
+      "parts": ["Hello ", "World"],
     })
   })
 
@@ -1319,6 +1324,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello World",
+      "parts": ["Hello ", "World"],
     })
   })
 
@@ -1327,6 +1333,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       "type": "StringLiteral",
       "value": "Hello World",
+      "parts": ["Hello ", "World"],
     })
   })
 
@@ -1334,7 +1341,8 @@ describe('AST', () => {
     var expr = parseExpression("hex\"fafafa\"")
     assert.deepEqual(expr, {
       type: "HexLiteral",
-      value: "hex\"fafafa\""
+      value: "fafafa",
+      parts: ["fafafa"],
     })
   })
 
@@ -1342,7 +1350,17 @@ describe('AST', () => {
     var expr = parseExpression("hex\"\"")
     assert.deepEqual(expr, {
       type: "HexLiteral",
-      value: "hex\"\""
+      value: "",
+      parts: [""]
+    })
+  })
+
+  it("Multipart HexLiteral", function() {
+    var expr = parseExpression("hex\"dead\" hex'beef'")
+    assert.deepEqual(expr, {
+      type: "HexLiteral",
+      value: "deadbeef",
+      parts: ["dead", "beef"]
     })
   })
 
@@ -1875,13 +1893,14 @@ describe('AST', () => {
     var ast = parseAssembly("0x04")
     assert.deepEqual(ast, {
       "type": "HexNumber",
-      "value": "0x04"
+      "value": "0x04",
     })
 
     ast = parseAssembly("\"hello\"")
     assert.deepEqual(ast, {
       "type": "StringLiteral",
-      "value": "hello"
+      "value": "hello",
+      "parts": ["hello"],
     })
   })
 

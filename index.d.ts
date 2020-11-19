@@ -369,10 +369,12 @@ export interface BooleanLiteral extends BaseASTNode {
 export interface HexLiteral extends BaseASTNode {
   type: 'HexLiteral';
   value: string;
+  parts: string[];
 }
 export interface StringLiteral extends BaseASTNode {
   type: 'StringLiteral';
   value: string;
+  parts: string[];
 }
 export interface Identifier extends BaseASTNode {
   type: 'Identifier';

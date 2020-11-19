@@ -236,7 +236,7 @@ BooleanLiteral
 DecimalNumber
 HexNumber
 NumberUnit
-HexLiteral
+HexLiteralFragment
 ReservedKeyword
 AnonymousKeyword
 BreakKeyword
@@ -370,7 +370,7 @@ DecimalDigits
 HexNumber
 HexDigits
 NumberUnit
-HexLiteral
+HexLiteralFragment
 HexPair
 HexCharacter
 ReservedKeyword

@@ -980,6 +980,19 @@ const transformAST = {
     }
   },
 
+  HexLiteral(ctx) {
+    const parts = ctx
+      .HexLiteralFragment()
+      .map(toText)
+      .map(x => x.substring(4, x.length - 1))
+
+    return {
+      type: 'HexLiteral',
+      value: parts.join(''),
+      parts
+    }
+  },
+
   PrimaryExpression(ctx) {
     if (ctx.BooleanLiteral()) {
       return {
@@ -988,15 +1001,12 @@ const transformAST = {
       }
     }
 
-    if (ctx.HexLiteral()) {
-      return {
-        type: 'HexLiteral',
-        value: toText(ctx.HexLiteral())
-      }
+    if (ctx.hexLiteral()) {
+      return this.visit(ctx.hexLiteral())
     }
 
     if (ctx.stringLiteral()) {
-      const value = ctx
+      const parts = ctx
         .stringLiteral()
         .StringLiteralFragment()
         .map(stringLiteralFragmentCtx => {
@@ -1009,11 +1019,11 @@ const transformAST = {
 
           return value
         })
-        .join('')
 
       return {
         type: 'StringLiteral',
-        value
+        value: parts.join(''),
+        parts
       }
     }
 
@@ -1260,18 +1270,17 @@ const transformAST = {
   AssemblyItem(ctx) {
     let text
 
-    if (ctx.HexLiteral()) {
-      return {
-        type: 'HexLiteral',
-        value: toText(ctx.HexLiteral())
-      }
+    if (ctx.hexLiteral()) {
+      return this.visit(ctx.hexLiteral())
     }
 
     if (ctx.stringLiteral()) {
       text = toText(ctx.stringLiteral())
+      const value = text.substring(1, text.length - 1)
       return {
         type: 'StringLiteral',
-        value: text.substring(1, text.length - 1)
+        value,
+        parts: [value]
       }
     }
 
@@ -1309,9 +1318,11 @@ const transformAST = {
 
     if (ctx.stringLiteral()) {
       text = toText(ctx)
+      const value = text.substring(1, text.length - 1)
       return {
         type: 'StringLiteral',
-        value: text.substring(1, text.length - 1)
+        value,
+        parts: [value]
       }
     }
 
@@ -1329,11 +1340,8 @@ const transformAST = {
       }
     }
 
-    if (ctx.HexLiteral()) {
-      return {
-        type: 'HexLiteral',
-        value: toText(ctx)
-      }
+    if (ctx.hexLiteral()) {
+      return this.visit(ctx.hexLiteral())
     }
   },
 

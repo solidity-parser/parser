@@ -1192,7 +1192,7 @@ export default class SolidityLexer extends antlr4.Lexer {
                           null, null, null, null, null, null, null, null, 
                           null, null, null, null, null, null, null, "Int", 
                           "Uint", "Byte", "Fixed", "Ufixed", "BooleanLiteral", 
-                          "DecimalNumber", "HexNumber", "NumberUnit", "HexLiteral", 
+                          "DecimalNumber", "HexNumber", "NumberUnit", "HexLiteralFragment", 
                           "ReservedKeyword", "AnonymousKeyword", "BreakKeyword", 
                           "ConstantKeyword", "ImmutableKeyword", "ContinueKeyword", 
                           "LeaveKeyword", "ExternalKeyword", "IndexedKeyword", 
@@ -1220,7 +1220,7 @@ export default class SolidityLexer extends antlr4.Lexer {
                       "T__91", "T__92", "T__93", "Int", "Uint", "Byte", 
                       "Fixed", "Ufixed", "BooleanLiteral", "DecimalNumber", 
                       "DecimalDigits", "HexNumber", "HexDigits", "NumberUnit", 
-                      "HexLiteral", "HexPair", "HexCharacter", "ReservedKeyword", 
+                      "HexLiteralFragment", "HexPair", "HexCharacter", "ReservedKeyword", 
                       "AnonymousKeyword", "BreakKeyword", "ConstantKeyword", 
                       "ImmutableKeyword", "ContinueKeyword", "LeaveKeyword", 
                       "ExternalKeyword", "IndexedKeyword", "InternalKeyword", 
@@ -1346,7 +1346,7 @@ SolidityLexer.BooleanLiteral = 100;
 SolidityLexer.DecimalNumber = 101;
 SolidityLexer.HexNumber = 102;
 SolidityLexer.NumberUnit = 103;
-SolidityLexer.HexLiteral = 104;
+SolidityLexer.HexLiteralFragment = 104;
 SolidityLexer.ReservedKeyword = 105;
 SolidityLexer.AnonymousKeyword = 106;
 SolidityLexer.BreakKeyword = 107;
