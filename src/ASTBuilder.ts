@@ -1,13 +1,18 @@
 import antlr4 from 'antlr4'
+import { ParseOptions } from './types'
+import * as ASTTypes from './ast-types'
+import { BaseASTNode } from './ast-types'
 
-function toText(ctx) {
+type Ctx = any
+
+function toText(ctx: Ctx | null) {
   if (ctx !== null) {
     return ctx.getText()
   }
   return null
 }
 
-function mapCommasToNulls(children) {
+function mapCommasToNulls(children: Ctx[]) {
   if (children.length === 0) {
     return []
   }
@@ -38,7 +43,7 @@ function mapCommasToNulls(children) {
   return values
 }
 
-function isBinOp(op) {
+function isBinOp(op: string): boolean {
   const binOps = [
     '+',
     '-',
@@ -69,87 +74,90 @@ function isBinOp(op) {
     '-=',
     '*=',
     '/=',
-    '%='
+    '%=',
   ]
   return binOps.includes(op)
 }
 
 const transformAST = {
-  SourceUnit(ctx) {
+  SourceUnit(ctx: Ctx): ASTTypes.SourceUnit {
     // last element is EOF terminal node
     return {
-      children: this.visit(ctx.children.slice(0, -1))
+      type: 'SourceUnit',
+      children: (this as any).visit(ctx.children.slice(0, -1)),
     }
   },
 
-  EnumDefinition(ctx) {
+  EnumDefinition(ctx: Ctx): ASTTypes.EnumDefinition {
+    return {
+      type: 'EnumDefinition',
+      name: toText(ctx.identifier()),
+      members: (this as any).visit(ctx.enumValue()),
+    }
+  },
+
+  EnumValue(ctx: Ctx) {
     return {
       name: toText(ctx.identifier()),
-      members: this.visit(ctx.enumValue())
     }
   },
 
-  EnumValue(ctx) {
-    return {
-      name: toText(ctx.identifier())
-    }
-  },
-
-  UsingForDeclaration(ctx) {
+  UsingForDeclaration(ctx: Ctx) {
     let typeName = null
     if (toText(ctx.getChild(3)) !== '*') {
-      typeName = this.visit(ctx.getChild(3))
+      typeName = (this as any).visit(ctx.getChild(3))
     }
 
     return {
       typeName,
-      libraryName: toText(ctx.identifier())
+      libraryName: toText(ctx.identifier()),
     }
   },
 
-  PragmaDirective(ctx) {
+  PragmaDirective(ctx: Ctx) {
     // this converts something like >= 0.5.0  <0.7.0
     // in >=0.5.0 <0.7.0
     const value = ctx
       .pragmaValue()
-      .children[0].children.map(x => toText(x))
+      .children[0].children.map((x: any) => toText(x))
       .join(' ')
 
     return {
       name: toText(ctx.pragmaName()),
-      value
+      value,
     }
   },
 
-  ContractDefinition(ctx) {
+  ContractDefinition(ctx: Ctx) {
     const name = toText(ctx.identifier())
     const kind = toText(ctx.getChild(0))
 
-    this._currentContract = name
+    ;(this as any)._currentContract = name
 
     return {
       name,
-      baseContracts: this.visit(ctx.inheritanceSpecifier()),
-      subNodes: this.visit(ctx.contractPart()),
-      kind
+      baseContracts: (this as any).visit(ctx.inheritanceSpecifier()),
+      subNodes: (this as any).visit(ctx.contractPart()),
+      kind,
     }
   },
 
-  InheritanceSpecifier(ctx) {
+  InheritanceSpecifier(ctx: Ctx) {
     const exprList = ctx.expressionList()
-    const args = exprList != null ? this.visit(exprList.expression()) : []
+    const args =
+      exprList != null ? (this as any).visit(exprList.expression()) : []
 
     return {
-      baseName: this.visit(ctx.userDefinedTypeName()),
-      arguments: args
+      baseName: (this as any).visit(ctx.userDefinedTypeName()),
+      arguments: args,
     }
   },
 
-  ContractPart(ctx) {
-    return this.visit(ctx.children[0])
+  ContractPart(ctx: Ctx) {
+    return (this as any).visit(ctx.children[0])
   },
 
-  FunctionDefinition(ctx) {
+  FunctionDefinition(ctx: Ctx) {
     let isConstructor = false
     let isFallback = false
     let isReceiveEther = false
@@ -160,39 +168,36 @@ const transformAST = {
     let visibility = 'default'
 
     let block = null
-    if (ctx.block()) {
-      block = this.visit(ctx.block())
+    if (ctx.block() !== undefined) {
+      block = (this as any).visit(ctx.block())
     }
 
     const modifiers = ctx
       .modifierList()
       .modifierInvocation()
-      .map(mod => this.visit(mod))
+      .map((mod: any) => (this as any).visit(mod))
 
     let stateMutability = null
-    if (ctx.modifierList().stateMutability(0)) {
+    if (ctx.modifierList().stateMutability(0) !== undefined) {
       stateMutability = toText(ctx.modifierList().stateMutability(0))
     }
 
     // see what type of function we're dealing with
     switch (toText(ctx.functionDescriptor().getChild(0))) {
       case 'constructor':
-        parameters = this.visit(ctx.parameterList())
+        parameters = (this as any).visit(ctx.parameterList())
 
         if (
-          ctx.returnParameters() &&
-          ctx
-            .returnParameters()
-            .parameterList()
-            .parameter().length > 0
+          ctx.returnParameters() !== undefined &&
+          ctx.returnParameters().parameterList().parameter().length > 0
         ) {
           throw new Error('Constructors cannot have return parameters')
         }
 
         // error out on incorrect function visibility
-        if (ctx.modifierList().InternalKeyword(0)) {
+        if (ctx.modifierList().InternalKeyword(0) !== undefined) {
           visibility = 'internal'
-        } else if (ctx.modifierList().PublicKeyword(0)) {
+        } else if (ctx.modifierList().PublicKeyword(0) !== undefined) {
           visibility = 'public'
         } else {
           visibility = 'default'
@@ -206,17 +211,14 @@ const transformAST = {
         }
 
         if (
-          ctx.returnParameters() &&
-          ctx
-            .returnParameters()
-            .parameterList()
-            .parameter().length > 0
+          ctx.returnParameters() !== undefined &&
+          ctx.returnParameters().parameterList().parameter().length > 0
         ) {
           throw new Error('Fallback functions cannot have return parameters')
         }
 
         // error out on incorrect function visibility
-        if (!ctx.modifierList().ExternalKeyword(0)) {
+        if (ctx.modifierList().ExternalKeyword(0) === undefined) {
           throw new Error('Fallback functions have to be declared "external"')
         }
         visibility = 'external'
@@ -229,11 +231,8 @@ const transformAST = {
         }
 
         if (
-          ctx.returnParameters() &&
-          ctx
-            .returnParameters()
-            .parameterList()
-            .parameter().length > 0
+          ctx.returnParameters() !== undefined &&
+          ctx.returnParameters().parameterList().parameter().length > 0
         ) {
           throw new Error(
             'Receive Ether functions cannot have return parameters'
@@ -241,7 +240,7 @@ const transformAST = {
         }
 
         // error out on incorrect function visibility
-        if (!ctx.modifierList().ExternalKeyword(0)) {
+        if (ctx.modifierList().ExternalKeyword(0) === undefined) {
           throw new Error(
             'Receive Ether functions have to be declared "external"'
           )
@@ -250,11 +249,8 @@ const transformAST = {
 
         // error out on incorrect function payability
         if (
-          !ctx.modifierList().stateMutability(0) ||
-          !ctx
-            .modifierList()
-            .stateMutability(0)
-            .PayableKeyword(0)
+          ctx.modifierList().stateMutability(0) === undefined ||
+          ctx.modifierList().stateMutability(0).PayableKeyword(0) === undefined
         ) {
           throw new Error(
             'Receive Ether functions have to be declared "payable"'
@@ -264,30 +260,28 @@ const transformAST = {
         isReceiveEther = true
         break
       case 'function':
-        name = ctx.functionDescriptor().identifier(0)
-          ? toText(ctx.functionDescriptor().identifier(0))
-          : ''
+        name = ctx.functionDescriptor().identifier(0) ?? ''
 
-        parameters = this.visit(ctx.parameterList())
-        returnParameters = this.visit(ctx.returnParameters())
+        parameters = (this as any).visit(ctx.parameterList())
+        returnParameters = (this as any).visit(ctx.returnParameters())
 
         // parse function visibility
-        if (ctx.modifierList().ExternalKeyword(0)) {
+        if (ctx.modifierList().ExternalKeyword(0) !== undefined) {
           visibility = 'external'
-        } else if (ctx.modifierList().InternalKeyword(0)) {
+        } else if (ctx.modifierList().InternalKeyword(0) !== undefined) {
           visibility = 'internal'
-        } else if (ctx.modifierList().PublicKeyword(0)) {
+        } else if (ctx.modifierList().PublicKeyword(0) !== undefined) {
           visibility = 'public'
-        } else if (ctx.modifierList().PrivateKeyword(0)) {
+        } else if (ctx.modifierList().PrivateKeyword(0) !== undefined) {
           visibility = 'private'
         }
 
         // check if function is virtual
-        if (ctx.modifierList().VirtualKeyword(0)) {
+        if (ctx.modifierList().VirtualKeyword(0) !== undefined) {
           isVirtual = true
         }
 
-        isConstructor = name === this._currentContract
+        isConstructor = name === (this as any)._currentContract
         isFallback = name === ''
         break
     }
@@ -297,7 +291,7 @@ const transformAST = {
     if (overrideSpecifier.length === 0) {
       override = null
     } else {
-      override = this.visit(overrideSpecifier[0].userDefinedTypeName())
+      override = (this as any).visit(overrideSpecifier[0].userDefinedTypeName())
     }
 
     return {
@@ -312,16 +306,16 @@ const transformAST = {
       isReceiveEther,
       isFallback,
       isVirtual,
-      stateMutability
+      stateMutability,
     }
   },
 
-  ModifierInvocation(ctx) {
+  ModifierInvocation(ctx: Ctx) {
     const exprList = ctx.expressionList()
 
     let args
     if (exprList != null) {
-      args = this.visit(exprList.expression())
+      args = (this as any).visit(exprList.expression())
     } else if (ctx.children.length > 1) {
       args = []
     } else {
@@ -330,66 +324,66 @@ const transformAST = {
 
     return {
       name: toText(ctx.identifier()),
-      arguments: args
+      arguments: args,
     }
   },
 
-  TypeNameExpression(ctx) {
+  TypeNameExpression(ctx: Ctx) {
     let typeName = ctx.elementaryTypeName()
     if (typeName === null) {
       typeName = ctx.userDefinedTypeName()
     }
     return {
-      typeName: this.visit(typeName)
+      typeName: (this as any).visit(typeName),
     }
   },
 
-  TypeName(ctx) {
+  TypeName(ctx: Ctx) {
     if (ctx.children.length > 2) {
       let length = null
       if (ctx.children.length === 4) {
-        length = this.visit(ctx.getChild(2))
+        length = (this as any).visit(ctx.getChild(2))
       }
 
       return {
         type: 'ArrayTypeName',
-        baseTypeName: this.visit(ctx.typeName()),
-        length
+        baseTypeName: (this as any).visit(ctx.typeName()),
+        length,
       }
     }
     if (ctx.children.length === 2) {
       return {
         type: 'ElementaryTypeName',
         name: toText(ctx.getChild(0)),
-        stateMutability: toText(ctx.getChild(1))
+        stateMutability: toText(ctx.getChild(1)),
       }
     }
-    return this.visit(ctx.getChild(0))
+    return (this as any).visit(ctx.getChild(0))
   },
 
-  FunctionTypeName(ctx) {
+  FunctionTypeName(ctx: Ctx) {
     const parameterTypes = ctx
       .functionTypeParameterList(0)
       .functionTypeParameter()
-      .map(typeCtx => this.visit(typeCtx))
+      .map((typeCtx: any) => (this as any).visit(typeCtx))
 
     let returnTypes = []
-    if (ctx.functionTypeParameterList(1)) {
+    if (ctx.functionTypeParameterList(1) !== undefined) {
       returnTypes = ctx
         .functionTypeParameterList(1)
         .functionTypeParameter()
-        .map(typeCtx => this.visit(typeCtx))
+        .map((typeCtx: any) => (this as any).visit(typeCtx))
     }
 
     let visibility = 'default'
-    if (ctx.InternalKeyword(0)) {
+    if (ctx.InternalKeyword(0) !== undefined) {
       visibility = 'internal'
-    } else if (ctx.ExternalKeyword(0)) {
+    } else if (ctx.ExternalKeyword(0) !== undefined) {
       visibility = 'external'
     }
 
     let stateMutability = null
-    if (ctx.stateMutability(0)) {
+    if (ctx.stateMutability(0) !== undefined) {
       stateMutability = toText(ctx.stateMutability(0))
     }
 
@@ -397,192 +391,196 @@ const transformAST = {
       parameterTypes,
       returnTypes,
       visibility,
-      stateMutability
+      stateMutability,
     }
   },
 
-  ReturnStatement(ctx) {
+  ReturnStatement(ctx: Ctx) {
     let expression = null
-    if (ctx.expression()) {
-      expression = this.visit(ctx.expression())
+    if (ctx.expression() !== undefined) {
+      expression = (this as any).visit(ctx.expression())
     }
 
     return { expression }
   },
 
-  EmitStatement(ctx) {
+  EmitStatement(ctx: Ctx) {
     return {
-      eventCall: this.visit(ctx.functionCall())
+      eventCall: (this as any).visit(ctx.functionCall()),
     }
   },
 
-  FunctionCall(ctx) {
+  FunctionCall(ctx: Ctx) {
     let args = []
     const names = []
 
     const ctxArgs = ctx.functionCallArguments()
-    if (ctxArgs.expressionList()) {
+    if (ctxArgs.expressionList() !== undefined) {
       args = ctxArgs
         .expressionList()
         .expression()
-        .map(exprCtx => this.visit(exprCtx))
-    } else if (ctxArgs.nameValueList()) {
+        .map((exprCtx: any) => (this as any).visit(exprCtx))
+    } else if (ctxArgs.nameValueList() !== undefined) {
       for (const nameValue of ctxArgs.nameValueList().nameValue()) {
-        args.push(this.visit(nameValue.expression()))
+        args.push((this as any).visit(nameValue.expression()))
         names.push(toText(nameValue.identifier()))
       }
     }
 
     return {
-      expression: this.visit(ctx.expression()),
+      expression: (this as any).visit(ctx.expression()),
       arguments: args,
-      names
+      names,
     }
   },
 
-  StructDefinition(ctx) {
+  StructDefinition(ctx: Ctx) {
     return {
       name: toText(ctx.identifier()),
-      members: this.visit(ctx.variableDeclaration())
+      members: (this as any).visit(ctx.variableDeclaration()),
     }
   },
 
-  VariableDeclaration(ctx) {
+  VariableDeclaration(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation()) {
+    if (ctx.storageLocation() !== undefined) {
       storageLocation = toText(ctx.storageLocation())
     }
 
     return {
-      typeName: this.visit(ctx.typeName()),
+      typeName: (this as any).visit(ctx.typeName()),
       name: toText(ctx.identifier()),
       storageLocation,
       isStateVar: false,
-      isIndexed: false
+      isIndexed: false,
     }
   },
 
-  EventParameter(ctx) {
+  EventParameter(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation(0)) {
+    if (ctx.storageLocation(0) !== undefined) {
       storageLocation = toText(ctx.storageLocation(0))
     }
 
     return {
       type: 'VariableDeclaration',
-      typeName: this.visit(ctx.typeName()),
+      typeName: (this as any).visit(ctx.typeName()),
       name: toText(ctx.identifier()),
       storageLocation,
       isStateVar: false,
-      isIndexed: !!ctx.IndexedKeyword(0)
+      isIndexed: ctx.IndexedKeyword(0) !== undefined,
     }
   },
 
-  FunctionTypeParameter(ctx) {
+  FunctionTypeParameter(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation()) {
+    if (ctx.storageLocation() !== undefined) {
       storageLocation = toText(ctx.storageLocation())
     }
 
     return {
       type: 'VariableDeclaration',
-      typeName: this.visit(ctx.typeName()),
+      typeName: (this as any).visit(ctx.typeName()),
       name: null,
       storageLocation,
       isStateVar: false,
-      isIndexed: false
+      isIndexed: false,
     }
   },
 
-  WhileStatement(ctx) {
+  WhileStatement(ctx: Ctx) {
     return {
-      condition: this.visit(ctx.expression()),
-      body: this.visit(ctx.statement())
+      condition: (this as any).visit(ctx.expression()),
+      body: (this as any).visit(ctx.statement()),
     }
   },
 
-  DoWhileStatement(ctx) {
+  DoWhileStatement(ctx: Ctx) {
     return {
-      condition: this.visit(ctx.expression()),
-      body: this.visit(ctx.statement())
+      condition: (this as any).visit(ctx.expression()),
+      body: (this as any).visit(ctx.statement()),
     }
   },
 
-  IfStatement(ctx) {
-    const trueBody = this.visit(ctx.statement(0))
+  IfStatement(ctx: Ctx) {
+    const trueBody = (this as any).visit(ctx.statement(0))
 
     let falseBody = null
     if (ctx.statement().length > 1) {
-      falseBody = this.visit(ctx.statement(1))
+      falseBody = (this as any).visit(ctx.statement(1))
     }
 
     return {
-      condition: this.visit(ctx.expression()),
+      condition: (this as any).visit(ctx.expression()),
       trueBody,
-      falseBody
+      falseBody,
     }
   },
 
-  TryStatement(ctx) {
+  TryStatement(ctx: Ctx) {
     let returnParameters = null
-    if (ctx.returnParameters()) {
-      returnParameters = this.visit(ctx.returnParameters())
+    if (ctx.returnParameters() !== undefined) {
+      returnParameters = (this as any).visit(ctx.returnParameters())
     }
 
-    const catchClauses = ctx.catchClause().map(exprCtx => this.visit(exprCtx))
+    const catchClauses = ctx
+      .catchClause()
+      .map((exprCtx: any) => (this as any).visit(exprCtx))
 
     return {
-      expression: this.visit(ctx.expression()),
+      expression: (this as any).visit(ctx.expression()),
       returnParameters,
-      body: this.visit(ctx.block()),
-      catchClauses
+      body: (this as any).visit(ctx.block()),
+      catchClauses,
     }
   },
 
-  CatchClause(ctx) {
+  CatchClause(ctx: Ctx) {
     let parameters = null
-    if (ctx.parameterList()) {
-      parameters = this.visit(ctx.parameterList())
+    if (ctx.parameterList() !== undefined) {
+      parameters = (this as any).visit(ctx.parameterList())
     }
 
-    if (ctx.identifier() && toText(ctx.identifier()) !== 'Error') {
+    if (
+      ctx.identifier() !== undefined &&
+      toText(ctx.identifier()) !== 'Error'
+    ) {
       throw new Error('Expected "Error" identifier in catch clause')
     }
 
     return {
-      isReasonStringType: !!(
-        ctx.identifier() && toText(ctx.identifier()) === 'Error'
-      ),
+      isReasonStringType:
+        ctx.identifier() !== undefined && toText(ctx.identifier()) === 'Error',
       parameters,
-      body: this.visit(ctx.block())
+      body: (this as any).visit(ctx.block()),
     }
   },
 
-  UserDefinedTypeName(ctx) {
+  UserDefinedTypeName(ctx: Ctx) {
     return {
-      namePath: toText(ctx)
+      namePath: toText(ctx),
     }
   },
 
-  ElementaryTypeName(ctx) {
+  ElementaryTypeName(ctx: Ctx) {
     return {
-      name: toText(ctx)
+      name: toText(ctx),
     }
   },
 
-  Block(ctx) {
+  Block(ctx: Ctx) {
     return {
-      statements: this.visit(ctx.statement())
+      statements: (this as any).visit(ctx.statement()),
     }
   },
 
-  ExpressionStatement(ctx) {
+  ExpressionStatement(ctx: Ctx) {
     return {
-      expression: this.visit(ctx.expression())
+      expression: (this as any).visit(ctx.expression()),
     }
   },
 
-  NumberLiteral(ctx) {
+  NumberLiteral(ctx: Ctx) {
     const number = toText(ctx.getChild(0))
     let subdenomination = null
 
@@ -592,15 +590,15 @@ const transformAST = {
 
     return {
       number,
-      subdenomination
+      subdenomination,
     }
   },
 
-  MappingKey(ctx) {
-    if (ctx.elementaryTypeName()) {
-      return this.visit(ctx.elementaryTypeName())
-    } else if (ctx.userDefinedTypeName()) {
-      return this.visit(ctx.userDefinedTypeName())
+  MappingKey(ctx: Ctx) {
+    if (ctx.elementaryTypeName() !== undefined) {
+      return (this as any).visit(ctx.elementaryTypeName())
+    } else if (ctx.userDefinedTypeName() !== undefined) {
+      return (this as any).visit(ctx.userDefinedTypeName())
     } else {
       throw new Error(
         'Expected MappingKey to have either ' +
@@ -609,21 +607,21 @@ const transformAST = {
     }
   },
 
-  Mapping(ctx) {
+  Mapping(ctx: Ctx) {
     return {
-      keyType: this.visit(ctx.mappingKey()),
-      valueType: this.visit(ctx.typeName())
+      keyType: (this as any).visit(ctx.mappingKey()),
+      valueType: (this as any).visit(ctx.typeName()),
     }
   },
 
-  ModifierDefinition(ctx) {
+  ModifierDefinition(ctx: Ctx) {
     let parameters = null
-    if (ctx.parameterList()) {
-      parameters = this.visit(ctx.parameterList())
+    if (ctx.parameterList() !== undefined) {
+      parameters = (this as any).visit(ctx.parameterList())
     }
 
     let isVirtual = false
-    if (ctx.VirtualKeyword(0)) {
+    if (ctx.VirtualKeyword(0) !== undefined) {
       isVirtual = true
     }
 
@@ -632,33 +630,33 @@ const transformAST = {
     if (overrideSpecifier.length === 0) {
       override = null
     } else {
-      override = this.visit(overrideSpecifier[0].userDefinedTypeName())
+      override = (this as any).visit(overrideSpecifier[0].userDefinedTypeName())
     }
 
     return {
       name: toText(ctx.identifier()),
       parameters,
-      body: this.visit(ctx.block()),
+      body: (this as any).visit(ctx.block()),
       isVirtual,
-      override
+      override,
     }
   },
 
-  Statement(ctx) {
-    return this.visit(ctx.getChild(0))
+  Statement(ctx: Ctx) {
+    return (this as any).visit(ctx.getChild(0))
   },
 
-  SimpleStatement(ctx) {
-    return this.visit(ctx.getChild(0))
+  SimpleStatement(ctx: Ctx) {
+    return (this as any).visit(ctx.getChild(0))
   },
 
-  Expression(ctx) {
+  Expression(ctx: Ctx): ASTTypes.Expression {
     let op
 
     switch (ctx.children.length) {
       case 1:
         // primary expression
-        return this.visit(ctx.getChild(0))
+        return (this as any).visit(ctx.getChild(0))
 
       case 2:
         op = toText(ctx.getChild(0))
@@ -667,7 +665,7 @@ const transformAST = {
         if (op === 'new') {
           return {
             type: 'NewExpression',
-            typeName: this.visit(ctx.typeName())
+            typeName: (this as any).visit(ctx.typeName()),
           }
         }
 
@@ -676,8 +674,8 @@ const transformAST = {
           return {
             type: 'UnaryOperation',
             operator: op,
-            subExpression: this.visit(ctx.getChild(1)),
-            isPrefix: true
+            subExpression: (this as any).visit(ctx.getChild(1)),
+            isPrefix: true,
           }
         }
 
@@ -688,8 +686,8 @@ const transformAST = {
           return {
             type: 'UnaryOperation',
             operator: op,
-            subExpression: this.visit(ctx.getChild(0)),
-            isPrefix: false
+            subExpression: (this as any).visit(ctx.getChild(0)),
+            isPrefix: false,
           }
         }
         break
@@ -702,8 +700,8 @@ const transformAST = {
         ) {
           return {
             type: 'TupleExpression',
-            components: [this.visit(ctx.getChild(1))],
-            isArray: false
+            components: [(this as any).visit(ctx.getChild(1))],
+            isArray: false,
           }
         }
 
@@ -717,9 +715,8 @@ const transformAST = {
             type: 'TypeNameExpression',
             typeName: {
               type: 'ArrayTypeName',
-              baseTypeName: this.visit(ctx.getChild(0)),
-              length: null
-            }
+              baseTypeName: (this as any).visit(ctx.getChild(0)),
+            },
           }
         }
 
@@ -730,10 +727,10 @@ const transformAST = {
           return {
             type: 'TupleExpression',
             components: [
-              this.visit(ctx.getChild(0)),
-              this.visit(ctx.getChild(2))
+              (this as any).visit(ctx.getChild(0)),
+              (this as any).visit(ctx.getChild(2)),
             ],
-            isArray: false
+            isArray: false,
           }
         }
 
@@ -741,8 +738,8 @@ const transformAST = {
         if (op === '.') {
           return {
             type: 'MemberAccess',
-            expression: this.visit(ctx.getChild(0)),
-            memberName: toText(ctx.getChild(2))
+            expression: (this as any).visit(ctx.getChild(0)),
+            memberName: toText(ctx.getChild(2)),
           }
         }
 
@@ -750,8 +747,8 @@ const transformAST = {
           return {
             type: 'BinaryOperation',
             operator: op,
-            left: this.visit(ctx.getChild(0)),
-            right: this.visit(ctx.getChild(2))
+            left: (this as any).visit(ctx.getChild(0)),
+            right: (this as any).visit(ctx.getChild(2)),
           }
         }
         break
@@ -766,23 +763,23 @@ const transformAST = {
           const names = []
 
           const ctxArgs = ctx.functionCallArguments()
-          if (ctxArgs.expressionList()) {
+          if (ctxArgs.expressionList() !== undefined) {
             args = ctxArgs
               .expressionList()
               .expression()
-              .map(exprCtx => this.visit(exprCtx))
-          } else if (ctxArgs.nameValueList()) {
+              .map((exprCtx: any) => (this as any).visit(exprCtx))
+          } else if (ctxArgs.nameValueList() !== undefined) {
             for (const nameValue of ctxArgs.nameValueList().nameValue()) {
-              args.push(this.visit(nameValue.expression()))
+              args.push((this as any).visit(nameValue.expression()))
               names.push(toText(nameValue.identifier()))
             }
           }
 
           return {
             type: 'FunctionCall',
-            expression: this.visit(ctx.getChild(0)),
+            expression: (this as any).visit(ctx.getChild(0)),
             arguments: args,
-            names
+            names,
           }
         }
 
@@ -793,8 +790,8 @@ const transformAST = {
         ) {
           return {
             type: 'IndexAccess',
-            base: this.visit(ctx.getChild(0)),
-            index: this.visit(ctx.getChild(2))
+            base: (this as any).visit(ctx.getChild(0)),
+            index: (this as any).visit(ctx.getChild(2)),
           }
         }
 
@@ -805,8 +802,8 @@ const transformAST = {
         ) {
           return {
             type: 'NameValueExpression',
-            expression: this.visit(ctx.getChild(0)),
-            arguments: this.visit(ctx.getChild(2))
+            expression: (this as any).visit(ctx.getChild(0)),
+            arguments: (this as any).visit(ctx.getChild(2)),
           }
         }
 
@@ -820,9 +817,9 @@ const transformAST = {
         ) {
           return {
             type: 'Conditional',
-            condition: this.visit(ctx.getChild(0)),
-            trueExpression: this.visit(ctx.getChild(2)),
-            falseExpression: this.visit(ctx.getChild(4))
+            condition: (this as any).visit(ctx.getChild(0)),
+            trueExpression: (this as any).visit(ctx.getChild(2)),
+            falseExpression: (this as any).visit(ctx.getChild(4)),
           }
         }
 
@@ -834,9 +831,8 @@ const transformAST = {
         ) {
           return {
             type: 'IndexRangeAccess',
-            base: this.visit(ctx.getChild(0)),
-            indexStart: null,
-            indexEnd: this.visit(ctx.getChild(3))
+            base: (this as any).visit(ctx.getChild(0)),
+            indexEnd: (this as any).visit(ctx.getChild(3)),
           }
         } else if (
           toText(ctx.getChild(1)) === '[' &&
@@ -845,9 +841,8 @@ const transformAST = {
         ) {
           return {
             type: 'IndexRangeAccess',
-            base: this.visit(ctx.getChild(0)),
-            indexStart: this.visit(ctx.getChild(2)),
-            indexEnd: null
+            base: (this as any).visit(ctx.getChild(0)),
+            indexStart: (this as any).visit(ctx.getChild(2)),
           }
         }
         break
@@ -861,9 +856,9 @@ const transformAST = {
         ) {
           return {
             type: 'IndexRangeAccess',
-            base: this.visit(ctx.getChild(0)),
-            indexStart: this.visit(ctx.getChild(2)),
-            indexEnd: this.visit(ctx.getChild(4))
+            base: (this as any).visit(ctx.getChild(0)),
+            indexStart: (this as any).visit(ctx.getChild(2)),
+            indexEnd: (this as any).visit(ctx.getChild(4)),
           }
         }
         break
@@ -872,43 +867,43 @@ const transformAST = {
     throw new Error('Unrecognized expression')
   },
 
-  NameValueList(ctx) {
+  NameValueList(ctx: Ctx) {
     const names = []
     const args = []
 
     for (const nameValue of ctx.nameValue()) {
       names.push(toText(nameValue.identifier()))
-      args.push(this.visit(nameValue.expression()))
+      args.push((this as any).visit(nameValue.expression()))
     }
 
     return {
       type: 'NameValueList',
       names,
-      arguments: args
+      arguments: args,
     }
   },
 
-  StateVariableDeclaration(ctx) {
-    const type = this.visit(ctx.typeName())
+  StateVariableDeclaration(ctx: Ctx) {
+    const type = (this as any).visit(ctx.typeName())
     const iden = ctx.identifier()
     const name = toText(iden)
 
     let expression = null
-    if (ctx.expression()) {
-      expression = this.visit(ctx.expression())
+    if (ctx.expression() !== undefined) {
+      expression = (this as any).visit(ctx.expression())
     }
 
     let visibility = 'default'
-    if (ctx.InternalKeyword(0)) {
+    if (ctx.InternalKeyword(0) !== undefined) {
       visibility = 'internal'
-    } else if (ctx.PublicKeyword(0)) {
+    } else if (ctx.PublicKeyword(0) !== undefined) {
       visibility = 'public'
-    } else if (ctx.PrivateKeyword(0)) {
+    } else if (ctx.PrivateKeyword(0) !== undefined) {
       visibility = 'private'
     }
 
     let isDeclaredConst = false
-    if (ctx.ConstantKeyword(0)) {
+    if (ctx.ConstantKeyword(0) !== undefined) {
       isDeclaredConst = true
     }
 
@@ -917,15 +912,15 @@ const transformAST = {
     if (overrideSpecifier.length === 0) {
       override = null
     } else {
-      override = this.visit(overrideSpecifier[0].userDefinedTypeName())
+      override = (this as any).visit(overrideSpecifier[0].userDefinedTypeName())
     }
 
     let isImmutable = false
-    if (ctx.ImmutableKeyword(0)) {
+    if (ctx.ImmutableKeyword(0) !== undefined) {
       isImmutable = true
     }
 
-    const decl = this.createNode(
+    const decl = (this as any).createNode(
       {
         type: 'VariableDeclaration',
         typeName: type,
@@ -936,80 +931,80 @@ const transformAST = {
         isDeclaredConst,
         isIndexed: false,
         isImmutable,
-        override
+        override,
       },
       iden
     )
 
     return {
       variables: [decl],
-      initialValue: expression
+      initialValue: expression,
     }
   },
 
-  FileLevelConstant(ctx) {
-    const type = this.visit(ctx.typeName())
+  FileLevelConstant(ctx: Ctx) {
+    const type = (this as any).visit(ctx.typeName())
     const iden = ctx.identifier()
     const name = toText(iden)
 
     let expression = null
-    if (ctx.expression()) {
-      expression = this.visit(ctx.expression())
+    if (ctx.expression() !== undefined) {
+      expression = (this as any).visit(ctx.expression())
     }
 
     return {
       typeName: type,
       name,
-      initialValue: expression
+      initialValue: expression,
     }
   },
 
-  ForStatement(ctx) {
-    let conditionExpression = this.visit(ctx.expressionStatement())
-    if (conditionExpression) {
+  ForStatement(ctx: Ctx) {
+    let conditionExpression = (this as any).visit(ctx.expressionStatement())
+    if (conditionExpression !== undefined) {
       conditionExpression = conditionExpression.expression
     }
     return {
-      initExpression: this.visit(ctx.simpleStatement()),
+      initExpression: (this as any).visit(ctx.simpleStatement()),
       conditionExpression,
       loopExpression: {
         type: 'ExpressionStatement',
-        expression: this.visit(ctx.expression())
+        expression: (this as any).visit(ctx.expression()),
       },
-      body: this.visit(ctx.statement())
+      body: (this as any).visit(ctx.statement()),
     }
   },
 
-  HexLiteral(ctx) {
+  HexLiteral(ctx: Ctx) {
     const parts = ctx
       .HexLiteralFragment()
       .map(toText)
-      .map(x => x.substring(4, x.length - 1))
+      .map((x: any) => x.substring(4, x.length - 1))
 
     return {
       type: 'HexLiteral',
       value: parts.join(''),
-      parts
+      parts,
     }
   },
 
-  PrimaryExpression(ctx) {
-    if (ctx.BooleanLiteral()) {
+  PrimaryExpression(ctx: Ctx) {
+    if (ctx.BooleanLiteral() !== undefined) {
       return {
         type: 'BooleanLiteral',
-        value: toText(ctx.BooleanLiteral()) === 'true'
+        value: toText(ctx.BooleanLiteral()) === 'true',
       }
     }
 
-    if (ctx.hexLiteral()) {
-      return this.visit(ctx.hexLiteral())
+    if (ctx.hexLiteral() !== undefined) {
+      return (this as any).visit(ctx.hexLiteral())
     }
 
-    if (ctx.stringLiteral()) {
+    if (ctx.stringLiteral() !== undefined) {
       const parts = ctx
         .stringLiteral()
         .StringLiteralFragment()
-        .map(stringLiteralFragmentCtx => {
+        .map((stringLiteralFragmentCtx: any) => {
           const text = toText(stringLiteralFragmentCtx)
           const singleQuotes = text[0] === "'"
           const textWithoutQuotes = text.substring(1, text.length - 1)
@@ -1023,14 +1018,14 @@ const transformAST = {
       return {
         type: 'StringLiteral',
         value: parts.join(''),
-        parts
+        parts,
       }
     }
 
-    if (ctx.TypeKeyword()) {
+    if (ctx.TypeKeyword() !== undefined) {
       return {
         type: 'Identifier',
-        name: 'type'
+        name: 'type',
       }
     }
 
@@ -1039,140 +1034,140 @@ const transformAST = {
       toText(ctx.getChild(1)) === '[' &&
       toText(ctx.getChild(2)) === ']'
     ) {
-      let node = this.visit(ctx.getChild(0))
+      let node = (this as any).visit(ctx.getChild(0))
       if (node.type === 'Identifier') {
         node = {
           type: 'UserDefinedTypeName',
-          namePath: node.name
+          namePath: node.name,
         }
       } else if (node.type == 'TypeNameExpression') {
         node = node.typeName
       } else {
         node = {
           type: 'ElementaryTypeName',
-          name: toText(ctx.getChild(0))
+          name: toText(ctx.getChild(0)),
         }
       }
 
       const typeName = {
         type: 'ArrayTypeName',
         baseTypeName: node,
-        length: null
+        length: null,
       }
 
       return {
         type: 'TypeNameExpression',
-        typeName
+        typeName,
       }
     }
 
-    return this.visit(ctx.getChild(0))
+    return (this as any).visit(ctx.getChild(0))
   },
 
-  Identifier(ctx) {
+  Identifier(ctx: Ctx) {
     return {
-      name: toText(ctx)
+      name: toText(ctx),
     }
   },
 
-  TupleExpression(ctx) {
+  TupleExpression(ctx: Ctx) {
     // remove parentheses
     const children = ctx.children.slice(1, -1)
-    const components = mapCommasToNulls(children).map(expr => {
+    const components = mapCommasToNulls(children).map((expr) => {
       // add a null for each empty value
       if (expr === null) {
         return null
       }
-      return this.visit(expr)
+      return (this as any).visit(expr)
     })
 
     return {
       components,
-      isArray: toText(ctx.getChild(0)) === '['
+      isArray: toText(ctx.getChild(0)) === '[',
     }
   },
 
-  IdentifierList(ctx) {
+  IdentifierList(ctx: Ctx) {
     // remove parentheses
     const children = ctx.children.slice(1, -1)
-    return mapCommasToNulls(children).map(iden => {
+    return mapCommasToNulls(children).map((iden) => {
       // add a null for each empty value
       if (iden === null) {
         return null
       }
 
-      return this.createNode(
+      return (this as any).createNode(
         {
           type: 'VariableDeclaration',
           name: toText(iden),
           storageLocation: null,
           typeName: null,
           isStateVar: false,
-          isIndexed: false
+          isIndexed: false,
         },
         iden
       )
     })
   },
 
-  VariableDeclarationList(ctx) {
+  VariableDeclarationList(ctx: Ctx) {
     // remove parentheses
-    return mapCommasToNulls(ctx.children).map(decl => {
+    return mapCommasToNulls(ctx.children).map((decl) => {
       // add a null for each empty value
       if (decl === null) {
         return null
       }
 
       let storageLocation = null
-      if (decl.storageLocation()) {
+      if (decl.storageLocation() !== undefined) {
         storageLocation = toText(decl.storageLocation())
       }
 
-      return this.createNode(
+      return (this as any).createNode(
         {
           type: 'VariableDeclaration',
           name: toText(decl.identifier()),
-          typeName: this.visit(decl.typeName()),
+          typeName: (this as any).visit(decl.typeName()),
           storageLocation,
           isStateVar: false,
-          isIndexed: false
+          isIndexed: false,
         },
         decl
       )
     })
   },
 
-  VariableDeclarationStatement(ctx) {
+  VariableDeclarationStatement(ctx: Ctx) {
     let variables
-    if (ctx.variableDeclaration()) {
-      variables = [this.visit(ctx.variableDeclaration())]
-    } else if (ctx.identifierList()) {
-      variables = this.visit(ctx.identifierList())
-    } else if (ctx.variableDeclarationList()) {
-      variables = this.visit(ctx.variableDeclarationList())
+    if (ctx.variableDeclaration() !== undefined) {
+      variables = [(this as any).visit(ctx.variableDeclaration())]
+    } else if (ctx.identifierList() !== undefined) {
+      variables = (this as any).visit(ctx.identifierList())
+    } else if (ctx.variableDeclarationList() !== undefined) {
+      variables = (this as any).visit(ctx.variableDeclarationList())
     }
 
     let initialValue = null
-    if (ctx.expression()) {
-      initialValue = this.visit(ctx.expression())
+    if (ctx.expression() !== undefined) {
+      initialValue = (this as any).visit(ctx.expression())
     }
 
     return {
       variables,
-      initialValue
+      initialValue,
     }
   },
 
-  ImportDirective(ctx) {
+  ImportDirective(ctx: Ctx) {
     const pathString = toText(ctx.StringLiteralFragment())
     let unitAlias = null
     let symbolAliases = null
 
     if (ctx.importDeclaration().length > 0) {
-      symbolAliases = ctx.importDeclaration().map(decl => {
+      symbolAliases = ctx.importDeclaration().map((decl: any) => {
         const symbol = toText(decl.identifier(0))
         let alias = null
-        if (decl.identifier(1)) {
+        if (decl.identifier(1) !== undefined) {
           alias = toText(decl.identifier(1))
         }
         return [symbol, alias]
@@ -1186,179 +1181,183 @@ const transformAST = {
     return {
       path: pathString.substring(1, pathString.length - 1),
       unitAlias,
-      symbolAliases
+      symbolAliases,
     }
   },
 
-  EventDefinition(ctx) {
+  EventDefinition(ctx: Ctx) {
     return {
       name: toText(ctx.identifier()),
-      parameters: this.visit(ctx.eventParameterList()),
-      isAnonymous: !!ctx.AnonymousKeyword()
+      parameters: (this as any).visit(ctx.eventParameterList()),
+      isAnonymous: ctx.AnonymousKeyword() !== undefined,
     }
   },
 
-  EventParameterList(ctx) {
-    return ctx.eventParameter().map(function(paramCtx) {
-      const type = this.visit(paramCtx.typeName())
+  EventParameterList(ctx: Ctx) {
+    return ctx.eventParameter().map((paramCtx: any) => {
+      const type = (this as any).visit(paramCtx.typeName())
       let name = null
-      if (paramCtx.identifier()) {
+      if (paramCtx.identifier() !== undefined) {
         name = toText(paramCtx.identifier())
       }
 
-      return this.createNode(
+      return (this as any).createNode(
         {
           type: 'VariableDeclaration',
           typeName: type,
           name,
           isStateVar: false,
-          isIndexed: !!paramCtx.IndexedKeyword(0)
+          isIndexed: paramCtx.IndexedKeyword(0) !== undefined,
         },
         paramCtx
       )
     }, this)
   },
 
-  ReturnParameters(ctx) {
-    return this.visit(ctx.parameterList())
+  ReturnParameters(ctx: Ctx) {
+    return (this as any).visit(ctx.parameterList())
   },
 
-  ParameterList(ctx) {
-    return ctx.parameter().map(paramCtx => this.visit(paramCtx))
+  ParameterList(ctx: Ctx) {
+    return ctx.parameter().map((paramCtx: any) => (this as any).visit(paramCtx))
   },
 
-  Parameter(ctx) {
+  Parameter(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation()) {
+    if (ctx.storageLocation() !== undefined) {
       storageLocation = toText(ctx.storageLocation())
     }
 
     let name = null
-    if (ctx.identifier()) {
+    if (ctx.identifier() !== undefined) {
       name = toText(ctx.identifier())
     }
 
     return {
       type: 'VariableDeclaration',
-      typeName: this.visit(ctx.typeName()),
+      typeName: (this as any).visit(ctx.typeName()),
       name,
       storageLocation,
       isStateVar: false,
-      isIndexed: false
+      isIndexed: false,
     }
   },
 
-  InlineAssemblyStatement(ctx) {
+  InlineAssemblyStatement(ctx: Ctx) {
     let language = null
-    if (ctx.StringLiteralFragment()) {
+    if (ctx.StringLiteralFragment() !== undefined) {
       language = toText(ctx.StringLiteralFragment())
       language = language.substring(1, language.length - 1)
     }
 
     return {
       language,
-      body: this.visit(ctx.assemblyBlock())
+      body: (this as any).visit(ctx.assemblyBlock()),
     }
   },
 
-  AssemblyBlock(ctx) {
-    const operations = ctx.assemblyItem().map(it => this.visit(it))
+  AssemblyBlock(ctx: Ctx) {
+    const operations = ctx
+      .assemblyItem()
+      .map((it: any) => (this as any).visit(it))
 
     return { operations }
   },
 
-  AssemblyItem(ctx) {
+  AssemblyItem(ctx: Ctx) {
     let text
 
-    if (ctx.hexLiteral()) {
-      return this.visit(ctx.hexLiteral())
+    if (ctx.hexLiteral() !== undefined) {
+      return (this as any).visit(ctx.hexLiteral())
     }
 
-    if (ctx.stringLiteral()) {
+    if (ctx.stringLiteral() !== undefined) {
       text = toText(ctx.stringLiteral())
       const value = text.substring(1, text.length - 1)
       return {
         type: 'StringLiteral',
         value,
-        parts: [value]
+        parts: [value],
       }
     }
 
-    if (ctx.BreakKeyword()) {
+    if (ctx.BreakKeyword() !== undefined) {
       return {
-        type: 'Break'
+        type: 'Break',
       }
     }
 
-    if (ctx.ContinueKeyword()) {
+    if (ctx.ContinueKeyword() !== undefined) {
       return {
-        type: 'Continue'
+        type: 'Continue',
       }
     }
 
-    return this.visit(ctx.getChild(0))
+    return (this as any).visit(ctx.getChild(0))
   },
 
-  AssemblyExpression(ctx) {
-    return this.visit(ctx.getChild(0))
+  AssemblyExpression(ctx: Ctx) {
+    return (this as any).visit(ctx.getChild(0))
   },
 
-  AssemblyCall(ctx) {
+  AssemblyCall(ctx: Ctx) {
     const functionName = toText(ctx.getChild(0))
-    const args = ctx.assemblyExpression().map(arg => this.visit(arg))
+    const args = ctx
+      .assemblyExpression()
+      .map((arg: any) => (this as any).visit(arg))
 
     return {
       functionName,
-      arguments: args
+      arguments: args,
     }
   },
 
-  AssemblyLiteral(ctx) {
+  AssemblyLiteral(ctx: Ctx) {
     let text
 
-    if (ctx.stringLiteral()) {
+    if (ctx.stringLiteral() !== undefined) {
       text = toText(ctx)
       const value = text.substring(1, text.length - 1)
       return {
         type: 'StringLiteral',
         value,
-        parts: [value]
+        parts: [value],
       }
     }
 
-    if (ctx.DecimalNumber()) {
+    if (ctx.DecimalNumber() !== undefined) {
       return {
         type: 'DecimalNumber',
-        value: toText(ctx)
+        value: toText(ctx),
       }
     }
 
-    if (ctx.HexNumber()) {
+    if (ctx.HexNumber() !== undefined) {
       return {
         type: 'HexNumber',
-        value: toText(ctx)
+        value: toText(ctx),
       }
     }
 
-    if (ctx.hexLiteral()) {
-      return this.visit(ctx.hexLiteral())
+    if (ctx.hexLiteral() !== undefined) {
+      return (this as any).visit(ctx.hexLiteral())
     }
   },
 
-  AssemblySwitch(ctx) {
+  AssemblySwitch(ctx: Ctx) {
     return {
-      expression: this.visit(ctx.assemblyExpression()),
-      cases: ctx.assemblyCase().map(c => this.visit(c))
+      expression: (this as any).visit(ctx.assemblyExpression()),
+      cases: ctx.assemblyCase().map((c: any) => (this as any).visit(c)),
     }
   },
 
-  AssemblyCase(ctx) {
+  AssemblyCase(ctx: Ctx) {
     let value = null
     if (toText(ctx.getChild(0)) === 'case') {
-      value = this.visit(ctx.assemblyLiteral())
+      value = (this as any).visit(ctx.assemblyLiteral())
     }
 
-    const node: any = { block: this.visit(ctx.assemblyBlock()) }
+    const node: any = { block: (this as any).visit(ctx.assemblyBlock()) }
     if (value !== null) {
       node.value = value
     } else {
@@ -1368,146 +1367,148 @@ const transformAST = {
     return node
   },
 
-  AssemblyLocalDefinition(ctx) {
+  AssemblyLocalDefinition(ctx: Ctx) {
     let names = ctx.assemblyIdentifierOrList()
-    if (names.identifier()) {
-      names = [this.visit(names.identifier())]
-    } else if (names.assemblyMember()) {
-      names = [this.visit(names.assemblyMember())]
+    if (names.identifier() !== undefined) {
+      names = [(this as any).visit(names.identifier())]
+    } else if (names.assemblyMember() !== undefined) {
+      names = [(this as any).visit(names.assemblyMember())]
     } else {
-      names = this.visit(names.assemblyIdentifierList().identifier())
+      names = (this as any).visit(names.assemblyIdentifierList().identifier())
     }
 
     return {
       names,
-      expression: this.visit(ctx.assemblyExpression())
+      expression: (this as any).visit(ctx.assemblyExpression()),
     }
   },
 
-  AssemblyFunctionDefinition(ctx) {
+  AssemblyFunctionDefinition(ctx: Ctx) {
     let args = ctx.assemblyIdentifierList()
-    args = args ? this.visit(args.identifier()) : []
+    args = args !== undefined ? (this as any).visit(args.identifier()) : []
 
     let returnArgs = ctx.assemblyFunctionReturns()
-    returnArgs = returnArgs
-      ? this.visit(returnArgs.assemblyIdentifierList().identifier())
-      : []
+    returnArgs =
+      returnArgs !== undefined
+        ? (this as any).visit(returnArgs.assemblyIdentifierList().identifier())
+        : []
 
     return {
       name: toText(ctx.identifier()),
       arguments: args,
       returnArguments: returnArgs,
-      body: this.visit(ctx.assemblyBlock())
+      body: (this as any).visit(ctx.assemblyBlock()),
     }
   },
 
-  AssemblyAssignment(ctx) {
+  AssemblyAssignment(ctx: Ctx) {
     let names = ctx.assemblyIdentifierOrList()
-    if (names.identifier()) {
-      names = [this.visit(names.identifier())]
-    } else if (names.assemblyMember()) {
-      names = [this.visit(names.assemblyMember())]
+    if (names.identifier() !== undefined) {
+      names = [(this as any).visit(names.identifier())]
+    } else if (names.assemblyMember() !== undefined) {
+      names = [(this as any).visit(names.assemblyMember())]
     } else {
-      names = this.visit(names.assemblyIdentifierList().identifier())
+      names = (this as any).visit(names.assemblyIdentifierList().identifier())
     }
 
     return {
       names,
-      expression: this.visit(ctx.assemblyExpression())
+      expression: (this as any).visit(ctx.assemblyExpression()),
     }
   },
 
-  AssemblyMember(ctx) {
+  AssemblyMember(ctx: Ctx) {
     const [accessed, member] = ctx.identifier()
     return {
       type: 'AssemblyMemberAccess',
-      expression: this.visit(accessed),
-      memberName: this.visit(member)
+      expression: (this as any).visit(accessed),
+      memberName: (this as any).visit(member),
     }
   },
 
-  LabelDefinition(ctx) {
+  LabelDefinition(ctx: Ctx) {
     return {
-      name: toText(ctx.identifier())
+      name: toText(ctx.identifier()),
     }
   },
 
-  AssemblyStackAssignment(ctx) {
+  AssemblyStackAssignment(ctx: Ctx) {
     return {
-      name: toText(ctx.identifier())
+      name: toText(ctx.identifier()),
     }
   },
 
-  AssemblyFor(ctx) {
+  AssemblyFor(ctx: Ctx) {
     return {
-      pre: this.visit(ctx.getChild(1)),
-      condition: this.visit(ctx.getChild(2)),
-      post: this.visit(ctx.getChild(3)),
-      body: this.visit(ctx.getChild(4))
+      pre: (this as any).visit(ctx.getChild(1)),
+      condition: (this as any).visit(ctx.getChild(2)),
+      post: (this as any).visit(ctx.getChild(3)),
+      body: (this as any).visit(ctx.getChild(4)),
     }
   },
 
-  AssemblyIf(ctx) {
+  AssemblyIf(ctx: Ctx) {
     return {
-      condition: this.visit(ctx.assemblyExpression()),
-      body: this.visit(ctx.assemblyBlock())
+      condition: (this as any).visit(ctx.assemblyExpression()),
+      body: (this as any).visit(ctx.assemblyBlock()),
     }
-  }
+  },
 }
 
 class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
-  public options: any;
-  constructor(options) {
+  public options: ParseOptions
+
+  constructor(options: ParseOptions) {
     super(options)
 
     this.options = options
   }
 
-  _loc(ctx) {
+  _loc(ctx: Ctx) {
     const sourceLocation = {
       start: {
         line: ctx.start.line,
-        column: ctx.start.column
+        column: ctx.start.column,
       },
       end: {
-        line: ctx.stop ? ctx.stop.line : ctx.start.line,
-        column: ctx.stop ? ctx.stop.column : ctx.start.column
-      }
+        line: ctx.stop !== undefined ? ctx.stop.line : ctx.start.line,
+        column: ctx.stop !== undefined ? ctx.stop.column : ctx.start.column,
+      },
     }
     return { loc: sourceLocation }
   }
 
-  _range(ctx) {
+  _range(ctx: Ctx) {
     return { range: [ctx.start.start, ctx.stop.stop] }
   }
 
-  meta(ctx) {
+  meta(ctx: Ctx) {
     const ret: any = {}
-    if (this.options.loc) {
+    if (this.options.loc === true) {
       Object.assign(ret, this._loc(ctx))
     }
-    if (this.options.range) {
+    if (this.options.range === true) {
       Object.assign(ret, this._range(ctx))
     }
     return ret
   }
 
-  createNode(obj, ctx) {
+  createNode(obj: any, ctx: any) {
     return Object.assign(obj, this.meta(ctx))
   }
 
-  visit(ctx) {
-    if (ctx == null) {
+  visit(ctx: Ctx): BaseASTNode | BaseASTNode[] | null {
+    if (ctx === null) {
       return null
     }
 
     if (Array.isArray(ctx)) {
-      return ctx.map(function(child) {
-        return this.visit(child)
+      return ctx.map((child) => {
+        return (this as any).visit(child)
       }, this)
     }
 
-    let name = ctx.constructor.name
+    let name: string = ctx.constructor.name
     if (name.endsWith('Context')) {
       name = name.substring(0, name.length - 'Context'.length)
     }
@@ -1515,14 +1516,14 @@ class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
     const node = { type: name }
 
     if (name in transformAST) {
-      const visited = transformAST[name].call(this, ctx)
+      const visited = (transformAST as any)[name].call(this, ctx)
       if (Array.isArray(visited)) {
         return visited
       }
       Object.assign(node, visited)
     }
 
-    return this.createNode(node, ctx)
+    return (this as any).createNode(node, ctx)
   }
 }
 

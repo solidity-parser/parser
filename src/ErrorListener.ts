@@ -1,7 +1,7 @@
 import antlr4 from 'antlr4'
 
 class ErrorListener extends antlr4.error.ErrorListener {
-  private _errors: any
+  private _errors: any[]
 
   constructor() {
     super()
@@ -9,11 +9,17 @@ class ErrorListener extends antlr4.error.ErrorListener {
     this._errors = []
   }
 
-  syntaxError(recognizer, offendingSymbol, line, column, message) {
+  syntaxError(
+    recognizer: any,
+    offendingSymbol: any,
+    line: number,
+    column: number,
+    message: string
+  ) {
     this._errors.push({ message, line, column })
   }
 
-  getErrors() {
+  getErrors(): any[] {
     return this._errors
   }
 

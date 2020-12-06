@@ -9,7 +9,7 @@
     "target": "es6",
     "module": "ES2015",
     "moduleResolution": "node",
-    "strict": false,
+    "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   }

@@ -41,5 +41,5 @@ module.exports = {
   parseNode,
   parseStatement,
   parseExpression,
-  parseAssembly
+  parseAssembly,
 }

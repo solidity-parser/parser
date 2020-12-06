@@ -1,30 +1,39 @@
 import SolidityLexer from './lib/SolidityLexer'
 import SolidityParser from './lib/SolidityParser'
+import { Token, ParseOptions, TokenizeOptions } from './types'
+import { AST, BaseASTNode } from './ast-types'
 
 import antlr4 from 'antlr4'
 import { buildTokenList } from './tokens'
 import ASTBuilder from './ASTBuilder'
 import ErrorListener from './ErrorListener'
 
-export function ParserError(args) {
-  const { message, line, column } = args.errors[0]
-  this.message = `${message} (${line}:${column})`
-  this.errors = args.errors
+interface ParserErrorItem {
+  message: string
+  line: number
+  column: number
+}
+export class ParserError extends Error {
+  public errors: ParserErrorItem[]
 
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, this.constructor)
-  } else {
-    this.stack = new Error().stack
+  constructor(args: { errors: ParserErrorItem[] }) {
+    super()
+    const { message, line, column } = args.errors[0]
+    this.message = `${message} (${line}:${column})`
+    this.errors = args.errors
+
+    if (Error.captureStackTrace !== undefined) {
+      Error.captureStackTrace(this, this.constructor)
+    } else {
+      this.stack = new Error().stack
+    }
   }
 }
 
-ParserError.prototype = Object.create(Error.prototype)
-ParserError.prototype.constructor = ParserError
-ParserError.prototype.name = 'ParserError'
-
-export function tokenize(input: string, options) {
-  options = options || {}
-
+export function tokenize(
+  input: string,
+  options: TokenizeOptions = {}
+): Token[] {
   const chars = new antlr4.InputStream(input)
   const lexer = new SolidityLexer(chars)
   const tokens = new antlr4.CommonTokenStream(lexer)
@@ -32,7 +41,7 @@ export function tokenize(input: string, options) {
   return buildTokenList(tokens.tokenSource.getAllTokens(), options)
 }
 
-export function parse(input, options: any = {}) {
+export function parse(input: string, options: ParseOptions = {}): AST {
   const chars = new antlr4.InputStream(input)
 
   const listener = new ErrorListener()
@@ -51,49 +60,49 @@ export function parse(input, options: any = {}) {
 
   const tree = parser.sourceUnit()
 
-  let tokenList
-  if (options.tokens) {
+  let tokenList: Token[] = []
+  if (options.tokens === true) {
     const tokenSource = tokens.tokenSource
     tokenSource.reset()
 
     tokenList = buildTokenList(tokenSource.getAllTokens(), options)
   }
 
-  if (!options.tolerant && listener.hasErrors()) {
+  if (options.tolerant !== true && listener.hasErrors()) {
     throw new ParserError({ errors: listener.getErrors() })
   }
 
   const visitor = new ASTBuilder(options)
-  const ast = visitor.visit(tree)
+  const ast = visitor.visit(tree) as AST
 
-  if (options.tolerant && listener.hasErrors()) {
+  if (options.tolerant === true && listener.hasErrors()) {
     ast.errors = listener.getErrors()
   }
-  if (options.tokens) {
+  if (options.tokens === true) {
     ast.tokens = tokenList
   }
 
   return ast
 }
 
-function _isASTNode(node) {
+function _isASTNode(node: any): node is BaseASTNode {
   return (
-    !!node &&
+    node !== undefined &&
     typeof node === 'object' &&
     Object.prototype.hasOwnProperty.call(node, 'type')
   )
 }
 
-export function visit(node, visitor) {
+export function visit(node: any, visitor: any): void {
   if (Array.isArray(node)) {
-    node.forEach(child => visit(child, visitor))
+    node.forEach((child) => visit(child, visitor))
   }
 
   if (!_isASTNode(node)) return
 
   let cont = true
 
-  if (visitor[node.type]) {
+  if (visitor[node.type] !== undefined) {
     cont = visitor[node.type](node)
   }
 
@@ -101,12 +110,12 @@ export function visit(node, visitor) {
 
   for (const prop in node) {
     if (Object.prototype.hasOwnProperty.call(node, prop)) {
-      visit(node[prop], visitor)
+      visit((node as any)[prop], visitor)
     }
   }
 
   const selector = node.type + ':exit'
-  if (visitor[selector]) {
+  if (visitor[selector] !== undefined) {
     visitor[selector](node)
   }
 }
