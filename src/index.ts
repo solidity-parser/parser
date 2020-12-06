@@ -87,7 +87,7 @@ export function parse(input: string, options: ParseOptions = {}): AST {
 
 function _isASTNode(node: any): node is BaseASTNode {
   return (
-    node !== undefined &&
+    node !== null &&
     typeof node === 'object' &&
     Object.prototype.hasOwnProperty.call(node, 'type')
   )

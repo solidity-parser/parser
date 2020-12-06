@@ -168,7 +168,7 @@ const transformAST = {
     let visibility = 'default'
 
     let block = null
-    if (ctx.block() !== undefined) {
+    if (ctx.block()) {
       block = (this as any).visit(ctx.block())
     }
 
@@ -178,7 +178,7 @@ const transformAST = {
       .map((mod: any) => (this as any).visit(mod))
 
     let stateMutability = null
-    if (ctx.modifierList().stateMutability(0) !== undefined) {
+    if (ctx.modifierList().stateMutability(0)) {
       stateMutability = toText(ctx.modifierList().stateMutability(0))
     }
 
@@ -188,16 +188,16 @@ const transformAST = {
         parameters = (this as any).visit(ctx.parameterList())
 
         if (
-          ctx.returnParameters() !== undefined &&
+          ctx.returnParameters() &&
           ctx.returnParameters().parameterList().parameter().length > 0
         ) {
           throw new Error('Constructors cannot have return parameters')
         }
 
         // error out on incorrect function visibility
-        if (ctx.modifierList().InternalKeyword(0) !== undefined) {
+        if (ctx.modifierList().InternalKeyword(0)) {
           visibility = 'internal'
-        } else if (ctx.modifierList().PublicKeyword(0) !== undefined) {
+        } else if (ctx.modifierList().PublicKeyword(0)) {
           visibility = 'public'
         } else {
           visibility = 'default'
@@ -211,14 +211,14 @@ const transformAST = {
         }
 
         if (
-          ctx.returnParameters() !== undefined &&
+          ctx.returnParameters() &&
           ctx.returnParameters().parameterList().parameter().length > 0
         ) {
           throw new Error('Fallback functions cannot have return parameters')
         }
 
         // error out on incorrect function visibility
-        if (ctx.modifierList().ExternalKeyword(0) === undefined) {
+        if (!ctx.modifierList().ExternalKeyword(0)) {
           throw new Error('Fallback functions have to be declared "external"')
         }
         visibility = 'external'
@@ -231,7 +231,7 @@ const transformAST = {
         }
 
         if (
-          ctx.returnParameters() !== undefined &&
+          ctx.returnParameters() &&
           ctx.returnParameters().parameterList().parameter().length > 0
         ) {
           throw new Error(
@@ -240,7 +240,7 @@ const transformAST = {
         }
 
         // error out on incorrect function visibility
-        if (ctx.modifierList().ExternalKeyword(0) === undefined) {
+        if (!ctx.modifierList().ExternalKeyword(0)) {
           throw new Error(
             'Receive Ether functions have to be declared "external"'
           )
@@ -249,8 +249,8 @@ const transformAST = {
 
         // error out on incorrect function payability
         if (
-          ctx.modifierList().stateMutability(0) === undefined ||
-          ctx.modifierList().stateMutability(0).PayableKeyword(0) === undefined
+          !ctx.modifierList().stateMutability(0) ||
+          !ctx.modifierList().stateMutability(0).PayableKeyword(0)
         ) {
           throw new Error(
             'Receive Ether functions have to be declared "payable"'
@@ -260,24 +260,27 @@ const transformAST = {
         isReceiveEther = true
         break
       case 'function':
-        name = ctx.functionDescriptor().identifier(0) ?? ''
+        name =
+          ctx.functionDescriptor().identifier(0)
+            ? toText(ctx.functionDescriptor().identifier(0))
+            : ''
 
         parameters = (this as any).visit(ctx.parameterList())
         returnParameters = (this as any).visit(ctx.returnParameters())
 
         // parse function visibility
-        if (ctx.modifierList().ExternalKeyword(0) !== undefined) {
+        if (ctx.modifierList().ExternalKeyword(0)) {
           visibility = 'external'
-        } else if (ctx.modifierList().InternalKeyword(0) !== undefined) {
+        } else if (ctx.modifierList().InternalKeyword(0)) {
           visibility = 'internal'
-        } else if (ctx.modifierList().PublicKeyword(0) !== undefined) {
+        } else if (ctx.modifierList().PublicKeyword(0)) {
           visibility = 'public'
-        } else if (ctx.modifierList().PrivateKeyword(0) !== undefined) {
+        } else if (ctx.modifierList().PrivateKeyword(0)) {
           visibility = 'private'
         }
 
         // check if function is virtual
-        if (ctx.modifierList().VirtualKeyword(0) !== undefined) {
+        if (ctx.modifierList().VirtualKeyword(0)) {
           isVirtual = true
         }
 
@@ -330,7 +333,7 @@ const transformAST = {
 
   TypeNameExpression(ctx: Ctx) {
     let typeName = ctx.elementaryTypeName()
-    if (typeName === null) {
+    if (!typeName) {
       typeName = ctx.userDefinedTypeName()
     }
     return {
@@ -368,7 +371,7 @@ const transformAST = {
       .map((typeCtx: any) => (this as any).visit(typeCtx))
 
     let returnTypes = []
-    if (ctx.functionTypeParameterList(1) !== undefined) {
+    if (ctx.functionTypeParameterList(1)) {
       returnTypes = ctx
         .functionTypeParameterList(1)
         .functionTypeParameter()
@@ -376,14 +379,14 @@ const transformAST = {
     }
 
     let visibility = 'default'
-    if (ctx.InternalKeyword(0) !== undefined) {
+    if (ctx.InternalKeyword(0)) {
       visibility = 'internal'
-    } else if (ctx.ExternalKeyword(0) !== undefined) {
+    } else if (ctx.ExternalKeyword(0)) {
       visibility = 'external'
     }
 
     let stateMutability = null
-    if (ctx.stateMutability(0) !== undefined) {
+    if (ctx.stateMutability(0)) {
       stateMutability = toText(ctx.stateMutability(0))
     }
 
@@ -397,7 +400,7 @@ const transformAST = {
 
   ReturnStatement(ctx: Ctx) {
     let expression = null
-    if (ctx.expression() !== undefined) {
+    if (ctx.expression()) {
       expression = (this as any).visit(ctx.expression())
     }
 
@@ -415,12 +418,12 @@ const transformAST = {
     const names = []
 
     const ctxArgs = ctx.functionCallArguments()
-    if (ctxArgs.expressionList() !== undefined) {
+    if (ctxArgs.expressionList()) {
       args = ctxArgs
         .expressionList()
         .expression()
         .map((exprCtx: any) => (this as any).visit(exprCtx))
-    } else if (ctxArgs.nameValueList() !== undefined) {
+    } else if (ctxArgs.nameValueList()) {
       for (const nameValue of ctxArgs.nameValueList().nameValue()) {
         args.push((this as any).visit(nameValue.expression()))
         names.push(toText(nameValue.identifier()))
@@ -443,7 +446,7 @@ const transformAST = {
 
   VariableDeclaration(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation() !== undefined) {
+    if (ctx.storageLocation()) {
       storageLocation = toText(ctx.storageLocation())
     }
 
@@ -458,7 +461,7 @@ const transformAST = {
 
   EventParameter(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation(0) !== undefined) {
+    if (ctx.storageLocation(0)) {
       storageLocation = toText(ctx.storageLocation(0))
     }
 
@@ -468,13 +471,13 @@ const transformAST = {
       name: toText(ctx.identifier()),
       storageLocation,
       isStateVar: false,
-      isIndexed: ctx.IndexedKeyword(0) !== undefined,
+      isIndexed: ctx.IndexedKeyword(0),
     }
   },
 
   FunctionTypeParameter(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation() !== undefined) {
+    if (ctx.storageLocation()) {
       storageLocation = toText(ctx.storageLocation())
     }
 
@@ -519,7 +522,7 @@ const transformAST = {
 
   TryStatement(ctx: Ctx) {
     let returnParameters = null
-    if (ctx.returnParameters() !== undefined) {
+    if (ctx.returnParameters()) {
       returnParameters = (this as any).visit(ctx.returnParameters())
     }
 
@@ -537,20 +540,17 @@ const transformAST = {
 
   CatchClause(ctx: Ctx) {
     let parameters = null
-    if (ctx.parameterList() !== undefined) {
+    if (ctx.parameterList()) {
       parameters = (this as any).visit(ctx.parameterList())
     }
 
-    if (
-      ctx.identifier() !== undefined &&
-      toText(ctx.identifier()) !== 'Error'
-    ) {
+    if (ctx.identifier() && toText(ctx.identifier()) !== 'Error') {
       throw new Error('Expected "Error" identifier in catch clause')
     }
 
     return {
       isReasonStringType:
-        ctx.identifier() !== undefined && toText(ctx.identifier()) === 'Error',
+        ctx.identifier() && toText(ctx.identifier()) === 'Error',
       parameters,
       body: (this as any).visit(ctx.block()),
     }
@@ -595,9 +595,9 @@ const transformAST = {
   },
 
   MappingKey(ctx: Ctx) {
-    if (ctx.elementaryTypeName() !== undefined) {
+    if (ctx.elementaryTypeName()) {
       return (this as any).visit(ctx.elementaryTypeName())
-    } else if (ctx.userDefinedTypeName() !== undefined) {
+    } else if (ctx.userDefinedTypeName()) {
       return (this as any).visit(ctx.userDefinedTypeName())
     } else {
       throw new Error(
@@ -616,12 +616,12 @@ const transformAST = {
 
   ModifierDefinition(ctx: Ctx) {
     let parameters = null
-    if (ctx.parameterList() !== undefined) {
+    if (ctx.parameterList()) {
       parameters = (this as any).visit(ctx.parameterList())
     }
 
     let isVirtual = false
-    if (ctx.VirtualKeyword(0) !== undefined) {
+    if (ctx.VirtualKeyword(0)) {
       isVirtual = true
     }
 
@@ -763,12 +763,12 @@ const transformAST = {
           const names = []
 
           const ctxArgs = ctx.functionCallArguments()
-          if (ctxArgs.expressionList() !== undefined) {
+          if (ctxArgs.expressionList()) {
             args = ctxArgs
               .expressionList()
               .expression()
               .map((exprCtx: any) => (this as any).visit(exprCtx))
-          } else if (ctxArgs.nameValueList() !== undefined) {
+          } else if (ctxArgs.nameValueList()) {
             for (const nameValue of ctxArgs.nameValueList().nameValue()) {
               args.push((this as any).visit(nameValue.expression()))
               names.push(toText(nameValue.identifier()))
@@ -889,21 +889,21 @@ const transformAST = {
     const name = toText(iden)
 
     let expression = null
-    if (ctx.expression() !== undefined) {
+    if (ctx.expression()) {
       expression = (this as any).visit(ctx.expression())
     }
 
     let visibility = 'default'
-    if (ctx.InternalKeyword(0) !== undefined) {
+    if (ctx.InternalKeyword(0)) {
       visibility = 'internal'
-    } else if (ctx.PublicKeyword(0) !== undefined) {
+    } else if (ctx.PublicKeyword(0)) {
       visibility = 'public'
-    } else if (ctx.PrivateKeyword(0) !== undefined) {
+    } else if (ctx.PrivateKeyword(0)) {
       visibility = 'private'
     }
 
     let isDeclaredConst = false
-    if (ctx.ConstantKeyword(0) !== undefined) {
+    if (ctx.ConstantKeyword(0)) {
       isDeclaredConst = true
     }
 
@@ -916,7 +916,7 @@ const transformAST = {
     }
 
     let isImmutable = false
-    if (ctx.ImmutableKeyword(0) !== undefined) {
+    if (ctx.ImmutableKeyword(0)) {
       isImmutable = true
     }
 
@@ -948,7 +948,7 @@ const transformAST = {
     const name = toText(iden)
 
     let expression = null
-    if (ctx.expression() !== undefined) {
+    if (ctx.expression()) {
       expression = (this as any).visit(ctx.expression())
     }
 
@@ -961,7 +961,7 @@ const transformAST = {
 
   ForStatement(ctx: Ctx) {
     let conditionExpression = (this as any).visit(ctx.expressionStatement())
-    if (conditionExpression !== undefined) {
+    if (conditionExpression) {
       conditionExpression = conditionExpression.expression
     }
     return {
@@ -989,18 +989,18 @@ const transformAST = {
   },
 
   PrimaryExpression(ctx: Ctx) {
-    if (ctx.BooleanLiteral() !== undefined) {
+    if (ctx.BooleanLiteral()) {
       return {
         type: 'BooleanLiteral',
         value: toText(ctx.BooleanLiteral()) === 'true',
       }
     }
 
-    if (ctx.hexLiteral() !== undefined) {
+    if (ctx.hexLiteral()) {
       return (this as any).visit(ctx.hexLiteral())
     }
 
-    if (ctx.stringLiteral() !== undefined) {
+    if (ctx.stringLiteral()) {
       const parts = ctx
         .stringLiteral()
         .StringLiteralFragment()
@@ -1022,7 +1022,7 @@ const transformAST = {
       }
     }
 
-    if (ctx.TypeKeyword() !== undefined) {
+    if (ctx.TypeKeyword()) {
       return {
         type: 'Identifier',
         name: 'type',
@@ -1075,7 +1075,7 @@ const transformAST = {
     const children = ctx.children.slice(1, -1)
     const components = mapCommasToNulls(children).map((expr) => {
       // add a null for each empty value
-      if (expr === null) {
+      if (!expr) {
         return null
       }
       return (this as any).visit(expr)
@@ -1092,7 +1092,7 @@ const transformAST = {
     const children = ctx.children.slice(1, -1)
     return mapCommasToNulls(children).map((iden) => {
       // add a null for each empty value
-      if (iden === null) {
+      if (!iden) {
         return null
       }
 
@@ -1114,12 +1114,12 @@ const transformAST = {
     // remove parentheses
     return mapCommasToNulls(ctx.children).map((decl) => {
       // add a null for each empty value
-      if (decl === null) {
+      if (!decl) {
         return null
       }
 
       let storageLocation = null
-      if (decl.storageLocation() !== undefined) {
+      if (decl.storageLocation()) {
         storageLocation = toText(decl.storageLocation())
       }
 
@@ -1139,16 +1139,16 @@ const transformAST = {
 
   VariableDeclarationStatement(ctx: Ctx) {
     let variables
-    if (ctx.variableDeclaration() !== undefined) {
+    if (ctx.variableDeclaration()) {
       variables = [(this as any).visit(ctx.variableDeclaration())]
-    } else if (ctx.identifierList() !== undefined) {
+    } else if (ctx.identifierList()) {
       variables = (this as any).visit(ctx.identifierList())
-    } else if (ctx.variableDeclarationList() !== undefined) {
+    } else if (ctx.variableDeclarationList()) {
       variables = (this as any).visit(ctx.variableDeclarationList())
     }
 
     let initialValue = null
-    if (ctx.expression() !== undefined) {
+    if (ctx.expression()) {
       initialValue = (this as any).visit(ctx.expression())
     }
 
@@ -1167,7 +1167,7 @@ const transformAST = {
       symbolAliases = ctx.importDeclaration().map((decl: any) => {
         const symbol = toText(decl.identifier(0))
         let alias = null
-        if (decl.identifier(1) !== undefined) {
+        if (decl.identifier(1)) {
           alias = toText(decl.identifier(1))
         }
         return [symbol, alias]
@@ -1189,7 +1189,7 @@ const transformAST = {
     return {
       name: toText(ctx.identifier()),
       parameters: (this as any).visit(ctx.eventParameterList()),
-      isAnonymous: ctx.AnonymousKeyword() !== undefined,
+      isAnonymous: ctx.AnonymousKeyword(),
     }
   },
 
@@ -1197,7 +1197,7 @@ const transformAST = {
     return ctx.eventParameter().map((paramCtx: any) => {
       const type = (this as any).visit(paramCtx.typeName())
       let name = null
-      if (paramCtx.identifier() !== undefined) {
+      if (paramCtx.identifier()) {
         name = toText(paramCtx.identifier())
       }
 
@@ -1207,7 +1207,7 @@ const transformAST = {
           typeName: type,
           name,
           isStateVar: false,
-          isIndexed: paramCtx.IndexedKeyword(0) !== undefined,
+          isIndexed: paramCtx.IndexedKeyword(0),
         },
         paramCtx
       )
@@ -1224,12 +1224,12 @@ const transformAST = {
 
   Parameter(ctx: Ctx) {
     let storageLocation = null
-    if (ctx.storageLocation() !== undefined) {
+    if (ctx.storageLocation()) {
       storageLocation = toText(ctx.storageLocation())
     }
 
     let name = null
-    if (ctx.identifier() !== undefined) {
+    if (ctx.identifier()) {
       name = toText(ctx.identifier())
     }
 
@@ -1245,7 +1245,7 @@ const transformAST = {
 
   InlineAssemblyStatement(ctx: Ctx) {
     let language = null
-    if (ctx.StringLiteralFragment() !== undefined) {
+    if (ctx.StringLiteralFragment()) {
       language = toText(ctx.StringLiteralFragment())
       language = language.substring(1, language.length - 1)
     }
@@ -1267,11 +1267,11 @@ const transformAST = {
   AssemblyItem(ctx: Ctx) {
     let text
 
-    if (ctx.hexLiteral() !== undefined) {
+    if (ctx.hexLiteral()) {
       return (this as any).visit(ctx.hexLiteral())
     }
 
-    if (ctx.stringLiteral() !== undefined) {
+    if (ctx.stringLiteral()) {
       text = toText(ctx.stringLiteral())
       const value = text.substring(1, text.length - 1)
       return {
@@ -1281,13 +1281,13 @@ const transformAST = {
       }
     }
 
-    if (ctx.BreakKeyword() !== undefined) {
+    if (ctx.BreakKeyword()) {
       return {
         type: 'Break',
       }
     }
 
-    if (ctx.ContinueKeyword() !== undefined) {
+    if (ctx.ContinueKeyword()) {
       return {
         type: 'Continue',
       }
@@ -1315,7 +1315,7 @@ const transformAST = {
   AssemblyLiteral(ctx: Ctx) {
     let text
 
-    if (ctx.stringLiteral() !== undefined) {
+    if (ctx.stringLiteral()) {
       text = toText(ctx)
       const value = text.substring(1, text.length - 1)
       return {
@@ -1325,21 +1325,21 @@ const transformAST = {
       }
     }
 
-    if (ctx.DecimalNumber() !== undefined) {
+    if (ctx.DecimalNumber()) {
       return {
         type: 'DecimalNumber',
         value: toText(ctx),
       }
     }
 
-    if (ctx.HexNumber() !== undefined) {
+    if (ctx.HexNumber()) {
       return {
         type: 'HexNumber',
         value: toText(ctx),
       }
     }
 
-    if (ctx.hexLiteral() !== undefined) {
+    if (ctx.hexLiteral()) {
       return (this as any).visit(ctx.hexLiteral())
     }
   },
@@ -1358,7 +1358,7 @@ const transformAST = {
     }
 
     const node: any = { block: (this as any).visit(ctx.assemblyBlock()) }
-    if (value !== null) {
+    if (value) {
       node.value = value
     } else {
       node.default = true
@@ -1369,9 +1369,9 @@ const transformAST = {
 
   AssemblyLocalDefinition(ctx: Ctx) {
     let names = ctx.assemblyIdentifierOrList()
-    if (names.identifier() !== undefined) {
+    if (names.identifier()) {
       names = [(this as any).visit(names.identifier())]
-    } else if (names.assemblyMember() !== undefined) {
+    } else if (names.assemblyMember()) {
       names = [(this as any).visit(names.assemblyMember())]
     } else {
       names = (this as any).visit(names.assemblyIdentifierList().identifier())
@@ -1385,11 +1385,11 @@ const transformAST = {
 
   AssemblyFunctionDefinition(ctx: Ctx) {
     let args = ctx.assemblyIdentifierList()
-    args = args !== undefined ? (this as any).visit(args.identifier()) : []
+    args = args ? (this as any).visit(args.identifier()) : []
 
     let returnArgs = ctx.assemblyFunctionReturns()
     returnArgs =
-      returnArgs !== undefined
+      returnArgs
         ? (this as any).visit(returnArgs.assemblyIdentifierList().identifier())
         : []
 
@@ -1403,9 +1403,9 @@ const transformAST = {
 
   AssemblyAssignment(ctx: Ctx) {
     let names = ctx.assemblyIdentifierOrList()
-    if (names.identifier() !== undefined) {
+    if (names.identifier()) {
       names = [(this as any).visit(names.identifier())]
-    } else if (names.assemblyMember() !== undefined) {
+    } else if (names.assemblyMember()) {
       names = [(this as any).visit(names.assemblyMember())]
     } else {
       names = (this as any).visit(names.assemblyIdentifierList().identifier())
@@ -1498,7 +1498,7 @@ class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
   }
 
   visit(ctx: Ctx): BaseASTNode | BaseASTNode[] | null {
-    if (ctx === null) {
+    if (!ctx) {
       return null
     }
 

@@ -10,9 +10,10 @@
     "build": "rollup -c rollup.config.js",
     "generate-types": "tsc",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
+    "prepack": "npm run build && npm run generate-types",
     "eslint": "eslint src",
     "lint": "eslint src",
-    "test": "nyc mocha"
+    "test": "npm run build && nyc mocha"
   },
   "authors": [
     "Franco Victorio",
