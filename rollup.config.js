@@ -1,19 +1,24 @@
 import babel from '@rollup/plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+const extensions = [
+  '.js', '.ts',
+];
 
 export default {
-  input: 'src/index.js',
+  input: './src/index.ts',
   output: {
     dir: 'dist',
     format: 'cjs',
     sourcemap: true
   },
   plugins: [
-    resolve(),
-    commonjs({
-      transformMixedEsModules: true
+    resolve({ extensions }),
+    commonjs(),
+    babel({
+      babelHelpers: 'bundled',
+      extensions,
+      include: 'src/**/*'
     }),
-    babel(),
   ]
 }

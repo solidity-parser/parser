@@ -1,12 +1,12 @@
 import SolidityLexer from './lib/SolidityLexer'
 import SolidityParser from './lib/SolidityParser'
 
-const antlr4 = require('antlr4')
-const ASTBuilder = require('./ASTBuilder')
-const ErrorListener = require('./ErrorListener')
-const { buildTokenList } = require('./tokens')
+import antlr4 from 'antlr4'
+import { buildTokenList } from './tokens'
+import ASTBuilder from './ASTBuilder'
+import ErrorListener from './ErrorListener'
 
-function ParserError(args) {
+export function ParserError(args) {
   const { message, line, column } = args.errors[0]
   this.message = `${message} (${line}:${column})`
   this.errors = args.errors
@@ -22,7 +22,7 @@ ParserError.prototype = Object.create(Error.prototype)
 ParserError.prototype.constructor = ParserError
 ParserError.prototype.name = 'ParserError'
 
-function tokenize(input, options) {
+export function tokenize(input: string, options) {
   options = options || {}
 
   const chars = new antlr4.InputStream(input)
@@ -32,20 +32,20 @@ function tokenize(input, options) {
   return buildTokenList(tokens.tokenSource.getAllTokens(), options)
 }
 
-function parse(input, options) {
+export function parse(input, options) {
   options = options || {}
 
   const chars = new antlr4.InputStream(input)
 
   const listener = new ErrorListener()
 
-  const lexer = new SolidityLexer(chars)
+  const lexer: any = new SolidityLexer(chars)
   lexer.removeErrorListeners()
   lexer.addErrorListener(listener)
 
   const tokens = new antlr4.CommonTokenStream(lexer)
 
-  const parser = new SolidityParser(tokens)
+  const parser: any = new SolidityParser(tokens)
 
   parser.removeErrorListeners()
   parser.addErrorListener(listener)
@@ -86,7 +86,7 @@ function _isASTNode(node) {
   )
 }
 
-function visit(node, visitor) {
+export function visit(node, visitor) {
   if (Array.isArray(node)) {
     node.forEach(child => visit(child, visitor))
   }
@@ -112,8 +112,3 @@ function visit(node, visitor) {
     visitor[selector](node)
   }
 }
-
-exports.tokenize = tokenize
-exports.parse = parse
-exports.visit = visit
-exports.ParserError = ParserError

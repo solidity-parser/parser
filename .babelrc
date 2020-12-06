@@ -1,5 +1,5 @@
 {
-  "presets": ["@babel/env"],
+  "presets": ["@babel/env", "@babel/preset-typescript"],
   "plugins": [
     [
       "babel-plugin-inline-import",

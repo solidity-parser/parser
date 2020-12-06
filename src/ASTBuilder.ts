@@ -1,4 +1,4 @@
-const antlr4 = require('antlr4')
+import antlr4 from 'antlr4'
 
 function toText(ctx) {
   if (ctx !== null) {
@@ -1525,4 +1525,4 @@ class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
   }
 }
 
-module.exports = ASTBuilder
+export default ASTBuilder

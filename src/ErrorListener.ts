@@ -1,4 +1,4 @@
-const antlr4 = require('antlr4')
+import antlr4 from 'antlr4'
 
 class ErrorListener extends antlr4.error.ErrorListener {
   constructor() {
@@ -20,4 +20,4 @@ class ErrorListener extends antlr4.error.ErrorListener {
   }
 }
 
-module.exports = ErrorListener
+export default ErrorListener
