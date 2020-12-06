@@ -4,6 +4,10 @@
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.cjs.js",
   "browser": "dist/index.iife.js",
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
   "types": "dist/index.d.ts",
   "scripts": {
     "antlr": "sh scripts/antlr.sh",
