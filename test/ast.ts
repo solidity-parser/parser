@@ -9,2222 +9,2254 @@ import {
 } from './utils'
 
 describe('AST', () => {
-
-  it("SourceUnit", function() {
-    var ast = parser.parse("");
+  it('SourceUnit', function() {
+    var ast = parser.parse('')
     assert.deepEqual(ast, {
-      "type": "SourceUnit",
-      "children": []
-    });
+      type: 'SourceUnit',
+      children: []
+    })
   })
 
-  it("EnumDefinition / EnumValue", function() {
-    var ast = parseNode("enum Hello { A, B, C }")
+  it('EnumDefinition / EnumValue', function() {
+    var ast = parseNode('enum Hello { A, B, C }')
     assert.deepEqual(ast, {
-      "type": "EnumDefinition",
-      "name": "Hello",
-      "members": [
+      type: 'EnumDefinition',
+      name: 'Hello',
+      members: [
         {
-          "type": "EnumValue",
-          "name": "A"
+          type: 'EnumValue',
+          name: 'A'
         },
         {
-          "type": "EnumValue",
-          "name": "B"
+          type: 'EnumValue',
+          name: 'B'
         },
         {
-          "type": "EnumValue",
-          "name": "C"
+          type: 'EnumValue',
+          name: 'C'
         }
       ]
     })
   })
 
-  it("UsingForDeclaration", function() {
-    var ast = parseNode("using Lib for uint;")
+  it('UsingForDeclaration', function() {
+    var ast = parseNode('using Lib for uint;')
     assert.deepEqual(ast, {
-      "type": "UsingForDeclaration",
-      "typeName": {
-          "type": "ElementaryTypeName",
-          "name": "uint"
-        },
-      "libraryName": "Lib"
+      type: 'UsingForDeclaration',
+      typeName: {
+        type: 'ElementaryTypeName',
+        name: 'uint'
+      },
+      libraryName: 'Lib'
     })
 
-    ast = parseNode("using Lib for *;")
+    ast = parseNode('using Lib for *;')
     assert.deepEqual(ast, {
-      "type": "UsingForDeclaration",
-      "typeName": null,
-      "libraryName": "Lib"
+      type: 'UsingForDeclaration',
+      typeName: null,
+      libraryName: 'Lib'
     })
 
-    ast = parseNode("using Lib for S;")
+    ast = parseNode('using Lib for S;')
     assert.deepEqual(ast, {
-      "type": "UsingForDeclaration",
-      "typeName": {
-          "type": "UserDefinedTypeName",
-          "namePath": "S"
-        },
-      "libraryName": "Lib"
+      type: 'UsingForDeclaration',
+      typeName: {
+        type: 'UserDefinedTypeName',
+        namePath: 'S'
+      },
+      libraryName: 'Lib'
     })
-
   })
 
   const versions = [
-    "0.4.12",
-    "0.0.0", "0.0", "0",
-    ">0.5.1", ">0.5", ">1",
-    ">=100.500.100", ">=100.500",
-    "^0.4.0", "^0.4", "^1",
-    "~0.3.11",, "~1.3", "~10",
-    "=0.0.1", "=0.6", "=1",
-    "<=1.1.1", "<=11.11", "<=111",
-    "<0.5.11", ">=0.6.7 <0.7.0"]
-  versions.forEach(function (version) {
-    it("PragmaDirective " + version, function() {
-      var ast = parser.parse("pragma solidity " + version + ";")
+    '0.4.12',
+    '0.0.0',
+    '0.0',
+    '0',
+    '>0.5.1',
+    '>0.5',
+    '>1',
+    '>=100.500.100',
+    '>=100.500',
+    '^0.4.0',
+    '^0.4',
+    '^1',
+    '~0.3.11',
+    ,
+    '~1.3',
+    '~10',
+    '=0.0.1',
+    '=0.6',
+    '=1',
+    '<=1.1.1',
+    '<=11.11',
+    '<=111',
+    '<0.5.11',
+    '>=0.6.7 <0.7.0'
+  ]
+  versions.forEach(function(version) {
+    it('PragmaDirective ' + version, function() {
+      var ast = parser.parse('pragma solidity ' + version + ';')
       var pragma = ast.children[0]
       assert.deepEqual(pragma, {
-        "type": "PragmaDirective",
-        "name": "solidity",
-        "value": version
+        type: 'PragmaDirective',
+        name: 'solidity',
+        value: version
       })
     })
   })
 
-  it("ContractDefinition", function() {
-    var ast = parseContract("contract test {}")
+  it('ContractDefinition', function() {
+    var ast = parseContract('contract test {}')
     assert.deepEqual(ast, {
-      "type": "ContractDefinition",
-      "name": "test",
-      "baseContracts": [],
-      "subNodes": [],
-      "kind": "contract"
+      type: 'ContractDefinition',
+      name: 'test',
+      baseContracts: [],
+      subNodes: [],
+      kind: 'contract'
     })
 
     // inheritance
-    ast = parseContract("contract test is foo, bar {}")
+    ast = parseContract('contract test is foo, bar {}')
     assert.deepEqual(ast, {
-      "type": "ContractDefinition",
-      "name": "test",
-      "baseContracts": [
+      type: 'ContractDefinition',
+      name: 'test',
+      baseContracts: [
         {
-          "type": "InheritanceSpecifier",
-          "baseName": {
-            "type": "UserDefinedTypeName",
-            "namePath": "foo"
+          type: 'InheritanceSpecifier',
+          baseName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'foo'
           },
-          "arguments": []
+          arguments: []
         },
         {
-          "type": "InheritanceSpecifier",
-          "baseName": {
-            "type": "UserDefinedTypeName",
-            "namePath": "bar"
+          type: 'InheritanceSpecifier',
+          baseName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'bar'
           },
-          "arguments": []
+          arguments: []
         }
       ],
-      "subNodes": [],
-      "kind": "contract"
+      subNodes: [],
+      kind: 'contract'
     })
 
     // library
-    ast = parseContract("library test {}")
+    ast = parseContract('library test {}')
     assert.deepEqual(ast, {
-      "type": "ContractDefinition",
-      "name": "test",
-      "baseContracts": [],
-      "subNodes": [],
-      "kind": "library"
+      type: 'ContractDefinition',
+      name: 'test',
+      baseContracts: [],
+      subNodes: [],
+      kind: 'library'
     })
 
     // interface
-    ast = parseContract("interface test {}")
+    ast = parseContract('interface test {}')
     assert.deepEqual(ast, {
-      "type": "ContractDefinition",
-      "name": "test",
-      "baseContracts": [],
-      "subNodes": [],
-      "kind": "interface"
+      type: 'ContractDefinition',
+      name: 'test',
+      baseContracts: [],
+      subNodes: [],
+      kind: 'interface'
     })
   })
 
   it('FunctionDefinition constructor case', () => {
-    var ast = parseNode("constructor(uint a) public {}")
+    var ast = parseNode('constructor(uint a) public {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": null,
-      "parameters": [
+      type: 'FunctionDefinition',
+      name: null,
+      parameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "public",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": true,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": null,
+      visibility: 'public',
+      modifiers: [],
+      override: null,
+      isConstructor: true,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null
     })
   })
 
   it('FunctionDefinition constructor case without public', () => {
-    var ast = parseNode("constructor(uint a) {}")
+    var ast = parseNode('constructor(uint a) {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": null,
-      "parameters": [
+      type: 'FunctionDefinition',
+      name: null,
+      parameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "default",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": true,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": null,
+      visibility: 'default',
+      modifiers: [],
+      override: null,
+      isConstructor: true,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null
     })
   })
 
   it('FunctionDefinition fallback case', () => {
-    var ast = parseNode("fallback () external {}")
+    var ast = parseNode('fallback () external {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": null,
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: null,
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "external",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": true,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": null,
+      visibility: 'external',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: true,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null
     })
   })
 
   it('FunctionDefinition fallback old definition', () => {
-    var ast = parseNode("function () external {}")
+    var ast = parseNode('function () external {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": '',
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: '',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "external",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": true,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": null,
+      visibility: 'external',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: true,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null
     })
   })
 
   it('FunctionDefinition fallback case missing "external" decorator throws', () => {
     assert.throws(
-      () => parseNode("fallback () {}"),
+      () => parseNode('fallback () {}'),
       Error,
       'Fallback functions have to be declared "external"'
-    );
+    )
   })
 
   it('FunctionDefinition fallback case with parameters throws', () => {
     assert.throws(
-      () => parseNode("fallback (uint256 myUint) external {}"),
+      () => parseNode('fallback (uint256 myUint) external {}'),
       Error,
       'Fallback functions cannot have parameters'
-    );
+    )
   })
 
   it('FunctionDefinition fallback case with return parameters throws', () => {
     assert.throws(
-      () => parseNode("fallback () external returns (uint256 myUint) {}"),
+      () => parseNode('fallback () external returns (uint256 myUint) {}'),
       Error,
       'Fallback functions cannot have return parameters'
-    );
+    )
   })
 
   it('FunctionDefinition receive ether case', () => {
-    var ast = parseNode("receive () external payable {}")
+    var ast = parseNode('receive () external payable {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": null,
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: null,
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "external",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": true,
-      "isVirtual": false,
-      "stateMutability": "payable",
+      visibility: 'external',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: true,
+      isVirtual: false,
+      stateMutability: 'payable'
     })
   })
 
   it('FunctionDefinition receive ether case missing "external" decorator throws', () => {
     assert.throws(
-      () => parseNode("receive () payable {}"),
+      () => parseNode('receive () payable {}'),
       Error,
-      'Receive Ether functions have to be declared "external"');
+      'Receive Ether functions have to be declared "external"'
+    )
   })
 
   it('FunctionDefinition receive ether case missing "payable" decorator throws', () => {
     assert.throws(
-      () => parseNode("receive () external {}"),
+      () => parseNode('receive () external {}'),
       Error,
-      'Receive Ether functions have to be declared "payable"');
+      'Receive Ether functions have to be declared "payable"'
+    )
   })
 
   it('FunctionDefinition receive ether case with parameters throws', () => {
     assert.throws(
-      () => parseNode("receive (uint256 myUint) external payable {}"),
+      () => parseNode('receive (uint256 myUint) external payable {}'),
       Error,
-      'Receive Ether functions cannot have parameters');
+      'Receive Ether functions cannot have parameters'
+    )
   })
 
   it('FunctionDefinition receive ether case with return parameters throws', () => {
     assert.throws(
-      () => parseNode("receive () external payable returns (uint256 myUint) {}"),
+      () =>
+        parseNode('receive () external payable returns (uint256 myUint) {}'),
       Error,
-      'Receive Ether functions cannot have return parameters');
+      'Receive Ether functions cannot have return parameters'
+    )
   })
 
   it('FunctionDefinition with override', () => {
-    var ast = parseNode("function foo() public override {}")
+    var ast = parseNode('function foo() public override {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "public",
-      "modifiers": [],
-      "override": [],
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": null,
+      visibility: 'public',
+      modifiers: [],
+      override: [],
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null
     })
   })
 
   it('StateVariableDeclaration with override', () => {
-    var ast = parseNode("uint public override foo;")
+    var ast = parseNode('uint public override foo;')
     assert.deepEqual(ast, {
-      "type": "StateVariableDeclaration",
-      "variables": [
+      type: 'StateVariableDeclaration',
+      variables: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "foo",
-          "expression": null,
-          "visibility": "public",
-          "override": [],
-          "isStateVar": true,
-          "isDeclaredConst": false,
-          "isIndexed": false,
-          "isImmutable": false,
+          name: 'foo',
+          expression: null,
+          visibility: 'public',
+          override: [],
+          isStateVar: true,
+          isDeclaredConst: false,
+          isIndexed: false,
+          isImmutable: false
         }
       ],
-      "initialValue": null
+      initialValue: null
     })
   })
 
   it('StateVariableDeclaration with immutable', () => {
-    var ast = parseNode("uint immutable foo;")
+    var ast = parseNode('uint immutable foo;')
     assert.deepEqual(ast, {
-      "type": "StateVariableDeclaration",
-      "variables": [
+      type: 'StateVariableDeclaration',
+      variables: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "foo",
-          "expression": null,
-          "visibility": "default",
-          "override": null,
-          "isStateVar": true,
-          "isDeclaredConst": false,
-          "isIndexed": false,
-          "isImmutable": true,
+          name: 'foo',
+          expression: null,
+          visibility: 'default',
+          override: null,
+          isStateVar: true,
+          isDeclaredConst: false,
+          isIndexed: false,
+          isImmutable: true
         }
       ],
-      "initialValue": null
+      initialValue: null
     })
   })
 
   it('FunctionDefinition with one explicit override', () => {
-    var ast = parseNode("function foo() public override(Base) {}")
+    var ast = parseNode('function foo() public override(Base) {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "public",
-      "modifiers": [],
-      "override": [{
-        "type": "UserDefinedTypeName",
-        "namePath": "Base"
-      }],
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": null,
+      visibility: 'public',
+      modifiers: [],
+      override: [
+        {
+          type: 'UserDefinedTypeName',
+          namePath: 'Base'
+        }
+      ],
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null
     })
   })
 
   it('StateVariableDeclaration with one explicit override', () => {
-    var ast = parseNode("uint public override(Base) foo;")
+    var ast = parseNode('uint public override(Base) foo;')
     assert.deepEqual(ast, {
-      "type": "StateVariableDeclaration",
-      "variables": [
+      type: 'StateVariableDeclaration',
+      variables: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "foo",
-          "expression": null,
-          "visibility": "public",
-          "override": [{
-            "type": "UserDefinedTypeName",
-            "namePath": "Base"
-          }],
-          "isStateVar": true,
-          "isDeclaredConst": false,
-          "isIndexed": false,
-          "isImmutable": false
+          name: 'foo',
+          expression: null,
+          visibility: 'public',
+          override: [
+            {
+              type: 'UserDefinedTypeName',
+              namePath: 'Base'
+            }
+          ],
+          isStateVar: true,
+          isDeclaredConst: false,
+          isIndexed: false,
+          isImmutable: false
         }
       ],
-      "initialValue": null
+      initialValue: null
     })
   })
 
   it('FunctionDefinition with two overrides', () => {
-    var ast = parseNode("function foo() public override(Base1, Base2) {}")
+    var ast = parseNode('function foo() public override(Base1, Base2) {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "public",
-      "modifiers": [],
-      "override": [{
-        "type": "UserDefinedTypeName",
-        "namePath": "Base1"
-      }, {
-        "type": "UserDefinedTypeName",
-        "namePath": "Base2"
-      }],
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": null,
+      visibility: 'public',
+      modifiers: [],
+      override: [
+        {
+          type: 'UserDefinedTypeName',
+          namePath: 'Base1'
+        },
+        {
+          type: 'UserDefinedTypeName',
+          namePath: 'Base2'
+        }
+      ],
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null
     })
   })
 
   it('StateVariableDeclaration with two overrides', () => {
-    var ast = parseNode("uint public override(Base1, Base2) foo;")
+    var ast = parseNode('uint public override(Base1, Base2) foo;')
     assert.deepEqual(ast, {
-      "type": "StateVariableDeclaration",
-      "variables": [
+      type: 'StateVariableDeclaration',
+      variables: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "foo",
-          "expression": null,
-          "visibility": "public",
-          "override": [{
-            "type": "UserDefinedTypeName",
-            "namePath": "Base1"
-          }, {
-            "type": "UserDefinedTypeName",
-            "namePath": "Base2"
-          }],
-          "isStateVar": true,
-          "isDeclaredConst": false,
-          "isIndexed": false,
-          "isImmutable": false
+          name: 'foo',
+          expression: null,
+          visibility: 'public',
+          override: [
+            {
+              type: 'UserDefinedTypeName',
+              namePath: 'Base1'
+            },
+            {
+              type: 'UserDefinedTypeName',
+              namePath: 'Base2'
+            }
+          ],
+          isStateVar: true,
+          isDeclaredConst: false,
+          isIndexed: false,
+          isImmutable: false
         }
       ],
-      "initialValue": null
+      initialValue: null
     })
   })
 
-  it("FunctionDefinition", function() {
-    var ast = parseNode("function foo(uint a) pure {}")
+  it('FunctionDefinition', function() {
+    var ast = parseNode('function foo(uint a) pure {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "default",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": "pure",
+      visibility: 'default',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: 'pure'
     })
 
-     ast = parseNode("function foo() virtual public {}")
+    ast = parseNode('function foo() virtual public {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "public",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": true,
-      "stateMutability": null,
+      visibility: 'public',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: true,
+      stateMutability: null
     })
 
     // Function Definition with return parameters
-    ast = parseNode("function foo(uint a) pure returns (uint256) {}")
+    ast = parseNode('function foo(uint a) pure returns (uint256) {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "returnParameters": [
+      returnParameters: [
         {
-          "isIndexed": false,
-          "isStateVar": false,
-          "name": null,
-          "storageLocation": null,
-          "type": "VariableDeclaration",
-          "typeName": {
-            "name": "uint256",
-            "type": "ElementaryTypeName"
+          isIndexed: false,
+          isStateVar: false,
+          name: null,
+          storageLocation: null,
+          type: 'VariableDeclaration',
+          typeName: {
+            name: 'uint256',
+            type: 'ElementaryTypeName'
           }
         }
       ],
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "default",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": "pure"
+      visibility: 'default',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: 'pure'
     })
   })
 
-  it("top-level FunctionDefinition", function() {
-    var ast = parser.parse("function foo(uint a) pure {}")
-    var functionNode = ast.children[0];
+  it('top-level FunctionDefinition', function() {
+    var ast = parser.parse('function foo(uint a) pure {}')
+    var functionNode = ast.children[0]
     assert.deepEqual(functionNode, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "default",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": "pure",
+      visibility: 'default',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: 'pure'
     })
 
-     ast = parseNode("function foo() virtual public {}")
+    ast = parseNode('function foo() virtual public {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [],
-      "returnParameters": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "public",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": true,
-      "stateMutability": null,
+      visibility: 'public',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: true,
+      stateMutability: null
     })
 
     // Function Definition with return parameters
-    ast = parseNode("function foo(uint a) pure returns (uint256) {}")
+    ast = parseNode('function foo(uint a) pure returns (uint256) {}')
     assert.deepEqual(ast, {
-      "type": "FunctionDefinition",
-      "name": "foo",
-      "parameters": [
+      type: 'FunctionDefinition',
+      name: 'foo',
+      parameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "returnParameters": [
+      returnParameters: [
         {
-          "isIndexed": false,
-          "isStateVar": false,
-          "name": null,
-          "storageLocation": null,
-          "type": "VariableDeclaration",
-          "typeName": {
-            "name": "uint256",
-            "type": "ElementaryTypeName"
+          isIndexed: false,
+          isStateVar: false,
+          name: null,
+          storageLocation: null,
+          type: 'VariableDeclaration',
+          typeName: {
+            name: 'uint256',
+            type: 'ElementaryTypeName'
           }
         }
       ],
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "visibility": "default",
-      "modifiers": [],
-      "override": null,
-      "isConstructor": false,
-      "isFallback": false,
-      "isReceiveEther": false,
-      "isVirtual": false,
-      "stateMutability": "pure"
+      visibility: 'default',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: 'pure'
     })
   })
 
-  it("file-level constants", function() {
-    var ast = parser.parse("uint constant EXPONENT = 10;")
-    var fileLevelConstantNode = ast.children[0];
+  it('file-level constants', function() {
+    var ast = parser.parse('uint constant EXPONENT = 10;')
+    var fileLevelConstantNode = ast.children[0]
 
     assert.deepEqual(fileLevelConstantNode, {
-      type: "FileLevelConstant",
+      type: 'FileLevelConstant',
       initialValue: {
-        number: "10",
+        number: '10',
         subdenomination: null,
-        type: "NumberLiteral"
+        type: 'NumberLiteral'
       },
-      name: "EXPONENT",
+      name: 'EXPONENT',
       typeName: {
-        name: "uint",
-        type: "ElementaryTypeName"
+        name: 'uint',
+        type: 'ElementaryTypeName'
       }
     })
   })
 
-  it("ModifierInvocation", function() {
-    var ast = parseNode("function foo(uint a) onlyOwner {}")
+  it('ModifierInvocation', function() {
+    var ast = parseNode('function foo(uint a) onlyOwner {}')
     assert.deepEqual(ast.modifiers[0], {
-      "type": "ModifierInvocation",
-      "name": "onlyOwner",
-      "arguments": null
+      type: 'ModifierInvocation',
+      name: 'onlyOwner',
+      arguments: null
     })
 
-    var ast = parseNode("function foo(uint a) onlyOwner() {}")
+    var ast = parseNode('function foo(uint a) onlyOwner() {}')
     assert.deepEqual(ast.modifiers[0], {
-      "type": "ModifierInvocation",
-      "name": "onlyOwner",
-      "arguments": []
+      type: 'ModifierInvocation',
+      name: 'onlyOwner',
+      arguments: []
     })
 
-    ast = parseNode("function foo(uint a) bar(true, 1) {}")
+    ast = parseNode('function foo(uint a) bar(true, 1) {}')
     assert.deepEqual(ast.modifiers[0], {
-      "type": "ModifierInvocation",
-      "name": "bar",
-      "arguments": [
+      type: 'ModifierInvocation',
+      name: 'bar',
+      arguments: [
         {
-          "type": "BooleanLiteral",
-          "value": true
+          type: 'BooleanLiteral',
+          value: true
         },
         {
-          "type": "NumberLiteral",
-          "number": "1",
-          "subdenomination": null
-        },
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: null
+        }
       ]
     })
   })
 
-  it("TypeNameExpression", function() {
-    var stmt = parseStatement("uint(a);")
+  it('TypeNameExpression', function() {
+    var stmt = parseStatement('uint(a);')
     assert.deepEqual(stmt.expression.expression, {
-      "type": "TypeNameExpression",
-      "typeName": {
-        "type": "ElementaryTypeName",
-        "name": "uint"
+      type: 'TypeNameExpression',
+      typeName: {
+        type: 'ElementaryTypeName',
+        name: 'uint'
       }
     })
-    stmt = parseStatement("A.B[];")
+    stmt = parseStatement('A.B[];')
     assert.deepEqual(stmt.expression, {
-      "type": "TypeNameExpression",
-      "typeName": {
-        "type": "ArrayTypeName",
-        "baseTypeName": {
-          "expression": {
-            "name": "A",
-            "type": "Identifier"
+      type: 'TypeNameExpression',
+      typeName: {
+        type: 'ArrayTypeName',
+        baseTypeName: {
+          expression: {
+            name: 'A',
+            type: 'Identifier'
           },
-          "memberName": "B",
-          "type": "MemberAccess"
+          memberName: 'B',
+          type: 'MemberAccess'
         },
-        "length": null
+        length: null
       }
     })
   })
 
-  it("TypeName", function() {
-    var ast = parseNode("uint256[2] a;")
+  it('TypeName', function() {
+    var ast = parseNode('uint256[2] a;')
     assert.deepEqual(ast.variables[0].typeName, {
-      "type": "ArrayTypeName",
-      "baseTypeName": {
-        "type": "ElementaryTypeName",
-        "name": "uint256"
+      type: 'ArrayTypeName',
+      baseTypeName: {
+        type: 'ElementaryTypeName',
+        name: 'uint256'
       },
-      "length": {
-        "type": "NumberLiteral",
-        "number": "2",
-        "subdenomination": null
+      length: {
+        type: 'NumberLiteral',
+        number: '2',
+        subdenomination: null
       }
     })
 
-    ast = parseNode("uint256[] a;")
+    ast = parseNode('uint256[] a;')
     assert.deepEqual(ast.variables[0].typeName, {
-      "type": "ArrayTypeName",
-      "baseTypeName": {
-        "type": "ElementaryTypeName",
-        "name": "uint256"
+      type: 'ArrayTypeName',
+      baseTypeName: {
+        type: 'ElementaryTypeName',
+        name: 'uint256'
       },
-      "length": null
+      length: null
     })
 
     // typename as expression
-    ast = parseExpression("A[]")
+    ast = parseExpression('A[]')
     assert.deepEqual(ast, {
-      "type": "TypeNameExpression",
-      "typeName": {
-        "type": "ArrayTypeName",
-        "baseTypeName": {
-          "type": "UserDefinedTypeName",
-          "namePath": "A"
+      type: 'TypeNameExpression',
+      typeName: {
+        type: 'ArrayTypeName',
+        baseTypeName: {
+          type: 'UserDefinedTypeName',
+          namePath: 'A'
         },
-        "length": null
+        length: null
       }
     })
 
-    ast = parseExpression("uint256[]")
+    ast = parseExpression('uint256[]')
     assert.deepEqual(ast, {
-      "type": "TypeNameExpression",
-      "typeName": {
-        "type": "ArrayTypeName",
-        "baseTypeName": {
-          "type": "ElementaryTypeName",
-          "name": "uint256"
+      type: 'TypeNameExpression',
+      typeName: {
+        type: 'ArrayTypeName',
+        baseTypeName: {
+          type: 'ElementaryTypeName',
+          name: 'uint256'
         },
-        "length": null
+        length: null
       }
     })
   })
 
-  it("ElementaryTypeName", function() {
-    var ast = parseNode("address payable a;")
+  it('ElementaryTypeName', function() {
+    var ast = parseNode('address payable a;')
     assert.deepEqual(ast.variables[0].typeName, {
-      "type": "ElementaryTypeName",
-      "name": "address",
-      "stateMutability": "payable"
+      type: 'ElementaryTypeName',
+      name: 'address',
+      stateMutability: 'payable'
     })
   })
 
-  it("FunctionTypeName", function() {
-    var ast = parseNode("function (uint, uint) returns(bool) a;")
+  it('FunctionTypeName', function() {
+    var ast = parseNode('function (uint, uint) returns(bool) a;')
     assert.deepEqual(ast.variables[0].typeName, {
-      "type": "FunctionTypeName",
-      "parameterTypes": [
+      type: 'FunctionTypeName',
+      parameterTypes: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": null,
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: null,
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         },
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": null,
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: null,
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "returnTypes": [
+      returnTypes: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "bool"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'bool'
           },
-          "name": null,
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: null,
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "visibility": "default",
-      "stateMutability": null
+      visibility: 'default',
+      stateMutability: null
     })
   })
 
-  it("ReturnStatement", function() {
-    var ast = parseStatement("return;")
+  it('ReturnStatement', function() {
+    var ast = parseStatement('return;')
     assert.deepEqual(ast, {
-      "type": "ReturnStatement",
-      "expression": null
+      type: 'ReturnStatement',
+      expression: null
     })
 
-    ast = parseStatement("return 2;")
+    ast = parseStatement('return 2;')
     assert.deepEqual(ast, {
-      "type": "ReturnStatement",
-      "expression": {
-        "type": "NumberLiteral",
-        "number": "2",
-        "subdenomination": null
+      type: 'ReturnStatement',
+      expression: {
+        type: 'NumberLiteral',
+        number: '2',
+        subdenomination: null
       }
     })
 
-    ast = parseStatement("return ();")
+    ast = parseStatement('return ();')
     assert.deepEqual(ast, {
-      "type": "ReturnStatement",
-      "expression": {
-        "type": "TupleExpression",
-        "isArray": false,
-        "components": []
+      type: 'ReturnStatement',
+      expression: {
+        type: 'TupleExpression',
+        isArray: false,
+        components: []
       }
     })
   })
 
-  it("ThrowStatement", function() {
-    var ast = parseStatement("throw;")
+  it('ThrowStatement', function() {
+    var ast = parseStatement('throw;')
     assert.deepEqual(ast, {
-      "type": "ThrowStatement",
+      type: 'ThrowStatement'
     })
   })
 
-  it("EmitStatement", function() {
-    var ast = parseStatement("emit EventCalled(1);")
+  it('EmitStatement', function() {
+    var ast = parseStatement('emit EventCalled(1);')
     assert.deepEqual(ast, {
-      "type": "EmitStatement",
-      "eventCall": {
-        "type": "FunctionCall",
-        "expression": {
-          "type": "Identifier",
-          "name": "EventCalled"
+      type: 'EmitStatement',
+      eventCall: {
+        type: 'FunctionCall',
+        expression: {
+          type: 'Identifier',
+          name: 'EventCalled'
         },
-        "arguments": [
+        arguments: [
           {
-            "type": "NumberLiteral",
-            "number": "1",
-            "subdenomination": null
+            type: 'NumberLiteral',
+            number: '1',
+            subdenomination: null
           }
         ],
-        "names": []
+        names: []
       }
     })
   })
 
-  it("StructDefinition", function() {
-    var ast = parseNode("struct hello { uint a; }")
+  it('StructDefinition', function() {
+    var ast = parseNode('struct hello { uint a; }')
     assert.deepEqual(ast, {
-      "type": "StructDefinition",
-      "name": "hello",
-      "members": [
+      type: 'StructDefinition',
+      name: 'hello',
+      members: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ]
     })
   })
 
-  it("VariableDeclaration", function() {
+  it('VariableDeclaration', function() {
     // state variable
-    var ast = parseNode("uint a;")
+    var ast = parseNode('uint a;')
     assert.deepEqual(ast.variables[0], {
-      "type": "VariableDeclaration",
-      "typeName": {
-        "type": "ElementaryTypeName",
-        "name": "uint"
+      type: 'VariableDeclaration',
+      typeName: {
+        type: 'ElementaryTypeName',
+        name: 'uint'
       },
-      "name": "a",
-      "expression": null,
-      "visibility": "default",
-      "isStateVar": true,
-      "isDeclaredConst": false,
-      "isIndexed": false,
-      "override": null,
-      "isImmutable": false,
+      name: 'a',
+      expression: null,
+      visibility: 'default',
+      isStateVar: true,
+      isDeclaredConst: false,
+      isIndexed: false,
+      override: null,
+      isImmutable: false
     })
   })
 
-  it("WhileStatement", function() {
-    var stmt = parseStatement("while (true) {}")
+  it('WhileStatement', function() {
+    var stmt = parseStatement('while (true) {}')
     assert.deepEqual(stmt, {
-      "type": "WhileStatement",
-      "condition": {
-        "type": "BooleanLiteral",
-        "value": true
+      type: 'WhileStatement',
+      condition: {
+        type: 'BooleanLiteral',
+        value: true
       },
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       }
     })
 
-    stmt = parseStatement("do {} while (true);")
+    stmt = parseStatement('do {} while (true);')
     assert.deepEqual(stmt, {
-      "type": "DoWhileStatement",
-      "condition": {
-        "type": "BooleanLiteral",
-        "value": true
+      type: 'DoWhileStatement',
+      condition: {
+        type: 'BooleanLiteral',
+        value: true
       },
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       }
     })
   })
 
-  it("IfStatement", function() {
-    var stmt = parseStatement("if (true) {}")
+  it('IfStatement', function() {
+    var stmt = parseStatement('if (true) {}')
     assert.deepEqual(stmt, {
-      "type": "IfStatement",
-      "condition": {
-        "type": "BooleanLiteral",
-        "value": true
+      type: 'IfStatement',
+      condition: {
+        type: 'BooleanLiteral',
+        value: true
       },
-      "trueBody": {
-        "type": "Block",
-        "statements": []
+      trueBody: {
+        type: 'Block',
+        statements: []
       },
-      "falseBody": null
+      falseBody: null
     })
 
     // else
-    stmt = parseStatement("if (true) {} else {}")
+    stmt = parseStatement('if (true) {} else {}')
     assert.deepEqual(stmt, {
-      "type": "IfStatement",
-      "condition": {
-        "type": "BooleanLiteral",
-        "value": true
+      type: 'IfStatement',
+      condition: {
+        type: 'BooleanLiteral',
+        value: true
       },
-      "trueBody": {
-        "type": "Block",
-        "statements": []
+      trueBody: {
+        type: 'Block',
+        statements: []
       },
-      "falseBody": {
-        "type": "Block",
-        "statements": []
-      },
+      falseBody: {
+        type: 'Block',
+        statements: []
+      }
     })
   })
 
-  it("TryStatement", function() {
+  it('TryStatement', function() {
     // try with one catch clause
     var stmt = parseStatement(
-      "try f(1, 2) returns (uint a) {} catch (bytes memory a) {}"
+      'try f(1, 2) returns (uint a) {} catch (bytes memory a) {}'
     )
     assert.deepEqual(stmt, {
-      "type": "TryStatement",
-      "expression": {
-        "type": "FunctionCall",
-        "expression": {
-          "type": "Identifier",
-          "name": "f"
+      type: 'TryStatement',
+      expression: {
+        type: 'FunctionCall',
+        expression: {
+          type: 'Identifier',
+          name: 'f'
         },
-        "arguments": [
+        arguments: [
           {
-            "type": "NumberLiteral",
-            "number": "1",
-            "subdenomination": null
+            type: 'NumberLiteral',
+            number: '1',
+            subdenomination: null
           },
           {
-            "type": "NumberLiteral",
-            "number": "2",
-            "subdenomination": null
+            type: 'NumberLiteral',
+            number: '2',
+            subdenomination: null
           }
         ],
-        "names": []
+        names: []
       },
-      "returnParameters": [
+      returnParameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "catchClauses": [
+      catchClauses: [
         {
-          "body": {
-            "statements": [],
-            "type": "Block"
+          body: {
+            statements: [],
+            type: 'Block'
           },
-          "isReasonStringType": false,
-          "parameters": [
+          isReasonStringType: false,
+          parameters: [
             {
-              "isIndexed": false,
-              "isStateVar": false,
-              "name": "a",
-              "storageLocation": "memory",
-              "type": "VariableDeclaration",
-              "typeName": {
-                "name": "bytes",
-                "type": "ElementaryTypeName"
+              isIndexed: false,
+              isStateVar: false,
+              name: 'a',
+              storageLocation: 'memory',
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'bytes',
+                type: 'ElementaryTypeName'
               }
             }
           ],
-          "type": "CatchClause"
+          type: 'CatchClause'
         }
       ]
     })
 
     // try with two catch clauses
     var stmt = parseStatement(
-      "try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch (bytes memory c) {}"
+      'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch (bytes memory c) {}'
     )
     assert.deepEqual(stmt, {
-      "type": "TryStatement",
-      "expression": {
-        "type": "FunctionCall",
-        "expression": {
-          "type": "Identifier",
-          "name": "f"
+      type: 'TryStatement',
+      expression: {
+        type: 'FunctionCall',
+        expression: {
+          type: 'Identifier',
+          name: 'f'
         },
-        "arguments": [
+        arguments: [
           {
-            "type": "NumberLiteral",
-            "number": "1",
-            "subdenomination": null
+            type: 'NumberLiteral',
+            number: '1',
+            subdenomination: null
           },
           {
-            "type": "NumberLiteral",
-            "number": "2",
-            "subdenomination": null
+            type: 'NumberLiteral',
+            number: '2',
+            subdenomination: null
           }
         ],
-        "names": []
+        names: []
       },
-      "returnParameters": [
+      returnParameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "catchClauses": [
+      catchClauses: [
         {
-          "body": {
-            "statements": [],
-            "type": "Block"
+          body: {
+            statements: [],
+            type: 'Block'
           },
-          "isReasonStringType": true,
-          "parameters": [
+          isReasonStringType: true,
+          parameters: [
             {
-              "isIndexed": false,
-              "isStateVar": false,
-              "name": "b",
-              "storageLocation": "memory",
-              "type": "VariableDeclaration",
-              "typeName": {
-                "name": "string",
-                "type": "ElementaryTypeName"
+              isIndexed: false,
+              isStateVar: false,
+              name: 'b',
+              storageLocation: 'memory',
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'string',
+                type: 'ElementaryTypeName'
               }
             }
           ],
-          "type": "CatchClause"
+          type: 'CatchClause'
         },
         {
-          "body": {
-            "statements": [],
-            "type": "Block"
+          body: {
+            statements: [],
+            type: 'Block'
           },
-          "isReasonStringType": false,
-          "parameters": [
+          isReasonStringType: false,
+          parameters: [
             {
-              "isIndexed": false,
-              "isStateVar": false,
-              "name": "c",
-              "storageLocation": "memory",
-              "type": "VariableDeclaration",
-              "typeName": {
-                "name": "bytes",
-                "type": "ElementaryTypeName"
+              isIndexed: false,
+              isStateVar: false,
+              name: 'c',
+              storageLocation: 'memory',
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'bytes',
+                type: 'ElementaryTypeName'
               }
             }
           ],
-          "type": "CatchClause"
+          type: 'CatchClause'
         }
       ]
     })
   })
 
-  it("UserDefinedTypeName", function() {
-    var ast = parseStatement("Foo.Bar a;")
+  it('UserDefinedTypeName', function() {
+    var ast = parseStatement('Foo.Bar a;')
     assert.deepEqual(ast.variables[0].typeName, {
-      "type": "UserDefinedTypeName",
-      "namePath": "Foo.Bar"
+      type: 'UserDefinedTypeName',
+      namePath: 'Foo.Bar'
     })
   })
 
-  it("ExpressionStatement", function() {
-    var stmt = parseStatement("true;")
+  it('ExpressionStatement', function() {
+    var stmt = parseStatement('true;')
     assert.deepEqual(stmt, {
-      "type": "ExpressionStatement",
-      "expression": {
-        "type": "BooleanLiteral",
-        "value": true
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'BooleanLiteral',
+        value: true
       }
     })
   })
 
-  it("NumberLiteral", function() {
-    var expr = parseExpression("2 ether")
+  it('NumberLiteral', function() {
+    var expr = parseExpression('2 ether')
     assert.deepEqual(expr, {
-      "type": "NumberLiteral",
-      "number": "2",
-      "subdenomination": "ether"
+      type: 'NumberLiteral',
+      number: '2',
+      subdenomination: 'ether'
     })
 
-    expr = parseExpression("2.3e5")
+    expr = parseExpression('2.3e5')
     assert.deepEqual(expr, {
-      "type": "NumberLiteral",
-      "number": "2.3e5",
-      "subdenomination": null
+      type: 'NumberLiteral',
+      number: '2.3e5',
+      subdenomination: null
     })
 
-    expr = parseExpression(".1")
+    expr = parseExpression('.1')
     assert.deepEqual(expr, {
-      "type": "NumberLiteral",
-      "number": ".1",
-      "subdenomination": null
+      type: 'NumberLiteral',
+      number: '.1',
+      subdenomination: null
     })
 
-    expr = parseExpression("1_000_000")
+    expr = parseExpression('1_000_000')
     assert.deepEqual(expr, {
-      "type": "NumberLiteral",
-      "number": "1_000_000",
-      "subdenomination": null
-    })
-  })
-
-  it("StringLiteral with double quotes", function() {
-    var expr = parseExpression("\"Hello\"")
-    assert.deepEqual(expr, {
-      "type": "StringLiteral",
-      "value": "Hello",
-      "parts": ["Hello"],
+      type: 'NumberLiteral',
+      number: '1_000_000',
+      subdenomination: null
     })
   })
 
-  it("StringLiteral with single quotes", function() {
+  it('StringLiteral with double quotes', function() {
+    var expr = parseExpression('"Hello"')
+    assert.deepEqual(expr, {
+      type: 'StringLiteral',
+      value: 'Hello',
+      parts: ['Hello']
+    })
+  })
+
+  it('StringLiteral with single quotes', function() {
     var expr = parseExpression("'Hello'")
     assert.deepEqual(expr, {
-      "type": "StringLiteral",
-      "value": "Hello",
-      "parts": ["Hello"],
+      type: 'StringLiteral',
+      value: 'Hello',
+      parts: ['Hello']
     })
   })
 
-  it("StringLiteral with escaped double quotes", function() {
-    var expr = parseExpression("\"Hello \\\"goodbye\\\"\"")
+  it('StringLiteral with escaped double quotes', function() {
+    var expr = parseExpression('"Hello \\"goodbye\\""')
     assert.deepEqual(expr, {
-      "type": "StringLiteral",
-      "value": "Hello \"goodbye\"",
-      "parts": ["Hello \"goodbye\""],
+      type: 'StringLiteral',
+      value: 'Hello "goodbye"',
+      parts: ['Hello "goodbye"']
     })
   })
 
-  it("StringLiteral with escaped single quotes", function() {
-    var expr = parseExpression("'Hello \\\'goodbye\\\''")
+  it('StringLiteral with escaped single quotes', function() {
+    var expr = parseExpression("'Hello \\'goodbye\\''")
     assert.deepEqual(expr, {
-      "type": "StringLiteral",
-      "value": "Hello 'goodbye'",
-      "parts": ["Hello 'goodbye'"],
+      type: 'StringLiteral',
+      value: "Hello 'goodbye'",
+      parts: ["Hello 'goodbye'"]
     })
   })
 
-  it("Multiline StringLiteral with newline", function() {
-    var expr = parseExpression("\"Hello \"\n\"World\"")
+  it('Multiline StringLiteral with newline', function() {
+    var expr = parseExpression('"Hello "\n"World"')
     assert.deepEqual(expr, {
-      "type": "StringLiteral",
-      "value": "Hello World",
-      "parts": ["Hello ", "World"],
+      type: 'StringLiteral',
+      value: 'Hello World',
+      parts: ['Hello ', 'World']
     })
   })
 
-  it("Multiline StringLiteral with space", function() {
-    var expr = parseExpression("\"Hello \" \"World\"")
+  it('Multiline StringLiteral with space', function() {
+    var expr = parseExpression('"Hello " "World"')
     assert.deepEqual(expr, {
-      "type": "StringLiteral",
-      "value": "Hello World",
-      "parts": ["Hello ", "World"],
+      type: 'StringLiteral',
+      value: 'Hello World',
+      parts: ['Hello ', 'World']
     })
   })
 
-  it("Multiline StringLiteral with no space", function() {
-    var expr = parseExpression("\"Hello \"\"World\"")
+  it('Multiline StringLiteral with no space', function() {
+    var expr = parseExpression('"Hello ""World"')
     assert.deepEqual(expr, {
-      "type": "StringLiteral",
-      "value": "Hello World",
-      "parts": ["Hello ", "World"],
+      type: 'StringLiteral',
+      value: 'Hello World',
+      parts: ['Hello ', 'World']
     })
   })
 
-  it("HexLiteral", function() {
-    var expr = parseExpression("hex\"fafafa\"")
+  it('HexLiteral', function() {
+    var expr = parseExpression('hex"fafafa"')
     assert.deepEqual(expr, {
-      type: "HexLiteral",
-      value: "fafafa",
-      parts: ["fafafa"],
+      type: 'HexLiteral',
+      value: 'fafafa',
+      parts: ['fafafa']
     })
   })
 
-  it("Empty HexLiteral", function() {
-    var expr = parseExpression("hex\"\"")
+  it('Empty HexLiteral', function() {
+    var expr = parseExpression('hex""')
     assert.deepEqual(expr, {
-      type: "HexLiteral",
-      value: "",
-      parts: [""]
+      type: 'HexLiteral',
+      value: '',
+      parts: ['']
     })
   })
 
-  it("Multipart HexLiteral", function() {
-    var expr = parseExpression("hex\"dead\" hex'beef'")
+  it('Multipart HexLiteral', function() {
+    var expr = parseExpression('hex"dead" hex\'beef\'')
     assert.deepEqual(expr, {
-      type: "HexLiteral",
-      value: "deadbeef",
-      parts: ["dead", "beef"]
+      type: 'HexLiteral',
+      value: 'deadbeef',
+      parts: ['dead', 'beef']
     })
   })
 
-  it("BooleanLiteral", function() {
-    var expr = parseExpression("false")
+  it('BooleanLiteral', function() {
+    var expr = parseExpression('false')
     assert.deepEqual(expr, {
-      "type": "BooleanLiteral",
-      "value": false,
+      type: 'BooleanLiteral',
+      value: false
     })
   })
 
-  it("Mapping with elementary type key", function() {
-    var ast = parseNode("mapping(uint => address) a;")
+  it('Mapping with elementary type key', function() {
+    var ast = parseNode('mapping(uint => address) a;')
     assert.deepEqual(ast.variables[0].typeName, {
-      "type": "Mapping",
-      "keyType": {
-        "type": "ElementaryTypeName",
-        "name": "uint"
+      type: 'Mapping',
+      keyType: {
+        type: 'ElementaryTypeName',
+        name: 'uint'
       },
-      "valueType": {
-        "type": "ElementaryTypeName",
-        "name": "address"
+      valueType: {
+        type: 'ElementaryTypeName',
+        name: 'address'
       }
     })
   })
 
-  it("Mapping with user defined type key", function() {
-    var ast = parseNode("mapping(Foo => address) a;")
+  it('Mapping with user defined type key', function() {
+    var ast = parseNode('mapping(Foo => address) a;')
     assert.deepEqual(ast.variables[0].typeName, {
-      "type": "Mapping",
-      "keyType": {
-        "type": "UserDefinedTypeName",
-        "namePath": "Foo"
+      type: 'Mapping',
+      keyType: {
+        type: 'UserDefinedTypeName',
+        namePath: 'Foo'
       },
-      "valueType": {
-        "type": "ElementaryTypeName",
-        "name": "address"
+      valueType: {
+        type: 'ElementaryTypeName',
+        name: 'address'
       }
     })
   })
 
-  it("ModifierDefinition", function() {
-    var ast = parseNode("modifier onlyOwner {}")
+  it('ModifierDefinition', function() {
+    var ast = parseNode('modifier onlyOwner {}')
     assert.deepEqual(ast, {
-      "type": "ModifierDefinition",
-      "name": "onlyOwner",
-      "parameters": null,
-      "isVirtual": false,
-      "override": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'ModifierDefinition',
+      name: 'onlyOwner',
+      parameters: null,
+      isVirtual: false,
+      override: null,
+      body: {
+        type: 'Block',
+        statements: []
       }
     })
-    var ast = parseNode("modifier onlyOwner() {}")
+    var ast = parseNode('modifier onlyOwner() {}')
     assert.deepEqual(ast, {
-      "type": "ModifierDefinition",
-      "name": "onlyOwner",
-      "parameters": [],
-      "isVirtual": false,
-      "override": null,
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'ModifierDefinition',
+      name: 'onlyOwner',
+      parameters: [],
+      isVirtual: false,
+      override: null,
+      body: {
+        type: 'Block',
+        statements: []
       }
     })
   })
 
-  it("Expression", function() {
+  it('Expression', function() {
     // new expression
-    var expr = parseExpression("new MyContract")
+    var expr = parseExpression('new MyContract')
     assert.deepEqual(expr, {
-      "type": "NewExpression",
-      "typeName": {
-        "type": "UserDefinedTypeName",
-        "namePath": "MyContract"
+      type: 'NewExpression',
+      typeName: {
+        type: 'UserDefinedTypeName',
+        namePath: 'MyContract'
       }
     })
 
     // prefix operation
-    var expr = parseExpression("!true")
+    var expr = parseExpression('!true')
     assert.deepEqual(expr, {
-      "type": "UnaryOperation",
-      "operator": "!",
-      "subExpression": {
-        "type": "BooleanLiteral",
-        "value": true
+      type: 'UnaryOperation',
+      operator: '!',
+      subExpression: {
+        type: 'BooleanLiteral',
+        value: true
       },
-      "isPrefix": true
+      isPrefix: true
     })
 
     // prefix operation
-    var expr = parseExpression("i++")
+    var expr = parseExpression('i++')
     assert.deepEqual(expr, {
-      "type": "UnaryOperation",
-      "operator": "++",
-      "subExpression": {
-        "type": "Identifier",
-        "name": "i"
+      type: 'UnaryOperation',
+      operator: '++',
+      subExpression: {
+        type: 'Identifier',
+        name: 'i'
       },
-      "isPrefix": false
+      isPrefix: false
     })
   })
 
-  it("FunctionCall", function() {
-    var expr = parseExpression("f(1, 2)")
+  it('FunctionCall', function() {
+    var expr = parseExpression('f(1, 2)')
     assert.deepEqual(expr, {
-      "type": "FunctionCall",
-      "expression": {
-        "type": "Identifier",
-        "name": "f"
+      type: 'FunctionCall',
+      expression: {
+        type: 'Identifier',
+        name: 'f'
       },
-      "arguments": [
+      arguments: [
         {
-          "type": "NumberLiteral",
-          "number": "1",
-          "subdenomination": null
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: null
         },
         {
-          "type": "NumberLiteral",
-          "number": "2",
-          "subdenomination": null
+          type: 'NumberLiteral',
+          number: '2',
+          subdenomination: null
         }
       ],
-      "names": []
+      names: []
     })
-    var expr = parseExpression("type(MyContract)")
+    var expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
-      "type": "FunctionCall",
-      "expression": {
-        "type": "Identifier",
-        "name": "type"
+      type: 'FunctionCall',
+      expression: {
+        type: 'Identifier',
+        name: 'type'
       },
-      "arguments": [
+      arguments: [
         {
-          "type": "Identifier",
-          "name": "MyContract",
+          type: 'Identifier',
+          name: 'MyContract'
         }
       ],
-      "names": []
+      names: []
     })
   })
 
-  it("StateVariableDeclaration", function() {
-    var ast = parseNode("uint a;")
+  it('StateVariableDeclaration', function() {
+    var ast = parseNode('uint a;')
     assert.deepEqual(ast, {
-      "type": "StateVariableDeclaration",
-      "variables": [
+      type: 'StateVariableDeclaration',
+      variables: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "expression": null,
-          "visibility": "default",
-          "override": null,
-          "isStateVar": true,
-          "isDeclaredConst": false,
-          "isIndexed": false,
-          "isImmutable": false
+          name: 'a',
+          expression: null,
+          visibility: 'default',
+          override: null,
+          isStateVar: true,
+          isDeclaredConst: false,
+          isIndexed: false,
+          isImmutable: false
         }
       ],
-      "initialValue": null
+      initialValue: null
     })
   })
 
-  it("ForStatement", function() {
-    var stmt = parseStatement("for (i = 0; i < 10; i++) {}")
+  it('ForStatement', function() {
+    var stmt = parseStatement('for (i = 0; i < 10; i++) {}')
     assert.deepEqual(stmt, {
-      "type": "ForStatement",
-      "initExpression": {
-        "type": "ExpressionStatement",
-        "expression": {
-          "type": "BinaryOperation",
-          "operator": "=",
-          "left": {
-            "type": "Identifier",
-            "name": "i"
+      type: 'ForStatement',
+      initExpression: {
+        type: 'ExpressionStatement',
+        expression: {
+          type: 'BinaryOperation',
+          operator: '=',
+          left: {
+            type: 'Identifier',
+            name: 'i'
           },
-          "right": {
-            "type": "NumberLiteral",
-            "number": "0",
-            "subdenomination": null
+          right: {
+            type: 'NumberLiteral',
+            number: '0',
+            subdenomination: null
           }
         }
       },
-      "conditionExpression": {
-        "type": "BinaryOperation",
-        "operator": "<",
-        "left": {
-          "type": "Identifier",
-          "name": "i"
+      conditionExpression: {
+        type: 'BinaryOperation',
+        operator: '<',
+        left: {
+          type: 'Identifier',
+          name: 'i'
         },
-        "right": {
-          "type": "NumberLiteral",
-          "number": "10",
-          "subdenomination": null
+        right: {
+          type: 'NumberLiteral',
+          number: '10',
+          subdenomination: null
         }
       },
-      "loopExpression": {
-        "type": "ExpressionStatement",
-        "expression": {
-          "type": "UnaryOperation",
-          "operator": "++",
-          "subExpression": {
-            "type": "Identifier",
-            "name": "i"
+      loopExpression: {
+        type: 'ExpressionStatement',
+        expression: {
+          type: 'UnaryOperation',
+          operator: '++',
+          subExpression: {
+            type: 'Identifier',
+            name: 'i'
           },
-          "isPrefix": false
+          isPrefix: false
         }
       },
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       }
     })
-    stmt = parseStatement("for (;; i++) {}")
+    stmt = parseStatement('for (;; i++) {}')
     assert.deepEqual(stmt, {
-      "type": "ForStatement",
-      "initExpression": null,
-      "conditionExpression": null,
-      "loopExpression": {
-        "type": "ExpressionStatement",
-        "expression": {
-          "type": "UnaryOperation",
-          "operator": "++",
-          "subExpression": {
-            "type": "Identifier",
-            "name": "i"
+      type: 'ForStatement',
+      initExpression: null,
+      conditionExpression: null,
+      loopExpression: {
+        type: 'ExpressionStatement',
+        expression: {
+          type: 'UnaryOperation',
+          operator: '++',
+          subExpression: {
+            type: 'Identifier',
+            name: 'i'
           },
-          "isPrefix": false
+          isPrefix: false
         }
       },
-      "body": {
-        "type": "Block",
-        "statements": []
+      body: {
+        type: 'Block',
+        statements: []
       }
     })
   })
 
-  it("IdentifierList", function() {
-    var expr = parseExpression("(a,) = (1,2)")
+  it('IdentifierList', function() {
+    var expr = parseExpression('(a,) = (1,2)')
     assert.deepEqual(expr.left, {
-      "components": [
+      components: [
         {
-          "name": "a",
-          "type": "Identifier",
+          name: 'a',
+          type: 'Identifier'
         },
-        null,
+        null
       ],
-      "isArray": false,
-      "type": "TupleExpression",
+      isArray: false,
+      type: 'TupleExpression'
     })
-    expr = parseExpression("(a) = (1,)")
+    expr = parseExpression('(a) = (1,)')
     assert.deepEqual(expr.left, {
-      "components": [
+      components: [
         {
-          "name": "a",
-          "type": "Identifier",
-        },
+          name: 'a',
+          type: 'Identifier'
+        }
       ],
-      "isArray": false,
-      "type": "TupleExpression",
+      isArray: false,
+      type: 'TupleExpression'
     })
-    expr = parseExpression("(a,,b,) = (1,2,1)")
+    expr = parseExpression('(a,,b,) = (1,2,1)')
     assert.deepEqual(expr.left, {
-      "components": [
+      components: [
         {
-          "name": "a",
-          "type": "Identifier",
+          name: 'a',
+          type: 'Identifier'
         },
         null,
         {
-          "name": "b",
-          "type": "Identifier",
+          name: 'b',
+          type: 'Identifier'
         },
-        null,
+        null
       ],
-      "isArray": false,
-      "type": "TupleExpression",
+      isArray: false,
+      type: 'TupleExpression'
     })
   })
 
-  it("Identifier", function() {
-    var expr = parseExpression("a")
+  it('Identifier', function() {
+    var expr = parseExpression('a')
     assert.deepEqual(expr, {
-      "type": "Identifier",
-      "name": "a",
+      type: 'Identifier',
+      name: 'a'
     })
-    expr = parseExpression("calldata")
+    expr = parseExpression('calldata')
     assert.deepEqual(expr, {
-      "type": "Identifier",
-      "name": "calldata",
+      type: 'Identifier',
+      name: 'calldata'
     })
   })
 
-  it("TupleExpression", function() {
+  it('TupleExpression', function() {
     // tuple
-    var ast = parseExpression("(,a,, b,,)")
+    var ast = parseExpression('(,a,, b,,)')
     assert.deepEqual(ast, {
-      "type": "TupleExpression",
-      "components": [
+      type: 'TupleExpression',
+      components: [
         null,
         {
-          "type": "Identifier",
-          "name": "a"
+          type: 'Identifier',
+          name: 'a'
         },
         null,
         {
-          "type": "Identifier",
-          "name": "b"
+          type: 'Identifier',
+          name: 'b'
         },
         null,
         null
       ],
-      "isArray": false
+      isArray: false
     })
 
     // array
-    ast = parseExpression("[a, b]")
+    ast = parseExpression('[a, b]')
     assert.deepEqual(ast, {
-      "type": "TupleExpression",
-      "components": [
+      type: 'TupleExpression',
+      components: [
         {
-          "type": "Identifier",
-          "name": "a"
+          type: 'Identifier',
+          name: 'a'
         },
         {
-          "type": "Identifier",
-          "name": "b"
+          type: 'Identifier',
+          name: 'b'
         }
       ],
-      "isArray": true
+      isArray: true
     })
   })
 
-  it("VariableDeclarationStatement", function() {
-    var stmt = parseStatement("uint a;")
+  it('VariableDeclarationStatement', function() {
+    var stmt = parseStatement('uint a;')
     assert.deepEqual(stmt, {
-      "type": "VariableDeclarationStatement",
-      "variables": [
+      type: 'VariableDeclarationStatement',
+      variables: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "a",
-          "storageLocation": null,
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "initialValue": null
+      initialValue: null
     })
 
-    stmt = parseStatement("var (a,,b) = 0;")
+    stmt = parseStatement('var (a,,b) = 0;')
     assert.deepEqual(stmt, {
-      "type": "VariableDeclarationStatement",
-      "initialValue": {
-        "number": "0",
-        "subdenomination": null,
-        "type": "NumberLiteral"
+      type: 'VariableDeclarationStatement',
+      initialValue: {
+        number: '0',
+        subdenomination: null,
+        type: 'NumberLiteral'
       },
-      "variables": [
+      variables: [
         {
-          "isIndexed": false,
-          "isStateVar": false,
-          "name": "a",
-          "storageLocation": null,
-          "type": "VariableDeclaration",
-          "typeName": null
+          isIndexed: false,
+          isStateVar: false,
+          name: 'a',
+          storageLocation: null,
+          type: 'VariableDeclaration',
+          typeName: null
         },
         null,
         {
-          "isIndexed": false,
-          "isStateVar": false,
-          "name": "b",
-          "storageLocation": null,
-          "type": "VariableDeclaration",
-          "typeName": null
+          isIndexed: false,
+          isStateVar: false,
+          name: 'b',
+          storageLocation: null,
+          type: 'VariableDeclaration',
+          typeName: null
         }
       ]
     })
 
-    stmt = parseStatement("(uint a,, uint b) = 0;")
+    stmt = parseStatement('(uint a,, uint b) = 0;')
     assert.deepEqual(stmt, {
-      "type": "VariableDeclarationStatement",
-      "initialValue": {
-        "number": "0",
-        "subdenomination": null,
-        "type": "NumberLiteral"
+      type: 'VariableDeclarationStatement',
+      initialValue: {
+        number: '0',
+        subdenomination: null,
+        type: 'NumberLiteral'
       },
-      "variables": [
+      variables: [
         {
-          "isIndexed": false,
-          "isStateVar": false,
-          "name": "a",
-          "storageLocation": null,
-          "type": "VariableDeclaration",
-          "typeName": {
-            "name": "uint",
-            "type": "ElementaryTypeName"
+          isIndexed: false,
+          isStateVar: false,
+          name: 'a',
+          storageLocation: null,
+          type: 'VariableDeclaration',
+          typeName: {
+            name: 'uint',
+            type: 'ElementaryTypeName'
           }
         },
         null,
         {
-          "isIndexed": false,
-          "isStateVar": false,
-          "name": "b",
-          "storageLocation": null,
-          "type": "VariableDeclaration",
-          "typeName": {
-            "name": "uint",
-            "type": "ElementaryTypeName"
+          isIndexed: false,
+          isStateVar: false,
+          name: 'b',
+          storageLocation: null,
+          type: 'VariableDeclaration',
+          typeName: {
+            name: 'uint',
+            type: 'ElementaryTypeName'
           }
         }
       ]
     })
   })
 
-  it("ImportDirective", function() {
-    var ast = parser.parse("import \"./abc.sol\";")
+  it('ImportDirective', function() {
+    var ast = parser.parse('import "./abc.sol";')
     assert.deepEqual(ast.children[0], {
-      "type": "ImportDirective",
-      "path": "./abc.sol",
-      "unitAlias": null,
-      "symbolAliases": null
+      type: 'ImportDirective',
+      path: './abc.sol',
+      unitAlias: null,
+      symbolAliases: null
     })
 
-    ast = parser.parse("import \"./abc.sol\" as x;")
+    ast = parser.parse('import "./abc.sol" as x;')
     assert.deepEqual(ast.children[0], {
-      "type": "ImportDirective",
-      "path": "./abc.sol",
-      "unitAlias": "x",
-      "symbolAliases": null
+      type: 'ImportDirective',
+      path: './abc.sol',
+      unitAlias: 'x',
+      symbolAliases: null
     })
 
-    ast = parser.parse("import * as x from \"./abc.sol\";")
+    ast = parser.parse('import * as x from "./abc.sol";')
     assert.deepEqual(ast.children[0], {
-      "type": "ImportDirective",
-      "path": "./abc.sol",
-      "unitAlias": "x",
-      "symbolAliases": null
+      type: 'ImportDirective',
+      path: './abc.sol',
+      unitAlias: 'x',
+      symbolAliases: null
     })
 
-    ast = parser.parse("import { a as b, c as d, f } from \"./abc.sol\";")
+    ast = parser.parse('import { a as b, c as d, f } from "./abc.sol";')
     assert.deepEqual(ast.children[0], {
-      "type": "ImportDirective",
-      "path": "./abc.sol",
-      "unitAlias": null,
-      "symbolAliases": [
-        ["a", "b"],
-        ["c", "d"],
-        ["f", null],
+      type: 'ImportDirective',
+      path: './abc.sol',
+      unitAlias: null,
+      symbolAliases: [
+        ['a', 'b'],
+        ['c', 'd'],
+        ['f', null]
       ]
     })
   })
 
-  it("EventDefinition", function() {
-    var ast = parseNode("event Foo(address indexed a, uint b);")
+  it('EventDefinition', function() {
+    var ast = parseNode('event Foo(address indexed a, uint b);')
     assert.deepEqual(ast, {
-      "type": "EventDefinition",
-      "name": "Foo",
-      "parameters": [
+      type: 'EventDefinition',
+      name: 'Foo',
+      parameters: [
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "address"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'address'
           },
-          "name": "a",
-          "isStateVar": false,
-          "isIndexed": true
+          name: 'a',
+          isStateVar: false,
+          isIndexed: true
         },
         {
-          "type": "VariableDeclaration",
-          "typeName": {
-            "type": "ElementaryTypeName",
-            "name": "uint"
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint'
           },
-          "name": "b",
-          "isStateVar": false,
-          "isIndexed": false
+          name: 'b',
+          isStateVar: false,
+          isIndexed: false
         }
       ],
-      "isAnonymous": false
+      isAnonymous: false
     })
   })
 
-  it("InlineAssemblyStatement", function() {
-    var ast = parseStatement("assembly {}")
+  it('InlineAssemblyStatement', function() {
+    var ast = parseStatement('assembly {}')
     assert.deepEqual(ast, {
-      "type": "InlineAssemblyStatement",
-      "language": null,
-      "body": {
-        "type": "AssemblyBlock",
-        "operations": []
+      type: 'InlineAssemblyStatement',
+      language: null,
+      body: {
+        type: 'AssemblyBlock',
+        operations: []
       }
     })
 
-    ast = parseStatement("assembly \"evmasm\" {}")
+    ast = parseStatement('assembly "evmasm" {}')
     assert.deepEqual(ast, {
-      "type": "InlineAssemblyStatement",
-      "language": "evmasm",
-      "body": {
-        "type": "AssemblyBlock",
-        "operations": []
+      type: 'InlineAssemblyStatement',
+      language: 'evmasm',
+      body: {
+        type: 'AssemblyBlock',
+        operations: []
       }
     })
   })
 
-  it("AssemblyCall", function() {
-    var ast = parseAssembly("mload(0x04)")
+  it('AssemblyCall', function() {
+    var ast = parseAssembly('mload(0x04)')
     assert.deepEqual(ast, {
-      "type": "AssemblyCall",
-      "functionName": "mload",
-      "arguments": [
+      type: 'AssemblyCall',
+      functionName: 'mload',
+      arguments: [
         {
-          "type": "HexNumber",
-          "value": "0x04"
+          type: 'HexNumber',
+          value: '0x04'
         }
       ]
     })
   })
 
-  it("AssemblyLiteral", function() {
-    var ast = parseAssembly("0x04")
+  it('AssemblyLiteral', function() {
+    var ast = parseAssembly('0x04')
     assert.deepEqual(ast, {
-      "type": "HexNumber",
-      "value": "0x04",
+      type: 'HexNumber',
+      value: '0x04'
     })
 
-    ast = parseAssembly("\"hello\"")
+    ast = parseAssembly('"hello"')
     assert.deepEqual(ast, {
-      "type": "StringLiteral",
-      "value": "hello",
-      "parts": ["hello"],
+      type: 'StringLiteral',
+      value: 'hello',
+      parts: ['hello']
     })
   })
 
-  it("AssemblySwitch / AssemblyCase", function() {
-    var ast = parseAssembly("switch x case 0 { y := mul(x, 2) } default { y := 0 }")
+  it('AssemblySwitch / AssemblyCase', function() {
+    var ast = parseAssembly(
+      'switch x case 0 { y := mul(x, 2) } default { y := 0 }'
+    )
     assert.deepEqual(ast, {
-      "type": "AssemblySwitch",
-      "expression": {
-        "type": "AssemblyCall",
-        "functionName": "x",
-        "arguments": []
+      type: 'AssemblySwitch',
+      expression: {
+        type: 'AssemblyCall',
+        functionName: 'x',
+        arguments: []
       },
-      "cases": [
+      cases: [
         {
-          "type": "AssemblyCase",
-          "block": {
-            "type": "AssemblyBlock",
-            "operations": [
+          type: 'AssemblyCase',
+          block: {
+            type: 'AssemblyBlock',
+            operations: [
               {
-                "type": "AssemblyAssignment",
-                "names": [
+                type: 'AssemblyAssignment',
+                names: [
                   {
-                    "type": "Identifier",
-                    "name": "y"
+                    type: 'Identifier',
+                    name: 'y'
                   }
                 ],
-                "expression": {
-                  "type": "AssemblyCall",
-                  "functionName": "mul",
-                  "arguments": [
+                expression: {
+                  type: 'AssemblyCall',
+                  functionName: 'mul',
+                  arguments: [
                     {
-                      "type": "AssemblyCall",
-                      "functionName": "x",
-                      "arguments": []
+                      type: 'AssemblyCall',
+                      functionName: 'x',
+                      arguments: []
                     },
                     {
-                      "type": "DecimalNumber",
-                      "value": "2"
+                      type: 'DecimalNumber',
+                      value: '2'
                     }
                   ]
                 }
               }
             ]
           },
-          "value": {
-            "type": "DecimalNumber",
-            "value": "0"
+          value: {
+            type: 'DecimalNumber',
+            value: '0'
           }
         },
         {
-          "type": "AssemblyCase",
-          "block": {
-            "type": "AssemblyBlock",
-            "operations": [
+          type: 'AssemblyCase',
+          block: {
+            type: 'AssemblyBlock',
+            operations: [
               {
-                "type": "AssemblyAssignment",
-                "names": [
+                type: 'AssemblyAssignment',
+                names: [
                   {
-                    "type": "Identifier",
-                    "name": "y"
+                    type: 'Identifier',
+                    name: 'y'
                   }
                 ],
-                "expression": {
-                  "type": "DecimalNumber",
-                  "value": "0"
+                expression: {
+                  type: 'DecimalNumber',
+                  value: '0'
                 }
               }
             ]
           },
-          "default": true
+          default: true
         }
       ]
     })
   })
 
-  it("AssemblyLocalDefinition", function() {
-    var ast = parseAssembly("let x := 0x04")
+  it('AssemblyLocalDefinition', function() {
+    var ast = parseAssembly('let x := 0x04')
     assert.deepEqual(ast, {
-      "type": "AssemblyLocalDefinition",
-      "names": [
+      type: 'AssemblyLocalDefinition',
+      names: [
         {
-          "type": "Identifier",
-          "name": "x"
+          type: 'Identifier',
+          name: 'x'
         }
       ],
-      "expression": {
-        "type": "HexNumber",
-        "value": "0x04"
+      expression: {
+        type: 'HexNumber',
+        value: '0x04'
       }
     })
-
   })
 
-  it("AssemblyFunctionDefinition", function() {
-    var ast = parseAssembly("function power(base, exponent) -> result {}")
+  it('AssemblyFunctionDefinition', function() {
+    var ast = parseAssembly('function power(base, exponent) -> result {}')
     assert.deepEqual(ast, {
-      "type": "AssemblyFunctionDefinition",
-      "name": "power",
-      "arguments": [
+      type: 'AssemblyFunctionDefinition',
+      name: 'power',
+      arguments: [
         {
-          "type": "Identifier",
-          "name": "base"
+          type: 'Identifier',
+          name: 'base'
         },
         {
-          "type": "Identifier",
-          "name": "exponent"
+          type: 'Identifier',
+          name: 'exponent'
         }
       ],
-      "returnArguments": [
+      returnArguments: [
         {
-          "type": "Identifier",
-          "name": "result"
+          type: 'Identifier',
+          name: 'result'
         }
       ],
-      "body": {
-        "type": "AssemblyBlock",
-        "operations": []
+      body: {
+        type: 'AssemblyBlock',
+        operations: []
       }
     })
-    var ast = parseAssembly("function foo() -> result {}")
+    var ast = parseAssembly('function foo() -> result {}')
     assert.deepEqual(ast, {
-      "type": "AssemblyFunctionDefinition",
-      "name": "foo",
-      "arguments": [],
-      "returnArguments": [
+      type: 'AssemblyFunctionDefinition',
+      name: 'foo',
+      arguments: [],
+      returnArguments: [
         {
-          "type": "Identifier",
-          "name": "result"
+          type: 'Identifier',
+          name: 'result'
         }
       ],
-      "body": {
-        "type": "AssemblyBlock",
-        "operations": []
+      body: {
+        type: 'AssemblyBlock',
+        operations: []
       }
     })
-    var ast = parseAssembly("function foo(x) {}")
+    var ast = parseAssembly('function foo(x) {}')
     assert.deepEqual(ast, {
-      "type": "AssemblyFunctionDefinition",
-      "name": "foo",
-      "arguments": [
+      type: 'AssemblyFunctionDefinition',
+      name: 'foo',
+      arguments: [
         {
-          "type": "Identifier",
-          "name": "x"
-        },
-      ],
-      "returnArguments": [],
-      "body": {
-        "type": "AssemblyBlock",
-        "operations": []
-      }
-    })
-  })
-
-  it("AssemblyAssignment", function() {
-    var ast = parseAssembly("a := 10")
-    assert.deepEqual(ast, {
-      "type": "AssemblyAssignment",
-      "names": [
-        {
-          "type": "Identifier",
-          "name": "a"
+          type: 'Identifier',
+          name: 'x'
         }
       ],
-      "expression": {
-        "type": "DecimalNumber",
-        "value": "10"
+      returnArguments: [],
+      body: {
+        type: 'AssemblyBlock',
+        operations: []
       }
     })
   })
 
-  it("AssemblyAssignment, left member access", function() {
-    var ast = parseAssembly("a.slot := 10")
+  it('AssemblyAssignment', function() {
+    var ast = parseAssembly('a := 10')
     assert.deepEqual(ast, {
-      "type": "AssemblyAssignment",
-      "names": [
+      type: 'AssemblyAssignment',
+      names: [
         {
-          "type": "AssemblyMemberAccess",
-          "expression": {
-            "name": "a",
-            "type": "Identifier"
+          type: 'Identifier',
+          name: 'a'
+        }
+      ],
+      expression: {
+        type: 'DecimalNumber',
+        value: '10'
+      }
+    })
+  })
+
+  it('AssemblyAssignment, left member access', function() {
+    var ast = parseAssembly('a.slot := 10')
+    assert.deepEqual(ast, {
+      type: 'AssemblyAssignment',
+      names: [
+        {
+          type: 'AssemblyMemberAccess',
+          expression: {
+            name: 'a',
+            type: 'Identifier'
           },
-          "memberName": {
-            "name": "slot",
-            "type": "Identifier"
+          memberName: {
+            name: 'slot',
+            type: 'Identifier'
           }
         }
       ],
-      "expression": {
-        "type": "DecimalNumber",
-        "value": "10"
+      expression: {
+        type: 'DecimalNumber',
+        value: '10'
       }
     })
   })
 
-  it("AssemblyAssignment, right member access", function() {
-    var ast = parseAssembly("o := x.offset")
+  it('AssemblyAssignment, right member access', function() {
+    var ast = parseAssembly('o := x.offset')
     assert.deepEqual(ast, {
-      "type": "AssemblyAssignment",
-      "names": [
+      type: 'AssemblyAssignment',
+      names: [
         {
-          "type": "Identifier",
-          "name": "o"
+          type: 'Identifier',
+          name: 'o'
         }
       ],
-      "expression": {
-          "type": "AssemblyMemberAccess",
-          "expression": {
-            "name": "x",
-            "type": "Identifier"
-          },
-          "memberName": {
-            "name": "offset",
-            "type": "Identifier"
-          }
+      expression: {
+        type: 'AssemblyMemberAccess',
+        expression: {
+          name: 'x',
+          type: 'Identifier'
+        },
+        memberName: {
+          name: 'offset',
+          type: 'Identifier'
+        }
       }
     })
   })
 
-  it("LabelDefinition", function() {
-    var ast = parseAssembly("loop:")
+  it('LabelDefinition', function() {
+    var ast = parseAssembly('loop:')
     assert.deepEqual(ast, {
-      "type": "LabelDefinition",
-      "name": "loop"
+      type: 'LabelDefinition',
+      name: 'loop'
     })
   })
 
-  it("AssemblyStackAssignment", function() {
-    var ast = parseAssembly("=: a")
+  it('AssemblyStackAssignment', function() {
+    var ast = parseAssembly('=: a')
     assert.deepEqual(ast, {
-      "type": "AssemblyStackAssignment",
-      "name": "a"
+      type: 'AssemblyStackAssignment',
+      name: 'a'
     })
   })
 
-  it("AssemblyFor", function() {
-    var ast = parseAssembly("for { let i := 0  } lt(i, x) { i := add(i, 1)  } { y := mul(2, y) }")
+  it('AssemblyFor', function() {
+    var ast = parseAssembly(
+      'for { let i := 0  } lt(i, x) { i := add(i, 1)  } { y := mul(2, y) }'
+    )
     assert.deepEqual(ast, {
-      "type": "AssemblyFor",
-      "pre": {
-        "type": "AssemblyBlock",
-        "operations": [
+      type: 'AssemblyFor',
+      pre: {
+        type: 'AssemblyBlock',
+        operations: [
           {
-            "type": "AssemblyLocalDefinition",
-            "names": [
+            type: 'AssemblyLocalDefinition',
+            names: [
               {
-                "type": "Identifier",
-                "name": "i"
+                type: 'Identifier',
+                name: 'i'
               }
             ],
-            "expression": {
-              "type": "DecimalNumber",
-              "value": "0"
+            expression: {
+              type: 'DecimalNumber',
+              value: '0'
             }
           }
         ]
       },
-      "condition": {
-        "type": "AssemblyCall",
-        "functionName": "lt",
-        "arguments": [
+      condition: {
+        type: 'AssemblyCall',
+        functionName: 'lt',
+        arguments: [
           {
-            "type": "AssemblyCall",
-            "functionName": "i",
-            "arguments": []
+            type: 'AssemblyCall',
+            functionName: 'i',
+            arguments: []
           },
           {
-            "type": "AssemblyCall",
-            "functionName": "x",
-            "arguments": []
+            type: 'AssemblyCall',
+            functionName: 'x',
+            arguments: []
           }
         ]
       },
-      "post": {
-        "type": "AssemblyBlock",
-        "operations": [
+      post: {
+        type: 'AssemblyBlock',
+        operations: [
           {
-            "type": "AssemblyAssignment",
-            "names": [
+            type: 'AssemblyAssignment',
+            names: [
               {
-                "type": "Identifier",
-                "name": "i"
+                type: 'Identifier',
+                name: 'i'
               }
             ],
-            "expression": {
-              "type": "AssemblyCall",
-              "functionName": "add",
-              "arguments": [
+            expression: {
+              type: 'AssemblyCall',
+              functionName: 'add',
+              arguments: [
                 {
-                  "type": "AssemblyCall",
-                  "functionName": "i",
-                  "arguments": []
+                  type: 'AssemblyCall',
+                  functionName: 'i',
+                  arguments: []
                 },
                 {
-                  "type": "DecimalNumber",
-                  "value": "1"
+                  type: 'DecimalNumber',
+                  value: '1'
                 }
               ]
             }
           }
         ]
       },
-      "body": {
-        "type": "AssemblyBlock",
-        "operations": [
+      body: {
+        type: 'AssemblyBlock',
+        operations: [
           {
-            "type": "AssemblyAssignment",
-            "names": [
+            type: 'AssemblyAssignment',
+            names: [
               {
-                "type": "Identifier",
-                "name": "y"
+                type: 'Identifier',
+                name: 'y'
               }
             ],
-            "expression": {
-              "type": "AssemblyCall",
-              "functionName": "mul",
-              "arguments": [
+            expression: {
+              type: 'AssemblyCall',
+              functionName: 'mul',
+              arguments: [
                 {
-                  "type": "DecimalNumber",
-                  "value": "2"
+                  type: 'DecimalNumber',
+                  value: '2'
                 },
                 {
-                  "type": "AssemblyCall",
-                  "functionName": "y",
-                  "arguments": []
+                  type: 'AssemblyCall',
+                  functionName: 'y',
+                  arguments: []
                 }
               ]
             }
@@ -2234,194 +2266,202 @@ describe('AST', () => {
     })
   })
 
-  it("AssemblyIf", function() {
-    var ast = parseAssembly("if lt(i, x) { revert(0, 0) }")
+  it('AssemblyIf', function() {
+    var ast = parseAssembly('if lt(i, x) { revert(0, 0) }')
     assert.deepEqual(ast, {
-      "body": {
-        "operations": [
+      body: {
+        operations: [
           {
-            "arguments": [
+            arguments: [
               {
-                "type": "DecimalNumber",
-                "value": "0"
+                type: 'DecimalNumber',
+                value: '0'
               },
               {
-                "type": "DecimalNumber",
-                "value": "0"
+                type: 'DecimalNumber',
+                value: '0'
               }
             ],
-            "functionName": "revert",
-            "type": "AssemblyCall"
+            functionName: 'revert',
+            type: 'AssemblyCall'
           }
         ],
-        "type": "AssemblyBlock"
+        type: 'AssemblyBlock'
       },
-      "condition": {
-        "arguments": [
+      condition: {
+        arguments: [
           {
-            "arguments": [],
-            "functionName": "i",
-            "type": "AssemblyCall"
+            arguments: [],
+            functionName: 'i',
+            type: 'AssemblyCall'
           },
           {
-            "arguments": [],
-            "functionName": "x",
-            "type": "AssemblyCall"
+            arguments: [],
+            functionName: 'x',
+            type: 'AssemblyCall'
           }
         ],
-        "functionName": "lt",
-        "type": "AssemblyCall"
+        functionName: 'lt',
+        type: 'AssemblyCall'
       },
-      "type": "AssemblyIf"
+      type: 'AssemblyIf'
     })
   })
 
-  it("Function call with name/value list", function() {
-    let expr = parseExpression("recipient.call{value: 1}()")
+  it('Function call with name/value list', function() {
+    let expr = parseExpression('recipient.call{value: 1}()')
     assert.deepEqual(expr, {
-      "type": "FunctionCall",
-      "expression": {
-        "arguments": {
-          "type": "NameValueList",
-          "names": ["value"],
-          "arguments": [{
-            "number": "1",
-            "subdenomination": null,
-            "type": "NumberLiteral"
-          }],
+      type: 'FunctionCall',
+      expression: {
+        arguments: {
+          type: 'NameValueList',
+          names: ['value'],
+          arguments: [
+            {
+              number: '1',
+              subdenomination: null,
+              type: 'NumberLiteral'
+            }
+          ]
         },
-        "expression": {
-          "expression": {
-            "name": "recipient",
-            "type": "Identifier"
+        expression: {
+          expression: {
+            name: 'recipient',
+            type: 'Identifier'
           },
-          "memberName": "call",
-          "type": "MemberAccess"
+          memberName: 'call',
+          type: 'MemberAccess'
         },
-        "type": "NameValueExpression"
+        type: 'NameValueExpression'
       },
-      "arguments": [],
-      "names": []
+      arguments: [],
+      names: []
     })
 
-    expr = parseExpression("recipient.call{value: 1, gas: 21000}()")
+    expr = parseExpression('recipient.call{value: 1, gas: 21000}()')
     assert.deepEqual(expr, {
-      "type": "FunctionCall",
-      "expression": {
-        "arguments": {
-          "type": "NameValueList",
-          "names": ["value", "gas"],
-          "arguments": [
-             {
-              "number": "1",
-              "subdenomination": null,
-              "type": "NumberLiteral"
+      type: 'FunctionCall',
+      expression: {
+        arguments: {
+          type: 'NameValueList',
+          names: ['value', 'gas'],
+          arguments: [
+            {
+              number: '1',
+              subdenomination: null,
+              type: 'NumberLiteral'
             },
             {
-              "number": "21000",
-              "subdenomination": null,
-              "type": "NumberLiteral"
-            }]
+              number: '21000',
+              subdenomination: null,
+              type: 'NumberLiteral'
+            }
+          ]
         },
-        "expression": {
-          "expression": {
-            "name": "recipient",
-            "type": "Identifier"
+        expression: {
+          expression: {
+            name: 'recipient',
+            type: 'Identifier'
           },
-          "memberName": "call",
-          "type": "MemberAccess"
+          memberName: 'call',
+          type: 'MemberAccess'
         },
-        "type": "NameValueExpression"
+        type: 'NameValueExpression'
       },
-      "arguments": [],
-      "names": []
+      arguments: [],
+      names: []
     })
   })
 
-  it("should allow using payable as a function", function () {
-    let expr = parseExpression("payable(recipient)")
+  it('should allow using payable as a function', function() {
+    let expr = parseExpression('payable(recipient)')
     assert.deepEqual(expr, {
-      "type": "FunctionCall",
-      "expression": {
-        "name": "payable",
-        "type": "Identifier"
+      type: 'FunctionCall',
+      expression: {
+        name: 'payable',
+        type: 'Identifier'
       },
-      "arguments": [
+      arguments: [
         {
-          "name": "recipient",
-          "type": "Identifier"
+          name: 'recipient',
+          type: 'Identifier'
         }
       ],
-      "names": [],
+      names: []
     })
   })
 
-  it("should allow using virtual in a modifier", function () {
-    let ast = parseNode("modifier foo() virtual {}")
+  it('should allow using virtual in a modifier', function() {
+    let ast = parseNode('modifier foo() virtual {}')
     assert.deepEqual(ast, {
-      "type": "ModifierDefinition",
-      "name": "foo",
-      "parameters": [],
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'ModifierDefinition',
+      name: 'foo',
+      parameters: [],
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "isVirtual": true,
-      "override": null,
+      isVirtual: true,
+      override: null
     })
   })
 
-  it("should allow using override in a modifier", function () {
-    let ast = parseNode("modifier foo() override {}")
+  it('should allow using override in a modifier', function() {
+    let ast = parseNode('modifier foo() override {}')
     assert.deepEqual(ast, {
-      "type": "ModifierDefinition",
-      "name": "foo",
-      "parameters": [],
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'ModifierDefinition',
+      name: 'foo',
+      parameters: [],
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "isVirtual": false,
-      "override": [],
+      isVirtual: false,
+      override: []
     })
   })
 
-  it("should allow using one explit override in a modifier", function () {
-    let ast = parseNode("modifier foo() override(Base) {}")
+  it('should allow using one explit override in a modifier', function() {
+    let ast = parseNode('modifier foo() override(Base) {}')
     assert.deepEqual(ast, {
-      "type": "ModifierDefinition",
-      "name": "foo",
-      "parameters": [],
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'ModifierDefinition',
+      name: 'foo',
+      parameters: [],
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "isVirtual": false,
-      "override": [{
-        "type": "UserDefinedTypeName",
-        "namePath": "Base"
-      }],
+      isVirtual: false,
+      override: [
+        {
+          type: 'UserDefinedTypeName',
+          namePath: 'Base'
+        }
+      ]
     })
   })
 
-  it("should allow using two explit overrides in a modifier", function () {
-    let ast = parseNode("modifier foo() override(Base1, Base2) {}")
+  it('should allow using two explit overrides in a modifier', function() {
+    let ast = parseNode('modifier foo() override(Base1, Base2) {}')
     assert.deepEqual(ast, {
-      "type": "ModifierDefinition",
-      "name": "foo",
-      "parameters": [],
-      "body": {
-        "type": "Block",
-        "statements": []
+      type: 'ModifierDefinition',
+      name: 'foo',
+      parameters: [],
+      body: {
+        type: 'Block',
+        statements: []
       },
-      "isVirtual": false,
-      "override": [{
-        "type": "UserDefinedTypeName",
-        "namePath": "Base1"
-      }, {
-        "type": "UserDefinedTypeName",
-        "namePath": "Base2"
-      }],
+      isVirtual: false,
+      override: [
+        {
+          type: 'UserDefinedTypeName',
+          namePath: 'Base1'
+        },
+        {
+          type: 'UserDefinedTypeName',
+          namePath: 'Base2'
+        }
+      ]
     })
   })
 })
