@@ -7,8 +7,7 @@
   "scripts": {
     "antlr": "sh scripts/antlr.sh",
     "build": "rm -rf dist && babel --out-dir=dist src --copy-files",
-    "build:browser": "webpack",
-    "prepare": "yarn build && yarn build:browser",
+    "prepare": "yarn build",
     "prettier": "find src -name *.js | egrep -v '^src/(lib|antlr4)/' | xargs prettier --no-semi --single-quote --write",
     "eslint": "eslint src",
     "lint": "eslint src && tslint-config-prettier-check ./tslint.json",
@@ -49,8 +48,6 @@
     "tslint": "5.19.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "3.6.2",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
     "yarn": "^1.17.3"
   },
   "nyc": {
