@@ -11,7 +11,7 @@
     "prettier": "find src -name *.js | egrep -v '^src/(lib|antlr4)/' | xargs prettier --no-semi --single-quote --write",
     "eslint": "eslint src",
     "lint": "eslint src && tslint-config-prettier-check ./tslint.json",
-    "test": "nyc mocha --require @babel/register",
+    "test": "nyc mocha --require ./test/register --extension ts",
     "tslint": "tslint-config-prettier-check ./tslint.json"
   },
   "authors": [
