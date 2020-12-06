@@ -1,6 +1,6 @@
 const fs = require('fs')
 const { assert } = require('chai')
-const parser = require('../dist/index')
+const parser = require('..')
 const { parseNode, parseStatement } = require('./utils')
 
 describe('#parse', function () {

@@ -471,7 +471,7 @@ const transformAST = {
       name: toText(ctx.identifier()),
       storageLocation,
       isStateVar: false,
-      isIndexed: ctx.IndexedKeyword(0),
+      isIndexed: !!ctx.IndexedKeyword(0),
     }
   },
 
@@ -550,7 +550,7 @@ const transformAST = {
 
     return {
       isReasonStringType:
-        ctx.identifier() && toText(ctx.identifier()) === 'Error',
+        !!ctx.identifier() && toText(ctx.identifier()) === 'Error',
       parameters,
       body: (this as any).visit(ctx.block()),
     }
@@ -716,6 +716,7 @@ const transformAST = {
             typeName: {
               type: 'ArrayTypeName',
               baseTypeName: (this as any).visit(ctx.getChild(0)),
+              length: null,
             },
           }
         }
@@ -1189,7 +1190,7 @@ const transformAST = {
     return {
       name: toText(ctx.identifier()),
       parameters: (this as any).visit(ctx.eventParameterList()),
-      isAnonymous: ctx.AnonymousKeyword(),
+      isAnonymous: !!ctx.AnonymousKeyword(),
     }
   },
 
@@ -1207,7 +1208,7 @@ const transformAST = {
           typeName: type,
           name,
           isStateVar: false,
-          isIndexed: paramCtx.IndexedKeyword(0),
+          isIndexed: !!paramCtx.IndexedKeyword(0),
         },
         paramCtx
       )
@@ -1471,8 +1472,8 @@ class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
         column: ctx.start.column,
       },
       end: {
-        line: ctx.stop !== undefined ? ctx.stop.line : ctx.start.line,
-        column: ctx.stop !== undefined ? ctx.stop.column : ctx.start.column,
+        line: ctx.stop ? ctx.stop.line : ctx.start.line,
+        column: ctx.stop ? ctx.stop.column : ctx.start.column,
       },
     }
     return { loc: sourceLocation }

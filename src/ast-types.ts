@@ -202,7 +202,7 @@ export interface UserDefinedTypeName extends BaseASTNode {
 export interface ArrayTypeName extends BaseASTNode {
   type: 'ArrayTypeName'
   baseTypeName: TypeName
-  length?: Expression
+  length: Expression | null
 }
 export interface Mapping extends BaseASTNode {
   type: 'Mapping'

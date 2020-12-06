@@ -1,5 +1,5 @@
 const { assert } = require('chai')
-const parser = require('../dist/index')
+const parser = require('..')
 
 function print(obj) {
   console.log(JSON.stringify(obj, null, 2))
