@@ -32,9 +32,7 @@ export function tokenize(input: string, options) {
   return buildTokenList(tokens.tokenSource.getAllTokens(), options)
 }
 
-export function parse(input, options) {
-  options = options || {}
-
+export function parse(input, options: any = {}) {
   const chars = new antlr4.InputStream(input)
 
   const listener = new ErrorListener()

@@ -1,7 +1,7 @@
-import * as fs from 'fs'
-import { assert } from 'chai'
-import * as parser from '../src/index'
-import { parseNode, parseStatement } from './utils'
+const fs = require('fs')
+const { assert } = require('chai')
+const parser = require('../dist/index')
+const { parseNode, parseStatement } = require('./utils')
 
 describe('#parse', function() {
   it('parses test file correctly', function() {
@@ -13,7 +13,7 @@ describe('#parse', function() {
     var source = 'not good'
     assert.throws(() => {
       parser.parse(source)
-    }, parser.ParseError)
+    }, parser.ParserError)
   })
 
   it('supports tolerant mode', function() {

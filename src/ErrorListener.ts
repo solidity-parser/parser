@@ -1,6 +1,8 @@
 import antlr4 from 'antlr4'
 
 class ErrorListener extends antlr4.error.ErrorListener {
+  private _errors: any
+
   constructor() {
     super()
 

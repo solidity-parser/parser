@@ -1,4 +1,4 @@
-import tokens from './lib/Solidity.tokens'
+import tokens from './tokens-string'
 
 const TYPE_TOKENS = [
   'var',
@@ -68,7 +68,7 @@ export function buildTokenList(tokens, options) {
 
   return tokens.map(token => {
     const type = getTokenType(tokenTypes[token.type])
-    const node = { type, value: token.text }
+    const node: any = { type, value: token.text }
     if (options.range) {
       node.range = [token.start, token.stop + 1]
     }

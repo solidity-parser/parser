@@ -1,12 +1,12 @@
-import { assert } from 'chai'
-import * as parser from '../src/index'
-import {
+const { assert } = require('chai')
+const parser = require('../dist/index')
+const {
   parseContract,
   parseNode,
   parseStatement,
   parseExpression,
   parseAssembly
-} from './utils'
+} = require('./utils')
 
 describe('AST', () => {
   it('SourceUnit', function() {

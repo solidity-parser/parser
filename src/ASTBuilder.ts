@@ -1358,7 +1358,7 @@ const transformAST = {
       value = this.visit(ctx.assemblyLiteral())
     }
 
-    const node = { block: this.visit(ctx.assemblyBlock()) }
+    const node: any = { block: this.visit(ctx.assemblyBlock()) }
     if (value !== null) {
       node.value = value
     } else {
@@ -1456,6 +1456,7 @@ const transformAST = {
 }
 
 class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
+  public options: any;
   constructor(options) {
     super(options)
 
@@ -1481,7 +1482,7 @@ class ASTBuilder extends antlr4.tree.ParseTreeVisitor {
   }
 
   meta(ctx) {
-    const ret = {}
+    const ret: any = {}
     if (this.options.loc) {
       Object.assign(ret, this._loc(ctx))
     }

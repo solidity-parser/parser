@@ -4,14 +4,16 @@
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.cjs.js",
   "browser": "dist/index.iife.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "antlr": "sh scripts/antlr.sh",
     "build": "rollup -c rollup.config.js",
+    "generate-types": "tsc",
     "prepublish": "yarn build",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
     "eslint": "eslint src",
     "lint": "eslint src",
-    "test": "nyc mocha --require ./test/register --extension ts"
+    "test": "nyc mocha"
   },
   "authors": [
     "Franco Victorio",
