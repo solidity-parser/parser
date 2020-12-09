@@ -1,4 +1,7 @@
-import tokens from './lib/Solidity.tokens'
+import { Token, AntlrToken, TokenizeOptions } from './types'
+import untypedTokens from './tokens-string'
+
+const tokens = untypedTokens as string
 
 const TYPE_TOKENS = [
   'var',
@@ -9,15 +12,15 @@ const TYPE_TOKENS = [
   'Uint',
   'Byte',
   'Fixed',
-  'UFixed'
+  'UFixed',
 ]
 
-function rsplit(str, value) {
+function rsplit(str: string, value: string) {
   const index = str.lastIndexOf(value)
   return [str.substring(0, index), str.substring(index + 1, str.length)]
 }
 
-function normalizeTokenType(value) {
+function normalizeTokenType(value: string) {
   if (value.endsWith("'")) {
     value = value.substring(0, value.length - 1)
   }
@@ -27,7 +30,7 @@ function normalizeTokenType(value) {
   return value
 }
 
-function getTokenType(value) {
+function getTokenType(value: string) {
   if (value === 'Identifier' || value === 'from') {
     return 'Identifier'
   } else if (value === 'TrueLiteral' || value === 'FalseLiteral') {
@@ -56,28 +59,33 @@ function getTokenType(value) {
 function getTokenTypeMap() {
   return tokens
     .split('\n')
-    .map(line => rsplit(line, '='))
-    .reduce((acum, [value, key]) => {
+    .map((line) => rsplit(line, '='))
+    .reduce((acum: any, [value, key]) => {
       acum[parseInt(key, 10)] = normalizeTokenType(value)
       return acum
     }, {})
 }
 
-export function buildTokenList(tokens, options) {
+export function buildTokenList(
+  tokens: AntlrToken[],
+  options: TokenizeOptions
+): Token[] {
   const tokenTypes = getTokenTypeMap()
 
-  return tokens.map(token => {
+  const result = tokens.map((token) => {
     const type = getTokenType(tokenTypes[token.type])
-    const node = { type, value: token.text }
-    if (options.range) {
+    const node: Token = { type, value: token.text }
+    if (options.range === true) {
       node.range = [token.start, token.stop + 1]
     }
-    if (options.loc) {
+    if (options.loc === true) {
       node.loc = {
         start: { line: token.line, column: token.column },
-        end: { line: token.line, column: token.column + token.text.length }
+        end: { line: token.line, column: token.column + token.text.length },
       }
     }
     return node
   })
+
+  return result
 }

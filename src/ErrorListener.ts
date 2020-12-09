@@ -1,17 +1,25 @@
-const antlr4 = require('antlr4')
+import antlr4 from 'antlr4'
 
 class ErrorListener extends antlr4.error.ErrorListener {
+  private _errors: any[]
+
   constructor() {
     super()
 
     this._errors = []
   }
 
-  syntaxError(recognizer, offendingSymbol, line, column, message) {
+  syntaxError(
+    recognizer: any,
+    offendingSymbol: any,
+    line: number,
+    column: number,
+    message: string
+  ) {
     this._errors.push({ message, line, column })
   }
 
-  getErrors() {
+  getErrors(): any[] {
     return this._errors
   }
 
@@ -20,4 +28,4 @@ class ErrorListener extends antlr4.error.ErrorListener {
   }
 }
 
-module.exports = ErrorListener
+export default ErrorListener
