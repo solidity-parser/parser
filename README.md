@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40solidity-parser%2Fparser.svg)](https://badge.fury.io/js/%40solidity-parser%2Fparser)
 
-A JavaScript package for parsing [Solidity](https://solidity.readthedocs.io/) code using [ANTLR (ANother Tool for Language Recognition) ](https://www.antlr.org/) grammar.
+A JavaScript package for parsing [Solidity](https://solidity.readthedocs.io/) code using [ANTLR (ANother Tool for Language Recognition)](https://www.antlr.org/) grammar.
 
 This is a fork of [@federicobond](https://github.com/federicobond)'s original [repo](https://github.com/federicobond/solidity-parser-antlr),
 with some extra features taken from [Consensys Diligence's alternative fork](https://github.com/consensys/solidity-parser-antlr).
