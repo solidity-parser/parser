@@ -1,6 +1,6 @@
 {
   "name": "@solidity-parser/parser",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
   "main": "dist/index.cjs.js",
   "browser": "dist/index.iife.js",
