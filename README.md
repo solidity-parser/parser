@@ -130,11 +130,11 @@ yarn run test
 
 ## Used by
 
+* [Hardhat](https://hardhat.org/)
 * [sol2uml](https://github.com/naddison36/sol2uml)
 * [Solhint](https://github.com/protofire/solhint/)
 * [solidity-coverage](https://github.com/sc-forks/solidity-coverage)
 * [prettier-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity/)
-* [Buidler](https://github.com/nomiclabs/buidler/)
 * [eth-gas-reporter](https://github.com/cgewecke/eth-gas-reporter)
 
 ## License
