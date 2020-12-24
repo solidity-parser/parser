@@ -93,6 +93,9 @@ describe('AST', () => {
     '<=111',
     '<0.5.11',
     '>=0.6.7 <0.7.0',
+    '^0.5.0 || ^0.6.0',
+    '^0.5.0 || ^0.6.0 || ^0.7.0',
+    '^0.5.0 || >=0.6.0 <0.8.0',
   ]
   versions.forEach(function (version) {
     it('PragmaDirective ' + version, function () {
