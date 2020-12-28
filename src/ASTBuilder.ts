@@ -260,10 +260,9 @@ const transformAST = {
         isReceiveEther = true
         break
       case 'function':
-        name =
-          ctx.functionDescriptor().identifier(0)
-            ? toText(ctx.functionDescriptor().identifier(0))
-            : ''
+        name = ctx.functionDescriptor().identifier(0)
+          ? toText(ctx.functionDescriptor().identifier(0))
+          : ''
 
         parameters = (this as any).visit(ctx.parameterList())
         returnParameters = (this as any).visit(ctx.returnParameters())
@@ -1395,10 +1394,9 @@ const transformAST = {
     args = args ? (this as any).visit(args.identifier()) : []
 
     let returnArgs = ctx.assemblyFunctionReturns()
-    returnArgs =
-      returnArgs
-        ? (this as any).visit(returnArgs.assemblyIdentifierList().identifier())
-        : []
+    returnArgs = returnArgs
+      ? (this as any).visit(returnArgs.assemblyIdentifierList().identifier())
+      : []
 
     return {
       name: toText(ctx.identifier()),
