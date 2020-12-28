@@ -711,3 +711,11 @@ function helper(uint x) pure returns (uint) {
 
 // file-level constant
 uint constant topLevelConstantVariable = 3;
+
+contract WithUncheckedBlock {
+  function f() public pure returns (uint) {
+    uint x = 0;
+    unchecked { x--; }
+    return x;
+  }
+}

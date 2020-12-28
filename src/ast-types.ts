@@ -91,6 +91,7 @@ export type ASTNodeTypeString =
   | 'IndexAccess'
   | 'IndexRangeAccess'
   | 'NameValueList'
+  | 'UncheckedStatement'
 export interface BaseASTNode {
   type: ASTNodeTypeString
   range?: [number, number]
@@ -229,6 +230,10 @@ export interface IfStatement extends BaseASTNode {
   condition: Expression
   trueBody: Statement
   falseBody?: Statement
+}
+export interface UncheckedStatement extends BaseASTNode {
+  type: 'UncheckedStatement'
+  block: Block
 }
 export interface WhileStatement extends BaseASTNode {
   type: 'WhileStatement'
@@ -488,18 +493,7 @@ export type ASTNode =
   | Mapping
   | FunctionTypeName
   | Block
-  | ExpressionStatement
-  | IfStatement
-  | WhileStatement
-  | ForStatement
-  | InlineAssemblyStatement
-  | DoWhileStatement
-  | ContinueStatement
-  | BreakStatement
-  | ReturnStatement
-  | EmitStatement
-  | ThrowStatement
-  | VariableDeclarationStatement
+  | Statement
   | ElementaryTypeName
   | AssemblyBlock
   | AssemblyCall
@@ -583,3 +577,4 @@ export type Statement =
   | ThrowStatement
   | SimpleStatement
   | VariableDeclarationStatement
+  | UncheckedStatement
