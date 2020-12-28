@@ -650,6 +650,12 @@ const transformAST = {
     return (this as any).visit(ctx.getChild(0))
   },
 
+  UncheckedStatement(ctx: Ctx) {
+    return {
+      block: (this as any).visit(ctx.block()),
+    }
+  },
+
   Expression(ctx: Ctx): ASTTypes.Expression {
     let op
 

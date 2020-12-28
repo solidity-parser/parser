@@ -2467,4 +2467,39 @@ describe('AST', () => {
       ],
     })
   })
+
+  it('should allow empty unchecked blocks', function () {
+    let ast = parseStatement('unchecked { }')
+    assert.deepEqual(ast, {
+      type: 'UncheckedStatement',
+      block: {
+        statements: [],
+        type: 'Block',
+      },
+    })
+  })
+
+  it('should allow non-empty unchecked blocks', function () {
+    let ast = parseStatement('unchecked { x++; }')
+    assert.deepEqual(ast, {
+      type: 'UncheckedStatement',
+      block: {
+        type: 'Block',
+        statements: [
+          {
+            type: 'ExpressionStatement',
+            expression: {
+              type: 'UnaryOperation',
+              isPrefix: false,
+              operator: '++',
+              subExpression: {
+                name: 'x',
+                type: 'Identifier',
+              },
+            },
+          },
+        ],
+      },
+    })
+  })
 })
