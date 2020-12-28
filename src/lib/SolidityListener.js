@@ -428,6 +428,15 @@ export default class SolidityListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by SolidityParser#uncheckedStatement.
+	enterUncheckedStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by SolidityParser#uncheckedStatement.
+	exitUncheckedStatement(ctx) {
+	}
+
+
 	// Enter a parse tree produced by SolidityParser#forStatement.
 	enterForStatement(ctx) {
 	}
