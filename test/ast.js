@@ -2502,4 +2502,60 @@ describe('AST', () => {
       },
     })
   })
+
+  it('should support units', function () {
+    let ast = parseStatement('a = 1 wei;')
+    assert.deepEqual(ast, {
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'BinaryOperation',
+        left: {
+          name: 'a',
+          type: 'Identifier',
+        },
+        operator: '=',
+        right: {
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: 'wei',
+        },
+      },
+    })
+
+    ast = parseStatement('a = 1 gwei;')
+    assert.deepEqual(ast, {
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'BinaryOperation',
+        left: {
+          name: 'a',
+          type: 'Identifier',
+        },
+        operator: '=',
+        right: {
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: 'gwei',
+        },
+      },
+    })
+
+    ast = parseStatement('a = 1 seconds;')
+    assert.deepEqual(ast, {
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'BinaryOperation',
+        left: {
+          name: 'a',
+          type: 'Identifier',
+        },
+        operator: '=',
+        right: {
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: 'seconds',
+        },
+      },
+    })
+  })
 })

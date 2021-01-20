@@ -246,6 +246,7 @@ contract test {
         a = 2 szabo;
         a = 3 finney;
         a = 4 ether;
+        a = 5 gwei;
 
         a = 1 seconds;
         a = 2 minutes;
