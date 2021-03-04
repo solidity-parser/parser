@@ -551,7 +551,7 @@ const transformAST = {
       throw new Error('Expected "Error" or "Panic" identifier in catch clause')
     }
 
-    let kind = "None";
+    let kind = null;
     if (ctx.identifier()) {
       kind = toText(ctx.identifier())
     }

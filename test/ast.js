@@ -1144,7 +1144,7 @@ describe('AST', () => {
       },
       catchClauses: [
         {
-          kind: 'None',
+          kind: null,
           body: {
             statements: [],
             type: 'Block',
@@ -1236,7 +1236,7 @@ describe('AST', () => {
           type: 'CatchClause',
         },
         {
-          kind: 'None',
+          kind: null,
           body: {
             statements: [],
             type: 'Block',
@@ -1328,7 +1328,7 @@ describe('AST', () => {
           type: 'CatchClause',
         },
         {
-          kind: 'None',
+          kind: null,
           body: {
             statements: [],
             type: 'Block',
@@ -1442,7 +1442,7 @@ describe('AST', () => {
           type: 'CatchClause',
         },
         {
-          kind: 'None',
+          kind: null,
           body: {
             statements: [],
             type: 'Block',
