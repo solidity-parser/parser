@@ -388,6 +388,7 @@ export interface StringLiteral extends BaseASTNode {
   type: 'StringLiteral'
   value: string
   parts: string[]
+  isUnicode: boolean[]
 }
 export interface Identifier extends BaseASTNode {
   type: 'Identifier'

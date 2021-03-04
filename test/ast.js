@@ -1514,6 +1514,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello',
       parts: ['Hello'],
+      isUnicode: [false],
     })
   })
 
@@ -1523,6 +1524,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello',
       parts: ['Hello'],
+      isUnicode: [false],
     })
   })
 
@@ -1532,6 +1534,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello "goodbye"',
       parts: ['Hello "goodbye"'],
+      isUnicode: [false],
     })
   })
 
@@ -1541,6 +1544,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: "Hello 'goodbye'",
       parts: ["Hello 'goodbye'"],
+      isUnicode: [false],
     })
   })
 
@@ -1550,6 +1554,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello World',
       parts: ['Hello ', 'World'],
+      isUnicode: [false, false],
     })
   })
 
@@ -1559,6 +1564,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello World',
       parts: ['Hello ', 'World'],
+      isUnicode: [false, false],
     })
   })
 
@@ -1568,6 +1574,37 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello World',
       parts: ['Hello ', 'World'],
+      isUnicode: [false, false],
+    })
+  })
+
+  it('unicode StringLiteral with double quotes', function () {
+    var expr = parseExpression('unicode"Hello 🦄 World"')
+    assert.deepEqual(expr, {
+      type: 'StringLiteral',
+      value: 'Hello 🦄 World',
+      parts: ['Hello 🦄 World'],
+      isUnicode: [true],
+    })
+  })
+
+  it('unicode StringLiteral with single quotes', function () {
+    var expr = parseExpression("unicode'Hello 🦄 World'")
+    assert.deepEqual(expr, {
+      type: 'StringLiteral',
+      value: 'Hello 🦄 World',
+      parts: ['Hello 🦄 World'],
+      isUnicode: [true],
+    })
+  })
+
+  it('multipart string where some parts are unicode', function () {
+    var expr = parseExpression("unicode'Hello 🦄 World' 'bye world'")
+    assert.deepEqual(expr, {
+      type: 'StringLiteral',
+      value: 'Hello 🦄 Worldbye world',
+      parts: ['Hello 🦄 World', 'bye world'],
+      isUnicode: [true, false],
     })
   })
 
@@ -2135,6 +2172,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'hello',
       parts: ['hello'],
+      isUnicode: [false],
     })
   })
 

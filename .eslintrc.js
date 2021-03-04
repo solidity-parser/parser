@@ -26,7 +26,9 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'object-shorthand': 'error',
     'prefer-const': 'error',
-    'max-len': 'error',
+    'max-len': ['error', {
+      "ignoreComments": true
+    }],
   },
   env: {
     es6: true,

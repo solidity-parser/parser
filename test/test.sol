@@ -720,3 +720,8 @@ contract WithUncheckedBlock {
     return x;
   }
 }
+
+contract UnicodeStrings {
+  string a = unicode"Hello 😃";
+  string b = unicode'Hello 😃';
+}

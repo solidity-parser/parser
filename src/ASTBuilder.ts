@@ -543,9 +543,11 @@ const transformAST = {
       parameters = (this as any).visit(ctx.parameterList())
     }
 
-    if (ctx.identifier() &&
-      (toText(ctx.identifier()) !== 'Error'
-        && toText(ctx.identifier()) !== 'Panic')) {
+    if (
+      ctx.identifier() &&
+      toText(ctx.identifier()) !== 'Error' &&
+      toText(ctx.identifier()) !== 'Panic'
+    ) {
       throw new Error('Expected "Error" or "Panic" identifier in catch clause')
     }
 
@@ -1009,24 +1011,32 @@ const transformAST = {
     }
 
     if (ctx.stringLiteral()) {
-      const parts = ctx
+      const fragments = ctx
         .stringLiteral()
         .StringLiteralFragment()
         .map((stringLiteralFragmentCtx: any) => {
-          const text = toText(stringLiteralFragmentCtx)
+          let text = toText(stringLiteralFragmentCtx)
+
+          const isUnicode = text.slice(0, 7) === 'unicode';
+          if (isUnicode) {
+            text = text.slice(7);
+          }
           const singleQuotes = text[0] === "'"
           const textWithoutQuotes = text.substring(1, text.length - 1)
           const value = singleQuotes
             ? textWithoutQuotes.replace(new RegExp("\\\\'", 'g'), "'")
             : textWithoutQuotes.replace(new RegExp('\\\\"', 'g'), '"')
 
-          return value
+          return { value, isUnicode }
         })
+
+      const parts = fragments.map((x: any) => x.value)
 
       return {
         type: 'StringLiteral',
         value: parts.join(''),
         parts,
+        isUnicode: fragments.map((x: any) => x.isUnicode),
       }
     }
 
@@ -1286,6 +1296,7 @@ const transformAST = {
         type: 'StringLiteral',
         value,
         parts: [value],
+        isUnicode: [false] // assembly doesn't seem to support unicode literals right now
       }
     }
 
@@ -1330,6 +1341,7 @@ const transformAST = {
         type: 'StringLiteral',
         value,
         parts: [value],
+        isUnicode: [false], // assembly doesn't seem to support unicode literals right now
       }
     }
 
