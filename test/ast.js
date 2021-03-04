@@ -1166,8 +1166,9 @@ describe('AST', () => {
         },
       ],
     })
+  })
 
-    // try with two catch clauses
+  it('TryStatement with Error', function () {
     var stmt = parseStatement(
       'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch (bytes memory c) {}'
     )
@@ -1226,6 +1227,207 @@ describe('AST', () => {
               type: 'VariableDeclaration',
               typeName: {
                 name: 'string',
+                type: 'ElementaryTypeName',
+              },
+            },
+          ],
+          type: 'CatchClause',
+        },
+        {
+          body: {
+            statements: [],
+            type: 'Block',
+          },
+          isReasonStringType: false,
+          parameters: [
+            {
+              isIndexed: false,
+              isStateVar: false,
+              name: 'c',
+              storageLocation: 'memory',
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'bytes',
+                type: 'ElementaryTypeName',
+              },
+            },
+          ],
+          type: 'CatchClause',
+        },
+      ],
+    })
+  })
+
+  it('TryStatement with Panic', function () {
+    var stmt = parseStatement(
+      'try f(1, 2) returns (uint a) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}'
+    )
+    assert.deepEqual(stmt, {
+      type: 'TryStatement',
+      expression: {
+        type: 'FunctionCall',
+        expression: {
+          type: 'Identifier',
+          name: 'f',
+        },
+        arguments: [
+          {
+            type: 'NumberLiteral',
+            number: '1',
+            subdenomination: null,
+          },
+          {
+            type: 'NumberLiteral',
+            number: '2',
+            subdenomination: null,
+          },
+        ],
+        names: [],
+      },
+      returnParameters: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint',
+          },
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false,
+        },
+      ],
+      body: {
+        type: 'Block',
+        statements: [],
+      },
+      catchClauses: [
+        {
+          body: {
+            statements: [],
+            type: 'Block',
+          },
+          isReasonStringType: false,
+          parameters: [
+            {
+              isIndexed: false,
+              isStateVar: false,
+              name: 'errorCode',
+              storageLocation: null,
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'uint',
+                type: 'ElementaryTypeName',
+              },
+            },
+          ],
+          type: 'CatchClause',
+        },
+        {
+          body: {
+            statements: [],
+            type: 'Block',
+          },
+          isReasonStringType: false,
+          parameters: [
+            {
+              isIndexed: false,
+              isStateVar: false,
+              name: 'c',
+              storageLocation: 'memory',
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'bytes',
+                type: 'ElementaryTypeName',
+              },
+            },
+          ],
+          type: 'CatchClause',
+        },
+      ],
+    })
+  })
+
+  it('TryStatement with Error and Panic', function () {
+    var stmt = parseStatement(
+      'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}'
+    )
+    assert.deepEqual(stmt, {
+      type: 'TryStatement',
+      expression: {
+        type: 'FunctionCall',
+        expression: {
+          type: 'Identifier',
+          name: 'f',
+        },
+        arguments: [
+          {
+            type: 'NumberLiteral',
+            number: '1',
+            subdenomination: null,
+          },
+          {
+            type: 'NumberLiteral',
+            number: '2',
+            subdenomination: null,
+          },
+        ],
+        names: [],
+      },
+      returnParameters: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint',
+          },
+          name: 'a',
+          storageLocation: null,
+          isStateVar: false,
+          isIndexed: false,
+        },
+      ],
+      body: {
+        type: 'Block',
+        statements: [],
+      },
+      catchClauses: [
+        {
+          body: {
+            statements: [],
+            type: 'Block',
+          },
+          isReasonStringType: true,
+          parameters: [
+            {
+              isIndexed: false,
+              isStateVar: false,
+              name: 'b',
+              storageLocation: 'memory',
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'string',
+                type: 'ElementaryTypeName',
+              },
+            },
+          ],
+          type: 'CatchClause',
+        },
+        {
+          body: {
+            statements: [],
+            type: 'Block',
+          },
+          isReasonStringType: false,
+          parameters: [
+            {
+              isIndexed: false,
+              isStateVar: false,
+              name: 'errorCode',
+              storageLocation: null,
+              type: 'VariableDeclaration',
+              typeName: {
+                name: 'uint',
                 type: 'ElementaryTypeName',
               },
             },

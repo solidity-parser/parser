@@ -543,8 +543,10 @@ const transformAST = {
       parameters = (this as any).visit(ctx.parameterList())
     }
 
-    if (ctx.identifier() && toText(ctx.identifier()) !== 'Error') {
-      throw new Error('Expected "Error" identifier in catch clause')
+    if (ctx.identifier() &&
+      (toText(ctx.identifier()) !== 'Error'
+        && toText(ctx.identifier()) !== 'Panic')) {
+      throw new Error('Expected "Error" or "Panic" identifier in catch clause')
     }
 
     return {
