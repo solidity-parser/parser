@@ -1144,6 +1144,7 @@ describe('AST', () => {
       },
       catchClauses: [
         {
+          kind: 'None',
           body: {
             statements: [],
             type: 'Block',
@@ -1213,6 +1214,7 @@ describe('AST', () => {
       },
       catchClauses: [
         {
+          kind: 'Error',
           body: {
             statements: [],
             type: 'Block',
@@ -1234,6 +1236,7 @@ describe('AST', () => {
           type: 'CatchClause',
         },
         {
+          kind: 'None',
           body: {
             statements: [],
             type: 'Block',
@@ -1303,6 +1306,7 @@ describe('AST', () => {
       },
       catchClauses: [
         {
+          kind: 'Panic',
           body: {
             statements: [],
             type: 'Block',
@@ -1324,6 +1328,7 @@ describe('AST', () => {
           type: 'CatchClause',
         },
         {
+          kind: 'None',
           body: {
             statements: [],
             type: 'Block',
@@ -1393,6 +1398,7 @@ describe('AST', () => {
       },
       catchClauses: [
         {
+          kind: 'Error',
           body: {
             statements: [],
             type: 'Block',
@@ -1414,6 +1420,7 @@ describe('AST', () => {
           type: 'CatchClause',
         },
         {
+          kind: 'Panic',
           body: {
             statements: [],
             type: 'Block',
@@ -1435,6 +1442,7 @@ describe('AST', () => {
           type: 'CatchClause',
         },
         {
+          kind: 'None',
           body: {
             statements: [],
             type: 'Block',

@@ -551,9 +551,16 @@ const transformAST = {
       throw new Error('Expected "Error" or "Panic" identifier in catch clause')
     }
 
+    let kind = "None";
+    if (ctx.identifier()) {
+      kind = toText(ctx.identifier())
+    }
+
     return {
+      // deprecated, use the `kind` property instead,
       isReasonStringType:
         !!ctx.identifier() && toText(ctx.identifier()) === 'Error',
+      kind,
       parameters,
       body: (this as any).visit(ctx.block()),
     }
