@@ -725,3 +725,11 @@ contract UnicodeStrings {
   string a = unicode"Hello 😃";
   string b = unicode'Hello 😃';
 }
+
+contract ArraySlices {
+    function f(bytes calldata x) public {
+        bytes memory a1 = abi.decode(x[:], (bytes));
+        bytes4 a2 = abi.decode(x[:4], (bytes4));
+        address a3 = abi.decode(x[4:], (address));
+    }
+}

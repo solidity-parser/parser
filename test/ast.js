@@ -2806,4 +2806,68 @@ describe('AST', () => {
       },
     })
   })
+
+  it('should support array slices with both start and end', function () {
+    let ast = parseExpression('a[0:4]')
+    assert.deepEqual(ast, {
+      type: 'IndexRangeAccess',
+      base: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      indexStart: {
+        type: 'NumberLiteral',
+        number: '0',
+        subdenomination: null,
+      },
+      indexEnd: {
+        type: 'NumberLiteral',
+        number: '4',
+        subdenomination: null,
+      },
+    })
+  })
+
+  it('should support array slices with only start', function () {
+    let ast = parseExpression('a[3:]')
+    assert.deepEqual(ast, {
+      type: 'IndexRangeAccess',
+      base: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      indexStart: {
+        type: 'NumberLiteral',
+        number: '3',
+        subdenomination: null,
+      },
+    })
+  })
+
+  it('should support array slices with only end', function () {
+    let ast = parseExpression('a[:20]')
+    assert.deepEqual(ast, {
+      type: 'IndexRangeAccess',
+      base: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      indexEnd: {
+        type: 'NumberLiteral',
+        number: '20',
+        subdenomination: null,
+      },
+    })
+  })
+
+  it('should support array slices without start nor end', function () {
+    let ast = parseExpression('a[:]')
+    assert.deepEqual(ast, {
+      type: 'IndexRangeAccess',
+      base: {
+        type: 'Identifier',
+        name: 'a',
+      },
+    })
+  })
 })

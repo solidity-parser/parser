@@ -805,6 +805,13 @@ const transformAST = {
           toText(ctx.getChild(1)) === '[' &&
           toText(ctx.getChild(3)) === ']'
         ) {
+          if (ctx.getChild(2).getText() === ':') {
+            return {
+              type: 'IndexRangeAccess',
+              base: (this as any).visit(ctx.getChild(0)),
+            }
+          }
+
           return {
             type: 'IndexAccess',
             base: (this as any).visit(ctx.getChild(0)),
