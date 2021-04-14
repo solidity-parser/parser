@@ -551,7 +551,7 @@ const transformAST = {
       throw new Error('Expected "Error" or "Panic" identifier in catch clause')
     }
 
-    let kind = null;
+    let kind = null
     if (ctx.identifier()) {
       kind = toText(ctx.identifier())
     }
@@ -1031,9 +1031,9 @@ const transformAST = {
         .map((stringLiteralFragmentCtx: any) => {
           let text = toText(stringLiteralFragmentCtx)
 
-          const isUnicode = text.slice(0, 7) === 'unicode';
+          const isUnicode = text.slice(0, 7) === 'unicode'
           if (isUnicode) {
-            text = text.slice(7);
+            text = text.slice(7)
           }
           const singleQuotes = text[0] === "'"
           const textWithoutQuotes = text.substring(1, text.length - 1)
@@ -1310,7 +1310,7 @@ const transformAST = {
         type: 'StringLiteral',
         value,
         parts: [value],
-        isUnicode: [false] // assembly doesn't seem to support unicode literals right now
+        isUnicode: [false], // assembly doesn't seem to support unicode literals right now
       }
     }
 
