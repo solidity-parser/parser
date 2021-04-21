@@ -66,5 +66,8 @@
     "include": [
       "src/*.js"
     ]
+  },
+  "volta": {
+    "node": "14.16.1"
   }
 }
