@@ -1,7 +1,7 @@
-const fs = require('fs')
-const { assert } = require('chai')
-const parser = require('..')
-const { parseNode, parseStatement } = require('./utils')
+import fs from 'fs'
+import { assert } from 'chai'
+import * as parser from'../src/index'
+import { parseNode, parseStatement } from './utils'
 
 describe('#parse', function () {
   it('parses test file correctly', function () {

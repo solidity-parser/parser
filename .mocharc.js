@@ -1,3 +1,4 @@
 module.exports = {
-  require: ["source-map-support/register"],
+  require: ["./babel-register"],
+  extension: ["ts"]
 }

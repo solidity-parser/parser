@@ -17,7 +17,8 @@
     "prepack": "npm run build && npm run generate-types",
     "eslint": "eslint src",
     "lint": "eslint src",
-    "test": "npm run build && nyc mocha"
+    "test": "mocha",
+    "test:coverage": "nyc mocha"
   },
   "authors": [
     "Franco Victorio",
@@ -42,6 +43,8 @@
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
+    "@types/chai": "^4.2.16",
+    "@types/mocha": "^8.2.2",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "antlr4": "^4.9.0",
@@ -63,8 +66,8 @@
     "yarn": "^1.17.3"
   },
   "nyc": {
-    "include": [
-      "src/*.js"
+    "extension": [
+      ".ts"
     ]
   },
   "volta": {
