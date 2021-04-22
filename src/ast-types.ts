@@ -5,6 +5,17 @@
 
 import { Token } from './types'
 
+interface Location {
+  start: {
+    line: number
+    column: number
+  }
+  end: {
+    line: number
+    column: number
+  }
+}
+
 export type AST = {
   errors?: any[]
   tokens?: Token[]

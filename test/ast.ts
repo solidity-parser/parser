@@ -10,7 +10,7 @@ import {
 
 describe('AST', () => {
   it('SourceUnit', function () {
-    var ast = parser.parse('')
+    const ast = parser.parse('')
     assert.deepEqual(ast, {
       type: 'SourceUnit',
       children: [],
@@ -18,7 +18,7 @@ describe('AST', () => {
   })
 
   it('EnumDefinition / EnumValue', function () {
-    var ast = parseNode('enum Hello { A, B, C }')
+    const ast = parseNode('enum Hello { A, B, C }')
     assert.deepEqual(ast, {
       type: 'EnumDefinition',
       name: 'Hello',
@@ -40,7 +40,7 @@ describe('AST', () => {
   })
 
   it('UsingForDeclaration', function () {
-    var ast = parseNode('using Lib for uint;')
+    let ast = parseNode('using Lib for uint;')
     assert.deepEqual(ast, {
       type: 'UsingForDeclaration',
       typeName: {
@@ -82,7 +82,6 @@ describe('AST', () => {
     '^0.4',
     '^1',
     '~0.3.11',
-    ,
     '~1.3',
     '~10',
     '=0.0.1',
@@ -99,8 +98,8 @@ describe('AST', () => {
   ]
   versions.forEach(function (version) {
     it('PragmaDirective ' + version, function () {
-      var ast = parser.parse('pragma solidity ' + version + ';')
-      var pragma = ast.children[0]
+      const ast: any = parser.parse('pragma solidity ' + version + ';')
+      const pragma = ast.children[0]
       assert.deepEqual(pragma, {
         type: 'PragmaDirective',
         name: 'solidity',
@@ -110,7 +109,7 @@ describe('AST', () => {
   })
 
   it('ContractDefinition', function () {
-    var ast = parseContract('contract test {}')
+    let ast = parseContract('contract test {}')
     assert.deepEqual(ast, {
       type: 'ContractDefinition',
       name: 'test',
@@ -168,7 +167,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition constructor case', () => {
-    var ast = parseNode('constructor(uint a) public {}')
+    const ast = parseNode('constructor(uint a) public {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: null,
@@ -202,7 +201,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition constructor case without public', () => {
-    var ast = parseNode('constructor(uint a) {}')
+    const ast = parseNode('constructor(uint a) {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: null,
@@ -236,7 +235,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition fallback case', () => {
-    var ast = parseNode('fallback () external {}')
+    const ast = parseNode('fallback () external {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: null,
@@ -258,7 +257,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition fallback old definition', () => {
-    var ast = parseNode('function () external {}')
+    const ast = parseNode('function () external {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: '',
@@ -304,7 +303,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition receive ether case', () => {
-    var ast = parseNode('receive () external payable {}')
+    const ast = parseNode('receive () external payable {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: null,
@@ -359,7 +358,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition with override', () => {
-    var ast = parseNode('function foo() public override {}')
+    const ast = parseNode('function foo() public override {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: 'foo',
@@ -381,7 +380,7 @@ describe('AST', () => {
   })
 
   it('StateVariableDeclaration with override', () => {
-    var ast = parseNode('uint public override foo;')
+    const ast = parseNode('uint public override foo;')
     assert.deepEqual(ast, {
       type: 'StateVariableDeclaration',
       variables: [
@@ -406,7 +405,7 @@ describe('AST', () => {
   })
 
   it('StateVariableDeclaration with immutable', () => {
-    var ast = parseNode('uint immutable foo;')
+    const ast = parseNode('uint immutable foo;')
     assert.deepEqual(ast, {
       type: 'StateVariableDeclaration',
       variables: [
@@ -431,7 +430,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition with one explicit override', () => {
-    var ast = parseNode('function foo() public override(Base) {}')
+    const ast = parseNode('function foo() public override(Base) {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: 'foo',
@@ -458,7 +457,7 @@ describe('AST', () => {
   })
 
   it('StateVariableDeclaration with one explicit override', () => {
-    var ast = parseNode('uint public override(Base) foo;')
+    const ast = parseNode('uint public override(Base) foo;')
     assert.deepEqual(ast, {
       type: 'StateVariableDeclaration',
       variables: [
@@ -488,7 +487,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition with two overrides', () => {
-    var ast = parseNode('function foo() public override(Base1, Base2) {}')
+    const ast = parseNode('function foo() public override(Base1, Base2) {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: 'foo',
@@ -519,7 +518,7 @@ describe('AST', () => {
   })
 
   it('StateVariableDeclaration with two overrides', () => {
-    var ast = parseNode('uint public override(Base1, Base2) foo;')
+    const ast = parseNode('uint public override(Base1, Base2) foo;')
     assert.deepEqual(ast, {
       type: 'StateVariableDeclaration',
       variables: [
@@ -553,7 +552,7 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition', function () {
-    var ast = parseNode('function foo(uint a) pure {}')
+    let ast = parseNode('function foo(uint a) pure {}')
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: 'foo',
@@ -652,8 +651,8 @@ describe('AST', () => {
   })
 
   it('top-level FunctionDefinition', function () {
-    var ast = parser.parse('function foo(uint a) pure {}')
-    var functionNode = ast.children[0]
+    const ast = parser.parse('function foo(uint a) pure {}')
+    const functionNode = ast.children[0]
     assert.deepEqual(functionNode, {
       type: 'FunctionDefinition',
       name: 'foo',
@@ -752,8 +751,8 @@ describe('AST', () => {
   })
 
   it('file-level constants', function () {
-    var ast = parser.parse('uint constant EXPONENT = 10;')
-    var fileLevelConstantNode = ast.children[0]
+    const ast = parser.parse('uint constant EXPONENT = 10;')
+    const fileLevelConstantNode = ast.children[0]
 
     assert.deepEqual(fileLevelConstantNode, {
       type: 'FileLevelConstant',
@@ -771,14 +770,14 @@ describe('AST', () => {
   })
 
   it('ModifierInvocation', function () {
-    var ast = parseNode('function foo(uint a) onlyOwner {}')
+    const ast = parseNode('function foo(uint a) onlyOwner {}')
     assert.deepEqual(ast.modifiers[0], {
       type: 'ModifierInvocation',
       name: 'onlyOwner',
       arguments: null,
     })
 
-    var ast = parseNode('function foo(uint a) onlyOwner() {}')
+    const ast = parseNode('function foo(uint a) onlyOwner() {}')
     assert.deepEqual(ast.modifiers[0], {
       type: 'ModifierInvocation',
       name: 'onlyOwner',
@@ -804,7 +803,7 @@ describe('AST', () => {
   })
 
   it('TypeNameExpression', function () {
-    var stmt = parseStatement('uint(a);')
+    const stmt = parseStatement('uint(a);')
     assert.deepEqual(stmt.expression.expression, {
       type: 'TypeNameExpression',
       typeName: {
@@ -831,7 +830,7 @@ describe('AST', () => {
   })
 
   it('TypeName', function () {
-    var ast = parseNode('uint256[2] a;')
+    const ast = parseNode('uint256[2] a;')
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'ArrayTypeName',
       baseTypeName: {
@@ -884,7 +883,7 @@ describe('AST', () => {
   })
 
   it('ElementaryTypeName', function () {
-    var ast = parseNode('address payable a;')
+    const ast = parseNode('address payable a;')
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'ElementaryTypeName',
       name: 'address',
@@ -893,7 +892,7 @@ describe('AST', () => {
   })
 
   it('FunctionTypeName', function () {
-    var ast = parseNode('function (uint, uint) returns(bool) a;')
+    const ast = parseNode('function (uint, uint) returns(bool) a;')
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'FunctionTypeName',
       parameterTypes: [
@@ -939,7 +938,7 @@ describe('AST', () => {
   })
 
   it('ReturnStatement', function () {
-    var ast = parseStatement('return;')
+    const ast = parseStatement('return;')
     assert.deepEqual(ast, {
       type: 'ReturnStatement',
       expression: null,
@@ -967,14 +966,14 @@ describe('AST', () => {
   })
 
   it('ThrowStatement', function () {
-    var ast = parseStatement('throw;')
+    const ast = parseStatement('throw;')
     assert.deepEqual(ast, {
       type: 'ThrowStatement',
     })
   })
 
   it('EmitStatement', function () {
-    var ast = parseStatement('emit EventCalled(1);')
+    const ast = parseStatement('emit EventCalled(1);')
     assert.deepEqual(ast, {
       type: 'EmitStatement',
       eventCall: {
@@ -996,7 +995,7 @@ describe('AST', () => {
   })
 
   it('StructDefinition', function () {
-    var ast = parseNode('struct hello { uint a; }')
+    const ast = parseNode('struct hello { uint a; }')
     assert.deepEqual(ast, {
       type: 'StructDefinition',
       name: 'hello',
@@ -1018,7 +1017,7 @@ describe('AST', () => {
 
   it('VariableDeclaration', function () {
     // state variable
-    var ast = parseNode('uint a;')
+    const ast = parseNode('uint a;')
     assert.deepEqual(ast.variables[0], {
       type: 'VariableDeclaration',
       typeName: {
@@ -1037,7 +1036,7 @@ describe('AST', () => {
   })
 
   it('WhileStatement', function () {
-    var stmt = parseStatement('while (true) {}')
+    const stmt = parseStatement('while (true) {}')
     assert.deepEqual(stmt, {
       type: 'WhileStatement',
       condition: {
@@ -1065,7 +1064,7 @@ describe('AST', () => {
   })
 
   it('IfStatement', function () {
-    var stmt = parseStatement('if (true) {}')
+    const stmt = parseStatement('if (true) {}')
     assert.deepEqual(stmt, {
       type: 'IfStatement',
       condition: {
@@ -1100,7 +1099,7 @@ describe('AST', () => {
 
   it('TryStatement', function () {
     // try with one catch clause
-    var stmt = parseStatement(
+    const stmt = parseStatement(
       'try f(1, 2) returns (uint a) {} catch (bytes memory a) {}'
     )
     assert.deepEqual(stmt, {
@@ -1170,7 +1169,7 @@ describe('AST', () => {
   })
 
   it('TryStatement with Error', function () {
-    var stmt = parseStatement(
+    const stmt = parseStatement(
       'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch (bytes memory c) {}'
     )
     assert.deepEqual(stmt, {
@@ -1262,7 +1261,7 @@ describe('AST', () => {
   })
 
   it('TryStatement with Panic', function () {
-    var stmt = parseStatement(
+    const stmt = parseStatement(
       'try f(1, 2) returns (uint a) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}'
     )
     assert.deepEqual(stmt, {
@@ -1354,7 +1353,7 @@ describe('AST', () => {
   })
 
   it('TryStatement with Error and Panic', function () {
-    var stmt = parseStatement(
+    const stmt = parseStatement(
       'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}'
     )
     assert.deepEqual(stmt, {
@@ -1468,7 +1467,7 @@ describe('AST', () => {
   })
 
   it('UserDefinedTypeName', function () {
-    var ast = parseStatement('Foo.Bar a;')
+    const ast = parseStatement('Foo.Bar a;')
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'UserDefinedTypeName',
       namePath: 'Foo.Bar',
@@ -1476,7 +1475,7 @@ describe('AST', () => {
   })
 
   it('ExpressionStatement', function () {
-    var stmt = parseStatement('true;')
+    const stmt = parseStatement('true;')
     assert.deepEqual(stmt, {
       type: 'ExpressionStatement',
       expression: {
@@ -1487,7 +1486,7 @@ describe('AST', () => {
   })
 
   it('NumberLiteral', function () {
-    var expr = parseExpression('2 ether')
+    const expr = parseExpression('2 ether')
     assert.deepEqual(expr, {
       type: 'NumberLiteral',
       number: '2',
@@ -1517,7 +1516,7 @@ describe('AST', () => {
   })
 
   it('StringLiteral with double quotes', function () {
-    var expr = parseExpression('"Hello"')
+    const expr = parseExpression('"Hello"')
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello',
@@ -1527,7 +1526,7 @@ describe('AST', () => {
   })
 
   it('StringLiteral with single quotes', function () {
-    var expr = parseExpression("'Hello'")
+    const expr = parseExpression("'Hello'")
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello',
@@ -1537,7 +1536,7 @@ describe('AST', () => {
   })
 
   it('StringLiteral with escaped double quotes', function () {
-    var expr = parseExpression('"Hello \\"goodbye\\""')
+    const expr = parseExpression('"Hello \\"goodbye\\""')
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello "goodbye"',
@@ -1547,7 +1546,7 @@ describe('AST', () => {
   })
 
   it('StringLiteral with escaped single quotes', function () {
-    var expr = parseExpression("'Hello \\'goodbye\\''")
+    const expr = parseExpression("'Hello \\'goodbye\\''")
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: "Hello 'goodbye'",
@@ -1557,7 +1556,7 @@ describe('AST', () => {
   })
 
   it('Multiline StringLiteral with newline', function () {
-    var expr = parseExpression('"Hello "\n"World"')
+    const expr = parseExpression('"Hello "\n"World"')
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello World',
@@ -1567,7 +1566,7 @@ describe('AST', () => {
   })
 
   it('Multiline StringLiteral with space', function () {
-    var expr = parseExpression('"Hello " "World"')
+    const expr = parseExpression('"Hello " "World"')
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello World',
@@ -1577,7 +1576,7 @@ describe('AST', () => {
   })
 
   it('Multiline StringLiteral with no space', function () {
-    var expr = parseExpression('"Hello ""World"')
+    const expr = parseExpression('"Hello ""World"')
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello World',
@@ -1587,7 +1586,7 @@ describe('AST', () => {
   })
 
   it('unicode StringLiteral with double quotes', function () {
-    var expr = parseExpression('unicode"Hello 🦄 World"')
+    const expr = parseExpression('unicode"Hello 🦄 World"')
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello 🦄 World',
@@ -1597,7 +1596,7 @@ describe('AST', () => {
   })
 
   it('unicode StringLiteral with single quotes', function () {
-    var expr = parseExpression("unicode'Hello 🦄 World'")
+    const expr = parseExpression("unicode'Hello 🦄 World'")
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello 🦄 World',
@@ -1607,7 +1606,7 @@ describe('AST', () => {
   })
 
   it('multipart string where some parts are unicode', function () {
-    var expr = parseExpression("unicode'Hello 🦄 World' 'bye world'")
+    const expr = parseExpression("unicode'Hello 🦄 World' 'bye world'")
     assert.deepEqual(expr, {
       type: 'StringLiteral',
       value: 'Hello 🦄 Worldbye world',
@@ -1617,7 +1616,7 @@ describe('AST', () => {
   })
 
   it('HexLiteral', function () {
-    var expr = parseExpression('hex"fafafa"')
+    const expr = parseExpression('hex"fafafa"')
     assert.deepEqual(expr, {
       type: 'HexLiteral',
       value: 'fafafa',
@@ -1626,7 +1625,7 @@ describe('AST', () => {
   })
 
   it('Empty HexLiteral', function () {
-    var expr = parseExpression('hex""')
+    const expr = parseExpression('hex""')
     assert.deepEqual(expr, {
       type: 'HexLiteral',
       value: '',
@@ -1635,7 +1634,7 @@ describe('AST', () => {
   })
 
   it('Multipart HexLiteral', function () {
-    var expr = parseExpression('hex"dead" hex\'beef\'')
+    const expr = parseExpression('hex"dead" hex\'beef\'')
     assert.deepEqual(expr, {
       type: 'HexLiteral',
       value: 'deadbeef',
@@ -1644,7 +1643,7 @@ describe('AST', () => {
   })
 
   it('BooleanLiteral', function () {
-    var expr = parseExpression('false')
+    const expr = parseExpression('false')
     assert.deepEqual(expr, {
       type: 'BooleanLiteral',
       value: false,
@@ -1652,7 +1651,7 @@ describe('AST', () => {
   })
 
   it('Mapping with elementary type key', function () {
-    var ast = parseNode('mapping(uint => address) a;')
+    const ast = parseNode('mapping(uint => address) a;')
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'Mapping',
       keyType: {
@@ -1667,7 +1666,7 @@ describe('AST', () => {
   })
 
   it('Mapping with user defined type key', function () {
-    var ast = parseNode('mapping(Foo => address) a;')
+    const ast = parseNode('mapping(Foo => address) a;')
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'Mapping',
       keyType: {
@@ -1682,7 +1681,7 @@ describe('AST', () => {
   })
 
   it('ModifierDefinition', function () {
-    var ast = parseNode('modifier onlyOwner {}')
+    const ast = parseNode('modifier onlyOwner {}')
     assert.deepEqual(ast, {
       type: 'ModifierDefinition',
       name: 'onlyOwner',
@@ -1694,7 +1693,7 @@ describe('AST', () => {
         statements: [],
       },
     })
-    var ast = parseNode('modifier onlyOwner() {}')
+    const ast = parseNode('modifier onlyOwner() {}')
     assert.deepEqual(ast, {
       type: 'ModifierDefinition',
       name: 'onlyOwner',
@@ -1710,7 +1709,7 @@ describe('AST', () => {
 
   it('Expression', function () {
     // new expression
-    var expr = parseExpression('new MyContract')
+    const expr = parseExpression('new MyContract')
     assert.deepEqual(expr, {
       type: 'NewExpression',
       typeName: {
@@ -1720,7 +1719,7 @@ describe('AST', () => {
     })
 
     // prefix operation
-    var expr = parseExpression('!true')
+    const expr = parseExpression('!true')
     assert.deepEqual(expr, {
       type: 'UnaryOperation',
       operator: '!',
@@ -1732,7 +1731,7 @@ describe('AST', () => {
     })
 
     // prefix operation
-    var expr = parseExpression('i++')
+    const expr = parseExpression('i++')
     assert.deepEqual(expr, {
       type: 'UnaryOperation',
       operator: '++',
@@ -1745,7 +1744,7 @@ describe('AST', () => {
   })
 
   it('FunctionCall', function () {
-    var expr = parseExpression('f(1, 2)')
+    const expr = parseExpression('f(1, 2)')
     assert.deepEqual(expr, {
       type: 'FunctionCall',
       expression: {
@@ -1766,7 +1765,7 @@ describe('AST', () => {
       ],
       names: [],
     })
-    var expr = parseExpression('type(MyContract)')
+    const expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
       type: 'FunctionCall',
       expression: {
@@ -1784,7 +1783,7 @@ describe('AST', () => {
   })
 
   it('StateVariableDeclaration', function () {
-    var ast = parseNode('uint a;')
+    const ast = parseNode('uint a;')
     assert.deepEqual(ast, {
       type: 'StateVariableDeclaration',
       variables: [
@@ -1809,7 +1808,7 @@ describe('AST', () => {
   })
 
   it('ForStatement', function () {
-    var stmt = parseStatement('for (i = 0; i < 10; i++) {}')
+    const stmt = parseStatement('for (i = 0; i < 10; i++) {}')
     assert.deepEqual(stmt, {
       type: 'ForStatement',
       initExpression: {
@@ -1883,7 +1882,7 @@ describe('AST', () => {
   })
 
   it('IdentifierList', function () {
-    var expr = parseExpression('(a,) = (1,2)')
+    const expr = parseExpression('(a,) = (1,2)')
     assert.deepEqual(expr.left, {
       components: [
         {
@@ -1926,7 +1925,7 @@ describe('AST', () => {
   })
 
   it('Identifier', function () {
-    var expr = parseExpression('a')
+    const expr = parseExpression('a')
     assert.deepEqual(expr, {
       type: 'Identifier',
       name: 'a',
@@ -1940,7 +1939,7 @@ describe('AST', () => {
 
   it('TupleExpression', function () {
     // tuple
-    var ast = parseExpression('(,a,, b,,)')
+    const ast = parseExpression('(,a,, b,,)')
     assert.deepEqual(ast, {
       type: 'TupleExpression',
       components: [
@@ -1979,7 +1978,7 @@ describe('AST', () => {
   })
 
   it('VariableDeclarationStatement', function () {
-    var stmt = parseStatement('uint a;')
+    const stmt = parseStatement('uint a;')
     assert.deepEqual(stmt, {
       type: 'VariableDeclarationStatement',
       variables: [
@@ -1998,7 +1997,7 @@ describe('AST', () => {
       initialValue: null,
     })
 
-    stmt = parseStatement('var (a,,b) = 0;')
+    stmt = parseStatement('const (a,,b) = 0;')
     assert.deepEqual(stmt, {
       type: 'VariableDeclarationStatement',
       initialValue: {
@@ -2064,7 +2063,7 @@ describe('AST', () => {
   })
 
   it('ImportDirective', function () {
-    var ast = parser.parse('import "./abc.sol";')
+    const ast = parser.parse('import "./abc.sol";')
     assert.deepEqual(ast.children[0], {
       type: 'ImportDirective',
       path: './abc.sol',
@@ -2102,7 +2101,7 @@ describe('AST', () => {
   })
 
   it('EventDefinition', function () {
-    var ast = parseNode('event Foo(address indexed a, uint b);')
+    const ast = parseNode('event Foo(address indexed a, uint b);')
     assert.deepEqual(ast, {
       type: 'EventDefinition',
       name: 'Foo',
@@ -2133,7 +2132,7 @@ describe('AST', () => {
   })
 
   it('InlineAssemblyStatement', function () {
-    var ast = parseStatement('assembly {}')
+    const ast = parseStatement('assembly {}')
     assert.deepEqual(ast, {
       type: 'InlineAssemblyStatement',
       language: null,
@@ -2155,7 +2154,7 @@ describe('AST', () => {
   })
 
   it('AssemblyCall', function () {
-    var ast = parseAssembly('mload(0x04)')
+    const ast = parseAssembly('mload(0x04)')
     assert.deepEqual(ast, {
       type: 'AssemblyCall',
       functionName: 'mload',
@@ -2169,7 +2168,7 @@ describe('AST', () => {
   })
 
   it('AssemblyLiteral', function () {
-    var ast = parseAssembly('0x04')
+    const ast = parseAssembly('0x04')
     assert.deepEqual(ast, {
       type: 'HexNumber',
       value: '0x04',
@@ -2185,7 +2184,7 @@ describe('AST', () => {
   })
 
   it('AssemblySwitch / AssemblyCase', function () {
-    var ast = parseAssembly(
+    const ast = parseAssembly(
       'switch x case 0 { y := mul(x, 2) } default { y := 0 }'
     )
     assert.deepEqual(ast, {
@@ -2259,7 +2258,7 @@ describe('AST', () => {
   })
 
   it('AssemblyLocalDefinition', function () {
-    var ast = parseAssembly('let x := 0x04')
+    const ast = parseAssembly('let x := 0x04')
     assert.deepEqual(ast, {
       type: 'AssemblyLocalDefinition',
       names: [
@@ -2276,7 +2275,7 @@ describe('AST', () => {
   })
 
   it('AssemblyFunctionDefinition', function () {
-    var ast = parseAssembly('function power(base, exponent) -> result {}')
+    const ast = parseAssembly('function power(base, exponent) -> result {}')
     assert.deepEqual(ast, {
       type: 'AssemblyFunctionDefinition',
       name: 'power',
@@ -2301,7 +2300,7 @@ describe('AST', () => {
         operations: [],
       },
     })
-    var ast = parseAssembly('function foo() -> result {}')
+    const ast = parseAssembly('function foo() -> result {}')
     assert.deepEqual(ast, {
       type: 'AssemblyFunctionDefinition',
       name: 'foo',
@@ -2317,7 +2316,7 @@ describe('AST', () => {
         operations: [],
       },
     })
-    var ast = parseAssembly('function foo(x) {}')
+    const ast = parseAssembly('function foo(x) {}')
     assert.deepEqual(ast, {
       type: 'AssemblyFunctionDefinition',
       name: 'foo',
@@ -2336,7 +2335,7 @@ describe('AST', () => {
   })
 
   it('AssemblyAssignment', function () {
-    var ast = parseAssembly('a := 10')
+    const ast = parseAssembly('a := 10')
     assert.deepEqual(ast, {
       type: 'AssemblyAssignment',
       names: [
@@ -2353,7 +2352,7 @@ describe('AST', () => {
   })
 
   it('AssemblyAssignment, left member access', function () {
-    var ast = parseAssembly('a.slot := 10')
+    const ast = parseAssembly('a.slot := 10')
     assert.deepEqual(ast, {
       type: 'AssemblyAssignment',
       names: [
@@ -2377,7 +2376,7 @@ describe('AST', () => {
   })
 
   it('AssemblyAssignment, right member access', function () {
-    var ast = parseAssembly('o := x.offset')
+    const ast = parseAssembly('o := x.offset')
     assert.deepEqual(ast, {
       type: 'AssemblyAssignment',
       names: [
@@ -2401,7 +2400,7 @@ describe('AST', () => {
   })
 
   it('LabelDefinition', function () {
-    var ast = parseAssembly('loop:')
+    const ast = parseAssembly('loop:')
     assert.deepEqual(ast, {
       type: 'LabelDefinition',
       name: 'loop',
@@ -2409,7 +2408,7 @@ describe('AST', () => {
   })
 
   it('AssemblyStackAssignment', function () {
-    var ast = parseAssembly('=: a')
+    const ast = parseAssembly('=: a')
     assert.deepEqual(ast, {
       type: 'AssemblyStackAssignment',
       name: 'a',
@@ -2417,7 +2416,7 @@ describe('AST', () => {
   })
 
   it('AssemblyFor', function () {
-    var ast = parseAssembly(
+    const ast = parseAssembly(
       'for { let i := 0  } lt(i, x) { i := add(i, 1)  } { y := mul(2, y) }'
     )
     assert.deepEqual(ast, {
@@ -2518,7 +2517,7 @@ describe('AST', () => {
   })
 
   it('AssemblyIf', function () {
-    var ast = parseAssembly('if lt(i, x) { revert(0, 0) }')
+    const ast = parseAssembly('if lt(i, x) { revert(0, 0) }')
     assert.deepEqual(ast, {
       body: {
         operations: [
@@ -2625,7 +2624,7 @@ describe('AST', () => {
   })
 
   it('should allow using payable as a function', function () {
-    let expr = parseExpression('payable(recipient)')
+    const expr = parseExpression('payable(recipient)')
     assert.deepEqual(expr, {
       type: 'FunctionCall',
       expression: {
@@ -2643,7 +2642,7 @@ describe('AST', () => {
   })
 
   it('should allow using virtual in a modifier', function () {
-    let ast = parseNode('modifier foo() virtual {}')
+    const ast = parseNode('modifier foo() virtual {}')
     assert.deepEqual(ast, {
       type: 'ModifierDefinition',
       name: 'foo',
@@ -2658,7 +2657,7 @@ describe('AST', () => {
   })
 
   it('should allow using override in a modifier', function () {
-    let ast = parseNode('modifier foo() override {}')
+    const ast = parseNode('modifier foo() override {}')
     assert.deepEqual(ast, {
       type: 'ModifierDefinition',
       name: 'foo',
@@ -2673,7 +2672,7 @@ describe('AST', () => {
   })
 
   it('should allow using one explit override in a modifier', function () {
-    let ast = parseNode('modifier foo() override(Base) {}')
+    const ast = parseNode('modifier foo() override(Base) {}')
     assert.deepEqual(ast, {
       type: 'ModifierDefinition',
       name: 'foo',
@@ -2693,7 +2692,7 @@ describe('AST', () => {
   })
 
   it('should allow using two explit overrides in a modifier', function () {
-    let ast = parseNode('modifier foo() override(Base1, Base2) {}')
+    const ast = parseNode('modifier foo() override(Base1, Base2) {}')
     assert.deepEqual(ast, {
       type: 'ModifierDefinition',
       name: 'foo',
@@ -2717,7 +2716,7 @@ describe('AST', () => {
   })
 
   it('should allow empty unchecked blocks', function () {
-    let ast = parseStatement('unchecked { }')
+    const ast = parseStatement('unchecked { }')
     assert.deepEqual(ast, {
       type: 'UncheckedStatement',
       block: {
@@ -2728,7 +2727,7 @@ describe('AST', () => {
   })
 
   it('should allow non-empty unchecked blocks', function () {
-    let ast = parseStatement('unchecked { x++; }')
+    const ast = parseStatement('unchecked { x++; }')
     assert.deepEqual(ast, {
       type: 'UncheckedStatement',
       block: {
@@ -2808,7 +2807,7 @@ describe('AST', () => {
   })
 
   it('should support array slices with both start and end', function () {
-    let ast = parseExpression('a[0:4]')
+    const ast = parseExpression('a[0:4]')
     assert.deepEqual(ast, {
       type: 'IndexRangeAccess',
       base: {
@@ -2829,7 +2828,7 @@ describe('AST', () => {
   })
 
   it('should support array slices with only start', function () {
-    let ast = parseExpression('a[3:]')
+    const ast = parseExpression('a[3:]')
     assert.deepEqual(ast, {
       type: 'IndexRangeAccess',
       base: {
@@ -2845,7 +2844,7 @@ describe('AST', () => {
   })
 
   it('should support array slices with only end', function () {
-    let ast = parseExpression('a[:20]')
+    const ast = parseExpression('a[:20]')
     assert.deepEqual(ast, {
       type: 'IndexRangeAccess',
       base: {
@@ -2861,7 +2860,7 @@ describe('AST', () => {
   })
 
   it('should support array slices without start nor end', function () {
-    let ast = parseExpression('a[:]')
+    const ast = parseExpression('a[:]')
     assert.deepEqual(ast, {
       type: 'IndexRangeAccess',
       base: {

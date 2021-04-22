@@ -15,8 +15,7 @@
     "generate-types": "tsc",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
     "prepack": "npm run build && npm run generate-types",
-    "eslint": "eslint src",
-    "lint": "eslint src",
+    "lint": "eslint src test",
     "test": "mocha",
     "test:coverage": "nyc mocha"
   },

@@ -1,66 +1,66 @@
 import fs from 'fs'
 import { assert } from 'chai'
-import * as parser from'../src/index'
+import * as parser from '../src/index'
 import { parseNode, parseStatement } from './utils'
 
 describe('#parse', function () {
   it('parses test file correctly', function () {
-    var content = fs.readFileSync(__dirname + '/test.sol')
+    const content = fs.readFileSync(__dirname + '/test.sol')
     parser.parse(content.toString())
   })
 
   it('throws ParserError on syntax error', function () {
-    var source = 'not good'
+    const source = 'not good'
     assert.throws(() => {
       parser.parse(source)
     }, parser.ParserError)
   })
 
   it('supports tolerant mode', function () {
-    var source = 'not good'
-    var root = parser.parse(source, { tolerant: true })
+    const source = 'not good'
+    const root: any = parser.parse(source, { tolerant: true })
     assert.isAbove(root.errors.length, 0)
   })
 
   it('supports loc', function () {
-    var source = 'contract test { uint a; }'
-    var root = parser.parse(source, { loc: true })
-    assert.isOk(root.hasOwnProperty('loc'))
+    const source = 'contract test { uint a; }'
+    const root: any = parser.parse(source, { loc: true })
+    assert.isOk('loc' in root)
   })
 
   it('supports range', function () {
-    var source = 'contract test { uint a; }'
-    var root = parser.parse(source, { range: true })
-    assert.isOk(root.hasOwnProperty('range'))
+    const source = 'contract test { uint a; }'
+    const root = parser.parse(source, { range: true })
+    assert.isOk('range' in root)
   })
 
   it('can build ast with tolerant mode errors', () => {
     // TODO: just a few examples here, more should be added
-    var cases = [
+    const cases = [
       'contract { function a() return bool {} }',
       'contract test { function () { 2 + + 2; } }',
       'contract test { uint ; }',
       'contract test { modifier {  } }',
     ]
 
-    for (var c of cases) {
+    for (const c of cases) {
       parser.parse(c, { tolerant: true })
     }
   })
 
   describe('node meta', function () {
     it('adds meta to VariableDeclaration inside StateVariableDeclaration', function () {
-      var ast = parseNode('uint public a;', { loc: true })
+      const ast = parseNode('uint public a;', { loc: true })
       assert.isOk(ast.variables[0].loc)
     })
 
     it('adds meta to VariableDeclaration inside VariableDeclarationStatement', function () {
-      var ast = parseStatement('uint a;', { loc: true })
+      const ast = parseStatement('uint a;', { loc: true })
       assert.isOk(ast.variables[0].loc)
     })
 
     it('adds meta to VariableDeclaration inside EventDefinition', function () {
-      var ast = parseNode('event Foo(address bar);', { loc: true })
+      const ast = parseNode('event Foo(address bar);', { loc: true })
       assert.isOk(ast.parameters[0].loc)
     })
   })
@@ -91,28 +91,28 @@ describe('#parse', function () {
 
 describe('#visit', function () {
   it('walks visitor through AST', function () {
-    var source = 'contract test { uint a; }'
-    var ast = parser.parse(source)
+    const source = 'contract test { uint a; }'
+    const ast = parser.parse(source)
     parser.visit(ast, {
-      ContractDefinition: (node) => {
+      ContractDefinition: (node: any) => {
         assert.equal(node.type, 'ContractDefinition')
       },
 
-      'ContractDefinition:exit': (node) => {
+      'ContractDefinition:exit': (node: any) => {
         assert.equal(node.type, 'ContractDefinition')
       },
     })
   })
 
   it('can stop visiting inner nodes by returning false', function () {
-    var source = 'contract test { uint a; }'
-    var ast = parser.parse(source)
+    const source = 'contract test { uint a; }'
+    const ast = parser.parse(source)
     parser.visit(ast, {
-      ContractDefinition: (node) => {
+      ContractDefinition: () => {
         return false
       },
 
-      'ContractDefinition:exit': (node) => {
+      'ContractDefinition:exit': () => {
         assert.fail('should not reach here')
       },
     })
@@ -123,7 +123,7 @@ describe('#visit', function () {
     let called = false
     console.error = () => (called = true)
 
-    var ast = parser.parse('"', { tolerant: true })
+    parser.parse('"', { tolerant: true })
 
     console.error = originalConsoleError
 
