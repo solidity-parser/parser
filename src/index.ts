@@ -46,13 +46,13 @@ export function parse(input: string, options: ParseOptions = {}): AST {
 
   const listener = new ErrorListener()
 
-  const lexer: any = new SolidityLexer(chars)
+  const lexer = new SolidityLexer(chars)
   lexer.removeErrorListeners()
   lexer.addErrorListener(listener)
 
   const tokens = new antlr4.CommonTokenStream(lexer)
 
-  const parser: any = new SolidityParser(tokens)
+  const parser = new SolidityParser(tokens)
 
   parser.removeErrorListeners()
   parser.addErrorListener(listener)
@@ -85,7 +85,7 @@ export function parse(input: string, options: ParseOptions = {}): AST {
   return ast
 }
 
-function _isASTNode(node: any): node is BaseASTNode {
+function _isASTNode(node: unknown): node is BaseASTNode {
   return (
     node !== null &&
     typeof node === 'object' &&
