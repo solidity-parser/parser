@@ -1997,7 +1997,7 @@ describe('AST', () => {
       initialValue: null,
     })
 
-    stmt = parseStatement('const (a,,b) = 0;')
+    stmt = parseStatement('var (a,,b) = 0;')
     assert.deepEqual(stmt, {
       type: 'VariableDeclarationStatement',
       initialValue: {
