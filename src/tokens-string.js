@@ -1,4 +1,10 @@
 // This is an indirect file to import the tokens string
 // It needs to be a js file so that tsc doesn't complain
-import tokens from './lib/Solidity.tokens'
-export default tokens
+
+if (typeof BROWSER !== "undefined") {
+  module.exports = require('./lib/Solidity.tokens')
+} else {
+  module.exports = require('fs')
+    .readFileSync(require('path').join(__dirname, './lib/Solidity.tokens'))
+    .toString()
+}

@@ -1,13 +1,14 @@
 {
-  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "compilerOptions": {
     "outDir": "dist",
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
+    "lib": ["es2016"],
     "target": "es6",
-    "module": "ES2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
     "skipLibCheck": true,
