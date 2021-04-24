@@ -16,8 +16,9 @@
     "antlr": "sh scripts/antlr.sh",
     "build:browser": "esbuild src/index.ts --outfile=dist/index.iife.js --bundle --loader:.tokens=file --sourcemap --format=iife --global-name=SolidityParser --define:__dirname=true --define:BROWSER=true",
     "build:node": "esbuild src/index.ts --outfile=dist/index.cjs.js --bundle  --loader:.tokens=file --sourcemap --format=cjs --platform=node",
-    "build": "npm run build:node && npm run build:browser && npm run generate-types",
+    "build": "npm run build:node && npm run build:browser && npm run generate-types && npm run copy-files",
     "generate-types": "tsc",
+    "copy-files": "shx mkdir -p dist/lib && shx cp './src/lib/*tokens' dist/lib",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
     "prepack": "npm run build",
     "lint": "eslint src test",
@@ -54,6 +55,7 @@
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "prettier": "^2.2.1",
+    "shx": "^0.3.3",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.2",
     "yarn": "^1.17.3"
