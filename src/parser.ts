@@ -1,4 +1,4 @@
-import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts'
+import { ANTLRInputStream, BufferedTokenStream, CommonTokenStream } from 'antlr4ts'
 
 import { SolidityLexer } from './antlr/SolidityLexer'
 import { SolidityParser } from './antlr/SolidityParser'
@@ -39,9 +39,8 @@ export class ParserError extends Error {
 export function tokenize(input: string, options: TokenizeOptions = {}): any {
   const inputStream = new ANTLRInputStream(input)
   const lexer = new SolidityLexer(inputStream)
-  const tokenStream = new CommonTokenStream(lexer)
 
-  return buildTokenList(tokenStream.getTokens(), options)
+  return buildTokenList(lexer.getAllTokens(), options)
 }
 
 export function parse(

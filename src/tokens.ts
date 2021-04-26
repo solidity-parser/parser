@@ -67,12 +67,12 @@ function getTokenTypeMap() {
 }
 
 export function buildTokenList(
-  tokens: AntlrToken[],
+  tokensArg: AntlrToken[],
   options: TokenizeOptions
 ): Token[] {
   const tokenTypes = getTokenTypeMap()
 
-  const result = tokens.map((token) => {
+  const result = tokensArg.map((token) => {
     const type = getTokenType(tokenTypes[token.type])
     const node: Token = { type, value: token.text }
     if (options.range === true) {

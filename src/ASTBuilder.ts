@@ -6,6 +6,7 @@ import * as SP from './antlr/SolidityParser'
 import { SolidityVisitor } from './antlr/SolidityVisitor'
 import { ParseOptions } from './types'
 import * as AST from './ast-types'
+import { ErrorNode } from 'antlr4ts/tree/ErrorNode'
 
 interface SourceLocation {
   start: {
@@ -35,7 +36,7 @@ export class ASTBuilder
   }
 
   defaultResult(): AST.ASTNode & WithMeta {
-    throw new Error("Unknown node");
+    throw new Error('Unknown node')
   }
 
   aggregateResult() {
@@ -43,16 +44,18 @@ export class ASTBuilder
   }
 
   public visitSourceUnit(ctx: SP.SourceUnitContext): AST.SourceUnit & WithMeta {
-    const children = ctx.children ?? []
+    const children = (ctx.children ?? []).filter(
+      (x) => !(x instanceof ErrorNode)
+    )
 
     const node: AST.SourceUnit = {
       type: 'SourceUnit',
       children: children.slice(0, -1).map((child) => this.visit(child)),
     }
     const result = this._addMeta(node, ctx)
-    this.result = result;
+    this.result = result
 
-    return result;
+    return result
   }
 
   public visitContractPart(ctx: SP.ContractPartContext) {
@@ -691,7 +694,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitEmitStatement(ctx: SP.EmitStatementContext): AST.EmitStatement & WithMeta {
+  public visitEmitStatement(
+    ctx: SP.EmitStatementContext
+  ): AST.EmitStatement & WithMeta {
     const node: AST.EmitStatement = {
       type: 'EmitStatement',
       eventCall: this.visitFunctionCall(ctx.functionCall()),
@@ -700,7 +705,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitFunctionCall(ctx: SP.FunctionCallContext): AST.FunctionCall & WithMeta {
+  public visitFunctionCall(
+    ctx: SP.FunctionCallContext
+  ): AST.FunctionCall & WithMeta {
     let args: AST.Expression[] = []
     const names = []
 
@@ -766,7 +773,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitIfStatement(ctx: SP.IfStatementContext): AST.IfStatement & WithMeta {
+  public visitIfStatement(
+    ctx: SP.IfStatementContext
+  ): AST.IfStatement & WithMeta {
     const trueBody = this.visitStatement(ctx.statement(0))
 
     let falseBody = null
@@ -784,7 +793,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitTryStatement(ctx: SP.TryStatementContext): AST.TryStatement & WithMeta {
+  public visitTryStatement(
+    ctx: SP.TryStatementContext
+  ): AST.TryStatement & WithMeta {
     let returnParameters = null
     const ctxReturnParameters = ctx.returnParameters()
     if (ctxReturnParameters !== undefined) {
@@ -806,7 +817,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitCatchClause(ctx: SP.CatchClauseContext): AST.CatchClause & WithMeta {
+  public visitCatchClause(
+    ctx: SP.CatchClauseContext
+  ): AST.CatchClause & WithMeta {
     let parameters = null
     if (ctx.parameterList()) {
       parameters = this.visitParameterList(ctx.parameterList()!)
@@ -852,7 +865,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitNumberLiteral(ctx: SP.NumberLiteralContext): AST.NumberLiteral & WithMeta {
+  public visitNumberLiteral(
+    ctx: SP.NumberLiteralContext
+  ): AST.NumberLiteral & WithMeta {
     const number = this._toText(ctx.getChild(0))
     let subdenomination = null
 
@@ -1174,7 +1189,9 @@ export class ASTBuilder
     throw new Error('Unrecognized expression')
   }
 
-  public visitNameValueList(ctx: SP.NameValueListContext): AST.NameValueList & WithMeta {
+  public visitNameValueList(
+    ctx: SP.NameValueListContext
+  ): AST.NameValueList & WithMeta {
     const names: string[] = []
     const args: AST.Expression[] = []
 
@@ -1373,11 +1390,16 @@ export class ASTBuilder
   public buildIdentifierList(ctx: SP.IdentifierListContext) {
     // remove parentheses
     const children = ctx.children!.slice(1, -1)
-    return this._mapCommasToNulls(children).map((iden) => {
+    const identifiers = ctx.identifier()
+    let i = 0
+    return this._mapCommasToNulls(children).map((idenOrNull) => {
       // add a null for each empty value
-      if (!iden) {
+      if (!idenOrNull) {
         return null
       }
+
+      const iden = identifiers[i]
+      i++
 
       const node: AST.VariableDeclaration = {
         type: 'VariableDeclaration',
@@ -1389,19 +1411,25 @@ export class ASTBuilder
         expression: null,
       }
 
-      return node
+      return this._addMeta(node, iden)
     })
   }
 
   public buildVariableDeclarationList(
     ctx: SP.VariableDeclarationListContext
-  ): Array<AST.VariableDeclaration | null> {
+  ): Array<(AST.VariableDeclaration & WithMeta) | null> {
     // remove parentheses
-    return this._mapCommasToNulls(ctx.children!).map((decl: any) => {
+
+    const variableDeclarations = ctx.variableDeclaration()
+    let i = 0
+    return this._mapCommasToNulls(ctx.children!).map((declOrNull) => {
       // add a null for each empty value
-      if (!decl) {
+      if (!declOrNull) {
         return null
       }
+
+      const decl = variableDeclarations[i]
+      i++
 
       let storageLocation: string | null = null
       if (decl.storageLocation()) {
@@ -1418,7 +1446,7 @@ export class ASTBuilder
         expression: null,
       }
 
-      return result
+      return this._addMeta(result, decl)
     })
   }
 
@@ -1498,7 +1526,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitAssemblyBlock(ctx: SP.AssemblyBlockContext): AST.AssemblyBlock & WithMeta {
+  public visitAssemblyBlock(
+    ctx: SP.AssemblyBlockContext
+  ): AST.AssemblyBlock & WithMeta {
     const operations = ctx
       .assemblyItem()
       .map((item) => this.visitAssemblyItem(item))
@@ -1511,7 +1541,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitAssemblyItem(ctx: SP.AssemblyItemContext): AST.AssemblyItem & WithMeta {
+  public visitAssemblyItem(
+    ctx: SP.AssemblyItemContext
+  ): AST.AssemblyItem & WithMeta {
     let text
 
     if (ctx.hexLiteral()) {
@@ -1556,7 +1588,9 @@ export class ASTBuilder
 
   public visitAssemblyCall(ctx: SP.AssemblyCallContext) {
     const functionName = this._toText(ctx.getChild(0))
-    const args = ctx.assemblyExpression().map((assemblyExpr) => this.visitAssemblyExpression(assemblyExpr))
+    const args = ctx
+      .assemblyExpression()
+      .map((assemblyExpr) => this.visitAssemblyExpression(assemblyExpr))
 
     const node: AST.AssemblyCall = {
       type: 'AssemblyCall',
@@ -1620,7 +1654,9 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitAssemblyCase(ctx: SP.AssemblyCaseContext): AST.AssemblyCase & WithMeta {
+  public visitAssemblyCase(
+    ctx: SP.AssemblyCaseContext
+  ): AST.AssemblyCase & WithMeta {
     let value = null
     if (this._toText(ctx.getChild(0)) === 'case') {
       value = this.visitAssemblyLiteral(ctx.assemblyLiteral()!)
@@ -1662,7 +1698,7 @@ export class ASTBuilder
     const node: AST.AssemblyLocalDefinition = {
       type: 'AssemblyLocalDefinition',
       names,
-      expression
+      expression,
     }
 
     return this._addMeta(node, ctx)
@@ -1781,20 +1817,24 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitContinueStatement(ctx: SP.ContinueStatementContext): AST.ContinueStatement & WithMeta {
+  public visitContinueStatement(
+    ctx: SP.ContinueStatementContext
+  ): AST.ContinueStatement & WithMeta {
     const node: AST.ContinueStatement = {
-      type: 'ContinueStatement'
+      type: 'ContinueStatement',
     }
 
-    return this._addMeta(node, ctx);
+    return this._addMeta(node, ctx)
   }
 
-  public visitBreakStatement(ctx: SP.BreakStatementContext): AST.BreakStatement & WithMeta {
+  public visitBreakStatement(
+    ctx: SP.BreakStatementContext
+  ): AST.BreakStatement & WithMeta {
     const node: AST.BreakStatement = {
-      type: 'BreakStatement'
+      type: 'BreakStatement',
     }
 
-    return this._addMeta(node, ctx);
+    return this._addMeta(node, ctx)
   }
 
   private _toText(ctx: ParserRuleContext | ParseTree): string {
