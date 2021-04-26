@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'no-var': 'error',
     'object-curly-spacing': ['error', 'always'],
     'object-shorthand': 'error',

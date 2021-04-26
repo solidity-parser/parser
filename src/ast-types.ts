@@ -334,7 +334,7 @@ export interface AssemblyCall extends BaseASTNode {
 export interface AssemblyLocalDefinition extends BaseASTNode {
   type: 'AssemblyLocalDefinition'
   names: Identifier[] | AssemblyMemberAccess[]
-  expression: AssemblyExpression
+  expression: AssemblyExpression | null
 }
 export interface AssemblyAssignment extends BaseASTNode {
   type: 'AssemblyAssignment'
@@ -481,6 +481,8 @@ export const binaryOpValues = [
   '*=',
   '/=',
   '%=',
+  '|',
+  '|='
 ] as const
 export type BinOp = typeof binaryOpValues[number]
 

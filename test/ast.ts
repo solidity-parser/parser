@@ -774,7 +774,7 @@ describe('AST', () => {
   })
 
   it('TypeNameExpression', function () {
-    let stmt = parseStatement('uint(a);')
+    const stmt = parseStatement('uint(a);')
     assert.deepEqual(stmt.expression.expression, {
       type: 'TypeNameExpression',
       typeName: {
@@ -2242,6 +2242,7 @@ describe('AST', () => {
             type: 'DecimalNumber',
             value: '0',
           },
+          default: false
         },
         {
           type: 'AssemblyCase',
@@ -2263,6 +2264,7 @@ describe('AST', () => {
               },
             ],
           },
+          value: null,
           default: true,
         },
       ],
