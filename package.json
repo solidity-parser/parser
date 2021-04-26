@@ -13,12 +13,12 @@
   ],
   "types": "dist/src/index.d.ts",
   "scripts": {
-    "antlr": "sh scripts/antlr.sh",
-    "build:browser": "esbuild src/index.ts --outfile=dist/index.iife.js --bundle --loader:.tokens=file --sourcemap --format=iife --global-name=SolidityParser --define:__dirname=true --define:BROWSER=true",
+    "antlr": "antlr4ts -visitor antlr/Solidity.g4 -o src",
+    "build:browser": "esbuild src/index.ts --outfile=dist/index.iife.js --bundle --loader:.tokens=file --sourcemap --format=iife --global-name=SolidityParser --define:__dirname=true --define:BROWSER=true --inject:./process-shim.js",
     "build:node": "esbuild src/index.ts --outfile=dist/index.cjs.js --bundle  --loader:.tokens=file --sourcemap --format=cjs --platform=node",
     "build": "npm run build:node && npm run build:browser && npm run generate-types && npm run copy-files",
     "generate-types": "tsc",
-    "copy-files": "shx mkdir -p dist/lib && shx cp './src/lib/*tokens' dist/lib",
+    "copy-files": "shx mkdir -p dist/antlr && shx cp './src/antlr/*tokens' dist/antlr",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
     "prepack": "npm run build",
     "lint": "eslint src test",
@@ -46,6 +46,9 @@
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "antlr4": "^4.9.0",
+    "antlr4ts": "^0.5.0-alpha.4",
+    "antlr4ts-cli": "^0.5.0-alpha.4",
+    "assert": "^2.0.0",
     "chai": "^4.2.0",
     "esbuild": "^0.11.13",
     "esbuild-register": "^2.5.0",
@@ -64,6 +67,7 @@
     "shx": "^0.3.3",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.2",
+    "util": "^0.12.3",
     "yarn": "^1.17.3"
   },
   "nyc": {

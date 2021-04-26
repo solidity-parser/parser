@@ -46,6 +46,7 @@ describe('AST', () => {
       typeName: {
         type: 'ElementaryTypeName',
         name: 'uint',
+        stateMutability: null,
       },
       libraryName: 'Lib',
     })
@@ -177,11 +178,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       returnParameters: null,
@@ -211,11 +214,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       returnParameters: null,
@@ -278,30 +283,6 @@ describe('AST', () => {
     })
   })
 
-  it('FunctionDefinition fallback case missing "external" decorator throws', () => {
-    assert.throws(
-      () => parseNode('fallback () {}'),
-      Error,
-      'Fallback functions have to be declared "external"'
-    )
-  })
-
-  it('FunctionDefinition fallback case with parameters throws', () => {
-    assert.throws(
-      () => parseNode('fallback (uint256 myUint) external {}'),
-      Error,
-      'Fallback functions cannot have parameters'
-    )
-  })
-
-  it('FunctionDefinition fallback case with return parameters throws', () => {
-    assert.throws(
-      () => parseNode('fallback () external returns (uint256 myUint) {}'),
-      Error,
-      'Fallback functions cannot have return parameters'
-    )
-  })
-
   it('FunctionDefinition receive ether case', () => {
     const ast: any = parseNode('receive () external payable {}')
     assert.deepEqual(ast, {
@@ -322,39 +303,6 @@ describe('AST', () => {
       isVirtual: false,
       stateMutability: 'payable',
     })
-  })
-
-  it('FunctionDefinition receive ether case missing "external" decorator throws', () => {
-    assert.throws(
-      () => parseNode('receive () payable {}'),
-      Error,
-      'Receive Ether functions have to be declared "external"'
-    )
-  })
-
-  it('FunctionDefinition receive ether case missing "payable" decorator throws', () => {
-    assert.throws(
-      () => parseNode('receive () external {}'),
-      Error,
-      'Receive Ether functions have to be declared "payable"'
-    )
-  })
-
-  it('FunctionDefinition receive ether case with parameters throws', () => {
-    assert.throws(
-      () => parseNode('receive (uint256 myUint) external payable {}'),
-      Error,
-      'Receive Ether functions cannot have parameters'
-    )
-  })
-
-  it('FunctionDefinition receive ether case with return parameters throws', () => {
-    assert.throws(
-      () =>
-        parseNode('receive () external payable returns (uint256 myUint) {}'),
-      Error,
-      'Receive Ether functions cannot have return parameters'
-    )
   })
 
   it('FunctionDefinition with override', () => {
@@ -389,6 +337,7 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'foo',
           expression: null,
@@ -398,6 +347,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          storageLocation: null
         },
       ],
       initialValue: null,
@@ -414,6 +364,7 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'foo',
           expression: null,
@@ -423,6 +374,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: true,
+          storageLocation: null
         },
       ],
       initialValue: null,
@@ -466,6 +418,7 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'foo',
           expression: null,
@@ -480,6 +433,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          storageLocation: null
         },
       ],
       initialValue: null,
@@ -487,7 +441,9 @@ describe('AST', () => {
   })
 
   it('FunctionDefinition with two overrides', () => {
-    const ast: any = parseNode('function foo() public override(Base1, Base2) {}')
+    const ast: any = parseNode(
+      'function foo() public override(Base1, Base2) {}'
+    )
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
       name: 'foo',
@@ -527,6 +483,7 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'foo',
           expression: null,
@@ -545,6 +502,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          storageLocation: null
         },
       ],
       initialValue: null,
@@ -562,11 +520,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       returnParameters: null,
@@ -615,11 +575,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       returnParameters: [
@@ -632,7 +594,9 @@ describe('AST', () => {
           typeName: {
             name: 'uint256',
             type: 'ElementaryTypeName',
+            stateMutability: null,
           },
+          expression: null,
         },
       ],
       body: {
@@ -662,11 +626,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       returnParameters: null,
@@ -715,11 +681,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       returnParameters: [
@@ -732,7 +700,9 @@ describe('AST', () => {
           typeName: {
             name: 'uint256',
             type: 'ElementaryTypeName',
+            stateMutability: null,
           },
+          expression: null,
         },
       ],
       body: {
@@ -765,6 +735,7 @@ describe('AST', () => {
       typeName: {
         name: 'uint',
         type: 'ElementaryTypeName',
+        stateMutability: null,
       },
     })
   })
@@ -809,22 +780,7 @@ describe('AST', () => {
       typeName: {
         type: 'ElementaryTypeName',
         name: 'uint',
-      },
-    })
-    stmt = parseStatement('A.B[];')
-    assert.deepEqual(stmt.expression, {
-      type: 'TypeNameExpression',
-      typeName: {
-        type: 'ArrayTypeName',
-        baseTypeName: {
-          expression: {
-            name: 'A',
-            type: 'Identifier',
-          },
-          memberName: 'B',
-          type: 'MemberAccess',
-        },
-        length: null,
+        stateMutability: null,
       },
     })
   })
@@ -836,6 +792,7 @@ describe('AST', () => {
       baseTypeName: {
         type: 'ElementaryTypeName',
         name: 'uint256',
+        stateMutability: null,
       },
       length: {
         type: 'NumberLiteral',
@@ -850,6 +807,7 @@ describe('AST', () => {
       baseTypeName: {
         type: 'ElementaryTypeName',
         name: 'uint256',
+        stateMutability: null,
       },
       length: null,
     })
@@ -876,6 +834,7 @@ describe('AST', () => {
         baseTypeName: {
           type: 'ElementaryTypeName',
           name: 'uint256',
+          stateMutability: null,
         },
         length: null,
       },
@@ -901,22 +860,26 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
         {
           type: 'VariableDeclaration',
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       returnTypes: [
@@ -925,11 +888,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'bool',
+            stateMutability: null,
           },
           name: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       visibility: 'default',
@@ -1005,11 +970,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
     })
@@ -1023,6 +990,7 @@ describe('AST', () => {
       typeName: {
         type: 'ElementaryTypeName',
         name: 'uint',
+        stateMutability: null,
       },
       name: 'a',
       expression: null,
@@ -1032,6 +1000,7 @@ describe('AST', () => {
       isIndexed: false,
       override: null,
       isImmutable: false,
+      storageLocation: null,
     })
   })
 
@@ -1130,11 +1099,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       body: {
@@ -1159,7 +1130,9 @@ describe('AST', () => {
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1200,11 +1173,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       body: {
@@ -1229,7 +1204,9 @@ describe('AST', () => {
               typeName: {
                 name: 'string',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1251,7 +1228,9 @@ describe('AST', () => {
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1292,11 +1271,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       body: {
@@ -1321,7 +1302,9 @@ describe('AST', () => {
               typeName: {
                 name: 'uint',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1343,7 +1326,9 @@ describe('AST', () => {
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1384,11 +1369,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       body: {
@@ -1413,7 +1400,9 @@ describe('AST', () => {
               typeName: {
                 name: 'string',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1435,7 +1424,9 @@ describe('AST', () => {
               typeName: {
                 name: 'uint',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1457,7 +1448,9 @@ describe('AST', () => {
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
+                stateMutability: null,
               },
+              expression: null,
             },
           ],
           type: 'CatchClause',
@@ -1657,10 +1650,12 @@ describe('AST', () => {
       keyType: {
         type: 'ElementaryTypeName',
         name: 'uint',
+        stateMutability: null,
       },
       valueType: {
         type: 'ElementaryTypeName',
         name: 'address',
+        stateMutability: null,
       },
     })
   })
@@ -1676,6 +1671,7 @@ describe('AST', () => {
       valueType: {
         type: 'ElementaryTypeName',
         name: 'address',
+        stateMutability: null,
       },
     })
   })
@@ -1792,6 +1788,7 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           expression: null,
@@ -1801,6 +1798,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          storageLocation: null,
         },
       ],
       initialValue: null,
@@ -1987,11 +1985,13 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'a',
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
+          expression: null,
         },
       ],
       initialValue: null,
@@ -2013,6 +2013,7 @@ describe('AST', () => {
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: null,
+          expression: null,
         },
         null,
         {
@@ -2022,6 +2023,7 @@ describe('AST', () => {
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: null,
+          expression: null,
         },
       ],
     })
@@ -2044,7 +2046,9 @@ describe('AST', () => {
           typeName: {
             name: 'uint',
             type: 'ElementaryTypeName',
+            stateMutability: null,
           },
+          expression: null,
         },
         null,
         {
@@ -2056,7 +2060,9 @@ describe('AST', () => {
           typeName: {
             name: 'uint',
             type: 'ElementaryTypeName',
+            stateMutability: null,
           },
+          expression: null,
         },
       ],
     })
@@ -2111,20 +2117,26 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'address',
+            stateMutability: null,
           },
           name: 'a',
           isStateVar: false,
           isIndexed: true,
+          expression: null,
+          storageLocation: null,
         },
         {
           type: 'VariableDeclaration',
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
+            stateMutability: null,
           },
           name: 'b',
           isStateVar: false,
           isIndexed: false,
+          expression: null,
+          storageLocation: null,
         },
       ],
       isAnonymous: false,

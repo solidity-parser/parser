@@ -1,15 +1,9 @@
+import { Token as Antlr4TsToken } from "antlr4ts";
 export interface Node {
   type: string
 }
 
-export interface AntlrToken {
-  type: string
-  text: string
-  start: number
-  stop: number
-  line: number
-  column: number
-}
+export type AntlrToken = Antlr4TsToken;
 
 export interface TokenizeOptions {
   range?: boolean
@@ -23,7 +17,7 @@ export interface ParseOptions extends TokenizeOptions {
 
 export interface Token {
   type: string
-  value: string
+  value: string | undefined
   range?: [number, number]
   loc?: {
     start: {

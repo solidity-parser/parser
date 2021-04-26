@@ -76,12 +76,12 @@ export function buildTokenList(
     const type = getTokenType(tokenTypes[token.type])
     const node: Token = { type, value: token.text }
     if (options.range === true) {
-      node.range = [token.start, token.stop + 1]
+      node.range = [token.startIndex, token.stopIndex + 1]
     }
     if (options.loc === true) {
       node.loc = {
-        start: { line: token.line, column: token.column },
-        end: { line: token.line, column: token.column + token.text.length },
+        start: { line: token.line, column: token.charPositionInLine },
+        end: { line: token.line, column: token.charPositionInLine + (token.text?.length ?? 0) },
       }
     }
     return node

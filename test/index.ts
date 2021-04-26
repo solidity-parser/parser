@@ -10,14 +10,14 @@ describe('#parse', function () {
   })
 
   it('throws ParserError on syntax error', function () {
-    const source = 'not good'
+    const source = 'contract {'
     assert.throws(() => {
       parser.parse(source)
     }, parser.ParserError)
   })
 
   it('supports tolerant mode', function () {
-    const source = 'not good'
+    const source = 'contract {'
     const root: any = parser.parse(source, { tolerant: true })
     assert.isAbove(root.errors.length, 0)
   })
@@ -35,11 +35,8 @@ describe('#parse', function () {
   })
 
   it('can build ast with tolerant mode errors', () => {
-    // TODO: just a few examples here, more should be added
     const cases = [
-      'contract { function a() return bool {} }',
       'contract test { function () { 2 + + 2; } }',
-      'contract test { uint ; }',
       'contract test { modifier {  } }',
     ]
 

@@ -1,17 +1,22 @@
-import SolidityLexer from './lib/SolidityLexer'
-import SolidityParser from './lib/SolidityParser'
-import { ParseOptions, Token, TokenizeOptions } from './types'
-import { AST, BaseASTNode } from './ast-types'
+import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts'
 
-import antlr4 from 'antlr4'
-import { buildTokenList } from './tokens'
-import ASTBuilder from './ASTBuilder'
+import { SolidityLexer } from './antlr/SolidityLexer'
+import { SolidityParser } from './antlr/SolidityParser'
+import { ASTNode, astNodeTypes, ASTNodeTypeString, ASTVisitor, SourceUnit } from './ast-types'
+import { ASTBuilder } from './ASTBuilder'
 import ErrorListener from './ErrorListener'
+import { buildTokenList } from './tokens'
+import { ParseOptions, Token, TokenizeOptions } from './types'
 
 interface ParserErrorItem {
   message: string
   line: number
   column: number
+}
+
+type ParseResult = SourceUnit & {
+  errors?: any[]
+  tokens?: Token[]
 }
 
 export class ParserError extends Error {
@@ -31,51 +36,51 @@ export class ParserError extends Error {
   }
 }
 
-export function tokenize(
-  input: string,
-  options: TokenizeOptions = {}
-): Token[] {
-  const chars = new antlr4.InputStream(input)
-  const lexer = new SolidityLexer(chars)
-  const tokens = new antlr4.CommonTokenStream(lexer)
+export function tokenize(input: string, options: TokenizeOptions = {}): any {
+  const inputStream = new ANTLRInputStream(input)
+  const lexer = new SolidityLexer(inputStream)
+  const tokenStream = new CommonTokenStream(lexer)
 
-  return buildTokenList(tokens.tokenSource.getAllTokens(), options)
+  return buildTokenList(tokenStream.getTokens(), options)
 }
 
-export function parse(input: string, options: ParseOptions = {}): AST {
-  const chars = new antlr4.InputStream(input)
+export function parse(
+  input: string,
+  options: ParseOptions = {}
+): ParseResult {
+  const inputStream = new ANTLRInputStream(input)
+  const lexer = new SolidityLexer(inputStream)
+  const tokenStream = new CommonTokenStream(lexer)
+  const parser = new SolidityParser(tokenStream)
 
   const listener = new ErrorListener()
-
-  const lexer = new SolidityLexer(chars)
   lexer.removeErrorListeners()
   lexer.addErrorListener(listener)
 
-  const tokens = new antlr4.CommonTokenStream(lexer)
-
-  const parser = new SolidityParser(tokens)
-
   parser.removeErrorListeners()
   parser.addErrorListener(listener)
-  parser.buildParseTrees = true
+  parser.buildParseTree = true
 
-  const tree = parser.sourceUnit()
+  const sourceUnit = parser.sourceUnit()
+
+  const astBuilder = new ASTBuilder(options)
+
+  astBuilder.visit(sourceUnit)
+
+  const ast: ParseResult | null = astBuilder.result as any
+
+  if (ast === null) {
+    throw new Error('ast should never be null')
+  }
 
   let tokenList: Token[] = []
   if (options.tokens === true) {
-    const tokenSource = tokens.tokenSource
-    tokenSource.reset()
-
-    tokenList = buildTokenList(tokenSource.getAllTokens(), options)
+    tokenList = buildTokenList(tokenStream.getTokens(), options)
   }
 
   if (options.tolerant !== true && listener.hasErrors()) {
     throw new ParserError({ errors: listener.getErrors() })
   }
-
-  const visitor = new ASTBuilder(options)
-  const ast = visitor.visit(tree) as AST
-
   if (options.tolerant === true && listener.hasErrors()) {
     ast.errors = listener.getErrors()
   }
@@ -86,15 +91,21 @@ export function parse(input: string, options: ParseOptions = {}): AST {
   return ast
 }
 
-function _isASTNode(node: unknown): node is BaseASTNode {
-  return (
-    node !== null &&
-    typeof node === 'object' &&
-    Object.prototype.hasOwnProperty.call(node, 'type')
-  )
+function _isASTNode(node: unknown): node is ASTNode {
+  if (typeof node !== 'object' || node === null) {
+    return false
+  }
+
+  const nodeAsAny: any = node
+
+  if (Object.prototype.hasOwnProperty.call(nodeAsAny, 'type') && typeof nodeAsAny.type === "string") {
+    return astNodeTypes.includes(nodeAsAny.type)
+  }
+
+  return false;
 }
 
-export function visit(node: any, visitor: any): void {
+export function visit(node: unknown, visitor: ASTVisitor): void {
   if (Array.isArray(node)) {
     node.forEach((child) => visit(child, visitor))
   }
@@ -104,19 +115,22 @@ export function visit(node: any, visitor: any): void {
   let cont = true
 
   if (visitor[node.type] !== undefined) {
-    cont = visitor[node.type](node)
+    // TODO can we avoid this `as any`
+    cont = visitor[node.type]!(node as any)
   }
 
   if (cont === false) return
 
   for (const prop in node) {
     if (Object.prototype.hasOwnProperty.call(node, prop)) {
+      // TODO can we avoid this `as any`
       visit((node as any)[prop], visitor)
     }
   }
 
-  const selector = node.type + ':exit'
+  const selector = (node.type + ':exit') as `${ASTNodeTypeString}:exit`
   if (visitor[selector] !== undefined) {
-    visitor[selector](node)
+      // TODO can we avoid this `as any`
+    visitor[selector]!(node as any)
   }
 }
