@@ -25,6 +25,7 @@
     "test": "npm run test:node && npm run test:browser",
     "test:node": "mocha",
     "test:browser": "karma start karma.conf.js",
+    "test:integration": "mocha --config ./.mocharc-integration.js test-integration",
     "test:coverage": "nyc mocha"
   },
   "authors": [
