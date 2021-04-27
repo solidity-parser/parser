@@ -1,4 +1,4 @@
-import { ANTLRInputStream, BufferedTokenStream, CommonTokenStream } from 'antlr4ts'
+import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts'
 
 import { SolidityLexer } from './antlr/SolidityLexer'
 import { SolidityParser } from './antlr/SolidityParser'
