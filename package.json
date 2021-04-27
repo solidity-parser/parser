@@ -77,8 +77,5 @@
     "extension": [
       ".ts"
     ]
-  },
-  "volta": {
-    "node": "14.16.1"
   }
 }
