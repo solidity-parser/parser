@@ -104,9 +104,9 @@ function _isASTNode(node: unknown): node is ASTNode {
   return false;
 }
 
-export function visit(node: unknown, visitor: ASTVisitor): void {
+export function visit(node: unknown, visitor: ASTVisitor, nodeParent?: ASTNode): void {
   if (Array.isArray(node)) {
-    node.forEach((child) => visit(child, visitor))
+    node.forEach((child) => visit(child, visitor, nodeParent))
   }
 
   if (!_isASTNode(node)) return
@@ -115,7 +115,7 @@ export function visit(node: unknown, visitor: ASTVisitor): void {
 
   if (visitor[node.type] !== undefined) {
     // TODO can we avoid this `as any`
-    cont = visitor[node.type]!(node as any)
+    cont = visitor[node.type]!(node as any, nodeParent)
   }
 
   if (cont === false) return
@@ -123,13 +123,13 @@ export function visit(node: unknown, visitor: ASTVisitor): void {
   for (const prop in node) {
     if (Object.prototype.hasOwnProperty.call(node, prop)) {
       // TODO can we avoid this `as any`
-      visit((node as any)[prop], visitor)
+      visit((node as any)[prop], visitor, node)
     }
   }
 
   const selector = (node.type + ':exit') as `${ASTNodeTypeString}:exit`
   if (visitor[selector] !== undefined) {
       // TODO can we avoid this `as any`
-    visitor[selector]!(node as any)
+    visitor[selector]!(node as any, nodeParent)
   }
 }

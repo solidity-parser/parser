@@ -126,4 +126,22 @@ describe('#visit', function () {
 
     assert.isFalse(called, 'Should not call console.error on lexer errors')
   })
+
+  it("should receive an optional parent node", function () {
+    const source = 'contract test { uint a; }'
+    const ast = parser.parse(source)
+    parser.visit(ast, {
+      StateVariableDeclaration: (node, parent) => {
+        if (parent === undefined) {
+          assert.fail("parent node should be defined")
+        }
+
+        if (parent.type !== 'ContractDefinition') {
+          assert.fail("parent node should be ContractDefinition")
+        }
+
+        assert.equal(parent.name, 'test');
+      },
+    })
+  });
 })
