@@ -490,6 +490,7 @@ export const unaryOpValues = [
   '-',
   '+',
   '++',
+  '--',
   '~',
   'after',
   'delete',

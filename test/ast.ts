@@ -1726,7 +1726,7 @@ describe('AST', () => {
       isPrefix: true,
     })
 
-    // prefix operation
+    // postfix operation
     expr = parseExpression('i++')
     assert.deepEqual(expr, {
       type: 'UnaryOperation',
@@ -1736,6 +1736,18 @@ describe('AST', () => {
         name: 'i',
       },
       isPrefix: false,
+    })
+
+    // prefix operation
+    expr = parseExpression('--i')
+    assert.deepEqual(expr, {
+      type: 'UnaryOperation',
+      operator: '--',
+      subExpression: {
+        type: 'Identifier',
+        name: 'i',
+      },
+      isPrefix: true,
     })
   })
 
