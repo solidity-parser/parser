@@ -17,6 +17,7 @@ import { InheritanceSpecifierContext } from "./SolidityParser";
 import { ContractPartContext } from "./SolidityParser";
 import { StateVariableDeclarationContext } from "./SolidityParser";
 import { FileLevelConstantContext } from "./SolidityParser";
+import { CustomErrorDefinitionContext } from "./SolidityParser";
 import { UsingForDeclarationContext } from "./SolidityParser";
 import { StructDefinitionContext } from "./SolidityParser";
 import { ModifierDefinitionContext } from "./SolidityParser";
@@ -59,6 +60,7 @@ import { BreakStatementContext } from "./SolidityParser";
 import { ReturnStatementContext } from "./SolidityParser";
 import { ThrowStatementContext } from "./SolidityParser";
 import { EmitStatementContext } from "./SolidityParser";
+import { RevertStatementContext } from "./SolidityParser";
 import { VariableDeclarationStatementContext } from "./SolidityParser";
 import { VariableDeclarationListContext } from "./SolidityParser";
 import { IdentifierListContext } from "./SolidityParser";
@@ -203,6 +205,13 @@ export interface SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitFileLevelConstant?: (ctx: FileLevelConstantContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SolidityParser.customErrorDefinition`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCustomErrorDefinition?: (ctx: CustomErrorDefinitionContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SolidityParser.usingForDeclaration`.
@@ -497,6 +506,13 @@ export interface SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitEmitStatement?: (ctx: EmitStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SolidityParser.revertStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRevertStatement?: (ctx: RevertStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SolidityParser.variableDeclarationStatement`.

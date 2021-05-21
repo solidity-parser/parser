@@ -17,6 +17,7 @@ import { InheritanceSpecifierContext } from "./SolidityParser";
 import { ContractPartContext } from "./SolidityParser";
 import { StateVariableDeclarationContext } from "./SolidityParser";
 import { FileLevelConstantContext } from "./SolidityParser";
+import { CustomErrorDefinitionContext } from "./SolidityParser";
 import { UsingForDeclarationContext } from "./SolidityParser";
 import { StructDefinitionContext } from "./SolidityParser";
 import { ModifierDefinitionContext } from "./SolidityParser";
@@ -59,6 +60,7 @@ import { BreakStatementContext } from "./SolidityParser";
 import { ReturnStatementContext } from "./SolidityParser";
 import { ThrowStatementContext } from "./SolidityParser";
 import { EmitStatementContext } from "./SolidityParser";
+import { RevertStatementContext } from "./SolidityParser";
 import { VariableDeclarationStatementContext } from "./SolidityParser";
 import { VariableDeclarationListContext } from "./SolidityParser";
 import { IdentifierListContext } from "./SolidityParser";
@@ -256,6 +258,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFileLevelConstant?: (ctx: FileLevelConstantContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.customErrorDefinition`.
+	 * @param ctx the parse tree
+	 */
+	enterCustomErrorDefinition?: (ctx: CustomErrorDefinitionContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.customErrorDefinition`.
+	 * @param ctx the parse tree
+	 */
+	exitCustomErrorDefinition?: (ctx: CustomErrorDefinitionContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.usingForDeclaration`.
@@ -718,6 +731,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitEmitStatement?: (ctx: EmitStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.revertStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterRevertStatement?: (ctx: RevertStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.revertStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitRevertStatement?: (ctx: RevertStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.variableDeclarationStatement`.
