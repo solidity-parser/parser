@@ -705,6 +705,29 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
+  public visitCustomErrorDefinition(
+    ctx: SP.CustomErrorDefinitionContext
+  ): AST.CustomErrorDefinition & WithMeta {
+    const node: AST.CustomErrorDefinition = {
+      type: 'CustomErrorDefinition',
+      name: this._toText(ctx.identifier()),
+      parameters: this.visitParameterList(ctx.parameterList()),
+    }
+
+    return this._addMeta(node, ctx)
+  }
+
+  public visitRevertStatement(
+    ctx: SP.RevertStatementContext
+  ): AST.RevertStatement & WithMeta {
+    const node: AST.RevertStatement = {
+      type: 'RevertStatement',
+      revertCall: this.visitFunctionCall(ctx.functionCall()),
+    }
+
+    return this._addMeta(node, ctx)
+  }
+
   public visitFunctionCall(
     ctx: SP.FunctionCallContext
   ): AST.FunctionCall & WithMeta {

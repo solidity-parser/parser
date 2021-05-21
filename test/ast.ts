@@ -347,7 +347,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
-          storageLocation: null
+          storageLocation: null,
         },
       ],
       initialValue: null,
@@ -374,7 +374,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: true,
-          storageLocation: null
+          storageLocation: null,
         },
       ],
       initialValue: null,
@@ -433,7 +433,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
-          storageLocation: null
+          storageLocation: null,
         },
       ],
       initialValue: null,
@@ -502,7 +502,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
-          storageLocation: null
+          storageLocation: null,
         },
       ],
       initialValue: null,
@@ -2254,7 +2254,7 @@ describe('AST', () => {
             type: 'DecimalNumber',
             value: '0',
           },
-          default: false
+          default: false,
         },
         {
           type: 'AssemblyCase',
@@ -2892,6 +2892,144 @@ describe('AST', () => {
       base: {
         type: 'Identifier',
         name: 'a',
+      },
+    })
+  })
+
+  it('should support top-level custom errors', function () {
+    let ast: any = parser.parse('error MyCustomError();')
+    assert.deepEqual(ast.children[0], {
+      type: 'CustomErrorDefinition',
+      name: 'MyCustomError',
+      parameters: [],
+    })
+
+    ast = parser.parse('error MyCustomError(uint a);')
+    assert.deepEqual(ast.children[0], {
+      type: 'CustomErrorDefinition',
+      name: 'MyCustomError',
+      parameters: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint',
+            stateMutability: null,
+          },
+          name: 'a',
+          isStateVar: false,
+          isIndexed: false,
+          expression: null,
+          storageLocation: null,
+        },
+      ],
+    })
+
+    ast = parser.parse('error MyCustomError(string);')
+    assert.deepEqual(ast.children[0], {
+      type: 'CustomErrorDefinition',
+      name: 'MyCustomError',
+      parameters: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'string',
+            stateMutability: null,
+          },
+          name: null,
+          isStateVar: false,
+          isIndexed: false,
+          expression: null,
+          storageLocation: null,
+        },
+      ],
+    })
+  })
+
+  it('should support contract-level custom errors', function () {
+    let ast: any = parseNode('error MyCustomError();')
+    assert.deepEqual(ast, {
+      type: 'CustomErrorDefinition',
+      name: 'MyCustomError',
+      parameters: [],
+    })
+
+    ast = parseNode('error MyCustomError(uint a);')
+    assert.deepEqual(ast, {
+      type: 'CustomErrorDefinition',
+      name: 'MyCustomError',
+      parameters: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint',
+            stateMutability: null,
+          },
+          name: 'a',
+          isStateVar: false,
+          isIndexed: false,
+          expression: null,
+          storageLocation: null,
+        },
+      ],
+    })
+
+    ast = parseNode('error MyCustomError(string);')
+    assert.deepEqual(ast, {
+      type: 'CustomErrorDefinition',
+      name: 'MyCustomError',
+      parameters: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'string',
+            stateMutability: null,
+          },
+          name: null,
+          isStateVar: false,
+          isIndexed: false,
+          expression: null,
+          storageLocation: null,
+        },
+      ],
+    })
+  })
+
+  it('should support revert statements', function () {
+    let ast: any = parseStatement('revert MyCustomError();')
+    assert.deepEqual(ast, {
+      type: 'RevertStatement',
+      revertCall: {
+        arguments: [],
+        expression: {
+          name: 'MyCustomError',
+          type: 'Identifier',
+        },
+        names: [],
+        type: 'FunctionCall',
+      },
+    })
+
+    ast = parseStatement('revert MyCustomError(3);')
+    assert.deepEqual(ast, {
+      type: 'RevertStatement',
+      revertCall: {
+        arguments: [
+          {
+            number: '3',
+            subdenomination: null,
+            type: 'NumberLiteral',
+          },
+        ],
+        expression: {
+          name: 'MyCustomError',
+          type: 'Identifier',
+        },
+        names: [],
+        type: 'FunctionCall',
       },
     })
   })

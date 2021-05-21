@@ -57,6 +57,8 @@ export const astNodeTypes = [
   'ModifierInvocation',
   'FunctionDefinition',
   'EventDefinition',
+  'CustomErrorDefinition',
+  'RevertStatement',
   'EnumValue',
   'EnumDefinition',
   'VariableDeclaration',
@@ -180,6 +182,15 @@ export interface FunctionDefinition extends BaseASTNode {
   isReceiveEther: boolean
   isFallback: boolean
   isVirtual: boolean
+}
+export interface CustomErrorDefinition extends BaseASTNode {
+  type: 'CustomErrorDefinition'
+  name: string
+  parameters: VariableDeclaration[]
+}
+export interface RevertStatement extends BaseASTNode {
+  type: 'RevertStatement'
+  revertCall: FunctionCall
 }
 export interface EventDefinition extends BaseASTNode {
   type: 'EventDefinition'
@@ -558,6 +569,7 @@ export type ASTNode =
   | ModifierInvocation
   | FunctionDefinition
   | EventDefinition
+  | CustomErrorDefinition
   | EnumValue
   | EnumDefinition
   | VariableDeclaration
@@ -659,6 +671,7 @@ export type Statement =
   | VariableDeclarationStatement
   | UncheckedStatement
   | TryStatement
+  | RevertStatement
 
 type ASTMap<U> = { [K in ASTNodeTypeString]: U extends { type: K } ? U : never };
 type ASTTypeMap = ASTMap<ASTNode>;
