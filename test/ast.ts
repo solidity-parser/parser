@@ -737,6 +737,8 @@ describe('AST', () => {
         type: 'ElementaryTypeName',
         stateMutability: null,
       },
+      isDeclaredConst: true,
+      isImmutable: false,
     })
   })
 

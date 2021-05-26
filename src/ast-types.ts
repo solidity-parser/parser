@@ -144,6 +144,8 @@ export interface FileLevelConstant extends BaseASTNode {
   typeName: TypeName
   name: string
   initialValue: Expression
+  isDeclaredConst: boolean
+  isImmutable: boolean
 }
 export interface UsingForDeclaration extends BaseASTNode {
   type: 'UsingForDeclaration'

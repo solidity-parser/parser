@@ -1244,6 +1244,8 @@ export class ASTBuilder
       typeName: type,
       name,
       initialValue: expression,
+      isDeclaredConst: true,
+      isImmutable: false,
     }
 
     return this._addMeta(node, ctx)
