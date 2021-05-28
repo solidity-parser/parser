@@ -261,6 +261,50 @@ describe('AST', () => {
     })
   })
 
+  it('FunctionDefinition payable virtual fallback', () => {
+    const ast: any = parseNode('fallback () external payable virtual {}')
+    assert.deepEqual(ast, {
+      type: 'FunctionDefinition',
+      name: null,
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: [],
+      },
+      visibility: 'external',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: true,
+      isReceiveEther: false,
+      isVirtual: true,
+      stateMutability: 'payable',
+    })
+  })
+
+  it('FunctionDefinition virtual receive', () => {
+    const ast: any = parseNode('receive () external payable virtual {}')
+    assert.deepEqual(ast, {
+      type: 'FunctionDefinition',
+      name: null,
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: [],
+      },
+      visibility: 'external',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: true,
+      isVirtual: true,
+      stateMutability: 'payable',
+    })
+  })
+
   it('FunctionDefinition fallback old definition', () => {
     const ast: any = parseNode('function () external {}')
     assert.deepEqual(ast, {

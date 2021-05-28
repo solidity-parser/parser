@@ -359,15 +359,15 @@ export class ASTBuilder
           visibility = 'private'
         }
 
-        // check if function is virtual
-        if (ctx.modifierList().VirtualKeyword().length > 0) {
-          isVirtual = true
-        }
-
         isConstructor = name === this._currentContract
         isFallback = name === ''
         break
       }
+    }
+
+    // check if function is virtual
+    if (ctx.modifierList().VirtualKeyword().length > 0) {
+      isVirtual = true
     }
 
     let override: AST.UserDefinedTypeName[] | null
