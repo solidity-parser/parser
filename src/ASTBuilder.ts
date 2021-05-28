@@ -528,7 +528,7 @@ export class ASTBuilder
     // in >=0.5.0 <0.7.0
     const versionContext = ctx.pragmaValue().version()
 
-    let value = ''
+    let value = this._toText(ctx.pragmaValue())
     if (versionContext?.children !== undefined) {
       value = versionContext.children.map((x) => this._toText(x)).join(' ')
     }

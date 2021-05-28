@@ -109,6 +109,36 @@ describe('AST', () => {
     })
   })
 
+  it("PragmaDirective experimental", function() {
+      const ast: any = parser.parse('pragma experimental ABIEncoderV2;')
+      const pragma = ast.children[0]
+      assert.deepEqual(pragma, {
+        type: 'PragmaDirective',
+        name: 'experimental',
+        value: 'ABIEncoderV2',
+      })
+  });
+
+  it("PragmaDirective abicoder v1", function() {
+      const ast: any = parser.parse('pragma abicoder v1;')
+      const pragma = ast.children[0]
+      assert.deepEqual(pragma, {
+        type: 'PragmaDirective',
+        name: 'abicoder',
+        value: 'v1',
+      })
+  });
+
+  it("PragmaDirective abicoder v2", function() {
+      const ast: any = parser.parse('pragma abicoder v2;')
+      const pragma = ast.children[0]
+      assert.deepEqual(pragma, {
+        type: 'PragmaDirective',
+        name: 'abicoder',
+        value: 'v2',
+      })
+  });
+
   it('ContractDefinition', function () {
     let ast = parseContract('contract test {}')
     assert.deepEqual(ast, {
