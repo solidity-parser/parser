@@ -132,7 +132,9 @@ export interface ImportDirective extends BaseASTNode {
   type: 'ImportDirective'
   path: string
   unitAlias: string | null
+  unitAliasIdentifier: Identifier | null
   symbolAliases: Array<[string, string | null]> | null
+  symbolAliasesIdentifiers: Array<[Identifier, Identifier | null]> | null
 }
 export interface StateVariableDeclaration extends BaseASTNode {
   type: 'StateVariableDeclaration'
@@ -215,6 +217,7 @@ export interface VariableDeclaration extends BaseASTNode {
   isStateVar: boolean
   typeName: TypeName | null
   name: string | null
+  identifier: Identifier | null
   isDeclaredConst?: boolean
   storageLocation: string | null
   expression: Expression | null

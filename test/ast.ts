@@ -109,35 +109,35 @@ describe('AST', () => {
     })
   })
 
-  it("PragmaDirective experimental", function() {
-      const ast: any = parser.parse('pragma experimental ABIEncoderV2;')
-      const pragma = ast.children[0]
-      assert.deepEqual(pragma, {
-        type: 'PragmaDirective',
-        name: 'experimental',
-        value: 'ABIEncoderV2',
-      })
-  });
+  it('PragmaDirective experimental', function () {
+    const ast: any = parser.parse('pragma experimental ABIEncoderV2;')
+    const pragma = ast.children[0]
+    assert.deepEqual(pragma, {
+      type: 'PragmaDirective',
+      name: 'experimental',
+      value: 'ABIEncoderV2',
+    })
+  })
 
-  it("PragmaDirective abicoder v1", function() {
-      const ast: any = parser.parse('pragma abicoder v1;')
-      const pragma = ast.children[0]
-      assert.deepEqual(pragma, {
-        type: 'PragmaDirective',
-        name: 'abicoder',
-        value: 'v1',
-      })
-  });
+  it('PragmaDirective abicoder v1', function () {
+    const ast: any = parser.parse('pragma abicoder v1;')
+    const pragma = ast.children[0]
+    assert.deepEqual(pragma, {
+      type: 'PragmaDirective',
+      name: 'abicoder',
+      value: 'v1',
+    })
+  })
 
-  it("PragmaDirective abicoder v2", function() {
-      const ast: any = parser.parse('pragma abicoder v2;')
-      const pragma = ast.children[0]
-      assert.deepEqual(pragma, {
-        type: 'PragmaDirective',
-        name: 'abicoder',
-        value: 'v2',
-      })
-  });
+  it('PragmaDirective abicoder v2', function () {
+    const ast: any = parser.parse('pragma abicoder v2;')
+    const pragma = ast.children[0]
+    assert.deepEqual(pragma, {
+      type: 'PragmaDirective',
+      name: 'abicoder',
+      value: 'v2',
+    })
+  })
 
   it('ContractDefinition', function () {
     let ast = parseContract('contract test {}')
@@ -211,6 +211,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -247,6 +251,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -414,6 +422,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'foo',
+          identifier: {
+            type: 'Identifier',
+            name: 'foo',
+          },
           expression: null,
           visibility: 'public',
           override: [],
@@ -441,6 +453,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'foo',
+          identifier: {
+            type: 'Identifier',
+            name: 'foo',
+          },
           expression: null,
           visibility: 'default',
           override: null,
@@ -495,6 +511,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'foo',
+          identifier: {
+            type: 'Identifier',
+            name: 'foo',
+          },
           expression: null,
           visibility: 'public',
           override: [
@@ -560,6 +580,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'foo',
+          identifier: {
+            type: 'Identifier',
+            name: 'foo',
+          },
           expression: null,
           visibility: 'public',
           override: [
@@ -597,6 +621,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -652,6 +680,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -663,6 +695,7 @@ describe('AST', () => {
           isIndexed: false,
           isStateVar: false,
           name: null,
+          identifier: null,
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: {
@@ -703,6 +736,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -758,6 +795,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -769,6 +810,7 @@ describe('AST', () => {
           isIndexed: false,
           isStateVar: false,
           name: null,
+          identifier: null,
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: {
@@ -939,6 +981,7 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: null,
+          identifier: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -952,6 +995,7 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: null,
+          identifier: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -967,6 +1011,7 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: null,
+          identifier: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -1049,6 +1094,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -1069,6 +1118,10 @@ describe('AST', () => {
         stateMutability: null,
       },
       name: 'a',
+      identifier: {
+        type: 'Identifier',
+        name: 'a',
+      },
       expression: null,
       visibility: 'default',
       isStateVar: true,
@@ -1178,6 +1231,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -1201,6 +1258,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'a',
+              identifier: {
+                type: 'Identifier',
+                name: 'a',
+              },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
@@ -1252,6 +1313,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -1275,6 +1340,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'b',
+              identifier: {
+                type: 'Identifier',
+                name: 'b',
+              },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
@@ -1299,6 +1368,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'c',
+              identifier: {
+                type: 'Identifier',
+                name: 'c',
+              },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
@@ -1350,6 +1423,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -1373,6 +1450,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'errorCode',
+              identifier: {
+                type: 'Identifier',
+                name: 'errorCode',
+              },
               storageLocation: null,
               type: 'VariableDeclaration',
               typeName: {
@@ -1397,6 +1478,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'c',
+              identifier: {
+                type: 'Identifier',
+                name: 'c',
+              },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
@@ -1448,6 +1533,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -1471,6 +1560,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'b',
+              identifier: {
+                type: 'Identifier',
+                name: 'b',
+              },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
@@ -1495,6 +1588,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'errorCode',
+              identifier: {
+                type: 'Identifier',
+                name: 'errorCode',
+              },
               storageLocation: null,
               type: 'VariableDeclaration',
               typeName: {
@@ -1519,6 +1616,10 @@ describe('AST', () => {
               isIndexed: false,
               isStateVar: false,
               name: 'c',
+              identifier: {
+                type: 'Identifier',
+                name: 'c',
+              },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
@@ -1879,6 +1980,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           expression: null,
           visibility: 'default',
           override: null,
@@ -2076,6 +2181,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
@@ -2098,6 +2207,10 @@ describe('AST', () => {
           isIndexed: false,
           isStateVar: false,
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: null,
@@ -2108,6 +2221,10 @@ describe('AST', () => {
           isIndexed: false,
           isStateVar: false,
           name: 'b',
+          identifier: {
+            type: 'Identifier',
+            name: 'b',
+          },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: null,
@@ -2129,6 +2246,10 @@ describe('AST', () => {
           isIndexed: false,
           isStateVar: false,
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: {
@@ -2143,6 +2264,10 @@ describe('AST', () => {
           isIndexed: false,
           isStateVar: false,
           name: 'b',
+          identifier: {
+            type: 'Identifier',
+            name: 'b',
+          },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: {
@@ -2162,7 +2287,9 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       unitAlias: null,
+      unitAliasIdentifier: null,
       symbolAliases: null,
+      symbolAliasesIdentifiers: null,
     })
 
     ast = parser.parse('import "./abc.sol" as x;')
@@ -2170,7 +2297,12 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       unitAlias: 'x',
+      unitAliasIdentifier: {
+        type: 'Identifier',
+        name: 'x',
+      },
       symbolAliases: null,
+      symbolAliasesIdentifiers: null,
     })
 
     ast = parser.parse('import * as x from "./abc.sol";')
@@ -2178,7 +2310,12 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       unitAlias: 'x',
+      unitAliasIdentifier: {
+        type: 'Identifier',
+        name: 'x',
+      },
       symbolAliases: null,
+      symbolAliasesIdentifiers: null,
     })
 
     ast = parser.parse('import { a as b, c as d, f } from "./abc.sol";')
@@ -2186,10 +2323,22 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       unitAlias: null,
+      unitAliasIdentifier: null,
       symbolAliases: [
         ['a', 'b'],
         ['c', 'd'],
         ['f', null],
+      ],
+      symbolAliasesIdentifiers: [
+        [
+          { type: 'Identifier', name: 'a' },
+          { type: 'Identifier', name: 'b' },
+        ],
+        [
+          { type: 'Identifier', name: 'c' },
+          { type: 'Identifier', name: 'd' },
+        ],
+        [{ type: 'Identifier', name: 'f' }, null],
       ],
     })
   })
@@ -2208,6 +2357,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           isStateVar: false,
           isIndexed: true,
           expression: null,
@@ -2221,6 +2374,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'b',
+          identifier: {
+            type: 'Identifier',
+            name: 'b',
+          },
           isStateVar: false,
           isIndexed: false,
           expression: null,
@@ -2993,6 +3150,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           isStateVar: false,
           isIndexed: false,
           expression: null,
@@ -3014,6 +3175,7 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: null,
+          identifier: null,
           isStateVar: false,
           isIndexed: false,
           expression: null,
@@ -3044,6 +3206,10 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
           isStateVar: false,
           isIndexed: false,
           expression: null,
@@ -3065,6 +3231,7 @@ describe('AST', () => {
             stateMutability: null,
           },
           name: null,
+          identifier: null,
           isStateVar: false,
           isIndexed: false,
           expression: null,

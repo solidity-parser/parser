@@ -129,6 +129,7 @@ export class ASTBuilder
       type: 'VariableDeclaration',
       typeName: type,
       name,
+      identifier: this.visitIdentifier(iden),
       expression,
       visibility,
       isStateVar: true,
@@ -157,10 +158,13 @@ export class ASTBuilder
       storageLocation = this._toText(ctxStorageLocation)
     }
 
+    const identifierCtx = ctx.identifier()
+
     const node: AST.VariableDeclaration = {
       type: 'VariableDeclaration',
       typeName: this.visitTypeName(ctx.typeName()),
-      name: this._toText(ctx.identifier()),
+      name: this._toText(identifierCtx),
+      identifier: this.visitIdentifier(identifierCtx),
       storageLocation,
       isStateVar: false,
       isIndexed: false,
@@ -224,6 +228,10 @@ export class ASTBuilder
           type: 'VariableDeclaration',
           typeName: type,
           name,
+          identifier:
+            paramCtxIdentifier !== undefined
+              ? this.visitIdentifier(paramCtxIdentifier)
+              : null,
           isStateVar: false,
           isIndexed: paramCtx.IndexedKeyword() !== undefined,
           storageLocation: null,
@@ -268,6 +276,10 @@ export class ASTBuilder
       type: 'VariableDeclaration',
       typeName: this.visitTypeName(ctx.typeName()),
       name,
+      identifier:
+        ctxIdentifier !== undefined
+          ? this.visitIdentifier(ctxIdentifier)
+          : null,
       storageLocation,
       isStateVar: false,
       isIndexed: false,
@@ -658,6 +670,7 @@ export class ASTBuilder
       type: 'VariableDeclaration',
       typeName: this.visitTypeName(ctx.typeName()),
       name: null,
+      identifier: null,
       storageLocation,
       isStateVar: false,
       isIndexed: false,
@@ -1429,6 +1442,7 @@ export class ASTBuilder
       const node: AST.VariableDeclaration = {
         type: 'VariableDeclaration',
         name: this._toText(iden),
+        identifier: this.visitIdentifier(iden),
         isStateVar: false,
         isIndexed: false,
         typeName: null,
@@ -1461,9 +1475,12 @@ export class ASTBuilder
         storageLocation = this._toText(decl.storageLocation()!)
       }
 
+      const identifierCtx = decl.identifier()
+
       const result: AST.VariableDeclaration = {
         type: 'VariableDeclaration',
-        name: this._toText(decl.identifier()),
+        name: this._toText(identifierCtx),
+        identifier: this.visitIdentifier(identifierCtx),
         typeName: this.visitTypeName(decl.typeName()),
         storageLocation,
         isStateVar: false,
@@ -1478,7 +1495,9 @@ export class ASTBuilder
   public visitImportDirective(ctx: SP.ImportDirectiveContext) {
     const pathString = this._toText(ctx.StringLiteralFragment())!
     let unitAlias = null
+    let unitAliasIdentifier = null
     let symbolAliases = null
+    let symbolAliasesIdentifiers = null
 
     if (ctx.importDeclaration().length > 0) {
       symbolAliases = ctx.importDeclaration().map((decl) => {
@@ -1489,17 +1508,46 @@ export class ASTBuilder
         }
         return [symbol, alias] as [string, string | null]
       })
-    } else if (ctx.children!.length === 7) {
-      unitAlias = this._toText(ctx.getChild(3))
-    } else if (ctx.children!.length === 5) {
-      unitAlias = this._toText(ctx.getChild(3))
+      symbolAliasesIdentifiers = ctx.importDeclaration().map((decl) => {
+        const symbolIdentifier = this.visitIdentifier(decl.identifier(0))
+        let aliasIdentifier = null
+        if (decl.identifier().length > 1) {
+          aliasIdentifier = this.visitIdentifier(decl.identifier(1))
+        }
+        return [symbolIdentifier, aliasIdentifier] as [
+          AST.Identifier,
+          AST.Identifier | null
+        ]
+      })
+    } else {
+      const identifierCtxList = ctx.identifier()
+      if (identifierCtxList.length === 0) {
+        // nothing to do
+      } else if (identifierCtxList.length === 1) {
+        const aliasIdentifierCtx = ctx.identifier(0)
+        unitAlias = this._toText(aliasIdentifierCtx)
+        unitAliasIdentifier = this.visitIdentifier(aliasIdentifierCtx)
+      } else if (identifierCtxList.length === 2) {
+        const aliasIdentifierCtx = ctx.identifier(1)
+        unitAlias = this._toText(aliasIdentifierCtx)
+        unitAliasIdentifier = this.visitIdentifier(aliasIdentifierCtx)
+      } else {
+        throw new Error(
+          'Assertion error: an import should have one or two identifiers'
+        )
+      }
     }
+    // else if (ctx.children!.length === 5) {
+    //   unitAlias = this._toText(ctx.getChild(3))
+    // }
 
     const node: AST.ImportDirective = {
       type: 'ImportDirective',
       path: pathString.substring(1, pathString.length - 1),
       unitAlias,
+      unitAliasIdentifier,
       symbolAliases,
+      symbolAliasesIdentifiers,
     }
 
     return this._addMeta(node, ctx)
