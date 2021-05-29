@@ -165,7 +165,7 @@ export interface ModifierDefinition extends BaseASTNode {
   parameters: null | VariableDeclaration[]
   isVirtual: boolean
   override: null | UserDefinedTypeName[]
-  body: Block
+  body: Block | null
 }
 export interface ModifierInvocation extends BaseASTNode {
   type: 'ModifierInvocation'

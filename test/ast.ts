@@ -3064,6 +3064,18 @@ describe('AST', () => {
     })
   })
 
+  it('should allow modifiers without body', function () {
+    const ast: any = parseNode('modifier foo() virtual;')
+    assert.deepEqual(ast, {
+      type: 'ModifierDefinition',
+      name: 'foo',
+      parameters: [],
+      body: null,
+      isVirtual: true,
+      override: null,
+    })
+  })
+
   it('should allow using override in a modifier', function () {
     const ast: any = parseNode('modifier foo() override {}')
     assert.deepEqual(ast, {
