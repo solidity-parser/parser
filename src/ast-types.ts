@@ -337,6 +337,7 @@ export interface FunctionCall extends BaseASTNode {
   expression: Expression
   arguments: Expression[]
   names: string[]
+  identifiers: Identifier[]
 }
 export interface AssemblyBlock extends BaseASTNode {
   type: 'AssemblyBlock'
@@ -498,7 +499,7 @@ export const binaryOpValues = [
   '/=',
   '%=',
   '|',
-  '|='
+  '|=',
 ] as const
 export type BinOp = typeof binaryOpValues[number]
 
@@ -559,6 +560,7 @@ export interface DecimalNumber extends BaseASTNode {
 export interface NameValueList extends BaseASTNode {
   type: 'NameValueList'
   names: string[]
+  identifiers: Identifier[]
   arguments: Expression[]
 }
 export type ASTNode =
@@ -678,14 +680,17 @@ export type Statement =
   | TryStatement
   | RevertStatement
 
-type ASTMap<U> = { [K in ASTNodeTypeString]: U extends { type: K } ? U : never };
-type ASTTypeMap = ASTMap<ASTNode>;
+type ASTMap<U> = { [K in ASTNodeTypeString]: U extends { type: K } ? U : never }
+type ASTTypeMap = ASTMap<ASTNode>
 type ASTVisitorEnter = {
   [K in keyof ASTTypeMap]?: (ast: ASTTypeMap[K], parent?: ASTNode) => any
-};
+}
 type ASTVisitorExit = {
-  [K in keyof ASTTypeMap as `${K}:exit`]?: (ast: ASTTypeMap[K], parent?: ASTNode) => any
-};
+  [K in keyof ASTTypeMap as `${K}:exit`]?: (
+    ast: ASTTypeMap[K],
+    parent?: ASTNode
+  ) => any
+}
 
 export type ASTVisitor = ASTVisitorEnter & ASTVisitorExit
 

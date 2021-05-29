@@ -746,6 +746,7 @@ export class ASTBuilder
   ): AST.FunctionCall & WithMeta {
     let args: AST.Expression[] = []
     const names = []
+    const identifiers = []
 
     const ctxArgs = ctx.functionCallArguments()
     const ctxArgsExpressionList = ctxArgs.expressionList()
@@ -758,6 +759,7 @@ export class ASTBuilder
       for (const nameValue of ctxArgsNameValueList.nameValue()) {
         args.push(this.visitExpression(nameValue.expression()))
         names.push(this._toText(nameValue.identifier()))
+        identifiers.push(this.visitIdentifier(nameValue.identifier()))
       }
     }
 
@@ -766,6 +768,7 @@ export class ASTBuilder
       expression: this.visitExpression(ctx.expression()),
       arguments: args,
       names,
+      identifiers,
     }
 
     return this._addMeta(node, ctx)
@@ -1096,6 +1099,7 @@ export class ASTBuilder
         ) {
           let args: AST.Expression[] = []
           const names = []
+          const identifiers = []
 
           const ctxArgs = ctx.functionCallArguments()!
           if (ctxArgs.expressionList()) {
@@ -1107,6 +1111,7 @@ export class ASTBuilder
             for (const nameValue of ctxArgs.nameValueList()!.nameValue()) {
               args.push(this.visitExpression(nameValue.expression()))
               names.push(this._toText(nameValue.identifier()))
+              identifiers.push(this.visitIdentifier(nameValue.identifier()))
             }
           }
 
@@ -1115,6 +1120,7 @@ export class ASTBuilder
             expression: this.visitExpression(ctx.expression(0)),
             arguments: args,
             names,
+            identifiers,
           }
 
           return this._addMeta(node, ctx)
@@ -1229,16 +1235,19 @@ export class ASTBuilder
     ctx: SP.NameValueListContext
   ): AST.NameValueList & WithMeta {
     const names: string[] = []
+    const identifiers: AST.Identifier[] = []
     const args: AST.Expression[] = []
 
     for (const nameValue of ctx.nameValue()) {
       names.push(this._toText(nameValue.identifier()))
+      identifiers.push(this.visitIdentifier(nameValue.identifier()))
       args.push(this.visitExpression(nameValue.expression()))
     }
 
     const node: AST.NameValueList = {
       type: 'NameValueList',
       names,
+      identifiers,
       arguments: args,
     }
 

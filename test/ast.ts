@@ -1076,6 +1076,35 @@ describe('AST', () => {
           },
         ],
         names: [],
+        identifiers: [],
+      },
+    })
+  })
+
+  it('EmitStatement with name/value pair', function () {
+    const ast: any = parseStatement('emit EventCalled({x : 1});')
+    assert.deepEqual(ast, {
+      type: 'EmitStatement',
+      eventCall: {
+        type: 'FunctionCall',
+        expression: {
+          type: 'Identifier',
+          name: 'EventCalled',
+        },
+        arguments: [
+          {
+            type: 'NumberLiteral',
+            number: '1',
+            subdenomination: null,
+          },
+        ],
+        names: ['x'],
+        identifiers: [
+          {
+            type: 'Identifier',
+            name: 'x',
+          },
+        ],
       },
     })
   })
@@ -1221,6 +1250,7 @@ describe('AST', () => {
           },
         ],
         names: [],
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1303,6 +1333,7 @@ describe('AST', () => {
           },
         ],
         names: [],
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1413,6 +1444,7 @@ describe('AST', () => {
           },
         ],
         names: [],
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1523,6 +1555,7 @@ describe('AST', () => {
           },
         ],
         names: [],
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1949,6 +1982,7 @@ describe('AST', () => {
         },
       ],
       names: [],
+      identifiers: [],
     })
     expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
@@ -1964,6 +1998,113 @@ describe('AST', () => {
         },
       ],
       names: [],
+      identifiers: [],
+    })
+  })
+
+  it('FunctionCall with name/value pairs', function () {
+    let expr = parseExpression('f{value: 10}(1, 2)')
+    assert.deepEqual(expr, {
+      type: 'FunctionCall',
+      expression: {
+        type: 'NameValueExpression',
+        expression: {
+          type: 'Identifier',
+          name: 'f',
+        },
+        arguments: {
+          type: 'NameValueList',
+          names: ['value'],
+          identifiers: [{ type: 'Identifier', name: 'value' }],
+          arguments: [
+            {
+              type: 'NumberLiteral',
+              number: '10',
+              subdenomination: null,
+            },
+          ],
+        },
+      },
+      arguments: [
+        {
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: null,
+        },
+        {
+          type: 'NumberLiteral',
+          number: '2',
+          subdenomination: null,
+        },
+      ],
+      names: [],
+      identifiers: [],
+    })
+    expr = parseExpression('type(MyContract)')
+    assert.deepEqual(expr, {
+      type: 'FunctionCall',
+      expression: {
+        type: 'Identifier',
+        name: 'type',
+      },
+      arguments: [
+        {
+          type: 'Identifier',
+          name: 'MyContract',
+        },
+      ],
+      names: [],
+      identifiers: [],
+    })
+  })
+
+  it('FunctionCall with name/value arguments', function () {
+    let expr = parseExpression('f({x: 1, y: 2})')
+    assert.deepEqual(expr, {
+      type: 'FunctionCall',
+      expression: {
+        type: 'Identifier',
+        name: 'f',
+      },
+      arguments: [
+        {
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: null,
+        },
+        {
+          type: 'NumberLiteral',
+          number: '2',
+          subdenomination: null,
+        },
+      ],
+      names: ['x', 'y'],
+      identifiers: [
+        {
+          type: 'Identifier',
+          name: 'x',
+        },
+        {
+          type: 'Identifier',
+          name: 'y',
+        },
+      ],
+    })
+    expr = parseExpression('type(MyContract)')
+    assert.deepEqual(expr, {
+      type: 'FunctionCall',
+      expression: {
+        type: 'Identifier',
+        name: 'type',
+      },
+      arguments: [
+        {
+          type: 'Identifier',
+          name: 'MyContract',
+        },
+      ],
+      names: [],
+      identifiers: [],
     })
   })
 
@@ -2825,6 +2966,7 @@ describe('AST', () => {
         arguments: {
           type: 'NameValueList',
           names: ['value'],
+          identifiers: [{ type: 'Identifier', name: 'value' }],
           arguments: [
             {
               number: '1',
@@ -2845,6 +2987,7 @@ describe('AST', () => {
       },
       arguments: [],
       names: [],
+      identifiers: [],
     })
 
     expr = parseExpression('recipient.call{value: 1, gas: 21000}()')
@@ -2854,6 +2997,10 @@ describe('AST', () => {
         arguments: {
           type: 'NameValueList',
           names: ['value', 'gas'],
+          identifiers: [
+            { type: 'Identifier', name: 'value' },
+            { type: 'Identifier', name: 'gas' },
+          ],
           arguments: [
             {
               number: '1',
@@ -2879,6 +3026,7 @@ describe('AST', () => {
       },
       arguments: [],
       names: [],
+      identifiers: [],
     })
   })
 
@@ -2897,6 +3045,7 @@ describe('AST', () => {
         },
       ],
       names: [],
+      identifiers: [],
     })
   })
 
@@ -3252,6 +3401,7 @@ describe('AST', () => {
           type: 'Identifier',
         },
         names: [],
+        identifiers: [],
         type: 'FunctionCall',
       },
     })
@@ -3272,6 +3422,7 @@ describe('AST', () => {
           type: 'Identifier',
         },
         names: [],
+        identifiers: [],
         type: 'FunctionCall',
       },
     })
