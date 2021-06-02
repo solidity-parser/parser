@@ -12,6 +12,7 @@ import { VersionOperatorContext } from "./SolidityParser";
 import { VersionConstraintContext } from "./SolidityParser";
 import { ImportDeclarationContext } from "./SolidityParser";
 import { ImportDirectiveContext } from "./SolidityParser";
+import { ImportPathContext } from "./SolidityParser";
 import { ContractDefinitionContext } from "./SolidityParser";
 import { InheritanceSpecifierContext } from "./SolidityParser";
 import { ContractPartContext } from "./SolidityParser";
@@ -170,6 +171,13 @@ export interface SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitImportDirective?: (ctx: ImportDirectiveContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SolidityParser.importPath`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitImportPath?: (ctx: ImportPathContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SolidityParser.contractDefinition`.

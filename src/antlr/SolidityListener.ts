@@ -12,6 +12,7 @@ import { VersionOperatorContext } from "./SolidityParser";
 import { VersionConstraintContext } from "./SolidityParser";
 import { ImportDeclarationContext } from "./SolidityParser";
 import { ImportDirectiveContext } from "./SolidityParser";
+import { ImportPathContext } from "./SolidityParser";
 import { ContractDefinitionContext } from "./SolidityParser";
 import { InheritanceSpecifierContext } from "./SolidityParser";
 import { ContractPartContext } from "./SolidityParser";
@@ -203,6 +204,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitImportDirective?: (ctx: ImportDirectiveContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.importPath`.
+	 * @param ctx the parse tree
+	 */
+	enterImportPath?: (ctx: ImportPathContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.importPath`.
+	 * @param ctx the parse tree
+	 */
+	exitImportPath?: (ctx: ImportPathContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.contractDefinition`.
