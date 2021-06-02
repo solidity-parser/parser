@@ -971,10 +971,10 @@ export class ASTBuilder
         .map((x) => this.visitUserDefinedTypeName(x))
     }
 
-    let body = null;
-    let blockCtx = ctx.block();
+    let body = null
+    const blockCtx = ctx.block()
     if (blockCtx !== undefined) {
-      body = this.visitBlock(blockCtx);
+      body = this.visitBlock(blockCtx)
     }
 
     const node: AST.ModifierDefinition = {
