@@ -1565,7 +1565,7 @@ export class ASTBuilder
     const node: AST.ImportDirective = {
       type: 'ImportDirective',
       path,
-      pathLiteral,
+      pathLiteral: this._addMeta(pathLiteral, ctx.importPath()),
       unitAlias,
       unitAliasIdentifier,
       symbolAliases,
