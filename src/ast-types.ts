@@ -131,6 +131,7 @@ export interface PragmaDirective extends BaseASTNode {
 export interface ImportDirective extends BaseASTNode {
   type: 'ImportDirective'
   path: string
+  pathLiteral: StringLiteral
   unitAlias: string | null
   unitAliasIdentifier: Identifier | null
   symbolAliases: Array<[string, string | null]> | null

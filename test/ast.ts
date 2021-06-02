@@ -2427,6 +2427,12 @@ describe('AST', () => {
     assert.deepEqual(ast.children[0], {
       type: 'ImportDirective',
       path: './abc.sol',
+      pathLiteral: {
+        type: "StringLiteral",
+        value: './abc.sol',
+        parts: ['./abc.sol'],
+        isUnicode: [false]
+      },
       unitAlias: null,
       unitAliasIdentifier: null,
       symbolAliases: null,
@@ -2437,6 +2443,12 @@ describe('AST', () => {
     assert.deepEqual(ast.children[0], {
       type: 'ImportDirective',
       path: './abc.sol',
+      pathLiteral: {
+        type: "StringLiteral",
+        value: './abc.sol',
+        parts: ['./abc.sol'],
+        isUnicode: [false]
+      },
       unitAlias: 'x',
       unitAliasIdentifier: {
         type: 'Identifier',
@@ -2450,6 +2462,12 @@ describe('AST', () => {
     assert.deepEqual(ast.children[0], {
       type: 'ImportDirective',
       path: './abc.sol',
+      pathLiteral: {
+        type: "StringLiteral",
+        value: './abc.sol',
+        parts: ['./abc.sol'],
+        isUnicode: [false]
+      },
       unitAlias: 'x',
       unitAliasIdentifier: {
         type: 'Identifier',
@@ -2463,6 +2481,12 @@ describe('AST', () => {
     assert.deepEqual(ast.children[0], {
       type: 'ImportDirective',
       path: './abc.sol',
+      pathLiteral: {
+        type: "StringLiteral",
+        value: './abc.sol',
+        parts: ['./abc.sol'],
+        isUnicode: [false]
+      },
       unitAlias: null,
       unitAliasIdentifier: null,
       symbolAliases: [

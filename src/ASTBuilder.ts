@@ -1508,7 +1508,7 @@ export class ASTBuilder
   }
 
   public visitImportDirective(ctx: SP.ImportDirectiveContext) {
-    const pathString = this._toText(ctx.StringLiteralFragment())!
+    const pathString = this._toText(ctx.importPath())
     let unitAlias = null
     let unitAliasIdentifier = null
     let symbolAliases = null
@@ -1552,13 +1552,20 @@ export class ASTBuilder
         )
       }
     }
-    // else if (ctx.children!.length === 5) {
-    //   unitAlias = this._toText(ctx.getChild(3))
-    // }
+
+    const path = pathString.substring(1, pathString.length - 1)
+
+    const pathLiteral: AST.StringLiteral = {
+      type: 'StringLiteral',
+      value: path,
+      parts: [path],
+      isUnicode: [false], // paths in imports don't seem to support unicode literals
+    }
 
     const node: AST.ImportDirective = {
       type: 'ImportDirective',
-      path: pathString.substring(1, pathString.length - 1),
+      path,
+      pathLiteral,
       unitAlias,
       unitAliasIdentifier,
       symbolAliases,
