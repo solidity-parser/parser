@@ -119,6 +119,7 @@ export const astNodeTypes = [
   'CatchClause',
   'FileLevelConstant',
   'AssemblyMemberAccess',
+  'TypeDefinition'
 ] as const
 
 export type ASTNodeTypeString = typeof astNodeTypes[number]
@@ -188,11 +189,19 @@ export interface FunctionDefinition extends BaseASTNode {
   isFallback: boolean
   isVirtual: boolean
 }
+
 export interface CustomErrorDefinition extends BaseASTNode {
   type: 'CustomErrorDefinition'
   name: string
   parameters: VariableDeclaration[]
 }
+
+export interface TypeDefinition extends BaseASTNode {
+  type: 'TypeDefinition'
+  name: string
+  definition: ElementaryTypeName
+}
+
 export interface RevertStatement extends BaseASTNode {
   type: 'RevertStatement'
   revertCall: FunctionCall
@@ -614,6 +623,7 @@ export type ASTNode =
   | AssemblyMemberAccess
   | CatchClause
   | FileLevelConstant
+  | TypeDefinition
 
 export type AssemblyItem =
   | Identifier

@@ -19,6 +19,7 @@ import { ContractPartContext } from "./SolidityParser";
 import { StateVariableDeclarationContext } from "./SolidityParser";
 import { FileLevelConstantContext } from "./SolidityParser";
 import { CustomErrorDefinitionContext } from "./SolidityParser";
+import { TypeDefinitionContext } from "./SolidityParser";
 import { UsingForDeclarationContext } from "./SolidityParser";
 import { StructDefinitionContext } from "./SolidityParser";
 import { ModifierDefinitionContext } from "./SolidityParser";
@@ -281,6 +282,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitCustomErrorDefinition?: (ctx: CustomErrorDefinitionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.typeDefinition`.
+	 * @param ctx the parse tree
+	 */
+	enterTypeDefinition?: (ctx: TypeDefinitionContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.typeDefinition`.
+	 * @param ctx the parse tree
+	 */
+	exitTypeDefinition?: (ctx: TypeDefinitionContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.usingForDeclaration`.

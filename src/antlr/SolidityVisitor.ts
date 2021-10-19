@@ -19,6 +19,7 @@ import { ContractPartContext } from "./SolidityParser";
 import { StateVariableDeclarationContext } from "./SolidityParser";
 import { FileLevelConstantContext } from "./SolidityParser";
 import { CustomErrorDefinitionContext } from "./SolidityParser";
+import { TypeDefinitionContext } from "./SolidityParser";
 import { UsingForDeclarationContext } from "./SolidityParser";
 import { StructDefinitionContext } from "./SolidityParser";
 import { ModifierDefinitionContext } from "./SolidityParser";
@@ -220,6 +221,13 @@ export interface SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitCustomErrorDefinition?: (ctx: CustomErrorDefinitionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SolidityParser.typeDefinition`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeDefinition?: (ctx: TypeDefinitionContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SolidityParser.usingForDeclaration`.

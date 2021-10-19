@@ -3463,4 +3463,32 @@ describe('AST', () => {
       },
     })
   })
+
+  it('should support top-level user defined value types', function () {
+    const ast = parseNode('type Price is uint128;')
+
+    assert.deepEqual(ast, {
+      type: 'TypeDefinition',
+      name: 'Price',
+      definition: {
+        type: 'ElementaryTypeName',
+        name: 'uint128',
+        stateMutability: null
+      }
+    })
+  });
+
+  it('should support contract-level user defined value types', function () {
+    const ast = parseContract('contract Foo { type Price is uint128; }')
+
+    assert.deepEqual(ast.subNodes[0], {
+      type: 'TypeDefinition',
+      name: 'Price',
+      definition: {
+        type: 'ElementaryTypeName',
+        name: 'uint128',
+        stateMutability: null
+      }
+    })
+  });
 })

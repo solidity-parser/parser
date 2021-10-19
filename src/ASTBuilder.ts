@@ -730,6 +730,18 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
+  public visitTypeDefinition(
+    ctx: SP.TypeDefinitionContext
+  ): AST.TypeDefinition & WithMeta {
+    const node: AST.TypeDefinition = {
+      type: 'TypeDefinition',
+      name: this._toText(ctx.identifier()),
+      definition: this.visitElementaryTypeName(ctx.elementaryTypeName())
+    }
+
+    return this._addMeta(node, ctx)
+  }
+
   public visitRevertStatement(
     ctx: SP.RevertStatementContext
   ): AST.RevertStatement & WithMeta {
