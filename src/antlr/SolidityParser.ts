@@ -1339,7 +1339,7 @@ export class SolidityParser extends Parser {
 			this.state = 369;
 			this.match(SolidityParser.T__25);
 			this.state = 370;
-			this.identifier();
+			this.userDefinedTypeName();
 			this.state = 371;
 			this.match(SolidityParser.T__26);
 			this.state = 374;
@@ -6378,16 +6378,16 @@ export class SolidityParser extends Parser {
 		"\u016B\x05:\x1E\x02\u016B\u016C\x07\x04\x02\x02\u016C!\x03\x02\x02\x02" +
 		"\u016D\u016E\x07}\x02\x02\u016E\u016F\x05\xBC_\x02\u016F\u0170\x07\x18" +
 		"\x02\x02\u0170\u0171\x05\x80A\x02\u0171\u0172\x07\x04\x02\x02\u0172#\x03" +
-		"\x02\x02\x02\u0173\u0174\x07\x1C\x02\x02\u0174\u0175\x05\xBC_\x02\u0175" +
-		"\u0178\x07\x1D\x02\x02\u0176\u0179\x07\x0F\x02\x02\u0177\u0179\x05H%\x02" +
-		"\u0178\u0176\x03\x02\x02\x02\u0178\u0177\x03\x02\x02\x02\u0179\u017A\x03" +
-		"\x02\x02\x02\u017A\u017B\x07\x04\x02\x02\u017B%\x03\x02\x02\x02\u017C" +
-		"\u017D\x07\x1E\x02\x02\u017D\u017E\x05\xBC_\x02\u017E\u0189\x07\x11\x02" +
-		"\x02\u017F\u0180\x05F$\x02\u0180\u0186\x07\x04\x02\x02\u0181\u0182\x05" +
-		"F$\x02\u0182\u0183\x07\x04\x02\x02\u0183\u0185\x03\x02\x02\x02\u0184\u0181" +
-		"\x03\x02\x02\x02\u0185\u0188\x03\x02\x02\x02\u0186\u0184\x03\x02\x02\x02" +
-		"\u0186\u0187\x03\x02\x02\x02\u0187\u018A\x03\x02\x02\x02\u0188\u0186\x03" +
-		"\x02\x02\x02\u0189\u017F\x03\x02\x02\x02\u0189\u018A\x03\x02\x02\x02\u018A" +
+		"\x02\x02\x02\u0173\u0174\x07\x1C\x02\x02\u0174\u0175\x05J&\x02\u0175\u0178" +
+		"\x07\x1D\x02\x02\u0176\u0179\x07\x0F\x02\x02\u0177\u0179\x05H%\x02\u0178" +
+		"\u0176\x03\x02\x02\x02\u0178\u0177\x03\x02\x02\x02\u0179\u017A\x03\x02" +
+		"\x02\x02\u017A\u017B\x07\x04\x02\x02\u017B%\x03\x02\x02\x02\u017C\u017D" +
+		"\x07\x1E\x02\x02\u017D\u017E\x05\xBC_\x02\u017E\u0189\x07\x11\x02\x02" +
+		"\u017F\u0180\x05F$\x02\u0180\u0186\x07\x04\x02\x02\u0181\u0182\x05F$\x02" +
+		"\u0182\u0183\x07\x04\x02\x02\u0183\u0185\x03\x02\x02\x02\u0184\u0181\x03" +
+		"\x02\x02\x02\u0185\u0188\x03\x02\x02\x02\u0186\u0184\x03\x02\x02\x02\u0186" +
+		"\u0187\x03\x02\x02\x02\u0187\u018A\x03\x02\x02\x02\u0188\u0186\x03\x02" +
+		"\x02\x02\u0189\u017F\x03\x02\x02\x02\u0189\u018A\x03\x02\x02\x02\u018A" +
 		"\u018B\x03\x02\x02\x02\u018B\u018C\x07\x13\x02\x02\u018C\'\x03\x02\x02" +
 		"\x02\u018D\u018E\x07\x1F\x02\x02\u018E\u0190\x05\xBC_\x02\u018F\u0191" +
 		"\x05:\x1E\x02\u0190\u018F\x03\x02\x02\x02\u0190\u0191\x03\x02\x02\x02" +
@@ -7537,8 +7537,8 @@ export class TypeDefinitionContext extends ParserRuleContext {
 
 
 export class UsingForDeclarationContext extends ParserRuleContext {
-	public identifier(): IdentifierContext {
-		return this.getRuleContext(0, IdentifierContext);
+	public userDefinedTypeName(): UserDefinedTypeNameContext {
+		return this.getRuleContext(0, UserDefinedTypeNameContext);
 	}
 	public typeName(): TypeNameContext | undefined {
 		return this.tryGetRuleContext(0, TypeNameContext);
