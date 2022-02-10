@@ -527,7 +527,7 @@ export class ASTBuilder
     const node: AST.UsingForDeclaration = {
       type: 'UsingForDeclaration',
       typeName,
-      libraryName: this._toText(ctx.identifier()),
+      libraryName: this._toText(ctx.userDefinedTypeName()),
     }
 
     return this._addMeta(node, ctx)

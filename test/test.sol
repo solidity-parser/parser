@@ -781,3 +781,7 @@ library FixedMath {
         return UFixed.wrap(a * multiplier);
     }
 }
+
+contract C {
+  using L.Lib for uint;
+}

@@ -67,6 +67,16 @@ describe('AST', () => {
       },
       libraryName: 'Lib',
     })
+
+    ast = parseNode('using L.Lib for S;')
+    assert.deepEqual(ast, {
+      type: 'UsingForDeclaration',
+      typeName: {
+        type: 'UserDefinedTypeName',
+        namePath: 'S',
+      },
+      libraryName: "L.Lib",
+    })
   })
 
   const versions = [
