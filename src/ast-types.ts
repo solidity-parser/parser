@@ -304,6 +304,7 @@ export interface ForStatement extends BaseASTNode {
 export interface InlineAssemblyStatement extends BaseASTNode {
   type: 'InlineAssemblyStatement'
   language: string | null
+  flags: string[]
   body: AssemblyBlock
 }
 export interface DoWhileStatement extends BaseASTNode {

@@ -57,6 +57,7 @@ import { SimpleStatementContext } from "./SolidityParser";
 import { UncheckedStatementContext } from "./SolidityParser";
 import { ForStatementContext } from "./SolidityParser";
 import { InlineAssemblyStatementContext } from "./SolidityParser";
+import { InlineAssemblyStatementFlagContext } from "./SolidityParser";
 import { DoWhileStatementContext } from "./SolidityParser";
 import { ContinueStatementContext } from "./SolidityParser";
 import { BreakStatementContext } from "./SolidityParser";
@@ -488,6 +489,13 @@ export interface SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitInlineAssemblyStatement?: (ctx: InlineAssemblyStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SolidityParser.inlineAssemblyStatementFlag`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInlineAssemblyStatementFlag?: (ctx: InlineAssemblyStatementFlagContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SolidityParser.doWhileStatement`.

@@ -1617,9 +1617,17 @@ export class ASTBuilder
       language = language.substring(1, language.length - 1)
     }
 
+    const flags = []
+    const flag = ctx.inlineAssemblyStatementFlag()
+    if (flag !== undefined) {
+      const flagString = this._toText(flag.stringLiteral())
+      flags.push(flagString.slice(1, flagString.length - 1))
+    }
+
     const node: AST.InlineAssemblyStatement = {
       type: 'InlineAssemblyStatement',
       language,
+      flags,
       body: this.visitAssemblyBlock(ctx.assemblyBlock()),
     }
 

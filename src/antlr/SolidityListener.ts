@@ -57,6 +57,7 @@ import { SimpleStatementContext } from "./SolidityParser";
 import { UncheckedStatementContext } from "./SolidityParser";
 import { ForStatementContext } from "./SolidityParser";
 import { InlineAssemblyStatementContext } from "./SolidityParser";
+import { InlineAssemblyStatementFlagContext } from "./SolidityParser";
 import { DoWhileStatementContext } from "./SolidityParser";
 import { ContinueStatementContext } from "./SolidityParser";
 import { BreakStatementContext } from "./SolidityParser";
@@ -701,6 +702,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitInlineAssemblyStatement?: (ctx: InlineAssemblyStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.inlineAssemblyStatementFlag`.
+	 * @param ctx the parse tree
+	 */
+	enterInlineAssemblyStatementFlag?: (ctx: InlineAssemblyStatementFlagContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.inlineAssemblyStatementFlag`.
+	 * @param ctx the parse tree
+	 */
+	exitInlineAssemblyStatementFlag?: (ctx: InlineAssemblyStatementFlagContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.doWhileStatement`.

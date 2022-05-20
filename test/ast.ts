@@ -2731,6 +2731,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       type: 'InlineAssemblyStatement',
       language: null,
+      flags: [],
       body: {
         type: 'AssemblyBlock',
         operations: [],
@@ -2741,6 +2742,29 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       type: 'InlineAssemblyStatement',
       language: 'evmasm',
+      flags: [],
+      body: {
+        type: 'AssemblyBlock',
+        operations: [],
+      },
+    })
+
+    ast = parseStatement('assembly ("memory-safe") {}')
+    assert.deepEqual(ast, {
+      type: 'InlineAssemblyStatement',
+      language: null,
+      flags: ["memory-safe"],
+      body: {
+        type: 'AssemblyBlock',
+        operations: [],
+      },
+    })
+
+    ast = parseStatement('assembly "evmasm" ("memory-safe") {}')
+    assert.deepEqual(ast, {
+      type: 'InlineAssemblyStatement',
+      language: 'evmasm',
+      flags: ["memory-safe"],
       body: {
         type: 'AssemblyBlock',
         operations: [],
