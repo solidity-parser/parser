@@ -21,6 +21,7 @@ import { FileLevelConstantContext } from "./SolidityParser";
 import { CustomErrorDefinitionContext } from "./SolidityParser";
 import { TypeDefinitionContext } from "./SolidityParser";
 import { UsingForDeclarationContext } from "./SolidityParser";
+import { UsingForObjectContext } from "./SolidityParser";
 import { StructDefinitionContext } from "./SolidityParser";
 import { ModifierDefinitionContext } from "./SolidityParser";
 import { ModifierInvocationContext } from "./SolidityParser";
@@ -304,6 +305,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUsingForDeclaration?: (ctx: UsingForDeclarationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.usingForObject`.
+	 * @param ctx the parse tree
+	 */
+	enterUsingForObject?: (ctx: UsingForObjectContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.usingForObject`.
+	 * @param ctx the parse tree
+	 */
+	exitUsingForObject?: (ctx: UsingForObjectContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.structDefinition`.

@@ -154,7 +154,9 @@ export interface FileLevelConstant extends BaseASTNode {
 export interface UsingForDeclaration extends BaseASTNode {
   type: 'UsingForDeclaration'
   typeName: TypeName | null
-  libraryName: string
+  functions: string[]
+  libraryName: string | null
+  isGlobal: boolean;
 }
 export interface StructDefinition extends BaseASTNode {
   type: 'StructDefinition'

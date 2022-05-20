@@ -524,10 +524,33 @@ export class ASTBuilder
       typeName = this.visitTypeName(ctxTypeName)
     }
 
-    const node: AST.UsingForDeclaration = {
-      type: 'UsingForDeclaration',
-      typeName,
-      libraryName: this._toText(ctx.userDefinedTypeName()),
+    const isGlobal = ctx.GlobalKeyword() !== undefined;
+
+    // the object of the `usingForDeclaration` can be a single identifier
+    // (the library name) or a group of functions:
+    //   using Lib for uint;
+    //   using { f } for uint;
+    let node: AST.UsingForDeclaration
+    const usingForObject = ctx.usingForObject()
+    const firstChild = this._toText(usingForObject.getChild(0))
+    if (firstChild === '{') {
+      node = {
+        type: 'UsingForDeclaration',
+        isGlobal,
+        typeName,
+        libraryName: null,
+        functions: usingForObject
+          .userDefinedTypeName()
+          .map((x) => this._toText(x)),
+      }
+    } else {
+      node = {
+        type: 'UsingForDeclaration',
+        isGlobal,
+        typeName,
+        libraryName: this._toText(usingForObject.userDefinedTypeName(0)),
+        functions: [],
+      }
     }
 
     return this._addMeta(node, ctx)
@@ -736,7 +759,7 @@ export class ASTBuilder
     const node: AST.TypeDefinition = {
       type: 'TypeDefinition',
       name: this._toText(ctx.identifier()),
-      definition: this.visitElementaryTypeName(ctx.elementaryTypeName())
+      definition: this.visitElementaryTypeName(ctx.elementaryTypeName()),
     }
 
     return this._addMeta(node, ctx)
@@ -1862,7 +1885,7 @@ export class ASTBuilder
     const node: AST.AssemblyStackAssignment = {
       type: 'AssemblyStackAssignment',
       name: this._toText(ctx.identifier()),
-      expression: this.visitAssemblyExpression(ctx.assemblyExpression())
+      expression: this.visitAssemblyExpression(ctx.assemblyExpression()),
     }
 
     return this._addMeta(node, ctx)
