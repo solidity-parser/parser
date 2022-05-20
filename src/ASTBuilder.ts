@@ -1393,38 +1393,8 @@ export class ASTBuilder
       return this._addMeta(node, ctx)
     }
 
-    if (
-      ctx.children!.length == 3 &&
-      this._toText(ctx.getChild(1)) === '[' &&
-      this._toText(ctx.getChild(2)) === ']'
-    ) {
-      let node: any = this.visit(ctx.getChild(0))
-      if (node.type === 'Identifier') {
-        node = {
-          type: 'UserDefinedTypeName',
-          namePath: node.name,
-        }
-      } else if (node.type == 'TypeNameExpression') {
-        node = node.typeName
-      } else {
-        node = {
-          type: 'ElementaryTypeName',
-          name: this._toText(ctx.getChild(0)),
-        }
-      }
-
-      const typeName: AST.ArrayTypeName = {
-        type: 'ArrayTypeName',
-        baseTypeName: this._addMeta(node, ctx),
-        length: null,
-      }
-
-      const result: AST.TypeNameExpression = {
-        type: 'TypeNameExpression',
-        typeName: this._addMeta(typeName, ctx),
-      }
-
-      return this._addMeta(result, ctx)
+    if (ctx.typeName()) {
+      return this.visitTypeName(ctx.typeName()!)
     }
 
     return this.visit(ctx.getChild(0)) as any

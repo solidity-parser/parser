@@ -75,7 +75,7 @@ describe('AST', () => {
         type: 'UserDefinedTypeName',
         namePath: 'S',
       },
-      libraryName: "L.Lib",
+      libraryName: 'L.Lib',
     })
   })
 
@@ -901,15 +901,12 @@ describe('AST', () => {
     })
   })
 
-  it('TypeNameExpression', function () {
+  it('TypeName expression', function () {
     const stmt = parseStatement('uint(a);')
     assert.deepEqual(stmt.expression.expression, {
-      type: 'TypeNameExpression',
-      typeName: {
-        type: 'ElementaryTypeName',
-        name: 'uint',
-        stateMutability: null,
-      },
+      type: 'ElementaryTypeName',
+      name: 'uint',
+      stateMutability: null,
     })
   })
 
@@ -943,28 +940,37 @@ describe('AST', () => {
     // typename as expression
     ast = parseExpression('A[]')
     assert.deepEqual(ast, {
-      type: 'TypeNameExpression',
-      typeName: {
-        type: 'ArrayTypeName',
-        baseTypeName: {
-          type: 'UserDefinedTypeName',
-          namePath: 'A',
-        },
-        length: null,
+      type: 'ArrayTypeName',
+      length: null,
+      baseTypeName: {
+        namePath: 'A',
+        type: 'UserDefinedTypeName',
       },
     })
 
     ast = parseExpression('uint256[]')
     assert.deepEqual(ast, {
-      type: 'TypeNameExpression',
-      typeName: {
+      type: 'ArrayTypeName',
+      length: null,
+      baseTypeName: {
+        name: 'uint256',
+        stateMutability: null,
+        type: 'ElementaryTypeName',
+      },
+    })
+
+    ast = parseExpression('uint256[][]')
+    assert.deepEqual(ast, {
+      type: 'ArrayTypeName',
+      length: null,
+      baseTypeName: {
         type: 'ArrayTypeName',
+        length: null,
         baseTypeName: {
-          type: 'ElementaryTypeName',
           name: 'uint256',
           stateMutability: null,
+          type: 'ElementaryTypeName',
         },
-        length: null,
       },
     })
   })
@@ -2438,10 +2444,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: null,
       unitAliasIdentifier: null,
@@ -2454,10 +2460,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: 'x',
       unitAliasIdentifier: {
@@ -2473,10 +2479,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: 'x',
       unitAliasIdentifier: {
@@ -2492,10 +2498,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: null,
       unitAliasIdentifier: null,
@@ -2849,7 +2855,7 @@ describe('AST', () => {
       expression: {
         type: 'DecimalNumber',
         value: '3',
-      }
+      },
     })
   })
 
@@ -3487,10 +3493,10 @@ describe('AST', () => {
       definition: {
         type: 'ElementaryTypeName',
         name: 'uint128',
-        stateMutability: null
-      }
+        stateMutability: null,
+      },
     })
-  });
+  })
 
   it('should support contract-level user defined value types', function () {
     const ast = parseContract('contract Foo { type Price is uint128; }')
@@ -3501,8 +3507,8 @@ describe('AST', () => {
       definition: {
         type: 'ElementaryTypeName',
         name: 'uint128',
-        stateMutability: null
-      }
+        stateMutability: null,
+      },
     })
-  });
+  })
 })

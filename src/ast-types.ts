@@ -666,7 +666,7 @@ export type PrimaryExpression =
   | NumberLiteral
   | Identifier
   | TupleExpression
-  | TypeNameExpression
+  | TypeName
 export type SimpleStatement = VariableDeclarationStatement | ExpressionStatement
 export type TypeName =
   | ElementaryTypeName
