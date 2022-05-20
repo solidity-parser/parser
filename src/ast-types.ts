@@ -371,6 +371,7 @@ export interface AssemblyAssignment extends BaseASTNode {
 export interface AssemblyStackAssignment extends BaseASTNode {
   type: 'AssemblyStackAssignment'
   name: string
+  expression: AssemblyExpression
 }
 export interface LabelDefinition extends BaseASTNode {
   type: 'LabelDefinition'

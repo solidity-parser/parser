@@ -2842,10 +2842,14 @@ describe('AST', () => {
   })
 
   it('AssemblyStackAssignment', function () {
-    const ast: any = parseAssembly('=: a')
+    const ast: any = parseAssembly('3 =: a')
     assert.deepEqual(ast, {
       type: 'AssemblyStackAssignment',
       name: 'a',
+      expression: {
+        type: 'DecimalNumber',
+        value: '3',
+      }
     })
   })
 

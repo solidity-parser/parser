@@ -1892,6 +1892,7 @@ export class ASTBuilder
     const node: AST.AssemblyStackAssignment = {
       type: 'AssemblyStackAssignment',
       name: this._toText(ctx.identifier()),
+      expression: this.visitAssemblyExpression(ctx.assemblyExpression())
     }
 
     return this._addMeta(node, ctx)
