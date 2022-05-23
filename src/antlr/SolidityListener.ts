@@ -96,7 +96,6 @@ import { AssemblyIfContext } from "./SolidityParser";
 import { AssemblyLiteralContext } from "./SolidityParser";
 import { SubAssemblyContext } from "./SolidityParser";
 import { TupleExpressionContext } from "./SolidityParser";
-import { TypeNameExpressionContext } from "./SolidityParser";
 import { NumberLiteralContext } from "./SolidityParser";
 import { IdentifierContext } from "./SolidityParser";
 import { HexLiteralContext } from "./SolidityParser";
@@ -1131,17 +1130,6 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitTupleExpression?: (ctx: TupleExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `SolidityParser.typeNameExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterTypeNameExpression?: (ctx: TypeNameExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by `SolidityParser.typeNameExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitTypeNameExpression?: (ctx: TypeNameExpressionContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.numberLiteral`.

@@ -97,7 +97,6 @@ export const astNodeTypes = [
   'AssemblyIf',
   'SubAssembly',
   'TupleExpression',
-  'TypeNameExpression',
   'NameValueExpression',
   'BooleanLiteral',
   'NumberLiteral',
@@ -435,10 +434,6 @@ export interface TupleExpression extends BaseASTNode {
   components: Array<BaseASTNode | null>
   isArray: boolean
 }
-export interface TypeNameExpression extends BaseASTNode {
-  type: 'TypeNameExpression'
-  typeName: ElementaryTypeName | UserDefinedTypeName | ArrayTypeName
-}
 export interface NameValueExpression extends BaseASTNode {
   type: 'NameValueExpression'
   expression: Expression
@@ -616,7 +611,6 @@ export type ASTNode =
   | AssemblyLiteral
   | SubAssembly
   | TupleExpression
-  | TypeNameExpression
   | BinaryOperation
   | Conditional
   | IndexAccess

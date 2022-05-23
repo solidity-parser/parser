@@ -96,7 +96,6 @@ import { AssemblyIfContext } from "./SolidityParser";
 import { AssemblyLiteralContext } from "./SolidityParser";
 import { SubAssemblyContext } from "./SolidityParser";
 import { TupleExpressionContext } from "./SolidityParser";
-import { TypeNameExpressionContext } from "./SolidityParser";
 import { NumberLiteralContext } from "./SolidityParser";
 import { IdentifierContext } from "./SolidityParser";
 import { HexLiteralContext } from "./SolidityParser";
@@ -762,13 +761,6 @@ export interface SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitTupleExpression?: (ctx: TupleExpressionContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `SolidityParser.typeNameExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeNameExpression?: (ctx: TypeNameExpressionContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SolidityParser.numberLiteral`.

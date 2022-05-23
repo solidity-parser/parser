@@ -617,31 +617,6 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitTypeNameExpression(
-    ctx: SP.TypeNameExpressionContext
-  ): AST.TypeNameExpression & WithMeta {
-    const ctxElementaryTypeName = ctx.elementaryTypeName()
-    const ctxUserDefinedTypeName = ctx.userDefinedTypeName()
-    let typeName
-
-    if (ctxElementaryTypeName !== undefined) {
-      typeName = this.visitElementaryTypeName(ctxElementaryTypeName)
-    } else if (ctxUserDefinedTypeName !== undefined) {
-      typeName = this.visitUserDefinedTypeName(ctxUserDefinedTypeName)
-    } else {
-      throw new Error(
-        'Assertion error: either elementaryTypeName or userDefinedTypeName should be defined'
-      )
-    }
-
-    const node: AST.TypeNameExpression = {
-      type: 'TypeNameExpression',
-      typeName,
-    }
-
-    return this._addMeta(node, ctx)
-  }
-
   public visitFunctionTypeName(
     ctx: SP.FunctionTypeNameContext
   ): AST.FunctionTypeName & WithMeta {
