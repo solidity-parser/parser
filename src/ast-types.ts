@@ -350,7 +350,7 @@ export interface FunctionCall extends BaseASTNode {
   arguments: Expression[]
   names: string[]
   identifiers: Identifier[]
-  methodFullname : string
+  methodFullName : string | null
 }
 export interface AssemblyBlock extends BaseASTNode {
   type: 'AssemblyBlock'
