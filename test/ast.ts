@@ -1250,6 +1250,7 @@ describe('AST', () => {
         ],
         names: [],
         identifiers: [],
+        methodFullName: null,
       },
     })
   })
@@ -1278,6 +1279,7 @@ describe('AST', () => {
             name: 'x',
           },
         ],
+        methodFullName: null,
       },
     })
   })
@@ -1424,6 +1426,7 @@ describe('AST', () => {
         ],
         names: [],
         identifiers: [],
+        methodFullName: null,
       },
       returnParameters: [
         {
@@ -1507,6 +1510,7 @@ describe('AST', () => {
         ],
         names: [],
         identifiers: [],
+        methodFullName: null,
       },
       returnParameters: [
         {
@@ -1618,6 +1622,7 @@ describe('AST', () => {
         ],
         names: [],
         identifiers: [],
+        methodFullName: null,
       },
       returnParameters: [
         {
@@ -1729,6 +1734,7 @@ describe('AST', () => {
         ],
         names: [],
         identifiers: [],
+        methodFullName: null,
       },
       returnParameters: [
         {
@@ -2156,6 +2162,7 @@ describe('AST', () => {
       ],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
     expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
@@ -2172,6 +2179,7 @@ describe('AST', () => {
       ],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
   })
 
@@ -2212,6 +2220,7 @@ describe('AST', () => {
       ],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
     expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
@@ -2228,6 +2237,7 @@ describe('AST', () => {
       ],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
   })
 
@@ -2262,6 +2272,7 @@ describe('AST', () => {
           name: 'y',
         },
       ],
+      methodFullName: null,
     })
     expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
@@ -2278,6 +2289,7 @@ describe('AST', () => {
       ],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
   })
 
@@ -3213,6 +3225,7 @@ describe('AST', () => {
       arguments: [],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
 
     expr = parseExpression('recipient.call{value: 1, gas: 21000}()')
@@ -3252,6 +3265,7 @@ describe('AST', () => {
       arguments: [],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
   })
 
@@ -3271,6 +3285,7 @@ describe('AST', () => {
       ],
       names: [],
       identifiers: [],
+      methodFullName: null,
     })
   })
 
@@ -3639,6 +3654,7 @@ describe('AST', () => {
         },
         names: [],
         identifiers: [],
+        methodFullName: null,
         type: 'FunctionCall',
       },
     })
@@ -3660,6 +3676,7 @@ describe('AST', () => {
         },
         names: [],
         identifiers: [],
+        methodFullName: null,
         type: 'FunctionCall',
       },
     })

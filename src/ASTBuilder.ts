@@ -779,6 +779,7 @@ export class ASTBuilder
       arguments: args,
       names,
       identifiers,
+      methodFullName: null,
     }
 
     return this._addMeta(node, ctx)
@@ -1137,6 +1138,7 @@ export class ASTBuilder
             arguments: args,
             names,
             identifiers,
+            methodFullName: null,
           }
 
           return this._addMeta(node, ctx)
