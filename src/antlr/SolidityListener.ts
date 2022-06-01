@@ -21,6 +21,7 @@ import { FileLevelConstantContext } from "./SolidityParser";
 import { CustomErrorDefinitionContext } from "./SolidityParser";
 import { TypeDefinitionContext } from "./SolidityParser";
 import { UsingForDeclarationContext } from "./SolidityParser";
+import { UsingForObjectContext } from "./SolidityParser";
 import { StructDefinitionContext } from "./SolidityParser";
 import { ModifierDefinitionContext } from "./SolidityParser";
 import { ModifierInvocationContext } from "./SolidityParser";
@@ -56,6 +57,7 @@ import { SimpleStatementContext } from "./SolidityParser";
 import { UncheckedStatementContext } from "./SolidityParser";
 import { ForStatementContext } from "./SolidityParser";
 import { InlineAssemblyStatementContext } from "./SolidityParser";
+import { InlineAssemblyStatementFlagContext } from "./SolidityParser";
 import { DoWhileStatementContext } from "./SolidityParser";
 import { ContinueStatementContext } from "./SolidityParser";
 import { BreakStatementContext } from "./SolidityParser";
@@ -94,7 +96,6 @@ import { AssemblyIfContext } from "./SolidityParser";
 import { AssemblyLiteralContext } from "./SolidityParser";
 import { SubAssemblyContext } from "./SolidityParser";
 import { TupleExpressionContext } from "./SolidityParser";
-import { TypeNameExpressionContext } from "./SolidityParser";
 import { NumberLiteralContext } from "./SolidityParser";
 import { IdentifierContext } from "./SolidityParser";
 import { HexLiteralContext } from "./SolidityParser";
@@ -304,6 +305,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUsingForDeclaration?: (ctx: UsingForDeclarationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.usingForObject`.
+	 * @param ctx the parse tree
+	 */
+	enterUsingForObject?: (ctx: UsingForObjectContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.usingForObject`.
+	 * @param ctx the parse tree
+	 */
+	exitUsingForObject?: (ctx: UsingForObjectContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.structDefinition`.
@@ -689,6 +701,17 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitInlineAssemblyStatement?: (ctx: InlineAssemblyStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.inlineAssemblyStatementFlag`.
+	 * @param ctx the parse tree
+	 */
+	enterInlineAssemblyStatementFlag?: (ctx: InlineAssemblyStatementFlagContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.inlineAssemblyStatementFlag`.
+	 * @param ctx the parse tree
+	 */
+	exitInlineAssemblyStatementFlag?: (ctx: InlineAssemblyStatementFlagContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.doWhileStatement`.
@@ -1107,17 +1130,6 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitTupleExpression?: (ctx: TupleExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `SolidityParser.typeNameExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterTypeNameExpression?: (ctx: TypeNameExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by `SolidityParser.typeNameExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitTypeNameExpression?: (ctx: TypeNameExpressionContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.numberLiteral`.

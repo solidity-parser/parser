@@ -39,43 +39,199 @@ describe('AST', () => {
     })
   })
 
-  it('UsingForDeclaration', function () {
-    let ast = parseNode('using Lib for uint;')
-    assert.deepEqual(ast, {
-      type: 'UsingForDeclaration',
-      typeName: {
-        type: 'ElementaryTypeName',
-        name: 'uint',
-        stateMutability: null,
-      },
-      libraryName: 'Lib',
+  describe('UsingForDeclaration', function () {
+    it('using library, non-global', function () {
+      let ast = parseNode('using Lib for uint;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: {
+          type: 'ElementaryTypeName',
+          name: 'uint',
+          stateMutability: null,
+        },
+        libraryName: 'Lib',
+        functions: [],
+      })
+
+      ast = parseNode('using Lib for *;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: null,
+        libraryName: 'Lib',
+        functions: [],
+      })
+
+      ast = parseNode('using Lib for S;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: {
+          type: 'UserDefinedTypeName',
+          namePath: 'S',
+        },
+        libraryName: 'Lib',
+        functions: [],
+      })
+
+      ast = parseNode('using L.Lib for S;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: {
+          type: 'UserDefinedTypeName',
+          namePath: 'S',
+        },
+        libraryName: 'L.Lib',
+        functions: [],
+      })
     })
 
-    ast = parseNode('using Lib for *;')
-    assert.deepEqual(ast, {
-      type: 'UsingForDeclaration',
-      typeName: null,
-      libraryName: 'Lib',
+    it('using library, global', function () {
+      let ast = parseNode('using Lib for uint global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: {
+          type: 'ElementaryTypeName',
+          name: 'uint',
+          stateMutability: null,
+        },
+        libraryName: 'Lib',
+        functions: [],
+      })
+
+      ast = parseNode('using Lib for * global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: null,
+        libraryName: 'Lib',
+        functions: [],
+      })
+
+      ast = parseNode('using Lib for S global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: {
+          type: 'UserDefinedTypeName',
+          namePath: 'S',
+        },
+        libraryName: 'Lib',
+        functions: [],
+      })
+
+      ast = parseNode('using L.Lib for S global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: {
+          type: 'UserDefinedTypeName',
+          namePath: 'S',
+        },
+        libraryName: 'L.Lib',
+        functions: [],
+      })
     })
 
-    ast = parseNode('using Lib for S;')
-    assert.deepEqual(ast, {
-      type: 'UsingForDeclaration',
-      typeName: {
-        type: 'UserDefinedTypeName',
-        namePath: 'S',
-      },
-      libraryName: 'Lib',
+    it('using functions, non-global', function () {
+      let ast = parseNode('using { f } for uint;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: {
+          type: 'ElementaryTypeName',
+          name: 'uint',
+          stateMutability: null,
+        },
+        libraryName: null,
+        functions: ['f'],
+      })
+
+      ast = parseNode('using { f, g } for uint;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: {
+          type: 'ElementaryTypeName',
+          name: 'uint',
+          stateMutability: null,
+        },
+        libraryName: null,
+        functions: ['f', 'g'],
+      })
+
+      ast = parseNode('using { f } for *;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: null,
+        libraryName: null,
+        functions: ['f'],
+      })
+
+      ast = parseNode('using { f } for S;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: false,
+        typeName: {
+          type: 'UserDefinedTypeName',
+          namePath: 'S',
+        },
+        libraryName: null,
+        functions: ['f'],
+      })
     })
 
-    ast = parseNode('using L.Lib for S;')
-    assert.deepEqual(ast, {
-      type: 'UsingForDeclaration',
-      typeName: {
-        type: 'UserDefinedTypeName',
-        namePath: 'S',
-      },
-      libraryName: "L.Lib",
+    it('using functions, global', function () {
+      let ast = parseNode('using { f } for uint global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: {
+          type: 'ElementaryTypeName',
+          name: 'uint',
+          stateMutability: null,
+        },
+        libraryName: null,
+        functions: ['f'],
+      })
+
+      ast = parseNode('using { f, g } for uint global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: {
+          type: 'ElementaryTypeName',
+          name: 'uint',
+          stateMutability: null,
+        },
+        libraryName: null,
+        functions: ['f', 'g'],
+      })
+
+      ast = parseNode('using { f } for * global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: null,
+        libraryName: null,
+        functions: ['f'],
+      })
+
+      ast = parseNode('using { f } for S global;')
+      assert.deepEqual(ast, {
+        type: 'UsingForDeclaration',
+        isGlobal: true,
+        typeName: {
+          type: 'UserDefinedTypeName',
+          namePath: 'S',
+        },
+        libraryName: null,
+        functions: ['f'],
+      })
     })
   })
 
@@ -106,6 +262,7 @@ describe('AST', () => {
     '^0.5.0 || ^0.6.0',
     '^0.5.0 || ^0.6.0 || ^0.7.0',
     '^0.5.0 || >=0.6.0 <0.8.0',
+    '*',
   ]
   versions.forEach(function (version) {
     it('PragmaDirective ' + version, function () {
@@ -901,15 +1058,12 @@ describe('AST', () => {
     })
   })
 
-  it('TypeNameExpression', function () {
+  it('TypeName expression', function () {
     const stmt = parseStatement('uint(a);')
     assert.deepEqual(stmt.expression.expression, {
-      type: 'TypeNameExpression',
-      typeName: {
-        type: 'ElementaryTypeName',
-        name: 'uint',
-        stateMutability: null,
-      },
+      type: 'ElementaryTypeName',
+      name: 'uint',
+      stateMutability: null,
     })
   })
 
@@ -943,28 +1097,37 @@ describe('AST', () => {
     // typename as expression
     ast = parseExpression('A[]')
     assert.deepEqual(ast, {
-      type: 'TypeNameExpression',
-      typeName: {
-        type: 'ArrayTypeName',
-        baseTypeName: {
-          type: 'UserDefinedTypeName',
-          namePath: 'A',
-        },
-        length: null,
+      type: 'ArrayTypeName',
+      length: null,
+      baseTypeName: {
+        namePath: 'A',
+        type: 'UserDefinedTypeName',
       },
     })
 
     ast = parseExpression('uint256[]')
     assert.deepEqual(ast, {
-      type: 'TypeNameExpression',
-      typeName: {
+      type: 'ArrayTypeName',
+      length: null,
+      baseTypeName: {
+        name: 'uint256',
+        stateMutability: null,
+        type: 'ElementaryTypeName',
+      },
+    })
+
+    ast = parseExpression('uint256[][]')
+    assert.deepEqual(ast, {
+      type: 'ArrayTypeName',
+      length: null,
+      baseTypeName: {
         type: 'ArrayTypeName',
+        length: null,
         baseTypeName: {
-          type: 'ElementaryTypeName',
           name: 'uint256',
           stateMutability: null,
+          type: 'ElementaryTypeName',
         },
-        length: null,
       },
     })
   })
@@ -2438,10 +2601,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: null,
       unitAliasIdentifier: null,
@@ -2454,10 +2617,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: 'x',
       unitAliasIdentifier: {
@@ -2473,10 +2636,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: 'x',
       unitAliasIdentifier: {
@@ -2492,10 +2655,10 @@ describe('AST', () => {
       type: 'ImportDirective',
       path: './abc.sol',
       pathLiteral: {
-        type: "StringLiteral",
+        type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: null,
       unitAliasIdentifier: null,
@@ -2568,6 +2731,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       type: 'InlineAssemblyStatement',
       language: null,
+      flags: [],
       body: {
         type: 'AssemblyBlock',
         operations: [],
@@ -2578,6 +2742,29 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       type: 'InlineAssemblyStatement',
       language: 'evmasm',
+      flags: [],
+      body: {
+        type: 'AssemblyBlock',
+        operations: [],
+      },
+    })
+
+    ast = parseStatement('assembly ("memory-safe") {}')
+    assert.deepEqual(ast, {
+      type: 'InlineAssemblyStatement',
+      language: null,
+      flags: ["memory-safe"],
+      body: {
+        type: 'AssemblyBlock',
+        operations: [],
+      },
+    })
+
+    ast = parseStatement('assembly "evmasm" ("memory-safe") {}')
+    assert.deepEqual(ast, {
+      type: 'InlineAssemblyStatement',
+      language: 'evmasm',
+      flags: ["memory-safe"],
       body: {
         type: 'AssemblyBlock',
         operations: [],
@@ -2842,10 +3029,14 @@ describe('AST', () => {
   })
 
   it('AssemblyStackAssignment', function () {
-    const ast: any = parseAssembly('=: a')
+    const ast: any = parseAssembly('3 =: a')
     assert.deepEqual(ast, {
       type: 'AssemblyStackAssignment',
       name: 'a',
+      expression: {
+        type: 'DecimalNumber',
+        value: '3',
+      },
     })
   })
 
@@ -3483,10 +3674,10 @@ describe('AST', () => {
       definition: {
         type: 'ElementaryTypeName',
         name: 'uint128',
-        stateMutability: null
-      }
+        stateMutability: null,
+      },
     })
-  });
+  })
 
   it('should support contract-level user defined value types', function () {
     const ast = parseContract('contract Foo { type Price is uint128; }')
@@ -3497,8 +3688,8 @@ describe('AST', () => {
       definition: {
         type: 'ElementaryTypeName',
         name: 'uint128',
-        stateMutability: null
-      }
+        stateMutability: null,
+      },
     })
-  });
+  })
 })

@@ -524,10 +524,33 @@ export class ASTBuilder
       typeName = this.visitTypeName(ctxTypeName)
     }
 
-    const node: AST.UsingForDeclaration = {
-      type: 'UsingForDeclaration',
-      typeName,
-      libraryName: this._toText(ctx.userDefinedTypeName()),
+    const isGlobal = ctx.GlobalKeyword() !== undefined;
+
+    // the object of the `usingForDeclaration` can be a single identifier
+    // (the library name) or a group of functions:
+    //   using Lib for uint;
+    //   using { f } for uint;
+    let node: AST.UsingForDeclaration
+    const usingForObject = ctx.usingForObject()
+    const firstChild = this._toText(usingForObject.getChild(0))
+    if (firstChild === '{') {
+      node = {
+        type: 'UsingForDeclaration',
+        isGlobal,
+        typeName,
+        libraryName: null,
+        functions: usingForObject
+          .userDefinedTypeName()
+          .map((x) => this._toText(x)),
+      }
+    } else {
+      node = {
+        type: 'UsingForDeclaration',
+        isGlobal,
+        typeName,
+        libraryName: this._toText(usingForObject.userDefinedTypeName(0)),
+        functions: [],
+      }
     }
 
     return this._addMeta(node, ctx)
@@ -591,31 +614,6 @@ export class ASTBuilder
       name: this._toText(ctx.identifier()),
       arguments: args,
     }
-    return this._addMeta(node, ctx)
-  }
-
-  public visitTypeNameExpression(
-    ctx: SP.TypeNameExpressionContext
-  ): AST.TypeNameExpression & WithMeta {
-    const ctxElementaryTypeName = ctx.elementaryTypeName()
-    const ctxUserDefinedTypeName = ctx.userDefinedTypeName()
-    let typeName
-
-    if (ctxElementaryTypeName !== undefined) {
-      typeName = this.visitElementaryTypeName(ctxElementaryTypeName)
-    } else if (ctxUserDefinedTypeName !== undefined) {
-      typeName = this.visitUserDefinedTypeName(ctxUserDefinedTypeName)
-    } else {
-      throw new Error(
-        'Assertion error: either elementaryTypeName or userDefinedTypeName should be defined'
-      )
-    }
-
-    const node: AST.TypeNameExpression = {
-      type: 'TypeNameExpression',
-      typeName,
-    }
-
     return this._addMeta(node, ctx)
   }
 
@@ -736,7 +734,7 @@ export class ASTBuilder
     const node: AST.TypeDefinition = {
       type: 'TypeDefinition',
       name: this._toText(ctx.identifier()),
-      definition: this.visitElementaryTypeName(ctx.elementaryTypeName())
+      definition: this.visitElementaryTypeName(ctx.elementaryTypeName()),
     }
 
     return this._addMeta(node, ctx)
@@ -1393,38 +1391,8 @@ export class ASTBuilder
       return this._addMeta(node, ctx)
     }
 
-    if (
-      ctx.children!.length == 3 &&
-      this._toText(ctx.getChild(1)) === '[' &&
-      this._toText(ctx.getChild(2)) === ']'
-    ) {
-      let node: any = this.visit(ctx.getChild(0))
-      if (node.type === 'Identifier') {
-        node = {
-          type: 'UserDefinedTypeName',
-          namePath: node.name,
-        }
-      } else if (node.type == 'TypeNameExpression') {
-        node = node.typeName
-      } else {
-        node = {
-          type: 'ElementaryTypeName',
-          name: this._toText(ctx.getChild(0)),
-        }
-      }
-
-      const typeName: AST.ArrayTypeName = {
-        type: 'ArrayTypeName',
-        baseTypeName: this._addMeta(node, ctx),
-        length: null,
-      }
-
-      const result: AST.TypeNameExpression = {
-        type: 'TypeNameExpression',
-        typeName: this._addMeta(typeName, ctx),
-      }
-
-      return this._addMeta(result, ctx)
+    if (ctx.typeName()) {
+      return this.visitTypeName(ctx.typeName()!)
     }
 
     return this.visit(ctx.getChild(0)) as any
@@ -1624,9 +1592,17 @@ export class ASTBuilder
       language = language.substring(1, language.length - 1)
     }
 
+    const flags = []
+    const flag = ctx.inlineAssemblyStatementFlag()
+    if (flag !== undefined) {
+      const flagString = this._toText(flag.stringLiteral())
+      flags.push(flagString.slice(1, flagString.length - 1))
+    }
+
     const node: AST.InlineAssemblyStatement = {
       type: 'InlineAssemblyStatement',
       language,
+      flags,
       body: this.visitAssemblyBlock(ctx.assemblyBlock()),
     }
 
@@ -1892,6 +1868,7 @@ export class ASTBuilder
     const node: AST.AssemblyStackAssignment = {
       type: 'AssemblyStackAssignment',
       name: this._toText(ctx.identifier()),
+      expression: this.visitAssemblyExpression(ctx.assemblyExpression()),
     }
 
     return this._addMeta(node, ctx)

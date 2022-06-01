@@ -97,7 +97,6 @@ export const astNodeTypes = [
   'AssemblyIf',
   'SubAssembly',
   'TupleExpression',
-  'TypeNameExpression',
   'NameValueExpression',
   'BooleanLiteral',
   'NumberLiteral',
@@ -154,7 +153,9 @@ export interface FileLevelConstant extends BaseASTNode {
 export interface UsingForDeclaration extends BaseASTNode {
   type: 'UsingForDeclaration'
   typeName: TypeName | null
-  libraryName: string
+  functions: string[]
+  libraryName: string | null
+  isGlobal: boolean;
 }
 export interface StructDefinition extends BaseASTNode {
   type: 'StructDefinition'
@@ -302,6 +303,7 @@ export interface ForStatement extends BaseASTNode {
 export interface InlineAssemblyStatement extends BaseASTNode {
   type: 'InlineAssemblyStatement'
   language: string | null
+  flags: string[]
   body: AssemblyBlock
 }
 export interface DoWhileStatement extends BaseASTNode {
@@ -372,6 +374,7 @@ export interface AssemblyAssignment extends BaseASTNode {
 export interface AssemblyStackAssignment extends BaseASTNode {
   type: 'AssemblyStackAssignment'
   name: string
+  expression: AssemblyExpression
 }
 export interface LabelDefinition extends BaseASTNode {
   type: 'LabelDefinition'
@@ -431,10 +434,6 @@ export interface TupleExpression extends BaseASTNode {
   type: 'TupleExpression'
   components: Array<BaseASTNode | null>
   isArray: boolean
-}
-export interface TypeNameExpression extends BaseASTNode {
-  type: 'TypeNameExpression'
-  typeName: ElementaryTypeName | UserDefinedTypeName | ArrayTypeName
 }
 export interface NameValueExpression extends BaseASTNode {
   type: 'NameValueExpression'
@@ -613,7 +612,6 @@ export type ASTNode =
   | AssemblyLiteral
   | SubAssembly
   | TupleExpression
-  | TypeNameExpression
   | BinaryOperation
   | Conditional
   | IndexAccess
@@ -666,7 +664,7 @@ export type PrimaryExpression =
   | NumberLiteral
   | Identifier
   | TupleExpression
-  | TypeNameExpression
+  | TypeName
 export type SimpleStatement = VariableDeclarationStatement | ExpressionStatement
 export type TypeName =
   | ElementaryTypeName
