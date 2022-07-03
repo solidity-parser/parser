@@ -340,6 +340,15 @@ export class ASTBuilder
         isConstructor = true
         break
       case 'fallback':
+        parameters = ctx
+          .parameterList()
+          .parameter()
+          .map((x) => this.visit(x))
+        returnParameters =
+          ctxReturnParameters !== undefined
+            ? this.visitReturnParameters(ctxReturnParameters)
+            : null
+
         visibility = 'external'
         isFallback = true
         break

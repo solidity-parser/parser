@@ -488,6 +488,66 @@ describe('AST', () => {
     })
   })
 
+  it('FunctionDefinition fallback with argument and return value', () => {
+    const ast: any = parseNode(
+      'fallback (bytes calldata input) external returns (bytes memory output) {}'
+    )
+    assert.deepEqual(ast, {
+      type: 'FunctionDefinition',
+      name: null,
+      parameters: [
+        {
+          isIndexed: false,
+          isStateVar: false,
+          name: 'input',
+          identifier: {
+            type: 'Identifier',
+            name: 'input',
+          },
+          storageLocation: 'calldata',
+          type: 'VariableDeclaration',
+          typeName: {
+            name: 'bytes',
+            type: 'ElementaryTypeName',
+            stateMutability: null,
+          },
+          expression: null,
+        },
+      ],
+      returnParameters: [
+        {
+          isIndexed: false,
+          isStateVar: false,
+          name: 'output',
+          identifier: {
+            name: 'output',
+            type: 'Identifier',
+          },
+          storageLocation: 'memory',
+          type: 'VariableDeclaration',
+          typeName: {
+            name: 'bytes',
+            type: 'ElementaryTypeName',
+            stateMutability: null,
+          },
+          expression: null,
+        },
+      ],
+      body: {
+        type: 'Block',
+        statements: [],
+      },
+      visibility: 'external',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: true,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null,
+    })
+  })
+
   it('FunctionDefinition virtual receive', () => {
     const ast: any = parseNode('receive () external payable virtual {}')
     assert.deepEqual(ast, {
