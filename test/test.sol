@@ -785,3 +785,7 @@ library FixedMath {
 contract C {
   using L.Lib for uint;
 }
+
+contract FallbackWithArgs {
+  fallback (bytes calldata input) external payable returns (bytes memory output) {}
+}
