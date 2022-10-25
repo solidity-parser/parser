@@ -1709,6 +1709,15 @@ export class ASTBuilder
       return this._addMeta(node, ctx)
     }
 
+    if (ctx.BooleanLiteral()) {
+      const node: AST.BooleanLiteral = {
+        type: 'BooleanLiteral',
+        value: this._toText(ctx.BooleanLiteral()!) === 'true',
+      }
+
+      return this._addMeta(node, ctx);
+    }
+
     if (ctx.DecimalNumber()) {
       const node: AST.DecimalNumber = {
         type: 'DecimalNumber',

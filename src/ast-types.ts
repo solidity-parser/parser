@@ -414,6 +414,7 @@ export interface AssemblyIf extends BaseASTNode {
 }
 export type AssemblyLiteral =
   | StringLiteral
+  | BooleanLiteral
   | DecimalNumber
   | HexNumber
   | HexLiteral

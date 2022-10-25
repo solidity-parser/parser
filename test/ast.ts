@@ -3767,4 +3767,38 @@ describe('AST', () => {
       type: 'ExpressionStatement',
     })
   })
+
+  it('sould accept boolean literals in assembly', function () {
+    let ast: any = parseAssembly('a := true')
+
+    assert.deepEqual(ast, {
+      expression: {
+        type: 'BooleanLiteral',
+        value: true,
+      },
+      names: [
+        {
+          name: 'a',
+          type: 'Identifier',
+        },
+      ],
+      type: 'AssemblyAssignment',
+    })
+
+    ast = parseAssembly('a := false')
+
+    assert.deepEqual(ast, {
+      expression: {
+        type: 'BooleanLiteral',
+        value: false,
+      },
+      names: [
+        {
+          name: 'a',
+          type: 'Identifier',
+        },
+      ],
+      type: 'AssemblyAssignment',
+    })
+  })
 })
