@@ -2813,7 +2813,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       type: 'InlineAssemblyStatement',
       language: null,
-      flags: ["memory-safe"],
+      flags: ['memory-safe'],
       body: {
         type: 'AssemblyBlock',
         operations: [],
@@ -2824,7 +2824,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       type: 'InlineAssemblyStatement',
       language: 'evmasm',
-      flags: ["memory-safe"],
+      flags: ['memory-safe'],
       body: {
         type: 'AssemblyBlock',
         operations: [],
@@ -3750,6 +3750,21 @@ describe('AST', () => {
         name: 'uint128',
         stateMutability: null,
       },
+    })
+  })
+
+  it('should support address as a property', function () {
+    const ast: any = parseStatement('foo.address;')
+    assert.deepEqual(ast, {
+      expression: {
+        expression: {
+          name: 'foo',
+          type: 'Identifier',
+        },
+        memberName: 'address',
+        type: 'MemberAccess',
+      },
+      type: 'ExpressionStatement',
     })
   })
 })
