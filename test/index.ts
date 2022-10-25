@@ -1,11 +1,13 @@
 import fs from 'fs'
 import { assert } from 'chai'
+import path from 'path'
 import * as parser from '../src/index'
 import { parseNode, parseStatement } from './utils'
 
 describe('#parse', function () {
   it('parses test file correctly', function () {
-    const content = fs.readFileSync(__dirname + '/test.sol')
+    const testSolPath = path.resolve(__dirname, '..', 'antlr', 'test.sol')
+    const content = fs.readFileSync(testSolPath)
     parser.parse(content.toString())
   })
 
@@ -127,21 +129,21 @@ describe('#visit', function () {
     assert.isFalse(called, 'Should not call console.error on lexer errors')
   })
 
-  it("should receive an optional parent node", function () {
+  it('should receive an optional parent node', function () {
     const source = 'contract test { uint a; }'
     const ast = parser.parse(source)
     parser.visit(ast, {
       StateVariableDeclaration: (node, parent) => {
         if (parent === undefined) {
-          assert.fail("parent node should be defined")
+          assert.fail('parent node should be defined')
         }
 
         if (parent.type !== 'ContractDefinition') {
-          assert.fail("parent node should be ContractDefinition")
+          assert.fail('parent node should be ContractDefinition')
         }
 
-        assert.equal(parent.name, 'test');
+        assert.equal(parent.name, 'test')
       },
     })
-  });
+  })
 })

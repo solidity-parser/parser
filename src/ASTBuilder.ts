@@ -1461,11 +1461,9 @@ export class ASTBuilder
   public buildVariableDeclarationList(
     ctx: SP.VariableDeclarationListContext
   ): Array<(AST.VariableDeclaration & WithMeta) | null> {
-    // remove parentheses
-
     const variableDeclarations = ctx.variableDeclaration()
     let i = 0
-    return this._mapCommasToNulls(ctx.children!).map((declOrNull) => {
+    return this._mapCommasToNulls(ctx.children ?? []).map((declOrNull) => {
       // add a null for each empty value
       if (!declOrNull) {
         return null
