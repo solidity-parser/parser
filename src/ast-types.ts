@@ -92,10 +92,8 @@ export const astNodeTypes = [
   'AssemblySwitch',
   'AssemblyCase',
   'AssemblyFunctionDefinition',
-  'AssemblyFunctionReturns',
   'AssemblyFor',
   'AssemblyIf',
-  'SubAssembly',
   'TupleExpression',
   'NameValueExpression',
   'BooleanLiteral',
@@ -397,9 +395,6 @@ export interface AssemblyFunctionDefinition extends BaseASTNode {
   returnArguments: Identifier[]
   body: AssemblyBlock
 }
-export interface AssemblyFunctionReturns extends BaseASTNode {
-  type: 'AssemblyFunctionReturns'
-}
 export interface AssemblyFor extends BaseASTNode {
   type: 'AssemblyFor'
   pre: AssemblyBlock | AssemblyExpression
@@ -418,9 +413,6 @@ export type AssemblyLiteral =
   | DecimalNumber
   | HexNumber
   | HexLiteral
-export interface SubAssembly extends BaseASTNode {
-  type: 'SubAssembly'
-}
 export interface AssemblyMemberAccess extends BaseASTNode {
   type: 'AssemblyMemberAccess'
   expression: Identifier
@@ -606,11 +598,9 @@ export type ASTNode =
   | AssemblySwitch
   | AssemblyCase
   | AssemblyFunctionDefinition
-  | AssemblyFunctionReturns
   | AssemblyFor
   | AssemblyIf
   | AssemblyLiteral
-  | SubAssembly
   | TupleExpression
   | BinaryOperation
   | Conditional
@@ -638,7 +628,6 @@ export type AssemblyItem =
   | AssemblyIf
   | Break
   | Continue
-  | SubAssembly
   | NumberLiteral
   | StringLiteral
   | HexNumber
