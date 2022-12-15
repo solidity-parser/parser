@@ -78,10 +78,12 @@ describe('#parse', function () {
         start: {
           line: 1,
           column: 0,
+          index: -1,
         },
         end: {
           line: 1,
           column: 0,
+          index: 0,
         },
       },
     })

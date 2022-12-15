@@ -12,10 +12,12 @@ interface SourceLocation {
   start: {
     line: number
     column: number
+    index: number
   }
   end: {
     line: number
     column: number
+    index: number
   }
 }
 
@@ -1970,12 +1972,16 @@ export class ASTBuilder
       start: {
         line: ctx.start.line,
         column: ctx.start.charPositionInLine,
+        index: ctx.start.startIndex,
       },
       end: {
         line: ctx.stop ? ctx.stop.line : ctx.start.line,
         column: ctx.stop
           ? ctx.stop.charPositionInLine
           : ctx.start.charPositionInLine,
+        index: ctx.stop
+          ? ctx.stop.stopIndex
+          : ctx.start.startIndex,
       },
     }
     return sourceLocation
