@@ -14,10 +14,32 @@ interface Location {
   }
 }
 
+export const commentTypes = ['BlockComment', 'LineComment'] as const
+
+export type CommentTypeString = typeof commentTypes[number]
+
+export interface BaseComment {
+  type: CommentTypeString
+  range?: [number, number]
+  loc?: Location
+  raw: string
+  value: string
+}
+
+export interface BlockComment extends BaseComment {
+  type: 'BlockComment'
+}
+export interface LineComment extends BaseComment {
+  type: 'LineComment'
+}
+
+export type Comment = BlockComment | LineComment
+
 export interface BaseASTNode {
   type: ASTNodeTypeString
   range?: [number, number]
   loc?: Location
+  comments?: Comment[]
 }
 
 export interface SourceUnit extends BaseASTNode {
@@ -116,7 +138,7 @@ export const astNodeTypes = [
   'CatchClause',
   'FileLevelConstant',
   'AssemblyMemberAccess',
-  'TypeDefinition'
+  'TypeDefinition',
 ] as const
 
 export type ASTNodeTypeString = typeof astNodeTypes[number]
@@ -156,7 +178,7 @@ export interface UsingForDeclaration extends BaseASTNode {
   // will be the defined operator, or null if it's just an attached function
   operators: Array<string | null>
   libraryName: string | null
-  isGlobal: boolean;
+  isGlobal: boolean
 }
 export interface StructDefinition extends BaseASTNode {
   type: 'StructDefinition'
@@ -736,7 +758,8 @@ function checkTypes() {
   assignAstNodeTypeStringExit = astVisitorEnterKeyExit
   assignAstNodeTypeStringExit = astVisitorExitKey
 
-  let assignAstVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` = astNodeTypeExit
+  let assignAstVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` =
+    astNodeTypeExit
   assignAstVisitorEnterKeyExit = astNodeTypeStringExit
   assignAstVisitorEnterKeyExit = astVisitorExitKey
 
