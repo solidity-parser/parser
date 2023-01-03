@@ -14,9 +14,7 @@ interface Location {
   }
 }
 
-export const commentTypes = ['BlockComment', 'LineComment'] as const
-
-export type CommentTypeString = typeof commentTypes[number]
+export type CommentTypeString = 'BlockComment' | 'LineComment'
 
 export interface BaseComment {
   type: CommentTypeString
