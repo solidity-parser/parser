@@ -94,7 +94,6 @@ import { AssemblyFunctionReturnsContext } from "./SolidityParser";
 import { AssemblyForContext } from "./SolidityParser";
 import { AssemblyIfContext } from "./SolidityParser";
 import { AssemblyLiteralContext } from "./SolidityParser";
-import { SubAssemblyContext } from "./SolidityParser";
 import { TupleExpressionContext } from "./SolidityParser";
 import { NumberLiteralContext } from "./SolidityParser";
 import { IdentifierContext } from "./SolidityParser";
@@ -1108,17 +1107,6 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAssemblyLiteral?: (ctx: AssemblyLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `SolidityParser.subAssembly`.
-	 * @param ctx the parse tree
-	 */
-	enterSubAssembly?: (ctx: SubAssemblyContext) => void;
-	/**
-	 * Exit a parse tree produced by `SolidityParser.subAssembly`.
-	 * @param ctx the parse tree
-	 */
-	exitSubAssembly?: (ctx: SubAssemblyContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.tupleExpression`.
