@@ -43,6 +43,8 @@ import { TypeNameContext } from "./SolidityParser";
 import { UserDefinedTypeNameContext } from "./SolidityParser";
 import { MappingKeyContext } from "./SolidityParser";
 import { MappingContext } from "./SolidityParser";
+import { MappingKeyNameContext } from "./SolidityParser";
+import { MappingValueNameContext } from "./SolidityParser";
 import { FunctionTypeNameContext } from "./SolidityParser";
 import { StorageLocationContext } from "./SolidityParser";
 import { StateMutabilityContext } from "./SolidityParser";
@@ -389,6 +391,20 @@ export interface SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitMapping?: (ctx: MappingContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SolidityParser.mappingKeyName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMappingKeyName?: (ctx: MappingKeyNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SolidityParser.mappingValueName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMappingValueName?: (ctx: MappingValueNameContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SolidityParser.functionTypeName`.
