@@ -43,6 +43,8 @@ import { TypeNameContext } from "./SolidityParser";
 import { UserDefinedTypeNameContext } from "./SolidityParser";
 import { MappingKeyContext } from "./SolidityParser";
 import { MappingContext } from "./SolidityParser";
+import { MappingKeyNameContext } from "./SolidityParser";
+import { MappingValueNameContext } from "./SolidityParser";
 import { FunctionTypeNameContext } from "./SolidityParser";
 import { StorageLocationContext } from "./SolidityParser";
 import { StateMutabilityContext } from "./SolidityParser";
@@ -546,6 +548,28 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitMapping?: (ctx: MappingContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.mappingKeyName`.
+	 * @param ctx the parse tree
+	 */
+	enterMappingKeyName?: (ctx: MappingKeyNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.mappingKeyName`.
+	 * @param ctx the parse tree
+	 */
+	exitMappingKeyName?: (ctx: MappingKeyNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.mappingValueName`.
+	 * @param ctx the parse tree
+	 */
+	enterMappingValueName?: (ctx: MappingValueNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.mappingValueName`.
+	 * @param ctx the parse tree
+	 */
+	exitMappingValueName?: (ctx: MappingValueNameContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.functionTypeName`.

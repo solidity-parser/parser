@@ -2100,6 +2100,8 @@ describe('AST', () => {
         name: 'address',
         stateMutability: null,
       },
+      keyName: null,
+      valueName: null,
     })
   })
 
@@ -2115,6 +2117,77 @@ describe('AST', () => {
         type: 'ElementaryTypeName',
         name: 'address',
         stateMutability: null,
+      },
+      keyName: null,
+      valueName: null,
+    })
+  })
+
+  it('Mapping with named key', function () {
+    const ast: any = parseNode('mapping(uint x => address) a;')
+    assert.deepEqual(ast.variables[0].typeName, {
+      type: 'Mapping',
+      keyType: {
+        type: 'ElementaryTypeName',
+        name: 'uint',
+        stateMutability: null,
+      },
+      valueType: {
+        type: 'ElementaryTypeName',
+        name: 'address',
+        stateMutability: null,
+      },
+      keyName: {
+        type: 'Identifier',
+        name: 'x',
+      },
+      valueName: null,
+    })
+  })
+
+  it('Mapping with named value', function () {
+    const ast: any = parseNode('mapping(uint => address y) a;')
+    assert.deepEqual(ast.variables[0].typeName, {
+      type: 'Mapping',
+      keyType: {
+        type: 'ElementaryTypeName',
+        name: 'uint',
+        stateMutability: null,
+      },
+      valueType: {
+        type: 'ElementaryTypeName',
+        name: 'address',
+        stateMutability: null,
+      },
+      keyName: null,
+      valueName: {
+        type: 'Identifier',
+        name: 'y',
+      },
+    })
+  })
+
+  it('Mapping with both named key and named value', function () {
+    const ast: any = parseNode('mapping(uint x => address y) a;')
+    assert.deepEqual(ast.variables[0].typeName, {
+      type: 'Mapping',
+      keyType: {
+        type: 'ElementaryTypeName',
+        name: 'uint',
+        stateMutability: null,
+      },
+      valueType: {
+        type: 'ElementaryTypeName',
+        name: 'address',
+        stateMutability: null,
+      },
+      keyName: {
+        type: 'Identifier',
+        name: 'x',
+      },
+      valueName: {
+        type: 'Identifier',
+        name: 'y',
       },
     })
   })
