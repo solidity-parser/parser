@@ -244,7 +244,9 @@ export interface ArrayTypeName extends BaseASTNode {
 export interface Mapping extends BaseASTNode {
   type: 'Mapping'
   keyType: ElementaryTypeName | UserDefinedTypeName
+  keyName: Identifier | null
   valueType: TypeName
+  valueName: Identifier | null
 }
 export interface FunctionTypeName extends BaseASTNode {
   type: 'FunctionTypeName'

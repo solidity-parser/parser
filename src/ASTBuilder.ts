@@ -958,10 +958,21 @@ export class ASTBuilder
   }
 
   public visitMapping(ctx: SP.MappingContext): AST.Mapping & WithMeta {
+    const mappingKeyNameCtx = ctx.mappingKeyName()
+    const mappingValueNameCtx = ctx.mappingValueName()
+
     const node: AST.Mapping = {
       type: 'Mapping',
       keyType: this.visitMappingKey(ctx.mappingKey()),
+      keyName:
+        mappingKeyNameCtx === undefined
+          ? null
+          : this.visitIdentifier(mappingKeyNameCtx.identifier()),
       valueType: this.visitTypeName(ctx.typeName()),
+      valueName:
+        mappingValueNameCtx === undefined
+          ? null
+          : this.visitIdentifier(mappingValueNameCtx.identifier()),
     }
 
     return this._addMeta(node, ctx)
