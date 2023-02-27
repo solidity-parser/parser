@@ -22,6 +22,8 @@ import { CustomErrorDefinitionContext } from "./SolidityParser";
 import { TypeDefinitionContext } from "./SolidityParser";
 import { UsingForDeclarationContext } from "./SolidityParser";
 import { UsingForObjectContext } from "./SolidityParser";
+import { UsingForObjectDirectiveContext } from "./SolidityParser";
+import { UserDefinableOperatorsContext } from "./SolidityParser";
 import { StructDefinitionContext } from "./SolidityParser";
 import { ModifierDefinitionContext } from "./SolidityParser";
 import { ModifierInvocationContext } from "./SolidityParser";
@@ -317,6 +319,28 @@ export interface SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUsingForObject?: (ctx: UsingForObjectContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.usingForObjectDirective`.
+	 * @param ctx the parse tree
+	 */
+	enterUsingForObjectDirective?: (ctx: UsingForObjectDirectiveContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.usingForObjectDirective`.
+	 * @param ctx the parse tree
+	 */
+	exitUsingForObjectDirective?: (ctx: UsingForObjectDirectiveContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `SolidityParser.userDefinableOperators`.
+	 * @param ctx the parse tree
+	 */
+	enterUserDefinableOperators?: (ctx: UserDefinableOperatorsContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.userDefinableOperators`.
+	 * @param ctx the parse tree
+	 */
+	exitUserDefinableOperators?: (ctx: UserDefinableOperatorsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SolidityParser.structDefinition`.

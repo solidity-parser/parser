@@ -52,6 +52,7 @@ describe('AST', () => {
         },
         libraryName: 'Lib',
         functions: [],
+        operators: [],
       })
 
       ast = parseNode('using Lib for *;')
@@ -61,6 +62,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: 'Lib',
         functions: [],
+        operators: [],
       })
 
       ast = parseNode('using Lib for S;')
@@ -73,6 +75,7 @@ describe('AST', () => {
         },
         libraryName: 'Lib',
         functions: [],
+        operators: [],
       })
 
       ast = parseNode('using L.Lib for S;')
@@ -85,6 +88,7 @@ describe('AST', () => {
         },
         libraryName: 'L.Lib',
         functions: [],
+        operators: [],
       })
     })
 
@@ -100,6 +104,7 @@ describe('AST', () => {
         },
         libraryName: 'Lib',
         functions: [],
+        operators: [],
       })
 
       ast = parseNode('using Lib for * global;')
@@ -109,6 +114,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: 'Lib',
         functions: [],
+        operators: [],
       })
 
       ast = parseNode('using Lib for S global;')
@@ -121,6 +127,7 @@ describe('AST', () => {
         },
         libraryName: 'Lib',
         functions: [],
+        operators: [],
       })
 
       ast = parseNode('using L.Lib for S global;')
@@ -133,6 +140,7 @@ describe('AST', () => {
         },
         libraryName: 'L.Lib',
         functions: [],
+        operators: [],
       })
     })
 
@@ -148,6 +156,7 @@ describe('AST', () => {
         },
         libraryName: null,
         functions: ['f'],
+        operators: [null],
       })
 
       ast = parseNode('using { f, g } for uint;')
@@ -161,6 +170,7 @@ describe('AST', () => {
         },
         libraryName: null,
         functions: ['f', 'g'],
+        operators: [null, null],
       })
 
       ast = parseNode('using { f } for *;')
@@ -170,6 +180,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: null,
         functions: ['f'],
+        operators: [null],
       })
 
       ast = parseNode('using { f } for S;')
@@ -182,6 +193,7 @@ describe('AST', () => {
         },
         libraryName: null,
         functions: ['f'],
+        operators: [null],
       })
     })
 
@@ -197,6 +209,7 @@ describe('AST', () => {
         },
         libraryName: null,
         functions: ['f'],
+        operators: [null],
       })
 
       ast = parseNode('using { f, g } for uint global;')
@@ -210,6 +223,7 @@ describe('AST', () => {
         },
         libraryName: null,
         functions: ['f', 'g'],
+        operators: [null, null],
       })
 
       ast = parseNode('using { f } for * global;')
@@ -219,6 +233,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: null,
         functions: ['f'],
+        operators: [null],
       })
 
       ast = parseNode('using { f } for S global;')
@@ -231,6 +246,67 @@ describe('AST', () => {
         },
         libraryName: null,
         functions: ['f'],
+        operators: [null],
+      })
+    })
+
+    describe('user-defined operators', function () {
+      it('defining a single operator', function () {
+        const ast = parseNode('using { add as + } for Fixed18 global;')
+        assert.deepEqual(ast, {
+          type: 'UsingForDeclaration',
+          isGlobal: true,
+          typeName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'Fixed18',
+          },
+          libraryName: null,
+          functions: ['add'],
+          operators: ['+'],
+        })
+      })
+
+      it('defining two operators', function () {
+        const ast = parseNode('using { add as +, sub as - } for Fixed18 global;')
+        assert.deepEqual(ast, {
+          type: 'UsingForDeclaration',
+          isGlobal: true,
+          typeName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'Fixed18',
+          },
+          libraryName: null,
+          functions: ['add', 'sub'],
+          operators: ['+', '-'],
+        })
+      })
+
+      it('mixing attached functions and user-defined operators', function () {
+        let ast = parseNode('using { add, sub as - } for Fixed18 global;')
+        assert.deepEqual(ast, {
+          type: 'UsingForDeclaration',
+          isGlobal: true,
+          typeName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'Fixed18',
+          },
+          libraryName: null,
+          functions: ['add', 'sub'],
+          operators: [null, '-'],
+        })
+
+        ast = parseNode('using { add as +, sub } for Fixed18 global;')
+        assert.deepEqual(ast, {
+          type: 'UsingForDeclaration',
+          isGlobal: true,
+          typeName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'Fixed18',
+          },
+          libraryName: null,
+          functions: ['add', 'sub'],
+          operators: ['+', null],
+        })
       })
     })
   })
