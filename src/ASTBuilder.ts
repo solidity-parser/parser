@@ -533,32 +533,48 @@ export class ASTBuilder
       typeName = this.visitTypeName(ctxTypeName)
     }
 
-    const isGlobal = ctx.GlobalKeyword() !== undefined;
+    const isGlobal = ctx.GlobalKeyword() !== undefined
 
-    // the object of the `usingForDeclaration` can be a single identifier
-    // (the library name) or a group of functions:
-    //   using Lib for uint;
-    //   using { f } for uint;
+    const usingForObjectCtx = ctx.usingForObject()
+
+    const userDefinedTypeNameCtx = usingForObjectCtx.userDefinedTypeName()
+
     let node: AST.UsingForDeclaration
-    const usingForObject = ctx.usingForObject()
-    const firstChild = this._toText(usingForObject.getChild(0))
-    if (firstChild === '{') {
+    if (userDefinedTypeNameCtx !== undefined) {
+      // using Lib for ...
+      node = {
+        type: 'UsingForDeclaration',
+        isGlobal,
+        typeName,
+        libraryName: this._toText(userDefinedTypeNameCtx),
+        functions: [],
+        operators: [],
+      }
+    } else {
+      // using { } for ...
+      const usingForObjectDirectives = usingForObjectCtx.usingForObjectDirective()
+      const functions: string[] = []
+      const operators: Array<string | null> = []
+
+      for (const usingForObjectDirective of usingForObjectDirectives) {
+        functions.push(
+          this._toText(usingForObjectDirective.userDefinedTypeName())
+        )
+        const operator = usingForObjectDirective.userDefinableOperators()
+        if (operator !== undefined) {
+          operators.push(this._toText(operator))
+        } else {
+          operators.push(null)
+        }
+      }
+
       node = {
         type: 'UsingForDeclaration',
         isGlobal,
         typeName,
         libraryName: null,
-        functions: usingForObject
-          .userDefinedTypeName()
-          .map((x) => this._toText(x)),
-      }
-    } else {
-      node = {
-        type: 'UsingForDeclaration',
-        isGlobal,
-        typeName,
-        libraryName: this._toText(usingForObject.userDefinedTypeName(0)),
-        functions: [],
+        functions,
+        operators,
       }
     }
 
@@ -1726,7 +1742,7 @@ export class ASTBuilder
         value: this._toText(ctx.BooleanLiteral()!) === 'true',
       }
 
-      return this._addMeta(node, ctx);
+      return this._addMeta(node, ctx)
     }
 
     if (ctx.DecimalNumber()) {

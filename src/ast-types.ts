@@ -152,6 +152,9 @@ export interface UsingForDeclaration extends BaseASTNode {
   type: 'UsingForDeclaration'
   typeName: TypeName | null
   functions: string[]
+  // for each item in `functions`, the item with the same index in `operators`
+  // will be the defined operator, or null if it's just an attached function
+  operators: Array<string | null>
   libraryName: string | null
   isGlobal: boolean;
 }
