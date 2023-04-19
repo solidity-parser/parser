@@ -11,6 +11,12 @@
     "dist/**/*",
     "src/**/*"
   ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.esm.js"
+    }
+  },
   "types": "dist/src/index.d.ts",
   "scripts": {
     "antlr": "antlr4ts -visitor antlr/Solidity.g4 -o src",
