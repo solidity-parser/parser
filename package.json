@@ -17,7 +17,7 @@
     "build:browser": "esbuild src/index.ts --outfile=dist/index.iife.js --bundle --loader:.tokens=text --sourcemap --format=iife --global-name=SolidityParser --define:__dirname=true --define:BROWSER=true --inject:./process-shim.js",
     "build:esm": "esbuild src/index.ts --outfile=dist/index.esm.js --bundle --loader:.tokens=text --sourcemap --format=esm --global-name=SolidityParser --define:__dirname=true --define:BROWSER=true --inject:./process-shim.js",
     "build:node": "esbuild src/index.ts --outfile=dist/index.cjs.js --bundle  --loader:.tokens=file --sourcemap --format=cjs --platform=node --target=node12",
-    "build": "npm run build:node && npm run build:browser && npm run build:browser && npm run generate-types && npm run copy-files",
+    "build": "npm run build:node && npm run build:browser && npm run build:esm && npm run generate-types && npm run copy-files",
     "generate-types": "tsc",
     "copy-files": "shx mkdir -p dist/antlr && shx cp './src/antlr/*tokens' dist/antlr",
     "prettier": "prettier --write 'src/**/*' 'test/**/*'",
