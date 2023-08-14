@@ -43,6 +43,7 @@ jobs:
           path: |
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - uses: browser-actions/setup-chrome@v1
       - name: Install
         run: npm install
       - name: Build
