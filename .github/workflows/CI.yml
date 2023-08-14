@@ -48,6 +48,8 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Run integration
+        run: npm run test:integration
       - name: Run tests
         run: npm run test:browser
 
@@ -76,8 +78,6 @@ jobs:
         run: npm install
       - name: Run tests
         run: npm run test:node
-      - name: Run integration
-        run: npm run test:integration
 
   test_macos:
     name: Test on MacOS with Node 16
@@ -101,8 +101,6 @@ jobs:
         run: npm install
       - name: Run tests
         run: npm run test:node
-      - name: Run integration
-        run: npm run test:integration
 
   test_windows:
     name: Test on Windows with Node 16
@@ -120,5 +118,3 @@ jobs:
         run: npm install
       - name: Run tests
         run: npm run test:node
-      - name: Run integration
-        run: npm run test:integration
