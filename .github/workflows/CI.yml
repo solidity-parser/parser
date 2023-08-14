@@ -74,7 +74,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Run tests
-        run: npm run test:all
+        run: npm run test
       - name: Run integration
         run: npm run test:integration
 
@@ -91,6 +91,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Run tests
-        run: npm run test:all
+        run: npm run test
       - name: Run integration
         run: npm run test:integration
