@@ -16,13 +16,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install
         run: npm install
       - name: lint
@@ -35,17 +30,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
           repository: solidity-parser/antlr
           path: antlr
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install
         run: npm install
       - name: Build
@@ -65,17 +55,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          cache: 'npm'
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
           repository: solidity-parser/antlr
           path: antlr
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
       - name: Install
         run: npm install
       - name: Run tests
@@ -88,17 +73,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
           repository: solidity-parser/antlr
           path: antlr
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install
         run: npm install
       - name: Run tests
@@ -111,6 +91,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
