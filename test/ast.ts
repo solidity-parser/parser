@@ -267,7 +267,9 @@ describe('AST', () => {
       })
 
       it('defining two operators', function () {
-        const ast = parseNode('using { add as +, sub as - } for Fixed18 global;')
+        const ast = parseNode(
+          'using { add as +, sub as - } for Fixed18 global;',
+        )
         assert.deepEqual(ast, {
           type: 'UsingForDeclaration',
           isGlobal: true,
@@ -566,7 +568,7 @@ describe('AST', () => {
 
   it('FunctionDefinition fallback with argument and return value', () => {
     const ast: any = parseNode(
-      'fallback (bytes calldata input) external returns (bytes memory output) {}'
+      'fallback (bytes calldata input) external returns (bytes memory output) {}',
     )
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
@@ -839,7 +841,7 @@ describe('AST', () => {
 
   it('FunctionDefinition with two overrides', () => {
     const ast: any = parseNode(
-      'function foo() public override(Base1, Base2) {}'
+      'function foo() public override(Base1, Base2) {}',
     )
     assert.deepEqual(ast, {
       type: 'FunctionDefinition',
@@ -1536,7 +1538,7 @@ describe('AST', () => {
   it('TryStatement', function () {
     // try with one catch clause
     const stmt = parseStatement(
-      'try f(1, 2) returns (uint a) {} catch (bytes memory a) {}'
+      'try f(1, 2) returns (uint a) {} catch (bytes memory a) {}',
     )
     assert.deepEqual(stmt, {
       type: 'TryStatement',
@@ -1619,7 +1621,7 @@ describe('AST', () => {
 
   it('TryStatement with Error', function () {
     const stmt = parseStatement(
-      'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch (bytes memory c) {}'
+      'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch (bytes memory c) {}',
     )
     assert.deepEqual(stmt, {
       type: 'TryStatement',
@@ -1730,7 +1732,7 @@ describe('AST', () => {
 
   it('TryStatement with Panic', function () {
     const stmt = parseStatement(
-      'try f(1, 2) returns (uint a) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}'
+      'try f(1, 2) returns (uint a) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}',
     )
     assert.deepEqual(stmt, {
       type: 'TryStatement',
@@ -1841,7 +1843,7 @@ describe('AST', () => {
 
   it('TryStatement with Error and Panic', function () {
     const stmt = parseStatement(
-      'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}'
+      'try f(1, 2) returns (uint a) {} catch Error(string memory b) {} catch Panic(uint errorCode) {} catch (bytes memory c) {}',
     )
     assert.deepEqual(stmt, {
       type: 'TryStatement',
@@ -3013,7 +3015,7 @@ describe('AST', () => {
 
   it('AssemblySwitch / AssemblyCase', function () {
     const ast: any = parseAssembly(
-      'switch x case 0 { y := mul(x, 2) } default { y := 0 }'
+      'switch x case 0 { y := mul(x, 2) } default { y := 0 }',
     )
     assert.deepEqual(ast, {
       type: 'AssemblySwitch',
@@ -3251,7 +3253,7 @@ describe('AST', () => {
 
   it('AssemblyFor', function () {
     const ast: any = parseAssembly(
-      'for { let i := 0  } lt(i, x) { i := add(i, 1)  } { y := mul(2, y) }'
+      'for { let i := 0  } lt(i, x) { i := add(i, 1)  } { y := mul(2, y) }',
     )
     assert.deepEqual(ast, {
       type: 'AssemblyFor',

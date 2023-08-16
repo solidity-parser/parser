@@ -1,9 +1,9 @@
-import { Token as Antlr4TsToken } from "antlr4ts";
+import { Token as Antlr4TsToken } from 'antlr4ts'
 export interface Node {
   type: string
 }
 
-export type AntlrToken = Antlr4TsToken;
+export type AntlrToken = Antlr4TsToken
 
 export interface TokenizeOptions {
   range?: boolean

@@ -14,7 +14,7 @@ class ErrorListener extends antlr4.error.ErrorListener {
     offendingSymbol: any,
     line: number,
     column: number,
-    message: string
+    message: string,
   ) {
     this._errors.push({ message, line, column })
   }
