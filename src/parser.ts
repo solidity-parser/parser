@@ -7,7 +7,7 @@ import {
   astNodeTypes,
   ASTNodeTypeString,
   ASTVisitor,
-  SourceUnit,
+  SourceUnit
 } from './ast-types'
 import { ASTBuilder } from './ASTBuilder'
 import ErrorListener from './ErrorListener'
@@ -113,7 +113,7 @@ function _isASTNode(node: unknown): node is ASTNode {
 export function visit(
   node: unknown,
   visitor: ASTVisitor,
-  nodeParent?: ASTNode,
+  nodeParent?: ASTNode
 ): void {
   if (Array.isArray(node)) {
     node.forEach((child) => visit(child, visitor, nodeParent))

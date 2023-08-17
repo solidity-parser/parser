@@ -116,7 +116,7 @@ export const astNodeTypes = [
   'CatchClause',
   'FileLevelConstant',
   'AssemblyMemberAccess',
-  'TypeDefinition',
+  'TypeDefinition'
 ] as const
 
 export type ASTNodeTypeString = (typeof astNodeTypes)[number]
@@ -506,7 +506,7 @@ export const binaryOpValues = [
   '/=',
   '%=',
   '|',
-  '|=',
+  '|='
 ] as const
 export type BinOp = (typeof binaryOpValues)[number]
 
@@ -518,7 +518,7 @@ export const unaryOpValues = [
   '~',
   'after',
   'delete',
-  '!',
+  '!'
 ] as const
 export type UnaryOp = (typeof unaryOpValues)[number]
 
@@ -692,7 +692,7 @@ type ASTVisitorEnter = {
 type ASTVisitorExit = {
   [K in keyof ASTTypeMap as `${K}:exit`]?: (
     ast: ASTTypeMap[K],
-    parent?: ASTNode,
+    parent?: ASTNode
   ) => any
 }
 
