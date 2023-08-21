@@ -98,13 +98,13 @@ function _isASTNode(node: unknown): node is ASTNode {
     return false
   }
 
-  const nodeAsAny = node as ASTNode
+  const nodeAsASTNode = node as ASTNode
 
   if (
-    Object.prototype.hasOwnProperty.call(nodeAsAny, 'type') &&
-    typeof nodeAsAny.type === 'string'
+    Object.prototype.hasOwnProperty.call(nodeAsASTNode, 'type') &&
+    typeof nodeAsASTNode.type === 'string'
   ) {
-    return astNodeTypes.includes(nodeAsAny.type)
+    return astNodeTypes.includes(nodeAsASTNode.type)
   }
 
   return false
