@@ -39,7 +39,7 @@ describe('#parse', function () {
   it('can build ast with tolerant mode errors', () => {
     const cases = [
       'contract test { function () { 2 + + 2; } }',
-      'contract test { modifier {  } }'
+      'contract test { modifier {  } }',
     ]
 
     for (const c of cases) {
@@ -77,13 +77,13 @@ describe('#parse', function () {
       loc: {
         start: {
           line: 1,
-          column: 0
+          column: 0,
         },
         end: {
           line: 1,
-          column: 0
-        }
-      }
+          column: 0,
+        },
+      },
     })
   })
 })
@@ -99,7 +99,7 @@ describe('#visit', function () {
 
       'ContractDefinition:exit': (node: any) => {
         assert.equal(node.type, 'ContractDefinition')
-      }
+      },
     })
   })
 
@@ -113,7 +113,7 @@ describe('#visit', function () {
 
       'ContractDefinition:exit': () => {
         assert.fail('should not reach here')
-      }
+      },
     })
   })
 
@@ -143,7 +143,7 @@ describe('#visit', function () {
         }
 
         assert.equal(parent.name, 'test')
-      }
+      },
     })
   })
 })

@@ -12,7 +12,7 @@ const TYPE_TOKENS = [
   'Uint',
   'Byte',
   'Fixed',
-  'UFixed'
+  'UFixed',
 ]
 
 function rsplit(str: string, value: string) {
@@ -83,8 +83,8 @@ export function buildTokenList(
         start: { line: token.line, column: token.charPositionInLine },
         end: {
           line: token.line,
-          column: token.charPositionInLine + (token.text?.length ?? 0)
-        }
+          column: token.charPositionInLine + (token.text?.length ?? 0),
+        },
       }
     }
     return node

@@ -7,7 +7,7 @@ import {
   astNodeTypes,
   ASTNodeTypeString,
   ASTVisitor,
-  SourceUnit
+  SourceUnit,
 } from './ast-types'
 import { ASTBuilder } from './ASTBuilder'
 import ErrorListener from './ErrorListener'

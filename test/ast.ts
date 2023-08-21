@@ -5,7 +5,7 @@ import {
   parseNode,
   parseStatement,
   parseExpression,
-  parseAssembly
+  parseAssembly,
 } from './utils'
 
 describe('AST', () => {
@@ -13,7 +13,7 @@ describe('AST', () => {
     const ast: any = parser.parse('')
     assert.deepEqual(ast, {
       type: 'SourceUnit',
-      children: []
+      children: [],
     })
   })
 
@@ -25,17 +25,17 @@ describe('AST', () => {
       members: [
         {
           type: 'EnumValue',
-          name: 'A'
+          name: 'A',
         },
         {
           type: 'EnumValue',
-          name: 'B'
+          name: 'B',
         },
         {
           type: 'EnumValue',
-          name: 'C'
-        }
-      ]
+          name: 'C',
+        },
+      ],
     })
   })
 
@@ -48,11 +48,11 @@ describe('AST', () => {
         typeName: {
           type: 'ElementaryTypeName',
           name: 'uint',
-          stateMutability: null
+          stateMutability: null,
         },
         libraryName: 'Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
 
       ast = parseNode('using Lib for *;')
@@ -62,7 +62,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: 'Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
 
       ast = parseNode('using Lib for S;')
@@ -71,11 +71,11 @@ describe('AST', () => {
         isGlobal: false,
         typeName: {
           type: 'UserDefinedTypeName',
-          namePath: 'S'
+          namePath: 'S',
         },
         libraryName: 'Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
 
       ast = parseNode('using L.Lib for S;')
@@ -84,11 +84,11 @@ describe('AST', () => {
         isGlobal: false,
         typeName: {
           type: 'UserDefinedTypeName',
-          namePath: 'S'
+          namePath: 'S',
         },
         libraryName: 'L.Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
     })
 
@@ -100,11 +100,11 @@ describe('AST', () => {
         typeName: {
           type: 'ElementaryTypeName',
           name: 'uint',
-          stateMutability: null
+          stateMutability: null,
         },
         libraryName: 'Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
 
       ast = parseNode('using Lib for * global;')
@@ -114,7 +114,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: 'Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
 
       ast = parseNode('using Lib for S global;')
@@ -123,11 +123,11 @@ describe('AST', () => {
         isGlobal: true,
         typeName: {
           type: 'UserDefinedTypeName',
-          namePath: 'S'
+          namePath: 'S',
         },
         libraryName: 'Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
 
       ast = parseNode('using L.Lib for S global;')
@@ -136,11 +136,11 @@ describe('AST', () => {
         isGlobal: true,
         typeName: {
           type: 'UserDefinedTypeName',
-          namePath: 'S'
+          namePath: 'S',
         },
         libraryName: 'L.Lib',
         functions: [],
-        operators: []
+        operators: [],
       })
     })
 
@@ -152,11 +152,11 @@ describe('AST', () => {
         typeName: {
           type: 'ElementaryTypeName',
           name: 'uint',
-          stateMutability: null
+          stateMutability: null,
         },
         libraryName: null,
         functions: ['f'],
-        operators: [null]
+        operators: [null],
       })
 
       ast = parseNode('using { f, g } for uint;')
@@ -166,11 +166,11 @@ describe('AST', () => {
         typeName: {
           type: 'ElementaryTypeName',
           name: 'uint',
-          stateMutability: null
+          stateMutability: null,
         },
         libraryName: null,
         functions: ['f', 'g'],
-        operators: [null, null]
+        operators: [null, null],
       })
 
       ast = parseNode('using { f } for *;')
@@ -180,7 +180,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: null,
         functions: ['f'],
-        operators: [null]
+        operators: [null],
       })
 
       ast = parseNode('using { f } for S;')
@@ -189,11 +189,11 @@ describe('AST', () => {
         isGlobal: false,
         typeName: {
           type: 'UserDefinedTypeName',
-          namePath: 'S'
+          namePath: 'S',
         },
         libraryName: null,
         functions: ['f'],
-        operators: [null]
+        operators: [null],
       })
     })
 
@@ -205,11 +205,11 @@ describe('AST', () => {
         typeName: {
           type: 'ElementaryTypeName',
           name: 'uint',
-          stateMutability: null
+          stateMutability: null,
         },
         libraryName: null,
         functions: ['f'],
-        operators: [null]
+        operators: [null],
       })
 
       ast = parseNode('using { f, g } for uint global;')
@@ -219,11 +219,11 @@ describe('AST', () => {
         typeName: {
           type: 'ElementaryTypeName',
           name: 'uint',
-          stateMutability: null
+          stateMutability: null,
         },
         libraryName: null,
         functions: ['f', 'g'],
-        operators: [null, null]
+        operators: [null, null],
       })
 
       ast = parseNode('using { f } for * global;')
@@ -233,7 +233,7 @@ describe('AST', () => {
         typeName: null,
         libraryName: null,
         functions: ['f'],
-        operators: [null]
+        operators: [null],
       })
 
       ast = parseNode('using { f } for S global;')
@@ -242,11 +242,11 @@ describe('AST', () => {
         isGlobal: true,
         typeName: {
           type: 'UserDefinedTypeName',
-          namePath: 'S'
+          namePath: 'S',
         },
         libraryName: null,
         functions: ['f'],
-        operators: [null]
+        operators: [null],
       })
     })
 
@@ -258,11 +258,11 @@ describe('AST', () => {
           isGlobal: true,
           typeName: {
             type: 'UserDefinedTypeName',
-            namePath: 'Fixed18'
+            namePath: 'Fixed18',
           },
           libraryName: null,
           functions: ['add'],
-          operators: ['+']
+          operators: ['+'],
         })
       })
 
@@ -275,11 +275,11 @@ describe('AST', () => {
           isGlobal: true,
           typeName: {
             type: 'UserDefinedTypeName',
-            namePath: 'Fixed18'
+            namePath: 'Fixed18',
           },
           libraryName: null,
           functions: ['add', 'sub'],
-          operators: ['+', '-']
+          operators: ['+', '-'],
         })
       })
 
@@ -290,11 +290,11 @@ describe('AST', () => {
           isGlobal: true,
           typeName: {
             type: 'UserDefinedTypeName',
-            namePath: 'Fixed18'
+            namePath: 'Fixed18',
           },
           libraryName: null,
           functions: ['add', 'sub'],
-          operators: [null, '-']
+          operators: [null, '-'],
         })
 
         ast = parseNode('using { add as +, sub } for Fixed18 global;')
@@ -303,11 +303,11 @@ describe('AST', () => {
           isGlobal: true,
           typeName: {
             type: 'UserDefinedTypeName',
-            namePath: 'Fixed18'
+            namePath: 'Fixed18',
           },
           libraryName: null,
           functions: ['add', 'sub'],
-          operators: ['+', null]
+          operators: ['+', null],
         })
       })
     })
@@ -340,7 +340,7 @@ describe('AST', () => {
     '^0.5.0 || ^0.6.0',
     '^0.5.0 || ^0.6.0 || ^0.7.0',
     '^0.5.0 || >=0.6.0 <0.8.0',
-    '*'
+    '*',
   ]
   versions.forEach(function (version) {
     it('PragmaDirective ' + version, function () {
@@ -349,7 +349,7 @@ describe('AST', () => {
       assert.deepEqual(pragma, {
         type: 'PragmaDirective',
         name: 'solidity',
-        value: version
+        value: version,
       })
     })
   })
@@ -360,7 +360,7 @@ describe('AST', () => {
     assert.deepEqual(pragma, {
       type: 'PragmaDirective',
       name: 'experimental',
-      value: 'ABIEncoderV2'
+      value: 'ABIEncoderV2',
     })
   })
 
@@ -370,7 +370,7 @@ describe('AST', () => {
     assert.deepEqual(pragma, {
       type: 'PragmaDirective',
       name: 'abicoder',
-      value: 'v1'
+      value: 'v1',
     })
   })
 
@@ -380,7 +380,7 @@ describe('AST', () => {
     assert.deepEqual(pragma, {
       type: 'PragmaDirective',
       name: 'abicoder',
-      value: 'v2'
+      value: 'v2',
     })
   })
 
@@ -391,7 +391,7 @@ describe('AST', () => {
       name: 'test',
       baseContracts: [],
       subNodes: [],
-      kind: 'contract'
+      kind: 'contract',
     })
 
     // inheritance
@@ -404,21 +404,21 @@ describe('AST', () => {
           type: 'InheritanceSpecifier',
           baseName: {
             type: 'UserDefinedTypeName',
-            namePath: 'foo'
+            namePath: 'foo',
           },
-          arguments: []
+          arguments: [],
         },
         {
           type: 'InheritanceSpecifier',
           baseName: {
             type: 'UserDefinedTypeName',
-            namePath: 'bar'
+            namePath: 'bar',
           },
-          arguments: []
-        }
+          arguments: [],
+        },
       ],
       subNodes: [],
-      kind: 'contract'
+      kind: 'contract',
     })
 
     // library
@@ -428,7 +428,7 @@ describe('AST', () => {
       name: 'test',
       baseContracts: [],
       subNodes: [],
-      kind: 'library'
+      kind: 'library',
     })
 
     // interface
@@ -438,7 +438,7 @@ describe('AST', () => {
       name: 'test',
       baseContracts: [],
       subNodes: [],
-      kind: 'interface'
+      kind: 'interface',
     })
   })
 
@@ -453,23 +453,23 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'public',
       modifiers: [],
@@ -478,7 +478,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -493,23 +493,23 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'default',
       modifiers: [],
@@ -518,7 +518,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -531,7 +531,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'external',
       modifiers: [],
@@ -540,7 +540,7 @@ describe('AST', () => {
       isFallback: true,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -553,7 +553,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'external',
       modifiers: [],
@@ -562,7 +562,7 @@ describe('AST', () => {
       isFallback: true,
       isReceiveEther: false,
       isVirtual: true,
-      stateMutability: 'payable'
+      stateMutability: 'payable',
     })
   })
 
@@ -580,17 +580,17 @@ describe('AST', () => {
           name: 'input',
           identifier: {
             type: 'Identifier',
-            name: 'input'
+            name: 'input',
           },
           storageLocation: 'calldata',
           type: 'VariableDeclaration',
           typeName: {
             name: 'bytes',
             type: 'ElementaryTypeName',
-            stateMutability: null
+            stateMutability: null,
           },
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnParameters: [
         {
@@ -599,21 +599,21 @@ describe('AST', () => {
           name: 'output',
           identifier: {
             name: 'output',
-            type: 'Identifier'
+            type: 'Identifier',
           },
           storageLocation: 'memory',
           type: 'VariableDeclaration',
           typeName: {
             name: 'bytes',
             type: 'ElementaryTypeName',
-            stateMutability: null
+            stateMutability: null,
           },
-          expression: null
-        }
+          expression: null,
+        },
       ],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'external',
       modifiers: [],
@@ -622,7 +622,7 @@ describe('AST', () => {
       isFallback: true,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -635,7 +635,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'external',
       modifiers: [],
@@ -644,7 +644,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: true,
       isVirtual: true,
-      stateMutability: 'payable'
+      stateMutability: 'payable',
     })
   })
 
@@ -657,7 +657,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'external',
       modifiers: [],
@@ -666,7 +666,7 @@ describe('AST', () => {
       isFallback: true,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -679,7 +679,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'external',
       modifiers: [],
@@ -688,7 +688,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: true,
       isVirtual: false,
-      stateMutability: 'payable'
+      stateMutability: 'payable',
     })
   })
 
@@ -701,7 +701,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'public',
       modifiers: [],
@@ -710,7 +710,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -724,12 +724,12 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'foo',
           identifier: {
             type: 'Identifier',
-            name: 'foo'
+            name: 'foo',
           },
           expression: null,
           visibility: 'public',
@@ -738,10 +738,10 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
-          storageLocation: null
-        }
+          storageLocation: null,
+        },
       ],
-      initialValue: null
+      initialValue: null,
     })
   })
 
@@ -755,12 +755,12 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'foo',
           identifier: {
             type: 'Identifier',
-            name: 'foo'
+            name: 'foo',
           },
           expression: null,
           visibility: 'default',
@@ -769,10 +769,10 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: true,
-          storageLocation: null
-        }
+          storageLocation: null,
+        },
       ],
-      initialValue: null
+      initialValue: null,
     })
   })
 
@@ -785,21 +785,21 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'public',
       modifiers: [],
       override: [
         {
           type: 'UserDefinedTypeName',
-          namePath: 'Base'
-        }
+          namePath: 'Base',
+        },
       ],
       isConstructor: false,
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -813,29 +813,29 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'foo',
           identifier: {
             type: 'Identifier',
-            name: 'foo'
+            name: 'foo',
           },
           expression: null,
           visibility: 'public',
           override: [
             {
               type: 'UserDefinedTypeName',
-              namePath: 'Base'
-            }
+              namePath: 'Base',
+            },
           ],
           isStateVar: true,
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
-          storageLocation: null
-        }
+          storageLocation: null,
+        },
       ],
-      initialValue: null
+      initialValue: null,
     })
   })
 
@@ -850,25 +850,25 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'public',
       modifiers: [],
       override: [
         {
           type: 'UserDefinedTypeName',
-          namePath: 'Base1'
+          namePath: 'Base1',
         },
         {
           type: 'UserDefinedTypeName',
-          namePath: 'Base2'
-        }
+          namePath: 'Base2',
+        },
       ],
       isConstructor: false,
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -882,33 +882,33 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'foo',
           identifier: {
             type: 'Identifier',
-            name: 'foo'
+            name: 'foo',
           },
           expression: null,
           visibility: 'public',
           override: [
             {
               type: 'UserDefinedTypeName',
-              namePath: 'Base1'
+              namePath: 'Base1',
             },
             {
               type: 'UserDefinedTypeName',
-              namePath: 'Base2'
-            }
+              namePath: 'Base2',
+            },
           ],
           isStateVar: true,
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
-          storageLocation: null
-        }
+          storageLocation: null,
+        },
       ],
-      initialValue: null
+      initialValue: null,
     })
   })
 
@@ -923,23 +923,23 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'default',
       modifiers: [],
@@ -948,7 +948,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: 'pure'
+      stateMutability: 'pure',
     })
 
     ast = parseNode('function foo() virtual public {}')
@@ -959,7 +959,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'public',
       modifiers: [],
@@ -968,7 +968,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: true,
-      stateMutability: null
+      stateMutability: null,
     })
 
     // Function Definition with return parameters
@@ -982,18 +982,18 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnParameters: [
         {
@@ -1006,14 +1006,14 @@ describe('AST', () => {
           typeName: {
             name: 'uint256',
             type: 'ElementaryTypeName',
-            stateMutability: null
+            stateMutability: null,
           },
-          expression: null
-        }
+          expression: null,
+        },
       ],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'default',
       modifiers: [],
@@ -1022,7 +1022,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: 'pure'
+      stateMutability: 'pure',
     })
   })
 
@@ -1038,23 +1038,23 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'default',
       modifiers: [],
@@ -1063,7 +1063,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: 'pure'
+      stateMutability: 'pure',
     })
 
     ast = parseNode('function foo() virtual public {}')
@@ -1074,7 +1074,7 @@ describe('AST', () => {
       returnParameters: null,
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'public',
       modifiers: [],
@@ -1083,7 +1083,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: true,
-      stateMutability: null
+      stateMutability: null,
     })
 
     // Function Definition with return parameters
@@ -1097,18 +1097,18 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnParameters: [
         {
@@ -1121,14 +1121,14 @@ describe('AST', () => {
           typeName: {
             name: 'uint256',
             type: 'ElementaryTypeName',
-            stateMutability: null
+            stateMutability: null,
           },
-          expression: null
-        }
+          expression: null,
+        },
       ],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       visibility: 'default',
       modifiers: [],
@@ -1137,7 +1137,7 @@ describe('AST', () => {
       isFallback: false,
       isReceiveEther: false,
       isVirtual: false,
-      stateMutability: 'pure'
+      stateMutability: 'pure',
     })
   })
 
@@ -1150,16 +1150,16 @@ describe('AST', () => {
       initialValue: {
         number: '10',
         subdenomination: null,
-        type: 'NumberLiteral'
+        type: 'NumberLiteral',
       },
       name: 'EXPONENT',
       typeName: {
         name: 'uint',
         type: 'ElementaryTypeName',
-        stateMutability: null
+        stateMutability: null,
       },
       isDeclaredConst: true,
-      isImmutable: false
+      isImmutable: false,
     })
   })
 
@@ -1168,14 +1168,14 @@ describe('AST', () => {
     assert.deepEqual(ast.modifiers[0], {
       type: 'ModifierInvocation',
       name: 'onlyOwner',
-      arguments: null
+      arguments: null,
     })
 
     ast = parseNode('function foo(uint a) onlyOwner() {}')
     assert.deepEqual(ast.modifiers[0], {
       type: 'ModifierInvocation',
       name: 'onlyOwner',
-      arguments: []
+      arguments: [],
     })
 
     ast = parseNode('function foo(uint a) bar(true, 1) {}')
@@ -1185,14 +1185,14 @@ describe('AST', () => {
       arguments: [
         {
           type: 'BooleanLiteral',
-          value: true
+          value: true,
         },
         {
           type: 'NumberLiteral',
           number: '1',
-          subdenomination: null
-        }
-      ]
+          subdenomination: null,
+        },
+      ],
     })
   })
 
@@ -1201,7 +1201,7 @@ describe('AST', () => {
     assert.deepEqual(stmt.expression.expression, {
       type: 'ElementaryTypeName',
       name: 'uint',
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -1212,13 +1212,13 @@ describe('AST', () => {
       baseTypeName: {
         type: 'ElementaryTypeName',
         name: 'uint256',
-        stateMutability: null
+        stateMutability: null,
       },
       length: {
         type: 'NumberLiteral',
         number: '2',
-        subdenomination: null
-      }
+        subdenomination: null,
+      },
     })
 
     ast = parseNode('uint256[] a;')
@@ -1227,9 +1227,9 @@ describe('AST', () => {
       baseTypeName: {
         type: 'ElementaryTypeName',
         name: 'uint256',
-        stateMutability: null
+        stateMutability: null,
       },
-      length: null
+      length: null,
     })
 
     // typename as expression
@@ -1239,8 +1239,8 @@ describe('AST', () => {
       length: null,
       baseTypeName: {
         namePath: 'A',
-        type: 'UserDefinedTypeName'
-      }
+        type: 'UserDefinedTypeName',
+      },
     })
 
     ast = parseExpression('uint256[]')
@@ -1250,8 +1250,8 @@ describe('AST', () => {
       baseTypeName: {
         name: 'uint256',
         stateMutability: null,
-        type: 'ElementaryTypeName'
-      }
+        type: 'ElementaryTypeName',
+      },
     })
 
     ast = parseExpression('uint256[][]')
@@ -1264,9 +1264,9 @@ describe('AST', () => {
         baseTypeName: {
           name: 'uint256',
           stateMutability: null,
-          type: 'ElementaryTypeName'
-        }
-      }
+          type: 'ElementaryTypeName',
+        },
+      },
     })
   })
 
@@ -1275,7 +1275,7 @@ describe('AST', () => {
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'ElementaryTypeName',
       name: 'address',
-      stateMutability: 'payable'
+      stateMutability: 'payable',
     })
   })
 
@@ -1289,29 +1289,29 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: null,
           identifier: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
+          expression: null,
         },
         {
           type: 'VariableDeclaration',
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: null,
           identifier: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       returnTypes: [
         {
@@ -1319,18 +1319,18 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'bool',
-            stateMutability: null
+            stateMutability: null,
           },
           name: null,
           identifier: null,
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       visibility: 'default',
-      stateMutability: null
+      stateMutability: null,
     })
   })
 
@@ -1338,7 +1338,7 @@ describe('AST', () => {
     let ast: any = parseStatement('return;')
     assert.deepEqual(ast, {
       type: 'ReturnStatement',
-      expression: null
+      expression: null,
     })
 
     ast = parseStatement('return 2;')
@@ -1347,8 +1347,8 @@ describe('AST', () => {
       expression: {
         type: 'NumberLiteral',
         number: '2',
-        subdenomination: null
-      }
+        subdenomination: null,
+      },
     })
 
     ast = parseStatement('return ();')
@@ -1357,15 +1357,15 @@ describe('AST', () => {
       expression: {
         type: 'TupleExpression',
         isArray: false,
-        components: []
-      }
+        components: [],
+      },
     })
   })
 
   it('ThrowStatement', function () {
     const ast: any = parseStatement('throw;')
     assert.deepEqual(ast, {
-      type: 'ThrowStatement'
+      type: 'ThrowStatement',
     })
   })
 
@@ -1377,18 +1377,18 @@ describe('AST', () => {
         type: 'FunctionCall',
         expression: {
           type: 'Identifier',
-          name: 'EventCalled'
+          name: 'EventCalled',
         },
         arguments: [
           {
             type: 'NumberLiteral',
             number: '1',
-            subdenomination: null
-          }
+            subdenomination: null,
+          },
         ],
         names: [],
-        identifiers: []
-      }
+        identifiers: [],
+      },
     })
   })
 
@@ -1400,23 +1400,23 @@ describe('AST', () => {
         type: 'FunctionCall',
         expression: {
           type: 'Identifier',
-          name: 'EventCalled'
+          name: 'EventCalled',
         },
         arguments: [
           {
             type: 'NumberLiteral',
             number: '1',
-            subdenomination: null
-          }
+            subdenomination: null,
+          },
         ],
         names: ['x'],
         identifiers: [
           {
             type: 'Identifier',
-            name: 'x'
-          }
-        ]
-      }
+            name: 'x',
+          },
+        ],
+      },
     })
   })
 
@@ -1431,19 +1431,19 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
-      ]
+          expression: null,
+        },
+      ],
     })
   })
 
@@ -1455,12 +1455,12 @@ describe('AST', () => {
       typeName: {
         type: 'ElementaryTypeName',
         name: 'uint',
-        stateMutability: null
+        stateMutability: null,
       },
       name: 'a',
       identifier: {
         type: 'Identifier',
-        name: 'a'
+        name: 'a',
       },
       expression: null,
       visibility: 'default',
@@ -1469,7 +1469,7 @@ describe('AST', () => {
       isIndexed: false,
       override: null,
       isImmutable: false,
-      storageLocation: null
+      storageLocation: null,
     })
   })
 
@@ -1479,12 +1479,12 @@ describe('AST', () => {
       type: 'WhileStatement',
       condition: {
         type: 'BooleanLiteral',
-        value: true
+        value: true,
       },
       body: {
         type: 'Block',
-        statements: []
-      }
+        statements: [],
+      },
     })
 
     stmt = parseStatement('do {} while (true);')
@@ -1492,12 +1492,12 @@ describe('AST', () => {
       type: 'DoWhileStatement',
       condition: {
         type: 'BooleanLiteral',
-        value: true
+        value: true,
       },
       body: {
         type: 'Block',
-        statements: []
-      }
+        statements: [],
+      },
     })
   })
 
@@ -1507,13 +1507,13 @@ describe('AST', () => {
       type: 'IfStatement',
       condition: {
         type: 'BooleanLiteral',
-        value: true
+        value: true,
       },
       trueBody: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
-      falseBody: null
+      falseBody: null,
     })
 
     // else
@@ -1522,16 +1522,16 @@ describe('AST', () => {
       type: 'IfStatement',
       condition: {
         type: 'BooleanLiteral',
-        value: true
+        value: true,
       },
       trueBody: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       falseBody: {
         type: 'Block',
-        statements: []
-      }
+        statements: [],
+      },
     })
   })
 
@@ -1546,22 +1546,22 @@ describe('AST', () => {
         type: 'FunctionCall',
         expression: {
           type: 'Identifier',
-          name: 'f'
+          name: 'f',
         },
         arguments: [
           {
             type: 'NumberLiteral',
             number: '1',
-            subdenomination: null
+            subdenomination: null,
           },
           {
             type: 'NumberLiteral',
             number: '2',
-            subdenomination: null
-          }
+            subdenomination: null,
+          },
         ],
         names: [],
-        identifiers: []
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1569,29 +1569,29 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       catchClauses: [
         {
           kind: null,
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: false,
           parameters: [
@@ -1601,21 +1601,21 @@ describe('AST', () => {
               name: 'a',
               identifier: {
                 type: 'Identifier',
-                name: 'a'
+                name: 'a',
               },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
-        }
-      ]
+          type: 'CatchClause',
+        },
+      ],
     })
   })
 
@@ -1629,22 +1629,22 @@ describe('AST', () => {
         type: 'FunctionCall',
         expression: {
           type: 'Identifier',
-          name: 'f'
+          name: 'f',
         },
         arguments: [
           {
             type: 'NumberLiteral',
             number: '1',
-            subdenomination: null
+            subdenomination: null,
           },
           {
             type: 'NumberLiteral',
             number: '2',
-            subdenomination: null
-          }
+            subdenomination: null,
+          },
         ],
         names: [],
-        identifiers: []
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1652,29 +1652,29 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       catchClauses: [
         {
           kind: 'Error',
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: true,
           parameters: [
@@ -1684,25 +1684,25 @@ describe('AST', () => {
               name: 'b',
               identifier: {
                 type: 'Identifier',
-                name: 'b'
+                name: 'b',
               },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
                 name: 'string',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
+          type: 'CatchClause',
         },
         {
           kind: null,
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: false,
           parameters: [
@@ -1712,21 +1712,21 @@ describe('AST', () => {
               name: 'c',
               identifier: {
                 type: 'Identifier',
-                name: 'c'
+                name: 'c',
               },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
-        }
-      ]
+          type: 'CatchClause',
+        },
+      ],
     })
   })
 
@@ -1740,22 +1740,22 @@ describe('AST', () => {
         type: 'FunctionCall',
         expression: {
           type: 'Identifier',
-          name: 'f'
+          name: 'f',
         },
         arguments: [
           {
             type: 'NumberLiteral',
             number: '1',
-            subdenomination: null
+            subdenomination: null,
           },
           {
             type: 'NumberLiteral',
             number: '2',
-            subdenomination: null
-          }
+            subdenomination: null,
+          },
         ],
         names: [],
-        identifiers: []
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1763,29 +1763,29 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       catchClauses: [
         {
           kind: 'Panic',
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: false,
           parameters: [
@@ -1795,25 +1795,25 @@ describe('AST', () => {
               name: 'errorCode',
               identifier: {
                 type: 'Identifier',
-                name: 'errorCode'
+                name: 'errorCode',
               },
               storageLocation: null,
               type: 'VariableDeclaration',
               typeName: {
                 name: 'uint',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
+          type: 'CatchClause',
         },
         {
           kind: null,
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: false,
           parameters: [
@@ -1823,21 +1823,21 @@ describe('AST', () => {
               name: 'c',
               identifier: {
                 type: 'Identifier',
-                name: 'c'
+                name: 'c',
               },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
-        }
-      ]
+          type: 'CatchClause',
+        },
+      ],
     })
   })
 
@@ -1851,22 +1851,22 @@ describe('AST', () => {
         type: 'FunctionCall',
         expression: {
           type: 'Identifier',
-          name: 'f'
+          name: 'f',
         },
         arguments: [
           {
             type: 'NumberLiteral',
             number: '1',
-            subdenomination: null
+            subdenomination: null,
           },
           {
             type: 'NumberLiteral',
             number: '2',
-            subdenomination: null
-          }
+            subdenomination: null,
+          },
         ],
         names: [],
-        identifiers: []
+        identifiers: [],
       },
       returnParameters: [
         {
@@ -1874,29 +1874,29 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       catchClauses: [
         {
           kind: 'Error',
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: true,
           parameters: [
@@ -1906,25 +1906,25 @@ describe('AST', () => {
               name: 'b',
               identifier: {
                 type: 'Identifier',
-                name: 'b'
+                name: 'b',
               },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
                 name: 'string',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
+          type: 'CatchClause',
         },
         {
           kind: 'Panic',
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: false,
           parameters: [
@@ -1934,25 +1934,25 @@ describe('AST', () => {
               name: 'errorCode',
               identifier: {
                 type: 'Identifier',
-                name: 'errorCode'
+                name: 'errorCode',
               },
               storageLocation: null,
               type: 'VariableDeclaration',
               typeName: {
                 name: 'uint',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
+          type: 'CatchClause',
         },
         {
           kind: null,
           body: {
             statements: [],
-            type: 'Block'
+            type: 'Block',
           },
           isReasonStringType: false,
           parameters: [
@@ -1962,21 +1962,21 @@ describe('AST', () => {
               name: 'c',
               identifier: {
                 type: 'Identifier',
-                name: 'c'
+                name: 'c',
               },
               storageLocation: 'memory',
               type: 'VariableDeclaration',
               typeName: {
                 name: 'bytes',
                 type: 'ElementaryTypeName',
-                stateMutability: null
+                stateMutability: null,
               },
-              expression: null
-            }
+              expression: null,
+            },
           ],
-          type: 'CatchClause'
-        }
-      ]
+          type: 'CatchClause',
+        },
+      ],
     })
   })
 
@@ -1984,7 +1984,7 @@ describe('AST', () => {
     const ast: any = parseStatement('Foo.Bar a;')
     assert.deepEqual(ast.variables[0].typeName, {
       type: 'UserDefinedTypeName',
-      namePath: 'Foo.Bar'
+      namePath: 'Foo.Bar',
     })
   })
 
@@ -1994,8 +1994,8 @@ describe('AST', () => {
       type: 'ExpressionStatement',
       expression: {
         type: 'BooleanLiteral',
-        value: true
-      }
+        value: true,
+      },
     })
   })
 
@@ -2004,28 +2004,28 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       type: 'NumberLiteral',
       number: '2',
-      subdenomination: 'ether'
+      subdenomination: 'ether',
     })
 
     expr = parseExpression('2.3e5')
     assert.deepEqual(expr, {
       type: 'NumberLiteral',
       number: '2.3e5',
-      subdenomination: null
+      subdenomination: null,
     })
 
     expr = parseExpression('.1')
     assert.deepEqual(expr, {
       type: 'NumberLiteral',
       number: '.1',
-      subdenomination: null
+      subdenomination: null,
     })
 
     expr = parseExpression('1_000_000')
     assert.deepEqual(expr, {
       type: 'NumberLiteral',
       number: '1_000_000',
-      subdenomination: null
+      subdenomination: null,
     })
   })
 
@@ -2035,7 +2035,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello',
       parts: ['Hello'],
-      isUnicode: [false]
+      isUnicode: [false],
     })
   })
 
@@ -2045,7 +2045,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello',
       parts: ['Hello'],
-      isUnicode: [false]
+      isUnicode: [false],
     })
   })
 
@@ -2055,7 +2055,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello "goodbye"',
       parts: ['Hello "goodbye"'],
-      isUnicode: [false]
+      isUnicode: [false],
     })
   })
 
@@ -2065,7 +2065,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: "Hello 'goodbye'",
       parts: ["Hello 'goodbye'"],
-      isUnicode: [false]
+      isUnicode: [false],
     })
   })
 
@@ -2075,7 +2075,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello World',
       parts: ['Hello ', 'World'],
-      isUnicode: [false, false]
+      isUnicode: [false, false],
     })
   })
 
@@ -2085,7 +2085,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello World',
       parts: ['Hello ', 'World'],
-      isUnicode: [false, false]
+      isUnicode: [false, false],
     })
   })
 
@@ -2095,7 +2095,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello World',
       parts: ['Hello ', 'World'],
-      isUnicode: [false, false]
+      isUnicode: [false, false],
     })
   })
 
@@ -2105,7 +2105,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello 🦄 World',
       parts: ['Hello 🦄 World'],
-      isUnicode: [true]
+      isUnicode: [true],
     })
   })
 
@@ -2115,7 +2115,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello 🦄 World',
       parts: ['Hello 🦄 World'],
-      isUnicode: [true]
+      isUnicode: [true],
     })
   })
 
@@ -2125,7 +2125,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'Hello 🦄 Worldbye world',
       parts: ['Hello 🦄 World', 'bye world'],
-      isUnicode: [true, false]
+      isUnicode: [true, false],
     })
   })
 
@@ -2134,7 +2134,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       type: 'HexLiteral',
       value: 'fafafa',
-      parts: ['fafafa']
+      parts: ['fafafa'],
     })
   })
 
@@ -2143,7 +2143,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       type: 'HexLiteral',
       value: '',
-      parts: ['']
+      parts: [''],
     })
   })
 
@@ -2152,7 +2152,7 @@ describe('AST', () => {
     assert.deepEqual(expr, {
       type: 'HexLiteral',
       value: 'deadbeef',
-      parts: ['dead', 'beef']
+      parts: ['dead', 'beef'],
     })
   })
 
@@ -2160,7 +2160,7 @@ describe('AST', () => {
     const expr = parseExpression('false')
     assert.deepEqual(expr, {
       type: 'BooleanLiteral',
-      value: false
+      value: false,
     })
   })
 
@@ -2171,15 +2171,15 @@ describe('AST', () => {
       keyType: {
         type: 'ElementaryTypeName',
         name: 'uint',
-        stateMutability: null
+        stateMutability: null,
       },
       valueType: {
         type: 'ElementaryTypeName',
         name: 'address',
-        stateMutability: null
+        stateMutability: null,
       },
       keyName: null,
-      valueName: null
+      valueName: null,
     })
   })
 
@@ -2189,15 +2189,15 @@ describe('AST', () => {
       type: 'Mapping',
       keyType: {
         type: 'UserDefinedTypeName',
-        namePath: 'Foo'
+        namePath: 'Foo',
       },
       valueType: {
         type: 'ElementaryTypeName',
         name: 'address',
-        stateMutability: null
+        stateMutability: null,
       },
       keyName: null,
-      valueName: null
+      valueName: null,
     })
   })
 
@@ -2208,18 +2208,18 @@ describe('AST', () => {
       keyType: {
         type: 'ElementaryTypeName',
         name: 'uint',
-        stateMutability: null
+        stateMutability: null,
       },
       valueType: {
         type: 'ElementaryTypeName',
         name: 'address',
-        stateMutability: null
+        stateMutability: null,
       },
       keyName: {
         type: 'Identifier',
-        name: 'x'
+        name: 'x',
       },
-      valueName: null
+      valueName: null,
     })
   })
 
@@ -2230,18 +2230,18 @@ describe('AST', () => {
       keyType: {
         type: 'ElementaryTypeName',
         name: 'uint',
-        stateMutability: null
+        stateMutability: null,
       },
       valueType: {
         type: 'ElementaryTypeName',
         name: 'address',
-        stateMutability: null
+        stateMutability: null,
       },
       keyName: null,
       valueName: {
         type: 'Identifier',
-        name: 'y'
-      }
+        name: 'y',
+      },
     })
   })
 
@@ -2252,21 +2252,21 @@ describe('AST', () => {
       keyType: {
         type: 'ElementaryTypeName',
         name: 'uint',
-        stateMutability: null
+        stateMutability: null,
       },
       valueType: {
         type: 'ElementaryTypeName',
         name: 'address',
-        stateMutability: null
+        stateMutability: null,
       },
       keyName: {
         type: 'Identifier',
-        name: 'x'
+        name: 'x',
       },
       valueName: {
         type: 'Identifier',
-        name: 'y'
-      }
+        name: 'y',
+      },
     })
   })
 
@@ -2280,8 +2280,8 @@ describe('AST', () => {
       override: null,
       body: {
         type: 'Block',
-        statements: []
-      }
+        statements: [],
+      },
     })
     ast = parseNode('modifier onlyOwner() {}')
     assert.deepEqual(ast, {
@@ -2292,8 +2292,8 @@ describe('AST', () => {
       override: null,
       body: {
         type: 'Block',
-        statements: []
-      }
+        statements: [],
+      },
     })
   })
 
@@ -2304,8 +2304,8 @@ describe('AST', () => {
       type: 'NewExpression',
       typeName: {
         type: 'UserDefinedTypeName',
-        namePath: 'MyContract'
-      }
+        namePath: 'MyContract',
+      },
     })
 
     // prefix operation
@@ -2315,9 +2315,9 @@ describe('AST', () => {
       operator: '!',
       subExpression: {
         type: 'BooleanLiteral',
-        value: true
+        value: true,
       },
-      isPrefix: true
+      isPrefix: true,
     })
 
     // postfix operation
@@ -2327,9 +2327,9 @@ describe('AST', () => {
       operator: '++',
       subExpression: {
         type: 'Identifier',
-        name: 'i'
+        name: 'i',
       },
-      isPrefix: false
+      isPrefix: false,
     })
 
     // prefix operation
@@ -2339,9 +2339,9 @@ describe('AST', () => {
       operator: '--',
       subExpression: {
         type: 'Identifier',
-        name: 'i'
+        name: 'i',
       },
-      isPrefix: true
+      isPrefix: true,
     })
   })
 
@@ -2351,38 +2351,38 @@ describe('AST', () => {
       type: 'FunctionCall',
       expression: {
         type: 'Identifier',
-        name: 'f'
+        name: 'f',
       },
       arguments: [
         {
           type: 'NumberLiteral',
           number: '1',
-          subdenomination: null
+          subdenomination: null,
         },
         {
           type: 'NumberLiteral',
           number: '2',
-          subdenomination: null
-        }
+          subdenomination: null,
+        },
       ],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
     expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
       type: 'FunctionCall',
       expression: {
         type: 'Identifier',
-        name: 'type'
+        name: 'type',
       },
       arguments: [
         {
           type: 'Identifier',
-          name: 'MyContract'
-        }
+          name: 'MyContract',
+        },
       ],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
   })
 
@@ -2394,7 +2394,7 @@ describe('AST', () => {
         type: 'NameValueExpression',
         expression: {
           type: 'Identifier',
-          name: 'f'
+          name: 'f',
         },
         arguments: {
           type: 'NameValueList',
@@ -2404,41 +2404,41 @@ describe('AST', () => {
             {
               type: 'NumberLiteral',
               number: '10',
-              subdenomination: null
-            }
-          ]
-        }
+              subdenomination: null,
+            },
+          ],
+        },
       },
       arguments: [
         {
           type: 'NumberLiteral',
           number: '1',
-          subdenomination: null
+          subdenomination: null,
         },
         {
           type: 'NumberLiteral',
           number: '2',
-          subdenomination: null
-        }
+          subdenomination: null,
+        },
       ],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
     expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
       type: 'FunctionCall',
       expression: {
         type: 'Identifier',
-        name: 'type'
+        name: 'type',
       },
       arguments: [
         {
           type: 'Identifier',
-          name: 'MyContract'
-        }
+          name: 'MyContract',
+        },
       ],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
   })
 
@@ -2448,47 +2448,47 @@ describe('AST', () => {
       type: 'FunctionCall',
       expression: {
         type: 'Identifier',
-        name: 'f'
+        name: 'f',
       },
       arguments: [
         {
           type: 'NumberLiteral',
           number: '1',
-          subdenomination: null
+          subdenomination: null,
         },
         {
           type: 'NumberLiteral',
           number: '2',
-          subdenomination: null
-        }
+          subdenomination: null,
+        },
       ],
       names: ['x', 'y'],
       identifiers: [
         {
           type: 'Identifier',
-          name: 'x'
+          name: 'x',
         },
         {
           type: 'Identifier',
-          name: 'y'
-        }
-      ]
+          name: 'y',
+        },
+      ],
     })
     expr = parseExpression('type(MyContract)')
     assert.deepEqual(expr, {
       type: 'FunctionCall',
       expression: {
         type: 'Identifier',
-        name: 'type'
+        name: 'type',
       },
       arguments: [
         {
           type: 'Identifier',
-          name: 'MyContract'
-        }
+          name: 'MyContract',
+        },
       ],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
   })
 
@@ -2502,12 +2502,12 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           expression: null,
           visibility: 'default',
@@ -2516,10 +2516,10 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
-          storageLocation: null
-        }
+          storageLocation: null,
+        },
       ],
-      initialValue: null
+      initialValue: null,
     })
   })
 
@@ -2534,27 +2534,27 @@ describe('AST', () => {
           operator: '=',
           left: {
             type: 'Identifier',
-            name: 'i'
+            name: 'i',
           },
           right: {
             type: 'NumberLiteral',
             number: '0',
-            subdenomination: null
-          }
-        }
+            subdenomination: null,
+          },
+        },
       },
       conditionExpression: {
         type: 'BinaryOperation',
         operator: '<',
         left: {
           type: 'Identifier',
-          name: 'i'
+          name: 'i',
         },
         right: {
           type: 'NumberLiteral',
           number: '10',
-          subdenomination: null
-        }
+          subdenomination: null,
+        },
       },
       loopExpression: {
         type: 'ExpressionStatement',
@@ -2563,15 +2563,15 @@ describe('AST', () => {
           operator: '++',
           subExpression: {
             type: 'Identifier',
-            name: 'i'
+            name: 'i',
           },
-          isPrefix: false
-        }
+          isPrefix: false,
+        },
       },
       body: {
         type: 'Block',
-        statements: []
-      }
+        statements: [],
+      },
     })
     stmt = parseStatement('for (;; i++) {}')
     assert.deepEqual(stmt, {
@@ -2585,15 +2585,15 @@ describe('AST', () => {
           operator: '++',
           subExpression: {
             type: 'Identifier',
-            name: 'i'
+            name: 'i',
           },
-          isPrefix: false
-        }
+          isPrefix: false,
+        },
       },
       body: {
         type: 'Block',
-        statements: []
-      }
+        statements: [],
+      },
     })
   })
 
@@ -2603,40 +2603,40 @@ describe('AST', () => {
       components: [
         {
           name: 'a',
-          type: 'Identifier'
+          type: 'Identifier',
         },
-        null
+        null,
       ],
       isArray: false,
-      type: 'TupleExpression'
+      type: 'TupleExpression',
     })
     expr = parseExpression('(a) = (1,)')
     assert.deepEqual(expr.left, {
       components: [
         {
           name: 'a',
-          type: 'Identifier'
-        }
+          type: 'Identifier',
+        },
       ],
       isArray: false,
-      type: 'TupleExpression'
+      type: 'TupleExpression',
     })
     expr = parseExpression('(a,,b,) = (1,2,1)')
     assert.deepEqual(expr.left, {
       components: [
         {
           name: 'a',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         null,
         {
           name: 'b',
-          type: 'Identifier'
+          type: 'Identifier',
         },
-        null
+        null,
       ],
       isArray: false,
-      type: 'TupleExpression'
+      type: 'TupleExpression',
     })
   })
 
@@ -2644,12 +2644,12 @@ describe('AST', () => {
     let expr = parseExpression('a')
     assert.deepEqual(expr, {
       type: 'Identifier',
-      name: 'a'
+      name: 'a',
     })
     expr = parseExpression('calldata')
     assert.deepEqual(expr, {
       type: 'Identifier',
-      name: 'calldata'
+      name: 'calldata',
     })
   })
 
@@ -2662,17 +2662,17 @@ describe('AST', () => {
         null,
         {
           type: 'Identifier',
-          name: 'a'
+          name: 'a',
         },
         null,
         {
           type: 'Identifier',
-          name: 'b'
+          name: 'b',
         },
         null,
-        null
+        null,
       ],
-      isArray: false
+      isArray: false,
     })
 
     // array
@@ -2682,14 +2682,14 @@ describe('AST', () => {
       components: [
         {
           type: 'Identifier',
-          name: 'a'
+          name: 'a',
         },
         {
           type: 'Identifier',
-          name: 'b'
-        }
+          name: 'b',
+        },
       ],
-      isArray: true
+      isArray: true,
     })
   })
 
@@ -2703,20 +2703,20 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           isStateVar: false,
           isIndexed: false,
-          expression: null
-        }
+          expression: null,
+        },
       ],
-      initialValue: null
+      initialValue: null,
     })
 
     stmt = parseStatement('var (a,,b) = 0;')
@@ -2725,7 +2725,7 @@ describe('AST', () => {
       initialValue: {
         number: '0',
         subdenomination: null,
-        type: 'NumberLiteral'
+        type: 'NumberLiteral',
       },
       variables: [
         {
@@ -2734,12 +2734,12 @@ describe('AST', () => {
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: null,
-          expression: null
+          expression: null,
         },
         null,
         {
@@ -2748,14 +2748,14 @@ describe('AST', () => {
           name: 'b',
           identifier: {
             type: 'Identifier',
-            name: 'b'
+            name: 'b',
           },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: null,
-          expression: null
-        }
-      ]
+          expression: null,
+        },
+      ],
     })
 
     stmt = parseStatement('(uint a,, uint b) = 0;')
@@ -2764,7 +2764,7 @@ describe('AST', () => {
       initialValue: {
         number: '0',
         subdenomination: null,
-        type: 'NumberLiteral'
+        type: 'NumberLiteral',
       },
       variables: [
         {
@@ -2773,16 +2773,16 @@ describe('AST', () => {
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: {
             name: 'uint',
             type: 'ElementaryTypeName',
-            stateMutability: null
+            stateMutability: null,
           },
-          expression: null
+          expression: null,
         },
         null,
         {
@@ -2791,18 +2791,18 @@ describe('AST', () => {
           name: 'b',
           identifier: {
             type: 'Identifier',
-            name: 'b'
+            name: 'b',
           },
           storageLocation: null,
           type: 'VariableDeclaration',
           typeName: {
             name: 'uint',
             type: 'ElementaryTypeName',
-            stateMutability: null
+            stateMutability: null,
           },
-          expression: null
-        }
-      ]
+          expression: null,
+        },
+      ],
     })
   })
 
@@ -2815,12 +2815,12 @@ describe('AST', () => {
         type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: null,
       unitAliasIdentifier: null,
       symbolAliases: null,
-      symbolAliasesIdentifiers: null
+      symbolAliasesIdentifiers: null,
     })
 
     ast = parser.parse('import "./abc.sol" as x;')
@@ -2831,15 +2831,15 @@ describe('AST', () => {
         type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: 'x',
       unitAliasIdentifier: {
         type: 'Identifier',
-        name: 'x'
+        name: 'x',
       },
       symbolAliases: null,
-      symbolAliasesIdentifiers: null
+      symbolAliasesIdentifiers: null,
     })
 
     ast = parser.parse('import * as x from "./abc.sol";')
@@ -2850,15 +2850,15 @@ describe('AST', () => {
         type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: 'x',
       unitAliasIdentifier: {
         type: 'Identifier',
-        name: 'x'
+        name: 'x',
       },
       symbolAliases: null,
-      symbolAliasesIdentifiers: null
+      symbolAliasesIdentifiers: null,
     })
 
     ast = parser.parse('import { a as b, c as d, f } from "./abc.sol";')
@@ -2869,26 +2869,26 @@ describe('AST', () => {
         type: 'StringLiteral',
         value: './abc.sol',
         parts: ['./abc.sol'],
-        isUnicode: [false]
+        isUnicode: [false],
       },
       unitAlias: null,
       unitAliasIdentifier: null,
       symbolAliases: [
         ['a', 'b'],
         ['c', 'd'],
-        ['f', null]
+        ['f', null],
       ],
       symbolAliasesIdentifiers: [
         [
           { type: 'Identifier', name: 'a' },
-          { type: 'Identifier', name: 'b' }
+          { type: 'Identifier', name: 'b' },
         ],
         [
           { type: 'Identifier', name: 'c' },
-          { type: 'Identifier', name: 'd' }
+          { type: 'Identifier', name: 'd' },
         ],
-        [{ type: 'Identifier', name: 'f' }, null]
-      ]
+        [{ type: 'Identifier', name: 'f' }, null],
+      ],
     })
   })
 
@@ -2903,37 +2903,37 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'address',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           isStateVar: false,
           isIndexed: true,
           expression: null,
-          storageLocation: null
+          storageLocation: null,
         },
         {
           type: 'VariableDeclaration',
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'b',
           identifier: {
             type: 'Identifier',
-            name: 'b'
+            name: 'b',
           },
           isStateVar: false,
           isIndexed: false,
           expression: null,
-          storageLocation: null
-        }
+          storageLocation: null,
+        },
       ],
-      isAnonymous: false
+      isAnonymous: false,
     })
   })
 
@@ -2945,8 +2945,8 @@ describe('AST', () => {
       flags: [],
       body: {
         type: 'AssemblyBlock',
-        operations: []
-      }
+        operations: [],
+      },
     })
 
     ast = parseStatement('assembly "evmasm" {}')
@@ -2956,8 +2956,8 @@ describe('AST', () => {
       flags: [],
       body: {
         type: 'AssemblyBlock',
-        operations: []
-      }
+        operations: [],
+      },
     })
 
     ast = parseStatement('assembly ("memory-safe") {}')
@@ -2967,8 +2967,8 @@ describe('AST', () => {
       flags: ['memory-safe'],
       body: {
         type: 'AssemblyBlock',
-        operations: []
-      }
+        operations: [],
+      },
     })
 
     ast = parseStatement('assembly "evmasm" ("memory-safe") {}')
@@ -2978,8 +2978,8 @@ describe('AST', () => {
       flags: ['memory-safe'],
       body: {
         type: 'AssemblyBlock',
-        operations: []
-      }
+        operations: [],
+      },
     })
   })
 
@@ -2991,9 +2991,9 @@ describe('AST', () => {
       arguments: [
         {
           type: 'HexNumber',
-          value: '0x04'
-        }
-      ]
+          value: '0x04',
+        },
+      ],
     })
   })
 
@@ -3001,7 +3001,7 @@ describe('AST', () => {
     let ast: any = parseAssembly('0x04')
     assert.deepEqual(ast, {
       type: 'HexNumber',
-      value: '0x04'
+      value: '0x04',
     })
 
     ast = parseAssembly('"hello"')
@@ -3009,7 +3009,7 @@ describe('AST', () => {
       type: 'StringLiteral',
       value: 'hello',
       parts: ['hello'],
-      isUnicode: [false]
+      isUnicode: [false],
     })
   })
 
@@ -3022,7 +3022,7 @@ describe('AST', () => {
       expression: {
         type: 'AssemblyCall',
         functionName: 'x',
-        arguments: []
+        arguments: [],
       },
       cases: [
         {
@@ -3035,8 +3035,8 @@ describe('AST', () => {
                 names: [
                   {
                     type: 'Identifier',
-                    name: 'y'
-                  }
+                    name: 'y',
+                  },
                 ],
                 expression: {
                   type: 'AssemblyCall',
@@ -3045,22 +3045,22 @@ describe('AST', () => {
                     {
                       type: 'AssemblyCall',
                       functionName: 'x',
-                      arguments: []
+                      arguments: [],
                     },
                     {
                       type: 'DecimalNumber',
-                      value: '2'
-                    }
-                  ]
-                }
-              }
-            ]
+                      value: '2',
+                    },
+                  ],
+                },
+              },
+            ],
           },
           value: {
             type: 'DecimalNumber',
-            value: '0'
+            value: '0',
           },
-          default: false
+          default: false,
         },
         {
           type: 'AssemblyCase',
@@ -3072,20 +3072,20 @@ describe('AST', () => {
                 names: [
                   {
                     type: 'Identifier',
-                    name: 'y'
-                  }
+                    name: 'y',
+                  },
                 ],
                 expression: {
                   type: 'DecimalNumber',
-                  value: '0'
-                }
-              }
-            ]
+                  value: '0',
+                },
+              },
+            ],
           },
           value: null,
-          default: true
-        }
-      ]
+          default: true,
+        },
+      ],
     })
   })
 
@@ -3096,13 +3096,13 @@ describe('AST', () => {
       names: [
         {
           type: 'Identifier',
-          name: 'x'
-        }
+          name: 'x',
+        },
       ],
       expression: {
         type: 'HexNumber',
-        value: '0x04'
-      }
+        value: '0x04',
+      },
     })
   })
 
@@ -3114,23 +3114,23 @@ describe('AST', () => {
       arguments: [
         {
           type: 'Identifier',
-          name: 'base'
+          name: 'base',
         },
         {
           type: 'Identifier',
-          name: 'exponent'
-        }
+          name: 'exponent',
+        },
       ],
       returnArguments: [
         {
           type: 'Identifier',
-          name: 'result'
-        }
+          name: 'result',
+        },
       ],
       body: {
         type: 'AssemblyBlock',
-        operations: []
-      }
+        operations: [],
+      },
     })
     ast = parseAssembly('function foo() -> result {}')
     assert.deepEqual(ast, {
@@ -3140,13 +3140,13 @@ describe('AST', () => {
       returnArguments: [
         {
           type: 'Identifier',
-          name: 'result'
-        }
+          name: 'result',
+        },
       ],
       body: {
         type: 'AssemblyBlock',
-        operations: []
-      }
+        operations: [],
+      },
     })
     ast = parseAssembly('function foo(x) {}')
     assert.deepEqual(ast, {
@@ -3155,14 +3155,14 @@ describe('AST', () => {
       arguments: [
         {
           type: 'Identifier',
-          name: 'x'
-        }
+          name: 'x',
+        },
       ],
       returnArguments: [],
       body: {
         type: 'AssemblyBlock',
-        operations: []
-      }
+        operations: [],
+      },
     })
   })
 
@@ -3173,13 +3173,13 @@ describe('AST', () => {
       names: [
         {
           type: 'Identifier',
-          name: 'a'
-        }
+          name: 'a',
+        },
       ],
       expression: {
         type: 'DecimalNumber',
-        value: '10'
-      }
+        value: '10',
+      },
     })
   })
 
@@ -3192,18 +3192,18 @@ describe('AST', () => {
           type: 'AssemblyMemberAccess',
           expression: {
             name: 'a',
-            type: 'Identifier'
+            type: 'Identifier',
           },
           memberName: {
             name: 'slot',
-            type: 'Identifier'
-          }
-        }
+            type: 'Identifier',
+          },
+        },
       ],
       expression: {
         type: 'DecimalNumber',
-        value: '10'
-      }
+        value: '10',
+      },
     })
   })
 
@@ -3214,20 +3214,20 @@ describe('AST', () => {
       names: [
         {
           type: 'Identifier',
-          name: 'o'
-        }
+          name: 'o',
+        },
       ],
       expression: {
         type: 'AssemblyMemberAccess',
         expression: {
           name: 'x',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         memberName: {
           name: 'offset',
-          type: 'Identifier'
-        }
-      }
+          type: 'Identifier',
+        },
+      },
     })
   })
 
@@ -3235,7 +3235,7 @@ describe('AST', () => {
     const ast: any = parseAssembly('loop:')
     assert.deepEqual(ast, {
       type: 'LabelDefinition',
-      name: 'loop'
+      name: 'loop',
     })
   })
 
@@ -3246,8 +3246,8 @@ describe('AST', () => {
       name: 'a',
       expression: {
         type: 'DecimalNumber',
-        value: '3'
-      }
+        value: '3',
+      },
     })
   })
 
@@ -3265,15 +3265,15 @@ describe('AST', () => {
             names: [
               {
                 type: 'Identifier',
-                name: 'i'
-              }
+                name: 'i',
+              },
             ],
             expression: {
               type: 'DecimalNumber',
-              value: '0'
-            }
-          }
-        ]
+              value: '0',
+            },
+          },
+        ],
       },
       condition: {
         type: 'AssemblyCall',
@@ -3282,14 +3282,14 @@ describe('AST', () => {
           {
             type: 'AssemblyCall',
             functionName: 'i',
-            arguments: []
+            arguments: [],
           },
           {
             type: 'AssemblyCall',
             functionName: 'x',
-            arguments: []
-          }
-        ]
+            arguments: [],
+          },
+        ],
       },
       post: {
         type: 'AssemblyBlock',
@@ -3299,8 +3299,8 @@ describe('AST', () => {
             names: [
               {
                 type: 'Identifier',
-                name: 'i'
-              }
+                name: 'i',
+              },
             ],
             expression: {
               type: 'AssemblyCall',
@@ -3309,16 +3309,16 @@ describe('AST', () => {
                 {
                   type: 'AssemblyCall',
                   functionName: 'i',
-                  arguments: []
+                  arguments: [],
                 },
                 {
                   type: 'DecimalNumber',
-                  value: '1'
-                }
-              ]
-            }
-          }
-        ]
+                  value: '1',
+                },
+              ],
+            },
+          },
+        ],
       },
       body: {
         type: 'AssemblyBlock',
@@ -3328,8 +3328,8 @@ describe('AST', () => {
             names: [
               {
                 type: 'Identifier',
-                name: 'y'
-              }
+                name: 'y',
+              },
             ],
             expression: {
               type: 'AssemblyCall',
@@ -3337,18 +3337,18 @@ describe('AST', () => {
               arguments: [
                 {
                   type: 'DecimalNumber',
-                  value: '2'
+                  value: '2',
                 },
                 {
                   type: 'AssemblyCall',
                   functionName: 'y',
-                  arguments: []
-                }
-              ]
-            }
-          }
-        ]
-      }
+                  arguments: [],
+                },
+              ],
+            },
+          },
+        ],
+      },
     })
   })
 
@@ -3361,36 +3361,36 @@ describe('AST', () => {
             arguments: [
               {
                 type: 'DecimalNumber',
-                value: '0'
+                value: '0',
               },
               {
                 type: 'DecimalNumber',
-                value: '0'
-              }
+                value: '0',
+              },
             ],
             functionName: 'revert',
-            type: 'AssemblyCall'
-          }
+            type: 'AssemblyCall',
+          },
         ],
-        type: 'AssemblyBlock'
+        type: 'AssemblyBlock',
       },
       condition: {
         arguments: [
           {
             arguments: [],
             functionName: 'i',
-            type: 'AssemblyCall'
+            type: 'AssemblyCall',
           },
           {
             arguments: [],
             functionName: 'x',
-            type: 'AssemblyCall'
-          }
+            type: 'AssemblyCall',
+          },
         ],
         functionName: 'lt',
-        type: 'AssemblyCall'
+        type: 'AssemblyCall',
       },
-      type: 'AssemblyIf'
+      type: 'AssemblyIf',
     })
   })
 
@@ -3407,23 +3407,23 @@ describe('AST', () => {
             {
               number: '1',
               subdenomination: null,
-              type: 'NumberLiteral'
-            }
-          ]
+              type: 'NumberLiteral',
+            },
+          ],
         },
         expression: {
           expression: {
             name: 'recipient',
-            type: 'Identifier'
+            type: 'Identifier',
           },
           memberName: 'call',
-          type: 'MemberAccess'
+          type: 'MemberAccess',
         },
-        type: 'NameValueExpression'
+        type: 'NameValueExpression',
       },
       arguments: [],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
 
     expr = parseExpression('recipient.call{value: 1, gas: 21000}()')
@@ -3435,34 +3435,34 @@ describe('AST', () => {
           names: ['value', 'gas'],
           identifiers: [
             { type: 'Identifier', name: 'value' },
-            { type: 'Identifier', name: 'gas' }
+            { type: 'Identifier', name: 'gas' },
           ],
           arguments: [
             {
               number: '1',
               subdenomination: null,
-              type: 'NumberLiteral'
+              type: 'NumberLiteral',
             },
             {
               number: '21000',
               subdenomination: null,
-              type: 'NumberLiteral'
-            }
-          ]
+              type: 'NumberLiteral',
+            },
+          ],
         },
         expression: {
           expression: {
             name: 'recipient',
-            type: 'Identifier'
+            type: 'Identifier',
           },
           memberName: 'call',
-          type: 'MemberAccess'
+          type: 'MemberAccess',
         },
-        type: 'NameValueExpression'
+        type: 'NameValueExpression',
       },
       arguments: [],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
   })
 
@@ -3472,16 +3472,16 @@ describe('AST', () => {
       type: 'FunctionCall',
       expression: {
         name: 'payable',
-        type: 'Identifier'
+        type: 'Identifier',
       },
       arguments: [
         {
           name: 'recipient',
-          type: 'Identifier'
-        }
+          type: 'Identifier',
+        },
       ],
       names: [],
-      identifiers: []
+      identifiers: [],
     })
   })
 
@@ -3493,10 +3493,10 @@ describe('AST', () => {
       parameters: [],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       isVirtual: true,
-      override: null
+      override: null,
     })
   })
 
@@ -3508,7 +3508,7 @@ describe('AST', () => {
       parameters: [],
       body: null,
       isVirtual: true,
-      override: null
+      override: null,
     })
   })
 
@@ -3520,10 +3520,10 @@ describe('AST', () => {
       parameters: [],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       isVirtual: false,
-      override: []
+      override: [],
     })
   })
 
@@ -3535,15 +3535,15 @@ describe('AST', () => {
       parameters: [],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       isVirtual: false,
       override: [
         {
           type: 'UserDefinedTypeName',
-          namePath: 'Base'
-        }
-      ]
+          namePath: 'Base',
+        },
+      ],
     })
   })
 
@@ -3555,19 +3555,19 @@ describe('AST', () => {
       parameters: [],
       body: {
         type: 'Block',
-        statements: []
+        statements: [],
       },
       isVirtual: false,
       override: [
         {
           type: 'UserDefinedTypeName',
-          namePath: 'Base1'
+          namePath: 'Base1',
         },
         {
           type: 'UserDefinedTypeName',
-          namePath: 'Base2'
-        }
-      ]
+          namePath: 'Base2',
+        },
+      ],
     })
   })
 
@@ -3577,8 +3577,8 @@ describe('AST', () => {
       type: 'UncheckedStatement',
       block: {
         statements: [],
-        type: 'Block'
-      }
+        type: 'Block',
+      },
     })
   })
 
@@ -3597,12 +3597,12 @@ describe('AST', () => {
               operator: '++',
               subExpression: {
                 name: 'x',
-                type: 'Identifier'
-              }
-            }
-          }
-        ]
-      }
+                type: 'Identifier',
+              },
+            },
+          },
+        ],
+      },
     })
   })
 
@@ -3614,15 +3614,15 @@ describe('AST', () => {
         type: 'BinaryOperation',
         left: {
           name: 'a',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         operator: '=',
         right: {
           type: 'NumberLiteral',
           number: '1',
-          subdenomination: 'wei'
-        }
-      }
+          subdenomination: 'wei',
+        },
+      },
     })
 
     ast = parseStatement('a = 1 gwei;')
@@ -3632,15 +3632,15 @@ describe('AST', () => {
         type: 'BinaryOperation',
         left: {
           name: 'a',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         operator: '=',
         right: {
           type: 'NumberLiteral',
           number: '1',
-          subdenomination: 'gwei'
-        }
-      }
+          subdenomination: 'gwei',
+        },
+      },
     })
 
     ast = parseStatement('a = 1 seconds;')
@@ -3650,15 +3650,15 @@ describe('AST', () => {
         type: 'BinaryOperation',
         left: {
           name: 'a',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         operator: '=',
         right: {
           type: 'NumberLiteral',
           number: '1',
-          subdenomination: 'seconds'
-        }
-      }
+          subdenomination: 'seconds',
+        },
+      },
     })
   })
 
@@ -3668,18 +3668,18 @@ describe('AST', () => {
       type: 'IndexRangeAccess',
       base: {
         type: 'Identifier',
-        name: 'a'
+        name: 'a',
       },
       indexStart: {
         type: 'NumberLiteral',
         number: '0',
-        subdenomination: null
+        subdenomination: null,
       },
       indexEnd: {
         type: 'NumberLiteral',
         number: '4',
-        subdenomination: null
-      }
+        subdenomination: null,
+      },
     })
   })
 
@@ -3689,13 +3689,13 @@ describe('AST', () => {
       type: 'IndexRangeAccess',
       base: {
         type: 'Identifier',
-        name: 'a'
+        name: 'a',
       },
       indexStart: {
         type: 'NumberLiteral',
         number: '3',
-        subdenomination: null
-      }
+        subdenomination: null,
+      },
     })
   })
 
@@ -3705,13 +3705,13 @@ describe('AST', () => {
       type: 'IndexRangeAccess',
       base: {
         type: 'Identifier',
-        name: 'a'
+        name: 'a',
       },
       indexEnd: {
         type: 'NumberLiteral',
         number: '20',
-        subdenomination: null
-      }
+        subdenomination: null,
+      },
     })
   })
 
@@ -3721,8 +3721,8 @@ describe('AST', () => {
       type: 'IndexRangeAccess',
       base: {
         type: 'Identifier',
-        name: 'a'
-      }
+        name: 'a',
+      },
     })
   })
 
@@ -3731,7 +3731,7 @@ describe('AST', () => {
     assert.deepEqual(ast.children[0], {
       type: 'CustomErrorDefinition',
       name: 'MyCustomError',
-      parameters: []
+      parameters: [],
     })
 
     ast = parser.parse('error MyCustomError(uint a);')
@@ -3744,19 +3744,19 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           isStateVar: false,
           isIndexed: false,
           expression: null,
-          storageLocation: null
-        }
-      ]
+          storageLocation: null,
+        },
+      ],
     })
 
     ast = parser.parse('error MyCustomError(string);')
@@ -3769,16 +3769,16 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'string',
-            stateMutability: null
+            stateMutability: null,
           },
           name: null,
           identifier: null,
           isStateVar: false,
           isIndexed: false,
           expression: null,
-          storageLocation: null
-        }
-      ]
+          storageLocation: null,
+        },
+      ],
     })
   })
 
@@ -3787,7 +3787,7 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       type: 'CustomErrorDefinition',
       name: 'MyCustomError',
-      parameters: []
+      parameters: [],
     })
 
     ast = parseNode('error MyCustomError(uint a);')
@@ -3800,19 +3800,19 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'uint',
-            stateMutability: null
+            stateMutability: null,
           },
           name: 'a',
           identifier: {
             type: 'Identifier',
-            name: 'a'
+            name: 'a',
           },
           isStateVar: false,
           isIndexed: false,
           expression: null,
-          storageLocation: null
-        }
-      ]
+          storageLocation: null,
+        },
+      ],
     })
 
     ast = parseNode('error MyCustomError(string);')
@@ -3825,16 +3825,16 @@ describe('AST', () => {
           typeName: {
             type: 'ElementaryTypeName',
             name: 'string',
-            stateMutability: null
+            stateMutability: null,
           },
           name: null,
           identifier: null,
           isStateVar: false,
           isIndexed: false,
           expression: null,
-          storageLocation: null
-        }
-      ]
+          storageLocation: null,
+        },
+      ],
     })
   })
 
@@ -3846,12 +3846,12 @@ describe('AST', () => {
         arguments: [],
         expression: {
           name: 'MyCustomError',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         names: [],
         identifiers: [],
-        type: 'FunctionCall'
-      }
+        type: 'FunctionCall',
+      },
     })
 
     ast = parseStatement('revert MyCustomError(3);')
@@ -3862,17 +3862,17 @@ describe('AST', () => {
           {
             number: '3',
             subdenomination: null,
-            type: 'NumberLiteral'
-          }
+            type: 'NumberLiteral',
+          },
         ],
         expression: {
           name: 'MyCustomError',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         names: [],
         identifiers: [],
-        type: 'FunctionCall'
-      }
+        type: 'FunctionCall',
+      },
     })
   })
 
@@ -3885,8 +3885,8 @@ describe('AST', () => {
       definition: {
         type: 'ElementaryTypeName',
         name: 'uint128',
-        stateMutability: null
-      }
+        stateMutability: null,
+      },
     })
   })
 
@@ -3899,8 +3899,8 @@ describe('AST', () => {
       definition: {
         type: 'ElementaryTypeName',
         name: 'uint128',
-        stateMutability: null
-      }
+        stateMutability: null,
+      },
     })
   })
 
@@ -3910,12 +3910,12 @@ describe('AST', () => {
       expression: {
         expression: {
           name: 'foo',
-          type: 'Identifier'
+          type: 'Identifier',
         },
         memberName: 'address',
-        type: 'MemberAccess'
+        type: 'MemberAccess',
       },
-      type: 'ExpressionStatement'
+      type: 'ExpressionStatement',
     })
   })
 
@@ -3925,15 +3925,15 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       expression: {
         type: 'BooleanLiteral',
-        value: true
+        value: true,
       },
       names: [
         {
           name: 'a',
-          type: 'Identifier'
-        }
+          type: 'Identifier',
+        },
       ],
-      type: 'AssemblyAssignment'
+      type: 'AssemblyAssignment',
     })
 
     ast = parseAssembly('a := false')
@@ -3941,15 +3941,15 @@ describe('AST', () => {
     assert.deepEqual(ast, {
       expression: {
         type: 'BooleanLiteral',
-        value: false
+        value: false,
       },
       names: [
         {
           name: 'a',
-          type: 'Identifier'
-        }
+          type: 'Identifier',
+        },
       ],
-      type: 'AssemblyAssignment'
+      type: 'AssemblyAssignment',
     })
   })
 })
