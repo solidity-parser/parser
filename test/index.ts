@@ -20,8 +20,8 @@ describe('#parse', function () {
 
   it('supports tolerant mode', function () {
     const source = 'contract {'
-    const root: any = parser.parse(source, { tolerant: true })
-    assert.isAbove(root.errors.length, 0)
+    const root = parser.parse(source, { tolerant: true })
+    assert.isAbove(root.errors!.length, 0)
   })
 
   it('supports loc', function () {

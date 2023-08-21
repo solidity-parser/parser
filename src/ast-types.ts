@@ -116,10 +116,10 @@ export const astNodeTypes = [
   'CatchClause',
   'FileLevelConstant',
   'AssemblyMemberAccess',
-  'TypeDefinition'
+  'TypeDefinition',
 ] as const
 
-export type ASTNodeTypeString = typeof astNodeTypes[number]
+export type ASTNodeTypeString = (typeof astNodeTypes)[number]
 
 export interface PragmaDirective extends BaseASTNode {
   type: 'PragmaDirective'
@@ -156,7 +156,7 @@ export interface UsingForDeclaration extends BaseASTNode {
   // will be the defined operator, or null if it's just an attached function
   operators: Array<string | null>
   libraryName: string | null
-  isGlobal: boolean;
+  isGlobal: boolean
 }
 export interface StructDefinition extends BaseASTNode {
   type: 'StructDefinition'
@@ -508,7 +508,7 @@ export const binaryOpValues = [
   '|',
   '|=',
 ] as const
-export type BinOp = typeof binaryOpValues[number]
+export type BinOp = (typeof binaryOpValues)[number]
 
 export const unaryOpValues = [
   '-',
@@ -520,7 +520,7 @@ export const unaryOpValues = [
   'delete',
   '!',
 ] as const
-export type UnaryOp = typeof unaryOpValues[number]
+export type UnaryOp = (typeof unaryOpValues)[number]
 
 export interface BinaryOperation extends BaseASTNode {
   type: 'BinaryOperation'
@@ -736,7 +736,8 @@ function checkTypes() {
   assignAstNodeTypeStringExit = astVisitorEnterKeyExit
   assignAstNodeTypeStringExit = astVisitorExitKey
 
-  let assignAstVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` = astNodeTypeExit
+  let assignAstVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` =
+    astNodeTypeExit
   assignAstVisitorEnterKeyExit = astNodeTypeStringExit
   assignAstVisitorEnterKeyExit = astVisitorExitKey
 

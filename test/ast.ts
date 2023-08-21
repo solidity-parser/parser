@@ -267,7 +267,9 @@ describe('AST', () => {
       })
 
       it('defining two operators', function () {
-        const ast = parseNode('using { add as +, sub as - } for Fixed18 global;')
+        const ast = parseNode(
+          'using { add as +, sub as - } for Fixed18 global;'
+        )
         assert.deepEqual(ast, {
           type: 'UsingForDeclaration',
           isGlobal: true,

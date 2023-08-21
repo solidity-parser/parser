@@ -27,7 +27,8 @@ type ASTBuilderNode = AST.ASTNode & WithMeta
 
 export class ASTBuilder
   extends AbstractParseTreeVisitor<ASTBuilderNode>
-  implements SolidityVisitor<ASTBuilderNode | ASTBuilderNode[]> {
+  implements SolidityVisitor<ASTBuilderNode | ASTBuilderNode[]>
+{
   public result: AST.SourceUnit | null = null
   private _currentContract?: string
 
@@ -40,7 +41,7 @@ export class ASTBuilder
   }
 
   aggregateResult() {
-    return ({ type: '' } as unknown) as AST.ASTNode & WithMeta
+    return { type: '' } as unknown as AST.ASTNode & WithMeta
   }
 
   public visitSourceUnit(ctx: SP.SourceUnitContext): AST.SourceUnit & WithMeta {
@@ -552,7 +553,8 @@ export class ASTBuilder
       }
     } else {
       // using { } for ...
-      const usingForObjectDirectives = usingForObjectCtx.usingForObjectDirective()
+      const usingForObjectDirectives =
+        usingForObjectCtx.usingForObjectDirective()
       const functions: string[] = []
       const operators: Array<string | null> = []
 
@@ -1386,7 +1388,7 @@ export class ASTBuilder
       const fragments = ctx
         .stringLiteral()!
         .StringLiteralFragment()
-        .map((stringLiteralFragmentCtx: any) => {
+        .map((stringLiteralFragmentCtx) => {
           let text = this._toText(stringLiteralFragmentCtx)!
 
           const isUnicode = text.slice(0, 7) === 'unicode'
@@ -1545,7 +1547,7 @@ export class ASTBuilder
         }
         return [symbolIdentifier, aliasIdentifier] as [
           AST.Identifier,
-          AST.Identifier | null
+          AST.Identifier | null,
         ]
       })
     } else {
@@ -1590,19 +1592,17 @@ export class ASTBuilder
   }
 
   public buildEventParameterList(ctx: SP.EventParameterListContext) {
-    return ctx.eventParameter().map((paramCtx: any) => {
+    return ctx.eventParameter().map((paramCtx) => {
       const type = this.visit(paramCtx.typeName())
-      let name = null
-      if (paramCtx.identifier()) {
-        name = this._toText(paramCtx.identifier())
-      }
+      const identifier = paramCtx.identifier()
+      const name = identifier ? this._toText(identifier) : null
 
       return {
         type: 'VariableDeclaration',
         typeName: type,
         name,
         isStateVar: false,
-        isIndexed: !!paramCtx.IndexedKeyword(0),
+        isIndexed: !!paramCtx.IndexedKeyword(),
       }
     })
   }
@@ -1616,7 +1616,9 @@ export class ASTBuilder
   public visitParameterList(
     ctx: SP.ParameterListContext
   ): (AST.VariableDeclaration & WithMeta)[] {
-    return ctx.parameter().map((paramCtx: any) => this.visitParameter(paramCtx))
+    return ctx
+      .parameter()
+      .map((paramCtx) => this.visitParameter(paramCtx))
   }
 
   public visitInlineAssemblyStatement(ctx: SP.InlineAssemblyStatementContext) {

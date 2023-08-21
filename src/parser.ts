@@ -2,7 +2,13 @@ import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts'
 
 import { SolidityLexer } from './antlr/SolidityLexer'
 import { SolidityParser } from './antlr/SolidityParser'
-import { ASTNode, astNodeTypes, ASTNodeTypeString, ASTVisitor, SourceUnit } from './ast-types'
+import {
+  ASTNode,
+  astNodeTypes,
+  ASTNodeTypeString,
+  ASTVisitor,
+  SourceUnit,
+} from './ast-types'
 import { ASTBuilder } from './ASTBuilder'
 import ErrorListener from './ErrorListener'
 import { buildTokenList } from './tokens'
@@ -43,10 +49,7 @@ export function tokenize(input: string, options: TokenizeOptions = {}): any {
   return buildTokenList(lexer.getAllTokens(), options)
 }
 
-export function parse(
-  input: string,
-  options: ParseOptions = {}
-): ParseResult {
+export function parse(input: string, options: ParseOptions = {}): ParseResult {
   const inputStream = new ANTLRInputStream(input)
   const lexer = new SolidityLexer(inputStream)
   const tokenStream = new CommonTokenStream(lexer)
@@ -95,16 +98,23 @@ function _isASTNode(node: unknown): node is ASTNode {
     return false
   }
 
-  const nodeAsAny: any = node
+  const nodeAsASTNode = node as ASTNode
 
-  if (Object.prototype.hasOwnProperty.call(nodeAsAny, 'type') && typeof nodeAsAny.type === "string") {
-    return astNodeTypes.includes(nodeAsAny.type)
+  if (
+    Object.prototype.hasOwnProperty.call(nodeAsASTNode, 'type') &&
+    typeof nodeAsASTNode.type === 'string'
+  ) {
+    return astNodeTypes.includes(nodeAsASTNode.type)
   }
 
-  return false;
+  return false
 }
 
-export function visit(node: unknown, visitor: ASTVisitor, nodeParent?: ASTNode): void {
+export function visit(
+  node: unknown,
+  visitor: ASTVisitor,
+  nodeParent?: ASTNode
+): void {
   if (Array.isArray(node)) {
     node.forEach((child) => visit(child, visitor, nodeParent))
   }
@@ -114,8 +124,8 @@ export function visit(node: unknown, visitor: ASTVisitor, nodeParent?: ASTNode):
   let cont = true
 
   if (visitor[node.type] !== undefined) {
-    // TODO can we avoid this `as any`
-    cont = visitor[node.type]!(node as any, nodeParent)
+    // TODO can we avoid this `as never`
+    cont = visitor[node.type]!(node as never, nodeParent)
   }
 
   if (cont === false) return
@@ -129,7 +139,7 @@ export function visit(node: unknown, visitor: ASTVisitor, nodeParent?: ASTNode):
 
   const selector = (node.type + ':exit') as `${ASTNodeTypeString}:exit`
   if (visitor[selector] !== undefined) {
-      // TODO can we avoid this `as any`
-    visitor[selector]!(node as any, nodeParent)
+    // TODO can we avoid this `as never`
+    visitor[selector]!(node as never, nodeParent)
   }
 }

@@ -1,3 +1,3 @@
-export * from "./parser";
+export * from './parser'
 
-export type { ParseOptions } from "./types";
+export type { ParseOptions } from './types'

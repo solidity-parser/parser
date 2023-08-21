@@ -60,7 +60,7 @@ function getTokenTypeMap() {
   return tokens
     .split('\n')
     .map((line) => rsplit(line, '='))
-    .reduce((acum: any, [value, key]) => {
+    .reduce((acum: { [key: number]: string }, [value, key]) => {
       acum[parseInt(key, 10)] = normalizeTokenType(value)
       return acum
     }, {})
@@ -81,7 +81,10 @@ export function buildTokenList(
     if (options.loc === true) {
       node.loc = {
         start: { line: token.line, column: token.charPositionInLine },
-        end: { line: token.line, column: token.charPositionInLine + (token.text?.length ?? 0) },
+        end: {
+          line: token.line,
+          column: token.charPositionInLine + (token.text?.length ?? 0),
+        },
       }
     }
     return node
