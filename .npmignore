@@ -1,8 +1,8 @@
+.github/
 src/
 test/
 scripts/
 .nyc_output/
-.travis.yml
 .gitmodules
 .eslintrc
 .editorconfig

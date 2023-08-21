@@ -7,7 +7,7 @@ const parser = require('..')
 describe('integration', function () {
   it('parses test file correctly', function () {
     const content = fs.readFileSync(
-      path.join(__dirname, '..', 'test', 'test.sol')
+      path.join(__dirname, '..', 'antlr', 'test.sol')
     )
     parser.parse(content.toString())
   })
