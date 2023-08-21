@@ -1592,7 +1592,7 @@ export class ASTBuilder
   }
 
   public buildEventParameterList(ctx: SP.EventParameterListContext) {
-    return ctx.eventParameter().map((paramCtx: SP.EventParameterContext) => {
+    return ctx.eventParameter().map((paramCtx) => {
       const type = this.visit(paramCtx.typeName())
       const identifier = paramCtx.identifier()
       const name = identifier ? this._toText(identifier) : null
@@ -1618,7 +1618,7 @@ export class ASTBuilder
   ): (AST.VariableDeclaration & WithMeta)[] {
     return ctx
       .parameter()
-      .map((paramCtx: SP.ParameterContext) => this.visitParameter(paramCtx))
+      .map((paramCtx) => this.visitParameter(paramCtx))
   }
 
   public visitInlineAssemblyStatement(ctx: SP.InlineAssemblyStatementContext) {
