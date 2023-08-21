@@ -1388,7 +1388,7 @@ export class ASTBuilder
       const fragments = ctx
         .stringLiteral()!
         .StringLiteralFragment()
-        .map((stringLiteralFragmentCtx: ParseTree) => {
+        .map((stringLiteralFragmentCtx) => {
           let text = this._toText(stringLiteralFragmentCtx)!
 
           const isUnicode = text.slice(0, 7) === 'unicode'
