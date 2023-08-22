@@ -26,7 +26,7 @@ yarn add @solidity-parser/parser
 ## Usage
 
 ```javascript
-const parser = require('@solidity-parser/parser');
+const parser = require('@solidity-parser/parser')
 
 const input = `
     contract test {
@@ -35,12 +35,12 @@ const input = `
     }
 `
 try {
-    const ast = parser.parse(input)
-    console.log(ast)
+  const ast = parser.parse(input)
+  console.log(ast)
 } catch (e) {
-    if (e instanceof parser.ParserError) {
-        console.error(e.errors)
-    }
+  if (e instanceof parser.ParserError) {
+    console.error(e.errors)
+  }
 }
 ```
 
@@ -48,11 +48,10 @@ The `parse` method also accepts a second argument which lets you specify the
 following options, in a style similar to the _esprima_ API:
 
 | Key      | Type    | Default | Description                                                                                                                                                                                          |
-|----------|---------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | tolerant | Boolean | false   | When set to `true` it will collect syntax errors and place them in a list under the key `errors` inside the root node of the returned AST. Otherwise, it will raise a `parser.ParserError`.          |
 | loc      | Boolean | false   | When set to `true`, it will add location information to each node, with start and stop keys that contain the corresponding line and column numbers. Column numbers start from 0, lines start from 1. |
 | range    | Boolean | false   | When set to `true`, it will add range information to each node, which consists of a two-element array with start and stop character indexes in the input.                                            |
-
 
 ### Example with location information
 
@@ -68,7 +67,6 @@ parser.parse('contract test { uint a; }', { loc: true })
 //        kind: 'contract',
 //        loc: [Object] } ],
 //   loc: { start: { line: 1, column: 0 }, end: { line: 1, column: 24 } } }
-
 ```
 
 ### Example using a visitor to walk over the AST
@@ -78,9 +76,9 @@ var ast = parser.parse('contract test { uint a; }')
 
 // output the path of each import found
 parser.visit(ast, {
-  ImportDirective: function(node) {
+  ImportDirective: function (node) {
     console.log(node.path)
-  }
+  },
 })
 ```
 
@@ -130,12 +128,12 @@ yarn run test
 
 ## Used by
 
-* [Hardhat](https://hardhat.org/)
-* [sol2uml](https://github.com/naddison36/sol2uml)
-* [Solhint](https://github.com/protofire/solhint/)
-* [solidity-coverage](https://github.com/sc-forks/solidity-coverage)
-* [prettier-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity/)
-* [eth-gas-reporter](https://github.com/cgewecke/eth-gas-reporter)
+- [Hardhat](https://hardhat.org/)
+- [sol2uml](https://github.com/naddison36/sol2uml)
+- [Solhint](https://github.com/protofire/solhint/)
+- [solidity-coverage](https://github.com/sc-forks/solidity-coverage)
+- [prettier-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity/)
+- [eth-gas-reporter](https://github.com/cgewecke/eth-gas-reporter)
 
 ## License
 

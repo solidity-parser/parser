@@ -49,7 +49,7 @@ node
 ## Understanding the generated parser
 
 The AST returned by the generated parser is very low level and tightly coupled to the grammar definition, that's why
-using this wrapper is much easier.  But if you want to contribute to this parser, you need to deal with this low level
+using this wrapper is much easier. But if you want to contribute to this parser, you need to deal with this low level
 representation. Let's see some examples of how to interpret it.
 
 ### Example 1: PragmaDirective
@@ -146,4 +146,3 @@ java -classpath antlr4.jar:target/ org.antlr.v4.gui.TestRig Solidity sourceUnit 
 ```
 
 And you'll get a window where you can see an inspect the generated tree.
-

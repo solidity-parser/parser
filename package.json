@@ -13,10 +13,10 @@
   ],
   "types": "dist/src/index.d.ts",
   "scripts": {
-    "antlr": "antlr4ts -visitor antlr/Solidity.g4 -o src &&  npm run prettier -- --write",
+    "antlr": "antlr4ts -visitor antlr/Solidity.g4 -o src",
     "build:browser": "esbuild src/index.ts --outfile=dist/index.iife.js --bundle --loader:.tokens=file --sourcemap --format=iife --global-name=SolidityParser --define:__dirname=true --define:BROWSER=true --inject:./process-shim.js",
     "build:node": "esbuild src/index.ts --outfile=dist/index.cjs.js --bundle  --loader:.tokens=file --sourcemap --format=cjs --platform=node --target=node12",
-    "build": "npm run build:node && npm run build:browser && npm run generate-types && npm run copy-files",
+    "build": "npm run antlr && npm run build:node && npm run build:browser && npm run generate-types && npm run copy-files",
     "generate-types": "tsc",
     "copy-files": "shx mkdir -p dist/antlr && shx cp './src/antlr/*tokens' dist/antlr",
     "eslint": "eslint 'src/**' 'test/**'",
