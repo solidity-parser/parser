@@ -3729,14 +3729,14 @@ describe('AST', () => {
   it('should support top-level custom errors', function () {
     let ast: any = parser.parse('error MyCustomError();')
     assert.deepEqual(ast.children[0], {
-      type: 'CustomErrorDefinition',
+      type: 'ErrorDefinition',
       name: 'MyCustomError',
       parameters: [],
     })
 
     ast = parser.parse('error MyCustomError(uint a);')
     assert.deepEqual(ast.children[0], {
-      type: 'CustomErrorDefinition',
+      type: 'ErrorDefinition',
       name: 'MyCustomError',
       parameters: [
         {
@@ -3761,7 +3761,7 @@ describe('AST', () => {
 
     ast = parser.parse('error MyCustomError(string);')
     assert.deepEqual(ast.children[0], {
-      type: 'CustomErrorDefinition',
+      type: 'ErrorDefinition',
       name: 'MyCustomError',
       parameters: [
         {
@@ -3785,14 +3785,14 @@ describe('AST', () => {
   it('should support contract-level custom errors', function () {
     let ast: any = parseNode('error MyCustomError();')
     assert.deepEqual(ast, {
-      type: 'CustomErrorDefinition',
+      type: 'ErrorDefinition',
       name: 'MyCustomError',
       parameters: [],
     })
 
     ast = parseNode('error MyCustomError(uint a);')
     assert.deepEqual(ast, {
-      type: 'CustomErrorDefinition',
+      type: 'ErrorDefinition',
       name: 'MyCustomError',
       parameters: [
         {
@@ -3817,7 +3817,7 @@ describe('AST', () => {
 
     ast = parseNode('error MyCustomError(string);')
     assert.deepEqual(ast, {
-      type: 'CustomErrorDefinition',
+      type: 'ErrorDefinition',
       name: 'MyCustomError',
       parameters: [
         {

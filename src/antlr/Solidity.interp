@@ -286,7 +286,7 @@ inheritanceSpecifier
 contractPart
 stateVariableDeclaration
 fileLevelConstant
-customErrorDefinition
+errorDefinition
 typeDefinition
 usingForDeclaration
 usingForObject

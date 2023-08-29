@@ -57,7 +57,7 @@ export const astNodeTypes = [
   'ModifierInvocation',
   'FunctionDefinition',
   'EventDefinition',
-  'CustomErrorDefinition',
+  'ErrorDefinition',
   'RevertStatement',
   'EnumValue',
   'EnumDefinition',
@@ -192,8 +192,8 @@ export interface FunctionDefinition extends BaseASTNode {
   isVirtual: boolean
 }
 
-export interface CustomErrorDefinition extends BaseASTNode {
-  type: 'CustomErrorDefinition'
+export interface ErrorDefinition extends BaseASTNode {
+  type: 'ErrorDefinition'
   name: string
   parameters: VariableDeclaration[]
 }
@@ -583,7 +583,7 @@ export type ASTNode =
   | ModifierInvocation
   | FunctionDefinition
   | EventDefinition
-  | CustomErrorDefinition
+  | ErrorDefinition
   | EnumValue
   | EnumDefinition
   | VariableDeclaration

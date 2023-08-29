@@ -176,7 +176,7 @@ export class SolidityParser extends Parser {
 	public static readonly RULE_contractPart = 12;
 	public static readonly RULE_stateVariableDeclaration = 13;
 	public static readonly RULE_fileLevelConstant = 14;
-	public static readonly RULE_customErrorDefinition = 15;
+	public static readonly RULE_errorDefinition = 15;
 	public static readonly RULE_typeDefinition = 16;
 	public static readonly RULE_usingForDeclaration = 17;
 	public static readonly RULE_usingForObject = 18;
@@ -267,12 +267,12 @@ export class SolidityParser extends Parser {
 		"sourceUnit", "pragmaDirective", "pragmaName", "pragmaValue", "version", 
 		"versionOperator", "versionConstraint", "importDeclaration", "importDirective", 
 		"importPath", "contractDefinition", "inheritanceSpecifier", "contractPart", 
-		"stateVariableDeclaration", "fileLevelConstant", "customErrorDefinition", 
-		"typeDefinition", "usingForDeclaration", "usingForObject", "usingForObjectDirective", 
-		"userDefinableOperators", "structDefinition", "modifierDefinition", "modifierInvocation", 
-		"functionDefinition", "functionDescriptor", "returnParameters", "modifierList", 
-		"eventDefinition", "enumValue", "enumDefinition", "parameterList", "parameter", 
-		"eventParameterList", "eventParameter", "functionTypeParameterList", "functionTypeParameter", 
+		"stateVariableDeclaration", "fileLevelConstant", "errorDefinition", "typeDefinition", 
+		"usingForDeclaration", "usingForObject", "usingForObjectDirective", "userDefinableOperators", 
+		"structDefinition", "modifierDefinition", "modifierInvocation", "functionDefinition", 
+		"functionDescriptor", "returnParameters", "modifierList", "eventDefinition", 
+		"enumValue", "enumDefinition", "parameterList", "parameter", "eventParameterList", 
+		"eventParameter", "functionTypeParameterList", "functionTypeParameter", 
 		"variableDeclaration", "typeName", "userDefinedTypeName", "mappingKey", 
 		"mapping", "mappingKeyName", "mappingValueName", "functionTypeName", "storageLocation", 
 		"stateMutability", "block", "statement", "expressionStatement", "ifStatement", 
@@ -429,7 +429,7 @@ export class SolidityParser extends Parser {
 				case 8:
 					{
 					this.state = 209;
-					this.customErrorDefinition();
+					this.errorDefinition();
 					}
 					break;
 
@@ -1131,7 +1131,7 @@ export class SolidityParser extends Parser {
 				this.enterOuterAlt(_localctx, 8);
 				{
 				this.state = 338;
-				this.customErrorDefinition();
+				this.errorDefinition();
 				}
 				break;
 
@@ -1288,9 +1288,9 @@ export class SolidityParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public customErrorDefinition(): CustomErrorDefinitionContext {
-		let _localctx: CustomErrorDefinitionContext = new CustomErrorDefinitionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 30, SolidityParser.RULE_customErrorDefinition);
+	public errorDefinition(): ErrorDefinitionContext {
+		let _localctx: ErrorDefinitionContext = new ErrorDefinitionContext(this._ctx, this.state);
+		this.enterRule(_localctx, 30, SolidityParser.RULE_errorDefinition);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
@@ -7004,13 +7004,13 @@ export class SourceUnitContext extends ParserRuleContext {
 			return this.getRuleContext(i, FileLevelConstantContext);
 		}
 	}
-	public customErrorDefinition(): CustomErrorDefinitionContext[];
-	public customErrorDefinition(i: number): CustomErrorDefinitionContext;
-	public customErrorDefinition(i?: number): CustomErrorDefinitionContext | CustomErrorDefinitionContext[] {
+	public errorDefinition(): ErrorDefinitionContext[];
+	public errorDefinition(i: number): ErrorDefinitionContext;
+	public errorDefinition(i?: number): ErrorDefinitionContext | ErrorDefinitionContext[] {
 		if (i === undefined) {
-			return this.getRuleContexts(CustomErrorDefinitionContext);
+			return this.getRuleContexts(ErrorDefinitionContext);
 		} else {
-			return this.getRuleContext(i, CustomErrorDefinitionContext);
+			return this.getRuleContext(i, ErrorDefinitionContext);
 		}
 	}
 	public typeDefinition(): TypeDefinitionContext[];
@@ -7487,8 +7487,8 @@ export class ContractPartContext extends ParserRuleContext {
 	public enumDefinition(): EnumDefinitionContext | undefined {
 		return this.tryGetRuleContext(0, EnumDefinitionContext);
 	}
-	public customErrorDefinition(): CustomErrorDefinitionContext | undefined {
-		return this.tryGetRuleContext(0, CustomErrorDefinitionContext);
+	public errorDefinition(): ErrorDefinitionContext | undefined {
+		return this.tryGetRuleContext(0, ErrorDefinitionContext);
 	}
 	public typeDefinition(): TypeDefinitionContext | undefined {
 		return this.tryGetRuleContext(0, TypeDefinitionContext);
@@ -7652,7 +7652,7 @@ export class FileLevelConstantContext extends ParserRuleContext {
 }
 
 
-export class CustomErrorDefinitionContext extends ParserRuleContext {
+export class ErrorDefinitionContext extends ParserRuleContext {
 	public identifier(): IdentifierContext {
 		return this.getRuleContext(0, IdentifierContext);
 	}
@@ -7663,23 +7663,23 @@ export class CustomErrorDefinitionContext extends ParserRuleContext {
 		super(parent, invokingState);
 	}
 	// @Override
-	public get ruleIndex(): number { return SolidityParser.RULE_customErrorDefinition; }
+	public get ruleIndex(): number { return SolidityParser.RULE_errorDefinition; }
 	// @Override
 	public enterRule(listener: SolidityListener): void {
-		if (listener.enterCustomErrorDefinition) {
-			listener.enterCustomErrorDefinition(this);
+		if (listener.enterErrorDefinition) {
+			listener.enterErrorDefinition(this);
 		}
 	}
 	// @Override
 	public exitRule(listener: SolidityListener): void {
-		if (listener.exitCustomErrorDefinition) {
-			listener.exitCustomErrorDefinition(this);
+		if (listener.exitErrorDefinition) {
+			listener.exitErrorDefinition(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
-		if (visitor.visitCustomErrorDefinition) {
-			return visitor.visitCustomErrorDefinition(this);
+		if (visitor.visitErrorDefinition) {
+			return visitor.visitErrorDefinition(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

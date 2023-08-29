@@ -743,11 +743,11 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  public visitCustomErrorDefinition(
-    ctx: SP.CustomErrorDefinitionContext
-  ): AST.CustomErrorDefinition & WithMeta {
-    const node: AST.CustomErrorDefinition = {
-      type: 'CustomErrorDefinition',
+  public visitErrorDefinition(
+    ctx: SP.ErrorDefinitionContext
+  ): AST.ErrorDefinition & WithMeta {
+    const node: AST.ErrorDefinition = {
+      type: 'ErrorDefinition',
       name: this._toText(ctx.identifier()),
       parameters: this.visitParameterList(ctx.parameterList()),
     }
