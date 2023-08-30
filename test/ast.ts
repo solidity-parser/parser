@@ -2014,6 +2014,13 @@ describe('AST', () => {
       subdenomination: null,
     })
 
+    expr = parseExpression('1000000e-2')
+    assert.deepEqual(expr, {
+      type: 'NumberLiteral',
+      number: '1000000e-2',
+      subdenomination: null,
+    })
+
     expr = parseExpression('.1')
     assert.deepEqual(expr, {
       type: 'NumberLiteral',
