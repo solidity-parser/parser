@@ -1616,9 +1616,7 @@ export class ASTBuilder
   public visitParameterList(
     ctx: SP.ParameterListContext
   ): (AST.VariableDeclaration & WithMeta)[] {
-    return ctx
-      .parameter()
-      .map((paramCtx) => this.visitParameter(paramCtx))
+    return ctx.parameter().map((paramCtx) => this.visitParameter(paramCtx))
   }
 
   public visitInlineAssemblyStatement(ctx: SP.InlineAssemblyStatementContext) {

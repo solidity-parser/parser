@@ -1,6 +1,6 @@
 export let process = {
   cwd: () => '',
-  env: () => {}
+  env: () => {},
 }
 
 export let global = {}
