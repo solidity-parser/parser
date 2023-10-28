@@ -1420,6 +1420,27 @@ describe('AST', () => {
     })
   })
 
+  it('EmitStatement from a different context', function () {
+    const ast: any = parseStatement('emit Contract.EventCalled();')
+    assert.deepEqual(ast, {
+      type: 'EmitStatement',
+      eventCall: {
+        type: 'FunctionCall',
+        expression: {
+          expression: {
+            name: 'Contract',
+            type: 'Identifier',
+          },
+          memberName: 'EventCalled',
+          type: 'MemberAccess',
+        },
+        arguments: [],
+        names: [],
+        identifiers: [],
+      },
+    })
+  })
+
   it('StructDefinition', function () {
     const ast: any = parseNode('struct hello { uint a; }')
     assert.deepEqual(ast, {
