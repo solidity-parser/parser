@@ -3980,4 +3980,56 @@ describe('AST', () => {
       type: 'AssemblyAssignment',
     })
   })
+
+  it('should accept top-level event definitions', function () {
+    const ast = parser.parse('event Foo(address indexed a, uint b);')
+
+    const eventNode = ast.children[0]
+
+    if (eventNode.type !== 'EventDefinition') {
+      assert.fail('Expected EventDefinition')
+    }
+
+    assert.deepEqual(eventNode, {
+      type: 'EventDefinition',
+      name: 'Foo',
+      parameters: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'address',
+            stateMutability: null,
+          },
+          name: 'a',
+          identifier: {
+            type: 'Identifier',
+            name: 'a',
+          },
+          isStateVar: false,
+          isIndexed: true,
+          expression: null,
+          storageLocation: null,
+        },
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'uint',
+            stateMutability: null,
+          },
+          name: 'b',
+          identifier: {
+            type: 'Identifier',
+            name: 'b',
+          },
+          isStateVar: false,
+          isIndexed: false,
+          expression: null,
+          storageLocation: null,
+        },
+      ],
+      isAnonymous: false,
+    })
+  })
 })
