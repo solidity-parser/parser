@@ -2057,6 +2057,189 @@ describe('AST', () => {
     })
   })
 
+  it('2 levels of nested Conditionals in falseExpression', function () {
+    const expr = parseExpression('a ? b : c ? d : e')
+    assert.deepEqual(expr, {
+      type: 'Conditional',
+      condition: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      trueExpression: {
+        type: 'Identifier',
+        name: 'b',
+      },
+      falseExpression: {
+        type: 'Conditional',
+        condition: {
+          type: 'Identifier',
+          name: 'c',
+        },
+        trueExpression: {
+          type: 'Identifier',
+          name: 'd',
+        },
+        falseExpression: {
+          type: 'Identifier',
+          name: 'e',
+        },
+      },
+    })
+  })
+
+  it('3 levels of nested Conditionals in falseExpression', function () {
+    const expr = parseExpression('a ? b : c ? d : e ? f : g')
+    assert.deepEqual(expr, {
+      type: 'Conditional',
+      condition: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      trueExpression: {
+        type: 'Identifier',
+        name: 'b',
+      },
+      falseExpression: {
+        type: 'Conditional',
+        condition: {
+          type: 'Identifier',
+          name: 'c',
+        },
+        trueExpression: {
+          type: 'Identifier',
+          name: 'd',
+        },
+        falseExpression: {
+          type: 'Conditional',
+          condition: {
+            type: 'Identifier',
+            name: 'e',
+          },
+          trueExpression: {
+            type: 'Identifier',
+            name: 'f',
+          },
+          falseExpression: {
+            type: 'Identifier',
+            name: 'g',
+          },
+        },
+      },
+    })
+  })
+
+  it('2 levels of nested Conditionals in trueExpression', function () {
+    const expr = parseExpression('a ? b ? c : d : e')
+    assert.deepEqual(expr, {
+      type: 'Conditional',
+      condition: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      trueExpression: {
+        type: 'Conditional',
+        condition: {
+          type: 'Identifier',
+          name: 'b',
+        },
+        trueExpression: {
+          type: 'Identifier',
+          name: 'c',
+        },
+        falseExpression: {
+          type: 'Identifier',
+          name: 'd',
+        },
+      },
+      falseExpression: {
+        type: 'Identifier',
+        name: 'e',
+      },
+    })
+  })
+
+  it('3 levels of nested Conditionals in trueExpression', function () {
+    const expr = parseExpression('a ? b ? c ? d : e : f : g')
+    assert.deepEqual(expr, {
+      type: 'Conditional',
+      condition: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      trueExpression: {
+        type: 'Conditional',
+        condition: {
+          type: 'Identifier',
+          name: 'b',
+        },
+        trueExpression: {
+          type: 'Conditional',
+          condition: {
+            type: 'Identifier',
+            name: 'c',
+          },
+          trueExpression: {
+            type: 'Identifier',
+            name: 'd',
+          },
+          falseExpression: {
+            type: 'Identifier',
+            name: 'e',
+          },
+        },
+        falseExpression: {
+          type: 'Identifier',
+          name: 'f',
+        },
+      },
+      falseExpression: {
+        type: 'Identifier',
+        name: 'g',
+      },
+    })
+  })
+
+  it('2 levels of nested Conditionals in trueExpression and falseExpression', function () {
+    const expr = parseExpression('a ? b ? c : d : e ? f : g')
+    assert.deepEqual(expr, {
+      type: 'Conditional',
+      condition: {
+        type: 'Identifier',
+        name: 'a',
+      },
+      trueExpression: {
+        type: 'Conditional',
+        condition: {
+          type: 'Identifier',
+          name: 'b',
+        },
+        trueExpression: {
+          type: 'Identifier',
+          name: 'c',
+        },
+        falseExpression: {
+          type: 'Identifier',
+          name: 'd',
+        },
+      },
+      falseExpression: {
+        type: 'Conditional',
+        condition: {
+          type: 'Identifier',
+          name: 'e',
+        },
+        trueExpression: {
+          type: 'Identifier',
+          name: 'f',
+        },
+        falseExpression: {
+          type: 'Identifier',
+          name: 'g',
+        },
+      },
+    })
+  })
+
   it('StringLiteral with double quotes', function () {
     const expr = parseExpression('"Hello"')
     assert.deepEqual(expr, {

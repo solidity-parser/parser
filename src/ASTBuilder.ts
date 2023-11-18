@@ -25,6 +25,25 @@ interface WithMeta {
 
 type ASTBuilderNode = AST.ASTNode & WithMeta
 
+function rearrangeConditional(conditional: AST.Conditional): AST.Conditional {
+  const arrangedConditional: AST.Conditional = { ...conditional }
+
+  while (arrangedConditional.condition.type === 'Conditional') {
+    const falseExpression: AST.Conditional = rearrangeConditional({
+      type: 'Conditional',
+      condition: arrangedConditional.condition.falseExpression,
+      trueExpression: arrangedConditional.trueExpression,
+      falseExpression: arrangedConditional.falseExpression,
+    })
+    arrangedConditional.falseExpression = falseExpression
+    arrangedConditional.trueExpression =
+      arrangedConditional.condition.trueExpression
+    arrangedConditional.condition = arrangedConditional.condition.condition
+  }
+
+  return arrangedConditional
+}
+
 export class ASTBuilder
   extends AbstractParseTreeVisitor<ASTBuilderNode>
   implements SolidityVisitor<ASTBuilderNode | ASTBuilderNode[]>
@@ -1225,12 +1244,20 @@ export class ASTBuilder
           this._toText(ctx.getChild(1)) === '?' &&
           this._toText(ctx.getChild(3)) === ':'
         ) {
-          const node: AST.Conditional = {
+          // ANTLR wrongly groups nested Conditionals in the falseExpression in
+          // the following way:
+          //
+          // (a ? b : c) ? d : e;
+          //
+          // The compiled code follows the following structure:
+          //
+          // a ? b : (c ? d : e);
+          const node: AST.Conditional = rearrangeConditional({
             type: 'Conditional',
             condition: this.visitExpression(ctx.expression(0)),
             trueExpression: this.visitExpression(ctx.expression(1)),
             falseExpression: this.visitExpression(ctx.expression(2)),
-          }
+          })
 
           return this._addMeta(node, ctx)
         }
