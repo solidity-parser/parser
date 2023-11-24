@@ -4418,7 +4418,7 @@ export class SolidityParser extends Parser {
 						this.state = 876;
 						this.match(SolidityParser.T__69);
 						this.state = 877;
-						this.expression(4);
+						this.expression(3);
 						}
 						break;
 
@@ -6772,7 +6772,7 @@ export class SolidityParser extends Parser {
 		"N\x02\x02\u0367\u0393\x05\x8EH\b\u0368\u0369\f\x06\x02\x02\u0369\u036A" +
 		"\x07\x06\x02\x02\u036A\u0393\x05\x8EH\x07\u036B\u036C\f\x05\x02\x02\u036C" +
 		"\u036D\x07O\x02\x02\u036D\u036E\x05\x8EH\x02\u036E\u036F\x07H\x02\x02" +
-		"\u036F\u0370\x05\x8EH\x06\u0370\u0393\x03\x02\x02\x02\u0371\u0372\f\x04" +
+		"\u036F\u0370\x05\x8EH\x05\u0370\u0393\x03\x02\x02\x02\u0371\u0372\f\x04" +
 		"\x02\x02\u0372\u0373\t\x0E\x02\x02\u0373\u0393\x05\x8EH\x05\u0374\u0375" +
 		"\f\x1D\x02\x02\u0375\u0393\t\b\x02\x02\u0376\u0377\f\x1B\x02\x02\u0377" +
 		"\u0378\x07,\x02\x02\u0378\u0379\x05\x8EH\x02\u0379\u037A\x07-\x02\x02" +
