@@ -2057,6 +2057,30 @@ describe('AST', () => {
     })
   })
 
+  it('Exponentiation is right associated', function () {
+    const expr = parseExpression('a ** b ** c')
+    assert.deepEqual(expr, {
+      type: 'BinaryOperation',
+      operator: '**',
+      left: {
+        name: 'a',
+        type: 'Identifier',
+      },
+      right: {
+        type: 'BinaryOperation',
+        operator: '**',
+        left: {
+          type: 'Identifier',
+          name: 'b',
+        },
+        right: {
+          type: 'Identifier',
+          name: 'c',
+        },
+      },
+    })
+  })
+
   it('2 levels of nested Conditionals in falseExpression', function () {
     const expr = parseExpression('a ? b : c ? d : e')
     assert.deepEqual(expr, {

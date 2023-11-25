@@ -4199,7 +4199,7 @@ export class SolidityParser extends Parser {
 						this.state = 841;
 						this.match(SolidityParser.T__72);
 						this.state = 842;
-						this.expression(15);
+						this.expression(14);
 						}
 						break;
 
@@ -6759,7 +6759,7 @@ export class SolidityParser extends Parser {
 		"\x02\x02\x02\u0348\u033D\x03\x02\x02\x02\u0348\u033F\x03\x02\x02\x02\u0348" +
 		"\u0341\x03\x02\x02\x02\u0348\u0343\x03\x02\x02\x02\u0348\u0345\x03\x02" +
 		"\x02\x02\u0348\u0347\x03\x02\x02\x02\u0349\u0394\x03\x02\x02\x02\u034A" +
-		"\u034B\f\x10\x02\x02\u034B\u034C\x07K\x02\x02\u034C\u0393\x05\x8EH\x11" +
+		"\u034B\f\x10\x02\x02\u034B\u034C\x07K\x02\x02\u034C\u0393\x05\x8EH\x10" +
 		"\u034D\u034E\f\x0F\x02\x02\u034E\u034F\t\n\x02\x02\u034F\u0393\x05\x8E" +
 		"H\x10\u0350\u0351\f\x0E\x02\x02\u0351\u0352\t\t\x02\x02\u0352\u0393\x05" +
 		"\x8EH\x0F\u0353\u0354\f\r\x02\x02\u0354\u0355\t\v\x02\x02\u0355\u0393" +
