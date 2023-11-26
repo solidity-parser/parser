@@ -1,12 +1,4 @@
 {
   "presets": ["@babel/env", "@babel/preset-typescript"],
-  "plugins": [
-    [
-      "babel-plugin-inline-import",
-      {
-        "extensions": [".tokens"]
-      }
-    ],
-    "@babel/plugin-proposal-class-properties"
-  ]
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }
