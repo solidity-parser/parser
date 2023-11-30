@@ -1,7 +1,5 @@
 import { Token, AntlrToken, TokenizeOptions } from './types'
-import untypedTokens from './antlr/solidity-tokens'
-
-const tokens = untypedTokens as { [key: string]: string }
+import { tokens } from './antlr/solidity-tokens'
 
 const TYPE_TOKENS = [
   'var',
