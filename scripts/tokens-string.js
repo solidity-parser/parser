@@ -33,5 +33,5 @@ function getTokenTypeMap() {
 
 fs.writeFileSync(
   `${__dirname}/../src/antlr/solidity-tokens.ts`,
-  `export default ${JSON.stringify(getTokenTypeMap(), null, 2)}`
+  `export const tokens: Record<string, string> = ${JSON.stringify(getTokenTypeMap(), null, 2)}`
 )

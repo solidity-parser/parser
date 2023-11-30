@@ -1,4 +1,4 @@
-export default {
+export const tokens: Record<string, string> = {
   "1": "pragma",
   "2": ";",
   "3": "*",
