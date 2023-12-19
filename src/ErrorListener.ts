@@ -1,6 +1,6 @@
-import antlr4 from 'antlr4'
+import { ErrorListener as AntlrErrorListener } from 'antlr4'
 
-class ErrorListener extends antlr4.error.ErrorListener {
+class ErrorListener extends AntlrErrorListener<any> {
   private _errors: any[]
 
   constructor() {
