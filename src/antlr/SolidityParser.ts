@@ -11,6 +11,7 @@ import {
 	Token, TokenStream,
 	Interval, IntervalSet
 } from 'antlr4';
+import SolidityListener from "./SolidityListener.js";
 import SolidityVisitor from "./SolidityVisitor.js";
 
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
@@ -6738,6 +6739,16 @@ export class SourceUnitContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_sourceUnit;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterSourceUnit) {
+	 		listener.enterSourceUnit(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitSourceUnit) {
+	 		listener.exitSourceUnit(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitSourceUnit) {
@@ -6763,6 +6774,16 @@ export class PragmaDirectiveContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_pragmaDirective;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterPragmaDirective) {
+	 		listener.enterPragmaDirective(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitPragmaDirective) {
+	 		listener.exitPragmaDirective(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitPragmaDirective) {
@@ -6784,6 +6805,16 @@ export class PragmaNameContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_pragmaName;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterPragmaName) {
+	 		listener.enterPragmaName(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitPragmaName) {
+	 		listener.exitPragmaName(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -6810,6 +6841,16 @@ export class PragmaValueContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_pragmaValue;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterPragmaValue) {
+	 		listener.enterPragmaValue(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitPragmaValue) {
+	 		listener.exitPragmaValue(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitPragmaValue) {
@@ -6835,6 +6876,16 @@ export class VersionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_version;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterVersion) {
+	 		listener.enterVersion(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitVersion) {
+	 		listener.exitVersion(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitVersion) {
@@ -6853,6 +6904,16 @@ export class VersionOperatorContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_versionOperator;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterVersionOperator) {
+	 		listener.enterVersionOperator(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitVersionOperator) {
+	 		listener.exitVersionOperator(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -6882,6 +6943,16 @@ export class VersionConstraintContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_versionConstraint;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterVersionConstraint) {
+	 		listener.enterVersionConstraint(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitVersionConstraint) {
+	 		listener.exitVersionConstraint(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitVersionConstraint) {
@@ -6906,6 +6977,16 @@ export class ImportDeclarationContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_importDeclaration;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterImportDeclaration) {
+	 		listener.enterImportDeclaration(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitImportDeclaration) {
+	 		listener.exitImportDeclaration(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -6941,6 +7022,16 @@ export class ImportDirectiveContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_importDirective;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterImportDirective) {
+	 		listener.enterImportDirective(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitImportDirective) {
+	 		listener.exitImportDirective(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitImportDirective) {
@@ -6962,6 +7053,16 @@ export class ImportPathContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_importPath;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterImportPath) {
+	 		listener.enterImportPath(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitImportPath) {
+	 		listener.exitImportPath(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -6997,6 +7098,16 @@ export class ContractDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_contractDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterContractDefinition) {
+	 		listener.enterContractDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitContractDefinition) {
+	 		listener.exitContractDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitContractDefinition) {
@@ -7021,6 +7132,16 @@ export class InheritanceSpecifierContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_inheritanceSpecifier;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterInheritanceSpecifier) {
+	 		listener.enterInheritanceSpecifier(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitInheritanceSpecifier) {
+	 		listener.exitInheritanceSpecifier(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7067,6 +7188,16 @@ export class ContractPartContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_contractPart;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterContractPart) {
+	 		listener.enterContractPart(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitContractPart) {
+	 		listener.exitContractPart(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7132,6 +7263,16 @@ export class StateVariableDeclarationContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_stateVariableDeclaration;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterStateVariableDeclaration) {
+	 		listener.enterStateVariableDeclaration(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitStateVariableDeclaration) {
+	 		listener.exitStateVariableDeclaration(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitStateVariableDeclaration) {
@@ -7163,6 +7304,16 @@ export class FileLevelConstantContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_fileLevelConstant;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFileLevelConstant) {
+	 		listener.enterFileLevelConstant(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFileLevelConstant) {
+	 		listener.exitFileLevelConstant(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitFileLevelConstant) {
@@ -7187,6 +7338,16 @@ export class CustomErrorDefinitionContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_customErrorDefinition;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterCustomErrorDefinition) {
+	 		listener.enterCustomErrorDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitCustomErrorDefinition) {
+	 		listener.exitCustomErrorDefinition(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7216,6 +7377,16 @@ export class TypeDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_typeDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterTypeDefinition) {
+	 		listener.enterTypeDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitTypeDefinition) {
+	 		listener.exitTypeDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitTypeDefinition) {
@@ -7243,6 +7414,16 @@ export class UsingForDeclarationContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_usingForDeclaration;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterUsingForDeclaration) {
+	 		listener.enterUsingForDeclaration(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitUsingForDeclaration) {
+	 		listener.exitUsingForDeclaration(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7272,6 +7453,16 @@ export class UsingForObjectContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_usingForObject;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterUsingForObject) {
+	 		listener.enterUsingForObject(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitUsingForObject) {
+	 		listener.exitUsingForObject(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitUsingForObject) {
@@ -7297,6 +7488,16 @@ export class UsingForObjectDirectiveContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_usingForObjectDirective;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterUsingForObjectDirective) {
+	 		listener.enterUsingForObjectDirective(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitUsingForObjectDirective) {
+	 		listener.exitUsingForObjectDirective(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitUsingForObjectDirective) {
@@ -7315,6 +7516,16 @@ export class UserDefinableOperatorsContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_userDefinableOperators;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterUserDefinableOperators) {
+	 		listener.enterUserDefinableOperators(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitUserDefinableOperators) {
+	 		listener.exitUserDefinableOperators(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7343,6 +7554,16 @@ export class StructDefinitionContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_structDefinition;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterStructDefinition) {
+	 		listener.enterStructDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitStructDefinition) {
+	 		listener.exitStructDefinition(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7384,6 +7605,16 @@ export class ModifierDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_modifierDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterModifierDefinition) {
+	 		listener.enterModifierDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitModifierDefinition) {
+	 		listener.exitModifierDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitModifierDefinition) {
@@ -7408,6 +7639,16 @@ export class ModifierInvocationContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_modifierInvocation;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterModifierInvocation) {
+	 		listener.enterModifierInvocation(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitModifierInvocation) {
+	 		listener.exitModifierInvocation(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7443,6 +7684,16 @@ export class FunctionDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_functionDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFunctionDefinition) {
+	 		listener.enterFunctionDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFunctionDefinition) {
+	 		listener.exitFunctionDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitFunctionDefinition) {
@@ -7474,6 +7725,16 @@ export class FunctionDescriptorContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_functionDescriptor;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFunctionDescriptor) {
+	 		listener.enterFunctionDescriptor(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFunctionDescriptor) {
+	 		listener.exitFunctionDescriptor(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitFunctionDescriptor) {
@@ -7495,6 +7756,16 @@ export class ReturnParametersContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_returnParameters;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterReturnParameters) {
+	 		listener.enterReturnParameters(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitReturnParameters) {
+	 		listener.exitReturnParameters(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7563,6 +7834,16 @@ export class ModifierListContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_modifierList;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterModifierList) {
+	 		listener.enterModifierList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitModifierList) {
+	 		listener.exitModifierList(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitModifierList) {
@@ -7591,6 +7872,16 @@ export class EventDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_eventDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterEventDefinition) {
+	 		listener.enterEventDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitEventDefinition) {
+	 		listener.exitEventDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitEventDefinition) {
@@ -7612,6 +7903,16 @@ export class EnumValueContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_enumValue;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterEnumValue) {
+	 		listener.enterEnumValue(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitEnumValue) {
+	 		listener.exitEnumValue(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7641,6 +7942,16 @@ export class EnumDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_enumDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterEnumDefinition) {
+	 		listener.enterEnumDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitEnumDefinition) {
+	 		listener.exitEnumDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitEnumDefinition) {
@@ -7665,6 +7976,16 @@ export class ParameterListContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_parameterList;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterParameterList) {
+	 		listener.enterParameterList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitParameterList) {
+	 		listener.exitParameterList(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7694,6 +8015,16 @@ export class ParameterContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_parameter;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterParameter) {
+	 		listener.enterParameter(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitParameter) {
+	 		listener.exitParameter(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitParameter) {
@@ -7718,6 +8049,16 @@ export class EventParameterListContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_eventParameterList;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterEventParameterList) {
+	 		listener.enterEventParameterList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitEventParameterList) {
+	 		listener.exitEventParameterList(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7747,6 +8088,16 @@ export class EventParameterContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_eventParameter;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterEventParameter) {
+	 		listener.enterEventParameter(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitEventParameter) {
+	 		listener.exitEventParameter(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitEventParameter) {
@@ -7772,6 +8123,16 @@ export class FunctionTypeParameterListContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_functionTypeParameterList;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFunctionTypeParameterList) {
+	 		listener.enterFunctionTypeParameterList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFunctionTypeParameterList) {
+	 		listener.exitFunctionTypeParameterList(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitFunctionTypeParameterList) {
@@ -7796,6 +8157,16 @@ export class FunctionTypeParameterContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_functionTypeParameter;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFunctionTypeParameter) {
+	 		listener.enterFunctionTypeParameter(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFunctionTypeParameter) {
+	 		listener.exitFunctionTypeParameter(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7824,6 +8195,16 @@ export class VariableDeclarationContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_variableDeclaration;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterVariableDeclaration) {
+	 		listener.enterVariableDeclaration(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitVariableDeclaration) {
+	 		listener.exitVariableDeclaration(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7865,6 +8246,16 @@ export class TypeNameContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_typeName;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterTypeName) {
+	 		listener.enterTypeName(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitTypeName) {
+	 		listener.exitTypeName(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitTypeName) {
@@ -7890,6 +8281,16 @@ export class UserDefinedTypeNameContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_userDefinedTypeName;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterUserDefinedTypeName) {
+	 		listener.enterUserDefinedTypeName(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitUserDefinedTypeName) {
+	 		listener.exitUserDefinedTypeName(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitUserDefinedTypeName) {
@@ -7914,6 +8315,16 @@ export class MappingKeyContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_mappingKey;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterMappingKey) {
+	 		listener.enterMappingKey(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitMappingKey) {
+	 		listener.exitMappingKey(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -7946,6 +8357,16 @@ export class MappingContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_mapping;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterMapping) {
+	 		listener.enterMapping(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitMapping) {
+	 		listener.exitMapping(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitMapping) {
@@ -7968,6 +8389,16 @@ export class MappingKeyNameContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_mappingKeyName;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterMappingKeyName) {
+	 		listener.enterMappingKeyName(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitMappingKeyName) {
+	 		listener.exitMappingKeyName(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitMappingKeyName) {
@@ -7989,6 +8420,16 @@ export class MappingValueNameContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_mappingValueName;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterMappingValueName) {
+	 		listener.enterMappingValueName(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitMappingValueName) {
+	 		listener.exitMappingValueName(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8033,6 +8474,16 @@ export class FunctionTypeNameContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_functionTypeName;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFunctionTypeName) {
+	 		listener.enterFunctionTypeName(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFunctionTypeName) {
+	 		listener.exitFunctionTypeName(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitFunctionTypeName) {
@@ -8051,6 +8502,16 @@ export class StorageLocationContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_storageLocation;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterStorageLocation) {
+	 		listener.enterStorageLocation(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitStorageLocation) {
+	 		listener.exitStorageLocation(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8083,6 +8544,16 @@ export class StateMutabilityContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_stateMutability;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterStateMutability) {
+	 		listener.enterStateMutability(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitStateMutability) {
+	 		listener.exitStateMutability(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitStateMutability) {
@@ -8107,6 +8578,16 @@ export class BlockContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_block;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterBlock) {
+	 		listener.enterBlock(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitBlock) {
+	 		listener.exitBlock(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8172,6 +8653,16 @@ export class StatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_statement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterStatement) {
+	 		listener.enterStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitStatement) {
+	 		listener.exitStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitStatement) {
@@ -8193,6 +8684,16 @@ export class ExpressionStatementContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_expressionStatement;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterExpressionStatement) {
+	 		listener.enterExpressionStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitExpressionStatement) {
+	 		listener.exitExpressionStatement(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8221,6 +8722,16 @@ export class IfStatementContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_ifStatement;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterIfStatement) {
+	 		listener.enterIfStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitIfStatement) {
+	 		listener.exitIfStatement(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8256,6 +8767,16 @@ export class TryStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_tryStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterTryStatement) {
+	 		listener.enterTryStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitTryStatement) {
+	 		listener.exitTryStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitTryStatement) {
@@ -8284,6 +8805,16 @@ export class CatchClauseContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_catchClause;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterCatchClause) {
+	 		listener.enterCatchClause(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitCatchClause) {
+	 		listener.exitCatchClause(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitCatchClause) {
@@ -8308,6 +8839,16 @@ export class WhileStatementContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_whileStatement;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterWhileStatement) {
+	 		listener.enterWhileStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitWhileStatement) {
+	 		listener.exitWhileStatement(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8334,6 +8875,16 @@ export class SimpleStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_simpleStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterSimpleStatement) {
+	 		listener.enterSimpleStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitSimpleStatement) {
+	 		listener.exitSimpleStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitSimpleStatement) {
@@ -8355,6 +8906,16 @@ export class UncheckedStatementContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_uncheckedStatement;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterUncheckedStatement) {
+	 		listener.enterUncheckedStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitUncheckedStatement) {
+	 		listener.exitUncheckedStatement(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8387,6 +8948,16 @@ export class ForStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_forStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterForStatement) {
+	 		listener.enterForStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitForStatement) {
+	 		listener.exitForStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitForStatement) {
@@ -8415,6 +8986,16 @@ export class InlineAssemblyStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_inlineAssemblyStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterInlineAssemblyStatement) {
+	 		listener.enterInlineAssemblyStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitInlineAssemblyStatement) {
+	 		listener.exitInlineAssemblyStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitInlineAssemblyStatement) {
@@ -8436,6 +9017,16 @@ export class InlineAssemblyStatementFlagContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_inlineAssemblyStatementFlag;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterInlineAssemblyStatementFlag) {
+	 		listener.enterInlineAssemblyStatementFlag(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitInlineAssemblyStatementFlag) {
+	 		listener.exitInlineAssemblyStatementFlag(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8462,6 +9053,16 @@ export class DoWhileStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_doWhileStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterDoWhileStatement) {
+	 		listener.enterDoWhileStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitDoWhileStatement) {
+	 		listener.exitDoWhileStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitDoWhileStatement) {
@@ -8483,6 +9084,16 @@ export class ContinueStatementContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_continueStatement;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterContinueStatement) {
+	 		listener.enterContinueStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitContinueStatement) {
+	 		listener.exitContinueStatement(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8506,6 +9117,16 @@ export class BreakStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_breakStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterBreakStatement) {
+	 		listener.enterBreakStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitBreakStatement) {
+	 		listener.exitBreakStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitBreakStatement) {
@@ -8528,6 +9149,16 @@ export class ReturnStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_returnStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterReturnStatement) {
+	 		listener.enterReturnStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitReturnStatement) {
+	 		listener.exitReturnStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitReturnStatement) {
@@ -8546,6 +9177,16 @@ export class ThrowStatementContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_throwStatement;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterThrowStatement) {
+	 		listener.enterThrowStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitThrowStatement) {
+	 		listener.exitThrowStatement(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8569,6 +9210,16 @@ export class EmitStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_emitStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterEmitStatement) {
+	 		listener.enterEmitStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitEmitStatement) {
+	 		listener.exitEmitStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitEmitStatement) {
@@ -8590,6 +9241,16 @@ export class RevertStatementContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_revertStatement;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterRevertStatement) {
+	 		listener.enterRevertStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitRevertStatement) {
+	 		listener.exitRevertStatement(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8622,6 +9283,16 @@ export class VariableDeclarationStatementContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_variableDeclarationStatement;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterVariableDeclarationStatement) {
+	 		listener.enterVariableDeclarationStatement(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitVariableDeclarationStatement) {
+	 		listener.exitVariableDeclarationStatement(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitVariableDeclarationStatement) {
@@ -8647,6 +9318,16 @@ export class VariableDeclarationListContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_variableDeclarationList;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterVariableDeclarationList) {
+	 		listener.enterVariableDeclarationList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitVariableDeclarationList) {
+	 		listener.exitVariableDeclarationList(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitVariableDeclarationList) {
@@ -8671,6 +9352,16 @@ export class IdentifierListContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_identifierList;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterIdentifierList) {
+	 		listener.enterIdentifierList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitIdentifierList) {
+	 		listener.exitIdentifierList(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8705,6 +9396,16 @@ export class ElementaryTypeNameContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_elementaryTypeName;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterElementaryTypeName) {
+	 		listener.enterElementaryTypeName(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitElementaryTypeName) {
+	 		listener.exitElementaryTypeName(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8745,6 +9446,16 @@ export class ExpressionContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_expression;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterExpression) {
+	 		listener.enterExpression(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitExpression) {
+	 		listener.exitExpression(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8792,6 +9503,16 @@ export class PrimaryExpressionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_primaryExpression;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterPrimaryExpression) {
+	 		listener.enterPrimaryExpression(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitPrimaryExpression) {
+	 		listener.exitPrimaryExpression(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitPrimaryExpression) {
@@ -8816,6 +9537,16 @@ export class ExpressionListContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_expressionList;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterExpressionList) {
+	 		listener.enterExpressionList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitExpressionList) {
+	 		listener.exitExpressionList(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8842,6 +9573,16 @@ export class NameValueListContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_nameValueList;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterNameValueList) {
+	 		listener.enterNameValueList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitNameValueList) {
+	 		listener.exitNameValueList(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitNameValueList) {
@@ -8866,6 +9607,16 @@ export class NameValueContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_nameValue;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterNameValue) {
+	 		listener.enterNameValue(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitNameValue) {
+	 		listener.exitNameValue(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -8892,6 +9643,16 @@ export class FunctionCallArgumentsContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_functionCallArguments;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFunctionCallArguments) {
+	 		listener.enterFunctionCallArguments(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFunctionCallArguments) {
+	 		listener.exitFunctionCallArguments(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitFunctionCallArguments) {
@@ -8917,6 +9678,16 @@ export class FunctionCallContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_functionCall;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterFunctionCall) {
+	 		listener.enterFunctionCall(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitFunctionCall) {
+	 		listener.exitFunctionCall(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitFunctionCall) {
@@ -8941,6 +9712,16 @@ export class AssemblyBlockContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyBlock;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyBlock) {
+	 		listener.enterAssemblyBlock(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyBlock) {
+	 		listener.exitAssemblyBlock(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9012,6 +9793,16 @@ export class AssemblyItemContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyItem;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyItem) {
+	 		listener.enterAssemblyItem(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyItem) {
+	 		listener.exitAssemblyItem(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyItem) {
@@ -9040,6 +9831,16 @@ export class AssemblyExpressionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyExpression;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyExpression) {
+	 		listener.enterAssemblyExpression(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyExpression) {
+	 		listener.exitAssemblyExpression(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyExpression) {
@@ -9064,6 +9865,16 @@ export class AssemblyMemberContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyMember;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyMember) {
+	 		listener.enterAssemblyMember(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyMember) {
+	 		listener.exitAssemblyMember(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9093,6 +9904,16 @@ export class AssemblyCallContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyCall;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyCall) {
+	 		listener.enterAssemblyCall(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyCall) {
+	 		listener.exitAssemblyCall(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyCall) {
@@ -9118,6 +9939,16 @@ export class AssemblyLocalDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyLocalDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyLocalDefinition) {
+	 		listener.enterAssemblyLocalDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyLocalDefinition) {
+	 		listener.exitAssemblyLocalDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyLocalDefinition) {
@@ -9142,6 +9973,16 @@ export class AssemblyAssignmentContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyAssignment;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyAssignment) {
+	 		listener.enterAssemblyAssignment(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyAssignment) {
+	 		listener.exitAssemblyAssignment(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9171,6 +10012,16 @@ export class AssemblyIdentifierOrListContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyIdentifierOrList;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyIdentifierOrList) {
+	 		listener.enterAssemblyIdentifierOrList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyIdentifierOrList) {
+	 		listener.exitAssemblyIdentifierOrList(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyIdentifierOrList) {
@@ -9195,6 +10046,16 @@ export class AssemblyIdentifierListContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyIdentifierList;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyIdentifierList) {
+	 		listener.enterAssemblyIdentifierList(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyIdentifierList) {
+	 		listener.exitAssemblyIdentifierList(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9221,6 +10082,16 @@ export class AssemblyStackAssignmentContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyStackAssignment;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyStackAssignment) {
+	 		listener.enterAssemblyStackAssignment(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyStackAssignment) {
+	 		listener.exitAssemblyStackAssignment(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyStackAssignment) {
@@ -9242,6 +10113,16 @@ export class LabelDefinitionContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_labelDefinition;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterLabelDefinition) {
+	 		listener.enterLabelDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitLabelDefinition) {
+	 		listener.exitLabelDefinition(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9271,6 +10152,16 @@ export class AssemblySwitchContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblySwitch;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblySwitch) {
+	 		listener.enterAssemblySwitch(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblySwitch) {
+	 		listener.exitAssemblySwitch(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblySwitch) {
@@ -9295,6 +10186,16 @@ export class AssemblyCaseContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyCase;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyCase) {
+	 		listener.enterAssemblyCase(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyCase) {
+	 		listener.exitAssemblyCase(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9327,6 +10228,16 @@ export class AssemblyFunctionDefinitionContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyFunctionDefinition;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyFunctionDefinition) {
+	 		listener.enterAssemblyFunctionDefinition(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyFunctionDefinition) {
+	 		listener.exitAssemblyFunctionDefinition(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyFunctionDefinition) {
@@ -9348,6 +10259,16 @@ export class AssemblyFunctionReturnsContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyFunctionReturns;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyFunctionReturns) {
+	 		listener.enterAssemblyFunctionReturns(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyFunctionReturns) {
+	 		listener.exitAssemblyFunctionReturns(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9380,6 +10301,16 @@ export class AssemblyForContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyFor;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyFor) {
+	 		listener.enterAssemblyFor(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyFor) {
+	 		listener.exitAssemblyFor(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyFor) {
@@ -9404,6 +10335,16 @@ export class AssemblyIfContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyIf;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyIf) {
+	 		listener.enterAssemblyIf(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyIf) {
+	 		listener.exitAssemblyIf(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9439,6 +10380,16 @@ export class AssemblyLiteralContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_assemblyLiteral;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterAssemblyLiteral) {
+	 		listener.enterAssemblyLiteral(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitAssemblyLiteral) {
+	 		listener.exitAssemblyLiteral(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitAssemblyLiteral) {
@@ -9463,6 +10414,16 @@ export class TupleExpressionContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_tupleExpression;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterTupleExpression) {
+	 		listener.enterTupleExpression(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitTupleExpression) {
+	 		listener.exitTupleExpression(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9491,6 +10452,16 @@ export class NumberLiteralContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_numberLiteral;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterNumberLiteral) {
+	 		listener.enterNumberLiteral(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitNumberLiteral) {
+	 		listener.exitNumberLiteral(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9529,6 +10500,16 @@ export class IdentifierContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_identifier;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterIdentifier) {
+	 		listener.enterIdentifier(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitIdentifier) {
+	 		listener.exitIdentifier(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitIdentifier) {
@@ -9553,6 +10534,16 @@ export class HexLiteralContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_hexLiteral;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterHexLiteral) {
+	 		listener.enterHexLiteral(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitHexLiteral) {
+	 		listener.exitHexLiteral(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
@@ -9579,6 +10570,16 @@ export class OverrideSpecifierContext extends ParserRuleContext {
     public get ruleIndex(): number {
     	return SolidityParser.RULE_overrideSpecifier;
 	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterOverrideSpecifier) {
+	 		listener.enterOverrideSpecifier(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitOverrideSpecifier) {
+	 		listener.exitOverrideSpecifier(this);
+		}
+	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitOverrideSpecifier) {
@@ -9603,6 +10604,16 @@ export class StringLiteralContext extends ParserRuleContext {
 	}
     public get ruleIndex(): number {
     	return SolidityParser.RULE_stringLiteral;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterStringLiteral) {
+	 		listener.enterStringLiteral(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitStringLiteral) {
+	 		listener.exitStringLiteral(this);
+		}
 	}
 	// @Override
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
