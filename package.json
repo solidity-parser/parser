@@ -16,7 +16,7 @@
     "antlr": "antlr -Dlanguage=TypeScript -visitor -no-listener -o src/ antlr/Solidity.g4 && npm run tokens",
     "tokens": "node ./scripts/tokens-string.js",
     "build:browser": "esbuild src/index.ts --outfile=dist/index.iife.js --bundle --sourcemap --format=iife --global-name=SolidityParser --inject:./process-shim.js",
-    "build:node": "esbuild src/index.ts --outfile=dist/index.cjs.js --bundle  --sourcemap --format=cjs --platform=node --target=node12",
+    "build:node": "esbuild src/index.ts --outfile=dist/index.cjs.js --bundle  --sourcemap --format=cjs --platform=node --target=node12 --define:import.meta.url='_importMetaUrl' --banner:js=\"const _importMetaUrl=require('url').pathToFileURL(__filename)\"",
     "build": "npm run antlr && npm run build:node && npm run build:browser && npm run generate-types && npm run copy-files",
     "generate-types": "tsc",
     "copy-files": "shx mkdir -p dist/antlr && shx cp './src/antlr/*tokens' dist/antlr",
