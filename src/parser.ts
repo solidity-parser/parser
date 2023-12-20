@@ -1,4 +1,4 @@
-import { CharStream, CommonTokenStream, Token as AntlrToken } from 'antlr4'
+import { CharStream, CommonTokenStream } from 'antlr4'
 
 import SolidityLexer from './antlr/SolidityLexer'
 import SolidityParser from './antlr/SolidityParser'
@@ -77,10 +77,7 @@ export function parse(input: string, options: ParseOptions = {}): ParseResult {
 
   let tokenList: Token[] = []
   if (options.tokens === true) {
-    tokenList = buildTokenList(
-      tokenStream.tokens as unknown as AntlrToken[],
-      options
-    )
+    tokenList = buildTokenList(tokenStream.tokens, options)
   }
 
   if (options.tolerant !== true && listener.hasErrors()) {
