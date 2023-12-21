@@ -38,6 +38,8 @@ jobs:
           cache: 'npm'
       - name: Install
         run: npm install
+      - name: Install ANTLR4
+        run: pip install antlr4-tools
       - name: Build
         run: npm run build
       - name: Run integration

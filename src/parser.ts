@@ -1,7 +1,7 @@
-import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts'
+import { CharStream, CommonTokenStream } from 'antlr4'
 
-import { SolidityLexer } from './antlr/SolidityLexer'
-import { SolidityParser } from './antlr/SolidityParser'
+import SolidityLexer from './antlr/SolidityLexer'
+import SolidityParser from './antlr/SolidityParser'
 import {
   ASTNode,
   astNodeTypes,
@@ -43,14 +43,14 @@ export class ParserError extends Error {
 }
 
 export function tokenize(input: string, options: TokenizeOptions = {}): any {
-  const inputStream = new ANTLRInputStream(input)
+  const inputStream = new CharStream(input)
   const lexer = new SolidityLexer(inputStream)
 
   return buildTokenList(lexer.getAllTokens(), options)
 }
 
 export function parse(input: string, options: ParseOptions = {}): ParseResult {
-  const inputStream = new ANTLRInputStream(input)
+  const inputStream = new CharStream(input)
   const lexer = new SolidityLexer(inputStream)
   const tokenStream = new CommonTokenStream(lexer)
   const parser = new SolidityParser(tokenStream)
@@ -61,7 +61,7 @@ export function parse(input: string, options: ParseOptions = {}): ParseResult {
 
   parser.removeErrorListeners()
   parser.addErrorListener(listener)
-  parser.buildParseTree = true
+  parser.buildParseTrees = true
 
   const sourceUnit = parser.sourceUnit()
 
@@ -77,7 +77,7 @@ export function parse(input: string, options: ParseOptions = {}): ParseResult {
 
   let tokenList: Token[] = []
   if (options.tokens === true) {
-    tokenList = buildTokenList(tokenStream.getTokens(), options)
+    tokenList = buildTokenList(tokenStream.tokens, options)
   }
 
   if (options.tolerant !== true && listener.hasErrors()) {

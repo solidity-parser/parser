@@ -27,19 +27,33 @@ git submodule update --init
 
 ## Updating the grammar
 
-The [`scripts/antlr.sh`](scripts/antlr.sh) script should download ANTLR and generate the grammar. For this to work, you
-need Java (1.6 or higher) installed.
+If you want to try changes made to the `antlr/Solidity.g4` file you need to generate the typescript files to reflect the changes.
+
+To accomplish that, we rely on [antlr4-tools](https://github.com/antlr/antlr4-tools) to generate the grammar.
+
+```bash
+# it requires Python 3 but doesn't require Java.
+# install antlr4-tools
+pip install antlr4-tools
+```
+
+Once it is installed you just need to run the following `npm` script to generate the new grammar files.
+
+```bash
+# generate the grammar Typescript files
+npm run antlr
+```
 
 ## Updating the parser
 
-Run `yarn build` to build the parser.
+Run `npm run build` to build the parser.
 
 ## Quick testing
 
 Right now the easier way to test something is to start the node REPL and import the project:
 
 ```
-yarn build
+npm run build
 node
 > parser = require('.')
 > ast = parser.parse('contract Foo {}')

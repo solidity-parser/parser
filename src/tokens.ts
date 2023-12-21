@@ -1,4 +1,5 @@
-import { Token, AntlrToken, TokenizeOptions } from './types'
+import { Token as AntlrToken } from 'antlr4'
+import { Token, TokenizeOptions } from './types'
 import { tokens } from './antlr/solidity-tokens'
 
 const TYPE_TOKENS = [
@@ -47,14 +48,14 @@ export function buildTokenList(
     const type = getTokenType(tokens[token.type.toString()])
     const node: Token = { type, value: token.text }
     if (options.range === true) {
-      node.range = [token.startIndex, token.stopIndex + 1]
+      node.range = [token.start, token.stop + 1]
     }
     if (options.loc === true) {
       node.loc = {
-        start: { line: token.line, column: token.charPositionInLine },
+        start: { line: token.line, column: token.column },
         end: {
           line: token.line,
-          column: token.charPositionInLine + (token.text?.length ?? 0),
+          column: token.column + (token.text?.length ?? 0),
         },
       }
     }
