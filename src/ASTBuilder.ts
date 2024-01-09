@@ -4,17 +4,6 @@ import SolidityVisitor from './antlr/SolidityVisitor'
 import { ParseOptions } from './types'
 import * as AST from './ast-types'
 
-interface SourceLocation {
-  start: {
-    line: number
-    column: number
-  }
-  end: {
-    line: number
-    column: number
-  }
-}
-
 interface WithMeta {
   __withMeta: never
 }
@@ -1966,8 +1955,8 @@ export class ASTBuilder
     throw new Error('Assertion error: non-exhaustive stateMutability check')
   }
 
-  private _loc(ctx: ParserRuleContext): SourceLocation {
-    const sourceLocation: SourceLocation = {
+  private _loc(ctx: ParserRuleContext): AST.Location {
+    const sourceLocation: AST.Location = {
       start: {
         line: ctx.start.line,
         column: ctx.start.column,
