@@ -11,7 +11,7 @@ import {
 } from './ast-types'
 import { ASTBuilder } from './ASTBuilder'
 import ErrorListener from './ErrorListener'
-import { buildTokenList } from './tokens'
+import { buildCommentList, buildTokenList } from './tokens'
 import { ParseOptions, Token, TokenizeOptions } from './types'
 
 interface ParserErrorItem {
@@ -69,25 +69,29 @@ export function parse(input: string, options: ParseOptions = {}): ParseResult {
 
   astBuilder.visit(sourceUnit)
 
-  const ast: ParseResult | null = astBuilder.result as any
+  const ast: ParseResult | null = astBuilder.result
 
   if (ast === null) {
     throw new Error('ast should never be null')
   }
 
-  let tokenList: Token[] = []
   if (options.tokens === true) {
-    tokenList = buildTokenList(tokenStream.tokens, options)
+    ast.tokens = buildTokenList(tokenStream.tokens, options)
   }
 
-  if (options.tolerant !== true && listener.hasErrors()) {
-    throw new ParserError({ errors: listener.getErrors() })
+  if (options.comments === true) {
+    ast.comments = buildCommentList(
+      tokenStream.tokens,
+      lexer.channelNames.indexOf('HIDDEN'),
+      options
+    )
   }
-  if (options.tolerant === true && listener.hasErrors()) {
+
+  if (listener.hasErrors()) {
+    if (options.tolerant !== true) {
+      throw new ParserError({ errors: listener.getErrors() })
+    }
     ast.errors = listener.getErrors()
-  }
-  if (options.tokens === true) {
-    ast.tokens = tokenList
   }
 
   return ast

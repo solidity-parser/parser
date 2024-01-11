@@ -1,3 +1,7 @@
+# Unreleased
+
+- Parser function now has an option to return comments as part of the parsed result. (#105)
+
 # 0.17.0
 
 - Using the official typescript target for antlr4. (#103)

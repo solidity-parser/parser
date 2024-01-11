@@ -8,6 +8,7 @@ export interface TokenizeOptions {
 }
 
 export interface ParseOptions extends TokenizeOptions {
+  comments?: boolean
   tokens?: boolean
   tolerant?: boolean
 }

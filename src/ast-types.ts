@@ -3,19 +3,26 @@
 //    Alex Browne <https://github.com/albrow>
 //    Xiao Liang <https://github.com/yxliang01>
 
-interface Location {
-  start: {
-    line: number
-    column: number
-  }
-  end: {
-    line: number
-    column: number
-  }
+export interface Position {
+  line: number
+  column: number
+}
+
+export interface Location {
+  start: Position
+  end: Position
+}
+
+export interface Comment {
+  type: 'BlockComment' | 'LineComment'
+  value: string
+  range?: [number, number]
+  loc?: Location
 }
 
 export interface BaseASTNode {
   type: ASTNodeTypeString
+  comments?: Comment[]
   range?: [number, number]
   loc?: Location
 }
