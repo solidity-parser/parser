@@ -13,22 +13,12 @@ export interface Location {
   end: Position
 }
 
-export interface BaseComment {
+export interface Comment {
   type: 'BlockComment' | 'LineComment'
   value: string
   range?: [number, number]
   loc?: Location
 }
-
-export interface BlockComment extends BaseComment {
-  type: 'BlockComment'
-}
-
-export interface LineComment extends BaseComment {
-  type: 'LineComment'
-}
-
-export type Comment = BlockComment | LineComment
 
 export interface BaseASTNode {
   type: ASTNodeTypeString
