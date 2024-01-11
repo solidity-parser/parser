@@ -46,7 +46,8 @@ function range(token: AntlrToken): [number, number] {
 }
 
 function loc(token: AntlrToken): Location {
-  const textInLines = token.text?.split(/\r?\n/) ?? ['']
+  const tokenText = token.text ?? ''
+  const textInLines = tokenText.split(/\r?\n/)
   const numberOfNewLines = textInLines.length - 1
   return {
     start: { line: token.line, column: token.column },
