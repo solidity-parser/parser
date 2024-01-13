@@ -1,5 +1,12 @@
 const path = require('path')
 const { build } = require('esbuild')
+const browserslist = require('browserslist')
+const { resolveToEsbuildTarget } = require('esbuild-plugin-browserslist')
+
+const target = resolveToEsbuildTarget(
+  browserslist(['>0.5%', 'not dead', 'not op_mini all']),
+  { printUnknownTargets: false }
+)
 
 build({
   logLevel: 'info',
@@ -7,6 +14,7 @@ build({
   bundle: true,
   sourcemap: true,
   format: 'iife',
+  target,
   banner: {
     js: `"use strict";
 (function universalModuleDefinition(root, factory) {
