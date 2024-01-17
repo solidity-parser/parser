@@ -1,6 +1,7 @@
 # Unreleased
 
 - Parser function now has an option to return comments as part of the parsed result. (#105)
+- We now export `umd` instead of `iife` format for browser compatibility. (#106)
 
 # 0.17.0
 
