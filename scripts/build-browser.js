@@ -30,6 +30,6 @@ typeof globalThis !== 'undefined' ? globalThis
   footer: {
     js: `
   return SolidityParser;
-})`,
+});`,
   },
 }).catch(() => process.exit(1))
