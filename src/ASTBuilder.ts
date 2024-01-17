@@ -471,19 +471,19 @@ export class ASTBuilder
     }
 
     if (ctx.elementaryTypeName()) {
-      return this.visitElementaryTypeName(ctx.elementaryTypeName()!)
+      return this.visitElementaryTypeName(ctx.elementaryTypeName())
     }
 
     if (ctx.userDefinedTypeName()) {
-      return this.visitUserDefinedTypeName(ctx.userDefinedTypeName()!)
+      return this.visitUserDefinedTypeName(ctx.userDefinedTypeName())
     }
 
     if (ctx.mapping()) {
-      return this.visitMapping(ctx.mapping()!)
+      return this.visitMapping(ctx.mapping())
     }
 
     if (ctx.functionTypeName()) {
-      return this.visitFunctionTypeName(ctx.functionTypeName()!)
+      return this.visitFunctionTypeName(ctx.functionTypeName())
     }
 
     throw new Error('Assertion error: unhandled type name case')
@@ -662,7 +662,7 @@ export class ASTBuilder
   ): AST.VariableDeclaration & WithMeta {
     let storageLocation = null
     if (ctx.storageLocation()) {
-      storageLocation = this._toText(ctx.storageLocation()!)
+      storageLocation = this._toText(ctx.storageLocation())
     }
 
     const node: AST.VariableDeclaration = {
@@ -872,13 +872,13 @@ export class ASTBuilder
   ): AST.CatchClause & WithMeta {
     let parameters = null
     if (ctx.parameterList()) {
-      parameters = this.visitParameterList(ctx.parameterList()!)
+      parameters = this.visitParameterList(ctx.parameterList())
     }
 
     if (
       ctx.identifier() &&
-      this._toText(ctx.identifier()!) !== 'Error' &&
-      this._toText(ctx.identifier()!) !== 'Panic'
+      this._toText(ctx.identifier()) !== 'Error' &&
+      this._toText(ctx.identifier()) !== 'Panic'
     ) {
       throw new Error('Expected "Error" or "Panic" identifier in catch clause')
     }
@@ -938,9 +938,9 @@ export class ASTBuilder
     ctx: SP.MappingKeyContext
   ): (AST.ElementaryTypeName | AST.UserDefinedTypeName) & WithMeta {
     if (ctx.elementaryTypeName()) {
-      return this.visitElementaryTypeName(ctx.elementaryTypeName()!)
+      return this.visitElementaryTypeName(ctx.elementaryTypeName())
     } else if (ctx.userDefinedTypeName()) {
-      return this.visitUserDefinedTypeName(ctx.userDefinedTypeName()!)
+      return this.visitUserDefinedTypeName(ctx.userDefinedTypeName())
     } else {
       throw new Error(
         'Expected MappingKey to have either ' +
@@ -973,7 +973,7 @@ export class ASTBuilder
   ): AST.ModifierDefinition & WithMeta {
     let parameters = null
     if (ctx.parameterList()) {
-      parameters = this.visitParameterList(ctx.parameterList()!)
+      parameters = this.visitParameterList(ctx.parameterList())
     }
 
     let isVirtual = false
@@ -1044,7 +1044,7 @@ export class ASTBuilder
         if (op === 'new') {
           const node: AST.NewExpression = {
             type: 'NewExpression',
-            typeName: this.visitTypeName(ctx.typeName()!),
+            typeName: this.visitTypeName(ctx.typeName()),
           }
           return this._addMeta(node, ctx)
         }
@@ -1095,7 +1095,7 @@ export class ASTBuilder
           const node: AST.MemberAccess = {
             type: 'MemberAccess',
             expression: this.visitExpression(ctx.expression(0)),
-            memberName: this._toText(ctx.identifier()!),
+            memberName: this._toText(ctx.identifier()),
           }
           return this._addMeta(node, ctx)
         }
@@ -1121,14 +1121,14 @@ export class ASTBuilder
           const names = []
           const identifiers = []
 
-          const ctxArgs = ctx.functionCallArguments()!
+          const ctxArgs = ctx.functionCallArguments()
           if (ctxArgs.expressionList()) {
             args = ctxArgs
-              .expressionList()!
+              .expressionList()
               .expression_list()
               .map((exprCtx) => this.visitExpression(exprCtx))
           } else if (ctxArgs.nameValueList()) {
-            for (const nameValue of ctxArgs.nameValueList()!.nameValue_list()) {
+            for (const nameValue of ctxArgs.nameValueList().nameValue_list()) {
               args.push(this.visitExpression(nameValue.expression()))
               names.push(this._toText(nameValue.identifier()))
               identifiers.push(this.visitIdentifier(nameValue.identifier()))
@@ -1177,7 +1177,7 @@ export class ASTBuilder
           const node: AST.NameValueExpression = {
             type: 'NameValueExpression',
             expression: this.visitExpression(ctx.expression(0)),
-            arguments: this.visitNameValueList(ctx.nameValueList()!),
+            arguments: this.visitNameValueList(ctx.nameValueList()),
           }
 
           return this._addMeta(node, ctx)
@@ -1294,7 +1294,7 @@ export class ASTBuilder
 
   public visitForStatement(ctx: SP.ForStatementContext) {
     let conditionExpression: any = this.visitExpressionStatement(
-      ctx.expressionStatement()!
+      ctx.expressionStatement()
     )
     if (conditionExpression) {
       conditionExpression = conditionExpression.expression
@@ -1302,13 +1302,13 @@ export class ASTBuilder
     const node: AST.ForStatement = {
       type: 'ForStatement',
       initExpression: ctx.simpleStatement()
-        ? this.visitSimpleStatement(ctx.simpleStatement()!)
+        ? this.visitSimpleStatement(ctx.simpleStatement())
         : null,
       conditionExpression,
       loopExpression: {
         type: 'ExpressionStatement',
         expression: ctx.expression()
-          ? this.visitExpression(ctx.expression()!)
+          ? this.visitExpression(ctx.expression())
           : null,
       },
       body: this.visitStatement(ctx.statement()),
@@ -1338,22 +1338,22 @@ export class ASTBuilder
     if (ctx.BooleanLiteral()) {
       const node: AST.BooleanLiteral = {
         type: 'BooleanLiteral',
-        value: this._toText(ctx.BooleanLiteral()!) === 'true',
+        value: this._toText(ctx.BooleanLiteral()) === 'true',
       }
 
       return this._addMeta(node, ctx)
     }
 
     if (ctx.hexLiteral()) {
-      return this.visitHexLiteral(ctx.hexLiteral()!)
+      return this.visitHexLiteral(ctx.hexLiteral())
     }
 
     if (ctx.stringLiteral()) {
       const fragments = ctx
-        .stringLiteral()!
+        .stringLiteral()
         .StringLiteralFragment_list()
         .map((stringLiteralFragmentCtx) => {
-          let text = this._toText(stringLiteralFragmentCtx)!
+          let text = this._toText(stringLiteralFragmentCtx)
 
           const isUnicode = text.slice(0, 7) === 'unicode'
           if (isUnicode) {
@@ -1381,7 +1381,7 @@ export class ASTBuilder
     }
 
     if (ctx.numberLiteral()) {
-      return this.visitNumberLiteral(ctx.numberLiteral()!)
+      return this.visitNumberLiteral(ctx.numberLiteral())
     }
 
     if (ctx.TypeKeyword()) {
@@ -1394,7 +1394,7 @@ export class ASTBuilder
     }
 
     if (ctx.typeName()) {
-      return this.visitTypeName(ctx.typeName()!)
+      return this.visitTypeName(ctx.typeName())
     }
 
     return this.visit(ctx.getChild(0)) as any
@@ -1467,7 +1467,7 @@ export class ASTBuilder
 
       let storageLocation: string | null = null
       if (decl.storageLocation()) {
-        storageLocation = this._toText(decl.storageLocation()!)
+        storageLocation = this._toText(decl.storageLocation())
       }
 
       const identifierCtx = decl.identifier()
@@ -1586,7 +1586,7 @@ export class ASTBuilder
   public visitInlineAssemblyStatement(ctx: SP.InlineAssemblyStatementContext) {
     let language: string | null = null
     if (ctx.StringLiteralFragment()) {
-      language = this._toText(ctx.StringLiteralFragment()!)!
+      language = this._toText(ctx.StringLiteralFragment())!
       language = language.substring(1, language.length - 1)
     }
 
@@ -1628,11 +1628,11 @@ export class ASTBuilder
     let text
 
     if (ctx.hexLiteral()) {
-      return this.visitHexLiteral(ctx.hexLiteral()!)
+      return this.visitHexLiteral(ctx.hexLiteral())
     }
 
     if (ctx.stringLiteral()) {
-      text = this._toText(ctx.stringLiteral()!)!
+      text = this._toText(ctx.stringLiteral())!
       const value = text.substring(1, text.length - 1)
       const node: AST.StringLiteral = {
         type: 'StringLiteral',
@@ -1703,7 +1703,7 @@ export class ASTBuilder
     if (ctx.BooleanLiteral()) {
       const node: AST.BooleanLiteral = {
         type: 'BooleanLiteral',
-        value: this._toText(ctx.BooleanLiteral()!) === 'true',
+        value: this._toText(ctx.BooleanLiteral()) === 'true',
       }
 
       return this._addMeta(node, ctx)
@@ -1728,7 +1728,7 @@ export class ASTBuilder
     }
 
     if (ctx.hexLiteral()) {
-      return this.visitHexLiteral(ctx.hexLiteral()!)
+      return this.visitHexLiteral(ctx.hexLiteral())
     }
 
     throw new Error('Should never reach here')
@@ -1749,7 +1749,7 @@ export class ASTBuilder
   ): AST.AssemblyCase & WithMeta {
     let value = null
     if (this._toText(ctx.getChild(0)) === 'case') {
-      value = this.visitAssemblyLiteral(ctx.assemblyLiteral()!)
+      value = this.visitAssemblyLiteral(ctx.assemblyLiteral())
     }
 
     const node: AST.AssemblyCase = {
@@ -1768,21 +1768,21 @@ export class ASTBuilder
     const ctxAssemblyIdentifierOrList = ctx.assemblyIdentifierOrList()
     let names
     if (ctxAssemblyIdentifierOrList.identifier()) {
-      names = [this.visitIdentifier(ctxAssemblyIdentifierOrList.identifier()!)]
+      names = [this.visitIdentifier(ctxAssemblyIdentifierOrList.identifier())]
     } else if (ctxAssemblyIdentifierOrList.assemblyMember()) {
       names = [
-        this.visitAssemblyMember(ctxAssemblyIdentifierOrList.assemblyMember()!),
+        this.visitAssemblyMember(ctxAssemblyIdentifierOrList.assemblyMember()),
       ]
     } else {
       names = ctxAssemblyIdentifierOrList
-        .assemblyIdentifierList()!
-        .identifier_list()!
+        .assemblyIdentifierList()
+        .identifier_list()
         .map((x) => this.visitIdentifier(x))
     }
 
     let expression: AST.AssemblyExpression | null = null
     if (ctx.assemblyExpression()) {
-      expression = this.visitAssemblyExpression(ctx.assemblyExpression()!)
+      expression = this.visitAssemblyExpression(ctx.assemblyExpression())
     }
 
     const node: AST.AssemblyLocalDefinition = {
@@ -1807,7 +1807,7 @@ export class ASTBuilder
     const ctxAssemblyFunctionReturns = ctx.assemblyFunctionReturns()
     const returnArgs = ctxAssemblyFunctionReturns
       ? ctxAssemblyFunctionReturns
-          .assemblyIdentifierList()!
+          .assemblyIdentifierList()
           .identifier_list()
           .map((x) => this.visitIdentifier(x))
       : []
@@ -1827,14 +1827,14 @@ export class ASTBuilder
     const ctxAssemblyIdentifierOrList = ctx.assemblyIdentifierOrList()
     let names
     if (ctxAssemblyIdentifierOrList.identifier()) {
-      names = [this.visitIdentifier(ctxAssemblyIdentifierOrList.identifier()!)]
+      names = [this.visitIdentifier(ctxAssemblyIdentifierOrList.identifier())]
     } else if (ctxAssemblyIdentifierOrList.assemblyMember()) {
       names = [
-        this.visitAssemblyMember(ctxAssemblyIdentifierOrList.assemblyMember()!),
+        this.visitAssemblyMember(ctxAssemblyIdentifierOrList.assemblyMember()),
       ]
     } else {
       names = ctxAssemblyIdentifierOrList
-        .assemblyIdentifierList()!
+        .assemblyIdentifierList()
         .identifier_list()
         .map((x) => this.visitIdentifier(x))
     }
