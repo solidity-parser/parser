@@ -10,7 +10,7 @@ module.exports = function (config) {
     frameworks: ['mocha'],
 
     // list of files / patterns to load in the browser
-    files: ['dist/index.iife.js', 'browser-test/*.js'],
+    files: ['dist/index.umd.js', 'browser-test/*.js'],
 
     // list of files / patterns to exclude
     exclude: [],

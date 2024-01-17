@@ -84,7 +84,7 @@ parser.visit(ast, {
 
 ## Usage in the browser
 
-A browser-friendly version is available in `dist/index.iife.js` (along with its sourcemaps file) in the published version.
+A browser-friendly version is available in `dist/index.umd.js` (along with its sourcemaps file) in the published version.
 
 If you are using webpack, keep in mind that minimizing your bundle will mangle function names, breaking the parser. To fix this you can just set `optimization.minimize` to `false`.
 

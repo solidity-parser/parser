@@ -2,11 +2,9 @@
   "name": "@solidity-parser/parser",
   "version": "0.17.0",
   "description": "A Solidity parser built from a robust ANTLR 4 grammar",
-  "main": "dist/index.cjs.js",
-  "browser": {
-    "fs": false,
-    "path": false
-  },
+  "main": "./dist/index.cjs.js",
+  "browser": "./dist/index.umd.js",
+  "unpkg": "./dist/index.umd.js",
   "files": [
     "dist/**/*",
     "src/**/*"
