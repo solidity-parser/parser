@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 it('smoke test for browser', () => {
   if (SolidityParser === undefined) {
     throw new Error('SolidityParser is not available')

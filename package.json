@@ -43,20 +43,14 @@
   "devDependencies": {
     "@types/chai": "^4.3.11",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.7",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "antlr4": "^4.13.1-patch-1",
-    "assert": "^2.1.0",
     "browserslist": "^4.22.3",
     "chai": "^4.4.1",
     "esbuild": "^0.19.12",
     "esbuild-plugin-browserslist": "^0.10.0",
     "eslint": "^8.56.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-standard": "^5.0.0",
     "karma": "^6.4.2",
     "karma-chrome-launcher": "^3.2.0",
     "karma-mocha": "^2.0.1",
@@ -65,9 +59,7 @@
     "prettier": "^3.2.4",
     "puppeteer": "^21.9.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3",
-    "util": "^0.12.5",
-    "yarn": "^1.22.21"
+    "typescript": "^5.3.3"
   },
   "nyc": {
     "extension": [
