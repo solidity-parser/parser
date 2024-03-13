@@ -25,7 +25,7 @@ function getTokenTypeMap() {
     .split('\n')
     .map((line) => rsplit(line, '='))
     .reduce((acum, [value, key]) => {
-      keyNumber = parseInt(key, 10)
+      const keyNumber = parseInt(key, 10)
       if (!isNaN(keyNumber)) acum[keyNumber] = normalizeTokenType(value)
       return acum
     }, {})

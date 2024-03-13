@@ -1,3 +1,2 @@
-src/lib
 src/antlr
-scripts
+dist
