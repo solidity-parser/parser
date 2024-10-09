@@ -1,4 +1,4 @@
 [submodule "antlr"]
 	path = antlr
-	url = https://github.com/solidity-parser/antlr
-	branch = master
+	url = https://github.com/yorhodes/solidity-antlr
+	branch = main
