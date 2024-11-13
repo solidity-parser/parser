@@ -1,3 +1,7 @@
+# 0.19.0
+
+- Add support for transient storage variables. (#119)
+
 # 0.18.0
 
 - Parser function now has an option to return comments as part of the parsed result. (#105)
