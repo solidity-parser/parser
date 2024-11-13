@@ -109,6 +109,11 @@ export class ASTBuilder
       isImmutable = true
     }
 
+    let isTransient = false
+    if (ctx.TransientKeyword_list().length > 0) {
+      isTransient = true
+    }
+
     const decl: AST.StateVariableDeclarationVariable = {
       type: 'VariableDeclaration',
       typeName: type,
@@ -120,6 +125,7 @@ export class ASTBuilder
       isDeclaredConst,
       isIndexed: false,
       isImmutable,
+      isTransient,
       override,
       storageLocation: null,
     }
