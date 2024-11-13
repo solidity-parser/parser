@@ -738,6 +738,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          isTransient: false,
           storageLocation: null,
         },
       ],
@@ -769,6 +770,39 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: true,
+          isTransient: false,
+          storageLocation: null,
+        },
+      ],
+      initialValue: null,
+    })
+  })
+
+  it('StateVariableDeclaration with transient', () => {
+    const ast: any = parseNode('bool transient locked;')
+    assert.deepEqual(ast, {
+      type: 'StateVariableDeclaration',
+      variables: [
+        {
+          type: 'VariableDeclaration',
+          typeName: {
+            type: 'ElementaryTypeName',
+            name: 'bool',
+            stateMutability: null,
+          },
+          name: 'locked',
+          identifier: {
+            type: 'Identifier',
+            name: 'locked',
+          },
+          expression: null,
+          visibility: 'default',
+          override: null,
+          isStateVar: true,
+          isDeclaredConst: false,
+          isIndexed: false,
+          isImmutable: false,
+          isTransient: true,
           storageLocation: null,
         },
       ],
@@ -832,6 +866,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          isTransient: false,
           storageLocation: null,
         },
       ],
@@ -905,6 +940,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          isTransient: false,
           storageLocation: null,
         },
       ],
@@ -1490,6 +1526,7 @@ describe('AST', () => {
       isIndexed: false,
       override: null,
       isImmutable: false,
+      isTransient: false,
       storageLocation: null,
     })
   })
@@ -2751,6 +2788,7 @@ describe('AST', () => {
           isDeclaredConst: false,
           isIndexed: false,
           isImmutable: false,
+          isTransient: false,
           storageLocation: null,
         },
       ],
