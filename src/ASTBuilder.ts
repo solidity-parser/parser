@@ -54,6 +54,11 @@ export class ASTBuilder
 
     this._currentContract = name
 
+    const customLayoutStorageList = ctx.customStorageLayout_list()
+    if (customLayoutStorageList.length > 1) {
+      throw new Error('Only one custom storage layout is allowed per contract')
+    }
+
     const node: AST.ContractDefinition = {
       type: 'ContractDefinition',
       name,
@@ -62,6 +67,12 @@ export class ASTBuilder
         .map((x) => this.visitInheritanceSpecifier(x)),
       subNodes: ctx.contractPart_list().map((x) => this.visit(x)),
       kind,
+    }
+
+    if (customLayoutStorageList.length === 1) {
+      node.storageLayout = this.visitExpression(
+        customLayoutStorageList[0].expression()
+      )
     }
 
     return this._addMeta(node, ctx)
