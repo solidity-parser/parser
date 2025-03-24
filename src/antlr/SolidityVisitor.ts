@@ -15,6 +15,7 @@ import { ImportDirectiveContext } from "./SolidityParser.js";
 import { ImportPathContext } from "./SolidityParser.js";
 import { ContractDefinitionContext } from "./SolidityParser.js";
 import { InheritanceSpecifierContext } from "./SolidityParser.js";
+import { CustomStorageLayoutContext } from "./SolidityParser.js";
 import { ContractPartContext } from "./SolidityParser.js";
 import { StateVariableDeclarationContext } from "./SolidityParser.js";
 import { FileLevelConstantContext } from "./SolidityParser.js";
@@ -186,6 +187,12 @@ export default class SolidityVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitInheritanceSpecifier?: (ctx: InheritanceSpecifierContext) => Result;
+	/**
+	 * Visit a parse tree produced by `SolidityParser.customStorageLayout`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCustomStorageLayout?: (ctx: CustomStorageLayoutContext) => Result;
 	/**
 	 * Visit a parse tree produced by `SolidityParser.contractPart`.
 	 * @param ctx the parse tree

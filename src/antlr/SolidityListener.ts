@@ -15,6 +15,7 @@ import { ImportDirectiveContext } from "./SolidityParser.js";
 import { ImportPathContext } from "./SolidityParser.js";
 import { ContractDefinitionContext } from "./SolidityParser.js";
 import { InheritanceSpecifierContext } from "./SolidityParser.js";
+import { CustomStorageLayoutContext } from "./SolidityParser.js";
 import { ContractPartContext } from "./SolidityParser.js";
 import { StateVariableDeclarationContext } from "./SolidityParser.js";
 import { FileLevelConstantContext } from "./SolidityParser.js";
@@ -231,6 +232,16 @@ export default class SolidityListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitInheritanceSpecifier?: (ctx: InheritanceSpecifierContext) => void;
+	/**
+	 * Enter a parse tree produced by `SolidityParser.customStorageLayout`.
+	 * @param ctx the parse tree
+	 */
+	enterCustomStorageLayout?: (ctx: CustomStorageLayoutContext) => void;
+	/**
+	 * Exit a parse tree produced by `SolidityParser.customStorageLayout`.
+	 * @param ctx the parse tree
+	 */
+	exitCustomStorageLayout?: (ctx: CustomStorageLayoutContext) => void;
 	/**
 	 * Enter a parse tree produced by `SolidityParser.contractPart`.
 	 * @param ctx the parse tree
