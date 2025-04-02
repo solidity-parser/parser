@@ -115,44 +115,46 @@ export default class SolidityParser extends Parser {
 	public static readonly T__93 = 94;
 	public static readonly T__94 = 95;
 	public static readonly T__95 = 96;
-	public static readonly Int = 97;
-	public static readonly Uint = 98;
-	public static readonly Byte = 99;
-	public static readonly Fixed = 100;
-	public static readonly Ufixed = 101;
-	public static readonly BooleanLiteral = 102;
-	public static readonly DecimalNumber = 103;
-	public static readonly HexNumber = 104;
-	public static readonly NumberUnit = 105;
-	public static readonly HexLiteralFragment = 106;
-	public static readonly ReservedKeyword = 107;
-	public static readonly AnonymousKeyword = 108;
-	public static readonly BreakKeyword = 109;
-	public static readonly ConstantKeyword = 110;
-	public static readonly TransientKeyword = 111;
-	public static readonly ImmutableKeyword = 112;
-	public static readonly ContinueKeyword = 113;
-	public static readonly LeaveKeyword = 114;
-	public static readonly ExternalKeyword = 115;
-	public static readonly IndexedKeyword = 116;
-	public static readonly InternalKeyword = 117;
-	public static readonly PayableKeyword = 118;
-	public static readonly PrivateKeyword = 119;
-	public static readonly PublicKeyword = 120;
-	public static readonly VirtualKeyword = 121;
-	public static readonly PureKeyword = 122;
-	public static readonly TypeKeyword = 123;
-	public static readonly ViewKeyword = 124;
-	public static readonly GlobalKeyword = 125;
-	public static readonly ConstructorKeyword = 126;
-	public static readonly FallbackKeyword = 127;
-	public static readonly ReceiveKeyword = 128;
-	public static readonly Identifier = 129;
-	public static readonly StringLiteralFragment = 130;
-	public static readonly VersionLiteral = 131;
-	public static readonly WS = 132;
-	public static readonly COMMENT = 133;
-	public static readonly LINE_COMMENT = 134;
+	public static readonly T__96 = 97;
+	public static readonly T__97 = 98;
+	public static readonly Int = 99;
+	public static readonly Uint = 100;
+	public static readonly Byte = 101;
+	public static readonly Fixed = 102;
+	public static readonly Ufixed = 103;
+	public static readonly BooleanLiteral = 104;
+	public static readonly DecimalNumber = 105;
+	public static readonly HexNumber = 106;
+	public static readonly NumberUnit = 107;
+	public static readonly HexLiteralFragment = 108;
+	public static readonly ReservedKeyword = 109;
+	public static readonly AnonymousKeyword = 110;
+	public static readonly BreakKeyword = 111;
+	public static readonly ConstantKeyword = 112;
+	public static readonly TransientKeyword = 113;
+	public static readonly ImmutableKeyword = 114;
+	public static readonly ContinueKeyword = 115;
+	public static readonly LeaveKeyword = 116;
+	public static readonly ExternalKeyword = 117;
+	public static readonly IndexedKeyword = 118;
+	public static readonly InternalKeyword = 119;
+	public static readonly PayableKeyword = 120;
+	public static readonly PrivateKeyword = 121;
+	public static readonly PublicKeyword = 122;
+	public static readonly VirtualKeyword = 123;
+	public static readonly PureKeyword = 124;
+	public static readonly TypeKeyword = 125;
+	public static readonly ViewKeyword = 126;
+	public static readonly GlobalKeyword = 127;
+	public static readonly ConstructorKeyword = 128;
+	public static readonly FallbackKeyword = 129;
+	public static readonly ReceiveKeyword = 130;
+	public static readonly Identifier = 131;
+	public static readonly StringLiteralFragment = 132;
+	public static readonly VersionLiteral = 133;
+	public static readonly WS = 134;
+	public static readonly COMMENT = 135;
+	public static readonly LINE_COMMENT = 136;
 	public static override readonly EOF = Token.EOF;
 	public static readonly RULE_sourceUnit = 0;
 	public static readonly RULE_pragmaDirective = 1;
@@ -166,95 +168,96 @@ export default class SolidityParser extends Parser {
 	public static readonly RULE_importPath = 9;
 	public static readonly RULE_contractDefinition = 10;
 	public static readonly RULE_inheritanceSpecifier = 11;
-	public static readonly RULE_contractPart = 12;
-	public static readonly RULE_stateVariableDeclaration = 13;
-	public static readonly RULE_fileLevelConstant = 14;
-	public static readonly RULE_customErrorDefinition = 15;
-	public static readonly RULE_typeDefinition = 16;
-	public static readonly RULE_usingForDeclaration = 17;
-	public static readonly RULE_usingForObject = 18;
-	public static readonly RULE_usingForObjectDirective = 19;
-	public static readonly RULE_userDefinableOperators = 20;
-	public static readonly RULE_structDefinition = 21;
-	public static readonly RULE_modifierDefinition = 22;
-	public static readonly RULE_modifierInvocation = 23;
-	public static readonly RULE_functionDefinition = 24;
-	public static readonly RULE_functionDescriptor = 25;
-	public static readonly RULE_returnParameters = 26;
-	public static readonly RULE_modifierList = 27;
-	public static readonly RULE_eventDefinition = 28;
-	public static readonly RULE_enumValue = 29;
-	public static readonly RULE_enumDefinition = 30;
-	public static readonly RULE_parameterList = 31;
-	public static readonly RULE_parameter = 32;
-	public static readonly RULE_eventParameterList = 33;
-	public static readonly RULE_eventParameter = 34;
-	public static readonly RULE_functionTypeParameterList = 35;
-	public static readonly RULE_functionTypeParameter = 36;
-	public static readonly RULE_variableDeclaration = 37;
-	public static readonly RULE_typeName = 38;
-	public static readonly RULE_userDefinedTypeName = 39;
-	public static readonly RULE_mappingKey = 40;
-	public static readonly RULE_mapping = 41;
-	public static readonly RULE_mappingKeyName = 42;
-	public static readonly RULE_mappingValueName = 43;
-	public static readonly RULE_functionTypeName = 44;
-	public static readonly RULE_storageLocation = 45;
-	public static readonly RULE_stateMutability = 46;
-	public static readonly RULE_block = 47;
-	public static readonly RULE_statement = 48;
-	public static readonly RULE_expressionStatement = 49;
-	public static readonly RULE_ifStatement = 50;
-	public static readonly RULE_tryStatement = 51;
-	public static readonly RULE_catchClause = 52;
-	public static readonly RULE_whileStatement = 53;
-	public static readonly RULE_simpleStatement = 54;
-	public static readonly RULE_uncheckedStatement = 55;
-	public static readonly RULE_forStatement = 56;
-	public static readonly RULE_inlineAssemblyStatement = 57;
-	public static readonly RULE_inlineAssemblyStatementFlag = 58;
-	public static readonly RULE_doWhileStatement = 59;
-	public static readonly RULE_continueStatement = 60;
-	public static readonly RULE_breakStatement = 61;
-	public static readonly RULE_returnStatement = 62;
-	public static readonly RULE_throwStatement = 63;
-	public static readonly RULE_emitStatement = 64;
-	public static readonly RULE_revertStatement = 65;
-	public static readonly RULE_variableDeclarationStatement = 66;
-	public static readonly RULE_variableDeclarationList = 67;
-	public static readonly RULE_identifierList = 68;
-	public static readonly RULE_elementaryTypeName = 69;
-	public static readonly RULE_expression = 70;
-	public static readonly RULE_primaryExpression = 71;
-	public static readonly RULE_expressionList = 72;
-	public static readonly RULE_nameValueList = 73;
-	public static readonly RULE_nameValue = 74;
-	public static readonly RULE_functionCallArguments = 75;
-	public static readonly RULE_functionCall = 76;
-	public static readonly RULE_assemblyBlock = 77;
-	public static readonly RULE_assemblyItem = 78;
-	public static readonly RULE_assemblyExpression = 79;
-	public static readonly RULE_assemblyMember = 80;
-	public static readonly RULE_assemblyCall = 81;
-	public static readonly RULE_assemblyLocalDefinition = 82;
-	public static readonly RULE_assemblyAssignment = 83;
-	public static readonly RULE_assemblyIdentifierOrList = 84;
-	public static readonly RULE_assemblyIdentifierList = 85;
-	public static readonly RULE_assemblyStackAssignment = 86;
-	public static readonly RULE_labelDefinition = 87;
-	public static readonly RULE_assemblySwitch = 88;
-	public static readonly RULE_assemblyCase = 89;
-	public static readonly RULE_assemblyFunctionDefinition = 90;
-	public static readonly RULE_assemblyFunctionReturns = 91;
-	public static readonly RULE_assemblyFor = 92;
-	public static readonly RULE_assemblyIf = 93;
-	public static readonly RULE_assemblyLiteral = 94;
-	public static readonly RULE_tupleExpression = 95;
-	public static readonly RULE_numberLiteral = 96;
-	public static readonly RULE_identifier = 97;
-	public static readonly RULE_hexLiteral = 98;
-	public static readonly RULE_overrideSpecifier = 99;
-	public static readonly RULE_stringLiteral = 100;
+	public static readonly RULE_customStorageLayout = 12;
+	public static readonly RULE_contractPart = 13;
+	public static readonly RULE_stateVariableDeclaration = 14;
+	public static readonly RULE_fileLevelConstant = 15;
+	public static readonly RULE_customErrorDefinition = 16;
+	public static readonly RULE_typeDefinition = 17;
+	public static readonly RULE_usingForDeclaration = 18;
+	public static readonly RULE_usingForObject = 19;
+	public static readonly RULE_usingForObjectDirective = 20;
+	public static readonly RULE_userDefinableOperators = 21;
+	public static readonly RULE_structDefinition = 22;
+	public static readonly RULE_modifierDefinition = 23;
+	public static readonly RULE_modifierInvocation = 24;
+	public static readonly RULE_functionDefinition = 25;
+	public static readonly RULE_functionDescriptor = 26;
+	public static readonly RULE_returnParameters = 27;
+	public static readonly RULE_modifierList = 28;
+	public static readonly RULE_eventDefinition = 29;
+	public static readonly RULE_enumValue = 30;
+	public static readonly RULE_enumDefinition = 31;
+	public static readonly RULE_parameterList = 32;
+	public static readonly RULE_parameter = 33;
+	public static readonly RULE_eventParameterList = 34;
+	public static readonly RULE_eventParameter = 35;
+	public static readonly RULE_functionTypeParameterList = 36;
+	public static readonly RULE_functionTypeParameter = 37;
+	public static readonly RULE_variableDeclaration = 38;
+	public static readonly RULE_typeName = 39;
+	public static readonly RULE_userDefinedTypeName = 40;
+	public static readonly RULE_mappingKey = 41;
+	public static readonly RULE_mapping = 42;
+	public static readonly RULE_mappingKeyName = 43;
+	public static readonly RULE_mappingValueName = 44;
+	public static readonly RULE_functionTypeName = 45;
+	public static readonly RULE_storageLocation = 46;
+	public static readonly RULE_stateMutability = 47;
+	public static readonly RULE_block = 48;
+	public static readonly RULE_statement = 49;
+	public static readonly RULE_expressionStatement = 50;
+	public static readonly RULE_ifStatement = 51;
+	public static readonly RULE_tryStatement = 52;
+	public static readonly RULE_catchClause = 53;
+	public static readonly RULE_whileStatement = 54;
+	public static readonly RULE_simpleStatement = 55;
+	public static readonly RULE_uncheckedStatement = 56;
+	public static readonly RULE_forStatement = 57;
+	public static readonly RULE_inlineAssemblyStatement = 58;
+	public static readonly RULE_inlineAssemblyStatementFlag = 59;
+	public static readonly RULE_doWhileStatement = 60;
+	public static readonly RULE_continueStatement = 61;
+	public static readonly RULE_breakStatement = 62;
+	public static readonly RULE_returnStatement = 63;
+	public static readonly RULE_throwStatement = 64;
+	public static readonly RULE_emitStatement = 65;
+	public static readonly RULE_revertStatement = 66;
+	public static readonly RULE_variableDeclarationStatement = 67;
+	public static readonly RULE_variableDeclarationList = 68;
+	public static readonly RULE_identifierList = 69;
+	public static readonly RULE_elementaryTypeName = 70;
+	public static readonly RULE_expression = 71;
+	public static readonly RULE_primaryExpression = 72;
+	public static readonly RULE_expressionList = 73;
+	public static readonly RULE_nameValueList = 74;
+	public static readonly RULE_nameValue = 75;
+	public static readonly RULE_functionCallArguments = 76;
+	public static readonly RULE_functionCall = 77;
+	public static readonly RULE_assemblyBlock = 78;
+	public static readonly RULE_assemblyItem = 79;
+	public static readonly RULE_assemblyExpression = 80;
+	public static readonly RULE_assemblyMember = 81;
+	public static readonly RULE_assemblyCall = 82;
+	public static readonly RULE_assemblyLocalDefinition = 83;
+	public static readonly RULE_assemblyAssignment = 84;
+	public static readonly RULE_assemblyIdentifierOrList = 85;
+	public static readonly RULE_assemblyIdentifierList = 86;
+	public static readonly RULE_assemblyStackAssignment = 87;
+	public static readonly RULE_labelDefinition = 88;
+	public static readonly RULE_assemblySwitch = 89;
+	public static readonly RULE_assemblyCase = 90;
+	public static readonly RULE_assemblyFunctionDefinition = 91;
+	public static readonly RULE_assemblyFunctionReturns = 92;
+	public static readonly RULE_assemblyFor = 93;
+	public static readonly RULE_assemblyIf = 94;
+	public static readonly RULE_assemblyLiteral = 95;
+	public static readonly RULE_tupleExpression = 96;
+	public static readonly RULE_numberLiteral = 97;
+	public static readonly RULE_identifier = 98;
+	public static readonly RULE_hexLiteral = 99;
+	public static readonly RULE_overrideSpecifier = 100;
+	public static readonly RULE_stringLiteral = 101;
 	public static readonly literalNames: (string | null)[] = [ null, "'pragma'", 
                                                             "';'", "'*'", 
                                                             "'||'", "'^'", 
@@ -269,7 +272,8 @@ export default class SolidityParser extends Parser {
                                                             "'interface'", 
                                                             "'library'", 
                                                             "'is'", "'('", 
-                                                            "')'", "'error'", 
+                                                            "')'", "'layout'", 
+                                                            "'at'", "'error'", 
                                                             "'using'", "'for'", 
                                                             "'|'", "'&'", 
                                                             "'+'", "'-'", 
@@ -381,6 +385,7 @@ export default class SolidityParser extends Parser {
                                                              null, null, 
                                                              null, null, 
                                                              null, null, 
+                                                             null, null, 
                                                              null, "Int", 
                                                              "Uint", "Byte", 
                                                              "Fixed", "Ufixed", 
@@ -420,8 +425,8 @@ export default class SolidityParser extends Parser {
 	public static readonly ruleNames: string[] = [
 		"sourceUnit", "pragmaDirective", "pragmaName", "pragmaValue", "version", 
 		"versionOperator", "versionConstraint", "importDeclaration", "importDirective", 
-		"importPath", "contractDefinition", "inheritanceSpecifier", "contractPart", 
-		"stateVariableDeclaration", "fileLevelConstant", "customErrorDefinition", 
+		"importPath", "contractDefinition", "inheritanceSpecifier", "customStorageLayout", 
+		"contractPart", "stateVariableDeclaration", "fileLevelConstant", "customErrorDefinition", 
 		"typeDefinition", "usingForDeclaration", "usingForObject", "usingForObjectDirective", 
 		"userDefinableOperators", "structDefinition", "modifierDefinition", "modifierInvocation", 
 		"functionDefinition", "functionDescriptor", "returnParameters", "modifierList", 
@@ -466,87 +471,87 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 215;
+			this.state = 217;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 104620034) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 2080392501) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3498573949) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 7) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 406609922) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 2080392501) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3498573949) !== 0) || ((((_la - 129)) & ~0x1F) === 0 && ((1 << (_la - 129)) & 7) !== 0)) {
 				{
-				this.state = 213;
+				this.state = 215;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 0, this._ctx) ) {
 				case 1:
 					{
-					this.state = 202;
+					this.state = 204;
 					this.pragmaDirective();
 					}
 					break;
 				case 2:
 					{
-					this.state = 203;
+					this.state = 205;
 					this.importDirective();
 					}
 					break;
 				case 3:
 					{
-					this.state = 204;
+					this.state = 206;
 					this.contractDefinition();
 					}
 					break;
 				case 4:
 					{
-					this.state = 205;
+					this.state = 207;
 					this.enumDefinition();
 					}
 					break;
 				case 5:
 					{
-					this.state = 206;
+					this.state = 208;
 					this.eventDefinition();
 					}
 					break;
 				case 6:
 					{
-					this.state = 207;
+					this.state = 209;
 					this.structDefinition();
 					}
 					break;
 				case 7:
 					{
-					this.state = 208;
+					this.state = 210;
 					this.functionDefinition();
 					}
 					break;
 				case 8:
 					{
-					this.state = 209;
+					this.state = 211;
 					this.fileLevelConstant();
 					}
 					break;
 				case 9:
 					{
-					this.state = 210;
+					this.state = 212;
 					this.customErrorDefinition();
 					}
 					break;
 				case 10:
 					{
-					this.state = 211;
+					this.state = 213;
 					this.typeDefinition();
 					}
 					break;
 				case 11:
 					{
-					this.state = 212;
+					this.state = 214;
 					this.usingForDeclaration();
 					}
 					break;
 				}
 				}
-				this.state = 217;
+				this.state = 219;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 218;
+			this.state = 220;
 			this.match(SolidityParser.EOF);
 			}
 		}
@@ -571,13 +576,13 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 220;
-			this.match(SolidityParser.T__0);
-			this.state = 221;
-			this.pragmaName();
 			this.state = 222;
-			this.pragmaValue();
+			this.match(SolidityParser.T__0);
 			this.state = 223;
+			this.pragmaName();
+			this.state = 224;
+			this.pragmaValue();
+			this.state = 225;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -602,7 +607,7 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 225;
+			this.state = 227;
 			this.identifier();
 			}
 		}
@@ -625,27 +630,27 @@ export default class SolidityParser extends Parser {
 		let localctx: PragmaValueContext = new PragmaValueContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 6, SolidityParser.RULE_pragmaValue);
 		try {
-			this.state = 230;
+			this.state = 232;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 2, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 227;
+				this.state = 229;
 				this.match(SolidityParser.T__2);
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 228;
+				this.state = 230;
 				this.version();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 229;
+				this.state = 231;
 				this.expression(0);
 				}
 				break;
@@ -673,29 +678,29 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 232;
+			this.state = 234;
 			this.versionConstraint();
-			this.state = 239;
+			this.state = 241;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4080) !== 0) || _la===103 || _la===131) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4080) !== 0) || _la===105 || _la===133) {
 				{
 				{
-				this.state = 234;
+				this.state = 236;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===4) {
 					{
-					this.state = 233;
+					this.state = 235;
 					this.match(SolidityParser.T__3);
 					}
 				}
 
-				this.state = 236;
+				this.state = 238;
 				this.versionConstraint();
 				}
 				}
-				this.state = 241;
+				this.state = 243;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -723,7 +728,7 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 242;
+			this.state = 244;
 			_la = this._input.LA(1);
 			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 4064) !== 0))) {
 			this._errHandler.recoverInline(this);
@@ -754,40 +759,40 @@ export default class SolidityParser extends Parser {
 		this.enterRule(localctx, 12, SolidityParser.RULE_versionConstraint);
 		let _la: number;
 		try {
-			this.state = 252;
+			this.state = 254;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 7, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 245;
+				this.state = 247;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4064) !== 0)) {
 					{
-					this.state = 244;
+					this.state = 246;
 					this.versionOperator();
 					}
 				}
 
-				this.state = 247;
+				this.state = 249;
 				this.match(SolidityParser.VersionLiteral);
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 249;
+				this.state = 251;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4064) !== 0)) {
 					{
-					this.state = 248;
+					this.state = 250;
 					this.versionOperator();
 					}
 				}
 
-				this.state = 251;
+				this.state = 253;
 				this.match(SolidityParser.DecimalNumber);
 				}
 				break;
@@ -815,16 +820,16 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 254;
+			this.state = 256;
 			this.identifier();
-			this.state = 257;
+			this.state = 259;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===12) {
 				{
-				this.state = 255;
+				this.state = 257;
 				this.match(SolidityParser.T__11);
-				this.state = 256;
+				this.state = 258;
 				this.identifier();
 				}
 			}
@@ -851,118 +856,118 @@ export default class SolidityParser extends Parser {
 		this.enterRule(localctx, 16, SolidityParser.RULE_importDirective);
 		let _la: number;
 		try {
-			this.state = 295;
+			this.state = 297;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 13, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 259;
+				this.state = 261;
 				this.match(SolidityParser.T__12);
-				this.state = 260;
+				this.state = 262;
 				this.importPath();
-				this.state = 263;
+				this.state = 265;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===12) {
 					{
-					this.state = 261;
+					this.state = 263;
 					this.match(SolidityParser.T__11);
-					this.state = 262;
+					this.state = 264;
 					this.identifier();
 					}
 				}
 
-				this.state = 265;
+				this.state = 267;
 				this.match(SolidityParser.T__1);
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 267;
+				this.state = 269;
 				this.match(SolidityParser.T__12);
-				this.state = 270;
+				this.state = 272;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
 				case 3:
 					{
-					this.state = 268;
+					this.state = 270;
 					this.match(SolidityParser.T__2);
 					}
 					break;
 				case 14:
-				case 25:
-				case 44:
-				case 50:
-				case 62:
-				case 95:
-				case 114:
-				case 118:
-				case 125:
-				case 126:
+				case 27:
+				case 46:
+				case 52:
+				case 64:
+				case 97:
+				case 116:
+				case 120:
+				case 127:
 				case 128:
-				case 129:
+				case 130:
+				case 131:
 					{
-					this.state = 269;
+					this.state = 271;
 					this.identifier();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				this.state = 274;
+				this.state = 276;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===12) {
 					{
-					this.state = 272;
+					this.state = 274;
 					this.match(SolidityParser.T__11);
-					this.state = 273;
+					this.state = 275;
 					this.identifier();
 					}
 				}
 
-				this.state = 276;
-				this.match(SolidityParser.T__13);
-				this.state = 277;
-				this.importPath();
 				this.state = 278;
+				this.match(SolidityParser.T__13);
+				this.state = 279;
+				this.importPath();
+				this.state = 280;
 				this.match(SolidityParser.T__1);
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 280;
-				this.match(SolidityParser.T__12);
-				this.state = 281;
-				this.match(SolidityParser.T__14);
 				this.state = 282;
+				this.match(SolidityParser.T__12);
+				this.state = 283;
+				this.match(SolidityParser.T__14);
+				this.state = 284;
 				this.importDeclaration();
-				this.state = 287;
+				this.state = 289;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 283;
+					this.state = 285;
 					this.match(SolidityParser.T__15);
-					this.state = 284;
+					this.state = 286;
 					this.importDeclaration();
 					}
 					}
-					this.state = 289;
+					this.state = 291;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 290;
-				this.match(SolidityParser.T__16);
-				this.state = 291;
-				this.match(SolidityParser.T__13);
 				this.state = 292;
-				this.importPath();
+				this.match(SolidityParser.T__16);
 				this.state = 293;
+				this.match(SolidityParser.T__13);
+				this.state = 294;
+				this.importPath();
+				this.state = 295;
 				this.match(SolidityParser.T__1);
 				}
 				break;
@@ -989,7 +994,7 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 297;
+			this.state = 299;
 			this.match(SolidityParser.StringLiteralFragment);
 			}
 		}
@@ -1015,17 +1020,17 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 300;
+			this.state = 302;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===18) {
 				{
-				this.state = 299;
+				this.state = 301;
 				this.match(SolidityParser.T__17);
 				}
 			}
 
-			this.state = 302;
+			this.state = 304;
 			_la = this._input.LA(1);
 			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 3670016) !== 0))) {
 			this._errHandler.recoverInline(this);
@@ -1034,53 +1039,73 @@ export default class SolidityParser extends Parser {
 				this._errHandler.reportMatch(this);
 			    this.consume();
 			}
-			this.state = 303;
+			this.state = 305;
 			this.identifier();
-			this.state = 313;
+			this.state = 307;
+			this._errHandler.sync(this);
+			switch ( this._interp.adaptivePredict(this._input, 15, this._ctx) ) {
+			case 1:
+				{
+				this.state = 306;
+				this.customStorageLayout();
+				}
+				break;
+			}
+			this.state = 318;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===22) {
 				{
-				this.state = 304;
+				this.state = 309;
 				this.match(SolidityParser.T__21);
-				this.state = 305;
-				this.inheritanceSpecifier();
 				this.state = 310;
+				this.inheritanceSpecifier();
+				this.state = 315;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 306;
+					this.state = 311;
 					this.match(SolidityParser.T__15);
-					this.state = 307;
+					this.state = 312;
 					this.inheritanceSpecifier();
 					}
 					}
-					this.state = 312;
+					this.state = 317;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
 				}
 			}
 
-			this.state = 315;
-			this.match(SolidityParser.T__14);
-			this.state = 319;
+			this.state = 321;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 100679680) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 2080392503) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3498573949) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 7) !== 0)) {
+			if (_la===25) {
+				{
+				this.state = 320;
+				this.customStorageLayout();
+				}
+			}
+
+			this.state = 323;
+			this.match(SolidityParser.T__14);
+			this.state = 327;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 402669568) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 2080392503) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3498573949) !== 0) || ((((_la - 129)) & ~0x1F) === 0 && ((1 << (_la - 129)) & 7) !== 0)) {
 				{
 				{
-				this.state = 316;
+				this.state = 324;
 				this.contractPart();
 				}
 				}
-				this.state = 321;
+				this.state = 329;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 322;
+			this.state = 330;
 			this.match(SolidityParser.T__16);
 			}
 		}
@@ -1106,26 +1131,26 @@ export default class SolidityParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 324;
+			this.state = 332;
 			this.userDefinedTypeName();
-			this.state = 330;
+			this.state = 338;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===23) {
 				{
-				this.state = 325;
+				this.state = 333;
 				this.match(SolidityParser.T__22);
-				this.state = 327;
+				this.state = 335;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+				if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 					{
-					this.state = 326;
+					this.state = 334;
 					this.expressionList();
 					}
 				}
 
-				this.state = 329;
+				this.state = 337;
 				this.match(SolidityParser.T__23);
 				}
 			}
@@ -1147,73 +1172,104 @@ export default class SolidityParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
+	public customStorageLayout(): CustomStorageLayoutContext {
+		let localctx: CustomStorageLayoutContext = new CustomStorageLayoutContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 24, SolidityParser.RULE_customStorageLayout);
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			{
+			this.state = 340;
+			this.match(SolidityParser.T__24);
+			this.state = 341;
+			this.match(SolidityParser.T__25);
+			this.state = 342;
+			this.expression(0);
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
 	public contractPart(): ContractPartContext {
 		let localctx: ContractPartContext = new ContractPartContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 24, SolidityParser.RULE_contractPart);
+		this.enterRule(localctx, 26, SolidityParser.RULE_contractPart);
 		try {
-			this.state = 341;
+			this.state = 353;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 20, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 22, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 332;
+				this.state = 344;
 				this.stateVariableDeclaration();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 333;
+				this.state = 345;
 				this.usingForDeclaration();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 334;
+				this.state = 346;
 				this.structDefinition();
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 335;
+				this.state = 347;
 				this.modifierDefinition();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 336;
+				this.state = 348;
 				this.functionDefinition();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 337;
+				this.state = 349;
 				this.eventDefinition();
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 338;
+				this.state = 350;
 				this.enumDefinition();
 				}
 				break;
 			case 8:
 				this.enterOuterAlt(localctx, 8);
 				{
-				this.state = 339;
+				this.state = 351;
 				this.customErrorDefinition();
 				}
 				break;
 			case 9:
 				this.enterOuterAlt(localctx, 9);
 				{
-				this.state = 340;
+				this.state = 352;
 				this.typeDefinition();
 				}
 				break;
@@ -1236,60 +1292,60 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public stateVariableDeclaration(): StateVariableDeclarationContext {
 		let localctx: StateVariableDeclarationContext = new StateVariableDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 26, SolidityParser.RULE_stateVariableDeclaration);
+		this.enterRule(localctx, 28, SolidityParser.RULE_stateVariableDeclaration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 343;
+			this.state = 355;
 			this.typeName(0);
-			this.state = 353;
+			this.state = 365;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 27377665) !== 0)) {
+			while (((((_la - 98)) & ~0x1F) === 0 && ((1 << (_la - 98)) & 27377665) !== 0)) {
 				{
-				this.state = 351;
+				this.state = 363;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
-				case 120:
+				case 122:
 					{
-					this.state = 344;
+					this.state = 356;
 					this.match(SolidityParser.PublicKeyword);
-					}
-					break;
-				case 117:
-					{
-					this.state = 345;
-					this.match(SolidityParser.InternalKeyword);
 					}
 					break;
 				case 119:
 					{
-					this.state = 346;
+					this.state = 357;
+					this.match(SolidityParser.InternalKeyword);
+					}
+					break;
+				case 121:
+					{
+					this.state = 358;
 					this.match(SolidityParser.PrivateKeyword);
-					}
-					break;
-				case 110:
-					{
-					this.state = 347;
-					this.match(SolidityParser.ConstantKeyword);
-					}
-					break;
-				case 111:
-					{
-					this.state = 348;
-					this.match(SolidityParser.TransientKeyword);
 					}
 					break;
 				case 112:
 					{
-					this.state = 349;
+					this.state = 359;
+					this.match(SolidityParser.ConstantKeyword);
+					}
+					break;
+				case 113:
+					{
+					this.state = 360;
+					this.match(SolidityParser.TransientKeyword);
+					}
+					break;
+				case 114:
+					{
+					this.state = 361;
 					this.match(SolidityParser.ImmutableKeyword);
 					}
 					break;
-				case 96:
+				case 98:
 					{
-					this.state = 350;
+					this.state = 362;
 					this.overrideSpecifier();
 					}
 					break;
@@ -1297,25 +1353,25 @@ export default class SolidityParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				this.state = 355;
+				this.state = 367;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 356;
+			this.state = 368;
 			this.identifier();
-			this.state = 359;
+			this.state = 371;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===11) {
 				{
-				this.state = 357;
+				this.state = 369;
 				this.match(SolidityParser.T__10);
-				this.state = 358;
+				this.state = 370;
 				this.expression(0);
 				}
 			}
 
-			this.state = 361;
+			this.state = 373;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -1336,21 +1392,21 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public fileLevelConstant(): FileLevelConstantContext {
 		let localctx: FileLevelConstantContext = new FileLevelConstantContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 28, SolidityParser.RULE_fileLevelConstant);
+		this.enterRule(localctx, 30, SolidityParser.RULE_fileLevelConstant);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 363;
+			this.state = 375;
 			this.typeName(0);
-			this.state = 364;
+			this.state = 376;
 			this.match(SolidityParser.ConstantKeyword);
-			this.state = 365;
+			this.state = 377;
 			this.identifier();
-			this.state = 366;
+			this.state = 378;
 			this.match(SolidityParser.T__10);
-			this.state = 367;
+			this.state = 379;
 			this.expression(0);
-			this.state = 368;
+			this.state = 380;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -1371,17 +1427,17 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public customErrorDefinition(): CustomErrorDefinitionContext {
 		let localctx: CustomErrorDefinitionContext = new CustomErrorDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 30, SolidityParser.RULE_customErrorDefinition);
+		this.enterRule(localctx, 32, SolidityParser.RULE_customErrorDefinition);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 370;
-			this.match(SolidityParser.T__24);
-			this.state = 371;
+			this.state = 382;
+			this.match(SolidityParser.T__26);
+			this.state = 383;
 			this.identifier();
-			this.state = 372;
+			this.state = 384;
 			this.parameterList();
-			this.state = 373;
+			this.state = 385;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -1402,19 +1458,19 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public typeDefinition(): TypeDefinitionContext {
 		let localctx: TypeDefinitionContext = new TypeDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 32, SolidityParser.RULE_typeDefinition);
+		this.enterRule(localctx, 34, SolidityParser.RULE_typeDefinition);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 375;
+			this.state = 387;
 			this.match(SolidityParser.TypeKeyword);
-			this.state = 376;
+			this.state = 388;
 			this.identifier();
-			this.state = 377;
+			this.state = 389;
 			this.match(SolidityParser.T__21);
-			this.state = 378;
+			this.state = 390;
 			this.elementaryTypeName();
-			this.state = 379;
+			this.state = 391;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -1435,68 +1491,68 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public usingForDeclaration(): UsingForDeclarationContext {
 		let localctx: UsingForDeclarationContext = new UsingForDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 34, SolidityParser.RULE_usingForDeclaration);
+		this.enterRule(localctx, 36, SolidityParser.RULE_usingForDeclaration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 381;
-			this.match(SolidityParser.T__25);
-			this.state = 382;
+			this.state = 393;
+			this.match(SolidityParser.T__27);
+			this.state = 394;
 			this.usingForObject();
-			this.state = 383;
-			this.match(SolidityParser.T__26);
-			this.state = 386;
+			this.state = 395;
+			this.match(SolidityParser.T__28);
+			this.state = 398;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 3:
 				{
-				this.state = 384;
+				this.state = 396;
 				this.match(SolidityParser.T__2);
 				}
 				break;
 			case 14:
-			case 25:
-			case 38:
-			case 44:
+			case 27:
+			case 40:
 			case 46:
-			case 50:
-			case 62:
-			case 63:
+			case 48:
+			case 52:
 			case 64:
 			case 65:
 			case 66:
-			case 95:
+			case 67:
+			case 68:
 			case 97:
-			case 98:
 			case 99:
 			case 100:
 			case 101:
-			case 114:
-			case 118:
-			case 125:
-			case 126:
+			case 102:
+			case 103:
+			case 116:
+			case 120:
+			case 127:
 			case 128:
-			case 129:
+			case 130:
+			case 131:
 				{
-				this.state = 385;
+				this.state = 397;
 				this.typeName(0);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 389;
+			this.state = 401;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===125) {
+			if (_la===127) {
 				{
-				this.state = 388;
+				this.state = 400;
 				this.match(SolidityParser.GlobalKeyword);
 				}
 			}
 
-			this.state = 391;
+			this.state = 403;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -1517,54 +1573,54 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public usingForObject(): UsingForObjectContext {
 		let localctx: UsingForObjectContext = new UsingForObjectContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 36, SolidityParser.RULE_usingForObject);
+		this.enterRule(localctx, 38, SolidityParser.RULE_usingForObject);
 		let _la: number;
 		try {
-			this.state = 405;
+			this.state = 417;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 14:
-			case 25:
-			case 44:
-			case 50:
-			case 62:
-			case 95:
-			case 114:
-			case 118:
-			case 125:
-			case 126:
+			case 27:
+			case 46:
+			case 52:
+			case 64:
+			case 97:
+			case 116:
+			case 120:
+			case 127:
 			case 128:
-			case 129:
+			case 130:
+			case 131:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 393;
+				this.state = 405;
 				this.userDefinedTypeName();
 				}
 				break;
 			case 15:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 394;
+				this.state = 406;
 				this.match(SolidityParser.T__14);
-				this.state = 395;
+				this.state = 407;
 				this.usingForObjectDirective();
-				this.state = 400;
+				this.state = 412;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 396;
+					this.state = 408;
 					this.match(SolidityParser.T__15);
-					this.state = 397;
+					this.state = 409;
 					this.usingForObjectDirective();
 					}
 					}
-					this.state = 402;
+					this.state = 414;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 403;
+				this.state = 415;
 				this.match(SolidityParser.T__16);
 				}
 				break;
@@ -1589,21 +1645,21 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public usingForObjectDirective(): UsingForObjectDirectiveContext {
 		let localctx: UsingForObjectDirectiveContext = new UsingForObjectDirectiveContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 38, SolidityParser.RULE_usingForObjectDirective);
+		this.enterRule(localctx, 40, SolidityParser.RULE_usingForObjectDirective);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 407;
+			this.state = 419;
 			this.userDefinedTypeName();
-			this.state = 410;
+			this.state = 422;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===12) {
 				{
-				this.state = 408;
+				this.state = 420;
 				this.match(SolidityParser.T__11);
-				this.state = 409;
+				this.state = 421;
 				this.userDefinableOperators();
 				}
 			}
@@ -1627,14 +1683,14 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public userDefinableOperators(): UserDefinableOperatorsContext {
 		let localctx: UserDefinableOperatorsContext = new UserDefinableOperatorsContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 40, SolidityParser.RULE_userDefinableOperators);
+		this.enterRule(localctx, 42, SolidityParser.RULE_userDefinableOperators);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 412;
+			this.state = 424;
 			_la = this._input.LA(1);
-			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 4026533864) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 15) !== 0))) {
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 3221227496) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 63) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -1660,46 +1716,46 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public structDefinition(): StructDefinitionContext {
 		let localctx: StructDefinitionContext = new StructDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 42, SolidityParser.RULE_structDefinition);
+		this.enterRule(localctx, 44, SolidityParser.RULE_structDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 414;
-			this.match(SolidityParser.T__35);
-			this.state = 415;
-			this.identifier();
-			this.state = 416;
-			this.match(SolidityParser.T__14);
+			this.state = 426;
+			this.match(SolidityParser.T__37);
 			this.state = 427;
+			this.identifier();
+			this.state = 428;
+			this.match(SolidityParser.T__14);
+			this.state = 439;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 520098113) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138493) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 520098113) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138493) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 417;
+				this.state = 429;
 				this.variableDeclaration();
-				this.state = 418;
+				this.state = 430;
 				this.match(SolidityParser.T__1);
-				this.state = 424;
+				this.state = 436;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===14 || _la===25 || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 520098113) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138493) !== 0) || _la===128 || _la===129) {
+				while (_la===14 || _la===27 || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 520098113) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138493) !== 0) || _la===130 || _la===131) {
 					{
 					{
-					this.state = 419;
+					this.state = 431;
 					this.variableDeclaration();
-					this.state = 420;
+					this.state = 432;
 					this.match(SolidityParser.T__1);
 					}
 					}
-					this.state = 426;
+					this.state = 438;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
 				}
 			}
 
-			this.state = 429;
+			this.state = 441;
 			this.match(SolidityParser.T__16);
 			}
 		}
@@ -1720,42 +1776,42 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public modifierDefinition(): ModifierDefinitionContext {
 		let localctx: ModifierDefinitionContext = new ModifierDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 44, SolidityParser.RULE_modifierDefinition);
+		this.enterRule(localctx, 46, SolidityParser.RULE_modifierDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 431;
-			this.match(SolidityParser.T__36);
-			this.state = 432;
+			this.state = 443;
+			this.match(SolidityParser.T__38);
+			this.state = 444;
 			this.identifier();
-			this.state = 434;
+			this.state = 446;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===23) {
 				{
-				this.state = 433;
+				this.state = 445;
 				this.parameterList();
 				}
 			}
 
-			this.state = 440;
+			this.state = 452;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===96 || _la===121) {
+			while (_la===98 || _la===123) {
 				{
-				this.state = 438;
+				this.state = 450;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
-				case 121:
+				case 123:
 					{
-					this.state = 436;
+					this.state = 448;
 					this.match(SolidityParser.VirtualKeyword);
 					}
 					break;
-				case 96:
+				case 98:
 					{
-					this.state = 437;
+					this.state = 449;
 					this.overrideSpecifier();
 					}
 					break;
@@ -1763,22 +1819,22 @@ export default class SolidityParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				this.state = 442;
+				this.state = 454;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 445;
+			this.state = 457;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 2:
 				{
-				this.state = 443;
+				this.state = 455;
 				this.match(SolidityParser.T__1);
 				}
 				break;
 			case 15:
 				{
-				this.state = 444;
+				this.state = 456;
 				this.block();
 				}
 				break;
@@ -1804,31 +1860,31 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public modifierInvocation(): ModifierInvocationContext {
 		let localctx: ModifierInvocationContext = new ModifierInvocationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 46, SolidityParser.RULE_modifierInvocation);
+		this.enterRule(localctx, 48, SolidityParser.RULE_modifierInvocation);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 447;
+			this.state = 459;
 			this.identifier();
-			this.state = 453;
+			this.state = 465;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===23) {
 				{
-				this.state = 448;
+				this.state = 460;
 				this.match(SolidityParser.T__22);
-				this.state = 450;
+				this.state = 462;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+				if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 					{
-					this.state = 449;
+					this.state = 461;
 					this.expressionList();
 					}
 				}
 
-				this.state = 452;
+				this.state = 464;
 				this.match(SolidityParser.T__23);
 				}
 			}
@@ -1852,39 +1908,39 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public functionDefinition(): FunctionDefinitionContext {
 		let localctx: FunctionDefinitionContext = new FunctionDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 48, SolidityParser.RULE_functionDefinition);
+		this.enterRule(localctx, 50, SolidityParser.RULE_functionDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 455;
+			this.state = 467;
 			this.functionDescriptor();
-			this.state = 456;
+			this.state = 468;
 			this.parameterList();
-			this.state = 457;
+			this.state = 469;
 			this.modifierList();
-			this.state = 459;
+			this.state = 471;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===39) {
+			if (_la===41) {
 				{
-				this.state = 458;
+				this.state = 470;
 				this.returnParameters();
 				}
 			}
 
-			this.state = 463;
+			this.state = 475;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 2:
 				{
-				this.state = 461;
+				this.state = 473;
 				this.match(SolidityParser.T__1);
 				}
 				break;
 			case 15:
 				{
-				this.state = 462;
+				this.state = 474;
 				this.block();
 				}
 				break;
@@ -1910,47 +1966,47 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public functionDescriptor(): FunctionDescriptorContext {
 		let localctx: FunctionDescriptorContext = new FunctionDescriptorContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 50, SolidityParser.RULE_functionDescriptor);
+		this.enterRule(localctx, 52, SolidityParser.RULE_functionDescriptor);
 		let _la: number;
 		try {
-			this.state = 472;
+			this.state = 484;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 38:
+			case 40:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 465;
-				this.match(SolidityParser.T__37);
-				this.state = 467;
+				this.state = 477;
+				this.match(SolidityParser.T__39);
+				this.state = 479;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+				if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 					{
-					this.state = 466;
+					this.state = 478;
 					this.identifier();
 					}
 				}
 
 				}
 				break;
-			case 126:
+			case 128:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 469;
+				this.state = 481;
 				this.match(SolidityParser.ConstructorKeyword);
 				}
 				break;
-			case 127:
+			case 129:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 470;
+				this.state = 482;
 				this.match(SolidityParser.FallbackKeyword);
 				}
 				break;
-			case 128:
+			case 130:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 471;
+				this.state = 483;
 				this.match(SolidityParser.ReceiveKeyword);
 				}
 				break;
@@ -1975,13 +2031,13 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public returnParameters(): ReturnParametersContext {
 		let localctx: ReturnParametersContext = new ReturnParametersContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 52, SolidityParser.RULE_returnParameters);
+		this.enterRule(localctx, 54, SolidityParser.RULE_returnParameters);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 474;
-			this.match(SolidityParser.T__38);
-			this.state = 475;
+			this.state = 486;
+			this.match(SolidityParser.T__40);
+			this.state = 487;
 			this.parameterList();
 			}
 		}
@@ -2002,70 +2058,70 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public modifierList(): ModifierListContext {
 		let localctx: ModifierListContext = new ModifierListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 54, SolidityParser.RULE_modifierList);
+		this.enterRule(localctx, 56, SolidityParser.RULE_modifierList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 487;
+			this.state = 499;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 4023943171) !== 0) || _la===128 || _la===129) {
+			while (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 4023943171) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 485;
+				this.state = 497;
 				this._errHandler.sync(this);
-				switch ( this._interp.adaptivePredict(this._input, 41, this._ctx) ) {
+				switch ( this._interp.adaptivePredict(this._input, 43, this._ctx) ) {
 				case 1:
 					{
-					this.state = 477;
+					this.state = 489;
 					this.match(SolidityParser.ExternalKeyword);
 					}
 					break;
 				case 2:
 					{
-					this.state = 478;
+					this.state = 490;
 					this.match(SolidityParser.PublicKeyword);
 					}
 					break;
 				case 3:
 					{
-					this.state = 479;
+					this.state = 491;
 					this.match(SolidityParser.InternalKeyword);
 					}
 					break;
 				case 4:
 					{
-					this.state = 480;
+					this.state = 492;
 					this.match(SolidityParser.PrivateKeyword);
 					}
 					break;
 				case 5:
 					{
-					this.state = 481;
+					this.state = 493;
 					this.match(SolidityParser.VirtualKeyword);
 					}
 					break;
 				case 6:
 					{
-					this.state = 482;
+					this.state = 494;
 					this.stateMutability();
 					}
 					break;
 				case 7:
 					{
-					this.state = 483;
+					this.state = 495;
 					this.modifierInvocation();
 					}
 					break;
 				case 8:
 					{
-					this.state = 484;
+					this.state = 496;
 					this.overrideSpecifier();
 					}
 					break;
 				}
 				}
-				this.state = 489;
+				this.state = 501;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -2088,28 +2144,28 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public eventDefinition(): EventDefinitionContext {
 		let localctx: EventDefinitionContext = new EventDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 56, SolidityParser.RULE_eventDefinition);
+		this.enterRule(localctx, 58, SolidityParser.RULE_eventDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 490;
-			this.match(SolidityParser.T__39);
-			this.state = 491;
+			this.state = 502;
+			this.match(SolidityParser.T__41);
+			this.state = 503;
 			this.identifier();
-			this.state = 492;
+			this.state = 504;
 			this.eventParameterList();
-			this.state = 494;
+			this.state = 506;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===108) {
+			if (_la===110) {
 				{
-				this.state = 493;
+				this.state = 505;
 				this.match(SolidityParser.AnonymousKeyword);
 				}
 			}
 
-			this.state = 496;
+			this.state = 508;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -2130,11 +2186,11 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public enumValue(): EnumValueContext {
 		let localctx: EnumValueContext = new EnumValueContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 58, SolidityParser.RULE_enumValue);
+		this.enterRule(localctx, 60, SolidityParser.RULE_enumValue);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 498;
+			this.state = 510;
 			this.identifier();
 			}
 		}
@@ -2155,44 +2211,44 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public enumDefinition(): EnumDefinitionContext {
 		let localctx: EnumDefinitionContext = new EnumDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 60, SolidityParser.RULE_enumDefinition);
+		this.enterRule(localctx, 62, SolidityParser.RULE_enumDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 500;
-			this.match(SolidityParser.T__40);
-			this.state = 501;
+			this.state = 512;
+			this.match(SolidityParser.T__42);
+			this.state = 513;
 			this.identifier();
-			this.state = 502;
+			this.state = 514;
 			this.match(SolidityParser.T__14);
-			this.state = 504;
+			this.state = 516;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 503;
+				this.state = 515;
 				this.enumValue();
 				}
 			}
 
-			this.state = 510;
+			this.state = 522;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===16) {
 				{
 				{
-				this.state = 506;
+				this.state = 518;
 				this.match(SolidityParser.T__15);
-				this.state = 507;
+				this.state = 519;
 				this.enumValue();
 				}
 				}
-				this.state = 512;
+				this.state = 524;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 513;
+			this.state = 525;
 			this.match(SolidityParser.T__16);
 			}
 		}
@@ -2213,40 +2269,40 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public parameterList(): ParameterListContext {
 		let localctx: ParameterListContext = new ParameterListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 62, SolidityParser.RULE_parameterList);
+		this.enterRule(localctx, 64, SolidityParser.RULE_parameterList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 515;
+			this.state = 527;
 			this.match(SolidityParser.T__22);
-			this.state = 524;
+			this.state = 536;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 520098113) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138493) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 520098113) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138493) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 516;
+				this.state = 528;
 				this.parameter();
-				this.state = 521;
+				this.state = 533;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 517;
+					this.state = 529;
 					this.match(SolidityParser.T__15);
-					this.state = 518;
+					this.state = 530;
 					this.parameter();
 					}
 					}
-					this.state = 523;
+					this.state = 535;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
 				}
 			}
 
-			this.state = 526;
+			this.state = 538;
 			this.match(SolidityParser.T__23);
 			}
 		}
@@ -2267,29 +2323,29 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public parameter(): ParameterContext {
 		let localctx: ParameterContext = new ParameterContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 64, SolidityParser.RULE_parameter);
+		this.enterRule(localctx, 66, SolidityParser.RULE_parameter);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 528;
+			this.state = 540;
 			this.typeName(0);
-			this.state = 530;
+			this.state = 542;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 48, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 50, this._ctx) ) {
 			case 1:
 				{
-				this.state = 529;
+				this.state = 541;
 				this.storageLocation();
 				}
 				break;
 			}
-			this.state = 533;
+			this.state = 545;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 532;
+				this.state = 544;
 				this.identifier();
 				}
 			}
@@ -2313,40 +2369,40 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public eventParameterList(): EventParameterListContext {
 		let localctx: EventParameterListContext = new EventParameterListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 66, SolidityParser.RULE_eventParameterList);
+		this.enterRule(localctx, 68, SolidityParser.RULE_eventParameterList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 535;
+			this.state = 547;
 			this.match(SolidityParser.T__22);
-			this.state = 544;
+			this.state = 556;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 520098113) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138493) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 520098113) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138493) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 536;
+				this.state = 548;
 				this.eventParameter();
-				this.state = 541;
+				this.state = 553;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 537;
+					this.state = 549;
 					this.match(SolidityParser.T__15);
-					this.state = 538;
+					this.state = 550;
 					this.eventParameter();
 					}
 					}
-					this.state = 543;
+					this.state = 555;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
 				}
 			}
 
-			this.state = 546;
+			this.state = 558;
 			this.match(SolidityParser.T__23);
 			}
 		}
@@ -2367,29 +2423,29 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public eventParameter(): EventParameterContext {
 		let localctx: EventParameterContext = new EventParameterContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 68, SolidityParser.RULE_eventParameter);
+		this.enterRule(localctx, 70, SolidityParser.RULE_eventParameter);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 548;
+			this.state = 560;
 			this.typeName(0);
-			this.state = 550;
+			this.state = 562;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===116) {
+			if (_la===118) {
 				{
-				this.state = 549;
+				this.state = 561;
 				this.match(SolidityParser.IndexedKeyword);
 				}
 			}
 
-			this.state = 553;
+			this.state = 565;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 552;
+				this.state = 564;
 				this.identifier();
 				}
 			}
@@ -2413,40 +2469,40 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public functionTypeParameterList(): FunctionTypeParameterListContext {
 		let localctx: FunctionTypeParameterListContext = new FunctionTypeParameterListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 70, SolidityParser.RULE_functionTypeParameterList);
+		this.enterRule(localctx, 72, SolidityParser.RULE_functionTypeParameterList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 555;
+			this.state = 567;
 			this.match(SolidityParser.T__22);
-			this.state = 564;
+			this.state = 576;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 520098113) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138493) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 520098113) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138493) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 556;
+				this.state = 568;
 				this.functionTypeParameter();
-				this.state = 561;
+				this.state = 573;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 557;
+					this.state = 569;
 					this.match(SolidityParser.T__15);
-					this.state = 558;
+					this.state = 570;
 					this.functionTypeParameter();
 					}
 					}
-					this.state = 563;
+					this.state = 575;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
 				}
 			}
 
-			this.state = 566;
+			this.state = 578;
 			this.match(SolidityParser.T__23);
 			}
 		}
@@ -2467,19 +2523,19 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public functionTypeParameter(): FunctionTypeParameterContext {
 		let localctx: FunctionTypeParameterContext = new FunctionTypeParameterContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 72, SolidityParser.RULE_functionTypeParameter);
+		this.enterRule(localctx, 74, SolidityParser.RULE_functionTypeParameter);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 568;
+			this.state = 580;
 			this.typeName(0);
-			this.state = 570;
+			this.state = 582;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 48)) & ~0x1F) === 0 && ((1 << (_la - 48)) & 7) !== 0)) {
+			if (((((_la - 50)) & ~0x1F) === 0 && ((1 << (_la - 50)) & 7) !== 0)) {
 				{
-				this.state = 569;
+				this.state = 581;
 				this.storageLocation();
 				}
 			}
@@ -2503,23 +2559,23 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclaration(): VariableDeclarationContext {
 		let localctx: VariableDeclarationContext = new VariableDeclarationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 74, SolidityParser.RULE_variableDeclaration);
+		this.enterRule(localctx, 76, SolidityParser.RULE_variableDeclaration);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 572;
+			this.state = 584;
 			this.typeName(0);
-			this.state = 574;
+			this.state = 586;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 57, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 59, this._ctx) ) {
 			case 1:
 				{
-				this.state = 573;
+				this.state = 585;
 				this.storageLocation();
 				}
 				break;
 			}
-			this.state = 576;
+			this.state = 588;
 			this.identifier();
 			}
 		}
@@ -2550,53 +2606,53 @@ export default class SolidityParser extends Parser {
 		let _parentState: number = this.state;
 		let localctx: TypeNameContext = new TypeNameContext(this, this._ctx, _parentState);
 		let _prevctx: TypeNameContext = localctx;
-		let _startState: number = 76;
-		this.enterRecursionRule(localctx, 76, SolidityParser.RULE_typeName, _p);
+		let _startState: number = 78;
+		this.enterRecursionRule(localctx, 78, SolidityParser.RULE_typeName, _p);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 585;
+			this.state = 597;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 58, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 60, this._ctx) ) {
 			case 1:
 				{
-				this.state = 579;
+				this.state = 591;
 				this.elementaryTypeName();
 				}
 				break;
 			case 2:
 				{
-				this.state = 580;
+				this.state = 592;
 				this.userDefinedTypeName();
 				}
 				break;
 			case 3:
 				{
-				this.state = 581;
+				this.state = 593;
 				this.mapping();
 				}
 				break;
 			case 4:
 				{
-				this.state = 582;
+				this.state = 594;
 				this.functionTypeName();
 				}
 				break;
 			case 5:
 				{
-				this.state = 583;
-				this.match(SolidityParser.T__43);
-				this.state = 584;
+				this.state = 595;
+				this.match(SolidityParser.T__45);
+				this.state = 596;
 				this.match(SolidityParser.PayableKeyword);
 				}
 				break;
 			}
 			this._ctx.stop = this._input.LT(-1);
-			this.state = 595;
+			this.state = 607;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 60, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 62, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					if (this._parseListeners != null) {
@@ -2607,30 +2663,30 @@ export default class SolidityParser extends Parser {
 					{
 					localctx = new TypeNameContext(this, _parentctx, _parentState);
 					this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_typeName);
-					this.state = 587;
+					this.state = 599;
 					if (!(this.precpred(this._ctx, 3))) {
 						throw this.createFailedPredicateException("this.precpred(this._ctx, 3)");
 					}
-					this.state = 588;
-					this.match(SolidityParser.T__41);
-					this.state = 590;
+					this.state = 600;
+					this.match(SolidityParser.T__43);
+					this.state = 602;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+					if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 						{
-						this.state = 589;
+						this.state = 601;
 						this.expression(0);
 						}
 					}
 
-					this.state = 592;
-					this.match(SolidityParser.T__42);
+					this.state = 604;
+					this.match(SolidityParser.T__44);
 					}
 					}
 				}
-				this.state = 597;
+				this.state = 609;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 60, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 62, this._ctx);
 			}
 			}
 		}
@@ -2651,30 +2707,30 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public userDefinedTypeName(): UserDefinedTypeNameContext {
 		let localctx: UserDefinedTypeNameContext = new UserDefinedTypeNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 78, SolidityParser.RULE_userDefinedTypeName);
+		this.enterRule(localctx, 80, SolidityParser.RULE_userDefinedTypeName);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 598;
+			this.state = 610;
 			this.identifier();
-			this.state = 603;
+			this.state = 615;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 61, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 63, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 599;
-					this.match(SolidityParser.T__44);
-					this.state = 600;
+					this.state = 611;
+					this.match(SolidityParser.T__46);
+					this.state = 612;
 					this.identifier();
 					}
 					}
 				}
-				this.state = 605;
+				this.state = 617;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 61, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 63, this._ctx);
 			}
 			}
 		}
@@ -2695,22 +2751,22 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public mappingKey(): MappingKeyContext {
 		let localctx: MappingKeyContext = new MappingKeyContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 80, SolidityParser.RULE_mappingKey);
+		this.enterRule(localctx, 82, SolidityParser.RULE_mappingKey);
 		try {
-			this.state = 608;
+			this.state = 620;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 62, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 64, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 606;
+				this.state = 618;
 				this.elementaryTypeName();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 607;
+				this.state = 619;
 				this.userDefinedTypeName();
 				}
 				break;
@@ -2733,42 +2789,42 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public mapping(): MappingContext {
 		let localctx: MappingContext = new MappingContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 82, SolidityParser.RULE_mapping);
+		this.enterRule(localctx, 84, SolidityParser.RULE_mapping);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 610;
-			this.match(SolidityParser.T__45);
-			this.state = 611;
+			this.state = 622;
+			this.match(SolidityParser.T__47);
+			this.state = 623;
 			this.match(SolidityParser.T__22);
-			this.state = 612;
+			this.state = 624;
 			this.mappingKey();
-			this.state = 614;
+			this.state = 626;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 613;
+				this.state = 625;
 				this.mappingKeyName();
 				}
 			}
 
-			this.state = 616;
-			this.match(SolidityParser.T__46);
-			this.state = 617;
+			this.state = 628;
+			this.match(SolidityParser.T__48);
+			this.state = 629;
 			this.typeName(0);
-			this.state = 619;
+			this.state = 631;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 618;
+				this.state = 630;
 				this.mappingValueName();
 				}
 			}
 
-			this.state = 621;
+			this.state = 633;
 			this.match(SolidityParser.T__23);
 			}
 		}
@@ -2789,11 +2845,11 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public mappingKeyName(): MappingKeyNameContext {
 		let localctx: MappingKeyNameContext = new MappingKeyNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 84, SolidityParser.RULE_mappingKeyName);
+		this.enterRule(localctx, 86, SolidityParser.RULE_mappingKeyName);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 623;
+			this.state = 635;
 			this.identifier();
 			}
 		}
@@ -2814,11 +2870,11 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public mappingValueName(): MappingValueNameContext {
 		let localctx: MappingValueNameContext = new MappingValueNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 86, SolidityParser.RULE_mappingValueName);
+		this.enterRule(localctx, 88, SolidityParser.RULE_mappingValueName);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 625;
+			this.state = 637;
 			this.identifier();
 			}
 		}
@@ -2839,42 +2895,42 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public functionTypeName(): FunctionTypeNameContext {
 		let localctx: FunctionTypeNameContext = new FunctionTypeNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 88, SolidityParser.RULE_functionTypeName);
+		this.enterRule(localctx, 90, SolidityParser.RULE_functionTypeName);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 627;
-			this.match(SolidityParser.T__37);
-			this.state = 628;
+			this.state = 639;
+			this.match(SolidityParser.T__39);
+			this.state = 640;
 			this.functionTypeParameterList();
-			this.state = 634;
+			this.state = 646;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 66, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 68, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
-					this.state = 632;
+					this.state = 644;
 					this._errHandler.sync(this);
 					switch (this._input.LA(1)) {
-					case 117:
+					case 119:
 						{
-						this.state = 629;
+						this.state = 641;
 						this.match(SolidityParser.InternalKeyword);
 						}
 						break;
-					case 115:
+					case 117:
 						{
-						this.state = 630;
+						this.state = 642;
 						this.match(SolidityParser.ExternalKeyword);
 						}
 						break;
-					case 110:
-					case 118:
-					case 122:
+					case 112:
+					case 120:
 					case 124:
+					case 126:
 						{
-						this.state = 631;
+						this.state = 643;
 						this.stateMutability();
 						}
 						break;
@@ -2883,18 +2939,18 @@ export default class SolidityParser extends Parser {
 					}
 					}
 				}
-				this.state = 636;
+				this.state = 648;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 66, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 68, this._ctx);
 			}
-			this.state = 639;
+			this.state = 651;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 67, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 69, this._ctx) ) {
 			case 1:
 				{
-				this.state = 637;
-				this.match(SolidityParser.T__38);
-				this.state = 638;
+				this.state = 649;
+				this.match(SolidityParser.T__40);
+				this.state = 650;
 				this.functionTypeParameterList();
 				}
 				break;
@@ -2918,14 +2974,14 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public storageLocation(): StorageLocationContext {
 		let localctx: StorageLocationContext = new StorageLocationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 90, SolidityParser.RULE_storageLocation);
+		this.enterRule(localctx, 92, SolidityParser.RULE_storageLocation);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 641;
+			this.state = 653;
 			_la = this._input.LA(1);
-			if(!(((((_la - 48)) & ~0x1F) === 0 && ((1 << (_la - 48)) & 7) !== 0))) {
+			if(!(((((_la - 50)) & ~0x1F) === 0 && ((1 << (_la - 50)) & 7) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -2951,14 +3007,14 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public stateMutability(): StateMutabilityContext {
 		let localctx: StateMutabilityContext = new StateMutabilityContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 92, SolidityParser.RULE_stateMutability);
+		this.enterRule(localctx, 94, SolidityParser.RULE_stateMutability);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 643;
+			this.state = 655;
 			_la = this._input.LA(1);
-			if(!(((((_la - 110)) & ~0x1F) === 0 && ((1 << (_la - 110)) & 20737) !== 0))) {
+			if(!(((((_la - 112)) & ~0x1F) === 0 && ((1 << (_la - 112)) & 20737) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -2984,28 +3040,28 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public block(): BlockContext {
 		let localctx: BlockContext = new BlockContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 94, SolidityParser.RULE_block);
+		this.enterRule(localctx, 96, SolidityParser.RULE_block);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 645;
+			this.state = 657;
 			this.match(SolidityParser.T__14);
-			this.state = 649;
+			this.state = 661;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3397435456) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4294881617) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248548427) !== 0)) {
+			while (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 211944193) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4294881617) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248548427) !== 0)) {
 				{
 				{
-				this.state = 646;
+				this.state = 658;
 				this.statement();
 				}
 				}
-				this.state = 651;
+				this.state = 663;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 652;
+			this.state = 664;
 			this.match(SolidityParser.T__16);
 			}
 		}
@@ -3026,113 +3082,113 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public statement(): StatementContext {
 		let localctx: StatementContext = new StatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 96, SolidityParser.RULE_statement);
+		this.enterRule(localctx, 98, SolidityParser.RULE_statement);
 		try {
-			this.state = 669;
+			this.state = 681;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 69, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 71, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 654;
+				this.state = 666;
 				this.ifStatement();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 655;
+				this.state = 667;
 				this.tryStatement();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 656;
+				this.state = 668;
 				this.whileStatement();
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 657;
+				this.state = 669;
 				this.forStatement();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 658;
+				this.state = 670;
 				this.block();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 659;
+				this.state = 671;
 				this.inlineAssemblyStatement();
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 660;
+				this.state = 672;
 				this.doWhileStatement();
 				}
 				break;
 			case 8:
 				this.enterOuterAlt(localctx, 8);
 				{
-				this.state = 661;
+				this.state = 673;
 				this.continueStatement();
 				}
 				break;
 			case 9:
 				this.enterOuterAlt(localctx, 9);
 				{
-				this.state = 662;
+				this.state = 674;
 				this.breakStatement();
 				}
 				break;
 			case 10:
 				this.enterOuterAlt(localctx, 10);
 				{
-				this.state = 663;
+				this.state = 675;
 				this.returnStatement();
 				}
 				break;
 			case 11:
 				this.enterOuterAlt(localctx, 11);
 				{
-				this.state = 664;
+				this.state = 676;
 				this.throwStatement();
 				}
 				break;
 			case 12:
 				this.enterOuterAlt(localctx, 12);
 				{
-				this.state = 665;
+				this.state = 677;
 				this.emitStatement();
 				}
 				break;
 			case 13:
 				this.enterOuterAlt(localctx, 13);
 				{
-				this.state = 666;
+				this.state = 678;
 				this.simpleStatement();
 				}
 				break;
 			case 14:
 				this.enterOuterAlt(localctx, 14);
 				{
-				this.state = 667;
+				this.state = 679;
 				this.uncheckedStatement();
 				}
 				break;
 			case 15:
 				this.enterOuterAlt(localctx, 15);
 				{
-				this.state = 668;
+				this.state = 680;
 				this.revertStatement();
 				}
 				break;
@@ -3155,13 +3211,13 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public expressionStatement(): ExpressionStatementContext {
 		let localctx: ExpressionStatementContext = new ExpressionStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 98, SolidityParser.RULE_expressionStatement);
+		this.enterRule(localctx, 100, SolidityParser.RULE_expressionStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 671;
+			this.state = 683;
 			this.expression(0);
-			this.state = 672;
+			this.state = 684;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3182,28 +3238,28 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public ifStatement(): IfStatementContext {
 		let localctx: IfStatementContext = new IfStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 100, SolidityParser.RULE_ifStatement);
+		this.enterRule(localctx, 102, SolidityParser.RULE_ifStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 674;
-			this.match(SolidityParser.T__50);
-			this.state = 675;
+			this.state = 686;
+			this.match(SolidityParser.T__52);
+			this.state = 687;
 			this.match(SolidityParser.T__22);
-			this.state = 676;
+			this.state = 688;
 			this.expression(0);
-			this.state = 677;
+			this.state = 689;
 			this.match(SolidityParser.T__23);
-			this.state = 678;
+			this.state = 690;
 			this.statement();
-			this.state = 681;
+			this.state = 693;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 70, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 72, this._ctx) ) {
 			case 1:
 				{
-				this.state = 679;
-				this.match(SolidityParser.T__51);
-				this.state = 680;
+				this.state = 691;
+				this.match(SolidityParser.T__53);
+				this.state = 692;
 				this.statement();
 				}
 				break;
@@ -3227,41 +3283,41 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public tryStatement(): TryStatementContext {
 		let localctx: TryStatementContext = new TryStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 102, SolidityParser.RULE_tryStatement);
+		this.enterRule(localctx, 104, SolidityParser.RULE_tryStatement);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 683;
-			this.match(SolidityParser.T__52);
-			this.state = 684;
+			this.state = 695;
+			this.match(SolidityParser.T__54);
+			this.state = 696;
 			this.expression(0);
-			this.state = 686;
+			this.state = 698;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===39) {
+			if (_la===41) {
 				{
-				this.state = 685;
+				this.state = 697;
 				this.returnParameters();
 				}
 			}
 
-			this.state = 688;
+			this.state = 700;
 			this.block();
-			this.state = 690;
+			this.state = 702;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 689;
+				this.state = 701;
 				this.catchClause();
 				}
 				}
-				this.state = 692;
+				this.state = 704;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while (_la===54);
+			} while (_la===56);
 			}
 		}
 		catch (re) {
@@ -3281,34 +3337,34 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public catchClause(): CatchClauseContext {
 		let localctx: CatchClauseContext = new CatchClauseContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 104, SolidityParser.RULE_catchClause);
+		this.enterRule(localctx, 106, SolidityParser.RULE_catchClause);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 694;
-			this.match(SolidityParser.T__53);
-			this.state = 699;
+			this.state = 706;
+			this.match(SolidityParser.T__55);
+			this.state = 711;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 41959424) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 142622720) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 696;
+				this.state = 708;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+				if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 					{
-					this.state = 695;
+					this.state = 707;
 					this.identifier();
 					}
 				}
 
-				this.state = 698;
+				this.state = 710;
 				this.parameterList();
 				}
 			}
 
-			this.state = 701;
+			this.state = 713;
 			this.block();
 			}
 		}
@@ -3329,19 +3385,19 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public whileStatement(): WhileStatementContext {
 		let localctx: WhileStatementContext = new WhileStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 106, SolidityParser.RULE_whileStatement);
+		this.enterRule(localctx, 108, SolidityParser.RULE_whileStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 703;
-			this.match(SolidityParser.T__54);
-			this.state = 704;
+			this.state = 715;
+			this.match(SolidityParser.T__56);
+			this.state = 716;
 			this.match(SolidityParser.T__22);
-			this.state = 705;
+			this.state = 717;
 			this.expression(0);
-			this.state = 706;
+			this.state = 718;
 			this.match(SolidityParser.T__23);
-			this.state = 707;
+			this.state = 719;
 			this.statement();
 			}
 		}
@@ -3362,22 +3418,22 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public simpleStatement(): SimpleStatementContext {
 		let localctx: SimpleStatementContext = new SimpleStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 108, SolidityParser.RULE_simpleStatement);
+		this.enterRule(localctx, 110, SolidityParser.RULE_simpleStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 711;
+			this.state = 723;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 75, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 77, this._ctx) ) {
 			case 1:
 				{
-				this.state = 709;
+				this.state = 721;
 				this.variableDeclarationStatement();
 				}
 				break;
 			case 2:
 				{
-				this.state = 710;
+				this.state = 722;
 				this.expressionStatement();
 				}
 				break;
@@ -3401,13 +3457,13 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public uncheckedStatement(): UncheckedStatementContext {
 		let localctx: UncheckedStatementContext = new UncheckedStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 110, SolidityParser.RULE_uncheckedStatement);
+		this.enterRule(localctx, 112, SolidityParser.RULE_uncheckedStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 713;
-			this.match(SolidityParser.T__55);
-			this.state = 714;
+			this.state = 725;
+			this.match(SolidityParser.T__57);
+			this.state = 726;
 			this.block();
 			}
 		}
@@ -3428,140 +3484,140 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public forStatement(): ForStatementContext {
 		let localctx: ForStatementContext = new ForStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 112, SolidityParser.RULE_forStatement);
+		this.enterRule(localctx, 114, SolidityParser.RULE_forStatement);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 716;
-			this.match(SolidityParser.T__26);
-			this.state = 717;
+			this.state = 728;
+			this.match(SolidityParser.T__28);
+			this.state = 729;
 			this.match(SolidityParser.T__22);
-			this.state = 720;
+			this.state = 732;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 6:
 			case 14:
 			case 23:
-			case 25:
-			case 30:
-			case 31:
-			case 38:
-			case 42:
+			case 27:
+			case 32:
+			case 33:
+			case 40:
 			case 44:
 			case 46:
-			case 50:
-			case 62:
-			case 63:
+			case 48:
+			case 52:
 			case 64:
 			case 65:
 			case 66:
 			case 67:
 			case 68:
 			case 69:
+			case 70:
 			case 71:
-			case 72:
-			case 95:
+			case 73:
+			case 74:
 			case 97:
-			case 98:
 			case 99:
 			case 100:
 			case 101:
 			case 102:
 			case 103:
 			case 104:
+			case 105:
 			case 106:
-			case 114:
-			case 118:
-			case 123:
+			case 108:
+			case 116:
+			case 120:
 			case 125:
-			case 126:
+			case 127:
 			case 128:
-			case 129:
 			case 130:
+			case 131:
+			case 132:
 				{
-				this.state = 718;
+				this.state = 730;
 				this.simpleStatement();
 				}
 				break;
 			case 2:
 				{
-				this.state = 719;
+				this.state = 731;
 				this.match(SolidityParser.T__1);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 724;
+			this.state = 736;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 6:
 			case 14:
 			case 23:
-			case 25:
-			case 30:
-			case 31:
-			case 38:
-			case 42:
+			case 27:
+			case 32:
+			case 33:
+			case 40:
 			case 44:
 			case 46:
-			case 50:
-			case 62:
-			case 63:
+			case 48:
+			case 52:
 			case 64:
 			case 65:
 			case 66:
 			case 67:
 			case 68:
 			case 69:
+			case 70:
 			case 71:
-			case 72:
-			case 95:
+			case 73:
+			case 74:
 			case 97:
-			case 98:
 			case 99:
 			case 100:
 			case 101:
 			case 102:
 			case 103:
 			case 104:
+			case 105:
 			case 106:
-			case 114:
-			case 118:
-			case 123:
+			case 108:
+			case 116:
+			case 120:
 			case 125:
-			case 126:
+			case 127:
 			case 128:
-			case 129:
 			case 130:
+			case 131:
+			case 132:
 				{
-				this.state = 722;
+				this.state = 734;
 				this.expressionStatement();
 				}
 				break;
 			case 2:
 				{
-				this.state = 723;
+				this.state = 735;
 				this.match(SolidityParser.T__1);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 727;
+			this.state = 739;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+			if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 				{
-				this.state = 726;
+				this.state = 738;
 				this.expression(0);
 				}
 			}
 
-			this.state = 729;
+			this.state = 741;
 			this.match(SolidityParser.T__23);
-			this.state = 730;
+			this.state = 742;
 			this.statement();
 			}
 		}
@@ -3582,38 +3638,38 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public inlineAssemblyStatement(): InlineAssemblyStatementContext {
 		let localctx: InlineAssemblyStatementContext = new InlineAssemblyStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 114, SolidityParser.RULE_inlineAssemblyStatement);
+		this.enterRule(localctx, 116, SolidityParser.RULE_inlineAssemblyStatement);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 732;
-			this.match(SolidityParser.T__56);
-			this.state = 734;
+			this.state = 744;
+			this.match(SolidityParser.T__58);
+			this.state = 746;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===130) {
+			if (_la===132) {
 				{
-				this.state = 733;
+				this.state = 745;
 				this.match(SolidityParser.StringLiteralFragment);
 				}
 			}
 
-			this.state = 740;
+			this.state = 752;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===23) {
 				{
-				this.state = 736;
+				this.state = 748;
 				this.match(SolidityParser.T__22);
-				this.state = 737;
+				this.state = 749;
 				this.inlineAssemblyStatementFlag();
-				this.state = 738;
+				this.state = 750;
 				this.match(SolidityParser.T__23);
 				}
 			}
 
-			this.state = 742;
+			this.state = 754;
 			this.assemblyBlock();
 			}
 		}
@@ -3634,11 +3690,11 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public inlineAssemblyStatementFlag(): InlineAssemblyStatementFlagContext {
 		let localctx: InlineAssemblyStatementFlagContext = new InlineAssemblyStatementFlagContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 116, SolidityParser.RULE_inlineAssemblyStatementFlag);
+		this.enterRule(localctx, 118, SolidityParser.RULE_inlineAssemblyStatementFlag);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 744;
+			this.state = 756;
 			this.stringLiteral();
 			}
 		}
@@ -3659,23 +3715,23 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public doWhileStatement(): DoWhileStatementContext {
 		let localctx: DoWhileStatementContext = new DoWhileStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 118, SolidityParser.RULE_doWhileStatement);
+		this.enterRule(localctx, 120, SolidityParser.RULE_doWhileStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 746;
-			this.match(SolidityParser.T__57);
-			this.state = 747;
+			this.state = 758;
+			this.match(SolidityParser.T__59);
+			this.state = 759;
 			this.statement();
-			this.state = 748;
-			this.match(SolidityParser.T__54);
-			this.state = 749;
+			this.state = 760;
+			this.match(SolidityParser.T__56);
+			this.state = 761;
 			this.match(SolidityParser.T__22);
-			this.state = 750;
+			this.state = 762;
 			this.expression(0);
-			this.state = 751;
+			this.state = 763;
 			this.match(SolidityParser.T__23);
-			this.state = 752;
+			this.state = 764;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3696,13 +3752,13 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public continueStatement(): ContinueStatementContext {
 		let localctx: ContinueStatementContext = new ContinueStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 120, SolidityParser.RULE_continueStatement);
+		this.enterRule(localctx, 122, SolidityParser.RULE_continueStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 754;
+			this.state = 766;
 			this.match(SolidityParser.ContinueKeyword);
-			this.state = 755;
+			this.state = 767;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3723,13 +3779,13 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public breakStatement(): BreakStatementContext {
 		let localctx: BreakStatementContext = new BreakStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 122, SolidityParser.RULE_breakStatement);
+		this.enterRule(localctx, 124, SolidityParser.RULE_breakStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 757;
+			this.state = 769;
 			this.match(SolidityParser.BreakKeyword);
-			this.state = 758;
+			this.state = 770;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3750,24 +3806,24 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public returnStatement(): ReturnStatementContext {
 		let localctx: ReturnStatementContext = new ReturnStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 124, SolidityParser.RULE_returnStatement);
+		this.enterRule(localctx, 126, SolidityParser.RULE_returnStatement);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 760;
-			this.match(SolidityParser.T__58);
-			this.state = 762;
+			this.state = 772;
+			this.match(SolidityParser.T__60);
+			this.state = 774;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+			if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 				{
-				this.state = 761;
+				this.state = 773;
 				this.expression(0);
 				}
 			}
 
-			this.state = 764;
+			this.state = 776;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3788,13 +3844,13 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public throwStatement(): ThrowStatementContext {
 		let localctx: ThrowStatementContext = new ThrowStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 126, SolidityParser.RULE_throwStatement);
+		this.enterRule(localctx, 128, SolidityParser.RULE_throwStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 766;
-			this.match(SolidityParser.T__59);
-			this.state = 767;
+			this.state = 778;
+			this.match(SolidityParser.T__61);
+			this.state = 779;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3815,15 +3871,15 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public emitStatement(): EmitStatementContext {
 		let localctx: EmitStatementContext = new EmitStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 128, SolidityParser.RULE_emitStatement);
+		this.enterRule(localctx, 130, SolidityParser.RULE_emitStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 769;
-			this.match(SolidityParser.T__60);
-			this.state = 770;
+			this.state = 781;
+			this.match(SolidityParser.T__62);
+			this.state = 782;
 			this.functionCall();
-			this.state = 771;
+			this.state = 783;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3844,15 +3900,15 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public revertStatement(): RevertStatementContext {
 		let localctx: RevertStatementContext = new RevertStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 130, SolidityParser.RULE_revertStatement);
+		this.enterRule(localctx, 132, SolidityParser.RULE_revertStatement);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 773;
-			this.match(SolidityParser.T__61);
-			this.state = 774;
+			this.state = 785;
+			this.match(SolidityParser.T__63);
+			this.state = 786;
 			this.functionCall();
-			this.state = 775;
+			this.state = 787;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3873,52 +3929,52 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclarationStatement(): VariableDeclarationStatementContext {
 		let localctx: VariableDeclarationStatementContext = new VariableDeclarationStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 132, SolidityParser.RULE_variableDeclarationStatement);
+		this.enterRule(localctx, 134, SolidityParser.RULE_variableDeclarationStatement);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 784;
+			this.state = 796;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 82, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 84, this._ctx) ) {
 			case 1:
 				{
-				this.state = 777;
-				this.match(SolidityParser.T__62);
-				this.state = 778;
+				this.state = 789;
+				this.match(SolidityParser.T__64);
+				this.state = 790;
 				this.identifierList();
 				}
 				break;
 			case 2:
 				{
-				this.state = 779;
+				this.state = 791;
 				this.variableDeclaration();
 				}
 				break;
 			case 3:
 				{
-				this.state = 780;
+				this.state = 792;
 				this.match(SolidityParser.T__22);
-				this.state = 781;
+				this.state = 793;
 				this.variableDeclarationList();
-				this.state = 782;
+				this.state = 794;
 				this.match(SolidityParser.T__23);
 				}
 				break;
 			}
-			this.state = 788;
+			this.state = 800;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===11) {
 				{
-				this.state = 786;
+				this.state = 798;
 				this.match(SolidityParser.T__10);
-				this.state = 787;
+				this.state = 799;
 				this.expression(0);
 				}
 			}
 
-			this.state = 790;
+			this.state = 802;
 			this.match(SolidityParser.T__1);
 			}
 		}
@@ -3939,42 +3995,42 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclarationList(): VariableDeclarationListContext {
 		let localctx: VariableDeclarationListContext = new VariableDeclarationListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 134, SolidityParser.RULE_variableDeclarationList);
+		this.enterRule(localctx, 136, SolidityParser.RULE_variableDeclarationList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 793;
+			this.state = 805;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 520098113) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138493) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 520098113) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138493) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 792;
+				this.state = 804;
 				this.variableDeclaration();
 				}
 			}
 
-			this.state = 801;
+			this.state = 813;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===16) {
 				{
 				{
-				this.state = 795;
+				this.state = 807;
 				this.match(SolidityParser.T__15);
-				this.state = 797;
+				this.state = 809;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===14 || _la===25 || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 520098113) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138493) !== 0) || _la===128 || _la===129) {
+				if (_la===14 || _la===27 || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 520098113) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138493) !== 0) || _la===130 || _la===131) {
 					{
-					this.state = 796;
+					this.state = 808;
 					this.variableDeclaration();
 					}
 				}
 
 				}
 				}
-				this.state = 803;
+				this.state = 815;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -3997,51 +4053,51 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public identifierList(): IdentifierListContext {
 		let localctx: IdentifierListContext = new IdentifierListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 136, SolidityParser.RULE_identifierList);
+		this.enterRule(localctx, 138, SolidityParser.RULE_identifierList);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 804;
+			this.state = 816;
 			this.match(SolidityParser.T__22);
-			this.state = 811;
+			this.state = 823;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 88, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 90, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 806;
+					this.state = 818;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+					if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 						{
-						this.state = 805;
+						this.state = 817;
 						this.identifier();
 						}
 					}
 
-					this.state = 808;
+					this.state = 820;
 					this.match(SolidityParser.T__15);
 					}
 					}
 				}
-				this.state = 813;
+				this.state = 825;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 88, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 90, this._ctx);
 			}
-			this.state = 815;
+			this.state = 827;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 814;
+				this.state = 826;
 				this.identifier();
 				}
 			}
 
-			this.state = 817;
+			this.state = 829;
 			this.match(SolidityParser.T__23);
 			}
 		}
@@ -4062,14 +4118,14 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public elementaryTypeName(): ElementaryTypeNameContext {
 		let localctx: ElementaryTypeNameContext = new ElementaryTypeNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 138, SolidityParser.RULE_elementaryTypeName);
+		this.enterRule(localctx, 140, SolidityParser.RULE_elementaryTypeName);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 819;
+			this.state = 831;
 			_la = this._input.LA(1);
-			if(!(((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 7864321) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 31) !== 0))) {
+			if(!(((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 7864321) !== 0) || ((((_la - 99)) & ~0x1F) === 0 && ((1 << (_la - 99)) & 31) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -4105,99 +4161,99 @@ export default class SolidityParser extends Parser {
 		let _parentState: number = this.state;
 		let localctx: ExpressionContext = new ExpressionContext(this, this._ctx, _parentState);
 		let _prevctx: ExpressionContext = localctx;
-		let _startState: number = 140;
-		this.enterRecursionRule(localctx, 140, SolidityParser.RULE_expression, _p);
+		let _startState: number = 142;
+		this.enterRecursionRule(localctx, 142, SolidityParser.RULE_expression, _p);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 839;
+			this.state = 851;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 90, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 92, this._ctx) ) {
 			case 1:
 				{
-				this.state = 822;
-				this.match(SolidityParser.T__68);
-				this.state = 823;
+				this.state = 834;
+				this.match(SolidityParser.T__70);
+				this.state = 835;
 				this.typeName(0);
 				}
 				break;
 			case 2:
 				{
-				this.state = 824;
+				this.state = 836;
 				this.match(SolidityParser.T__22);
-				this.state = 825;
+				this.state = 837;
 				this.expression(0);
-				this.state = 826;
+				this.state = 838;
 				this.match(SolidityParser.T__23);
 				}
 				break;
 			case 3:
 				{
-				this.state = 828;
+				this.state = 840;
 				_la = this._input.LA(1);
-				if(!(_la===67 || _la===68)) {
+				if(!(_la===69 || _la===70)) {
 				this._errHandler.recoverInline(this);
 				}
 				else {
 					this._errHandler.reportMatch(this);
 				    this.consume();
 				}
-				this.state = 829;
+				this.state = 841;
 				this.expression(19);
 				}
 				break;
 			case 4:
 				{
-				this.state = 830;
+				this.state = 842;
 				_la = this._input.LA(1);
-				if(!(_la===30 || _la===31)) {
+				if(!(_la===32 || _la===33)) {
 				this._errHandler.recoverInline(this);
 				}
 				else {
 					this._errHandler.reportMatch(this);
 				    this.consume();
 				}
-				this.state = 831;
+				this.state = 843;
 				this.expression(18);
 				}
 				break;
 			case 5:
 				{
-				this.state = 832;
-				this.match(SolidityParser.T__70);
-				this.state = 833;
+				this.state = 844;
+				this.match(SolidityParser.T__72);
+				this.state = 845;
 				this.expression(17);
 				}
 				break;
 			case 6:
 				{
-				this.state = 834;
-				this.match(SolidityParser.T__71);
-				this.state = 835;
+				this.state = 846;
+				this.match(SolidityParser.T__73);
+				this.state = 847;
 				this.expression(16);
 				}
 				break;
 			case 7:
 				{
-				this.state = 836;
+				this.state = 848;
 				this.match(SolidityParser.T__5);
-				this.state = 837;
+				this.state = 849;
 				this.expression(15);
 				}
 				break;
 			case 8:
 				{
-				this.state = 838;
+				this.state = 850;
 				this.primaryExpression();
 				}
 				break;
 			}
 			this._ctx.stop = this._input.LT(-1);
-			this.state = 915;
+			this.state = 927;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 94, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 96, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					if (this._parseListeners != null) {
@@ -4205,20 +4261,20 @@ export default class SolidityParser extends Parser {
 					}
 					_prevctx = localctx;
 					{
-					this.state = 913;
+					this.state = 925;
 					this._errHandler.sync(this);
-					switch ( this._interp.adaptivePredict(this._input, 93, this._ctx) ) {
+					switch ( this._interp.adaptivePredict(this._input, 95, this._ctx) ) {
 					case 1:
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 841;
+						this.state = 853;
 						if (!(this.precpred(this._ctx, 14))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 14)");
 						}
-						this.state = 842;
-						this.match(SolidityParser.T__72);
-						this.state = 843;
+						this.state = 854;
+						this.match(SolidityParser.T__74);
+						this.state = 855;
 						this.expression(14);
 						}
 						break;
@@ -4226,20 +4282,20 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 844;
+						this.state = 856;
 						if (!(this.precpred(this._ctx, 13))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
 						}
-						this.state = 845;
+						this.state = 857;
 						_la = this._input.LA(1);
-						if(!(((((_la - 3)) & ~0x1F) === 0 && ((1 << (_la - 3)) & 1610612737) !== 0))) {
+						if(!(_la===3 || _la===34 || _la===35)) {
 						this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 846;
+						this.state = 858;
 						this.expression(14);
 						}
 						break;
@@ -4247,20 +4303,20 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 847;
+						this.state = 859;
 						if (!(this.precpred(this._ctx, 12))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 12)");
 						}
-						this.state = 848;
+						this.state = 860;
 						_la = this._input.LA(1);
-						if(!(_la===30 || _la===31)) {
+						if(!(_la===32 || _la===33)) {
 						this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 849;
+						this.state = 861;
 						this.expression(13);
 						}
 						break;
@@ -4268,20 +4324,20 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 850;
+						this.state = 862;
 						if (!(this.precpred(this._ctx, 11))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 11)");
 						}
-						this.state = 851;
+						this.state = 863;
 						_la = this._input.LA(1);
-						if(!(_la===74 || _la===75)) {
+						if(!(_la===76 || _la===77)) {
 						this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 852;
+						this.state = 864;
 						this.expression(12);
 						}
 						break;
@@ -4289,13 +4345,13 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 853;
+						this.state = 865;
 						if (!(this.precpred(this._ctx, 10))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 10)");
 						}
-						this.state = 854;
-						this.match(SolidityParser.T__28);
-						this.state = 855;
+						this.state = 866;
+						this.match(SolidityParser.T__30);
+						this.state = 867;
 						this.expression(11);
 						}
 						break;
@@ -4303,13 +4359,13 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 856;
+						this.state = 868;
 						if (!(this.precpred(this._ctx, 9))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 9)");
 						}
-						this.state = 857;
+						this.state = 869;
 						this.match(SolidityParser.T__4);
-						this.state = 858;
+						this.state = 870;
 						this.expression(10);
 						}
 						break;
@@ -4317,13 +4373,13 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 859;
+						this.state = 871;
 						if (!(this.precpred(this._ctx, 8))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 8)");
 						}
-						this.state = 860;
-						this.match(SolidityParser.T__27);
-						this.state = 861;
+						this.state = 872;
+						this.match(SolidityParser.T__29);
+						this.state = 873;
 						this.expression(9);
 						}
 						break;
@@ -4331,11 +4387,11 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 862;
+						this.state = 874;
 						if (!(this.precpred(this._ctx, 7))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 7)");
 						}
-						this.state = 863;
+						this.state = 875;
 						_la = this._input.LA(1);
 						if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 1920) !== 0))) {
 						this._errHandler.recoverInline(this);
@@ -4344,7 +4400,7 @@ export default class SolidityParser extends Parser {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 864;
+						this.state = 876;
 						this.expression(8);
 						}
 						break;
@@ -4352,20 +4408,20 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 865;
+						this.state = 877;
 						if (!(this.precpred(this._ctx, 6))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 6)");
 						}
-						this.state = 866;
+						this.state = 878;
 						_la = this._input.LA(1);
-						if(!(_la===34 || _la===35)) {
+						if(!(_la===36 || _la===37)) {
 						this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 867;
+						this.state = 879;
 						this.expression(7);
 						}
 						break;
@@ -4373,13 +4429,13 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 868;
+						this.state = 880;
 						if (!(this.precpred(this._ctx, 5))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 5)");
 						}
-						this.state = 869;
-						this.match(SolidityParser.T__75);
-						this.state = 870;
+						this.state = 881;
+						this.match(SolidityParser.T__77);
+						this.state = 882;
 						this.expression(6);
 						}
 						break;
@@ -4387,13 +4443,13 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 871;
+						this.state = 883;
 						if (!(this.precpred(this._ctx, 4))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 4)");
 						}
-						this.state = 872;
+						this.state = 884;
 						this.match(SolidityParser.T__3);
-						this.state = 873;
+						this.state = 885;
 						this.expression(5);
 						}
 						break;
@@ -4401,17 +4457,17 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 874;
+						this.state = 886;
 						if (!(this.precpred(this._ctx, 3))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 3)");
 						}
-						this.state = 875;
-						this.match(SolidityParser.T__76);
-						this.state = 876;
+						this.state = 887;
+						this.match(SolidityParser.T__78);
+						this.state = 888;
 						this.expression(0);
-						this.state = 877;
-						this.match(SolidityParser.T__69);
-						this.state = 878;
+						this.state = 889;
+						this.match(SolidityParser.T__71);
+						this.state = 890;
 						this.expression(3);
 						}
 						break;
@@ -4419,20 +4475,20 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 880;
+						this.state = 892;
 						if (!(this.precpred(this._ctx, 2))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
 						}
-						this.state = 881;
+						this.state = 893;
 						_la = this._input.LA(1);
-						if(!(_la===11 || ((((_la - 78)) & ~0x1F) === 0 && ((1 << (_la - 78)) & 1023) !== 0))) {
+						if(!(_la===11 || ((((_la - 80)) & ~0x1F) === 0 && ((1 << (_la - 80)) & 1023) !== 0))) {
 						this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
 						    this.consume();
 						}
-						this.state = 882;
+						this.state = 894;
 						this.expression(3);
 						}
 						break;
@@ -4440,13 +4496,13 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 883;
+						this.state = 895;
 						if (!(this.precpred(this._ctx, 27))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 27)");
 						}
-						this.state = 884;
+						this.state = 896;
 						_la = this._input.LA(1);
-						if(!(_la===67 || _la===68)) {
+						if(!(_la===69 || _la===70)) {
 						this._errHandler.recoverInline(this);
 						}
 						else {
@@ -4459,65 +4515,65 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 885;
+						this.state = 897;
 						if (!(this.precpred(this._ctx, 25))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 25)");
 						}
-						this.state = 886;
-						this.match(SolidityParser.T__41);
-						this.state = 887;
+						this.state = 898;
+						this.match(SolidityParser.T__43);
+						this.state = 899;
 						this.expression(0);
-						this.state = 888;
-						this.match(SolidityParser.T__42);
+						this.state = 900;
+						this.match(SolidityParser.T__44);
 						}
 						break;
 					case 16:
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 890;
+						this.state = 902;
 						if (!(this.precpred(this._ctx, 24))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 24)");
 						}
-						this.state = 891;
-						this.match(SolidityParser.T__41);
-						this.state = 893;
+						this.state = 903;
+						this.match(SolidityParser.T__43);
+						this.state = 905;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+						if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 							{
-							this.state = 892;
+							this.state = 904;
 							this.expression(0);
 							}
 						}
 
-						this.state = 895;
-						this.match(SolidityParser.T__69);
-						this.state = 897;
+						this.state = 907;
+						this.match(SolidityParser.T__71);
+						this.state = 909;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
-						if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+						if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 							{
-							this.state = 896;
+							this.state = 908;
 							this.expression(0);
 							}
 						}
 
-						this.state = 899;
-						this.match(SolidityParser.T__42);
+						this.state = 911;
+						this.match(SolidityParser.T__44);
 						}
 						break;
 					case 17:
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 900;
+						this.state = 912;
 						if (!(this.precpred(this._ctx, 23))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 23)");
 						}
-						this.state = 901;
-						this.match(SolidityParser.T__44);
-						this.state = 902;
+						this.state = 913;
+						this.match(SolidityParser.T__46);
+						this.state = 914;
 						this.identifier();
 						}
 						break;
@@ -4525,15 +4581,15 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 903;
+						this.state = 915;
 						if (!(this.precpred(this._ctx, 22))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 22)");
 						}
-						this.state = 904;
+						this.state = 916;
 						this.match(SolidityParser.T__14);
-						this.state = 905;
+						this.state = 917;
 						this.nameValueList();
-						this.state = 906;
+						this.state = 918;
 						this.match(SolidityParser.T__16);
 						}
 						break;
@@ -4541,24 +4597,24 @@ export default class SolidityParser extends Parser {
 						{
 						localctx = new ExpressionContext(this, _parentctx, _parentState);
 						this.pushNewRecursionContext(localctx, _startState, SolidityParser.RULE_expression);
-						this.state = 908;
+						this.state = 920;
 						if (!(this.precpred(this._ctx, 21))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 21)");
 						}
-						this.state = 909;
+						this.state = 921;
 						this.match(SolidityParser.T__22);
-						this.state = 910;
+						this.state = 922;
 						this.functionCallArguments();
-						this.state = 911;
+						this.state = 923;
 						this.match(SolidityParser.T__23);
 						}
 						break;
 					}
 					}
 				}
-				this.state = 917;
+				this.state = 929;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 94, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 96, this._ctx);
 			}
 			}
 		}
@@ -4579,71 +4635,71 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public primaryExpression(): PrimaryExpressionContext {
 		let localctx: PrimaryExpressionContext = new PrimaryExpressionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 142, SolidityParser.RULE_primaryExpression);
+		this.enterRule(localctx, 144, SolidityParser.RULE_primaryExpression);
 		try {
-			this.state = 927;
+			this.state = 939;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 95, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 97, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 918;
+				this.state = 930;
 				this.match(SolidityParser.BooleanLiteral);
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 919;
+				this.state = 931;
 				this.numberLiteral();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 920;
+				this.state = 932;
 				this.hexLiteral();
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 921;
+				this.state = 933;
 				this.stringLiteral();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 922;
+				this.state = 934;
 				this.identifier();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 923;
+				this.state = 935;
 				this.match(SolidityParser.TypeKeyword);
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 924;
+				this.state = 936;
 				this.match(SolidityParser.PayableKeyword);
 				}
 				break;
 			case 8:
 				this.enterOuterAlt(localctx, 8);
 				{
-				this.state = 925;
+				this.state = 937;
 				this.tupleExpression();
 				}
 				break;
 			case 9:
 				this.enterOuterAlt(localctx, 9);
 				{
-				this.state = 926;
+				this.state = 938;
 				this.typeName(0);
 				}
 				break;
@@ -4666,26 +4722,26 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public expressionList(): ExpressionListContext {
 		let localctx: ExpressionListContext = new ExpressionListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 144, SolidityParser.RULE_expressionList);
+		this.enterRule(localctx, 146, SolidityParser.RULE_expressionList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 929;
+			this.state = 941;
 			this.expression(0);
-			this.state = 934;
+			this.state = 946;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===16) {
 				{
 				{
-				this.state = 930;
+				this.state = 942;
 				this.match(SolidityParser.T__15);
-				this.state = 931;
+				this.state = 943;
 				this.expression(0);
 				}
 				}
-				this.state = 936;
+				this.state = 948;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -4708,38 +4764,38 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public nameValueList(): NameValueListContext {
 		let localctx: NameValueListContext = new NameValueListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 146, SolidityParser.RULE_nameValueList);
+		this.enterRule(localctx, 148, SolidityParser.RULE_nameValueList);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 937;
+			this.state = 949;
 			this.nameValue();
-			this.state = 942;
+			this.state = 954;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 97, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 99, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 938;
+					this.state = 950;
 					this.match(SolidityParser.T__15);
-					this.state = 939;
+					this.state = 951;
 					this.nameValue();
 					}
 					}
 				}
-				this.state = 944;
+				this.state = 956;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 97, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 99, this._ctx);
 			}
-			this.state = 946;
+			this.state = 958;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===16) {
 				{
-				this.state = 945;
+				this.state = 957;
 				this.match(SolidityParser.T__15);
 				}
 			}
@@ -4763,15 +4819,15 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public nameValue(): NameValueContext {
 		let localctx: NameValueContext = new NameValueContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 148, SolidityParser.RULE_nameValue);
+		this.enterRule(localctx, 150, SolidityParser.RULE_nameValue);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 948;
+			this.state = 960;
 			this.identifier();
-			this.state = 949;
-			this.match(SolidityParser.T__69);
-			this.state = 950;
+			this.state = 961;
+			this.match(SolidityParser.T__71);
+			this.state = 962;
 			this.expression(0);
 			}
 		}
@@ -4792,28 +4848,28 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public functionCallArguments(): FunctionCallArgumentsContext {
 		let localctx: FunctionCallArgumentsContext = new FunctionCallArgumentsContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 150, SolidityParser.RULE_functionCallArguments);
+		this.enterRule(localctx, 152, SolidityParser.RULE_functionCallArguments);
 		let _la: number;
 		try {
-			this.state = 960;
+			this.state = 972;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 15:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 952;
+				this.state = 964;
 				this.match(SolidityParser.T__14);
-				this.state = 954;
+				this.state = 966;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+				if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 					{
-					this.state = 953;
+					this.state = 965;
 					this.nameValueList();
 					}
 				}
 
-				this.state = 956;
+				this.state = 968;
 				this.match(SolidityParser.T__16);
 				}
 				break;
@@ -4821,50 +4877,50 @@ export default class SolidityParser extends Parser {
 			case 14:
 			case 23:
 			case 24:
-			case 25:
-			case 30:
-			case 31:
-			case 38:
-			case 42:
+			case 27:
+			case 32:
+			case 33:
+			case 40:
 			case 44:
 			case 46:
-			case 50:
-			case 62:
-			case 63:
+			case 48:
+			case 52:
 			case 64:
 			case 65:
 			case 66:
 			case 67:
 			case 68:
 			case 69:
+			case 70:
 			case 71:
-			case 72:
-			case 95:
+			case 73:
+			case 74:
 			case 97:
-			case 98:
 			case 99:
 			case 100:
 			case 101:
 			case 102:
 			case 103:
 			case 104:
+			case 105:
 			case 106:
-			case 114:
-			case 118:
-			case 123:
+			case 108:
+			case 116:
+			case 120:
 			case 125:
-			case 126:
+			case 127:
 			case 128:
-			case 129:
 			case 130:
+			case 131:
+			case 132:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 958;
+				this.state = 970;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+				if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 					{
-					this.state = 957;
+					this.state = 969;
 					this.expressionList();
 					}
 				}
@@ -4892,17 +4948,17 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public functionCall(): FunctionCallContext {
 		let localctx: FunctionCallContext = new FunctionCallContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 152, SolidityParser.RULE_functionCall);
+		this.enterRule(localctx, 154, SolidityParser.RULE_functionCall);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 962;
+			this.state = 974;
 			this.expression(0);
-			this.state = 963;
+			this.state = 975;
 			this.match(SolidityParser.T__22);
-			this.state = 964;
+			this.state = 976;
 			this.functionCallArguments();
-			this.state = 965;
+			this.state = 977;
 			this.match(SolidityParser.T__23);
 			}
 		}
@@ -4923,28 +4979,28 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyBlock(): AssemblyBlockContext {
 		let localctx: AssemblyBlockContext = new AssemblyBlockContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 154, SolidityParser.RULE_assemblyBlock);
+		this.enterRule(localctx, 156, SolidityParser.RULE_assemblyBlock);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 967;
+			this.state = 979;
 			this.match(SolidityParser.T__14);
-			this.state = 971;
+			this.state = 983;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 176209920) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 287322177) !== 0) || ((((_la - 88)) & ~0x1F) === 0 && ((1 << (_la - 88)) & 1176879241) !== 0) || ((((_la - 125)) & ~0x1F) === 0 && ((1 << (_la - 125)) & 59) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 679526400) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 287322177) !== 0) || ((((_la - 90)) & ~0x1F) === 0 && ((1 << (_la - 90)) & 1176879241) !== 0) || ((((_la - 127)) & ~0x1F) === 0 && ((1 << (_la - 127)) & 59) !== 0)) {
 				{
 				{
-				this.state = 968;
+				this.state = 980;
 				this.assemblyItem();
 				}
 				}
-				this.state = 973;
+				this.state = 985;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 974;
+			this.state = 986;
 			this.match(SolidityParser.T__16);
 			}
 		}
@@ -4965,127 +5021,127 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyItem(): AssemblyItemContext {
 		let localctx: AssemblyItemContext = new AssemblyItemContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 156, SolidityParser.RULE_assemblyItem);
+		this.enterRule(localctx, 158, SolidityParser.RULE_assemblyItem);
 		try {
-			this.state = 993;
+			this.state = 1005;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 103, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 105, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 976;
+				this.state = 988;
 				this.identifier();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 977;
+				this.state = 989;
 				this.assemblyBlock();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 978;
+				this.state = 990;
 				this.assemblyExpression();
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 979;
+				this.state = 991;
 				this.assemblyLocalDefinition();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 980;
+				this.state = 992;
 				this.assemblyAssignment();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 981;
+				this.state = 993;
 				this.assemblyStackAssignment();
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 982;
+				this.state = 994;
 				this.labelDefinition();
 				}
 				break;
 			case 8:
 				this.enterOuterAlt(localctx, 8);
 				{
-				this.state = 983;
+				this.state = 995;
 				this.assemblySwitch();
 				}
 				break;
 			case 9:
 				this.enterOuterAlt(localctx, 9);
 				{
-				this.state = 984;
+				this.state = 996;
 				this.assemblyFunctionDefinition();
 				}
 				break;
 			case 10:
 				this.enterOuterAlt(localctx, 10);
 				{
-				this.state = 985;
+				this.state = 997;
 				this.assemblyFor();
 				}
 				break;
 			case 11:
 				this.enterOuterAlt(localctx, 11);
 				{
-				this.state = 986;
+				this.state = 998;
 				this.assemblyIf();
 				}
 				break;
 			case 12:
 				this.enterOuterAlt(localctx, 12);
 				{
-				this.state = 987;
+				this.state = 999;
 				this.match(SolidityParser.BreakKeyword);
 				}
 				break;
 			case 13:
 				this.enterOuterAlt(localctx, 13);
 				{
-				this.state = 988;
+				this.state = 1000;
 				this.match(SolidityParser.ContinueKeyword);
 				}
 				break;
 			case 14:
 				this.enterOuterAlt(localctx, 14);
 				{
-				this.state = 989;
+				this.state = 1001;
 				this.match(SolidityParser.LeaveKeyword);
 				}
 				break;
 			case 15:
 				this.enterOuterAlt(localctx, 15);
 				{
-				this.state = 990;
+				this.state = 1002;
 				this.numberLiteral();
 				}
 				break;
 			case 16:
 				this.enterOuterAlt(localctx, 16);
 				{
-				this.state = 991;
+				this.state = 1003;
 				this.stringLiteral();
 				}
 				break;
 			case 17:
 				this.enterOuterAlt(localctx, 17);
 				{
-				this.state = 992;
+				this.state = 1004;
 				this.hexLiteral();
 				}
 				break;
@@ -5108,29 +5164,29 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyExpression(): AssemblyExpressionContext {
 		let localctx: AssemblyExpressionContext = new AssemblyExpressionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 158, SolidityParser.RULE_assemblyExpression);
+		this.enterRule(localctx, 160, SolidityParser.RULE_assemblyExpression);
 		try {
-			this.state = 998;
+			this.state = 1010;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 104, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 106, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 995;
+				this.state = 1007;
 				this.assemblyCall();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 996;
+				this.state = 1008;
 				this.assemblyLiteral();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 997;
+				this.state = 1009;
 				this.assemblyMember();
 				}
 				break;
@@ -5153,15 +5209,15 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyMember(): AssemblyMemberContext {
 		let localctx: AssemblyMemberContext = new AssemblyMemberContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 160, SolidityParser.RULE_assemblyMember);
+		this.enterRule(localctx, 162, SolidityParser.RULE_assemblyMember);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1000;
+			this.state = 1012;
 			this.identifier();
-			this.state = 1001;
-			this.match(SolidityParser.T__44);
-			this.state = 1002;
+			this.state = 1013;
+			this.match(SolidityParser.T__46);
+			this.state = 1014;
 			this.identifier();
 			}
 		}
@@ -5182,73 +5238,73 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyCall(): AssemblyCallContext {
 		let localctx: AssemblyCallContext = new AssemblyCallContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 162, SolidityParser.RULE_assemblyCall);
+		this.enterRule(localctx, 164, SolidityParser.RULE_assemblyCall);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1008;
+			this.state = 1020;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 105, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 107, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1004;
-				this.match(SolidityParser.T__58);
+				this.state = 1016;
+				this.match(SolidityParser.T__60);
 				}
 				break;
 			case 2:
 				{
-				this.state = 1005;
-				this.match(SolidityParser.T__43);
+				this.state = 1017;
+				this.match(SolidityParser.T__45);
 				}
 				break;
 			case 3:
 				{
-				this.state = 1006;
-				this.match(SolidityParser.T__65);
+				this.state = 1018;
+				this.match(SolidityParser.T__67);
 				}
 				break;
 			case 4:
 				{
-				this.state = 1007;
+				this.state = 1019;
 				this.identifier();
 				}
 				break;
 			}
-			this.state = 1022;
+			this.state = 1034;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 108, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 110, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1010;
+				this.state = 1022;
 				this.match(SolidityParser.T__22);
-				this.state = 1012;
+				this.state = 1024;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 4489281) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230141313) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 7) !== 0)) {
+				if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 4489281) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230141313) !== 0) || ((((_la - 130)) & ~0x1F) === 0 && ((1 << (_la - 130)) & 7) !== 0)) {
 					{
-					this.state = 1011;
+					this.state = 1023;
 					this.assemblyExpression();
 					}
 				}
 
-				this.state = 1018;
+				this.state = 1030;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 1014;
+					this.state = 1026;
 					this.match(SolidityParser.T__15);
-					this.state = 1015;
+					this.state = 1027;
 					this.assemblyExpression();
 					}
 					}
-					this.state = 1020;
+					this.state = 1032;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 1021;
+				this.state = 1033;
 				this.match(SolidityParser.T__23);
 				}
 				break;
@@ -5272,23 +5328,23 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyLocalDefinition(): AssemblyLocalDefinitionContext {
 		let localctx: AssemblyLocalDefinitionContext = new AssemblyLocalDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 164, SolidityParser.RULE_assemblyLocalDefinition);
+		this.enterRule(localctx, 166, SolidityParser.RULE_assemblyLocalDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1024;
-			this.match(SolidityParser.T__87);
-			this.state = 1025;
+			this.state = 1036;
+			this.match(SolidityParser.T__89);
+			this.state = 1037;
 			this.assemblyIdentifierOrList();
-			this.state = 1028;
+			this.state = 1040;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===89) {
+			if (_la===91) {
 				{
-				this.state = 1026;
-				this.match(SolidityParser.T__88);
-				this.state = 1027;
+				this.state = 1038;
+				this.match(SolidityParser.T__90);
+				this.state = 1039;
 				this.assemblyExpression();
 				}
 			}
@@ -5312,15 +5368,15 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyAssignment(): AssemblyAssignmentContext {
 		let localctx: AssemblyAssignmentContext = new AssemblyAssignmentContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 166, SolidityParser.RULE_assemblyAssignment);
+		this.enterRule(localctx, 168, SolidityParser.RULE_assemblyAssignment);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1030;
+			this.state = 1042;
 			this.assemblyIdentifierOrList();
-			this.state = 1031;
-			this.match(SolidityParser.T__88);
-			this.state = 1032;
+			this.state = 1043;
+			this.match(SolidityParser.T__90);
+			this.state = 1044;
 			this.assemblyExpression();
 			}
 		}
@@ -5341,40 +5397,40 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyIdentifierOrList(): AssemblyIdentifierOrListContext {
 		let localctx: AssemblyIdentifierOrListContext = new AssemblyIdentifierOrListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 168, SolidityParser.RULE_assemblyIdentifierOrList);
+		this.enterRule(localctx, 170, SolidityParser.RULE_assemblyIdentifierOrList);
 		try {
-			this.state = 1041;
+			this.state = 1053;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 110, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 112, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 1034;
+				this.state = 1046;
 				this.identifier();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 1035;
+				this.state = 1047;
 				this.assemblyMember();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 1036;
+				this.state = 1048;
 				this.assemblyIdentifierList();
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 1037;
+				this.state = 1049;
 				this.match(SolidityParser.T__22);
-				this.state = 1038;
+				this.state = 1050;
 				this.assemblyIdentifierList();
-				this.state = 1039;
+				this.state = 1051;
 				this.match(SolidityParser.T__23);
 				}
 				break;
@@ -5397,26 +5453,26 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyIdentifierList(): AssemblyIdentifierListContext {
 		let localctx: AssemblyIdentifierListContext = new AssemblyIdentifierListContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 170, SolidityParser.RULE_assemblyIdentifierList);
+		this.enterRule(localctx, 172, SolidityParser.RULE_assemblyIdentifierList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1043;
+			this.state = 1055;
 			this.identifier();
-			this.state = 1048;
+			this.state = 1060;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===16) {
 				{
 				{
-				this.state = 1044;
+				this.state = 1056;
 				this.match(SolidityParser.T__15);
-				this.state = 1045;
+				this.state = 1057;
 				this.identifier();
 				}
 				}
-				this.state = 1050;
+				this.state = 1062;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -5439,15 +5495,15 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyStackAssignment(): AssemblyStackAssignmentContext {
 		let localctx: AssemblyStackAssignmentContext = new AssemblyStackAssignmentContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 172, SolidityParser.RULE_assemblyStackAssignment);
+		this.enterRule(localctx, 174, SolidityParser.RULE_assemblyStackAssignment);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1051;
+			this.state = 1063;
 			this.assemblyExpression();
-			this.state = 1052;
-			this.match(SolidityParser.T__89);
-			this.state = 1053;
+			this.state = 1064;
+			this.match(SolidityParser.T__91);
+			this.state = 1065;
 			this.identifier();
 			}
 		}
@@ -5468,14 +5524,14 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public labelDefinition(): LabelDefinitionContext {
 		let localctx: LabelDefinitionContext = new LabelDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 174, SolidityParser.RULE_labelDefinition);
+		this.enterRule(localctx, 176, SolidityParser.RULE_labelDefinition);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1055;
+			this.state = 1067;
 			this.identifier();
-			this.state = 1056;
-			this.match(SolidityParser.T__69);
+			this.state = 1068;
+			this.match(SolidityParser.T__71);
 			}
 		}
 		catch (re) {
@@ -5495,26 +5551,26 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblySwitch(): AssemblySwitchContext {
 		let localctx: AssemblySwitchContext = new AssemblySwitchContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 176, SolidityParser.RULE_assemblySwitch);
+		this.enterRule(localctx, 178, SolidityParser.RULE_assemblySwitch);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1058;
-			this.match(SolidityParser.T__90);
-			this.state = 1059;
+			this.state = 1070;
+			this.match(SolidityParser.T__92);
+			this.state = 1071;
 			this.assemblyExpression();
-			this.state = 1063;
+			this.state = 1075;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===92 || _la===93) {
+			while (_la===94 || _la===95) {
 				{
 				{
-				this.state = 1060;
+				this.state = 1072;
 				this.assemblyCase();
 				}
 				}
-				this.state = 1065;
+				this.state = 1077;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -5537,28 +5593,28 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyCase(): AssemblyCaseContext {
 		let localctx: AssemblyCaseContext = new AssemblyCaseContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 178, SolidityParser.RULE_assemblyCase);
+		this.enterRule(localctx, 180, SolidityParser.RULE_assemblyCase);
 		try {
-			this.state = 1072;
+			this.state = 1084;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 92:
+			case 94:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 1066;
-				this.match(SolidityParser.T__91);
-				this.state = 1067;
+				this.state = 1078;
+				this.match(SolidityParser.T__93);
+				this.state = 1079;
 				this.assemblyLiteral();
-				this.state = 1068;
+				this.state = 1080;
 				this.assemblyBlock();
 				}
 				break;
-			case 93:
+			case 95:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 1070;
-				this.match(SolidityParser.T__92);
-				this.state = 1071;
+				this.state = 1082;
+				this.match(SolidityParser.T__94);
+				this.state = 1083;
 				this.assemblyBlock();
 				}
 				break;
@@ -5583,40 +5639,40 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyFunctionDefinition(): AssemblyFunctionDefinitionContext {
 		let localctx: AssemblyFunctionDefinitionContext = new AssemblyFunctionDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 180, SolidityParser.RULE_assemblyFunctionDefinition);
+		this.enterRule(localctx, 182, SolidityParser.RULE_assemblyFunctionDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1074;
-			this.match(SolidityParser.T__37);
-			this.state = 1075;
+			this.state = 1086;
+			this.match(SolidityParser.T__39);
+			this.state = 1087;
 			this.identifier();
-			this.state = 1076;
+			this.state = 1088;
 			this.match(SolidityParser.T__22);
-			this.state = 1078;
+			this.state = 1090;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129) {
+			if (_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131) {
 				{
-				this.state = 1077;
+				this.state = 1089;
 				this.assemblyIdentifierList();
 				}
 			}
 
-			this.state = 1080;
+			this.state = 1092;
 			this.match(SolidityParser.T__23);
-			this.state = 1082;
+			this.state = 1094;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===94) {
+			if (_la===96) {
 				{
-				this.state = 1081;
+				this.state = 1093;
 				this.assemblyFunctionReturns();
 				}
 			}
 
-			this.state = 1084;
+			this.state = 1096;
 			this.assemblyBlock();
 			}
 		}
@@ -5637,14 +5693,14 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyFunctionReturns(): AssemblyFunctionReturnsContext {
 		let localctx: AssemblyFunctionReturnsContext = new AssemblyFunctionReturnsContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 182, SolidityParser.RULE_assemblyFunctionReturns);
+		this.enterRule(localctx, 184, SolidityParser.RULE_assemblyFunctionReturns);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			{
-			this.state = 1086;
-			this.match(SolidityParser.T__93);
-			this.state = 1087;
+			this.state = 1098;
+			this.match(SolidityParser.T__95);
+			this.state = 1099;
 			this.assemblyIdentifierList();
 			}
 			}
@@ -5666,87 +5722,87 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyFor(): AssemblyForContext {
 		let localctx: AssemblyForContext = new AssemblyForContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 184, SolidityParser.RULE_assemblyFor);
+		this.enterRule(localctx, 186, SolidityParser.RULE_assemblyFor);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1089;
-			this.match(SolidityParser.T__26);
-			this.state = 1092;
+			this.state = 1101;
+			this.match(SolidityParser.T__28);
+			this.state = 1104;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 15:
 				{
-				this.state = 1090;
+				this.state = 1102;
 				this.assemblyBlock();
 				}
 				break;
 			case 14:
-			case 25:
-			case 44:
-			case 50:
-			case 59:
-			case 62:
-			case 66:
-			case 95:
-			case 102:
-			case 103:
+			case 27:
+			case 46:
+			case 52:
+			case 61:
+			case 64:
+			case 68:
+			case 97:
 			case 104:
+			case 105:
 			case 106:
-			case 114:
-			case 118:
-			case 125:
-			case 126:
+			case 108:
+			case 116:
+			case 120:
+			case 127:
 			case 128:
-			case 129:
 			case 130:
+			case 131:
+			case 132:
 				{
-				this.state = 1091;
+				this.state = 1103;
 				this.assemblyExpression();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 1094;
+			this.state = 1106;
 			this.assemblyExpression();
-			this.state = 1097;
+			this.state = 1109;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 15:
 				{
-				this.state = 1095;
+				this.state = 1107;
 				this.assemblyBlock();
 				}
 				break;
 			case 14:
-			case 25:
-			case 44:
-			case 50:
-			case 59:
-			case 62:
-			case 66:
-			case 95:
-			case 102:
-			case 103:
+			case 27:
+			case 46:
+			case 52:
+			case 61:
+			case 64:
+			case 68:
+			case 97:
 			case 104:
+			case 105:
 			case 106:
-			case 114:
-			case 118:
-			case 125:
-			case 126:
+			case 108:
+			case 116:
+			case 120:
+			case 127:
 			case 128:
-			case 129:
 			case 130:
+			case 131:
+			case 132:
 				{
-				this.state = 1096;
+				this.state = 1108;
 				this.assemblyExpression();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 1099;
+			this.state = 1111;
 			this.assemblyBlock();
 			}
 		}
@@ -5767,15 +5823,15 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyIf(): AssemblyIfContext {
 		let localctx: AssemblyIfContext = new AssemblyIfContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 186, SolidityParser.RULE_assemblyIf);
+		this.enterRule(localctx, 188, SolidityParser.RULE_assemblyIf);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1101;
-			this.match(SolidityParser.T__50);
-			this.state = 1102;
+			this.state = 1113;
+			this.match(SolidityParser.T__52);
+			this.state = 1114;
 			this.assemblyExpression();
-			this.state = 1103;
+			this.state = 1115;
 			this.assemblyBlock();
 			}
 		}
@@ -5796,43 +5852,43 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public assemblyLiteral(): AssemblyLiteralContext {
 		let localctx: AssemblyLiteralContext = new AssemblyLiteralContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 188, SolidityParser.RULE_assemblyLiteral);
+		this.enterRule(localctx, 190, SolidityParser.RULE_assemblyLiteral);
 		try {
-			this.state = 1110;
+			this.state = 1122;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 130:
+			case 132:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 1105;
+				this.state = 1117;
 				this.stringLiteral();
 				}
 				break;
-			case 103:
+			case 105:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 1106;
+				this.state = 1118;
 				this.match(SolidityParser.DecimalNumber);
 				}
 				break;
-			case 104:
+			case 106:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 1107;
+				this.state = 1119;
 				this.match(SolidityParser.HexNumber);
 				}
 				break;
-			case 106:
+			case 108:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 1108;
+				this.state = 1120;
 				this.hexLiteral();
 				}
 				break;
-			case 102:
+			case 104:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 1109;
+				this.state = 1121;
 				this.match(SolidityParser.BooleanLiteral);
 				}
 				break;
@@ -5857,90 +5913,90 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public tupleExpression(): TupleExpressionContext {
 		let localctx: TupleExpressionContext = new TupleExpressionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 190, SolidityParser.RULE_tupleExpression);
+		this.enterRule(localctx, 192, SolidityParser.RULE_tupleExpression);
 		let _la: number;
 		try {
-			this.state = 1138;
+			this.state = 1150;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 23:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 1112;
+				this.state = 1124;
 				this.match(SolidityParser.T__22);
 				{
-				this.state = 1114;
+				this.state = 1126;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+				if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 					{
-					this.state = 1113;
+					this.state = 1125;
 					this.expression(0);
 					}
 				}
 
-				this.state = 1122;
+				this.state = 1134;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 1116;
+					this.state = 1128;
 					this.match(SolidityParser.T__15);
-					this.state = 1118;
+					this.state = 1130;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+					if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 						{
-						this.state = 1117;
+						this.state = 1129;
 						this.expression(0);
 						}
 					}
 
 					}
 					}
-					this.state = 1124;
+					this.state = 1136;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
 				}
-				this.state = 1125;
+				this.state = 1137;
 				this.match(SolidityParser.T__23);
 				}
 				break;
-			case 42:
+			case 44:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 1126;
-				this.match(SolidityParser.T__41);
-				this.state = 1135;
+				this.state = 1138;
+				this.match(SolidityParser.T__43);
+				this.state = 1147;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 3263184960) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4278194513) !== 0) || ((((_la - 71)) & ~0x1F) === 0 && ((1 << (_la - 71)) & 4244635651) !== 0) || ((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 248547339) !== 0)) {
+				if (((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 203555073) !== 0) || ((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 4278194513) !== 0) || ((((_la - 73)) & ~0x1F) === 0 && ((1 << (_la - 73)) & 4244635651) !== 0) || ((((_la - 105)) & ~0x1F) === 0 && ((1 << (_la - 105)) & 248547339) !== 0)) {
 					{
-					this.state = 1127;
+					this.state = 1139;
 					this.expression(0);
-					this.state = 1132;
+					this.state = 1144;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 					while (_la===16) {
 						{
 						{
-						this.state = 1128;
+						this.state = 1140;
 						this.match(SolidityParser.T__15);
-						this.state = 1129;
+						this.state = 1141;
 						this.expression(0);
 						}
 						}
-						this.state = 1134;
+						this.state = 1146;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 					}
 					}
 				}
 
-				this.state = 1137;
-				this.match(SolidityParser.T__42);
+				this.state = 1149;
+				this.match(SolidityParser.T__44);
 				}
 				break;
 			default:
@@ -5964,26 +6020,26 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public numberLiteral(): NumberLiteralContext {
 		let localctx: NumberLiteralContext = new NumberLiteralContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 192, SolidityParser.RULE_numberLiteral);
+		this.enterRule(localctx, 194, SolidityParser.RULE_numberLiteral);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1140;
+			this.state = 1152;
 			_la = this._input.LA(1);
-			if(!(_la===103 || _la===104)) {
+			if(!(_la===105 || _la===106)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
 				this._errHandler.reportMatch(this);
 			    this.consume();
 			}
-			this.state = 1142;
+			this.state = 1154;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 125, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 127, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1141;
+				this.state = 1153;
 				this.match(SolidityParser.NumberUnit);
 				}
 				break;
@@ -6007,14 +6063,14 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public identifier(): IdentifierContext {
 		let localctx: IdentifierContext = new IdentifierContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 194, SolidityParser.RULE_identifier);
+		this.enterRule(localctx, 196, SolidityParser.RULE_identifier);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1144;
+			this.state = 1156;
 			_la = this._input.LA(1);
-			if(!(_la===14 || _la===25 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 262209) !== 0) || ((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 3230138369) !== 0) || _la===128 || _la===129)) {
+			if(!(_la===14 || _la===27 || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 262209) !== 0) || ((((_la - 97)) & ~0x1F) === 0 && ((1 << (_la - 97)) & 3230138369) !== 0) || _la===130 || _la===131)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -6040,12 +6096,12 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public hexLiteral(): HexLiteralContext {
 		let localctx: HexLiteralContext = new HexLiteralContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 196, SolidityParser.RULE_hexLiteral);
+		this.enterRule(localctx, 198, SolidityParser.RULE_hexLiteral);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1147;
+			this.state = 1159;
 			this._errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -6053,7 +6109,7 @@ export default class SolidityParser extends Parser {
 				case 1:
 					{
 					{
-					this.state = 1146;
+					this.state = 1158;
 					this.match(SolidityParser.HexLiteralFragment);
 					}
 					}
@@ -6061,9 +6117,9 @@ export default class SolidityParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				this.state = 1149;
+				this.state = 1161;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 126, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 128, this._ctx);
 			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
@@ -6084,39 +6140,39 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public overrideSpecifier(): OverrideSpecifierContext {
 		let localctx: OverrideSpecifierContext = new OverrideSpecifierContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 198, SolidityParser.RULE_overrideSpecifier);
+		this.enterRule(localctx, 200, SolidityParser.RULE_overrideSpecifier);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1151;
-			this.match(SolidityParser.T__95);
 			this.state = 1163;
+			this.match(SolidityParser.T__97);
+			this.state = 1175;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===23) {
 				{
-				this.state = 1152;
+				this.state = 1164;
 				this.match(SolidityParser.T__22);
-				this.state = 1153;
+				this.state = 1165;
 				this.userDefinedTypeName();
-				this.state = 1158;
+				this.state = 1170;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===16) {
 					{
 					{
-					this.state = 1154;
+					this.state = 1166;
 					this.match(SolidityParser.T__15);
-					this.state = 1155;
+					this.state = 1167;
 					this.userDefinedTypeName();
 					}
 					}
-					this.state = 1160;
+					this.state = 1172;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 1161;
+				this.state = 1173;
 				this.match(SolidityParser.T__23);
 				}
 			}
@@ -6140,12 +6196,12 @@ export default class SolidityParser extends Parser {
 	// @RuleVersion(0)
 	public stringLiteral(): StringLiteralContext {
 		let localctx: StringLiteralContext = new StringLiteralContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 200, SolidityParser.RULE_stringLiteral);
+		this.enterRule(localctx, 202, SolidityParser.RULE_stringLiteral);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1166;
+			this.state = 1178;
 			this._errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -6153,7 +6209,7 @@ export default class SolidityParser extends Parser {
 				case 1:
 					{
 					{
-					this.state = 1165;
+					this.state = 1177;
 					this.match(SolidityParser.StringLiteralFragment);
 					}
 					}
@@ -6161,9 +6217,9 @@ export default class SolidityParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				this.state = 1168;
+				this.state = 1180;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 129, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 131, this._ctx);
 			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
@@ -6184,9 +6240,9 @@ export default class SolidityParser extends Parser {
 
 	public sempred(localctx: RuleContext, ruleIndex: number, predIndex: number): boolean {
 		switch (ruleIndex) {
-		case 38:
+		case 39:
 			return this.typeName_sempred(localctx as TypeNameContext, predIndex);
-		case 70:
+		case 71:
 			return this.expression_sempred(localctx as ExpressionContext, predIndex);
 		}
 		return true;
@@ -6242,7 +6298,7 @@ export default class SolidityParser extends Parser {
 		return true;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,134,1171,2,0,7,0,
+	public static readonly _serializedATN: number[] = [4,1,136,1183,2,0,7,0,
 	2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,
 	2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,
 	17,7,17,2,18,7,18,2,19,7,19,2,20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,
@@ -6256,406 +6312,412 @@ export default class SolidityParser extends Parser {
 	75,7,75,2,76,7,76,2,77,7,77,2,78,7,78,2,79,7,79,2,80,7,80,2,81,7,81,2,82,
 	7,82,2,83,7,83,2,84,7,84,2,85,7,85,2,86,7,86,2,87,7,87,2,88,7,88,2,89,7,
 	89,2,90,7,90,2,91,7,91,2,92,7,92,2,93,7,93,2,94,7,94,2,95,7,95,2,96,7,96,
-	2,97,7,97,2,98,7,98,2,99,7,99,2,100,7,100,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,
-	0,1,0,1,0,1,0,5,0,214,8,0,10,0,12,0,217,9,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,
-	1,2,1,2,1,3,1,3,1,3,3,3,231,8,3,1,4,1,4,3,4,235,8,4,1,4,5,4,238,8,4,10,
-	4,12,4,241,9,4,1,5,1,5,1,6,3,6,246,8,6,1,6,1,6,3,6,250,8,6,1,6,3,6,253,
-	8,6,1,7,1,7,1,7,3,7,258,8,7,1,8,1,8,1,8,1,8,3,8,264,8,8,1,8,1,8,1,8,1,8,
-	1,8,3,8,271,8,8,1,8,1,8,3,8,275,8,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,
-	5,8,286,8,8,10,8,12,8,289,9,8,1,8,1,8,1,8,1,8,1,8,3,8,296,8,8,1,9,1,9,1,
-	10,3,10,301,8,10,1,10,1,10,1,10,1,10,1,10,1,10,5,10,309,8,10,10,10,12,10,
-	312,9,10,3,10,314,8,10,1,10,1,10,5,10,318,8,10,10,10,12,10,321,9,10,1,10,
-	1,10,1,11,1,11,1,11,3,11,328,8,11,1,11,3,11,331,8,11,1,12,1,12,1,12,1,12,
-	1,12,1,12,1,12,1,12,1,12,3,12,342,8,12,1,13,1,13,1,13,1,13,1,13,1,13,1,
-	13,1,13,5,13,352,8,13,10,13,12,13,355,9,13,1,13,1,13,1,13,3,13,360,8,13,
-	1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,1,15,1,15,1,
-	16,1,16,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,17,3,17,387,8,17,1,17,
-	3,17,390,8,17,1,17,1,17,1,18,1,18,1,18,1,18,1,18,5,18,399,8,18,10,18,12,
-	18,402,9,18,1,18,1,18,3,18,406,8,18,1,19,1,19,1,19,3,19,411,8,19,1,20,1,
-	20,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,5,21,423,8,21,10,21,12,21,426,
-	9,21,3,21,428,8,21,1,21,1,21,1,22,1,22,1,22,3,22,435,8,22,1,22,1,22,5,22,
-	439,8,22,10,22,12,22,442,9,22,1,22,1,22,3,22,446,8,22,1,23,1,23,1,23,3,
-	23,451,8,23,1,23,3,23,454,8,23,1,24,1,24,1,24,1,24,3,24,460,8,24,1,24,1,
-	24,3,24,464,8,24,1,25,1,25,3,25,468,8,25,1,25,1,25,1,25,3,25,473,8,25,1,
-	26,1,26,1,26,1,27,1,27,1,27,1,27,1,27,1,27,1,27,1,27,5,27,486,8,27,10,27,
-	12,27,489,9,27,1,28,1,28,1,28,1,28,3,28,495,8,28,1,28,1,28,1,29,1,29,1,
-	30,1,30,1,30,1,30,3,30,505,8,30,1,30,1,30,5,30,509,8,30,10,30,12,30,512,
-	9,30,1,30,1,30,1,31,1,31,1,31,1,31,5,31,520,8,31,10,31,12,31,523,9,31,3,
-	31,525,8,31,1,31,1,31,1,32,1,32,3,32,531,8,32,1,32,3,32,534,8,32,1,33,1,
-	33,1,33,1,33,5,33,540,8,33,10,33,12,33,543,9,33,3,33,545,8,33,1,33,1,33,
-	1,34,1,34,3,34,551,8,34,1,34,3,34,554,8,34,1,35,1,35,1,35,1,35,5,35,560,
-	8,35,10,35,12,35,563,9,35,3,35,565,8,35,1,35,1,35,1,36,1,36,3,36,571,8,
-	36,1,37,1,37,3,37,575,8,37,1,37,1,37,1,38,1,38,1,38,1,38,1,38,1,38,1,38,
-	3,38,586,8,38,1,38,1,38,1,38,3,38,591,8,38,1,38,5,38,594,8,38,10,38,12,
-	38,597,9,38,1,39,1,39,1,39,5,39,602,8,39,10,39,12,39,605,9,39,1,40,1,40,
-	3,40,609,8,40,1,41,1,41,1,41,1,41,3,41,615,8,41,1,41,1,41,1,41,3,41,620,
-	8,41,1,41,1,41,1,42,1,42,1,43,1,43,1,44,1,44,1,44,1,44,1,44,5,44,633,8,
-	44,10,44,12,44,636,9,44,1,44,1,44,3,44,640,8,44,1,45,1,45,1,46,1,46,1,47,
-	1,47,5,47,648,8,47,10,47,12,47,651,9,47,1,47,1,47,1,48,1,48,1,48,1,48,1,
-	48,1,48,1,48,1,48,1,48,1,48,1,48,1,48,1,48,1,48,1,48,3,48,670,8,48,1,49,
-	1,49,1,49,1,50,1,50,1,50,1,50,1,50,1,50,1,50,3,50,682,8,50,1,51,1,51,1,
-	51,3,51,687,8,51,1,51,1,51,4,51,691,8,51,11,51,12,51,692,1,52,1,52,3,52,
-	697,8,52,1,52,3,52,700,8,52,1,52,1,52,1,53,1,53,1,53,1,53,1,53,1,53,1,54,
-	1,54,3,54,712,8,54,1,55,1,55,1,55,1,56,1,56,1,56,1,56,3,56,721,8,56,1,56,
-	1,56,3,56,725,8,56,1,56,3,56,728,8,56,1,56,1,56,1,56,1,57,1,57,3,57,735,
-	8,57,1,57,1,57,1,57,1,57,3,57,741,8,57,1,57,1,57,1,58,1,58,1,59,1,59,1,
-	59,1,59,1,59,1,59,1,59,1,59,1,60,1,60,1,60,1,61,1,61,1,61,1,62,1,62,3,62,
-	763,8,62,1,62,1,62,1,63,1,63,1,63,1,64,1,64,1,64,1,64,1,65,1,65,1,65,1,
-	65,1,66,1,66,1,66,1,66,1,66,1,66,1,66,3,66,785,8,66,1,66,1,66,3,66,789,
-	8,66,1,66,1,66,1,67,3,67,794,8,67,1,67,1,67,3,67,798,8,67,5,67,800,8,67,
-	10,67,12,67,803,9,67,1,68,1,68,3,68,807,8,68,1,68,5,68,810,8,68,10,68,12,
-	68,813,9,68,1,68,3,68,816,8,68,1,68,1,68,1,69,1,69,1,70,1,70,1,70,1,70,
-	1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,3,
-	70,840,8,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,
-	1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,
-	70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,
-	1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,3,70,894,8,70,1,
-	70,1,70,3,70,898,8,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,1,70,
-	1,70,1,70,1,70,1,70,5,70,914,8,70,10,70,12,70,917,9,70,1,71,1,71,1,71,1,
-	71,1,71,1,71,1,71,1,71,1,71,3,71,928,8,71,1,72,1,72,1,72,5,72,933,8,72,
-	10,72,12,72,936,9,72,1,73,1,73,1,73,5,73,941,8,73,10,73,12,73,944,9,73,
-	1,73,3,73,947,8,73,1,74,1,74,1,74,1,74,1,75,1,75,3,75,955,8,75,1,75,1,75,
-	3,75,959,8,75,3,75,961,8,75,1,76,1,76,1,76,1,76,1,76,1,77,1,77,5,77,970,
-	8,77,10,77,12,77,973,9,77,1,77,1,77,1,78,1,78,1,78,1,78,1,78,1,78,1,78,
-	1,78,1,78,1,78,1,78,1,78,1,78,1,78,1,78,1,78,1,78,3,78,994,8,78,1,79,1,
-	79,1,79,3,79,999,8,79,1,80,1,80,1,80,1,80,1,81,1,81,1,81,1,81,3,81,1009,
-	8,81,1,81,1,81,3,81,1013,8,81,1,81,1,81,5,81,1017,8,81,10,81,12,81,1020,
-	9,81,1,81,3,81,1023,8,81,1,82,1,82,1,82,1,82,3,82,1029,8,82,1,83,1,83,1,
-	83,1,83,1,84,1,84,1,84,1,84,1,84,1,84,1,84,3,84,1042,8,84,1,85,1,85,1,85,
-	5,85,1047,8,85,10,85,12,85,1050,9,85,1,86,1,86,1,86,1,86,1,87,1,87,1,87,
-	1,88,1,88,1,88,5,88,1062,8,88,10,88,12,88,1065,9,88,1,89,1,89,1,89,1,89,
-	1,89,1,89,3,89,1073,8,89,1,90,1,90,1,90,1,90,3,90,1079,8,90,1,90,1,90,3,
-	90,1083,8,90,1,90,1,90,1,91,1,91,1,91,1,92,1,92,1,92,3,92,1093,8,92,1,92,
-	1,92,1,92,3,92,1098,8,92,1,92,1,92,1,93,1,93,1,93,1,93,1,94,1,94,1,94,1,
-	94,1,94,3,94,1111,8,94,1,95,1,95,3,95,1115,8,95,1,95,1,95,3,95,1119,8,95,
-	5,95,1121,8,95,10,95,12,95,1124,9,95,1,95,1,95,1,95,1,95,1,95,5,95,1131,
-	8,95,10,95,12,95,1134,9,95,3,95,1136,8,95,1,95,3,95,1139,8,95,1,96,1,96,
-	3,96,1143,8,96,1,97,1,97,1,98,4,98,1148,8,98,11,98,12,98,1149,1,99,1,99,
-	1,99,1,99,1,99,5,99,1157,8,99,10,99,12,99,1160,9,99,1,99,1,99,3,99,1164,
-	8,99,1,100,4,100,1167,8,100,11,100,12,100,1168,1,100,0,2,76,140,101,0,2,
-	4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,
-	54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,
-	102,104,106,108,110,112,114,116,118,120,122,124,126,128,130,132,134,136,
-	138,140,142,144,146,148,150,152,154,156,158,160,162,164,166,168,170,172,
-	174,176,178,180,182,184,186,188,190,192,194,196,198,200,0,15,1,0,5,11,1,
-	0,19,21,3,0,3,3,5,10,28,35,1,0,48,50,4,0,110,110,118,118,122,122,124,124,
-	3,0,44,44,63,66,97,101,1,0,67,68,1,0,30,31,2,0,3,3,32,33,1,0,74,75,1,0,
-	7,10,1,0,34,35,2,0,11,11,78,87,1,0,103,104,10,0,14,14,25,25,44,44,50,50,
-	62,62,95,95,114,114,118,118,125,126,128,129,1301,0,215,1,0,0,0,2,220,1,
-	0,0,0,4,225,1,0,0,0,6,230,1,0,0,0,8,232,1,0,0,0,10,242,1,0,0,0,12,252,1,
-	0,0,0,14,254,1,0,0,0,16,295,1,0,0,0,18,297,1,0,0,0,20,300,1,0,0,0,22,324,
-	1,0,0,0,24,341,1,0,0,0,26,343,1,0,0,0,28,363,1,0,0,0,30,370,1,0,0,0,32,
-	375,1,0,0,0,34,381,1,0,0,0,36,405,1,0,0,0,38,407,1,0,0,0,40,412,1,0,0,0,
-	42,414,1,0,0,0,44,431,1,0,0,0,46,447,1,0,0,0,48,455,1,0,0,0,50,472,1,0,
-	0,0,52,474,1,0,0,0,54,487,1,0,0,0,56,490,1,0,0,0,58,498,1,0,0,0,60,500,
-	1,0,0,0,62,515,1,0,0,0,64,528,1,0,0,0,66,535,1,0,0,0,68,548,1,0,0,0,70,
-	555,1,0,0,0,72,568,1,0,0,0,74,572,1,0,0,0,76,585,1,0,0,0,78,598,1,0,0,0,
-	80,608,1,0,0,0,82,610,1,0,0,0,84,623,1,0,0,0,86,625,1,0,0,0,88,627,1,0,
-	0,0,90,641,1,0,0,0,92,643,1,0,0,0,94,645,1,0,0,0,96,669,1,0,0,0,98,671,
-	1,0,0,0,100,674,1,0,0,0,102,683,1,0,0,0,104,694,1,0,0,0,106,703,1,0,0,0,
-	108,711,1,0,0,0,110,713,1,0,0,0,112,716,1,0,0,0,114,732,1,0,0,0,116,744,
-	1,0,0,0,118,746,1,0,0,0,120,754,1,0,0,0,122,757,1,0,0,0,124,760,1,0,0,0,
-	126,766,1,0,0,0,128,769,1,0,0,0,130,773,1,0,0,0,132,784,1,0,0,0,134,793,
-	1,0,0,0,136,804,1,0,0,0,138,819,1,0,0,0,140,839,1,0,0,0,142,927,1,0,0,0,
-	144,929,1,0,0,0,146,937,1,0,0,0,148,948,1,0,0,0,150,960,1,0,0,0,152,962,
-	1,0,0,0,154,967,1,0,0,0,156,993,1,0,0,0,158,998,1,0,0,0,160,1000,1,0,0,
-	0,162,1008,1,0,0,0,164,1024,1,0,0,0,166,1030,1,0,0,0,168,1041,1,0,0,0,170,
-	1043,1,0,0,0,172,1051,1,0,0,0,174,1055,1,0,0,0,176,1058,1,0,0,0,178,1072,
-	1,0,0,0,180,1074,1,0,0,0,182,1086,1,0,0,0,184,1089,1,0,0,0,186,1101,1,0,
-	0,0,188,1110,1,0,0,0,190,1138,1,0,0,0,192,1140,1,0,0,0,194,1144,1,0,0,0,
-	196,1147,1,0,0,0,198,1151,1,0,0,0,200,1166,1,0,0,0,202,214,3,2,1,0,203,
-	214,3,16,8,0,204,214,3,20,10,0,205,214,3,60,30,0,206,214,3,56,28,0,207,
-	214,3,42,21,0,208,214,3,48,24,0,209,214,3,28,14,0,210,214,3,30,15,0,211,
-	214,3,32,16,0,212,214,3,34,17,0,213,202,1,0,0,0,213,203,1,0,0,0,213,204,
-	1,0,0,0,213,205,1,0,0,0,213,206,1,0,0,0,213,207,1,0,0,0,213,208,1,0,0,0,
-	213,209,1,0,0,0,213,210,1,0,0,0,213,211,1,0,0,0,213,212,1,0,0,0,214,217,
-	1,0,0,0,215,213,1,0,0,0,215,216,1,0,0,0,216,218,1,0,0,0,217,215,1,0,0,0,
-	218,219,5,0,0,1,219,1,1,0,0,0,220,221,5,1,0,0,221,222,3,4,2,0,222,223,3,
-	6,3,0,223,224,5,2,0,0,224,3,1,0,0,0,225,226,3,194,97,0,226,5,1,0,0,0,227,
-	231,5,3,0,0,228,231,3,8,4,0,229,231,3,140,70,0,230,227,1,0,0,0,230,228,
-	1,0,0,0,230,229,1,0,0,0,231,7,1,0,0,0,232,239,3,12,6,0,233,235,5,4,0,0,
-	234,233,1,0,0,0,234,235,1,0,0,0,235,236,1,0,0,0,236,238,3,12,6,0,237,234,
-	1,0,0,0,238,241,1,0,0,0,239,237,1,0,0,0,239,240,1,0,0,0,240,9,1,0,0,0,241,
-	239,1,0,0,0,242,243,7,0,0,0,243,11,1,0,0,0,244,246,3,10,5,0,245,244,1,0,
-	0,0,245,246,1,0,0,0,246,247,1,0,0,0,247,253,5,131,0,0,248,250,3,10,5,0,
-	249,248,1,0,0,0,249,250,1,0,0,0,250,251,1,0,0,0,251,253,5,103,0,0,252,245,
-	1,0,0,0,252,249,1,0,0,0,253,13,1,0,0,0,254,257,3,194,97,0,255,256,5,12,
-	0,0,256,258,3,194,97,0,257,255,1,0,0,0,257,258,1,0,0,0,258,15,1,0,0,0,259,
-	260,5,13,0,0,260,263,3,18,9,0,261,262,5,12,0,0,262,264,3,194,97,0,263,261,
-	1,0,0,0,263,264,1,0,0,0,264,265,1,0,0,0,265,266,5,2,0,0,266,296,1,0,0,0,
-	267,270,5,13,0,0,268,271,5,3,0,0,269,271,3,194,97,0,270,268,1,0,0,0,270,
-	269,1,0,0,0,271,274,1,0,0,0,272,273,5,12,0,0,273,275,3,194,97,0,274,272,
-	1,0,0,0,274,275,1,0,0,0,275,276,1,0,0,0,276,277,5,14,0,0,277,278,3,18,9,
-	0,278,279,5,2,0,0,279,296,1,0,0,0,280,281,5,13,0,0,281,282,5,15,0,0,282,
-	287,3,14,7,0,283,284,5,16,0,0,284,286,3,14,7,0,285,283,1,0,0,0,286,289,
-	1,0,0,0,287,285,1,0,0,0,287,288,1,0,0,0,288,290,1,0,0,0,289,287,1,0,0,0,
-	290,291,5,17,0,0,291,292,5,14,0,0,292,293,3,18,9,0,293,294,5,2,0,0,294,
-	296,1,0,0,0,295,259,1,0,0,0,295,267,1,0,0,0,295,280,1,0,0,0,296,17,1,0,
-	0,0,297,298,5,130,0,0,298,19,1,0,0,0,299,301,5,18,0,0,300,299,1,0,0,0,300,
-	301,1,0,0,0,301,302,1,0,0,0,302,303,7,1,0,0,303,313,3,194,97,0,304,305,
-	5,22,0,0,305,310,3,22,11,0,306,307,5,16,0,0,307,309,3,22,11,0,308,306,1,
-	0,0,0,309,312,1,0,0,0,310,308,1,0,0,0,310,311,1,0,0,0,311,314,1,0,0,0,312,
-	310,1,0,0,0,313,304,1,0,0,0,313,314,1,0,0,0,314,315,1,0,0,0,315,319,5,15,
-	0,0,316,318,3,24,12,0,317,316,1,0,0,0,318,321,1,0,0,0,319,317,1,0,0,0,319,
-	320,1,0,0,0,320,322,1,0,0,0,321,319,1,0,0,0,322,323,5,17,0,0,323,21,1,0,
-	0,0,324,330,3,78,39,0,325,327,5,23,0,0,326,328,3,144,72,0,327,326,1,0,0,
-	0,327,328,1,0,0,0,328,329,1,0,0,0,329,331,5,24,0,0,330,325,1,0,0,0,330,
-	331,1,0,0,0,331,23,1,0,0,0,332,342,3,26,13,0,333,342,3,34,17,0,334,342,
-	3,42,21,0,335,342,3,44,22,0,336,342,3,48,24,0,337,342,3,56,28,0,338,342,
-	3,60,30,0,339,342,3,30,15,0,340,342,3,32,16,0,341,332,1,0,0,0,341,333,1,
-	0,0,0,341,334,1,0,0,0,341,335,1,0,0,0,341,336,1,0,0,0,341,337,1,0,0,0,341,
-	338,1,0,0,0,341,339,1,0,0,0,341,340,1,0,0,0,342,25,1,0,0,0,343,353,3,76,
-	38,0,344,352,5,120,0,0,345,352,5,117,0,0,346,352,5,119,0,0,347,352,5,110,
-	0,0,348,352,5,111,0,0,349,352,5,112,0,0,350,352,3,198,99,0,351,344,1,0,
-	0,0,351,345,1,0,0,0,351,346,1,0,0,0,351,347,1,0,0,0,351,348,1,0,0,0,351,
-	349,1,0,0,0,351,350,1,0,0,0,352,355,1,0,0,0,353,351,1,0,0,0,353,354,1,0,
-	0,0,354,356,1,0,0,0,355,353,1,0,0,0,356,359,3,194,97,0,357,358,5,11,0,0,
-	358,360,3,140,70,0,359,357,1,0,0,0,359,360,1,0,0,0,360,361,1,0,0,0,361,
-	362,5,2,0,0,362,27,1,0,0,0,363,364,3,76,38,0,364,365,5,110,0,0,365,366,
-	3,194,97,0,366,367,5,11,0,0,367,368,3,140,70,0,368,369,5,2,0,0,369,29,1,
-	0,0,0,370,371,5,25,0,0,371,372,3,194,97,0,372,373,3,62,31,0,373,374,5,2,
-	0,0,374,31,1,0,0,0,375,376,5,123,0,0,376,377,3,194,97,0,377,378,5,22,0,
-	0,378,379,3,138,69,0,379,380,5,2,0,0,380,33,1,0,0,0,381,382,5,26,0,0,382,
-	383,3,36,18,0,383,386,5,27,0,0,384,387,5,3,0,0,385,387,3,76,38,0,386,384,
-	1,0,0,0,386,385,1,0,0,0,387,389,1,0,0,0,388,390,5,125,0,0,389,388,1,0,0,
-	0,389,390,1,0,0,0,390,391,1,0,0,0,391,392,5,2,0,0,392,35,1,0,0,0,393,406,
-	3,78,39,0,394,395,5,15,0,0,395,400,3,38,19,0,396,397,5,16,0,0,397,399,3,
-	38,19,0,398,396,1,0,0,0,399,402,1,0,0,0,400,398,1,0,0,0,400,401,1,0,0,0,
-	401,403,1,0,0,0,402,400,1,0,0,0,403,404,5,17,0,0,404,406,1,0,0,0,405,393,
-	1,0,0,0,405,394,1,0,0,0,406,37,1,0,0,0,407,410,3,78,39,0,408,409,5,12,0,
-	0,409,411,3,40,20,0,410,408,1,0,0,0,410,411,1,0,0,0,411,39,1,0,0,0,412,
-	413,7,2,0,0,413,41,1,0,0,0,414,415,5,36,0,0,415,416,3,194,97,0,416,427,
-	5,15,0,0,417,418,3,74,37,0,418,424,5,2,0,0,419,420,3,74,37,0,420,421,5,
-	2,0,0,421,423,1,0,0,0,422,419,1,0,0,0,423,426,1,0,0,0,424,422,1,0,0,0,424,
-	425,1,0,0,0,425,428,1,0,0,0,426,424,1,0,0,0,427,417,1,0,0,0,427,428,1,0,
-	0,0,428,429,1,0,0,0,429,430,5,17,0,0,430,43,1,0,0,0,431,432,5,37,0,0,432,
-	434,3,194,97,0,433,435,3,62,31,0,434,433,1,0,0,0,434,435,1,0,0,0,435,440,
-	1,0,0,0,436,439,5,121,0,0,437,439,3,198,99,0,438,436,1,0,0,0,438,437,1,
-	0,0,0,439,442,1,0,0,0,440,438,1,0,0,0,440,441,1,0,0,0,441,445,1,0,0,0,442,
-	440,1,0,0,0,443,446,5,2,0,0,444,446,3,94,47,0,445,443,1,0,0,0,445,444,1,
-	0,0,0,446,45,1,0,0,0,447,453,3,194,97,0,448,450,5,23,0,0,449,451,3,144,
-	72,0,450,449,1,0,0,0,450,451,1,0,0,0,451,452,1,0,0,0,452,454,5,24,0,0,453,
-	448,1,0,0,0,453,454,1,0,0,0,454,47,1,0,0,0,455,456,3,50,25,0,456,457,3,
-	62,31,0,457,459,3,54,27,0,458,460,3,52,26,0,459,458,1,0,0,0,459,460,1,0,
-	0,0,460,463,1,0,0,0,461,464,5,2,0,0,462,464,3,94,47,0,463,461,1,0,0,0,463,
-	462,1,0,0,0,464,49,1,0,0,0,465,467,5,38,0,0,466,468,3,194,97,0,467,466,
-	1,0,0,0,467,468,1,0,0,0,468,473,1,0,0,0,469,473,5,126,0,0,470,473,5,127,
-	0,0,471,473,5,128,0,0,472,465,1,0,0,0,472,469,1,0,0,0,472,470,1,0,0,0,472,
-	471,1,0,0,0,473,51,1,0,0,0,474,475,5,39,0,0,475,476,3,62,31,0,476,53,1,
-	0,0,0,477,486,5,115,0,0,478,486,5,120,0,0,479,486,5,117,0,0,480,486,5,119,
-	0,0,481,486,5,121,0,0,482,486,3,92,46,0,483,486,3,46,23,0,484,486,3,198,
-	99,0,485,477,1,0,0,0,485,478,1,0,0,0,485,479,1,0,0,0,485,480,1,0,0,0,485,
-	481,1,0,0,0,485,482,1,0,0,0,485,483,1,0,0,0,485,484,1,0,0,0,486,489,1,0,
-	0,0,487,485,1,0,0,0,487,488,1,0,0,0,488,55,1,0,0,0,489,487,1,0,0,0,490,
-	491,5,40,0,0,491,492,3,194,97,0,492,494,3,66,33,0,493,495,5,108,0,0,494,
-	493,1,0,0,0,494,495,1,0,0,0,495,496,1,0,0,0,496,497,5,2,0,0,497,57,1,0,
-	0,0,498,499,3,194,97,0,499,59,1,0,0,0,500,501,5,41,0,0,501,502,3,194,97,
-	0,502,504,5,15,0,0,503,505,3,58,29,0,504,503,1,0,0,0,504,505,1,0,0,0,505,
-	510,1,0,0,0,506,507,5,16,0,0,507,509,3,58,29,0,508,506,1,0,0,0,509,512,
-	1,0,0,0,510,508,1,0,0,0,510,511,1,0,0,0,511,513,1,0,0,0,512,510,1,0,0,0,
-	513,514,5,17,0,0,514,61,1,0,0,0,515,524,5,23,0,0,516,521,3,64,32,0,517,
-	518,5,16,0,0,518,520,3,64,32,0,519,517,1,0,0,0,520,523,1,0,0,0,521,519,
-	1,0,0,0,521,522,1,0,0,0,522,525,1,0,0,0,523,521,1,0,0,0,524,516,1,0,0,0,
-	524,525,1,0,0,0,525,526,1,0,0,0,526,527,5,24,0,0,527,63,1,0,0,0,528,530,
-	3,76,38,0,529,531,3,90,45,0,530,529,1,0,0,0,530,531,1,0,0,0,531,533,1,0,
-	0,0,532,534,3,194,97,0,533,532,1,0,0,0,533,534,1,0,0,0,534,65,1,0,0,0,535,
-	544,5,23,0,0,536,541,3,68,34,0,537,538,5,16,0,0,538,540,3,68,34,0,539,537,
-	1,0,0,0,540,543,1,0,0,0,541,539,1,0,0,0,541,542,1,0,0,0,542,545,1,0,0,0,
-	543,541,1,0,0,0,544,536,1,0,0,0,544,545,1,0,0,0,545,546,1,0,0,0,546,547,
-	5,24,0,0,547,67,1,0,0,0,548,550,3,76,38,0,549,551,5,116,0,0,550,549,1,0,
-	0,0,550,551,1,0,0,0,551,553,1,0,0,0,552,554,3,194,97,0,553,552,1,0,0,0,
-	553,554,1,0,0,0,554,69,1,0,0,0,555,564,5,23,0,0,556,561,3,72,36,0,557,558,
-	5,16,0,0,558,560,3,72,36,0,559,557,1,0,0,0,560,563,1,0,0,0,561,559,1,0,
-	0,0,561,562,1,0,0,0,562,565,1,0,0,0,563,561,1,0,0,0,564,556,1,0,0,0,564,
-	565,1,0,0,0,565,566,1,0,0,0,566,567,5,24,0,0,567,71,1,0,0,0,568,570,3,76,
-	38,0,569,571,3,90,45,0,570,569,1,0,0,0,570,571,1,0,0,0,571,73,1,0,0,0,572,
-	574,3,76,38,0,573,575,3,90,45,0,574,573,1,0,0,0,574,575,1,0,0,0,575,576,
-	1,0,0,0,576,577,3,194,97,0,577,75,1,0,0,0,578,579,6,38,-1,0,579,586,3,138,
-	69,0,580,586,3,78,39,0,581,586,3,82,41,0,582,586,3,88,44,0,583,584,5,44,
-	0,0,584,586,5,118,0,0,585,578,1,0,0,0,585,580,1,0,0,0,585,581,1,0,0,0,585,
-	582,1,0,0,0,585,583,1,0,0,0,586,595,1,0,0,0,587,588,10,3,0,0,588,590,5,
-	42,0,0,589,591,3,140,70,0,590,589,1,0,0,0,590,591,1,0,0,0,591,592,1,0,0,
-	0,592,594,5,43,0,0,593,587,1,0,0,0,594,597,1,0,0,0,595,593,1,0,0,0,595,
-	596,1,0,0,0,596,77,1,0,0,0,597,595,1,0,0,0,598,603,3,194,97,0,599,600,5,
-	45,0,0,600,602,3,194,97,0,601,599,1,0,0,0,602,605,1,0,0,0,603,601,1,0,0,
-	0,603,604,1,0,0,0,604,79,1,0,0,0,605,603,1,0,0,0,606,609,3,138,69,0,607,
-	609,3,78,39,0,608,606,1,0,0,0,608,607,1,0,0,0,609,81,1,0,0,0,610,611,5,
-	46,0,0,611,612,5,23,0,0,612,614,3,80,40,0,613,615,3,84,42,0,614,613,1,0,
-	0,0,614,615,1,0,0,0,615,616,1,0,0,0,616,617,5,47,0,0,617,619,3,76,38,0,
-	618,620,3,86,43,0,619,618,1,0,0,0,619,620,1,0,0,0,620,621,1,0,0,0,621,622,
-	5,24,0,0,622,83,1,0,0,0,623,624,3,194,97,0,624,85,1,0,0,0,625,626,3,194,
-	97,0,626,87,1,0,0,0,627,628,5,38,0,0,628,634,3,70,35,0,629,633,5,117,0,
-	0,630,633,5,115,0,0,631,633,3,92,46,0,632,629,1,0,0,0,632,630,1,0,0,0,632,
-	631,1,0,0,0,633,636,1,0,0,0,634,632,1,0,0,0,634,635,1,0,0,0,635,639,1,0,
-	0,0,636,634,1,0,0,0,637,638,5,39,0,0,638,640,3,70,35,0,639,637,1,0,0,0,
-	639,640,1,0,0,0,640,89,1,0,0,0,641,642,7,3,0,0,642,91,1,0,0,0,643,644,7,
-	4,0,0,644,93,1,0,0,0,645,649,5,15,0,0,646,648,3,96,48,0,647,646,1,0,0,0,
-	648,651,1,0,0,0,649,647,1,0,0,0,649,650,1,0,0,0,650,652,1,0,0,0,651,649,
-	1,0,0,0,652,653,5,17,0,0,653,95,1,0,0,0,654,670,3,100,50,0,655,670,3,102,
-	51,0,656,670,3,106,53,0,657,670,3,112,56,0,658,670,3,94,47,0,659,670,3,
-	114,57,0,660,670,3,118,59,0,661,670,3,120,60,0,662,670,3,122,61,0,663,670,
-	3,124,62,0,664,670,3,126,63,0,665,670,3,128,64,0,666,670,3,108,54,0,667,
-	670,3,110,55,0,668,670,3,130,65,0,669,654,1,0,0,0,669,655,1,0,0,0,669,656,
-	1,0,0,0,669,657,1,0,0,0,669,658,1,0,0,0,669,659,1,0,0,0,669,660,1,0,0,0,
-	669,661,1,0,0,0,669,662,1,0,0,0,669,663,1,0,0,0,669,664,1,0,0,0,669,665,
-	1,0,0,0,669,666,1,0,0,0,669,667,1,0,0,0,669,668,1,0,0,0,670,97,1,0,0,0,
-	671,672,3,140,70,0,672,673,5,2,0,0,673,99,1,0,0,0,674,675,5,51,0,0,675,
-	676,5,23,0,0,676,677,3,140,70,0,677,678,5,24,0,0,678,681,3,96,48,0,679,
-	680,5,52,0,0,680,682,3,96,48,0,681,679,1,0,0,0,681,682,1,0,0,0,682,101,
-	1,0,0,0,683,684,5,53,0,0,684,686,3,140,70,0,685,687,3,52,26,0,686,685,1,
-	0,0,0,686,687,1,0,0,0,687,688,1,0,0,0,688,690,3,94,47,0,689,691,3,104,52,
-	0,690,689,1,0,0,0,691,692,1,0,0,0,692,690,1,0,0,0,692,693,1,0,0,0,693,103,
-	1,0,0,0,694,699,5,54,0,0,695,697,3,194,97,0,696,695,1,0,0,0,696,697,1,0,
-	0,0,697,698,1,0,0,0,698,700,3,62,31,0,699,696,1,0,0,0,699,700,1,0,0,0,700,
-	701,1,0,0,0,701,702,3,94,47,0,702,105,1,0,0,0,703,704,5,55,0,0,704,705,
-	5,23,0,0,705,706,3,140,70,0,706,707,5,24,0,0,707,708,3,96,48,0,708,107,
-	1,0,0,0,709,712,3,132,66,0,710,712,3,98,49,0,711,709,1,0,0,0,711,710,1,
-	0,0,0,712,109,1,0,0,0,713,714,5,56,0,0,714,715,3,94,47,0,715,111,1,0,0,
-	0,716,717,5,27,0,0,717,720,5,23,0,0,718,721,3,108,54,0,719,721,5,2,0,0,
-	720,718,1,0,0,0,720,719,1,0,0,0,721,724,1,0,0,0,722,725,3,98,49,0,723,725,
-	5,2,0,0,724,722,1,0,0,0,724,723,1,0,0,0,725,727,1,0,0,0,726,728,3,140,70,
-	0,727,726,1,0,0,0,727,728,1,0,0,0,728,729,1,0,0,0,729,730,5,24,0,0,730,
-	731,3,96,48,0,731,113,1,0,0,0,732,734,5,57,0,0,733,735,5,130,0,0,734,733,
-	1,0,0,0,734,735,1,0,0,0,735,740,1,0,0,0,736,737,5,23,0,0,737,738,3,116,
-	58,0,738,739,5,24,0,0,739,741,1,0,0,0,740,736,1,0,0,0,740,741,1,0,0,0,741,
-	742,1,0,0,0,742,743,3,154,77,0,743,115,1,0,0,0,744,745,3,200,100,0,745,
-	117,1,0,0,0,746,747,5,58,0,0,747,748,3,96,48,0,748,749,5,55,0,0,749,750,
-	5,23,0,0,750,751,3,140,70,0,751,752,5,24,0,0,752,753,5,2,0,0,753,119,1,
-	0,0,0,754,755,5,113,0,0,755,756,5,2,0,0,756,121,1,0,0,0,757,758,5,109,0,
-	0,758,759,5,2,0,0,759,123,1,0,0,0,760,762,5,59,0,0,761,763,3,140,70,0,762,
-	761,1,0,0,0,762,763,1,0,0,0,763,764,1,0,0,0,764,765,5,2,0,0,765,125,1,0,
-	0,0,766,767,5,60,0,0,767,768,5,2,0,0,768,127,1,0,0,0,769,770,5,61,0,0,770,
-	771,3,152,76,0,771,772,5,2,0,0,772,129,1,0,0,0,773,774,5,62,0,0,774,775,
-	3,152,76,0,775,776,5,2,0,0,776,131,1,0,0,0,777,778,5,63,0,0,778,785,3,136,
-	68,0,779,785,3,74,37,0,780,781,5,23,0,0,781,782,3,134,67,0,782,783,5,24,
-	0,0,783,785,1,0,0,0,784,777,1,0,0,0,784,779,1,0,0,0,784,780,1,0,0,0,785,
-	788,1,0,0,0,786,787,5,11,0,0,787,789,3,140,70,0,788,786,1,0,0,0,788,789,
-	1,0,0,0,789,790,1,0,0,0,790,791,5,2,0,0,791,133,1,0,0,0,792,794,3,74,37,
-	0,793,792,1,0,0,0,793,794,1,0,0,0,794,801,1,0,0,0,795,797,5,16,0,0,796,
-	798,3,74,37,0,797,796,1,0,0,0,797,798,1,0,0,0,798,800,1,0,0,0,799,795,1,
-	0,0,0,800,803,1,0,0,0,801,799,1,0,0,0,801,802,1,0,0,0,802,135,1,0,0,0,803,
-	801,1,0,0,0,804,811,5,23,0,0,805,807,3,194,97,0,806,805,1,0,0,0,806,807,
-	1,0,0,0,807,808,1,0,0,0,808,810,5,16,0,0,809,806,1,0,0,0,810,813,1,0,0,
-	0,811,809,1,0,0,0,811,812,1,0,0,0,812,815,1,0,0,0,813,811,1,0,0,0,814,816,
-	3,194,97,0,815,814,1,0,0,0,815,816,1,0,0,0,816,817,1,0,0,0,817,818,5,24,
-	0,0,818,137,1,0,0,0,819,820,7,5,0,0,820,139,1,0,0,0,821,822,6,70,-1,0,822,
-	823,5,69,0,0,823,840,3,76,38,0,824,825,5,23,0,0,825,826,3,140,70,0,826,
-	827,5,24,0,0,827,840,1,0,0,0,828,829,7,6,0,0,829,840,3,140,70,19,830,831,
-	7,7,0,0,831,840,3,140,70,18,832,833,5,71,0,0,833,840,3,140,70,17,834,835,
-	5,72,0,0,835,840,3,140,70,16,836,837,5,6,0,0,837,840,3,140,70,15,838,840,
-	3,142,71,0,839,821,1,0,0,0,839,824,1,0,0,0,839,828,1,0,0,0,839,830,1,0,
-	0,0,839,832,1,0,0,0,839,834,1,0,0,0,839,836,1,0,0,0,839,838,1,0,0,0,840,
-	915,1,0,0,0,841,842,10,14,0,0,842,843,5,73,0,0,843,914,3,140,70,14,844,
-	845,10,13,0,0,845,846,7,8,0,0,846,914,3,140,70,14,847,848,10,12,0,0,848,
-	849,7,7,0,0,849,914,3,140,70,13,850,851,10,11,0,0,851,852,7,9,0,0,852,914,
-	3,140,70,12,853,854,10,10,0,0,854,855,5,29,0,0,855,914,3,140,70,11,856,
-	857,10,9,0,0,857,858,5,5,0,0,858,914,3,140,70,10,859,860,10,8,0,0,860,861,
-	5,28,0,0,861,914,3,140,70,9,862,863,10,7,0,0,863,864,7,10,0,0,864,914,3,
-	140,70,8,865,866,10,6,0,0,866,867,7,11,0,0,867,914,3,140,70,7,868,869,10,
-	5,0,0,869,870,5,76,0,0,870,914,3,140,70,6,871,872,10,4,0,0,872,873,5,4,
-	0,0,873,914,3,140,70,5,874,875,10,3,0,0,875,876,5,77,0,0,876,877,3,140,
-	70,0,877,878,5,70,0,0,878,879,3,140,70,3,879,914,1,0,0,0,880,881,10,2,0,
-	0,881,882,7,12,0,0,882,914,3,140,70,3,883,884,10,27,0,0,884,914,7,6,0,0,
-	885,886,10,25,0,0,886,887,5,42,0,0,887,888,3,140,70,0,888,889,5,43,0,0,
-	889,914,1,0,0,0,890,891,10,24,0,0,891,893,5,42,0,0,892,894,3,140,70,0,893,
-	892,1,0,0,0,893,894,1,0,0,0,894,895,1,0,0,0,895,897,5,70,0,0,896,898,3,
-	140,70,0,897,896,1,0,0,0,897,898,1,0,0,0,898,899,1,0,0,0,899,914,5,43,0,
-	0,900,901,10,23,0,0,901,902,5,45,0,0,902,914,3,194,97,0,903,904,10,22,0,
-	0,904,905,5,15,0,0,905,906,3,146,73,0,906,907,5,17,0,0,907,914,1,0,0,0,
-	908,909,10,21,0,0,909,910,5,23,0,0,910,911,3,150,75,0,911,912,5,24,0,0,
-	912,914,1,0,0,0,913,841,1,0,0,0,913,844,1,0,0,0,913,847,1,0,0,0,913,850,
-	1,0,0,0,913,853,1,0,0,0,913,856,1,0,0,0,913,859,1,0,0,0,913,862,1,0,0,0,
-	913,865,1,0,0,0,913,868,1,0,0,0,913,871,1,0,0,0,913,874,1,0,0,0,913,880,
-	1,0,0,0,913,883,1,0,0,0,913,885,1,0,0,0,913,890,1,0,0,0,913,900,1,0,0,0,
-	913,903,1,0,0,0,913,908,1,0,0,0,914,917,1,0,0,0,915,913,1,0,0,0,915,916,
-	1,0,0,0,916,141,1,0,0,0,917,915,1,0,0,0,918,928,5,102,0,0,919,928,3,192,
-	96,0,920,928,3,196,98,0,921,928,3,200,100,0,922,928,3,194,97,0,923,928,
-	5,123,0,0,924,928,5,118,0,0,925,928,3,190,95,0,926,928,3,76,38,0,927,918,
-	1,0,0,0,927,919,1,0,0,0,927,920,1,0,0,0,927,921,1,0,0,0,927,922,1,0,0,0,
-	927,923,1,0,0,0,927,924,1,0,0,0,927,925,1,0,0,0,927,926,1,0,0,0,928,143,
-	1,0,0,0,929,934,3,140,70,0,930,931,5,16,0,0,931,933,3,140,70,0,932,930,
-	1,0,0,0,933,936,1,0,0,0,934,932,1,0,0,0,934,935,1,0,0,0,935,145,1,0,0,0,
-	936,934,1,0,0,0,937,942,3,148,74,0,938,939,5,16,0,0,939,941,3,148,74,0,
-	940,938,1,0,0,0,941,944,1,0,0,0,942,940,1,0,0,0,942,943,1,0,0,0,943,946,
-	1,0,0,0,944,942,1,0,0,0,945,947,5,16,0,0,946,945,1,0,0,0,946,947,1,0,0,
-	0,947,147,1,0,0,0,948,949,3,194,97,0,949,950,5,70,0,0,950,951,3,140,70,
-	0,951,149,1,0,0,0,952,954,5,15,0,0,953,955,3,146,73,0,954,953,1,0,0,0,954,
-	955,1,0,0,0,955,956,1,0,0,0,956,961,5,17,0,0,957,959,3,144,72,0,958,957,
-	1,0,0,0,958,959,1,0,0,0,959,961,1,0,0,0,960,952,1,0,0,0,960,958,1,0,0,0,
-	961,151,1,0,0,0,962,963,3,140,70,0,963,964,5,23,0,0,964,965,3,150,75,0,
-	965,966,5,24,0,0,966,153,1,0,0,0,967,971,5,15,0,0,968,970,3,156,78,0,969,
-	968,1,0,0,0,970,973,1,0,0,0,971,969,1,0,0,0,971,972,1,0,0,0,972,974,1,0,
-	0,0,973,971,1,0,0,0,974,975,5,17,0,0,975,155,1,0,0,0,976,994,3,194,97,0,
-	977,994,3,154,77,0,978,994,3,158,79,0,979,994,3,164,82,0,980,994,3,166,
-	83,0,981,994,3,172,86,0,982,994,3,174,87,0,983,994,3,176,88,0,984,994,3,
-	180,90,0,985,994,3,184,92,0,986,994,3,186,93,0,987,994,5,109,0,0,988,994,
-	5,113,0,0,989,994,5,114,0,0,990,994,3,192,96,0,991,994,3,200,100,0,992,
-	994,3,196,98,0,993,976,1,0,0,0,993,977,1,0,0,0,993,978,1,0,0,0,993,979,
-	1,0,0,0,993,980,1,0,0,0,993,981,1,0,0,0,993,982,1,0,0,0,993,983,1,0,0,0,
-	993,984,1,0,0,0,993,985,1,0,0,0,993,986,1,0,0,0,993,987,1,0,0,0,993,988,
-	1,0,0,0,993,989,1,0,0,0,993,990,1,0,0,0,993,991,1,0,0,0,993,992,1,0,0,0,
-	994,157,1,0,0,0,995,999,3,162,81,0,996,999,3,188,94,0,997,999,3,160,80,
-	0,998,995,1,0,0,0,998,996,1,0,0,0,998,997,1,0,0,0,999,159,1,0,0,0,1000,
-	1001,3,194,97,0,1001,1002,5,45,0,0,1002,1003,3,194,97,0,1003,161,1,0,0,
-	0,1004,1009,5,59,0,0,1005,1009,5,44,0,0,1006,1009,5,66,0,0,1007,1009,3,
-	194,97,0,1008,1004,1,0,0,0,1008,1005,1,0,0,0,1008,1006,1,0,0,0,1008,1007,
-	1,0,0,0,1009,1022,1,0,0,0,1010,1012,5,23,0,0,1011,1013,3,158,79,0,1012,
-	1011,1,0,0,0,1012,1013,1,0,0,0,1013,1018,1,0,0,0,1014,1015,5,16,0,0,1015,
-	1017,3,158,79,0,1016,1014,1,0,0,0,1017,1020,1,0,0,0,1018,1016,1,0,0,0,1018,
-	1019,1,0,0,0,1019,1021,1,0,0,0,1020,1018,1,0,0,0,1021,1023,5,24,0,0,1022,
-	1010,1,0,0,0,1022,1023,1,0,0,0,1023,163,1,0,0,0,1024,1025,5,88,0,0,1025,
-	1028,3,168,84,0,1026,1027,5,89,0,0,1027,1029,3,158,79,0,1028,1026,1,0,0,
-	0,1028,1029,1,0,0,0,1029,165,1,0,0,0,1030,1031,3,168,84,0,1031,1032,5,89,
-	0,0,1032,1033,3,158,79,0,1033,167,1,0,0,0,1034,1042,3,194,97,0,1035,1042,
-	3,160,80,0,1036,1042,3,170,85,0,1037,1038,5,23,0,0,1038,1039,3,170,85,0,
-	1039,1040,5,24,0,0,1040,1042,1,0,0,0,1041,1034,1,0,0,0,1041,1035,1,0,0,
-	0,1041,1036,1,0,0,0,1041,1037,1,0,0,0,1042,169,1,0,0,0,1043,1048,3,194,
-	97,0,1044,1045,5,16,0,0,1045,1047,3,194,97,0,1046,1044,1,0,0,0,1047,1050,
-	1,0,0,0,1048,1046,1,0,0,0,1048,1049,1,0,0,0,1049,171,1,0,0,0,1050,1048,
-	1,0,0,0,1051,1052,3,158,79,0,1052,1053,5,90,0,0,1053,1054,3,194,97,0,1054,
-	173,1,0,0,0,1055,1056,3,194,97,0,1056,1057,5,70,0,0,1057,175,1,0,0,0,1058,
-	1059,5,91,0,0,1059,1063,3,158,79,0,1060,1062,3,178,89,0,1061,1060,1,0,0,
-	0,1062,1065,1,0,0,0,1063,1061,1,0,0,0,1063,1064,1,0,0,0,1064,177,1,0,0,
-	0,1065,1063,1,0,0,0,1066,1067,5,92,0,0,1067,1068,3,188,94,0,1068,1069,3,
-	154,77,0,1069,1073,1,0,0,0,1070,1071,5,93,0,0,1071,1073,3,154,77,0,1072,
-	1066,1,0,0,0,1072,1070,1,0,0,0,1073,179,1,0,0,0,1074,1075,5,38,0,0,1075,
-	1076,3,194,97,0,1076,1078,5,23,0,0,1077,1079,3,170,85,0,1078,1077,1,0,0,
-	0,1078,1079,1,0,0,0,1079,1080,1,0,0,0,1080,1082,5,24,0,0,1081,1083,3,182,
-	91,0,1082,1081,1,0,0,0,1082,1083,1,0,0,0,1083,1084,1,0,0,0,1084,1085,3,
-	154,77,0,1085,181,1,0,0,0,1086,1087,5,94,0,0,1087,1088,3,170,85,0,1088,
-	183,1,0,0,0,1089,1092,5,27,0,0,1090,1093,3,154,77,0,1091,1093,3,158,79,
-	0,1092,1090,1,0,0,0,1092,1091,1,0,0,0,1093,1094,1,0,0,0,1094,1097,3,158,
-	79,0,1095,1098,3,154,77,0,1096,1098,3,158,79,0,1097,1095,1,0,0,0,1097,1096,
-	1,0,0,0,1098,1099,1,0,0,0,1099,1100,3,154,77,0,1100,185,1,0,0,0,1101,1102,
-	5,51,0,0,1102,1103,3,158,79,0,1103,1104,3,154,77,0,1104,187,1,0,0,0,1105,
-	1111,3,200,100,0,1106,1111,5,103,0,0,1107,1111,5,104,0,0,1108,1111,3,196,
-	98,0,1109,1111,5,102,0,0,1110,1105,1,0,0,0,1110,1106,1,0,0,0,1110,1107,
-	1,0,0,0,1110,1108,1,0,0,0,1110,1109,1,0,0,0,1111,189,1,0,0,0,1112,1114,
-	5,23,0,0,1113,1115,3,140,70,0,1114,1113,1,0,0,0,1114,1115,1,0,0,0,1115,
-	1122,1,0,0,0,1116,1118,5,16,0,0,1117,1119,3,140,70,0,1118,1117,1,0,0,0,
-	1118,1119,1,0,0,0,1119,1121,1,0,0,0,1120,1116,1,0,0,0,1121,1124,1,0,0,0,
-	1122,1120,1,0,0,0,1122,1123,1,0,0,0,1123,1125,1,0,0,0,1124,1122,1,0,0,0,
-	1125,1139,5,24,0,0,1126,1135,5,42,0,0,1127,1132,3,140,70,0,1128,1129,5,
-	16,0,0,1129,1131,3,140,70,0,1130,1128,1,0,0,0,1131,1134,1,0,0,0,1132,1130,
-	1,0,0,0,1132,1133,1,0,0,0,1133,1136,1,0,0,0,1134,1132,1,0,0,0,1135,1127,
-	1,0,0,0,1135,1136,1,0,0,0,1136,1137,1,0,0,0,1137,1139,5,43,0,0,1138,1112,
-	1,0,0,0,1138,1126,1,0,0,0,1139,191,1,0,0,0,1140,1142,7,13,0,0,1141,1143,
-	5,105,0,0,1142,1141,1,0,0,0,1142,1143,1,0,0,0,1143,193,1,0,0,0,1144,1145,
-	7,14,0,0,1145,195,1,0,0,0,1146,1148,5,106,0,0,1147,1146,1,0,0,0,1148,1149,
-	1,0,0,0,1149,1147,1,0,0,0,1149,1150,1,0,0,0,1150,197,1,0,0,0,1151,1163,
-	5,96,0,0,1152,1153,5,23,0,0,1153,1158,3,78,39,0,1154,1155,5,16,0,0,1155,
-	1157,3,78,39,0,1156,1154,1,0,0,0,1157,1160,1,0,0,0,1158,1156,1,0,0,0,1158,
-	1159,1,0,0,0,1159,1161,1,0,0,0,1160,1158,1,0,0,0,1161,1162,5,24,0,0,1162,
-	1164,1,0,0,0,1163,1152,1,0,0,0,1163,1164,1,0,0,0,1164,199,1,0,0,0,1165,
-	1167,5,130,0,0,1166,1165,1,0,0,0,1167,1168,1,0,0,0,1168,1166,1,0,0,0,1168,
-	1169,1,0,0,0,1169,201,1,0,0,0,130,213,215,230,234,239,245,249,252,257,263,
-	270,274,287,295,300,310,313,319,327,330,341,351,353,359,386,389,400,405,
-	410,424,427,434,438,440,445,450,453,459,463,467,472,485,487,494,504,510,
-	521,524,530,533,541,544,550,553,561,564,570,574,585,590,595,603,608,614,
-	619,632,634,639,649,669,681,686,692,696,699,711,720,724,727,734,740,762,
-	784,788,793,797,801,806,811,815,839,893,897,913,915,927,934,942,946,954,
-	958,960,971,993,998,1008,1012,1018,1022,1028,1041,1048,1063,1072,1078,1082,
-	1092,1097,1110,1114,1118,1122,1132,1135,1138,1142,1149,1158,1163,1168];
+	2,97,7,97,2,98,7,98,2,99,7,99,2,100,7,100,2,101,7,101,1,0,1,0,1,0,1,0,1,
+	0,1,0,1,0,1,0,1,0,1,0,1,0,5,0,216,8,0,10,0,12,0,219,9,0,1,0,1,0,1,1,1,1,
+	1,1,1,1,1,1,1,2,1,2,1,3,1,3,1,3,3,3,233,8,3,1,4,1,4,3,4,237,8,4,1,4,5,4,
+	240,8,4,10,4,12,4,243,9,4,1,5,1,5,1,6,3,6,248,8,6,1,6,1,6,3,6,252,8,6,1,
+	6,3,6,255,8,6,1,7,1,7,1,7,3,7,260,8,7,1,8,1,8,1,8,1,8,3,8,266,8,8,1,8,1,
+	8,1,8,1,8,1,8,3,8,273,8,8,1,8,1,8,3,8,277,8,8,1,8,1,8,1,8,1,8,1,8,1,8,1,
+	8,1,8,1,8,5,8,288,8,8,10,8,12,8,291,9,8,1,8,1,8,1,8,1,8,1,8,3,8,298,8,8,
+	1,9,1,9,1,10,3,10,303,8,10,1,10,1,10,1,10,3,10,308,8,10,1,10,1,10,1,10,
+	1,10,5,10,314,8,10,10,10,12,10,317,9,10,3,10,319,8,10,1,10,3,10,322,8,10,
+	1,10,1,10,5,10,326,8,10,10,10,12,10,329,9,10,1,10,1,10,1,11,1,11,1,11,3,
+	11,336,8,11,1,11,3,11,339,8,11,1,12,1,12,1,12,1,12,1,13,1,13,1,13,1,13,
+	1,13,1,13,1,13,1,13,1,13,3,13,354,8,13,1,14,1,14,1,14,1,14,1,14,1,14,1,
+	14,1,14,5,14,364,8,14,10,14,12,14,367,9,14,1,14,1,14,1,14,3,14,372,8,14,
+	1,14,1,14,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,16,1,
+	17,1,17,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,18,3,18,399,8,18,1,18,
+	3,18,402,8,18,1,18,1,18,1,19,1,19,1,19,1,19,1,19,5,19,411,8,19,10,19,12,
+	19,414,9,19,1,19,1,19,3,19,418,8,19,1,20,1,20,1,20,3,20,423,8,20,1,21,1,
+	21,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,5,22,435,8,22,10,22,12,22,438,
+	9,22,3,22,440,8,22,1,22,1,22,1,23,1,23,1,23,3,23,447,8,23,1,23,1,23,5,23,
+	451,8,23,10,23,12,23,454,9,23,1,23,1,23,3,23,458,8,23,1,24,1,24,1,24,3,
+	24,463,8,24,1,24,3,24,466,8,24,1,25,1,25,1,25,1,25,3,25,472,8,25,1,25,1,
+	25,3,25,476,8,25,1,26,1,26,3,26,480,8,26,1,26,1,26,1,26,3,26,485,8,26,1,
+	27,1,27,1,27,1,28,1,28,1,28,1,28,1,28,1,28,1,28,1,28,5,28,498,8,28,10,28,
+	12,28,501,9,28,1,29,1,29,1,29,1,29,3,29,507,8,29,1,29,1,29,1,30,1,30,1,
+	31,1,31,1,31,1,31,3,31,517,8,31,1,31,1,31,5,31,521,8,31,10,31,12,31,524,
+	9,31,1,31,1,31,1,32,1,32,1,32,1,32,5,32,532,8,32,10,32,12,32,535,9,32,3,
+	32,537,8,32,1,32,1,32,1,33,1,33,3,33,543,8,33,1,33,3,33,546,8,33,1,34,1,
+	34,1,34,1,34,5,34,552,8,34,10,34,12,34,555,9,34,3,34,557,8,34,1,34,1,34,
+	1,35,1,35,3,35,563,8,35,1,35,3,35,566,8,35,1,36,1,36,1,36,1,36,5,36,572,
+	8,36,10,36,12,36,575,9,36,3,36,577,8,36,1,36,1,36,1,37,1,37,3,37,583,8,
+	37,1,38,1,38,3,38,587,8,38,1,38,1,38,1,39,1,39,1,39,1,39,1,39,1,39,1,39,
+	3,39,598,8,39,1,39,1,39,1,39,3,39,603,8,39,1,39,5,39,606,8,39,10,39,12,
+	39,609,9,39,1,40,1,40,1,40,5,40,614,8,40,10,40,12,40,617,9,40,1,41,1,41,
+	3,41,621,8,41,1,42,1,42,1,42,1,42,3,42,627,8,42,1,42,1,42,1,42,3,42,632,
+	8,42,1,42,1,42,1,43,1,43,1,44,1,44,1,45,1,45,1,45,1,45,1,45,5,45,645,8,
+	45,10,45,12,45,648,9,45,1,45,1,45,3,45,652,8,45,1,46,1,46,1,47,1,47,1,48,
+	1,48,5,48,660,8,48,10,48,12,48,663,9,48,1,48,1,48,1,49,1,49,1,49,1,49,1,
+	49,1,49,1,49,1,49,1,49,1,49,1,49,1,49,1,49,1,49,1,49,3,49,682,8,49,1,50,
+	1,50,1,50,1,51,1,51,1,51,1,51,1,51,1,51,1,51,3,51,694,8,51,1,52,1,52,1,
+	52,3,52,699,8,52,1,52,1,52,4,52,703,8,52,11,52,12,52,704,1,53,1,53,3,53,
+	709,8,53,1,53,3,53,712,8,53,1,53,1,53,1,54,1,54,1,54,1,54,1,54,1,54,1,55,
+	1,55,3,55,724,8,55,1,56,1,56,1,56,1,57,1,57,1,57,1,57,3,57,733,8,57,1,57,
+	1,57,3,57,737,8,57,1,57,3,57,740,8,57,1,57,1,57,1,57,1,58,1,58,3,58,747,
+	8,58,1,58,1,58,1,58,1,58,3,58,753,8,58,1,58,1,58,1,59,1,59,1,60,1,60,1,
+	60,1,60,1,60,1,60,1,60,1,60,1,61,1,61,1,61,1,62,1,62,1,62,1,63,1,63,3,63,
+	775,8,63,1,63,1,63,1,64,1,64,1,64,1,65,1,65,1,65,1,65,1,66,1,66,1,66,1,
+	66,1,67,1,67,1,67,1,67,1,67,1,67,1,67,3,67,797,8,67,1,67,1,67,3,67,801,
+	8,67,1,67,1,67,1,68,3,68,806,8,68,1,68,1,68,3,68,810,8,68,5,68,812,8,68,
+	10,68,12,68,815,9,68,1,69,1,69,3,69,819,8,69,1,69,5,69,822,8,69,10,69,12,
+	69,825,9,69,1,69,3,69,828,8,69,1,69,1,69,1,70,1,70,1,71,1,71,1,71,1,71,
+	1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,3,
+	71,852,8,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,
+	1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,
+	71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,
+	1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,3,71,906,8,71,1,
+	71,1,71,3,71,910,8,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,1,71,
+	1,71,1,71,1,71,1,71,5,71,926,8,71,10,71,12,71,929,9,71,1,72,1,72,1,72,1,
+	72,1,72,1,72,1,72,1,72,1,72,3,72,940,8,72,1,73,1,73,1,73,5,73,945,8,73,
+	10,73,12,73,948,9,73,1,74,1,74,1,74,5,74,953,8,74,10,74,12,74,956,9,74,
+	1,74,3,74,959,8,74,1,75,1,75,1,75,1,75,1,76,1,76,3,76,967,8,76,1,76,1,76,
+	3,76,971,8,76,3,76,973,8,76,1,77,1,77,1,77,1,77,1,77,1,78,1,78,5,78,982,
+	8,78,10,78,12,78,985,9,78,1,78,1,78,1,79,1,79,1,79,1,79,1,79,1,79,1,79,
+	1,79,1,79,1,79,1,79,1,79,1,79,1,79,1,79,1,79,1,79,3,79,1006,8,79,1,80,1,
+	80,1,80,3,80,1011,8,80,1,81,1,81,1,81,1,81,1,82,1,82,1,82,1,82,3,82,1021,
+	8,82,1,82,1,82,3,82,1025,8,82,1,82,1,82,5,82,1029,8,82,10,82,12,82,1032,
+	9,82,1,82,3,82,1035,8,82,1,83,1,83,1,83,1,83,3,83,1041,8,83,1,84,1,84,1,
+	84,1,84,1,85,1,85,1,85,1,85,1,85,1,85,1,85,3,85,1054,8,85,1,86,1,86,1,86,
+	5,86,1059,8,86,10,86,12,86,1062,9,86,1,87,1,87,1,87,1,87,1,88,1,88,1,88,
+	1,89,1,89,1,89,5,89,1074,8,89,10,89,12,89,1077,9,89,1,90,1,90,1,90,1,90,
+	1,90,1,90,3,90,1085,8,90,1,91,1,91,1,91,1,91,3,91,1091,8,91,1,91,1,91,3,
+	91,1095,8,91,1,91,1,91,1,92,1,92,1,92,1,93,1,93,1,93,3,93,1105,8,93,1,93,
+	1,93,1,93,3,93,1110,8,93,1,93,1,93,1,94,1,94,1,94,1,94,1,95,1,95,1,95,1,
+	95,1,95,3,95,1123,8,95,1,96,1,96,3,96,1127,8,96,1,96,1,96,3,96,1131,8,96,
+	5,96,1133,8,96,10,96,12,96,1136,9,96,1,96,1,96,1,96,1,96,1,96,5,96,1143,
+	8,96,10,96,12,96,1146,9,96,3,96,1148,8,96,1,96,3,96,1151,8,96,1,97,1,97,
+	3,97,1155,8,97,1,98,1,98,1,99,4,99,1160,8,99,11,99,12,99,1161,1,100,1,100,
+	1,100,1,100,1,100,5,100,1169,8,100,10,100,12,100,1172,9,100,1,100,1,100,
+	3,100,1176,8,100,1,101,4,101,1179,8,101,11,101,12,101,1180,1,101,0,2,78,
+	142,102,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,
+	46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,
+	94,96,98,100,102,104,106,108,110,112,114,116,118,120,122,124,126,128,130,
+	132,134,136,138,140,142,144,146,148,150,152,154,156,158,160,162,164,166,
+	168,170,172,174,176,178,180,182,184,186,188,190,192,194,196,198,200,202,
+	0,15,1,0,5,11,1,0,19,21,3,0,3,3,5,10,30,37,1,0,50,52,4,0,112,112,120,120,
+	124,124,126,126,3,0,46,46,65,68,99,103,1,0,69,70,1,0,32,33,2,0,3,3,34,35,
+	1,0,76,77,1,0,7,10,1,0,36,37,2,0,11,11,80,89,1,0,105,106,10,0,14,14,27,
+	27,46,46,52,52,64,64,97,97,116,116,120,120,127,128,130,131,1314,0,217,1,
+	0,0,0,2,222,1,0,0,0,4,227,1,0,0,0,6,232,1,0,0,0,8,234,1,0,0,0,10,244,1,
+	0,0,0,12,254,1,0,0,0,14,256,1,0,0,0,16,297,1,0,0,0,18,299,1,0,0,0,20,302,
+	1,0,0,0,22,332,1,0,0,0,24,340,1,0,0,0,26,353,1,0,0,0,28,355,1,0,0,0,30,
+	375,1,0,0,0,32,382,1,0,0,0,34,387,1,0,0,0,36,393,1,0,0,0,38,417,1,0,0,0,
+	40,419,1,0,0,0,42,424,1,0,0,0,44,426,1,0,0,0,46,443,1,0,0,0,48,459,1,0,
+	0,0,50,467,1,0,0,0,52,484,1,0,0,0,54,486,1,0,0,0,56,499,1,0,0,0,58,502,
+	1,0,0,0,60,510,1,0,0,0,62,512,1,0,0,0,64,527,1,0,0,0,66,540,1,0,0,0,68,
+	547,1,0,0,0,70,560,1,0,0,0,72,567,1,0,0,0,74,580,1,0,0,0,76,584,1,0,0,0,
+	78,597,1,0,0,0,80,610,1,0,0,0,82,620,1,0,0,0,84,622,1,0,0,0,86,635,1,0,
+	0,0,88,637,1,0,0,0,90,639,1,0,0,0,92,653,1,0,0,0,94,655,1,0,0,0,96,657,
+	1,0,0,0,98,681,1,0,0,0,100,683,1,0,0,0,102,686,1,0,0,0,104,695,1,0,0,0,
+	106,706,1,0,0,0,108,715,1,0,0,0,110,723,1,0,0,0,112,725,1,0,0,0,114,728,
+	1,0,0,0,116,744,1,0,0,0,118,756,1,0,0,0,120,758,1,0,0,0,122,766,1,0,0,0,
+	124,769,1,0,0,0,126,772,1,0,0,0,128,778,1,0,0,0,130,781,1,0,0,0,132,785,
+	1,0,0,0,134,796,1,0,0,0,136,805,1,0,0,0,138,816,1,0,0,0,140,831,1,0,0,0,
+	142,851,1,0,0,0,144,939,1,0,0,0,146,941,1,0,0,0,148,949,1,0,0,0,150,960,
+	1,0,0,0,152,972,1,0,0,0,154,974,1,0,0,0,156,979,1,0,0,0,158,1005,1,0,0,
+	0,160,1010,1,0,0,0,162,1012,1,0,0,0,164,1020,1,0,0,0,166,1036,1,0,0,0,168,
+	1042,1,0,0,0,170,1053,1,0,0,0,172,1055,1,0,0,0,174,1063,1,0,0,0,176,1067,
+	1,0,0,0,178,1070,1,0,0,0,180,1084,1,0,0,0,182,1086,1,0,0,0,184,1098,1,0,
+	0,0,186,1101,1,0,0,0,188,1113,1,0,0,0,190,1122,1,0,0,0,192,1150,1,0,0,0,
+	194,1152,1,0,0,0,196,1156,1,0,0,0,198,1159,1,0,0,0,200,1163,1,0,0,0,202,
+	1178,1,0,0,0,204,216,3,2,1,0,205,216,3,16,8,0,206,216,3,20,10,0,207,216,
+	3,62,31,0,208,216,3,58,29,0,209,216,3,44,22,0,210,216,3,50,25,0,211,216,
+	3,30,15,0,212,216,3,32,16,0,213,216,3,34,17,0,214,216,3,36,18,0,215,204,
+	1,0,0,0,215,205,1,0,0,0,215,206,1,0,0,0,215,207,1,0,0,0,215,208,1,0,0,0,
+	215,209,1,0,0,0,215,210,1,0,0,0,215,211,1,0,0,0,215,212,1,0,0,0,215,213,
+	1,0,0,0,215,214,1,0,0,0,216,219,1,0,0,0,217,215,1,0,0,0,217,218,1,0,0,0,
+	218,220,1,0,0,0,219,217,1,0,0,0,220,221,5,0,0,1,221,1,1,0,0,0,222,223,5,
+	1,0,0,223,224,3,4,2,0,224,225,3,6,3,0,225,226,5,2,0,0,226,3,1,0,0,0,227,
+	228,3,196,98,0,228,5,1,0,0,0,229,233,5,3,0,0,230,233,3,8,4,0,231,233,3,
+	142,71,0,232,229,1,0,0,0,232,230,1,0,0,0,232,231,1,0,0,0,233,7,1,0,0,0,
+	234,241,3,12,6,0,235,237,5,4,0,0,236,235,1,0,0,0,236,237,1,0,0,0,237,238,
+	1,0,0,0,238,240,3,12,6,0,239,236,1,0,0,0,240,243,1,0,0,0,241,239,1,0,0,
+	0,241,242,1,0,0,0,242,9,1,0,0,0,243,241,1,0,0,0,244,245,7,0,0,0,245,11,
+	1,0,0,0,246,248,3,10,5,0,247,246,1,0,0,0,247,248,1,0,0,0,248,249,1,0,0,
+	0,249,255,5,133,0,0,250,252,3,10,5,0,251,250,1,0,0,0,251,252,1,0,0,0,252,
+	253,1,0,0,0,253,255,5,105,0,0,254,247,1,0,0,0,254,251,1,0,0,0,255,13,1,
+	0,0,0,256,259,3,196,98,0,257,258,5,12,0,0,258,260,3,196,98,0,259,257,1,
+	0,0,0,259,260,1,0,0,0,260,15,1,0,0,0,261,262,5,13,0,0,262,265,3,18,9,0,
+	263,264,5,12,0,0,264,266,3,196,98,0,265,263,1,0,0,0,265,266,1,0,0,0,266,
+	267,1,0,0,0,267,268,5,2,0,0,268,298,1,0,0,0,269,272,5,13,0,0,270,273,5,
+	3,0,0,271,273,3,196,98,0,272,270,1,0,0,0,272,271,1,0,0,0,273,276,1,0,0,
+	0,274,275,5,12,0,0,275,277,3,196,98,0,276,274,1,0,0,0,276,277,1,0,0,0,277,
+	278,1,0,0,0,278,279,5,14,0,0,279,280,3,18,9,0,280,281,5,2,0,0,281,298,1,
+	0,0,0,282,283,5,13,0,0,283,284,5,15,0,0,284,289,3,14,7,0,285,286,5,16,0,
+	0,286,288,3,14,7,0,287,285,1,0,0,0,288,291,1,0,0,0,289,287,1,0,0,0,289,
+	290,1,0,0,0,290,292,1,0,0,0,291,289,1,0,0,0,292,293,5,17,0,0,293,294,5,
+	14,0,0,294,295,3,18,9,0,295,296,5,2,0,0,296,298,1,0,0,0,297,261,1,0,0,0,
+	297,269,1,0,0,0,297,282,1,0,0,0,298,17,1,0,0,0,299,300,5,132,0,0,300,19,
+	1,0,0,0,301,303,5,18,0,0,302,301,1,0,0,0,302,303,1,0,0,0,303,304,1,0,0,
+	0,304,305,7,1,0,0,305,307,3,196,98,0,306,308,3,24,12,0,307,306,1,0,0,0,
+	307,308,1,0,0,0,308,318,1,0,0,0,309,310,5,22,0,0,310,315,3,22,11,0,311,
+	312,5,16,0,0,312,314,3,22,11,0,313,311,1,0,0,0,314,317,1,0,0,0,315,313,
+	1,0,0,0,315,316,1,0,0,0,316,319,1,0,0,0,317,315,1,0,0,0,318,309,1,0,0,0,
+	318,319,1,0,0,0,319,321,1,0,0,0,320,322,3,24,12,0,321,320,1,0,0,0,321,322,
+	1,0,0,0,322,323,1,0,0,0,323,327,5,15,0,0,324,326,3,26,13,0,325,324,1,0,
+	0,0,326,329,1,0,0,0,327,325,1,0,0,0,327,328,1,0,0,0,328,330,1,0,0,0,329,
+	327,1,0,0,0,330,331,5,17,0,0,331,21,1,0,0,0,332,338,3,80,40,0,333,335,5,
+	23,0,0,334,336,3,146,73,0,335,334,1,0,0,0,335,336,1,0,0,0,336,337,1,0,0,
+	0,337,339,5,24,0,0,338,333,1,0,0,0,338,339,1,0,0,0,339,23,1,0,0,0,340,341,
+	5,25,0,0,341,342,5,26,0,0,342,343,3,142,71,0,343,25,1,0,0,0,344,354,3,28,
+	14,0,345,354,3,36,18,0,346,354,3,44,22,0,347,354,3,46,23,0,348,354,3,50,
+	25,0,349,354,3,58,29,0,350,354,3,62,31,0,351,354,3,32,16,0,352,354,3,34,
+	17,0,353,344,1,0,0,0,353,345,1,0,0,0,353,346,1,0,0,0,353,347,1,0,0,0,353,
+	348,1,0,0,0,353,349,1,0,0,0,353,350,1,0,0,0,353,351,1,0,0,0,353,352,1,0,
+	0,0,354,27,1,0,0,0,355,365,3,78,39,0,356,364,5,122,0,0,357,364,5,119,0,
+	0,358,364,5,121,0,0,359,364,5,112,0,0,360,364,5,113,0,0,361,364,5,114,0,
+	0,362,364,3,200,100,0,363,356,1,0,0,0,363,357,1,0,0,0,363,358,1,0,0,0,363,
+	359,1,0,0,0,363,360,1,0,0,0,363,361,1,0,0,0,363,362,1,0,0,0,364,367,1,0,
+	0,0,365,363,1,0,0,0,365,366,1,0,0,0,366,368,1,0,0,0,367,365,1,0,0,0,368,
+	371,3,196,98,0,369,370,5,11,0,0,370,372,3,142,71,0,371,369,1,0,0,0,371,
+	372,1,0,0,0,372,373,1,0,0,0,373,374,5,2,0,0,374,29,1,0,0,0,375,376,3,78,
+	39,0,376,377,5,112,0,0,377,378,3,196,98,0,378,379,5,11,0,0,379,380,3,142,
+	71,0,380,381,5,2,0,0,381,31,1,0,0,0,382,383,5,27,0,0,383,384,3,196,98,0,
+	384,385,3,64,32,0,385,386,5,2,0,0,386,33,1,0,0,0,387,388,5,125,0,0,388,
+	389,3,196,98,0,389,390,5,22,0,0,390,391,3,140,70,0,391,392,5,2,0,0,392,
+	35,1,0,0,0,393,394,5,28,0,0,394,395,3,38,19,0,395,398,5,29,0,0,396,399,
+	5,3,0,0,397,399,3,78,39,0,398,396,1,0,0,0,398,397,1,0,0,0,399,401,1,0,0,
+	0,400,402,5,127,0,0,401,400,1,0,0,0,401,402,1,0,0,0,402,403,1,0,0,0,403,
+	404,5,2,0,0,404,37,1,0,0,0,405,418,3,80,40,0,406,407,5,15,0,0,407,412,3,
+	40,20,0,408,409,5,16,0,0,409,411,3,40,20,0,410,408,1,0,0,0,411,414,1,0,
+	0,0,412,410,1,0,0,0,412,413,1,0,0,0,413,415,1,0,0,0,414,412,1,0,0,0,415,
+	416,5,17,0,0,416,418,1,0,0,0,417,405,1,0,0,0,417,406,1,0,0,0,418,39,1,0,
+	0,0,419,422,3,80,40,0,420,421,5,12,0,0,421,423,3,42,21,0,422,420,1,0,0,
+	0,422,423,1,0,0,0,423,41,1,0,0,0,424,425,7,2,0,0,425,43,1,0,0,0,426,427,
+	5,38,0,0,427,428,3,196,98,0,428,439,5,15,0,0,429,430,3,76,38,0,430,436,
+	5,2,0,0,431,432,3,76,38,0,432,433,5,2,0,0,433,435,1,0,0,0,434,431,1,0,0,
+	0,435,438,1,0,0,0,436,434,1,0,0,0,436,437,1,0,0,0,437,440,1,0,0,0,438,436,
+	1,0,0,0,439,429,1,0,0,0,439,440,1,0,0,0,440,441,1,0,0,0,441,442,5,17,0,
+	0,442,45,1,0,0,0,443,444,5,39,0,0,444,446,3,196,98,0,445,447,3,64,32,0,
+	446,445,1,0,0,0,446,447,1,0,0,0,447,452,1,0,0,0,448,451,5,123,0,0,449,451,
+	3,200,100,0,450,448,1,0,0,0,450,449,1,0,0,0,451,454,1,0,0,0,452,450,1,0,
+	0,0,452,453,1,0,0,0,453,457,1,0,0,0,454,452,1,0,0,0,455,458,5,2,0,0,456,
+	458,3,96,48,0,457,455,1,0,0,0,457,456,1,0,0,0,458,47,1,0,0,0,459,465,3,
+	196,98,0,460,462,5,23,0,0,461,463,3,146,73,0,462,461,1,0,0,0,462,463,1,
+	0,0,0,463,464,1,0,0,0,464,466,5,24,0,0,465,460,1,0,0,0,465,466,1,0,0,0,
+	466,49,1,0,0,0,467,468,3,52,26,0,468,469,3,64,32,0,469,471,3,56,28,0,470,
+	472,3,54,27,0,471,470,1,0,0,0,471,472,1,0,0,0,472,475,1,0,0,0,473,476,5,
+	2,0,0,474,476,3,96,48,0,475,473,1,0,0,0,475,474,1,0,0,0,476,51,1,0,0,0,
+	477,479,5,40,0,0,478,480,3,196,98,0,479,478,1,0,0,0,479,480,1,0,0,0,480,
+	485,1,0,0,0,481,485,5,128,0,0,482,485,5,129,0,0,483,485,5,130,0,0,484,477,
+	1,0,0,0,484,481,1,0,0,0,484,482,1,0,0,0,484,483,1,0,0,0,485,53,1,0,0,0,
+	486,487,5,41,0,0,487,488,3,64,32,0,488,55,1,0,0,0,489,498,5,117,0,0,490,
+	498,5,122,0,0,491,498,5,119,0,0,492,498,5,121,0,0,493,498,5,123,0,0,494,
+	498,3,94,47,0,495,498,3,48,24,0,496,498,3,200,100,0,497,489,1,0,0,0,497,
+	490,1,0,0,0,497,491,1,0,0,0,497,492,1,0,0,0,497,493,1,0,0,0,497,494,1,0,
+	0,0,497,495,1,0,0,0,497,496,1,0,0,0,498,501,1,0,0,0,499,497,1,0,0,0,499,
+	500,1,0,0,0,500,57,1,0,0,0,501,499,1,0,0,0,502,503,5,42,0,0,503,504,3,196,
+	98,0,504,506,3,68,34,0,505,507,5,110,0,0,506,505,1,0,0,0,506,507,1,0,0,
+	0,507,508,1,0,0,0,508,509,5,2,0,0,509,59,1,0,0,0,510,511,3,196,98,0,511,
+	61,1,0,0,0,512,513,5,43,0,0,513,514,3,196,98,0,514,516,5,15,0,0,515,517,
+	3,60,30,0,516,515,1,0,0,0,516,517,1,0,0,0,517,522,1,0,0,0,518,519,5,16,
+	0,0,519,521,3,60,30,0,520,518,1,0,0,0,521,524,1,0,0,0,522,520,1,0,0,0,522,
+	523,1,0,0,0,523,525,1,0,0,0,524,522,1,0,0,0,525,526,5,17,0,0,526,63,1,0,
+	0,0,527,536,5,23,0,0,528,533,3,66,33,0,529,530,5,16,0,0,530,532,3,66,33,
+	0,531,529,1,0,0,0,532,535,1,0,0,0,533,531,1,0,0,0,533,534,1,0,0,0,534,537,
+	1,0,0,0,535,533,1,0,0,0,536,528,1,0,0,0,536,537,1,0,0,0,537,538,1,0,0,0,
+	538,539,5,24,0,0,539,65,1,0,0,0,540,542,3,78,39,0,541,543,3,92,46,0,542,
+	541,1,0,0,0,542,543,1,0,0,0,543,545,1,0,0,0,544,546,3,196,98,0,545,544,
+	1,0,0,0,545,546,1,0,0,0,546,67,1,0,0,0,547,556,5,23,0,0,548,553,3,70,35,
+	0,549,550,5,16,0,0,550,552,3,70,35,0,551,549,1,0,0,0,552,555,1,0,0,0,553,
+	551,1,0,0,0,553,554,1,0,0,0,554,557,1,0,0,0,555,553,1,0,0,0,556,548,1,0,
+	0,0,556,557,1,0,0,0,557,558,1,0,0,0,558,559,5,24,0,0,559,69,1,0,0,0,560,
+	562,3,78,39,0,561,563,5,118,0,0,562,561,1,0,0,0,562,563,1,0,0,0,563,565,
+	1,0,0,0,564,566,3,196,98,0,565,564,1,0,0,0,565,566,1,0,0,0,566,71,1,0,0,
+	0,567,576,5,23,0,0,568,573,3,74,37,0,569,570,5,16,0,0,570,572,3,74,37,0,
+	571,569,1,0,0,0,572,575,1,0,0,0,573,571,1,0,0,0,573,574,1,0,0,0,574,577,
+	1,0,0,0,575,573,1,0,0,0,576,568,1,0,0,0,576,577,1,0,0,0,577,578,1,0,0,0,
+	578,579,5,24,0,0,579,73,1,0,0,0,580,582,3,78,39,0,581,583,3,92,46,0,582,
+	581,1,0,0,0,582,583,1,0,0,0,583,75,1,0,0,0,584,586,3,78,39,0,585,587,3,
+	92,46,0,586,585,1,0,0,0,586,587,1,0,0,0,587,588,1,0,0,0,588,589,3,196,98,
+	0,589,77,1,0,0,0,590,591,6,39,-1,0,591,598,3,140,70,0,592,598,3,80,40,0,
+	593,598,3,84,42,0,594,598,3,90,45,0,595,596,5,46,0,0,596,598,5,120,0,0,
+	597,590,1,0,0,0,597,592,1,0,0,0,597,593,1,0,0,0,597,594,1,0,0,0,597,595,
+	1,0,0,0,598,607,1,0,0,0,599,600,10,3,0,0,600,602,5,44,0,0,601,603,3,142,
+	71,0,602,601,1,0,0,0,602,603,1,0,0,0,603,604,1,0,0,0,604,606,5,45,0,0,605,
+	599,1,0,0,0,606,609,1,0,0,0,607,605,1,0,0,0,607,608,1,0,0,0,608,79,1,0,
+	0,0,609,607,1,0,0,0,610,615,3,196,98,0,611,612,5,47,0,0,612,614,3,196,98,
+	0,613,611,1,0,0,0,614,617,1,0,0,0,615,613,1,0,0,0,615,616,1,0,0,0,616,81,
+	1,0,0,0,617,615,1,0,0,0,618,621,3,140,70,0,619,621,3,80,40,0,620,618,1,
+	0,0,0,620,619,1,0,0,0,621,83,1,0,0,0,622,623,5,48,0,0,623,624,5,23,0,0,
+	624,626,3,82,41,0,625,627,3,86,43,0,626,625,1,0,0,0,626,627,1,0,0,0,627,
+	628,1,0,0,0,628,629,5,49,0,0,629,631,3,78,39,0,630,632,3,88,44,0,631,630,
+	1,0,0,0,631,632,1,0,0,0,632,633,1,0,0,0,633,634,5,24,0,0,634,85,1,0,0,0,
+	635,636,3,196,98,0,636,87,1,0,0,0,637,638,3,196,98,0,638,89,1,0,0,0,639,
+	640,5,40,0,0,640,646,3,72,36,0,641,645,5,119,0,0,642,645,5,117,0,0,643,
+	645,3,94,47,0,644,641,1,0,0,0,644,642,1,0,0,0,644,643,1,0,0,0,645,648,1,
+	0,0,0,646,644,1,0,0,0,646,647,1,0,0,0,647,651,1,0,0,0,648,646,1,0,0,0,649,
+	650,5,41,0,0,650,652,3,72,36,0,651,649,1,0,0,0,651,652,1,0,0,0,652,91,1,
+	0,0,0,653,654,7,3,0,0,654,93,1,0,0,0,655,656,7,4,0,0,656,95,1,0,0,0,657,
+	661,5,15,0,0,658,660,3,98,49,0,659,658,1,0,0,0,660,663,1,0,0,0,661,659,
+	1,0,0,0,661,662,1,0,0,0,662,664,1,0,0,0,663,661,1,0,0,0,664,665,5,17,0,
+	0,665,97,1,0,0,0,666,682,3,102,51,0,667,682,3,104,52,0,668,682,3,108,54,
+	0,669,682,3,114,57,0,670,682,3,96,48,0,671,682,3,116,58,0,672,682,3,120,
+	60,0,673,682,3,122,61,0,674,682,3,124,62,0,675,682,3,126,63,0,676,682,3,
+	128,64,0,677,682,3,130,65,0,678,682,3,110,55,0,679,682,3,112,56,0,680,682,
+	3,132,66,0,681,666,1,0,0,0,681,667,1,0,0,0,681,668,1,0,0,0,681,669,1,0,
+	0,0,681,670,1,0,0,0,681,671,1,0,0,0,681,672,1,0,0,0,681,673,1,0,0,0,681,
+	674,1,0,0,0,681,675,1,0,0,0,681,676,1,0,0,0,681,677,1,0,0,0,681,678,1,0,
+	0,0,681,679,1,0,0,0,681,680,1,0,0,0,682,99,1,0,0,0,683,684,3,142,71,0,684,
+	685,5,2,0,0,685,101,1,0,0,0,686,687,5,53,0,0,687,688,5,23,0,0,688,689,3,
+	142,71,0,689,690,5,24,0,0,690,693,3,98,49,0,691,692,5,54,0,0,692,694,3,
+	98,49,0,693,691,1,0,0,0,693,694,1,0,0,0,694,103,1,0,0,0,695,696,5,55,0,
+	0,696,698,3,142,71,0,697,699,3,54,27,0,698,697,1,0,0,0,698,699,1,0,0,0,
+	699,700,1,0,0,0,700,702,3,96,48,0,701,703,3,106,53,0,702,701,1,0,0,0,703,
+	704,1,0,0,0,704,702,1,0,0,0,704,705,1,0,0,0,705,105,1,0,0,0,706,711,5,56,
+	0,0,707,709,3,196,98,0,708,707,1,0,0,0,708,709,1,0,0,0,709,710,1,0,0,0,
+	710,712,3,64,32,0,711,708,1,0,0,0,711,712,1,0,0,0,712,713,1,0,0,0,713,714,
+	3,96,48,0,714,107,1,0,0,0,715,716,5,57,0,0,716,717,5,23,0,0,717,718,3,142,
+	71,0,718,719,5,24,0,0,719,720,3,98,49,0,720,109,1,0,0,0,721,724,3,134,67,
+	0,722,724,3,100,50,0,723,721,1,0,0,0,723,722,1,0,0,0,724,111,1,0,0,0,725,
+	726,5,58,0,0,726,727,3,96,48,0,727,113,1,0,0,0,728,729,5,29,0,0,729,732,
+	5,23,0,0,730,733,3,110,55,0,731,733,5,2,0,0,732,730,1,0,0,0,732,731,1,0,
+	0,0,733,736,1,0,0,0,734,737,3,100,50,0,735,737,5,2,0,0,736,734,1,0,0,0,
+	736,735,1,0,0,0,737,739,1,0,0,0,738,740,3,142,71,0,739,738,1,0,0,0,739,
+	740,1,0,0,0,740,741,1,0,0,0,741,742,5,24,0,0,742,743,3,98,49,0,743,115,
+	1,0,0,0,744,746,5,59,0,0,745,747,5,132,0,0,746,745,1,0,0,0,746,747,1,0,
+	0,0,747,752,1,0,0,0,748,749,5,23,0,0,749,750,3,118,59,0,750,751,5,24,0,
+	0,751,753,1,0,0,0,752,748,1,0,0,0,752,753,1,0,0,0,753,754,1,0,0,0,754,755,
+	3,156,78,0,755,117,1,0,0,0,756,757,3,202,101,0,757,119,1,0,0,0,758,759,
+	5,60,0,0,759,760,3,98,49,0,760,761,5,57,0,0,761,762,5,23,0,0,762,763,3,
+	142,71,0,763,764,5,24,0,0,764,765,5,2,0,0,765,121,1,0,0,0,766,767,5,115,
+	0,0,767,768,5,2,0,0,768,123,1,0,0,0,769,770,5,111,0,0,770,771,5,2,0,0,771,
+	125,1,0,0,0,772,774,5,61,0,0,773,775,3,142,71,0,774,773,1,0,0,0,774,775,
+	1,0,0,0,775,776,1,0,0,0,776,777,5,2,0,0,777,127,1,0,0,0,778,779,5,62,0,
+	0,779,780,5,2,0,0,780,129,1,0,0,0,781,782,5,63,0,0,782,783,3,154,77,0,783,
+	784,5,2,0,0,784,131,1,0,0,0,785,786,5,64,0,0,786,787,3,154,77,0,787,788,
+	5,2,0,0,788,133,1,0,0,0,789,790,5,65,0,0,790,797,3,138,69,0,791,797,3,76,
+	38,0,792,793,5,23,0,0,793,794,3,136,68,0,794,795,5,24,0,0,795,797,1,0,0,
+	0,796,789,1,0,0,0,796,791,1,0,0,0,796,792,1,0,0,0,797,800,1,0,0,0,798,799,
+	5,11,0,0,799,801,3,142,71,0,800,798,1,0,0,0,800,801,1,0,0,0,801,802,1,0,
+	0,0,802,803,5,2,0,0,803,135,1,0,0,0,804,806,3,76,38,0,805,804,1,0,0,0,805,
+	806,1,0,0,0,806,813,1,0,0,0,807,809,5,16,0,0,808,810,3,76,38,0,809,808,
+	1,0,0,0,809,810,1,0,0,0,810,812,1,0,0,0,811,807,1,0,0,0,812,815,1,0,0,0,
+	813,811,1,0,0,0,813,814,1,0,0,0,814,137,1,0,0,0,815,813,1,0,0,0,816,823,
+	5,23,0,0,817,819,3,196,98,0,818,817,1,0,0,0,818,819,1,0,0,0,819,820,1,0,
+	0,0,820,822,5,16,0,0,821,818,1,0,0,0,822,825,1,0,0,0,823,821,1,0,0,0,823,
+	824,1,0,0,0,824,827,1,0,0,0,825,823,1,0,0,0,826,828,3,196,98,0,827,826,
+	1,0,0,0,827,828,1,0,0,0,828,829,1,0,0,0,829,830,5,24,0,0,830,139,1,0,0,
+	0,831,832,7,5,0,0,832,141,1,0,0,0,833,834,6,71,-1,0,834,835,5,71,0,0,835,
+	852,3,78,39,0,836,837,5,23,0,0,837,838,3,142,71,0,838,839,5,24,0,0,839,
+	852,1,0,0,0,840,841,7,6,0,0,841,852,3,142,71,19,842,843,7,7,0,0,843,852,
+	3,142,71,18,844,845,5,73,0,0,845,852,3,142,71,17,846,847,5,74,0,0,847,852,
+	3,142,71,16,848,849,5,6,0,0,849,852,3,142,71,15,850,852,3,144,72,0,851,
+	833,1,0,0,0,851,836,1,0,0,0,851,840,1,0,0,0,851,842,1,0,0,0,851,844,1,0,
+	0,0,851,846,1,0,0,0,851,848,1,0,0,0,851,850,1,0,0,0,852,927,1,0,0,0,853,
+	854,10,14,0,0,854,855,5,75,0,0,855,926,3,142,71,14,856,857,10,13,0,0,857,
+	858,7,8,0,0,858,926,3,142,71,14,859,860,10,12,0,0,860,861,7,7,0,0,861,926,
+	3,142,71,13,862,863,10,11,0,0,863,864,7,9,0,0,864,926,3,142,71,12,865,866,
+	10,10,0,0,866,867,5,31,0,0,867,926,3,142,71,11,868,869,10,9,0,0,869,870,
+	5,5,0,0,870,926,3,142,71,10,871,872,10,8,0,0,872,873,5,30,0,0,873,926,3,
+	142,71,9,874,875,10,7,0,0,875,876,7,10,0,0,876,926,3,142,71,8,877,878,10,
+	6,0,0,878,879,7,11,0,0,879,926,3,142,71,7,880,881,10,5,0,0,881,882,5,78,
+	0,0,882,926,3,142,71,6,883,884,10,4,0,0,884,885,5,4,0,0,885,926,3,142,71,
+	5,886,887,10,3,0,0,887,888,5,79,0,0,888,889,3,142,71,0,889,890,5,72,0,0,
+	890,891,3,142,71,3,891,926,1,0,0,0,892,893,10,2,0,0,893,894,7,12,0,0,894,
+	926,3,142,71,3,895,896,10,27,0,0,896,926,7,6,0,0,897,898,10,25,0,0,898,
+	899,5,44,0,0,899,900,3,142,71,0,900,901,5,45,0,0,901,926,1,0,0,0,902,903,
+	10,24,0,0,903,905,5,44,0,0,904,906,3,142,71,0,905,904,1,0,0,0,905,906,1,
+	0,0,0,906,907,1,0,0,0,907,909,5,72,0,0,908,910,3,142,71,0,909,908,1,0,0,
+	0,909,910,1,0,0,0,910,911,1,0,0,0,911,926,5,45,0,0,912,913,10,23,0,0,913,
+	914,5,47,0,0,914,926,3,196,98,0,915,916,10,22,0,0,916,917,5,15,0,0,917,
+	918,3,148,74,0,918,919,5,17,0,0,919,926,1,0,0,0,920,921,10,21,0,0,921,922,
+	5,23,0,0,922,923,3,152,76,0,923,924,5,24,0,0,924,926,1,0,0,0,925,853,1,
+	0,0,0,925,856,1,0,0,0,925,859,1,0,0,0,925,862,1,0,0,0,925,865,1,0,0,0,925,
+	868,1,0,0,0,925,871,1,0,0,0,925,874,1,0,0,0,925,877,1,0,0,0,925,880,1,0,
+	0,0,925,883,1,0,0,0,925,886,1,0,0,0,925,892,1,0,0,0,925,895,1,0,0,0,925,
+	897,1,0,0,0,925,902,1,0,0,0,925,912,1,0,0,0,925,915,1,0,0,0,925,920,1,0,
+	0,0,926,929,1,0,0,0,927,925,1,0,0,0,927,928,1,0,0,0,928,143,1,0,0,0,929,
+	927,1,0,0,0,930,940,5,104,0,0,931,940,3,194,97,0,932,940,3,198,99,0,933,
+	940,3,202,101,0,934,940,3,196,98,0,935,940,5,125,0,0,936,940,5,120,0,0,
+	937,940,3,192,96,0,938,940,3,78,39,0,939,930,1,0,0,0,939,931,1,0,0,0,939,
+	932,1,0,0,0,939,933,1,0,0,0,939,934,1,0,0,0,939,935,1,0,0,0,939,936,1,0,
+	0,0,939,937,1,0,0,0,939,938,1,0,0,0,940,145,1,0,0,0,941,946,3,142,71,0,
+	942,943,5,16,0,0,943,945,3,142,71,0,944,942,1,0,0,0,945,948,1,0,0,0,946,
+	944,1,0,0,0,946,947,1,0,0,0,947,147,1,0,0,0,948,946,1,0,0,0,949,954,3,150,
+	75,0,950,951,5,16,0,0,951,953,3,150,75,0,952,950,1,0,0,0,953,956,1,0,0,
+	0,954,952,1,0,0,0,954,955,1,0,0,0,955,958,1,0,0,0,956,954,1,0,0,0,957,959,
+	5,16,0,0,958,957,1,0,0,0,958,959,1,0,0,0,959,149,1,0,0,0,960,961,3,196,
+	98,0,961,962,5,72,0,0,962,963,3,142,71,0,963,151,1,0,0,0,964,966,5,15,0,
+	0,965,967,3,148,74,0,966,965,1,0,0,0,966,967,1,0,0,0,967,968,1,0,0,0,968,
+	973,5,17,0,0,969,971,3,146,73,0,970,969,1,0,0,0,970,971,1,0,0,0,971,973,
+	1,0,0,0,972,964,1,0,0,0,972,970,1,0,0,0,973,153,1,0,0,0,974,975,3,142,71,
+	0,975,976,5,23,0,0,976,977,3,152,76,0,977,978,5,24,0,0,978,155,1,0,0,0,
+	979,983,5,15,0,0,980,982,3,158,79,0,981,980,1,0,0,0,982,985,1,0,0,0,983,
+	981,1,0,0,0,983,984,1,0,0,0,984,986,1,0,0,0,985,983,1,0,0,0,986,987,5,17,
+	0,0,987,157,1,0,0,0,988,1006,3,196,98,0,989,1006,3,156,78,0,990,1006,3,
+	160,80,0,991,1006,3,166,83,0,992,1006,3,168,84,0,993,1006,3,174,87,0,994,
+	1006,3,176,88,0,995,1006,3,178,89,0,996,1006,3,182,91,0,997,1006,3,186,
+	93,0,998,1006,3,188,94,0,999,1006,5,111,0,0,1000,1006,5,115,0,0,1001,1006,
+	5,116,0,0,1002,1006,3,194,97,0,1003,1006,3,202,101,0,1004,1006,3,198,99,
+	0,1005,988,1,0,0,0,1005,989,1,0,0,0,1005,990,1,0,0,0,1005,991,1,0,0,0,1005,
+	992,1,0,0,0,1005,993,1,0,0,0,1005,994,1,0,0,0,1005,995,1,0,0,0,1005,996,
+	1,0,0,0,1005,997,1,0,0,0,1005,998,1,0,0,0,1005,999,1,0,0,0,1005,1000,1,
+	0,0,0,1005,1001,1,0,0,0,1005,1002,1,0,0,0,1005,1003,1,0,0,0,1005,1004,1,
+	0,0,0,1006,159,1,0,0,0,1007,1011,3,164,82,0,1008,1011,3,190,95,0,1009,1011,
+	3,162,81,0,1010,1007,1,0,0,0,1010,1008,1,0,0,0,1010,1009,1,0,0,0,1011,161,
+	1,0,0,0,1012,1013,3,196,98,0,1013,1014,5,47,0,0,1014,1015,3,196,98,0,1015,
+	163,1,0,0,0,1016,1021,5,61,0,0,1017,1021,5,46,0,0,1018,1021,5,68,0,0,1019,
+	1021,3,196,98,0,1020,1016,1,0,0,0,1020,1017,1,0,0,0,1020,1018,1,0,0,0,1020,
+	1019,1,0,0,0,1021,1034,1,0,0,0,1022,1024,5,23,0,0,1023,1025,3,160,80,0,
+	1024,1023,1,0,0,0,1024,1025,1,0,0,0,1025,1030,1,0,0,0,1026,1027,5,16,0,
+	0,1027,1029,3,160,80,0,1028,1026,1,0,0,0,1029,1032,1,0,0,0,1030,1028,1,
+	0,0,0,1030,1031,1,0,0,0,1031,1033,1,0,0,0,1032,1030,1,0,0,0,1033,1035,5,
+	24,0,0,1034,1022,1,0,0,0,1034,1035,1,0,0,0,1035,165,1,0,0,0,1036,1037,5,
+	90,0,0,1037,1040,3,170,85,0,1038,1039,5,91,0,0,1039,1041,3,160,80,0,1040,
+	1038,1,0,0,0,1040,1041,1,0,0,0,1041,167,1,0,0,0,1042,1043,3,170,85,0,1043,
+	1044,5,91,0,0,1044,1045,3,160,80,0,1045,169,1,0,0,0,1046,1054,3,196,98,
+	0,1047,1054,3,162,81,0,1048,1054,3,172,86,0,1049,1050,5,23,0,0,1050,1051,
+	3,172,86,0,1051,1052,5,24,0,0,1052,1054,1,0,0,0,1053,1046,1,0,0,0,1053,
+	1047,1,0,0,0,1053,1048,1,0,0,0,1053,1049,1,0,0,0,1054,171,1,0,0,0,1055,
+	1060,3,196,98,0,1056,1057,5,16,0,0,1057,1059,3,196,98,0,1058,1056,1,0,0,
+	0,1059,1062,1,0,0,0,1060,1058,1,0,0,0,1060,1061,1,0,0,0,1061,173,1,0,0,
+	0,1062,1060,1,0,0,0,1063,1064,3,160,80,0,1064,1065,5,92,0,0,1065,1066,3,
+	196,98,0,1066,175,1,0,0,0,1067,1068,3,196,98,0,1068,1069,5,72,0,0,1069,
+	177,1,0,0,0,1070,1071,5,93,0,0,1071,1075,3,160,80,0,1072,1074,3,180,90,
+	0,1073,1072,1,0,0,0,1074,1077,1,0,0,0,1075,1073,1,0,0,0,1075,1076,1,0,0,
+	0,1076,179,1,0,0,0,1077,1075,1,0,0,0,1078,1079,5,94,0,0,1079,1080,3,190,
+	95,0,1080,1081,3,156,78,0,1081,1085,1,0,0,0,1082,1083,5,95,0,0,1083,1085,
+	3,156,78,0,1084,1078,1,0,0,0,1084,1082,1,0,0,0,1085,181,1,0,0,0,1086,1087,
+	5,40,0,0,1087,1088,3,196,98,0,1088,1090,5,23,0,0,1089,1091,3,172,86,0,1090,
+	1089,1,0,0,0,1090,1091,1,0,0,0,1091,1092,1,0,0,0,1092,1094,5,24,0,0,1093,
+	1095,3,184,92,0,1094,1093,1,0,0,0,1094,1095,1,0,0,0,1095,1096,1,0,0,0,1096,
+	1097,3,156,78,0,1097,183,1,0,0,0,1098,1099,5,96,0,0,1099,1100,3,172,86,
+	0,1100,185,1,0,0,0,1101,1104,5,29,0,0,1102,1105,3,156,78,0,1103,1105,3,
+	160,80,0,1104,1102,1,0,0,0,1104,1103,1,0,0,0,1105,1106,1,0,0,0,1106,1109,
+	3,160,80,0,1107,1110,3,156,78,0,1108,1110,3,160,80,0,1109,1107,1,0,0,0,
+	1109,1108,1,0,0,0,1110,1111,1,0,0,0,1111,1112,3,156,78,0,1112,187,1,0,0,
+	0,1113,1114,5,53,0,0,1114,1115,3,160,80,0,1115,1116,3,156,78,0,1116,189,
+	1,0,0,0,1117,1123,3,202,101,0,1118,1123,5,105,0,0,1119,1123,5,106,0,0,1120,
+	1123,3,198,99,0,1121,1123,5,104,0,0,1122,1117,1,0,0,0,1122,1118,1,0,0,0,
+	1122,1119,1,0,0,0,1122,1120,1,0,0,0,1122,1121,1,0,0,0,1123,191,1,0,0,0,
+	1124,1126,5,23,0,0,1125,1127,3,142,71,0,1126,1125,1,0,0,0,1126,1127,1,0,
+	0,0,1127,1134,1,0,0,0,1128,1130,5,16,0,0,1129,1131,3,142,71,0,1130,1129,
+	1,0,0,0,1130,1131,1,0,0,0,1131,1133,1,0,0,0,1132,1128,1,0,0,0,1133,1136,
+	1,0,0,0,1134,1132,1,0,0,0,1134,1135,1,0,0,0,1135,1137,1,0,0,0,1136,1134,
+	1,0,0,0,1137,1151,5,24,0,0,1138,1147,5,44,0,0,1139,1144,3,142,71,0,1140,
+	1141,5,16,0,0,1141,1143,3,142,71,0,1142,1140,1,0,0,0,1143,1146,1,0,0,0,
+	1144,1142,1,0,0,0,1144,1145,1,0,0,0,1145,1148,1,0,0,0,1146,1144,1,0,0,0,
+	1147,1139,1,0,0,0,1147,1148,1,0,0,0,1148,1149,1,0,0,0,1149,1151,5,45,0,
+	0,1150,1124,1,0,0,0,1150,1138,1,0,0,0,1151,193,1,0,0,0,1152,1154,7,13,0,
+	0,1153,1155,5,107,0,0,1154,1153,1,0,0,0,1154,1155,1,0,0,0,1155,195,1,0,
+	0,0,1156,1157,7,14,0,0,1157,197,1,0,0,0,1158,1160,5,108,0,0,1159,1158,1,
+	0,0,0,1160,1161,1,0,0,0,1161,1159,1,0,0,0,1161,1162,1,0,0,0,1162,199,1,
+	0,0,0,1163,1175,5,98,0,0,1164,1165,5,23,0,0,1165,1170,3,80,40,0,1166,1167,
+	5,16,0,0,1167,1169,3,80,40,0,1168,1166,1,0,0,0,1169,1172,1,0,0,0,1170,1168,
+	1,0,0,0,1170,1171,1,0,0,0,1171,1173,1,0,0,0,1172,1170,1,0,0,0,1173,1174,
+	5,24,0,0,1174,1176,1,0,0,0,1175,1164,1,0,0,0,1175,1176,1,0,0,0,1176,201,
+	1,0,0,0,1177,1179,5,132,0,0,1178,1177,1,0,0,0,1179,1180,1,0,0,0,1180,1178,
+	1,0,0,0,1180,1181,1,0,0,0,1181,203,1,0,0,0,132,215,217,232,236,241,247,
+	251,254,259,265,272,276,289,297,302,307,315,318,321,327,335,338,353,363,
+	365,371,398,401,412,417,422,436,439,446,450,452,457,462,465,471,475,479,
+	484,497,499,506,516,522,533,536,542,545,553,556,562,565,573,576,582,586,
+	597,602,607,615,620,626,631,644,646,651,661,681,693,698,704,708,711,723,
+	732,736,739,746,752,774,796,800,805,809,813,818,823,827,851,905,909,925,
+	927,939,946,954,958,966,970,972,983,1005,1010,1020,1024,1030,1034,1040,
+	1053,1060,1075,1084,1090,1094,1104,1109,1122,1126,1130,1134,1144,1147,1150,
+	1154,1161,1170,1175,1180];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -7092,6 +7154,12 @@ export class ContractDefinitionContext extends ParserRuleContext {
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
+	public customStorageLayout_list(): CustomStorageLayoutContext[] {
+		return this.getTypedRuleContexts(CustomStorageLayoutContext) as CustomStorageLayoutContext[];
+	}
+	public customStorageLayout(i: number): CustomStorageLayoutContext {
+		return this.getTypedRuleContext(CustomStorageLayoutContext, i) as CustomStorageLayoutContext;
+	}
 	public inheritanceSpecifier_list(): InheritanceSpecifierContext[] {
 		return this.getTypedRuleContexts(InheritanceSpecifierContext) as InheritanceSpecifierContext[];
 	}
@@ -7156,6 +7224,38 @@ export class InheritanceSpecifierContext extends ParserRuleContext {
 	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
 		if (visitor.visitInheritanceSpecifier) {
 			return visitor.visitInheritanceSpecifier(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class CustomStorageLayoutContext extends ParserRuleContext {
+	constructor(parser?: SolidityParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return SolidityParser.RULE_customStorageLayout;
+	}
+	public enterRule(listener: SolidityListener): void {
+	    if(listener.enterCustomStorageLayout) {
+	 		listener.enterCustomStorageLayout(this);
+		}
+	}
+	public exitRule(listener: SolidityListener): void {
+	    if(listener.exitCustomStorageLayout) {
+	 		listener.exitCustomStorageLayout(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: SolidityVisitor<Result>): Result {
+		if (visitor.visitCustomStorageLayout) {
+			return visitor.visitCustomStorageLayout(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

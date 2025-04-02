@@ -440,6 +440,78 @@ describe('AST', () => {
       subNodes: [],
       kind: 'interface',
     })
+
+    // custom layout storage, no inheritance
+    ast = parseContract('contract test layout at 1 {}')
+    assert.deepEqual(ast, {
+      type: 'ContractDefinition',
+      name: 'test',
+      baseContracts: [],
+      subNodes: [],
+      kind: 'contract',
+      storageLayout: {
+        number: '1',
+        subdenomination: null,
+        type: 'NumberLiteral',
+      },
+    })
+
+    // custom layout storage after inheritance specifier
+    ast = parseContract('contract test is foo layout at 1+2 {}')
+    assert.deepEqual(ast, {
+      type: 'ContractDefinition',
+      name: 'test',
+      baseContracts: [
+        {
+          type: 'InheritanceSpecifier',
+          baseName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'foo',
+          },
+          arguments: [],
+        },
+      ],
+      subNodes: [],
+      kind: 'contract',
+      storageLayout: {
+        type: 'BinaryOperation',
+        operator: '+',
+        left: {
+          type: 'NumberLiteral',
+          number: '1',
+          subdenomination: null,
+        },
+        right: {
+          type: 'NumberLiteral',
+          number: '2',
+          subdenomination: null,
+        },
+      },
+    })
+
+    // custom layout storage before inheritance specifier
+    ast = parseContract('contract test layout at 10 is foo {}')
+    assert.deepEqual(ast, {
+      type: 'ContractDefinition',
+      name: 'test',
+      baseContracts: [
+        {
+          type: 'InheritanceSpecifier',
+          baseName: {
+            type: 'UserDefinedTypeName',
+            namePath: 'foo',
+          },
+          arguments: [],
+        },
+      ],
+      subNodes: [],
+      kind: 'contract',
+      storageLayout: {
+        type: 'NumberLiteral',
+        number: '10',
+        subdenomination: null,
+      },
+    })
   })
 
   it('FunctionDefinition constructor case', () => {
