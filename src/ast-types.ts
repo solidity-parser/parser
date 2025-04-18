@@ -3,7 +3,7 @@
 //    Alex Browne <https://github.com/albrow>
 //    Xiao Liang <https://github.com/yxliang01>
 
-export interface Position {
+interface Position {
   line: number
   column: number
 }
