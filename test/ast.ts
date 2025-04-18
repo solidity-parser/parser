@@ -786,6 +786,50 @@ describe('AST', () => {
     })
   })
 
+  it('FunctionDefinition with name `at`', () => {
+    const ast: any = parseNode('function at() public {}')
+    assert.deepEqual(ast, {
+      type: 'FunctionDefinition',
+      name: 'at',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: [],
+      },
+      visibility: 'public',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null,
+    })
+  })
+
+  it('FunctionDefinition with name `layout`', () => {
+    const ast: any = parseNode('function layout() public {}')
+    assert.deepEqual(ast, {
+      type: 'FunctionDefinition',
+      name: 'layout',
+      parameters: [],
+      returnParameters: null,
+      body: {
+        type: 'Block',
+        statements: [],
+      },
+      visibility: 'public',
+      modifiers: [],
+      override: null,
+      isConstructor: false,
+      isFallback: false,
+      isReceiveEther: false,
+      isVirtual: false,
+      stateMutability: null,
+    })
+  })
+
   it('StateVariableDeclaration with override', () => {
     const ast: any = parseNode('uint public override foo;')
     assert.deepEqual(ast, {
