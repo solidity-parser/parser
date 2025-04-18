@@ -1,7 +1,3 @@
-export interface Node {
-  type: string
-}
-
 export interface TokenizeOptions {
   range?: boolean
   loc?: boolean
