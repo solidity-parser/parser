@@ -144,6 +144,6 @@ export function visit(
   const selector = (node.type + ':exit') as `${ASTNodeTypeString}:exit`
   if (visitor[selector] !== undefined) {
     // TODO can we avoid this `as never`
-    visitor[selector]!(node as never, nodeParent)
+    visitor[selector](node as never, nodeParent)
   }
 }
