@@ -18,7 +18,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
       - name: Install
         run: npm install
@@ -34,7 +34,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
       - name: Install
         run: npm install
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [18, 20, 22]
+        node: [20, 22, 24]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -67,7 +67,7 @@ jobs:
         run: npm run test:node
 
   test_macos:
-    name: Test on MacOS with Node 18
+    name: Test on MacOS with Node 20
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -75,7 +75,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
       - name: Install
         run: npm install
@@ -83,7 +83,7 @@ jobs:
         run: npm run test:node
 
   test_windows:
-    name: Test on Windows with Node 18
+    name: Test on Windows with Node 20
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -91,7 +91,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
       - name: Install
         run: npm install
