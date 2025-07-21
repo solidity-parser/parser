@@ -296,7 +296,6 @@ export class ASTBuilder
     let name: string | null = null
     let parameters: any = []
     let returnParameters: AST.VariableDeclaration[] | null = null
-    let visibility: AST.FunctionDefinition['visibility'] = 'default'
 
     let block: AST.Block | null = null
     const ctxBlock = ctx.block()
@@ -318,21 +317,24 @@ export class ASTBuilder
 
     // see what type of function we're dealing with
     const ctxReturnParameters = ctx.returnParameters()
+
+    let visibility: AST.FunctionDefinition['visibility'] = 'default'
+    if (ctx.modifierList().ExternalKeyword_list().length > 0) {
+      visibility = 'external'
+    } else if (ctx.modifierList().InternalKeyword_list().length > 0) {
+      visibility = 'internal'
+    } else if (ctx.modifierList().PublicKeyword_list().length > 0) {
+      visibility = 'public'
+    } else if (ctx.modifierList().PrivateKeyword_list().length > 0) {
+      visibility = 'private'
+    }
+
     switch (this._toText(ctx.functionDescriptor().getChild(0))) {
       case 'constructor':
         parameters = ctx
           .parameterList()
           .parameter_list()
           .map((x) => this.visit(x))
-
-        // error out on incorrect function visibility
-        if (ctx.modifierList().InternalKeyword_list().length > 0) {
-          visibility = 'internal'
-        } else if (ctx.modifierList().PublicKeyword_list().length > 0) {
-          visibility = 'public'
-        } else {
-          visibility = 'default'
-        }
 
         isConstructor = true
         break
@@ -345,11 +347,9 @@ export class ASTBuilder
           ? this.visitReturnParameters(ctxReturnParameters)
           : null
 
-        visibility = 'external'
         isFallback = true
         break
       case 'receive':
-        visibility = 'external'
         isReceiveEther = true
         break
       case 'function': {
@@ -363,17 +363,6 @@ export class ASTBuilder
         returnParameters = ctxReturnParameters
           ? this.visitReturnParameters(ctxReturnParameters)
           : null
-
-        // parse function visibility
-        if (ctx.modifierList().ExternalKeyword_list().length > 0) {
-          visibility = 'external'
-        } else if (ctx.modifierList().InternalKeyword_list().length > 0) {
-          visibility = 'internal'
-        } else if (ctx.modifierList().PublicKeyword_list().length > 0) {
-          visibility = 'public'
-        } else if (ctx.modifierList().PrivateKeyword_list().length > 0) {
-          visibility = 'private'
-        }
 
         isConstructor = name === this._currentContract
         isFallback = name === ''

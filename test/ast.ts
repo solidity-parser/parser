@@ -698,6 +698,19 @@ describe('AST', () => {
     })
   })
 
+  it('should produce different ASTs when the fallback function has the external keyword and when it does not', () => {
+    const astWithExternal: any = parseNode('fallback() external {}')
+    const astWithoutExternal: any = parseNode('fallback() {}')
+
+    assert.equal(astWithExternal.type, 'FunctionDefinition')
+    assert.equal(astWithExternal.isFallback, true)
+    assert.equal(astWithExternal.visibility, 'external')
+
+    assert.equal(astWithoutExternal.type, 'FunctionDefinition')
+    assert.equal(astWithoutExternal.isFallback, true)
+    assert.equal(astWithoutExternal.visibility, 'default')
+  })
+
   it('FunctionDefinition virtual receive', () => {
     const ast: any = parseNode('receive () external payable virtual {}')
     assert.deepEqual(ast, {
