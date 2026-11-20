@@ -65,7 +65,14 @@ export function parse(input: string, options: ParseOptions = {}): ParseResult {
 
   const sourceUnit = parser.sourceUnit()
 
-  const astBuilder = new ASTBuilder(options)
+  if (listener.hasErrors() && options.tolerant !== true) {
+    throw new ParserError({ errors: listener.getErrors() })
+  }
+
+  const astBuilder = new ASTBuilder(
+    options,
+    listener.hasErrors() && options.tolerant === true
+  )
 
   astBuilder.visit(sourceUnit)
 
@@ -88,9 +95,6 @@ export function parse(input: string, options: ParseOptions = {}): ParseResult {
   }
 
   if (listener.hasErrors()) {
-    if (options.tolerant !== true) {
-      throw new ParserError({ errors: listener.getErrors() })
-    }
     ast.errors = listener.getErrors()
   }
 
