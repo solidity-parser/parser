@@ -17,7 +17,10 @@ export class ASTBuilder
   public result: AST.SourceUnit | null = null
   private _currentContract?: string
 
-  constructor(public options: ParseOptions) {
+  constructor(
+    public options: ParseOptions,
+    private readonly recoverErrors = false
+  ) {
     super()
   }
 
@@ -34,7 +37,18 @@ export class ASTBuilder
 
     const node: AST.SourceUnit = {
       type: 'SourceUnit',
-      children: children.slice(0, -1).map((child) => this.visit(child)),
+      children: [],
+    }
+    for (const child of children.slice(0, -1)) {
+      try {
+        node.children.push(this.visit(child))
+      } catch (error) {
+        // ANTLR recovery can leave required children missing. Preserve the
+        // other declarations when the caller requested syntax-error recovery.
+        if (!this.recoverErrors) {
+          throw error
+        }
+      }
     }
     const result = this._addMeta(node, ctx)
     this.result = result

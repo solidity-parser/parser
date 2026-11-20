@@ -53,6 +53,10 @@ following options, in a style similar to the _esprima_ API:
 | loc      | Boolean | false   | When set to `true`, it will add location information to each node, with start and stop keys that contain the corresponding line and column numbers. Column numbers start from 0, lines start from 1. |
 | range    | Boolean | false   | When set to `true`, it will add range information to each node, which consists of a two-element array with start and stop character indexes in the input.                                            |
 
+In tolerant mode, a top-level declaration that cannot be converted after syntax
+error recovery is omitted from the AST. Other declarations and the syntax errors
+are still returned.
+
 ### Example with location information
 
 ```javascript

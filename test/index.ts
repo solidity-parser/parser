@@ -24,6 +24,61 @@ describe('#parse', function () {
     assert.isAbove(root.errors!.length, 0)
   })
 
+  const incompleteSources = [
+    'contract A { uint x = ; }',
+    'contract A { function f() public { if () {} } }',
+    'uint constant X = ;',
+    'contract A { function f() public { emit ; } }',
+    'contract A { function fallback(address payable r) public {} }',
+  ]
+
+  for (const source of incompleteSources) {
+    it(`reports syntax errors before building an incomplete AST: ${source}`, function () {
+      assert.throws(() => parser.parse(source), parser.ParserError)
+    })
+
+    it(`recovers from an incomplete AST in tolerant mode: ${source}`, function () {
+      const root = parser.parse(source, { tolerant: true })
+      assert.equal(root.type, 'SourceUnit')
+      assert.isArray(root.children)
+      assert.isAbove(root.errors!.length, 0)
+    })
+  }
+
+  it('keeps valid declarations and metadata after tolerant recovery', function () {
+    const source = `pragma solidity ^0.8.0;
+// invalid contract
+contract A { function f() public { if () {} } }
+contract B {}`
+    const root = parser.parse(source, {
+      tolerant: true,
+      loc: true,
+      range: true,
+      comments: true,
+      tokens: true,
+    })
+    assert.deepEqual(
+      root.children.map((node) => node.type),
+      ['PragmaDirective', 'ContractDefinition']
+    )
+    assert.propertyVal(root.children[1], 'name', 'B')
+    assert.isAbove(root.errors!.length, 0)
+    assert.isAbove(root.tokens!.length, 0)
+    assert.lengthOf(root.comments!, 1)
+    assert.deepEqual(root.range, [0, source.length - 1])
+    assert.deepEqual(root.loc!.start, { line: 1, column: 0 })
+  })
+
+  it('does not suppress AST errors without syntax errors in tolerant mode', function () {
+    assert.throws(
+      () =>
+        parser.parse('contract A layout at 1 layout at 2 {}', {
+          tolerant: true,
+        }),
+      'Only one custom storage layout is allowed per contract'
+    )
+  })
+
   it('supports loc', function () {
     const source = 'contract test { uint a; }'
     const root: any = parser.parse(source, { loc: true })
